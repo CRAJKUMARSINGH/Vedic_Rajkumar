@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Crimson+Pro:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 35 30% 97%;
+    --foreground: 240 20% 15%;
+
+    --card: 35 25% 95%;
+    --card-foreground: 240 20% 15%;
+
+    --popover: 35 30% 97%;
+    --popover-foreground: 240 20% 15%;
+
+    --primary: 30 85% 52%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 40% 25%;
+    --secondary-foreground: 35 30% 95%;
+
+    --muted: 35 15% 90%;
+    --muted-foreground: 240 10% 45%;
+
+    --accent: 15 75% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 35 20% 85%;
+    --input: 35 20% 88%;
+    --ring: 30 85% 52%;
+
+    --radius: 0.625rem;
+
+    --sidebar-background: 240 40% 20%;
+    --sidebar-foreground: 35 30% 95%;
+    --sidebar-primary: 30 85% 52%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 35% 30%;
+    --sidebar-accent-foreground: 35 30% 95%;
+    --sidebar-border: 240 30% 30%;
+    --sidebar-ring: 30 85% 52%;
+
+    /* Custom tokens */
+    --gold: 42 90% 55%;
+    --gold-foreground: 35 50% 15%;
+    --indigo: 240 45% 20%;
+    --indigo-foreground: 35 30% 95%;
+    --saffron: 25 90% 55%;
+    --favorable: 145 60% 40%;
+    --unfavorable: 0 65% 50%;
+    --mixed: 40 80% 50%;
+  }
+
+  .dark {
+    --background: 240 30% 8%;
+    --foreground: 35 25% 92%;
+
+    --card: 240 28% 12%;
+    --card-foreground: 35 25% 92%;
+
+    --popover: 240 28% 12%;
+    --popover-foreground: 35 25% 92%;
+
+    --primary: 30 85% 52%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 35 20% 20%;
+    --secondary-foreground: 35 25% 92%;
+
+    --muted: 240 20% 18%;
+    --muted-foreground: 35 15% 60%;
+
+    --accent: 15 75% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 240 20% 22%;
+    --input: 240 20% 22%;
+    --ring: 30 85% 52%;
+
+    --sidebar-background: 240 30% 8%;
+    --sidebar-foreground: 35 25% 92%;
+    --sidebar-primary: 30 85% 52%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 25% 15%;
+    --sidebar-accent-foreground: 35 25% 92%;
+    --sidebar-border: 240 20% 18%;
+    --sidebar-ring: 30 85% 52%;
+
+    --gold: 42 80% 50%;
+    --gold-foreground: 35 50% 95%;
+    --indigo: 240 45% 75%;
+    --indigo-foreground: 240 30% 10%;
+    --saffron: 25 85% 55%;
+    --favorable: 145 55% 45%;
+    --unfavorable: 0 60% 55%;
+    --mixed: 40 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Crimson Pro', serif;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: 'Crimson Pro', serif;
+  }
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+  .font-hindi {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+}
