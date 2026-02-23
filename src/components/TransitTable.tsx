@@ -1,9 +1,18 @@
 import { TransitResult, RASHIS } from "@/data/transitData";
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
+import { exportTransitToPDF } from "@/services/pdfExportService";
 
 interface TransitTableProps {
   results: TransitResult[];
   lang: "en" | "hi";
   moonRashiIndex: number;
+  birthData?: {
+    date: string;
+    time: string;
+    location: string;
+  };
+  transitDate?: string;
 }
 
 const headers = {
@@ -36,24 +45,47 @@ const statusLabels = {
   hi: { favorable: "शुभ", unfavorable: "अशुभ", mixed: "वेध अवरोध" },
 };
 
-export default function TransitTable({ results, lang, moonRashiIndex }: TransitTableProps) {
+export default function TransitTable({ results, lang, moonRashiIndex, birthData, transitDate }: TransitTableProps) {
   const t = headers[lang];
   const sl = statusLabels[lang];
   const isHi = lang === "hi";
   const totalScore = results.reduce((s, r) => s + r.scoreContribution, 0);
   const moonRashi = RASHIS[moonRashiIndex];
 
+  const handleExportPDF = () => {
+    if (!birthData || !transitDate) return;
+    
+    exportTransitToPDF({
+      birthDate: birthData.date,
+      birthTime: birthData.time,
+      birthLocation: birthData.location,
+      moonRashi: isHi ? moonRashi.hi : moonRashi.en,
+      transitDate: transitDate,
+      results: results,
+      overallScore: totalScore,
+    }, lang);
+  };
+
   return (
     <div className="w-full space-y-3">
-      {/* Moon Rashi badge */}
-      <div className="flex items-center justify-center gap-2 text-sm">
-        <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground font-semibold">
-          {isHi ? (
-            <span className="font-hindi">चन्द्र राशि: {moonRashi.hi} {moonRashi.symbol}</span>
-          ) : (
-            <span>Moon Sign: {moonRashi.en} {moonRashi.symbol}</span>
-          )}
-        </span>
+      {/* Moon Rashi badge and Export button */}
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2 text-sm">
+          <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground font-semibold">
+            {isHi ? (
+              <span className="font-hindi">चन्द्र राशि: {moonRashi.hi} {moonRashi.symbol}</span>
+            ) : (
+              <span>Moon Sign: {moonRashi.en} {moonRashi.symbol}</span>
+            )}
+          </span>
+        </div>
+        
+        {birthData && transitDate && (
+          <Button onClick={handleExportPDF} variant="outline" size="sm" className="gap-2">
+            <Download className="h-4 w-4" />
+            <span className={isHi ? "font-hindi" : ""}>{isHi ? "PDF निर्यात" : "Export PDF"}</span>
+          </Button>
+        )}
       </div>
 
       {/* Table */}

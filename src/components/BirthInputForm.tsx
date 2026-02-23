@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { getUserProfile } from "@/services/userProfileService";
 
 interface BirthInputFormProps {
   lang: "en" | "hi";
@@ -18,6 +20,8 @@ const labels = {
     datePlaceholder: "e.g. 15-09-1963",
     timePlaceholder: "e.g. 06:00 AM",
     locationPlaceholder: "e.g. Udaipur, Rajasthan",
+    savedDetails: "Use Saved Details",
+    newEntry: "New Entry",
   },
   hi: {
     title: "जन्म विवरण दर्ज करें",
@@ -28,6 +32,8 @@ const labels = {
     datePlaceholder: "जैसे 15-09-1963",
     timePlaceholder: "जैसे 06:00 AM",
     locationPlaceholder: "जैसे उदयपुर, राजस्थान",
+    savedDetails: "सहेजे गए विवरण",
+    newEntry: "नया विवरण",
   },
 };
 
@@ -35,7 +41,30 @@ export default function BirthInputForm({ lang, onSubmit }: BirthInputFormProps) 
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [location, setLocation] = useState("");
+  const [savedDetails, setSavedDetails] = useState<Array<{ date: string; time: string; location: string }>>([]);
   const t = labels[lang];
+
+  useEffect(() => {
+    const profile = getUserProfile();
+    if (profile?.savedBirthDetails) {
+      setSavedDetails(profile.savedBirthDetails);
+    }
+  }, []);
+
+  const handleSavedSelect = (index: string) => {
+    if (index === "new") {
+      setDate("");
+      setTime("");
+      setLocation("");
+    } else {
+      const selected = savedDetails[parseInt(index)];
+      if (selected) {
+        setDate(selected.date);
+        setTime(selected.time);
+        setLocation(selected.location);
+      }
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,6 +78,26 @@ export default function BirthInputForm({ lang, onSubmit }: BirthInputFormProps) 
       <h2 className={`text-2xl font-heading font-bold text-center text-secondary ${lang === "hi" ? "font-hindi" : ""}`}>
         {t.title}
       </h2>
+      
+      {savedDetails.length > 0 && (
+        <div className="space-y-2">
+          <Label className={lang === "hi" ? "font-hindi" : ""}>{t.savedDetails}</Label>
+          <Select onValueChange={handleSavedSelect}>
+            <SelectTrigger className="bg-background border-border">
+              <SelectValue placeholder={t.newEntry} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="new">{t.newEntry}</SelectItem>
+              {savedDetails.map((detail, idx) => (
+                <SelectItem key={idx} value={idx.toString()}>
+                  {detail.date} • {detail.time} • {detail.location}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
+      
       <div className="space-y-2">
         <Label htmlFor="dob" className={lang === "hi" ? "font-hindi" : ""}>{t.date}</Label>
         <Input

@@ -3,9 +3,11 @@ import BirthInputForm from "@/components/BirthInputForm";
 import TransitTable from "@/components/TransitTable";
 import LanguageToggle from "@/components/LanguageToggle";
 import ReadingHistory from "@/components/ReadingHistory";
+import UserProfileDialog from "@/components/UserProfileDialog";
 import { calculateTransits, RASHIS, type TransitResult } from "@/data/transitData";
 import { saveReading, getReadings, type SavedReading } from "@/services/readingService";
 import { getPlanetaryPositions, calculateMoonRashi } from "@/services/astronomyService";
+import { addBirthDetails, getUserProfile } from "@/services/userProfileService";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
@@ -17,6 +19,14 @@ const Index = () => {
   const [saving, setSaving] = useState(false);
   const { toast } = useToast();
 
+  // Load user profile on mount
+  useEffect(() => {
+    const profile = getUserProfile();
+    if (profile?.defaultLocation && !birthData) {
+      // Could pre-fill location if needed
+    }
+  }, []);
+
   const isHi = lang === "hi";
   const today = new Date().toLocaleDateString(isHi ? "hi-IN" : "en-IN", {
     weekday: "long", year: "numeric", month: "long", day: "numeric",
@@ -25,6 +35,10 @@ const Index = () => {
 
   const handleSubmit = async (data: { date: string; time: string; location: string }) => {
     setBirthData(data);
+    
+    // Save birth details to user profile
+    addBirthDetails(data);
+    
     const birthDate = new Date(data.date);
     const moonIdx = getMoonRashi(birthDate);
     setMoonRashiIndex(moonIdx);
@@ -83,7 +97,10 @@ const Index = () => {
               </p>
             </div>
           </div>
-          <LanguageToggle lang={lang} onChange={setLang} />
+          <div className="flex items-center gap-2">
+            <UserProfileDialog lang={lang} />
+            <LanguageToggle lang={lang} onChange={setLang} />
+          </div>
         </div>
       </header>
 
@@ -121,7 +138,13 @@ const Index = () => {
               )}
             </div>
 
-            <TransitTable results={results} lang={lang} moonRashiIndex={moonRashiIndex} />
+            <TransitTable 
+              results={results} 
+              lang={lang} 
+              moonRashiIndex={moonRashiIndex}
+              birthData={birthData}
+              transitDate={today}
+            />
 
             {/* Past readings */}
             {pastReadings.length > 1 && (
