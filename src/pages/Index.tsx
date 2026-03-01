@@ -9,6 +9,7 @@ import { saveReading, getReadings, type SavedReading } from "@/services/readingS
 import { getPlanetaryPositions, calculateMoonRashi } from "@/services/astronomyService";
 import { addBirthDetails, getUserProfile } from "@/services/userProfileService";
 import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [lang, setLang] = useState<"en" | "hi">("en");
@@ -98,6 +99,30 @@ const Index = () => {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <Link 
+              to="/career"
+              className={`text-sm text-primary hover:text-primary/80 underline underline-offset-2 ${isHi ? "font-hindi" : ""}`}
+            >
+              {isHi ? "करियर रिपोर्ट" : "Career Report"}
+            </Link>
+            <Link 
+              to="/kaalsarp"
+              className={`text-sm text-primary hover:text-primary/80 underline underline-offset-2 ${isHi ? "font-hindi" : ""}`}
+            >
+              {isHi ? "काल सर्प योग" : "Kaal Sarp Yoga"}
+            </Link>
+            <Link 
+              to="/comprehensive"
+              className={`text-sm text-primary hover:text-primary/80 underline underline-offset-2 ${isHi ? "font-hindi" : ""}`}
+            >
+              {isHi ? "व्यापक रिपोर्ट" : "Comprehensive Report"}
+            </Link>
+            <Link 
+              to="/test"
+              className={`text-sm text-orange-600 hover:text-orange-700 underline underline-offset-2 font-semibold ${isHi ? "font-hindi" : ""}`}
+            >
+              {isHi ? "परीक्षण" : "Test"}
+            </Link>
             <UserProfileDialog lang={lang} />
             <LanguageToggle lang={lang} onChange={setLang} />
           </div>

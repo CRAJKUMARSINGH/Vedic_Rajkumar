@@ -25,3 +25,5 @@ export default function LanguageToggle({ lang, onChange }: LanguageToggleProps) 
     </div>
   );
 }
+
+export { LanguageToggle };
