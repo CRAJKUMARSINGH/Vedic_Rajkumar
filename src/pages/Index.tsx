@@ -4,7 +4,7 @@ import TransitTable from "@/components/TransitTable";
 import LanguageToggle from "@/components/LanguageToggle";
 import ReadingHistory from "@/components/ReadingHistory";
 import UserProfileDialog from "@/components/UserProfileDialog";
-import { calculateTransits, RASHIS, type TransitResult } from "@/data/transitData";
+import { calculateTransits, RASHIS, getMoonRashi, CURRENT_POSITIONS, type TransitResult } from "@/data/transitData";
 import { saveReading, getReadings, type SavedReading } from "@/services/readingService";
 import { getPlanetaryPositions, calculateMoonRashi } from "@/services/astronomyService";
 import { addBirthDetails, getUserProfile } from "@/services/userProfileService";
