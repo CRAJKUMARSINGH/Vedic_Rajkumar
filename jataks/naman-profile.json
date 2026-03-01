@@ -1,0 +1,19 @@
+{
+  "profile": {
+    "name": "Naman Shah",
+    "email": "",
+    "defaultLocation": "Partapur, Rajasthan",
+    "savedBirthDetails": [
+      {
+        "date": "1997-03-29",
+        "time": "03:32",
+        "location": "Partapur, Rajasthan",
+        "coordinates": "23.50°N, 74.00°E",
+        "moonRashi": "",
+        "moonRashiIndex": null
+      }
+    ]
+  },
+  "readings": [],
+  "exportDate": "2026-03-01T07:45:00.000Z"
+}

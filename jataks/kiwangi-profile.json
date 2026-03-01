@@ -1,0 +1,19 @@
+{
+  "profile": {
+    "name": "Kiwangi Jain",
+    "email": "",
+    "defaultLocation": "Idar, Gujarat",
+    "savedBirthDetails": [
+      {
+        "date": "2010-12-21",
+        "time": "10:10",
+        "location": "Idar, Gujarat",
+        "coordinates": "23.84°N, 73.01°E",
+        "moonRashi": "",
+        "moonRashiIndex": null
+      }
+    ]
+  },
+  "readings": [],
+  "exportDate": "2026-03-01T07:30:00.000Z"
+}
