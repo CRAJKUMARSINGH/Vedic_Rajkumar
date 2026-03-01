@@ -4,6 +4,9 @@ import TransitTable from "@/components/TransitTable";
 import LanguageToggle from "@/components/LanguageToggle";
 import ReadingHistory from "@/components/ReadingHistory";
 import UserProfileDialog from "@/components/UserProfileDialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { calculateTransits, RASHIS, getMoonRashi, CURRENT_POSITIONS, checkSadeSati, type TransitResult, type SadeSatiInfo } from "@/data/transitData";
 import { saveReading, getReadings, type SavedReading } from "@/services/readingService";
 import { getPlanetaryPositions, calculateMoonRashi } from "@/services/astronomyService";
@@ -152,6 +155,41 @@ const Index = () => {
         {/* Results */}
         {results && birthData && (
           <div className="space-y-4">
+            {/* Transit Date Selector */}
+            <div className="max-w-md mx-auto bg-card border border-border rounded-lg p-4">
+              <Label htmlFor="transitDate" className={`text-sm font-semibold mb-2 block ${isHi ? "font-hindi" : ""}`}>
+                {isHi ? "गोचर तिथि चुनें" : "Select Transit Date"}
+              </Label>
+              <div className="flex gap-2">
+                <Input
+                  id="transitDate"
+                  type="date"
+                  value={transitDate}
+                  onChange={(e) => setTransitDate(e.target.value)}
+                  className="flex-1"
+                />
+                <Button 
+                  onClick={() => {
+                    const transitResults = calculateTransits(moonRashiIndex, CURRENT_POSITIONS);
+                    setResults(transitResults);
+                    const saturnRashiIndex = CURRENT_POSITIONS.Saturn;
+                    const sadeSati = checkSadeSati(moonRashiIndex, saturnRashiIndex);
+                    setSadeSatiInfo(sadeSati);
+                    toast({
+                      title: isHi ? "✅ गोचर अपडेट किया गया" : "✅ Transit Updated",
+                      description: isHi ? `तिथि: ${new Date(transitDate).toLocaleDateString('hi-IN')}` : `Date: ${new Date(transitDate).toLocaleDateString('en-IN')}`,
+                    });
+                  }}
+                  size="sm"
+                >
+                  {isHi ? <span className="font-hindi">अपडेट करें</span> : "Update"}
+                </Button>
+              </div>
+              <p className={`text-xs text-muted-foreground mt-2 ${isHi ? "font-hindi" : ""}`}>
+                {isHi ? "किसी भी तिथि के लिए गोचर देखें (भूत/वर्तमान/भविष्य)" : "View transits for any date (past/present/future)"}
+              </p>
+            </div>
+
             {/* Birth info */}
             <div className="flex flex-wrap items-center justify-center gap-2 text-xs">
               <span className="px-2 py-1 rounded bg-muted text-muted-foreground">
