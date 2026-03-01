@@ -4,7 +4,7 @@ import TransitTable from "@/components/TransitTable";
 import LanguageToggle from "@/components/LanguageToggle";
 import ReadingHistory from "@/components/ReadingHistory";
 import UserProfileDialog from "@/components/UserProfileDialog";
-import { calculateTransits, RASHIS, getMoonRashi, CURRENT_POSITIONS, type TransitResult } from "@/data/transitData";
+import { calculateTransits, RASHIS, getMoonRashi, CURRENT_POSITIONS, checkSadeSati, type TransitResult, type SadeSatiInfo } from "@/data/transitData";
 import { saveReading, getReadings, type SavedReading } from "@/services/readingService";
 import { getPlanetaryPositions, calculateMoonRashi } from "@/services/astronomyService";
 import { addBirthDetails, getUserProfile } from "@/services/userProfileService";
@@ -14,11 +14,13 @@ import { Link } from "react-router-dom";
 const Index = () => {
   const [lang, setLang] = useState<"en" | "hi">("en");
   const [birthData, setBirthData] = useState<{ date: string; time: string; location: string } | null>(null);
+  const [transitDate, setTransitDate] = useState<string>(new Date().toISOString().split("T")[0]);
   const [results, setResults] = useState<TransitResult[] | null>(null);
   const [moonRashiIndex, setMoonRashiIndex] = useState(3);
+  const [sadeSatiInfo, setSadeSatiInfo] = useState<SadeSatiInfo | null>(null);
   const [pastReadings, setPastReadings] = useState<SavedReading[]>([]);
   const [saving, setSaving] = useState(false);
-  const { toast } = useToast();
+  const { toast} = useToast();
 
   // Load user profile on mount
   useEffect(() => {
@@ -46,6 +48,11 @@ const Index = () => {
     const transitResults = calculateTransits(moonIdx, CURRENT_POSITIONS);
     setResults(transitResults);
 
+    // Check Sade Sati
+    const saturnRashiIndex = CURRENT_POSITIONS.Saturn;
+    const sadeSati = checkSadeSati(moonIdx, saturnRashiIndex);
+    setSadeSatiInfo(sadeSati);
+
     // Save to database
     setSaving(true);
     const totalScore = transitResults.reduce((s, r) => s + r.scoreContribution, 0);
@@ -54,7 +61,7 @@ const Index = () => {
       birth_time: data.time,
       birth_location: data.location,
       moon_rashi_index: moonIdx,
-      transit_date: todayISO,
+      transit_date: transitDate,
       overall_score: totalScore,
       results: transitResults,
     });
@@ -162,6 +169,33 @@ const Index = () => {
                 </span>
               )}
             </div>
+
+            {/* Sade Sati Alert */}
+            {sadeSatiInfo?.active && (
+              <div className="max-w-2xl mx-auto bg-orange-50 dark:bg-orange-950/20 border-2 border-orange-500 rounded-lg p-4">
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">⚠️</span>
+                  <div className="flex-1">
+                    <h3 className={`font-bold text-orange-900 dark:text-orange-100 mb-2 ${isHi ? "font-hindi" : ""}`}>
+                      {isHi ? "साढ़े साती सक्रिय!" : "Sade Sati Active!"}
+                    </h3>
+                    <p className={`text-sm text-orange-800 dark:text-orange-200 mb-3 ${isHi ? "font-hindi" : ""}`}>
+                      {isHi ? sadeSatiInfo.description.hi : sadeSatiInfo.description.en}
+                    </p>
+                    <details className="text-sm">
+                      <summary className={`cursor-pointer text-orange-700 dark:text-orange-300 font-semibold mb-2 ${isHi ? "font-hindi" : ""}`}>
+                        {isHi ? "उपाय देखें" : "View Remedies"}
+                      </summary>
+                      <ul className={`list-disc list-inside space-y-1 text-orange-800 dark:text-orange-200 ${isHi ? "font-hindi" : ""}`}>
+                        {(isHi ? sadeSatiInfo.remedies.hi : sadeSatiInfo.remedies.en).map((remedy, idx) => (
+                          <li key={idx}>{remedy}</li>
+                        ))}
+                      </ul>
+                    </details>
+                  </div>
+                </div>
+              </div>
+            )}
 
             <TransitTable 
               results={results} 
