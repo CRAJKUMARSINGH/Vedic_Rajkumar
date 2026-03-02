@@ -6,6 +6,7 @@ import VisualTransitChart from "@/components/VisualTransitChart";
 import AscendantNakshatraCard from "@/components/AscendantNakshatraCard";
 import PlanetaryPositionsCard from "@/components/PlanetaryPositionsCard";
 import PlanetaryAspectsCard from "@/components/PlanetaryAspectsCard";
+import ManglikDoshaCard from "@/components/ManglikDoshaCard";
 import LanguageToggle from "@/components/LanguageToggle";
 import ReadingHistory from "@/components/ReadingHistory";
 import UserProfileDialog from "@/components/UserProfileDialog";
@@ -20,6 +21,7 @@ import { addBirthDetails, getUserProfile, getLastUsedProfile, shouldAutoLoad } f
 import { calculateCompleteAscendant, type AscendantData } from "@/services/ascendantService";
 import { getNakshatraInfo, type NakshatraInfo } from "@/services/nakshatraService";
 import { calculateCompletePlanetaryPositions, type CompletePlanetaryPositions } from "@/services/ephemerisService";
+import { checkManglikDosha, type ManglikResult } from "@/services/manglikService";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 
@@ -35,6 +37,7 @@ const Index = () => {
   const [ascendantData, setAscendantData] = useState<AscendantData | null>(null);
   const [nakshatraData, setNakshatraData] = useState<NakshatraInfo | null>(null);
   const [planetaryPositions, setPlanetaryPositions] = useState<CompletePlanetaryPositions | null>(null);
+  const [manglikResult, setManglikResult] = useState<ManglikResult | null>(null);
   const [autoLoadAttempted, setAutoLoadAttempted] = useState(false);
   const { toast} = useToast();
 
@@ -145,6 +148,15 @@ const Index = () => {
     } catch (error) {
       console.error('Error calculating planetary positions:', error);
       setPlanetaryPositions(null);
+    }
+    
+    // Check Manglik Dosha
+    try {
+      const manglik = checkManglikDosha(data.date, data.time, coords.lat, coords.lon);
+      setManglikResult(manglik);
+    } catch (error) {
+      console.error('Error checking Manglik Dosha:', error);
+      setManglikResult(null);
     }
     
     const birthDate = new Date(data.date);
@@ -348,6 +360,14 @@ const Index = () => {
               />
             )}
 
+            {/* Manglik Dosha Card */}
+            {manglikResult && (
+              <ManglikDoshaCard
+                result={manglikResult}
+                lang={lang}
+              />
+            )}
+
             {/* Sade Sati Alert */}
             {sadeSatiInfo?.active && (
               <div className="max-w-2xl mx-auto bg-orange-50 dark:bg-orange-950/20 border-2 border-orange-500 rounded-lg p-4">
@@ -420,6 +440,7 @@ const Index = () => {
                   setAscendantData(null); 
                   setNakshatraData(null);
                   setPlanetaryPositions(null);
+                  setManglikResult(null);
                 }}
                 className={`text-sm text-primary underline underline-offset-2 hover:text-primary/80 ${isHi ? "font-hindi" : ""}`}
               >
