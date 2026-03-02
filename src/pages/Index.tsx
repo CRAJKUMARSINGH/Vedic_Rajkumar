@@ -5,6 +5,7 @@ import TransitChart from "@/components/TransitChart";
 import VisualTransitChart from "@/components/VisualTransitChart";
 import AscendantNakshatraCard from "@/components/AscendantNakshatraCard";
 import PlanetaryPositionsCard from "@/components/PlanetaryPositionsCard";
+import PlanetaryAspectsCard from "@/components/PlanetaryAspectsCard";
 import LanguageToggle from "@/components/LanguageToggle";
 import ReadingHistory from "@/components/ReadingHistory";
 import UserProfileDialog from "@/components/UserProfileDialog";
@@ -15,7 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { calculateTransits, RASHIS, getMoonRashi, CURRENT_POSITIONS, checkSadeSati, type TransitResult, type SadeSatiInfo } from "@/data/transitData";
 import { saveReading, getReadings, type SavedReading } from "@/services/readingService";
 import { getPlanetaryPositions, calculateMoonRashi } from "@/services/astronomyService";
-import { addBirthDetails, getUserProfile } from "@/services/userProfileService";
+import { addBirthDetails, getUserProfile, getLastUsedProfile, shouldAutoLoad } from "@/services/userProfileService";
 import { calculateCompleteAscendant, type AscendantData } from "@/services/ascendantService";
 import { getNakshatraInfo, type NakshatraInfo } from "@/services/nakshatraService";
 import { calculateCompletePlanetaryPositions, type CompletePlanetaryPositions } from "@/services/ephemerisService";
@@ -34,7 +35,26 @@ const Index = () => {
   const [ascendantData, setAscendantData] = useState<AscendantData | null>(null);
   const [nakshatraData, setNakshatraData] = useState<NakshatraInfo | null>(null);
   const [planetaryPositions, setPlanetaryPositions] = useState<CompletePlanetaryPositions | null>(null);
+  const [autoLoadAttempted, setAutoLoadAttempted] = useState(false);
   const { toast} = useToast();
+
+  // Auto-load last used profile on mount
+  useEffect(() => {
+    if (!autoLoadAttempted && !birthData && shouldAutoLoad()) {
+      const lastProfile = getLastUsedProfile();
+      if (lastProfile) {
+        setAutoLoadAttempted(true);
+        // Auto-submit the last used profile
+        handleSubmit(lastProfile);
+        toast({
+          title: isHi ? "✅ स्वागत वापस!" : "✅ Welcome Back!",
+          description: isHi 
+            ? `अंतिम प्रोफाइल लोड की गई: ${lastProfile.name || lastProfile.location}`
+            : `Last profile loaded: ${lastProfile.name || lastProfile.location}`,
+        });
+      }
+    }
+  }, [autoLoadAttempted, birthData]);
 
   // Load user profile on mount
   useEffect(() => {
@@ -311,6 +331,19 @@ const Index = () => {
             {planetaryPositions && (
               <PlanetaryPositionsCard
                 positions={planetaryPositions}
+                lang={lang}
+              />
+            )}
+
+            {/* Planetary Aspects Card */}
+            {planetaryPositions && (
+              <PlanetaryAspectsCard
+                planetaryPositions={planetaryPositions.planets.map(p => ({
+                  planet: p.name,
+                  rashi: p.rashiIndex,
+                  degree: p.degrees,
+                  house: p.house
+                }))}
                 lang={lang}
               />
             )}

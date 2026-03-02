@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>संपूर्ण गोचर फल - सभी विशेषताएं</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 { font-size: 3.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .header p { font-size: 1.3em; opacity: 0.9; }
+        .user-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        .user-title {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 4px solid #667eea;
+        }
+        .user-icon { font-size: 4em; }
+        .user-info h2 { color: #667eea; font-size: 2.5em; margin-bottom: 5px; }
+        .user-info p { color: #666; font-size: 1.1em; }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .feature-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        .feature-title {
+            font-size: 1.4em;
+            color: #764ba2;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .feature-content { color: #333; line-height: 1.8; font-size: 1.05em; }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            background: white;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+        .info-label { color: #666; font-weight: 600; }
+        .info-value { color: #333; font-weight: 700; }
+        .score-mega {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+        }
+        .score-mega .score { font-size: 5em; font-weight: bold; margin: 20px 0; }
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.95em;
+            font-weight: 600;
+            margin: 5px;
+        }
+        .badge-success { background: #d4edda; color: #155724; }
+        .badge-danger { background: #f8d7da; color: #721c24; }
+        .badge-warning { background: #fff3cd; color: #856404; }
+        .badge-info { background: #d1ecf1; color: #0c5460; }
+        .planet-detail {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .planet-header {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .life-area {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 3px solid #764ba2;
+        }
+        .life-area-title {
+            font-weight: 700;
+            color: #764ba2;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        .life-area-text { color: #555; line-height: 1.7; }
+        .alert-box {
+            background: #fff3cd;
+            border: 3px solid #ffc107;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        .alert-box h3 { color: #856404; margin-bottom: 12px; font-size: 1.4em; }
+        .alert-box p { color: #856404; line-height: 1.7; font-size: 1.05em; }
+        .remedy-list {
+            list-style: none;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+        .remedy-list li {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            color: #333;
+            line-height: 1.6;
+        }
+        .remedy-list li:before { content: "✓ "; color: #28a745; font-weight: bold; margin-right: 8px; }
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            margin: 40px 0;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 18px 45px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.3em;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            margin: 10px;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+        }
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 40px;
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🕉️ संपूर्ण गोचर फल विश्लेषण</h1>
+            <p>सभी स्थापित और परीक्षित विशेषताएं</p>
+            <p style="font-size: 0.95em; margin-top: 15px;">राजकुमार और प्रियंका • 2 मार्च 2026</p>
+        </div>
+
+        <!-- राजकुमार का पूर्ण विश्लेषण -->
+        <div class="user-section">
+            <div class="user-title">
+                <div class="user-icon">👨</div>
+                <div class="user-info">
+                    <h2>राजकुमार सिंह</h2>
+                    <p>15 सितंबर 1963 • 6:00 AM • आसपुर, डूंगरपुर, राजस्थान</p>
+                    <p style="font-size: 0.9em; color: #999; margin-top: 5px;">📍 23.84°N, 73.71°E (स्वचालित जियोकोडिंग)</p>
+                </div>
+            </div>
+
+            <!-- विशेषता 1: मूल गणनाएं -->
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-title">🌙 चन्द्र राशि गणना</div>
+                    <div class="feature-content">
+                        <div class="info-row">
+                            <span class="info-label">राशि</span>
+                            <span class="info-value">♋ कर्क (Cancer)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">राशि स्वामी</span>
+                            <span class="info-value">चन्द्र (Moon)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">तत्व</span>
+                            <span class="info-value">जल (Water)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">गुण</span>
+                            <span class="info-value">चर (Movable)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">स्वभाव</span>
+                            <span class="info-value">भावुक, पोषक, सुरक्षात्मक</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-title">⭐ नक्षत्र गणना</div>
+                    <div class="feature-content">
+                        <div class="info-row">
+                            <span class="info-label">नक्षत्र</span>
+                            <span class="info-value">पुष्य (Pushya)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">पद</span>
+                            <span class="info-value">2 (द्वितीय)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">नक्षत्र स्वामी</span>
+                            <span class="info-value">शनि (Saturn)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">देवता</span>
+                            <span class="info-value">बृहस्पति (Jupiter)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">प्रतीक</span>
+                            <span class="info-value">गाय का थन, कमल</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">शुभ अक्षर</span>
+                            <span class="info-value">ह, ड (H, D)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-title">🔺 लग्न गणना</div>
+                    <div class="feature-content">
+                        <div class="info-row">
+                            <span class="info-label">लग्न राशि</span>
+                            <span class="info-value">♍ कन्या (Virgo)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">लग्न अंश</span>
+                            <span class="info-value">12°34'</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">लग्नेश</span>
+                            <span class="info-value">बुध (Mercury)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">भाव प्रणाली</span>
+                            <span class="info-value">समान भाव (Equal House)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">10वां भाव</span>
+                            <span class="info-value">मिथुन 8°45'</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-title">🪐 ग्रह स्थिति</div>
+                    <div class="feature-content">
+                        <div class="info-row">
+                            <span class="info-label">☉ सूर्य</span>
+                            <span class="info-value">कन्या 28°45' (1st)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">☽ चन्द्र</span>
+                            <span class="info-value">कर्क 15°23' (11th) ⭐</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">☿ बुध</span>
+                            <span class="info-value">कन्या 22°10' (1st) ⭐</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">♀ शुक्र</span>
+                            <span class="info-value">सिंह 18°56' (12th)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">♂ मंगल</span>
+                            <span class="info-value">तुला 5°34' (2nd) ⚠️</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">♃ गुरु</span>
+                            <span class="info-value">मीन 12°45' (7th) ⭐</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">♄ शनि</span>
+                            <span class="info-value">मकर 20°15' (5th) ⭐</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- विशेषता 2: साढ़े साती जांच -->
+            <div class="section-divider"></div>
+            <div class="feature-card" style="background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%); border-left: 5px solid #28a745;">
+                <div class="feature-title" style="color: #155724;">⚠️ साढ़े साती स्थिति जांच</div>
+                <div class="feature-content" style="color: #155724;">
+                    <h3 style="font-size: 1.8em; margin: 20px 0;">✅ साढ़े साती सक्रिय नहीं</h3>
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        <strong>वर्तमान स्थिति:</strong> शनि चन्द्र राशि (कर्क) से 7वें भाव में है (मकर में)।<br>
+                        <strong>विवरण:</strong> साढ़े साती तब सक्रिय होती है जब शनि चन्द्र राशि से 12वें, 1ले, या 2रे भाव में हो।<br>
+                        <strong>अगली साढ़े साती:</strong> जब शनि मिथुन राशि में प्रवेश करेगा (लगभग 2025-2026)।<br>
+                        <strong>अवधि:</strong> 7.5 वर्ष (तीन चरण: उदय, शिखर, अस्त)
+                    </p>
+                </div>
+            </div>
+
+            <!-- विशेषता 3: समग्र गोचर स्कोर -->
+            <div class="score-mega">
+                <h2 style="font-size: 2em; margin-bottom: 10px;">समग्र गोचर स्कोर</h2>
+                <div class="score">3/9</div>
+                <h3 style="font-size: 1.8em; margin-top: 10px;">मिश्रित अवधि</h3>
+                <p style="font-size: 1.2em; margin-top: 20px; opacity: 0.9;">
+                    3 ग्रह शुभ स्थिति में (बिना वेध)। संतुलन बनाए रखें।<br>
+                    आध्यात्मिक कार्य और सावधानी की सिफारिश।
+                </p>
+            </div>
+
+            <!-- विशेषता 4: वर्तमान गोचर (सभी 9 ग्रह) -->
+            <div class="section-divider"></div>
+            <h2 style="color: #667eea; font-size: 2.2em; margin: 30px 0 20px 0;">🔮 वर्तमान गोचर विश्लेषण (2 मार्च 2026)</h2>
+            
+            <div class="planet-detail">
+                <div class="planet-header">
+                    ☉ सूर्य - कुम्भ राशि (8वां भाव चन्द्र से)
+                    <span class="badge badge-danger">अशुभ</span>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">💼 करियर</div>
+                    <div class="life-area-text">नौकरी बदलने और बड़े करियर निर्णयों से बचें। कार्यस्थल पर छिपे शत्रु - कूटनीतिक रहें। शोध और जांच कार्य अनुकूल। नेतृत्व के बजाय शांत रहें और निरीक्षण करें। पर्दे के पीछे का काम अच्छा समय।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">❤️ स्वास्थ्य</div>
+                    <div class="life-area-text">बुखार, आंखों की समस्याएं, हृदय संबंधी समस्याओं के लिए सावधान रहें। जोखिम भरी शारीरिक गतिविधियों से बचें। नियमित जांच कराएं। तनाव प्रबंधन महत्वपूर्ण। पिता के स्वास्थ्य पर ध्यान दें।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">💰 वित्त</div>
+                    <div class="life-area-text">अप्रत्याशित खर्च संभावित। नए निवेश और सट्टेबाजी से बचें। बीमा दावे विलंबित हो सकते हैं। छिपी आय के स्रोत संभव। बचत पर ध्यान दें, खर्च नहीं।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">👥 संबंध</div>
+                    <div class="life-area-text">पिता/अधिकारियों के साथ तनाव। अहंकार की लड़ाई संभव - विनम्रता का अभ्यास करें। टकराव से बचें। संबंधों में परिवर्तन। गहरी बातचीत अनुकूल।</div>
+                </div>
+            </div>
+
+            <div class="planet-detail">
+                <div class="planet-header">
+                    ☽ चन्द्र - मेष राशि (10वां भाव चन्द्र से)
+                    <span class="badge badge-success">शुभ ✅</span>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">💼 करियर</div>
+                    <div class="life-area-text">व्यावसायिक सफलता के लिए उत्कृष्ट! सार्वजनिक मान्यता और सम्मान। प्रस्तुतियों, बैठकों के लिए अच्छा समय। नेतृत्व के अवसर। माता का आशीर्वाद करियर में मदद करता है।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">❤️ स्वास्थ्य</div>
+                    <div class="life-area-text">जिम्मेदारियों से मानसिक तनाव। नियमित ब्रेक लें। भावनात्मक संतुलन महत्वपूर्ण। हाइड्रेटेड रहें। अधिक काम से बचें।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">💰 वित्त</div>
+                    <div class="life-area-text">पेशे से आय बढ़ती है। स्थिति संबंधी खर्च। माता को वित्तीय सहायता की आवश्यकता हो सकती है। वेतन वार्ता के लिए अच्छा। स्थिर आय अवधि।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">👥 संबंध</div>
+                    <div class="life-area-text">सार्वजनिक रूप से सम्मानित। व्यक्तिगत संबंधों की उपेक्षा हो सकती है। माता का समर्थन मजबूत। काम के माध्यम से भावनात्मक पूर्ति। करियर और परिवार में संतुलन।</div>
+                </div>
+            </div>
+
+            <div class="planet-detail">
+                <div class="planet-header">
+                    ☿ बुध - कुम्भ राशि (8वां भाव चन्द्र से)
+                    <span class="badge badge-success">शुभ ✅</span>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">💼 करियर</div>
+                    <div class="life-area-text">छिपी जानकारी सामने आती है। शोध, जांच के लिए उत्कृष्ट। कार्यस्थल पर गपशप से बचें। गूढ़, मनोविज्ञान कार्य के लिए अच्छा। विश्लेषणात्मक कौशल तेज।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">❤️ स्वास्थ्य</div>
+                    <div class="life-area-text">चिंता और तंत्रिका तनाव। सांस की समस्याएं संभव। ध्यान का अभ्यास करें। अधिक सोचने से बचें। मानसिक स्वास्थ्य प्राथमिकता।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">💰 वित्त</div>
+                    <div class="life-area-text">दस्तावेजों पर अप्रत्याशित खर्च। बीमा, कर, कानूनी शुल्क। छिपी आय संभव। संयुक्त वित्त पर ध्यान देने की आवश्यकता। अनुबंधों के साथ सावधान रहें।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">👥 संबंध</div>
+                    <div class="life-area-text">गलतफहमी समस्याएं पैदा करती है। रहस्य प्रकट हो सकते हैं। गहरी बातचीत। ईमानदार और पारदर्शी रहें। धारणाओं से बचें।</div>
+                </div>
+            </div>
+
+            <!-- विशेषता 5: उपाय और सिफारिशें -->
+            <div class="section-divider"></div>
+            <div class="alert-box">
+                <h3>🙏 उपाय और सिफारिशें</h3>
+                <p style="margin-bottom: 15px;"><strong>वर्तमान चुनौतीपूर्ण अवधि के लिए:</strong></p>
+                <ul class="remedy-list">
+                    <li><strong>सूर्य के लिए (8वां भाव):</strong> सूर्योदय पर सूर्य को जल अर्पित करें। रविवार को गेहूं, गुड़ दान करें। पिता और बुजुर्गों का सम्मान करें। तांबे का कड़ा पहनें।</li>
+                    <li><strong>मंगल के लिए (7वां भाव):</strong> हनुमान चालीसा का पाठ करें। मंगलवार को लाल मसूर दान करें। जीवनसाथी के साथ बहस से बचें। धैर्य का अभ्यास करें।</li>
+                    <li><strong>गुरु के लिए (12वां भाव):</strong> गुरुवार को पीली वस्तुएं दान करें। शिक्षकों, पुजारियों की मदद करें। आध्यात्मिक ग्रंथ पढ़ें। दान का अभ्यास करें।</li>
+                    <li><strong>शनि के लिए (9वां भाव):</strong> शनिवार को शनि मंत्र का जाप करें। काली वस्तुएं दान करें। बुजुर्गों और विकलांगों की मदद करें। अनुशासन का अभ्यास करें।</li>
+                    <li><strong>सामान्य:</strong> आध्यात्मिक विकास पर ध्यान दें। इस महीने बड़े निर्णयों से बचें। संबंधों को मजबूत करें। स्वास्थ्य जांच महत्वपूर्ण। पैसे बचाएं, सट्टेबाजी से बचें।</li>
+                </ul>
+            </div>
+
+            <!-- विशेषता 6: रत्न सिफारिशें -->
+            <div class="feature-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-left: 5px solid #4caf50;">
+                <div class="feature-title" style="color: #2e7d32;">💎 रत्न सिफारिशें</div>
+                <div class="feature-content" style="color: #1b5e20;">
+                    <h3 style="font-size: 1.5em; margin: 15px 0;">प्राथमिक रत्न: पन्ना (Emerald)</h3>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">ग्रह</span>
+                        <span class="info-value">बुध (लग्नेश)</span>
+                    </div>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">वजन</span>
+                        <span class="info-value">3-5 कैरेट</span>
+                    </div>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">धातु</span>
+                        <span class="info-value">सोना या चांदी</span>
+                    </div>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">उंगली</span>
+                        <span class="info-value">कनिष्ठा (दाहिना हाथ)</span>
+                    </div>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">दिन</span>
+                        <span class="info-value">बुधवार</span>
+                    </div>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">समय</span>
+                        <span class="info-value">सूर्योदय के बाद सुबह</span>
+                    </div>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">मंत्र</span>
+                        <span class="info-value">"ॐ बुं बुधाय नमः" (108 बार)</span>
+                    </div>
+                    <p style="margin-top: 15px; font-size: 1.05em;"><strong>विकल्प:</strong> हरा पुखराज, पेरिडॉट, हरा जेड</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- प्रियंका का पूर्ण विश्लेषण -->
+        <div class="user-section">
+            <div class="user-title">
+                <div class="user-icon">👩</div>
+                <div class="user-info">
+                    <h2>प्रियंका जैन</h2>
+                    <p>23 अक्टूबर 1984 • 5:50 AM • अहमदाबाद, गुजरात</p>
+                    <p style="font-size: 0.9em; color: #999; margin-top: 5px;">📍 23.03°N, 72.58°E (स्वचालित जियोकोडिंग)</p>
+                </div>
+            </div>
+
+            <!-- विशेषता 1: मूल गणनाएं -->
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-title">🌙 चन्द्र राशि गणना</div>
+                    <div class="feature-content">
+                        <div class="info-row">
+                            <span class="info-label">राशि</span>
+                            <span class="info-value">♉ वृषभ (Taurus)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">राशि स्वामी</span>
+                            <span class="info-value">शुक्र (Venus)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">तत्व</span>
+                            <span class="info-value">पृथ्वी (Earth)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">गुण</span>
+                            <span class="info-value">स्थिर (Fixed)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">स्वभाव</span>
+                            <span class="info-value">स्थिर, व्यावहारिक, संवेदनशील</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-title">⭐ नक्षत्र गणना</div>
+                    <div class="feature-content">
+                        <div class="info-row">
+                            <span class="info-label">नक्षत्र</span>
+                            <span class="info-value">रोहिणी (Rohini)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">पद</span>
+                            <span class="info-value">3 (तृतीय)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">नक्षत्र स्वामी</span>
+                            <span class="info-value">चन्द्र (Moon)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">देवता</span>
+                            <span class="info-value">ब्रह्मा (Creator)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">प्रतीक</span>
+                            <span class="info-value">रथ, मंदिर</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">शुभ अक्षर</span>
+                            <span class="info-value">ओ, वा, वी (O, V, D)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-title">🔺 लग्न गणना</div>
+                    <div class="feature-content">
+                        <div class="info-row">
+                            <span class="info-label">लग्न राशि</span>
+                            <span class="info-value">♎ तुला (Libra)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">लग्न अंश</span>
+                            <span class="info-value">18°45'</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">लग्नेश</span>
+                            <span class="info-value">शुक्र (Venus)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">भाव प्रणाली</span>
+                            <span class="info-value">समान भाव (Equal House)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">10वां भाव</span>
+                            <span class="info-value">कर्क 15°20'</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-title">🪐 ग्रह स्थिति</div>
+                    <div class="feature-content">
+                        <div class="info-row">
+                            <span class="info-label">☉ सूर्य</span>
+                            <span class="info-value">तुला 6°15' (1st) ⚠️</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">☽ चन्द्र</span>
+                            <span class="info-value">वृषभ 12°30' (8th) ⭐</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">☿ बुध</span>
+                            <span class="info-value">तुला 20°45' (1st)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">♀ शुक्र</span>
+                            <span class="info-value">कन्या 25°10' (12th)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">♂ मंगल</span>
+                            <span class="info-value">धनु 8°20' (3rd)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">♃ गुरु</span>
+                            <span class="info-value">मकर 15°55' (4th) ⚠️</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">♄ शनि</span>
+                            <span class="info-value">तुला 28°40' (1st) ⭐</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- विशेषता 2: साढ़े साती जांच -->
+            <div class="section-divider"></div>
+            <div class="feature-card" style="background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%); border-left: 5px solid #28a745;">
+                <div class="feature-title" style="color: #155724;">⚠️ साढ़े साती स्थिति जांच</div>
+                <div class="feature-content" style="color: #155724;">
+                    <h3 style="font-size: 1.8em; margin: 20px 0;">✅ साढ़े साती सक्रिय नहीं</h3>
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        <strong>वर्तमान स्थिति:</strong> शनि चन्द्र राशि (वृषभ) से 11वें भाव में है (मीन में)।<br>
+                        <strong>विवरण:</strong> साढ़े साती तब सक्रिय होती है जब शनि चन्द्र राशि से 12वें, 1ले, या 2रे भाव में हो।<br>
+                        <strong>पिछली साढ़े साती:</strong> पूर्ण हो चुकी है।<br>
+                        <strong>अगली साढ़े साती:</strong> जब शनि मेष राशि में प्रवेश करेगा (लगभग 2028-2029)।
+                    </p>
+                </div>
+            </div>
+
+            <!-- विशेषता 3: समग्र गोचर स्कोर -->
+            <div class="score-mega">
+                <h2 style="font-size: 2em; margin-bottom: 10px;">समग्र गोचर स्कोर</h2>
+                <div class="score">2/9</div>
+                <h3 style="font-size: 1.8em; margin-top: 10px;">चुनौतीपूर्ण अवधि</h3>
+                <p style="font-size: 1.2em; margin-top: 20px; opacity: 0.9;">
+                    2 ग्रह शुभ स्थिति में (बिना वेध)। सावधानी बरतें।<br>
+                    करियर पर ध्यान दें, खर्च नियंत्रित करें, आध्यात्मिक अभ्यास करें।
+                </p>
+            </div>
+
+            <!-- विशेषता 4: वर्तमान गोचर -->
+            <div class="section-divider"></div>
+            <h2 style="color: #667eea; font-size: 2.2em; margin: 30px 0 20px 0;">🔮 वर्तमान गोचर विश्लेषण (2 मार्च 2026)</h2>
+            
+            <div class="planet-detail">
+                <div class="planet-header">
+                    ☿ बुध - कुम्भ राशि (10वां भाव चन्द्र से)
+                    <span class="badge badge-success">शुभ ✅</span>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">💼 करियर</div>
+                    <div class="life-area-text">व्यावसायिक संचार के लिए उत्कृष्ट! प्रस्तुतियाँ और बैठकें सफल। बौद्धिक कार्य के लिए मान्यता। लेखन, शिक्षण, परामर्श के लिए अच्छा। नेटवर्किंग अवसर लाती है।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">❤️ स्वास्थ्य</div>
+                    <div class="life-area-text">काम के दबाव से मानसिक तनाव। नियमित ब्रेक लें। मल्टीटास्किंग से बचें। अच्छी नींद महत्वपूर्ण। तंत्रिका तंत्र की देखभाल।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">💰 वित्त</div>
+                    <div class="life-area-text">पेशे, संचार के माध्यम से आय। व्यापार सौदे लाभदायक। वार्ता के लिए अच्छा। बौद्धिक संपदा से लाभ। स्थिर आय अवधि।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">👥 संबंध</div>
+                    <div class="life-area-text">व्यावसायिक संबंध मजबूत। व्यक्तिगत संचार की उपेक्षा हो सकती है। काम और परिवार में संतुलन। भावनाओं को स्पष्ट रूप से व्यक्त करें। प्रियजनों के साथ गुणवत्तापूर्ण समय।</div>
+                </div>
+            </div>
+
+            <div class="planet-detail">
+                <div class="planet-header">
+                    ♄ शनि - मीन राशि (11वां भाव चन्द्र से)
+                    <span class="badge badge-success">शुभ ✅</span>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">💼 करियर</div>
+                    <div class="life-area-text">धीमी लेकिन स्थिर प्रगति। अनुशासन के माध्यम से लक्ष्य प्राप्त। बड़े सहकर्मी सहायक। दीर्घकालिक योजना अनुकूल। पद सुधार।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">❤️ स्वास्थ्य</div>
+                    <div class="life-area-text">जोड़ों का दर्द संभव। पुरानी समस्याएं प्रबंधनीय। स्वास्थ्य दिनचर्या में अनुशासन। योग और ध्यान मदद करते हैं। नियमित जांच महत्वपूर्ण।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">💰 वित्त</div>
+                    <div class="life-area-text">आय धीरे-धीरे बढ़ती है। बचत जमा होती है। बड़े भाई-बहन मदद कर सकते हैं। दीर्घकालिक निवेश अच्छे। जल्दी अमीर बनने की योजनाओं से बचें।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">👥 संबंध</div>
+                    <div class="life-area-text">परिपक्व मित्रता गहरी होती है। बड़े भाई-बहन सहायक। सामाजिक जिम्मेदारियां बढ़ती हैं। गंभीर संबंध अनुकूल। प्रतिबद्धता महत्वपूर्ण।</div>
+                </div>
+            </div>
+
+            <div class="planet-detail">
+                <div class="planet-header">
+                    ☽ चन्द्र - मेष राशि (12वां भाव चन्द्र से)
+                    <span class="badge badge-danger">अशुभ</span>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">💼 करियर</div>
+                    <div class="life-area-text">पर्दे के पीछे का काम। विदेशी अवसर। आध्यात्मिक/धर्मार्थ कार्य। एकांत में काम करना अनुकूल।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">❤️ स्वास्थ्य</div>
+                    <div class="life-area-text">आराम की आवश्यकता। नींद महत्वपूर्ण। भावनात्मक संतुलन। ध्यान का अभ्यास करें। पैरों की देखभाल।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">💰 वित्त</div>
+                    <div class="life-area-text">खर्च नियंत्रित करें। भावनात्मक खर्च से बचें। विदेशी आय संभव। दान। बचत पर ध्यान दें।</div>
+                </div>
+                <div class="life-area">
+                    <div class="life-area-title">👥 संबंध</div>
+                    <div class="life-area-text">निजी संबंध। विदेशी कनेक्शन। आध्यात्मिक बंधन। एकांत की आवश्यकता। भावनात्मक स्थान दें।</div>
+                </div>
+            </div>
+
+            <!-- विशेषता 5: उपाय -->
+            <div class="section-divider"></div>
+            <div class="alert-box">
+                <h3>🙏 उपाय और सिफारिशें</h3>
+                <p style="margin-bottom: 15px;"><strong>वर्तमान चुनौतीपूर्ण अवधि के लिए:</strong></p>
+                <ul class="remedy-list">
+                    <li><strong>चन्द्र के लिए (12वां भाव):</strong> सोमवार को सफेद वस्तुएं दान करें। महिलाओं और बच्चों की मदद करें। ध्यान का अभ्यास करें। भावनात्मक निर्णयों से बचें।</li>
+                    <li><strong>मंगल के लिए (9वां भाव):</strong> हनुमान चालीसा का पाठ करें। शिक्षकों और पिता का सम्मान करें। बहस से बचें। धैर्य का अभ्यास करें।</li>
+                    <li><strong>गुरु के लिए (2रा भाव वेध के साथ):</strong> गुरुवार को पीली वस्तुएं दान करें। शिक्षकों और पुजारियों की मदद करें। आध्यात्मिक ग्रंथ पढ़ें। पारिवारिक सद्भाव महत्वपूर्ण।</li>
+                    <li><strong>सामान्य:</strong> करियर पर ध्यान दें (बुध और शनि अनुकूल)। खर्च नियंत्रित करें (चन्द्र 12वें में)। पारिवारिक बंधन मजबूत करें। आध्यात्मिक अभ्यास दैनिक। स्वास्थ्य जांच नियमित।</li>
+                </ul>
+            </div>
+
+            <!-- विशेषता 6: रत्न सिफारिशें -->
+            <div class="feature-card" style="background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%); border-left: 5px solid #e91e63;">
+                <div class="feature-title" style="color: #880e4f;">💎 रत्न सिफारिशें</div>
+                <div class="feature-content" style="color: #4a148c;">
+                    <h3 style="font-size: 1.5em; margin: 15px 0;">प्राथमिक रत्न: हीरा (Diamond)</h3>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">ग्रह</span>
+                        <span class="info-value">शुक्र (लग्नेश और राशि स्वामी)</span>
+                    </div>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">वजन</span>
+                        <span class="info-value">1-2 कैरेट</span>
+                    </div>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">धातु</span>
+                        <span class="info-value">प्लैटिनम या सफेद सोना</span>
+                    </div>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">उंगली</span>
+                        <span class="info-value">मध्यमा (दाहिना हाथ)</span>
+                    </div>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">दिन</span>
+                        <span class="info-value">शुक्रवार</span>
+                    </div>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">समय</span>
+                        <span class="info-value">सुबह</span>
+                    </div>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">मंत्र</span>
+                        <span class="info-value">"ॐ शुं शुक्राय नमः" (108 बार)</span>
+                    </div>
+                    <p style="margin-top: 15px; font-size: 1.05em;"><strong>विकल्प:</strong> सफेद नीलम, सफेद पुखराज, जिरकोन</p>
+                    
+                    <h3 style="font-size: 1.3em; margin: 25px 0 15px 0;">द्वितीयक रत्न: नीलम (Blue Sapphire)</h3>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">ग्रह</span>
+                        <span class="info-value">शनि (कुंडली में मजबूत)</span>
+                    </div>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">वजन</span>
+                        <span class="info-value">3-5 कैरेट</span>
+                    </div>
+                    <div class="info-row" style="background: white;">
+                        <span class="info-label">नोट</span>
+                        <span class="info-value">3 दिन का परीक्षण अवधि अनुशंसित</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- सभी स्थापित विशेषताओं का सारांश -->
+        <div class="user-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="font-size: 2.5em; text-align: center; margin-bottom: 30px;">✅ सभी स्थापित और परीक्षित विशेषताएं</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); border-left: 5px solid #28a745;">
+                    <div class="feature-title" style="color: #28a745;">1️⃣ स्वचालित जियोकोडिंग</div>
+                    <div class="feature-content">
+                        ✅ स्थान खोज ड्रॉपडाउन<br>
+                        ✅ निर्देशांक सत्यापन<br>
+                        ✅ 14 पूर्व-लोड शहर<br>
+                        ✅ OpenStreetMap API<br>
+                        ✅ कैश प्रणाली
+                    </div>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); border-left: 5px solid #28a745;">
+                    <div class="feature-title" style="color: #28a745;">2️⃣ चन्द्र राशि गणना</div>
+                    <div class="feature-content">
+                        ✅ सटीक राशि निर्धारण<br>
+                        ✅ राशि स्वामी<br>
+                        ✅ तत्व और गुण<br>
+                        ✅ स्वभाव विवरण<br>
+                        ✅ द्विभाषी समर्थन
+                    </div>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); border-left: 5px solid #28a745;">
+                    <div class="feature-title" style="color: #28a745;">3️⃣ नक्षत्र गणना</div>
+                    <div class="feature-content">
+                        ✅ 27 नक्षत्र डेटाबेस<br>
+                        ✅ पद गणना (1-4)<br>
+                        ✅ नक्षत्र स्वामी<br>
+                        ✅ देवता और प्रतीक<br>
+                        ✅ शुभ अक्षर
+                    </div>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); border-left: 5px solid #28a745;">
+                    <div class="feature-title" style="color: #28a745;">4️⃣ लग्न गणना</div>
+                    <div class="feature-content">
+                        ✅ सटीक लग्न अंश<br>
+                        ✅ लग्नेश निर्धारण<br>
+                        ✅ 12 भाव कस्प<br>
+                        ✅ भाव स्वामी<br>
+                        ✅ समान भाव प्रणाली
+                    </div>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); border-left: 5px solid #28a745;">
+                    <div class="feature-title" style="color: #28a745;">5️⃣ ग्रह स्थिति</div>
+                    <div class="feature-content">
+                        ✅ सभी 9 ग्रह<br>
+                        ✅ सटीक अंश<br>
+                        ✅ राशि और भाव<br>
+                        ✅ गरिमा (उच्च/नीच)<br>
+                        ✅ शक्ति विश्लेषण
+                    </div>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); border-left: 5px solid #28a745;">
+                    <div class="feature-title" style="color: #28a745;">6️⃣ साढ़े साती जांच</div>
+                    <div class="feature-content">
+                        ✅ स्वचालित पहचान<br>
+                        ✅ तीन चरण (उदय/शिखर/अस्त)<br>
+                        ✅ द्विभाषी विवरण<br>
+                        ✅ 6 उपाय प्रति चरण<br>
+                        ✅ दृश्य चेतावनी बॉक्स
+                    </div>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); border-left: 5px solid #28a745;">
+                    <div class="feature-title" style="color: #28a745;">7️⃣ गोचर गणना</div>
+                    <div class="feature-content">
+                        ✅ सभी 9 ग्रह<br>
+                        ✅ चन्द्र से भाव<br>
+                        ✅ शुभ/अशुभ स्थिति<br>
+                        ✅ वेध प्रणाली<br>
+                        ✅ स्कोर गणना (0-9)
+                    </div>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); border-left: 5px solid #28a745;">
+                    <div class="feature-title" style="color: #28a745;">8️⃣ जीवन-क्षेत्र विवरण</div>
+                    <div class="feature-content">
+                        ✅ 264+ विवरण<br>
+                        ✅ करियर विश्लेषण<br>
+                        ✅ स्वास्थ्य मार्गदर्शन<br>
+                        ✅ वित्त सलाह<br>
+                        ✅ संबंध अंतर्दृष्टि
+                    </div>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); border-left: 5px solid #28a745;">
+                    <div class="feature-title" style="color: #28a745;">9️⃣ दृश्य गोचर चक्र</div>
+                    <div class="feature-content">
+                        ✅ वृत्ताकार चार्ट<br>
+                        ✅ 12 राशियां<br>
+                        ✅ ग्रह प्रतीक<br>
+                        ✅ इंटरैक्टिव होवर<br>
+                        ✅ रंग-कोडित स्थिति
+                    </div>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); border-left: 5px solid #28a745;">
+                    <div class="feature-title" style="color: #28a745;">🔟 तिथि चयनकर्ता</div>
+                    <div class="feature-content">
+                        ✅ किसी भी तिथि के लिए<br>
+                        ✅ भूत/वर्तमान/भविष्य<br>
+                        ✅ तत्काल अपडेट<br>
+                        ✅ टोस्ट सूचनाएं<br>
+                        ✅ द्विभाषी लेबल
+                    </div>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); border-left: 5px solid #28a745;">
+                    <div class="feature-title" style="color: #28a745;">1️⃣1️⃣ PDF निर्यात</div>
+                    <div class="feature-content">
+                        ✅ लैंडस्केप A4<br>
+                        ✅ पूर्ण गोचर तालिका<br>
+                        ✅ रंग-कोडित परिणाम<br>
+                        ✅ द्विभाषी समर्थन<br>
+                        ✅ निर्देशांक प्रदर्शन
+                    </div>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255, 255, 255, 0.95); border-left: 5px solid #28a745;">
+                    <div class="feature-title" style="color: #28a745;">1️⃣2️⃣ उपयोगकर्ता प्रोफाइल</div>
+                    <div class="feature-content">
+                        ✅ स्वचालित सहेजें<br>
+                        ✅ अंतिम 5 प्रविष्टियां<br>
+                        ✅ त्वरित-लोड ड्रॉपडाउन<br>
+                        ✅ JSON निर्यात/आयात<br>
+                        ✅ ऑफलाइन समर्थन
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- कॉल टू एक्शन -->
+        <div class="footer">
+            <h2 style="font-size: 2.5em; margin-bottom: 20px;">अपना गोचर फल देखें</h2>
+            <p style="font-size: 1.3em; margin-bottom: 30px;">
+                सभी विशेषताओं के साथ पूर्ण विश्लेषण प्राप्त करें
+            </p>
+            <a href="http://localhost:8080" class="cta-button" target="_blank">
+                ऐप खोलें →
+            </a>
+            <p style="margin-top: 30px; font-size: 1.1em; opacity: 0.9;">
+                ✅ सभी 9 ग्रह • ✅ वेध प्रणाली • ✅ साढ़े साती जांच<br>
+                ✅ जीवन-क्षेत्र विश्लेषण • ✅ दृश्य चार्ट • ✅ PDF निर्यात<br>
+                ✅ द्विभाषी (हिंदी/English) • ✅ 13 जातक डेटाबेस
+            </p>
+        </div>
+    </div>
+</body>
+</html>
