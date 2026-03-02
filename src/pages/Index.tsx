@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import BirthInputForm from "@/components/BirthInputForm";
 import TransitTable from "@/components/TransitTable";
 import TransitChart from "@/components/TransitChart";
+import VisualTransitChart from "@/components/VisualTransitChart";
 import AscendantNakshatraCard from "@/components/AscendantNakshatraCard";
 import PlanetaryPositionsCard from "@/components/PlanetaryPositionsCard";
 import LanguageToggle from "@/components/LanguageToggle";
@@ -363,7 +364,7 @@ const Index = () => {
               </TabsContent>
               
               <TabsContent value="chart" className="mt-4">
-                <TransitChart 
+                <VisualTransitChart 
                   results={results}
                   moonRashiIndex={moonRashiIndex}
                   lang={lang}
