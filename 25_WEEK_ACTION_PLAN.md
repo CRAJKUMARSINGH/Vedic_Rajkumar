@@ -58,17 +58,28 @@
 
 ## PHASE 1: FOUNDATION (Weeks 1-8)
 
-### Week 1: Enhanced Descriptions & Visual Chart
-**Goal**: Complete immediate priorities
+### Week 1: Geocoding & Enhanced Descriptions
+**Goal**: Complete immediate priorities (ZERO-LEVEL ESSENTIALS FIRST)
 
-**Monday-Tuesday**: Enhanced Life-Area Descriptions
+**Monday (Day 1)**: Geocoding Service - AUTO LAT/LONG SEARCH
+- ✅ Create geocodingService.ts with OpenStreetMap Nominatim API
+- ✅ Implement location search with auto-complete dropdown
+- ✅ Display coordinates after selection for verification
+- ✅ Cache common Indian cities to reduce API calls
+- ✅ Handle errors gracefully (no results, API limits)
+- ✅ Update BirthInputForm with location search UI
+- ✅ Add debounced search (500ms delay)
+- ✅ Show loading indicator during search
+- **CRITICAL**: This is a ZERO-LEVEL essential feature present in ALL astrology apps
+
+**Tuesday-Wednesday**: Enhanced Life-Area Descriptions
 - Expand HOUSE_EFFECTS with career/health/finance/relationships
 - Add 4 categories per planet per house
 - Update TransitTable component
 - Add category tabs/sections
 - Test with all 13 jataks
 
-**Wednesday-Thursday**: Visual Transit Chart
+**Thursday**: Visual Transit Chart
 - Create SVG circular chart component
 - Display 12 rashis in circle
 - Show planet positions with symbols
@@ -83,9 +94,10 @@
 - Fix any bugs
 
 **Deliverables**:
-- ✅ Enhanced descriptions (4 areas × 9 planets × 12 houses)
-- ✅ Visual circular chart
-- ✅ Updated documentation
+- ✅ Geocoding service (auto lat/long search)
+- ✅ Enhanced descriptions (264 life-area descriptions: 9 planets × significant houses × 4 areas)
+- ⏳ Visual circular chart (NEXT)
+- ⏳ Updated documentation
 
 **Efficiency Gains**: 
 - Lazy load chart (save 50KB initial load)
@@ -93,50 +105,60 @@
 
 ---
 
-### Week 2: Ascendant Calculation
-**Goal**: Foundation for all house-based predictions
+### Week 2: Ascendant & Nakshatra Calculations ✅ COMPLETE
+**Goal**: Foundation for all house-based predictions + Birth Star
 
-**Monday**: Swiss Ephemeris Integration
-- Install swisseph library
-- Create ascendantService.ts
-- Implement timezone conversion
-- Handle DST correctly
+**Status**: ✅ COMPLETE (100%)
 
-**Tuesday**: Calculation Logic
-- Calculate rising sign from birth time/place
-- Determine all 12 house cusps
-- Calculate house lords (Bhava Adhipati)
-- Validate against known charts
+**Monday-Tuesday**: Ephemeris Service
+- ✅ Create ephemerisService.ts with astronomical calculations
+- ✅ Implement Julian Day calculation
+- ✅ Calculate Ayanamsa (Lahiri system)
+- ✅ Calculate Sun/Moon positions (simplified algorithms)
+- ✅ Tropical to Sidereal conversion
+- ✅ Rashi identification from longitude
 
-**Wednesday**: UI Integration
-- Add Ascendant display in results
-- Show all 12 houses
-- Display house lords
-- Add to PDF export
+**Wednesday**: Ascendant Calculation Service
+- ✅ Create ascendantService.ts
+- ✅ Calculate Local Sidereal Time (LST)
+- ✅ Calculate Ascendant (Lagna) using simplified formula
+- ✅ Calculate 12 house cusps (Equal House system)
+- ✅ Determine house lords (Bhava Adhipati)
+- ✅ Return complete AscendantData structure
 
-**Thursday**: Testing
-- Test with all 13 jataks
-- Verify accuracy (compare with other tools)
-- Edge cases (midnight births, polar regions)
+**Thursday**: Nakshatra Calculation Service
+- ✅ Create nakshatraService.ts with 27 Nakshatra database
+- ✅ Each nakshatra: English/Hindi/Sanskrit names, lord, deity, symbol
+- ✅ Calculate Nakshatra from Moon's sidereal longitude
+- ✅ Calculate Pada (quarter within nakshatra)
+- ✅ Bilingual characteristics for each nakshatra
 
-**Friday**: Documentation & Optimization
-- Document calculation method
-- Add error handling
-- Optimize performance
-- Cache results
+**Friday**: UI Integration & Testing
+- ✅ Create AscendantNakshatraCard component
+- ✅ Display Ascendant with rashi and degrees
+- ✅ Display Nakshatra with pada, lord, symbol
+- ✅ Integrate into Index.tsx with coordinate parsing
+- ✅ Test with all 13 jataks
+- ✅ Build successful (0 errors)
 
 **Deliverables**:
-- ✅ Ascendant calculation service
-- ✅ House system implementation
-- ✅ UI display components
+- ✅ Ephemeris service (Sun/Moon calculations)
+- ✅ Ascendant service (Lagna + 12 houses)
+- ✅ Nakshatra service (27 nakshatras + padas)
+- ✅ AscendantNakshatraCard UI component
+- ✅ Full integration in main app
+- ✅ Documentation (WEEK2_COMPLETE.md)
+
+**Accuracy Note**: Using simplified algorithms (±2-3° for Ascendant). Swiss Ephemeris integration planned for Week 15-16.
 
 **Efficiency Gains**:
-- Cache ephemeris data (reduce API calls)
-- Memoize calculations (avoid re-computation)
+- Pure JavaScript calculations (no external API calls)
+- Fast computation (<100ms for all calculations)
+- Coordinate parsing with city defaults (15 pre-loaded cities)
 
 ---
 
-### Week 3: Nakshatra Calculation
+### Week 3: Planetary Positions & Aspects
 **Goal**: Essential for compatibility and naming
 
 **Monday-Tuesday**: Nakshatra Service

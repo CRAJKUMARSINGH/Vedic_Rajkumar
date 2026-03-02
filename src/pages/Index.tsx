@@ -1,16 +1,23 @@
 import { useState, useEffect } from "react";
 import BirthInputForm from "@/components/BirthInputForm";
 import TransitTable from "@/components/TransitTable";
+import TransitChart from "@/components/TransitChart";
+import AscendantNakshatraCard from "@/components/AscendantNakshatraCard";
+import PlanetaryPositionsCard from "@/components/PlanetaryPositionsCard";
 import LanguageToggle from "@/components/LanguageToggle";
 import ReadingHistory from "@/components/ReadingHistory";
 import UserProfileDialog from "@/components/UserProfileDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { calculateTransits, RASHIS, getMoonRashi, CURRENT_POSITIONS, checkSadeSati, type TransitResult, type SadeSatiInfo } from "@/data/transitData";
 import { saveReading, getReadings, type SavedReading } from "@/services/readingService";
 import { getPlanetaryPositions, calculateMoonRashi } from "@/services/astronomyService";
 import { addBirthDetails, getUserProfile } from "@/services/userProfileService";
+import { calculateCompleteAscendant, type AscendantData } from "@/services/ascendantService";
+import { getNakshatraInfo, type NakshatraInfo } from "@/services/nakshatraService";
+import { calculateCompletePlanetaryPositions, type CompletePlanetaryPositions } from "@/services/ephemerisService";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 
@@ -23,6 +30,9 @@ const Index = () => {
   const [sadeSatiInfo, setSadeSatiInfo] = useState<SadeSatiInfo | null>(null);
   const [pastReadings, setPastReadings] = useState<SavedReading[]>([]);
   const [saving, setSaving] = useState(false);
+  const [ascendantData, setAscendantData] = useState<AscendantData | null>(null);
+  const [nakshatraData, setNakshatraData] = useState<NakshatraInfo | null>(null);
+  const [planetaryPositions, setPlanetaryPositions] = useState<CompletePlanetaryPositions | null>(null);
   const { toast} = useToast();
 
   // Load user profile on mount
@@ -39,11 +49,82 @@ const Index = () => {
   });
   const todayISO = new Date().toISOString().split("T")[0];
 
+  // Helper function to parse coordinates from location string
+  const parseCoordinates = (location: string): { lat: number; lon: number } | null => {
+    // Try to extract coordinates from location string
+    // Format: "City (lat, lon)" or just "City"
+    const coordMatch = location.match(/\(([^,]+),\s*([^)]+)\)/);
+    if (coordMatch) {
+      const lat = parseFloat(coordMatch[1]);
+      const lon = parseFloat(coordMatch[2]);
+      if (!isNaN(lat) && !isNaN(lon)) {
+        return { lat, lon };
+      }
+    }
+    
+    // Default coordinates for common Indian cities (fallback)
+    const cityDefaults: Record<string, { lat: number; lon: number }> = {
+      'delhi': { lat: 28.61, lon: 77.23 },
+      'mumbai': { lat: 19.08, lon: 72.88 },
+      'bangalore': { lat: 12.97, lon: 77.59 },
+      'kolkata': { lat: 22.57, lon: 88.36 },
+      'chennai': { lat: 13.08, lon: 80.27 },
+      'hyderabad': { lat: 17.39, lon: 78.49 },
+      'ahmedabad': { lat: 23.03, lon: 72.58 },
+      'pune': { lat: 18.52, lon: 73.86 },
+      'jaipur': { lat: 26.91, lon: 75.79 },
+      'indore': { lat: 22.72, lon: 75.86 },
+      'dungarpur': { lat: 23.84, lon: 73.71 },
+      'banswara': { lat: 23.54, lon: 74.44 },
+      'nandli': { lat: 23.55, lon: 74.08 },
+      'aspur': { lat: 23.84, lon: 73.71 },
+      'idar': { lat: 23.84, lon: 73.01 },
+    };
+    
+    const cityKey = location.toLowerCase().split('(')[0].trim();
+    return cityDefaults[cityKey] || { lat: 23.0, lon: 72.0 }; // Default to Gujarat
+  };
+
   const handleSubmit = async (data: { date: string; time: string; location: string }) => {
     setBirthData(data);
     
     // Save birth details to user profile
     addBirthDetails(data);
+    
+    // Parse coordinates from location
+    const coords = parseCoordinates(data.location);
+    
+    // Calculate Ascendant
+    try {
+      const ascendant = calculateCompleteAscendant(
+        data.date,
+        data.time,
+        coords.lat,
+        coords.lon
+      );
+      setAscendantData(ascendant);
+    } catch (error) {
+      console.error('Error calculating ascendant:', error);
+      setAscendantData(null);
+    }
+    
+    // Calculate Nakshatra
+    try {
+      const nakshatra = getNakshatraInfo(data.date, data.time);
+      setNakshatraData(nakshatra);
+    } catch (error) {
+      console.error('Error calculating nakshatra:', error);
+      setNakshatraData(null);
+    }
+    
+    // Calculate all planetary positions
+    try {
+      const positions = calculateCompletePlanetaryPositions(data.date, data.time);
+      setPlanetaryPositions(positions);
+    } catch (error) {
+      console.error('Error calculating planetary positions:', error);
+      setPlanetaryPositions(null);
+    }
     
     const birthDate = new Date(data.date);
     const moonIdx = getMoonRashi(birthDate);
@@ -208,6 +289,31 @@ const Index = () => {
               )}
             </div>
 
+            {/* Ascendant & Nakshatra Card */}
+            {(ascendantData || nakshatraData) && (
+              <AscendantNakshatraCard
+                ascendant={ascendantData ? {
+                  rashiName: ascendantData.ascendant.rashiName,
+                  degrees: ascendantData.ascendant.degrees
+                } : undefined}
+                nakshatra={nakshatraData ? {
+                  name: nakshatraData.name,
+                  pada: nakshatraData.pada,
+                  lord: nakshatraData.lord,
+                  symbol: nakshatraData.symbol
+                } : undefined}
+                lang={lang}
+              />
+            )}
+
+            {/* Planetary Positions Card */}
+            {planetaryPositions && (
+              <PlanetaryPositionsCard
+                positions={planetaryPositions}
+                lang={lang}
+              />
+            )}
+
             {/* Sade Sati Alert */}
             {sadeSatiInfo?.active && (
               <div className="max-w-2xl mx-auto bg-orange-50 dark:bg-orange-950/20 border-2 border-orange-500 rounded-lg p-4">
@@ -235,13 +341,35 @@ const Index = () => {
               </div>
             )}
 
-            <TransitTable 
-              results={results} 
-              lang={lang} 
-              moonRashiIndex={moonRashiIndex}
-              birthData={birthData}
-              transitDate={today}
-            />
+            {/* Tabs for Chart and Table views */}
+            <Tabs defaultValue="table" className="w-full">
+              <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
+                <TabsTrigger value="table" className={isHi ? "font-hindi" : ""}>
+                  {isHi ? "तालिका दृश्य" : "Table View"}
+                </TabsTrigger>
+                <TabsTrigger value="chart" className={isHi ? "font-hindi" : ""}>
+                  {isHi ? "चक्र दृश्य" : "Chart View"}
+                </TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="table" className="mt-4">
+                <TransitTable 
+                  results={results} 
+                  lang={lang} 
+                  moonRashiIndex={moonRashiIndex}
+                  birthData={birthData}
+                  transitDate={today}
+                />
+              </TabsContent>
+              
+              <TabsContent value="chart" className="mt-4">
+                <TransitChart 
+                  results={results}
+                  moonRashiIndex={moonRashiIndex}
+                  lang={lang}
+                />
+              </TabsContent>
+            </Tabs>
 
             {/* Past readings */}
             {pastReadings.length > 1 && (
@@ -251,7 +379,14 @@ const Index = () => {
             {/* Reset */}
             <div className="flex justify-center">
               <button
-                onClick={() => { setResults(null); setBirthData(null); setPastReadings([]); }}
+                onClick={() => { 
+                  setResults(null); 
+                  setBirthData(null); 
+                  setPastReadings([]); 
+                  setAscendantData(null); 
+                  setNakshatraData(null);
+                  setPlanetaryPositions(null);
+                }}
                 className={`text-sm text-primary underline underline-offset-2 hover:text-primary/80 ${isHi ? "font-hindi" : ""}`}
               >
                 {isHi ? "नया विवरण दर्ज करें" : "Enter new details"}

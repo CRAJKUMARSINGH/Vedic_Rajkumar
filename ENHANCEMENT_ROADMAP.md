@@ -13,13 +13,16 @@
 
 | Feature | Value | Effort | Status |
 |---------|-------|--------|--------|
-| Date Selector | HIGH | 1 day | 🔄 In Progress |
-| Sade Sati Indicator | HIGH | 1 day | 🔄 In Progress |
+| **Geocoding/Auto Lat-Long** | **CRITICAL** | **1 day** | **✅ DONE** |
+| Date Selector | HIGH | 1 day | ✅ DONE |
+| Sade Sati Indicator | HIGH | 1 day | ✅ DONE |
 | Life Area Descriptions | HIGH | 2 days | 🔄 In Progress |
 | Visual Transit Chart | MEDIUM | 3 days | ⏳ Planned |
 
-**Total Time**: ~7 days  
+**Total Time**: ~8 days  
 **Impact**: Completes core transit analysis
+
+**NOTE**: Geocoding is a ZERO-LEVEL essential feature present in ALL astrology apps. Without it, users cannot easily input birth locations.
 
 ---
 
@@ -87,6 +90,7 @@
 
 ### Month 1-2: Core Enhancements
 ```
+Week 1:    ✅ Geocoding (ZERO-LEVEL ESSENTIAL)
 Week 1-2:  ✅ Date selector, Sade Sati, Enhanced descriptions
 Week 3-4:  ⭐ Ascendant, Nakshatra calculations
 Week 5-6:  ⭐ Manglik dosha, Basic match making
