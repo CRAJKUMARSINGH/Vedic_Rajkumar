@@ -3,8 +3,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { getUserProfile, saveUserProfile, exportUserData, importUserData, type UserProfile } from "@/services/userProfileService";
+import { getUserProfile, saveUserProfile, exportUserData, importUserData, shouldAutoLoad, setAutoLoadEnabled, type UserProfile } from "@/services/userProfileService";
 import { Download, Upload, User } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 
 interface UserProfileDialogProps {
@@ -14,12 +15,14 @@ interface UserProfileDialogProps {
 export default function UserProfileDialog({ lang }: UserProfileDialogProps) {
   const [open, setOpen] = useState(false);
   const [profile, setProfile] = useState<UserProfile>({});
+  const [autoLoad, setAutoLoad] = useState(true);
   const { toast } = useToast();
   const isHi = lang === "hi";
 
   useEffect(() => {
     const stored = getUserProfile();
     if (stored) setProfile(stored);
+    setAutoLoad(shouldAutoLoad());
   }, [open]);
 
   const handleSave = () => {
@@ -124,6 +127,35 @@ export default function UserProfileDialog({ lang }: UserProfileDialogProps) {
               value={profile.defaultLocation || ""}
               onChange={(e) => setProfile({ ...profile, defaultLocation: e.target.value })}
               placeholder={isHi ? "शहर, राज्य" : "City, State"}
+            />
+          </div>
+
+          <div className="flex items-center justify-between space-x-2 py-2 border-t border-b">
+            <div className="space-y-0.5">
+              <Label htmlFor="auto-load" className={`text-sm font-medium ${isHi ? "font-hindi" : ""}`}>
+                {isHi ? "स्वचालित लोड" : "Auto-Load Last Profile"}
+              </Label>
+              <p className={`text-xs text-muted-foreground ${isHi ? "font-hindi" : ""}`}>
+                {isHi 
+                  ? "वापस आने पर अंतिम प्रोफाइल स्वचालित रूप से लोड करें"
+                  : "Automatically load your last used profile when you return"}
+              </p>
+            </div>
+            <Switch
+              id="auto-load"
+              checked={autoLoad}
+              onCheckedChange={(checked) => {
+                setAutoLoad(checked);
+                setAutoLoadEnabled(checked);
+                toast({
+                  title: checked 
+                    ? (isHi ? "✅ स्वचालित लोड सक्षम" : "✅ Auto-Load Enabled")
+                    : (isHi ? "⏸️ स्वचालित लोड अक्षम" : "⏸️ Auto-Load Disabled"),
+                  description: checked
+                    ? (isHi ? "अगली बार आपकी प्रोफाइल स्वचालित रूप से लोड होगी" : "Your profile will load automatically next time")
+                    : (isHi ? "आपको हर बार विवरण दर्ज करना होगा" : "You'll need to enter details each time"),
+                });
+              }}
             />
           </div>
 

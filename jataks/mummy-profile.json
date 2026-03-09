@@ -1,0 +1,19 @@
+{
+  "profile": {
+    "name": "Mummy",
+    "email": "",
+    "defaultLocation": "Nandli, Rajasthan",
+    "savedBirthDetails": [
+      {
+        "date": "1947-09-05",
+        "time": "05:00",
+        "location": "Nandli, Rajasthan",
+        "coordinates": "23.55°N, 74.08°E",
+        "moonRashi": "",
+        "moonRashiIndex": null
+      }
+    ]
+  },
+  "readings": [],
+  "exportDate": "2026-03-01T07:30:00.000Z"
+}

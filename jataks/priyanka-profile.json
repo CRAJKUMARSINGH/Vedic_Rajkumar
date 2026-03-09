@@ -1,0 +1,19 @@
+{
+  "profile": {
+    "name": "Priyanka Jain",
+    "email": "priyanka@example.com",
+    "defaultLocation": "Ahmedabad, Gujarat",
+    "savedBirthDetails": [
+      {
+        "date": "1984-10-23",
+        "time": "05:50",
+        "location": "Ahmedabad, Gujarat",
+        "coordinates": "23.03°N, 72.58°E",
+        "moonRashi": "Taurus (वृषभ)",
+        "moonRashiIndex": 1
+      }
+    ]
+  },
+  "readings": [],
+  "exportDate": "2026-03-01T07:30:00.000Z"
+}

@@ -1,0 +1,19 @@
+{
+  "profile": {
+    "name": "Ajit Singh Chauhan",
+    "email": "",
+    "defaultLocation": "Banswara, Rajasthan",
+    "savedBirthDetails": [
+      {
+        "date": "1975-09-07",
+        "time": "05:35",
+        "location": "Banswara, Rajasthan",
+        "coordinates": "23.54°N, 74.44°E",
+        "moonRashi": "",
+        "moonRashiIndex": null
+      }
+    ]
+  },
+  "readings": [],
+  "exportDate": "2026-03-01T07:45:00.000Z"
+}

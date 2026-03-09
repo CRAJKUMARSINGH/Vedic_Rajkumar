@@ -1,0 +1,19 @@
+{
+  "profile": {
+    "name": "Vishwaraj Singh Chauhan",
+    "email": "",
+    "defaultLocation": "Indore, Madhya Pradesh",
+    "savedBirthDetails": [
+      {
+        "date": "1994-09-26",
+        "time": "02:17",
+        "location": "Indore, Madhya Pradesh",
+        "coordinates": "22.72°N, 75.86°E",
+        "moonRashi": "",
+        "moonRashiIndex": null
+      }
+    ]
+  },
+  "readings": [],
+  "exportDate": "2026-03-01T07:45:00.000Z"
+}

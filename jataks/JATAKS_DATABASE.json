@@ -1,0 +1,214 @@
+{
+  "databaseName": "Astrological Chart Database",
+  "createdDate": "2026-03-01",
+  "totalJataks": 13,
+  "jataks": [
+    {
+      "id": "jatak_001",
+      "name": "Pankaj Jain",
+      "dateOfBirth": "1979-07-28",
+      "timeOfBirth": "23:50",
+      "placeOfBirth": "Dungarpur",
+      "state": "Rajasthan",
+      "country": "India",
+      "coordinates": {
+        "latitude": "23.84°N",
+        "longitude": "73.71°E"
+      },
+      "relationship": "Friend/Relative",
+      "notes": ""
+    },
+    {
+      "id": "jatak_002",
+      "name": "Priyansh Singh Chauhan",
+      "dateOfBirth": "2000-10-26",
+      "timeOfBirth": "00:50",
+      "placeOfBirth": "Indore",
+      "state": "Madhya Pradesh",
+      "country": "India",
+      "coordinates": {
+        "latitude": "22.72°N",
+        "longitude": "75.86°E"
+      },
+      "relationship": "Son",
+      "notes": "Time updated: 00:50 AM"
+    },
+    {
+      "id": "jatak_003",
+      "name": "Vishwaraj Singh Chauhan",
+      "dateOfBirth": "1994-09-26",
+      "timeOfBirth": "02:17",
+      "placeOfBirth": "Indore",
+      "state": "Madhya Pradesh",
+      "country": "India",
+      "coordinates": {
+        "latitude": "22.72°N",
+        "longitude": "75.86°E"
+      },
+      "relationship": "Son",
+      "notes": "Time updated: 02:17 AM"
+    },
+    {
+      "id": "jatak_004",
+      "name": "Mummy",
+      "dateOfBirth": "1947-09-05",
+      "timeOfBirth": "05:00",
+      "placeOfBirth": "Nandli",
+      "state": "Rajasthan",
+      "country": "India",
+      "coordinates": {
+        "latitude": "23.55°N",
+        "longitude": "74.08°E"
+      },
+      "relationship": "Mother",
+      "notes": ""
+    },
+    {
+      "id": "jatak_005",
+      "name": "Rajkumar",
+      "dateOfBirth": "1963-09-15",
+      "timeOfBirth": "06:00",
+      "placeOfBirth": "Nandli (Aspur)",
+      "state": "Rajasthan",
+      "country": "India",
+      "coordinates": {
+        "latitude": "23.84°N",
+        "longitude": "73.71°E",
+        "note": "Original data: 23-55, 74-08 (Nandli), corrected to Aspur coordinates"
+      },
+      "relationship": "Self",
+      "moonRashi": "Cancer (कर्क)",
+      "moonRashiIndex": 3,
+      "notes": "Primary user - coordinates verified"
+    },
+    {
+      "id": "jatak_006",
+      "name": "Kanchi Jain",
+      "dateOfBirth": "2004-09-08",
+      "timeOfBirth": "01:05",
+      "placeOfBirth": "Aspur",
+      "state": "Rajasthan",
+      "country": "India",
+      "coordinates": {
+        "latitude": "23.84°N",
+        "longitude": "73.71°E"
+      },
+      "relationship": "Daughter",
+      "notes": ""
+    },
+    {
+      "id": "jatak_007",
+      "name": "Kiwangi Jain",
+      "dateOfBirth": "2010-12-21",
+      "timeOfBirth": "10:10",
+      "placeOfBirth": "Idar",
+      "state": "Gujarat",
+      "country": "India",
+      "coordinates": {
+        "latitude": "23.84°N",
+        "longitude": "73.01°E"
+      },
+      "relationship": "Daughter",
+      "notes": ""
+    },
+    {
+      "id": "jatak_008",
+      "name": "Priyanka Jain",
+      "dateOfBirth": "1984-10-23",
+      "timeOfBirth": "05:50",
+      "placeOfBirth": "Ahmedabad",
+      "state": "Gujarat",
+      "country": "India",
+      "coordinates": {
+        "latitude": "23.03°N",
+        "longitude": "72.58°E"
+      },
+      "relationship": "Wife",
+      "moonRashi": "Taurus (वृषभ)",
+      "moonRashiIndex": 1,
+      "notes": "Primary user - coordinates verified"
+    },
+    {
+      "id": "jatak_009",
+      "name": "Ajit Singh Chauhan",
+      "dateOfBirth": "1975-09-07",
+      "timeOfBirth": "05:35",
+      "placeOfBirth": "Banswara",
+      "state": "Rajasthan",
+      "country": "India",
+      "coordinates": {
+        "latitude": "23.54°N",
+        "longitude": "74.44°E"
+      },
+      "relationship": "Brother/Relative",
+      "notes": ""
+    },
+    {
+      "id": "jatak_010",
+      "name": "Hunar Jain",
+      "dateOfBirth": "1996-09-09",
+      "timeOfBirth": "12:47",
+      "placeOfBirth": "Dungarpur",
+      "state": "Rajasthan",
+      "country": "India",
+      "coordinates": {
+        "latitude": "23.84°N",
+        "longitude": "73.71°E"
+      },
+      "relationship": "Niece/Nephew",
+      "notes": ""
+    },
+    {
+      "id": "jatak_011",
+      "name": "Bittu Son Arthuna",
+      "dateOfBirth": "2021-05-02",
+      "timeOfBirth": "05:45",
+      "placeOfBirth": "Banswara",
+      "state": "Rajasthan",
+      "country": "India",
+      "coordinates": {
+        "latitude": "23.54°N",
+        "longitude": "74.44°E"
+      },
+      "relationship": "Relative's Child",
+      "notes": ""
+    },
+    {
+      "id": "jatak_012",
+      "name": "Naman Shah",
+      "dateOfBirth": "1997-03-29",
+      "timeOfBirth": "03:32",
+      "placeOfBirth": "Partapur",
+      "state": "Rajasthan",
+      "country": "India",
+      "coordinates": {
+        "latitude": "23.50°N",
+        "longitude": "74.00°E"
+      },
+      "relationship": "Friend/Relative",
+      "notes": ""
+    },
+    {
+      "id": "jatak_013",
+      "name": "Miss Jaya Sisodia",
+      "dateOfBirth": "1994-06-25",
+      "timeOfBirth": "11:00",
+      "placeOfBirth": "Indore",
+      "state": "Madhya Pradesh",
+      "country": "India",
+      "coordinates": {
+        "latitude": "22.72°N",
+        "longitude": "75.86°E"
+      },
+      "relationship": "Friend/Relative",
+      "notes": ""
+    }
+  ],
+  "metadata": {
+    "format": "ISO 8601 dates (YYYY-MM-DD)",
+    "timeFormat": "24-hour (HH:MM)",
+    "coordinateSystem": "Decimal degrees",
+    "ayanamsa": "Lahiri (Chitrapaksha)",
+    "calculationMethod": "Vedic/Sidereal"
+  }
+}

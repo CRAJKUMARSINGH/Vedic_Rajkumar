@@ -1,0 +1,19 @@
+{
+  "profile": {
+    "name": "Bittu Son Arthuna",
+    "email": "",
+    "defaultLocation": "Banswara, Rajasthan",
+    "savedBirthDetails": [
+      {
+        "date": "2021-05-02",
+        "time": "05:45",
+        "location": "Banswara, Rajasthan",
+        "coordinates": "23.54°N, 74.44°E",
+        "moonRashi": "",
+        "moonRashiIndex": null
+      }
+    ]
+  },
+  "readings": [],
+  "exportDate": "2026-03-01T07:45:00.000Z"
+}

@@ -1,0 +1,19 @@
+{
+  "profile": {
+    "name": "Kanchi Jain",
+    "email": "",
+    "defaultLocation": "Aspur, Rajasthan",
+    "savedBirthDetails": [
+      {
+        "date": "2004-09-08",
+        "time": "01:05",
+        "location": "Aspur, Rajasthan",
+        "coordinates": "23.84°N, 73.71°E",
+        "moonRashi": "",
+        "moonRashiIndex": null
+      }
+    ]
+  },
+  "readings": [],
+  "exportDate": "2026-03-01T07:30:00.000Z"
+}

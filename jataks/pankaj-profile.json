@@ -1,0 +1,19 @@
+{
+  "profile": {
+    "name": "Pankaj Jain",
+    "email": "",
+    "defaultLocation": "Dungarpur, Rajasthan",
+    "savedBirthDetails": [
+      {
+        "date": "1979-07-28",
+        "time": "23:50",
+        "location": "Dungarpur, Rajasthan",
+        "coordinates": "23.84°N, 73.71°E",
+        "moonRashi": "",
+        "moonRashiIndex": null
+      }
+    ]
+  },
+  "readings": [],
+  "exportDate": "2026-03-01T07:30:00.000Z"
+}

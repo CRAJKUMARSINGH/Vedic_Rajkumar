@@ -1,0 +1,19 @@
+{
+  "profile": {
+    "name": "Priyansh Singh Chauhan",
+    "email": "",
+    "defaultLocation": "Indore, Madhya Pradesh",
+    "savedBirthDetails": [
+      {
+        "date": "2000-10-26",
+        "time": "00:50",
+        "location": "Indore, Madhya Pradesh",
+        "coordinates": "22.72°N, 75.86°E",
+        "moonRashi": "",
+        "moonRashiIndex": null
+      }
+    ]
+  },
+  "readings": [],
+  "exportDate": "2026-03-01T07:45:00.000Z"
+}

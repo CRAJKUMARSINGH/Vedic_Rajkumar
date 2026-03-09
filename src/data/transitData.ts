@@ -302,3 +302,86 @@ export function getMoonRashi(birthDate: Date): number {
   );
   return Math.floor((dayOfYear * 12) / 365) % 12;
 }
+
+// Sade Sati detection and analysis
+export interface SadeSatiInfo {
+  active: boolean;
+  phase: 'rising' | 'peak' | 'setting' | null;
+  house: number;
+  description: {
+    en: string;
+    hi: string;
+  };
+  remedies: {
+    en: string[];
+    hi: string[];
+  };
+}
+
+export function checkSadeSati(moonRashiIndex: number, saturnRashiIndex: number): SadeSatiInfo {
+  const saturnHouse = ((saturnRashiIndex - moonRashiIndex + 12) % 12) + 1;
+
+  const phases = {
+    12: {
+      phase: 'rising' as const,
+      en: 'Rising Phase (Arohini): Saturn in 12th house from Moon. Beginning of 7.5-year period. Focus on expenses, losses, and spiritual growth.',
+      hi: 'आरोहिणी चरण: शनि चन्द्र से 12वें भाव में। 7.5 वर्ष की अवधि का प्रारंभ। खर्च, हानि और आध्यात्मिक विकास पर ध्यान।'
+    },
+    1: {
+      phase: 'peak' as const,
+      en: 'Peak Phase (Madhya): Saturn in Moon sign. Most challenging period. Health, career, and relationships face maximum pressure.',
+      hi: 'मध्य चरण: शनि चन्द्र राशि में। सबसे कठिन समय। स्वास्थ्य, करियर और संबंधों पर अधिकतम दबाव।'
+    },
+    2: {
+      phase: 'setting' as const,
+      en: 'Setting Phase (Avarohi): Saturn in 2nd house from Moon. Final phase. Financial challenges, family issues, but relief approaching.',
+      hi: 'अवरोही चरण: शनि चन्द्र से 2रे भाव में। अंतिम चरण। आर्थिक चुनौतियां, पारिवारिक मुद्दे, लेकिन राहत निकट।'
+    }
+  };
+
+  if (saturnHouse === 12 || saturnHouse === 1 || saturnHouse === 2) {
+    const phaseInfo = phases[saturnHouse as 12 | 1 | 2];
+    return {
+      active: true,
+      phase: phaseInfo.phase,
+      house: saturnHouse,
+      description: {
+        en: phaseInfo.en,
+        hi: phaseInfo.hi
+      },
+      remedies: {
+        en: [
+          'Recite Shani mantra: "Om Sham Shanaishcharaya Namah" (108 times daily)',
+          'Donate black items (black cloth, black sesame) on Saturdays',
+          'Light mustard oil lamp under Peepal tree on Saturdays',
+          'Wear blue sapphire (Neelam) after consultation',
+          'Help elderly, disabled, and poor people',
+          'Practice patience, discipline, and hard work'
+        ],
+        hi: [
+          'शनि मंत्र जाप: "ॐ शं शनैश्चराय नमः" (प्रतिदिन 108 बार)',
+          'शनिवार को काले वस्त्र, काले तिल दान करें',
+          'शनिवार को पीपल के पेड़ के नीचे सरसों तेल का दीपक जलाएं',
+          'परामर्श के बाद नीलम धारण करें',
+          'वृद्ध, विकलांग और गरीब लोगों की सहायता करें',
+          'धैर्य, अनुशासन और कठिन परिश्रम का अभ्यास करें'
+        ]
+      }
+    };
+  }
+
+  return {
+    active: false,
+    phase: null,
+    house: saturnHouse,
+    description: {
+      en: 'Not in Sade Sati period',
+      hi: 'साढ़े साती की अवधि में नहीं'
+    },
+    remedies: {
+      en: [],
+      hi: []
+    }
+  };
+}
+

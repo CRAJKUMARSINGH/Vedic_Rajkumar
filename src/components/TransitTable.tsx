@@ -1,7 +1,9 @@
 import { TransitResult, RASHIS } from "@/data/transitData";
+import { ENHANCED_EFFECTS_EN, ENHANCED_EFFECTS_HI } from "@/data/enhancedTransitEffects";
 import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
+import { Download, ChevronDown, ChevronUp } from "lucide-react";
 import { exportTransitToPDF } from "@/services/pdfExportService";
+import { useState } from "react";
 
 interface TransitTableProps {
   results: TransitResult[];
@@ -46,11 +48,13 @@ const statusLabels = {
 };
 
 export default function TransitTable({ results, lang, moonRashiIndex, birthData, transitDate }: TransitTableProps) {
+  const [expandedPlanet, setExpandedPlanet] = useState<string | null>(null);
   const t = headers[lang];
   const sl = statusLabels[lang];
   const isHi = lang === "hi";
   const totalScore = results.reduce((s, r) => s + r.scoreContribution, 0);
   const moonRashi = RASHIS[moonRashiIndex];
+  const enhancedEffects = isHi ? ENHANCED_EFFECTS_HI : ENHANCED_EFFECTS_EN;
 
   const handleExportPDF = () => {
     if (!birthData || !transitDate) return;
@@ -101,43 +105,97 @@ export default function TransitTable({ results, lang, moonRashiIndex, birthData,
             </tr>
           </thead>
           <tbody>
-            {results.map((r, i) => (
-              <tr key={r.planet.en} className={`border-t border-border ${i % 2 === 0 ? "bg-card" : "bg-muted/30"}`}>
-                <td className="px-2 py-2 font-semibold whitespace-nowrap">
-                  <span className="mr-1">{r.planet.symbol}</span>
-                  {isHi ? <span className="font-hindi">{r.planet.hi}</span> : r.planet.en}
-                </td>
-                <td className="px-2 py-2 whitespace-nowrap">
-                  {RASHIS[r.currentRashi].symbol}{" "}
-                  {isHi ? <span className="font-hindi">{RASHIS[r.currentRashi].hi}</span> : RASHIS[r.currentRashi].en}
-                </td>
-                <td className="px-2 py-2 text-center font-mono font-bold">{r.houseFromMoon}</td>
-                <td className="px-2 py-2">
-                  <StatusBadge status={r.baseFavorable ? "favorable" : "unfavorable"} label={r.baseFavorable ? sl.favorable : sl.unfavorable} isHi={isHi} />
-                </td>
-                <td className={`px-2 py-2 text-xs ${isHi ? "font-hindi" : ""}`}>
-                  {r.vedhaActive ? (
-                    <span className="text-unfavorable font-semibold">{isHi ? "हाँ" : "Yes"}</span>
-                  ) : (
-                    <span className="text-muted-foreground">{isHi ? "नहीं" : "No"}</span>
+            {results.map((r, i) => {
+              const planetName = r.planet.en;
+              const houseNum = r.houseFromMoon;
+              const lifeAreas = enhancedEffects[planetName]?.[houseNum];
+              const isExpanded = expandedPlanet === planetName;
+              
+              return (
+                <>
+                  <tr 
+                    key={r.planet.en} 
+                    className={`border-t border-border ${i % 2 === 0 ? "bg-card" : "bg-muted/30"} ${lifeAreas ? "cursor-pointer hover:bg-muted/50" : ""}`}
+                    onClick={() => lifeAreas && setExpandedPlanet(isExpanded ? null : planetName)}
+                  >
+                    <td className="px-2 py-2 font-semibold whitespace-nowrap">
+                      <div className="flex items-center gap-1">
+                        <span className="mr-1">{r.planet.symbol}</span>
+                        {isHi ? <span className="font-hindi">{r.planet.hi}</span> : r.planet.en}
+                        {lifeAreas && (
+                          <span className="ml-1 text-primary">
+                            {isExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+                          </span>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-2 py-2 whitespace-nowrap">
+                      {RASHIS[r.currentRashi].symbol}{" "}
+                      {isHi ? <span className="font-hindi">{RASHIS[r.currentRashi].hi}</span> : RASHIS[r.currentRashi].en}
+                    </td>
+                    <td className="px-2 py-2 text-center font-mono font-bold">{r.houseFromMoon}</td>
+                    <td className="px-2 py-2">
+                      <StatusBadge status={r.baseFavorable ? "favorable" : "unfavorable"} label={r.baseFavorable ? sl.favorable : sl.unfavorable} isHi={isHi} />
+                    </td>
+                    <td className={`px-2 py-2 text-xs ${isHi ? "font-hindi" : ""}`}>
+                      {r.vedhaActive ? (
+                        <span className="text-unfavorable font-semibold">{isHi ? "हाँ" : "Yes"}</span>
+                      ) : (
+                        <span className="text-muted-foreground">{isHi ? "नहीं" : "No"}</span>
+                      )}
+                    </td>
+                    <td className="px-2 py-2">
+                      <StatusBadge status={r.effectiveStatus} label={sl[r.effectiveStatus]} isHi={isHi} />
+                    </td>
+                    <td className="px-2 py-2 text-center font-mono font-bold">
+                      {r.scoreContribution > 0 ? (
+                        <span className="text-favorable">+1</span>
+                      ) : (
+                        <span className="text-muted-foreground">0</span>
+                      )}
+                    </td>
+                    <td className="px-2 py-2 text-center font-mono">{r.rating}/9</td>
+                    <td className={`px-2 py-2 text-xs max-w-[180px] ${isHi ? "font-hindi" : ""}`}>
+                      {isHi ? r.effectHi : r.effectEn}
+                    </td>
+                  </tr>
+                  
+                  {/* Expanded Life-Area Details */}
+                  {isExpanded && lifeAreas && (
+                    <tr className={`border-t border-border ${i % 2 === 0 ? "bg-card" : "bg-muted/30"}`}>
+                      <td colSpan={9} className="px-4 py-3">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          <LifeAreaCard 
+                            icon="💼" 
+                            title={isHi ? "करियर" : "Career"} 
+                            description={lifeAreas.career} 
+                            isHi={isHi} 
+                          />
+                          <LifeAreaCard 
+                            icon="❤️" 
+                            title={isHi ? "स्वास्थ्य" : "Health"} 
+                            description={lifeAreas.health} 
+                            isHi={isHi} 
+                          />
+                          <LifeAreaCard 
+                            icon="💰" 
+                            title={isHi ? "वित्त" : "Finance"} 
+                            description={lifeAreas.finance} 
+                            isHi={isHi} 
+                          />
+                          <LifeAreaCard 
+                            icon="👥" 
+                            title={isHi ? "संबंध" : "Relationships"} 
+                            description={lifeAreas.relationships} 
+                            isHi={isHi} 
+                          />
+                        </div>
+                      </td>
+                    </tr>
                   )}
-                </td>
-                <td className="px-2 py-2">
-                  <StatusBadge status={r.effectiveStatus} label={sl[r.effectiveStatus]} isHi={isHi} />
-                </td>
-                <td className="px-2 py-2 text-center font-mono font-bold">
-                  {r.scoreContribution > 0 ? (
-                    <span className="text-favorable">+1</span>
-                  ) : (
-                    <span className="text-muted-foreground">0</span>
-                  )}
-                </td>
-                <td className="px-2 py-2 text-center font-mono">{r.rating}/9</td>
-                <td className={`px-2 py-2 text-xs max-w-[180px] ${isHi ? "font-hindi" : ""}`}>
-                  {isHi ? r.effectHi : r.effectEn}
-                </td>
-              </tr>
-            ))}
+                </>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -173,5 +231,19 @@ function StatusBadge({ status, label, isHi }: { status: string; label: string; i
     <span className={`inline-block px-1.5 py-0.5 rounded text-xs font-semibold border ${colorClass} ${isHi ? "font-hindi" : ""}`}>
       {label}
     </span>
+  );
+}
+
+function LifeAreaCard({ icon, title, description, isHi }: { icon: string; title: string; description: string; isHi: boolean }) {
+  return (
+    <div className="bg-background border border-border rounded-lg p-3">
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-lg">{icon}</span>
+        <h4 className={`font-semibold text-sm ${isHi ? "font-hindi" : ""}`}>{title}</h4>
+      </div>
+      <p className={`text-xs text-muted-foreground leading-relaxed ${isHi ? "font-hindi" : ""}`}>
+        {description}
+      </p>
+    </div>
   );
 }
