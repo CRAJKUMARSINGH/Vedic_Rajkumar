@@ -283,16 +283,32 @@ const Index = () => {
                   className="flex-1"
                 />
                 <Button 
-                  onClick={() => {
-                    const transitResults = calculateTransits(moonRashiIndex, CURRENT_POSITIONS);
-                    setResults(transitResults);
-                    const saturnRashiIndex = CURRENT_POSITIONS.Saturn;
-                    const sadeSati = checkSadeSati(moonRashiIndex, saturnRashiIndex);
-                    setSadeSatiInfo(sadeSati);
-                    toast({
-                      title: isHi ? "✅ गोचर अपडेट किया गया" : "✅ Transit Updated",
-                      description: isHi ? `तिथि: ${new Date(transitDate).toLocaleDateString('hi-IN')}` : `Date: ${new Date(transitDate).toLocaleDateString('en-IN')}`,
-                    });
+                  onClick={async () => {
+                    try {
+                      // Fetch actual planetary positions for the selected date
+                      const selectedDate = new Date(transitDate);
+                      const positions = await getPlanetaryPositions(selectedDate);
+                      
+                      // Recalculate transits for that date's positions
+                      const transitResults = calculateTransits(moonRashiIndex, positions);
+                      setResults(transitResults);
+                      
+                      // Recalculate Sade Sati for that date's Saturn position
+                      const sadeSati = checkSadeSati(moonRashiIndex, positions.Saturn);
+                      setSadeSatiInfo(sadeSati);
+                      
+                      toast({
+                        title: isHi ? "✅ गोचर अपडेट किया गया" : "✅ Transit Updated",
+                        description: `${isHi ? "तिथि:" : "Date:"} ${new Date(transitDate).toLocaleDateString(isHi ? 'hi-IN' : 'en-IN')}`,
+                      });
+                    } catch (error) {
+                      console.error('Error fetching planetary positions:', error);
+                      toast({
+                        title: isHi ? "⚠️ त्रुटि" : "⚠️ Error",
+                        description: isHi ? "तिथि के लिए डेटा उपलब्ध नहीं" : "Could not fetch positions for that date",
+                        variant: "destructive"
+                      });
+                    }
                   }}
                   size="sm"
                 >

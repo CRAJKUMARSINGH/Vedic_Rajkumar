@@ -1,4 +1,4 @@
-import { TransitResult, RASHIS } from "@/data/transitData";
+import { TransitResult, RASHIS, PLANET_REMEDIES } from "@/data/transitData";
 import { ENHANCED_EFFECTS_EN, ENHANCED_EFFECTS_HI } from "@/data/enhancedTransitEffects";
 import { Button } from "@/components/ui/button";
 import { Download, ChevronDown, ChevronUp } from "lucide-react";
@@ -164,31 +164,52 @@ export default function TransitTable({ results, lang, moonRashiIndex, birthData,
                   {isExpanded && lifeAreas && (
                     <tr className={`border-t border-border ${i % 2 === 0 ? "bg-card" : "bg-muted/30"}`}>
                       <td colSpan={9} className="px-4 py-3">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          <LifeAreaCard 
-                            icon="💼" 
-                            title={isHi ? "करियर" : "Career"} 
-                            description={lifeAreas.career} 
-                            isHi={isHi} 
-                          />
-                          <LifeAreaCard 
-                            icon="❤️" 
-                            title={isHi ? "स्वास्थ्य" : "Health"} 
-                            description={lifeAreas.health} 
-                            isHi={isHi} 
-                          />
-                          <LifeAreaCard 
-                            icon="💰" 
-                            title={isHi ? "वित्त" : "Finance"} 
-                            description={lifeAreas.finance} 
-                            isHi={isHi} 
-                          />
-                          <LifeAreaCard 
-                            icon="👥" 
-                            title={isHi ? "संबंध" : "Relationships"} 
-                            description={lifeAreas.relationships} 
-                            isHi={isHi} 
-                          />
+                        <div className="space-y-4">
+                          {/* Life Area Effects */}
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <LifeAreaCard 
+                              icon="💼" 
+                              title={isHi ? "करियर" : "Career"} 
+                              description={lifeAreas.career} 
+                              isHi={isHi} 
+                            />
+                            <LifeAreaCard 
+                              icon="❤️" 
+                              title={isHi ? "स्वास्थ्य" : "Health"} 
+                              description={lifeAreas.health} 
+                              isHi={isHi} 
+                            />
+                            <LifeAreaCard 
+                              icon="💰" 
+                              title={isHi ? "वित्त" : "Finance"} 
+                              description={lifeAreas.finance} 
+                              isHi={isHi} 
+                            />
+                            <LifeAreaCard 
+                              icon="👥" 
+                              title={isHi ? "संबंध" : "Relationships"} 
+                              description={lifeAreas.relationships} 
+                              isHi={isHi} 
+                            />
+                          </div>
+                          
+                          {/* Remedies for Unfavorable Planets */}
+                          {!r.baseFavorable && PLANET_REMEDIES[planetName] && (
+                            <div className="mt-4 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
+                              <h4 className={`font-semibold text-amber-900 dark:text-amber-100 mb-3 flex items-center gap-2 ${isHi ? "font-hindi" : ""}`}>
+                                <span>🙏</span>
+                                {isHi ? "उपाय (Remedies)" : "Remedies"}
+                              </h4>
+                              <ul className={`list-disc list-inside space-y-2 text-sm text-amber-800 dark:text-amber-200 ${isHi ? "font-hindi" : ""}`}>
+                                {(isHi 
+                                  ? PLANET_REMEDIES[planetName].hi 
+                                  : PLANET_REMEDIES[planetName].en
+                                ).map((remedy, idx) => (
+                                  <li key={idx} className="leading-relaxed">{remedy}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
                         </div>
                       </td>
                     </tr>

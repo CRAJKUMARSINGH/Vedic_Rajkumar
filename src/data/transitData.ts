@@ -385,3 +385,493 @@ export function checkSadeSati(moonRashiIndex: number, saturnRashiIndex: number):
   };
 }
 
+
+// Life-Area Specific Effects for each planet in different houses
+export interface LifeAreaEffects {
+  career: string;
+  health: string;
+  finance: string;
+  relationships: string;
+}
+
+export const LIFE_AREA_EFFECTS: Record<string, Record<number, LifeAreaEffects>> = {
+  Sun: {
+    3: {
+      career: "Courage to take initiatives; good for leadership roles",
+      health: "High energy; good vitality; avoid overexertion",
+      finance: "Gains through own efforts; avoid risky ventures",
+      relationships: "Confident in social interactions; sibling support"
+    },
+    6: {
+      career: "Victory over workplace rivals; promotions likely",
+      health: "Recovery from illness; immune system strong",
+      finance: "Debt relief; legal victories bring gains",
+      relationships: "Overcome relationship obstacles; authority respected"
+    },
+    8: {
+      career: "Delays in promotions; avoid confronting superiors",
+      health: "Watch blood pressure, eye/heart issues; rest well",
+      finance: "Unexpected expenses; avoid investments/loans",
+      relationships: "Ego clashes with authority figures; be humble"
+    },
+    10: {
+      career: "Excellent for recognition, promotion, govt favor",
+      health: "Energy high; good for physical activities",
+      finance: "Income from authority/government likely",
+      relationships: "Improved social standing; father figure supportive"
+    },
+    11: {
+      career: "Achievement of career goals; networking success",
+      health: "Generally good; maintain routine",
+      finance: "Income gains; fulfillment of financial desires",
+      relationships: "Social recognition; elder sibling support"
+    }
+  },
+  Moon: {
+    1: {
+      career: "Mental clarity for decisions; good start for projects",
+      health: "Emotional wellbeing; digestive system good",
+      finance: "Comfortable financial state; avoid impulsive spending",
+      relationships: "Nurturing relationships; mother's blessings"
+    },
+    3: {
+      career: "Communication skills shine; good for sales/marketing",
+      health: "Mental strength; respiratory system healthy",
+      finance: "Short-term gains; sibling financial support",
+      relationships: "Sibling harmony; neighbors friendly"
+    },
+    6: {
+      career: "Overcome workplace challenges; service-oriented success",
+      health: "Recovery from minor ailments; immunity improves",
+      finance: "Debt management successful; avoid lending",
+      relationships: "Resolve conflicts; maternal uncle supportive"
+    },
+    7: {
+      career: "Partnership ventures favorable; public dealings good",
+      health: "Spouse's health needs attention; emotional balance",
+      finance: "Joint finances improve; business partnerships gain",
+      relationships: "Marriage harmony; spouse supportive"
+    },
+    10: {
+      career: "Career boost, productivity, recognition; public image strong",
+      health: "Energy fluctuates; manage stress; adequate rest",
+      finance: "Professional income increases; reputation brings gains",
+      relationships: "Mother's support in career; public respect"
+    },
+    11: {
+      career: "Fulfillment of career ambitions; networking pays off",
+      health: "Generally comfortable; watch emotional eating",
+      finance: "Financial gains; wishes fulfilled; income rises",
+      relationships: "Elder sibling support; social circle expands"
+    }
+  },
+  Mercury: {
+    2: {
+      career: "Eloquent communication; good for teaching/writing",
+      health: "Nervous system balanced; speech clear",
+      finance: "Wealth gain through intellect; family business profits",
+      relationships: "Family harmony; articulate in relationships"
+    },
+    4: {
+      career: "Education/property-related career success",
+      health: "Mental peace; respiratory health good",
+      finance: "Property gains; vehicle purchase favorable",
+      relationships: "Mother's advice valuable; domestic happiness"
+    },
+    6: {
+      career: "Sharp intellect defeats rivals; legal victories",
+      health: "Overcome health issues through knowledge; avoid stress",
+      finance: "Debt management through smart planning",
+      relationships: "Win arguments; maternal uncle helpful"
+    },
+    8: {
+      career: "Good for research, investigation, hidden work",
+      health: "Nervous system — avoid stress; sleep hygiene critical",
+      finance: "Hidden gains possible; careful with contracts",
+      relationships: "Deep conversations; uncover hidden truths"
+    },
+    10: {
+      career: "Professional communication success; recognition for skills",
+      health: "Mental workload high; manage stress; breaks needed",
+      finance: "Income through communication/intellect; consulting gains",
+      relationships: "Professional relationships strong; networking"
+    },
+    11: {
+      career: "Intellectual achievements recognized; goals met",
+      health: "Generally good; avoid overthinking",
+      finance: "Income from multiple sources; trade profits",
+      relationships: "Friends supportive; social networking beneficial"
+    }
+  },
+  Venus: {
+    1: {
+      career: "Creative career success; charm helps professionally",
+      health: "Physical comfort; beauty/wellness focus beneficial",
+      finance: "Comfortable financial state; luxury purchases",
+      relationships: "Romantic happiness; personal magnetism high"
+    },
+    2: {
+      career: "Artistic/creative work brings wealth",
+      health: "Facial beauty; throat/voice health good",
+      finance: "Wealth accumulation; family assets grow",
+      relationships: "Family joy; spouse brings financial support"
+    },
+    3: {
+      career: "Artistic communication; media/arts success",
+      health: "Good vitality; artistic pursuits therapeutic",
+      finance: "Gains through siblings; short travels profitable",
+      relationships: "Sibling harmony; artistic collaborations"
+    },
+    4: {
+      career: "Property/interior design career favorable",
+      health: "Domestic comfort supports health",
+      finance: "Property gains; vehicle purchase; home improvements",
+      relationships: "Mother supportive; domestic bliss"
+    },
+    5: {
+      career: "Creative projects succeed; entertainment industry good",
+      health: "Romantic happiness boosts health; fertility good",
+      finance: "Speculative gains possible; children bring joy",
+      relationships: "Romance flourishes; children's welfare; love affairs"
+    },
+    8: {
+      career: "Hidden talents emerge; occult/research work",
+      health: "Reproductive health focus; emotional ups-downs",
+      finance: "Hidden gains; inheritance possible; joint finances complex",
+      relationships: "Deep intimacy; relationship transformation; secrets"
+    },
+    9: {
+      career: "Good for creative/artistic pursuits; travel benefits",
+      health: "Generally comfortable; hormonal balance good",
+      finance: "Fortune smiles; long-distance deals favorable",
+      relationships: "Romance flourishes; spiritual bond with partner"
+    },
+    11: {
+      career: "Social networking brings career gains",
+      health: "Generally good; social activities therapeutic",
+      finance: "Income increases; desires fulfilled; luxury purchases",
+      relationships: "Friends supportive; social status rises"
+    },
+    12: {
+      career: "Foreign connections; spiritual/artistic work abroad",
+      health: "Rest and relaxation needed; spa/retreat beneficial",
+      finance: "Expenses on luxury/comfort; foreign investments",
+      relationships: "Bed pleasures; spiritual connection; foreign romance"
+    }
+  },
+  Mars: {
+    3: {
+      career: "Courage to take bold career moves; competition success",
+      health: "High energy; physical strength; avoid accidents",
+      finance: "Gains through courage; property/land deals",
+      relationships: "Sibling support; assertive communication"
+    },
+    6: {
+      career: "Defeat workplace enemies; competitive success",
+      health: "Overcome illness; surgery successful; energy high",
+      finance: "Debt victory; legal wins; property disputes resolved",
+      relationships: "Win arguments; maternal uncle helpful"
+    },
+    7: {
+      career: "Partnership tensions; business conflicts",
+      health: "Spouse health concerns; accidents possible; blood pressure",
+      finance: "Joint venture conflicts; legal expenses",
+      relationships: "Partnership tensions, arguments; avoid confrontations"
+    },
+    11: {
+      career: "Ambitious goals achieved; competitive gains",
+      health: "High energy; sports/fitness beneficial",
+      finance: "Income through property; elder sibling support",
+      relationships: "Friends supportive in ambitions; social courage"
+    }
+  },
+  Jupiter: {
+    2: {
+      career: "Teaching/advisory roles favorable; knowledge brings wealth",
+      health: "Generally good; liver/weight management needed",
+      finance: "Wealth through wisdom; family assets grow",
+      relationships: "Family harmony; wise speech; spouse supportive"
+    },
+    5: {
+      career: "Education/teaching success; creative wisdom",
+      health: "Children's health good; fertility favorable",
+      finance: "Speculative gains; children bring prosperity",
+      relationships: "Children's welfare; romantic wisdom; spiritual love"
+    },
+    7: {
+      career: "Partnership success; consulting/advisory roles",
+      health: "Spouse health good; balanced lifestyle",
+      finance: "Business partnerships profitable; joint ventures",
+      relationships: "Marriage harmony; wise partner; spiritual bond"
+    },
+    9: {
+      career: "Higher education success; teaching/publishing",
+      health: "Generally good; pilgrimage beneficial",
+      finance: "Fortune increases; father's support; long-distance gains",
+      relationships: "Father supportive; guru blessings; spiritual growth"
+    },
+    11: {
+      career: "Great professional achievements; recognition",
+      health: "Generally excellent; maintain balance",
+      finance: "Major financial gains; prosperity; wishes fulfilled",
+      relationships: "Elder sibling support; social elevation; networking"
+    },
+    12: {
+      career: "Foreign connections possible; spiritual work rewarded",
+      health: "Sleep disturbances; meditation recommended",
+      finance: "Expenses rise; foreign expenditure likely; charity",
+      relationships: "Withdrawal/solitude tendency; introspection good"
+    }
+  },
+  Saturn: {
+    3: {
+      career: "Steady career progress through hard work",
+      health: "Stamina good; avoid overwork; joint care",
+      finance: "Property gains through patience; servant support",
+      relationships: "Sibling relations require patience; stability"
+    },
+    6: {
+      career: "Victory through perseverance; service roles",
+      health: "Chronic issues improve slowly; discipline helps",
+      finance: "Debt relief through discipline; legal patience",
+      relationships: "Overcome obstacles; maternal uncle's slow support"
+    },
+    9: {
+      career: "Hard work brings slow results; avoid cutting corners",
+      health: "Joint/bone issues; cold-related problems; rest",
+      finance: "Delays in expected gains; budget carefully",
+      relationships: "Father/guru relationship strained; be respectful"
+    },
+    11: {
+      career: "Slow but steady career gains; elder support",
+      health: "Generally stable; maintain routine",
+      finance: "Income through hard work; elder sibling support",
+      relationships: "Friends require patience; social discipline"
+    }
+  },
+  Rahu: {
+    3: {
+      career: "Unconventional success; foreign connections",
+      health: "Nervous energy; avoid addictions; mental clarity",
+      finance: "Sudden gains; technology/foreign deals",
+      relationships: "Sibling relations unusual; innovative communication"
+    },
+    6: {
+      career: "Victory through unconventional means",
+      health: "Mysterious ailments improve; avoid intoxicants",
+      finance: "Debt relief through unusual sources",
+      relationships: "Overcome enemies; maternal uncle's foreign help"
+    },
+    8: {
+      career: "Research/occult/technology work; sudden changes",
+      health: "Sudden health scares; mysterious ailments; avoid risks",
+      finance: "Sudden gains/losses; inheritance; hidden money",
+      relationships: "Sudden changes; mysteries; health scares; unpredictable"
+    },
+    10: {
+      career: "Foreign opportunities; technology/innovation success",
+      health: "Stress from ambition; avoid shortcuts",
+      finance: "Income through foreign/technology; sudden gains",
+      relationships: "Professional image unconventional; foreign contacts"
+    },
+    11: {
+      career: "Major unconventional gains; networking success",
+      health: "Generally good; avoid addictions",
+      finance: "Sudden major gains; foreign income; wishes fulfilled",
+      relationships: "Friends from diverse backgrounds; social elevation"
+    }
+  },
+  Ketu: {
+    2: {
+      career: "Detachment from family business; spiritual work",
+      health: "Speech issues; dental care; mysterious ailments",
+      finance: "Financial detachment; family wealth disruption",
+      relationships: "Family disruptions; spiritual detachment; speech issues"
+    },
+    3: {
+      career: "Spiritual courage; unconventional communication",
+      health: "Overcome fears; mysterious recovery",
+      finance: "Gains through spiritual/occult work",
+      relationships: "Sibling relations spiritual; detached communication"
+    },
+    6: {
+      career: "Victory through spiritual means; service",
+      health: "Mysterious recovery; spiritual healing",
+      finance: "Debt relief through detachment; spiritual gains",
+      relationships: "Overcome enemies spiritually; detached service"
+    },
+    11: {
+      career: "Rare spiritual achievements; unconventional gains",
+      health: "Generally good; spiritual practices beneficial",
+      finance: "Income through spiritual/occult; rare gains",
+      relationships: "Friends spiritual; detached social circle"
+    }
+  }
+};
+
+
+// Individual Planet Remedies for unfavorable transits
+export const PLANET_REMEDIES: Record<string, { en: string[]; hi: string[] }> = {
+  Sun: {
+    en: [
+      'Recite Aditya Hridayam or Surya mantra daily at sunrise',
+      'Offer water to Sun (Arghya) every morning facing east',
+      'Donate wheat, jaggery, or copper on Sundays',
+      'Wear Ruby (Manik) after astrological consultation',
+      'Chant: "Om Suryaya Namah" (108 times)',
+      'Help your father or father figures'
+    ],
+    hi: [
+      'प्रतिदिन सूर्योदय पर आदित्य हृदयम् या सूर्य मंत्र जाप करें',
+      'प्रतिदिन पूर्व दिशा में सूर्य को अर्घ्य अर्पित करें',
+      'रविवार को गेहूं, गुड़ या तांबा दान करें',
+      'ज्योतिषीय परामर्श के बाद माणिक्य धारण करें',
+      'मंत्र जाप: "ॐ सूर्याय नमः" (108 बार)',
+      'अपने पिता या पिता तुल्य व्यक्तियों की सहायता करें'
+    ]
+  },
+  Moon: {
+    en: [
+      'Chant: "Om Som Somaya Namah" (108 times)',
+      'Offer milk or white flowers to Shiva on Mondays',
+      'Wear Pearl (Moti) after consultation',
+      'Meditate near water bodies',
+      'Donate white items (rice, milk, white cloth) on Mondays',
+      'Respect and serve your mother'
+    ],
+    hi: [
+      'मंत्र जाप: "ॐ सोम सोमाय नमः" (108 बार)',
+      'सोमवार को शिव को दूध या सफेद फूल अर्पित करें',
+      'परामर्श के बाद मोती धारण करें',
+      'जल स्रोत के पास ध्यान करें',
+      'सोमवार को सफेद वस्तुएं (चावल, दूध, सफेद वस्त्र) दान करें',
+      'अपनी माता का सम्मान और सेवा करें'
+    ]
+  },
+  Mercury: {
+    en: [
+      'Chant: "Om Budhaya Namah" (108 times)',
+      'Donate green items, books, or pens on Wednesdays',
+      'Wear Emerald (Panna) after consultation',
+      'Feed green grass to cows',
+      'Study and teach others',
+      'Respect your maternal uncle and teachers'
+    ],
+    hi: [
+      'मंत्र जाप: "ॐ बुधाय नमः" (108 बार)',
+      'बुधवार को हरी वस्तुएं, पुस्तकें या कलम दान करें',
+      'परामर्श के बाद पन्ना धारण करें',
+      'गायों को हरी घास खिलाएं',
+      'अध्ययन करें और दूसरों को पढ़ाएं',
+      'अपने मामा और शिक्षकों का सम्मान करें'
+    ]
+  },
+  Venus: {
+    en: [
+      'Chant: "Om Shukraya Namah" (108 times)',
+      'Donate white items, sugar, or rice on Fridays',
+      'Wear Diamond or White Sapphire after consultation',
+      'Offer white flowers to Goddess Lakshmi',
+      'Maintain cleanliness and beauty in surroundings',
+      'Respect women and your spouse'
+    ],
+    hi: [
+      'मंत्र जाप: "ॐ शुक्राय नमः" (108 बार)',
+      'शुक्रवार को सफेद वस्तुएं, चीनी या चावल दान करें',
+      'परामर्श के बाद हीरा या सफेद पुखराज धारण करें',
+      'देवी लक्ष्मी को सफेद फूल अर्पित करें',
+      'परिवेश में स्वच्छता और सौंदर्य बनाए रखें',
+      'महिलाओं और अपनी पत्नी का सम्मान करें'
+    ]
+  },
+  Mars: {
+    en: [
+      'Recite Hanuman Chalisa daily',
+      'Donate red lentils (masoor dal) on Tuesdays',
+      'Avoid arguments and physical confrontations',
+      'Chant: "Om Angarakaya Namah" (108 times)',
+      'Wear Red Coral (Moonga) after consultation',
+      'Practice patience and control anger'
+    ],
+    hi: [
+      'प्रतिदिन हनुमान चालीसा पाठ करें',
+      'मंगलवार को मसूर दाल दान करें',
+      'वाद-विवाद और शारीरिक टकराव से बचें',
+      'मंत्र जाप: "ॐ अंगारकाय नमः" (108 बार)',
+      'परामर्श के बाद मूंगा धारण करें',
+      'धैर्य का अभ्यास करें और क्रोध पर नियंत्रण रखें'
+    ]
+  },
+  Jupiter: {
+    en: [
+      'Chant: "Om Gurave Namah" or Brahaspati mantra',
+      'Donate yellow items (turmeric, yellow cloth) on Thursdays',
+      'Respect teachers, elders, and spiritual guides',
+      'Read Vishnu Sahasranama',
+      'Wear Yellow Sapphire (Pukhraj) after consultation',
+      'Practice charity and help students'
+    ],
+    hi: [
+      'मंत्र: "ॐ गुरवे नमः" या बृहस्पति मंत्र जाप करें',
+      'गुरुवार को पीली वस्तुएं (हल्दी, पीला वस्त्र) दान करें',
+      'शिक्षक, बड़े-बुजुर्ग और आध्यात्मिक गुरुओं का आदर करें',
+      'विष्णु सहस्रनाम पाठ करें',
+      'परामर्श के बाद पुखराज धारण करें',
+      'दान करें और छात्रों की सहायता करें'
+    ]
+  },
+  Saturn: {
+    en: [
+      'Chant: "Om Sham Shanaishcharaya Namah" (108 times)',
+      'Donate black sesame, mustard oil on Saturdays',
+      'Light lamp under Peepal tree on Saturdays',
+      'Serve the poor, elderly, and disabled',
+      'Wear Blue Sapphire (Neelam) after consultation',
+      'Practice patience, discipline, and hard work'
+    ],
+    hi: [
+      'मंत्र: "ॐ शं शनैश्चराय नमः" (108 बार) जाप करें',
+      'शनिवार को काले तिल, सरसों तेल दान करें',
+      'शनिवार को पीपल के पेड़ के नीचे दीपक जलाएं',
+      'गरीब, वृद्ध और विकलांगों की सेवा करें',
+      'परामर्श के बाद नीलम धारण करें',
+      'धैर्य, अनुशासन और कठिन परिश्रम का अभ्यास करें'
+    ]
+  },
+  Rahu: {
+    en: [
+      'Chant Rahu Beej Mantra: "Om Rahave Namah" (108 times)',
+      'Donate blue/black items on Saturdays',
+      'Avoid intoxicants and impulsive decisions',
+      'Feed crows on Saturdays',
+      'Wear Hessonite (Gomed) after consultation',
+      'Practice meditation and mindfulness'
+    ],
+    hi: [
+      'राहु बीज मंत्र: "ॐ राहवे नमः" (108 बार) जाप करें',
+      'शनिवार को नीले/काले वस्तुएं दान करें',
+      'नशे और आवेगी निर्णयों से बचें',
+      'शनिवार को कौओं को भोजन दें',
+      'परामर्श के बाद गोमेद धारण करें',
+      'ध्यान और सचेतनता का अभ्यास करें'
+    ]
+  },
+  Ketu: {
+    en: [
+      'Chant: "Om Ketave Namah" (108 times)',
+      'Donate multi-colored items or blankets',
+      'Visit Ganesha temple on Tuesdays',
+      'Practice spiritual detachment from outcomes',
+      'Wear Cat\'s Eye (Lehsunia) after consultation',
+      'Feed and care for dogs'
+    ],
+    hi: [
+      'मंत्र: "ॐ केतवे नमः" (108 बार) जाप करें',
+      'रंग-बिरंगी वस्तुएं या कंबल दान करें',
+      'मंगलवार को गणेश मंदिर जाएं',
+      'परिणामों से आध्यात्मिक वैराग्य का अभ्यास करें',
+      'परामर्श के बाद लहसुनिया धारण करें',
+      'कुत्तों को भोजन दें और उनकी देखभाल करें'
+    ]
+  }
+};
