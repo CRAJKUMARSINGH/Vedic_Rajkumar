@@ -62,6 +62,7 @@ const GemstonePage = lazy(() => import("./pages/GemstonePage"));
 const EnterprisePage = lazy(() => import("./pages/EnterprisePage"));
 const VarshaphalPage = lazy(() => import("./pages/VarshaphalPage"));
 const BV_RamanPage = lazy(() => import("./pages/BV_RamanPage"));
+const RamanArchivePage = lazy(() => import("./pages/RamanArchivePage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Loading fallback — animated 🕉️ spinner
@@ -148,6 +149,7 @@ const AnimatedRoutes = () => {
           <Route path="/enterprise" element={<EnterprisePage />} />
           <Route path="/varshaphal" element={<VarshaphalPage />} />
           <Route path="/bv-raman" element={<BV_RamanPage />} />
+          <Route path="/raman-archive" element={<RamanArchivePage />} />
           <Route path="/spiritual-remedies" element={<SpiritualRemediesPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
