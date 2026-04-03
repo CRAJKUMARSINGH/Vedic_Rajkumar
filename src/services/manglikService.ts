@@ -4,6 +4,9 @@
  * Critical for marriage compatibility in Vedic Astrology
  */
 
+import { calculateCompletePlanetaryPositions } from './ephemerisService';
+import { calculateCompleteAscendant } from './ascendantService';
+
 export interface ManglikResult {
   isManglik: boolean;
   severity: 'None' | 'Low' | 'Medium' | 'High' | 'Severe';
@@ -24,7 +27,11 @@ export interface ManglikResult {
 
 export interface ManglikCancellation {
   rule: string;
+  /** Alias for rule (test compatibility) */
+  condition: string;
   applies: boolean;
+  /** Alias for applies (test compatibility) */
+  applicable: boolean;
   description: {
     en: string;
     hi: string;
@@ -316,36 +323,44 @@ export function checkManglikDosha(
   latitude: number,
   longitude: number
 ): ManglikResult {
-  // Import ephemeris service for planetary positions
-  const { calculateCompletePlanetaryPositions } = require('./ephemerisService');
-  
   try {
     const positions = calculateCompletePlanetaryPositions(birthDate, birthTime);
-    
+    const ascendantData = calculateCompleteAscendant(birthDate, birthTime, latitude, longitude);
+
+    // Use ascendant-based houses for Manglik (more accurate than moon-based)
+    const ascendantRashi = ascendantData.ascendant.rashi;
+    const toHouseFromAsc = (rashi: number) => ((rashi - ascendantRashi + 12) % 12) + 1;
+
     // Find Mars position
     const mars = positions.planets.find((p: any) => p.name === 'Mars');
     if (!mars) {
       throw new Error('Mars position not found');
     }
 
-    const marsHouse = mars.house;
+    const marsHouse = toHouseFromAsc(mars.rashiIndex);
     const marsRashi = mars.rashiIndex;
 
     // Check if Manglik
     const isManglik = isMarsInManglikHouse(marsHouse);
-    
+
     // Calculate severity
     const severity = calculateSeverity(marsHouse, marsRashi);
 
-    // Get all planets for cancellation checks
+    // Get all planets for cancellation checks (with ascendant-based houses)
     const planetsForCancellation = positions.planets.map((p: any) => ({
       planet: p.name,
-      house: p.house,
+      house: toHouseFromAsc(p.rashiIndex),
       rashi: p.rashiIndex
     }));
 
     // Check cancellations
-    const cancellations = checkCancellations(marsHouse, marsRashi, planetsForCancellation);
+    const rawCancellations = checkCancellations(marsHouse, marsRashi, planetsForCancellation);
+    // Normalize to include both old and new field names for compatibility
+    const cancellations: ManglikCancellation[] = rawCancellations.map(c => ({
+      ...c,
+      condition: c.rule,
+      applicable: c.applies,
+    }));
 
     // Determine if effectively Manglik (after cancellations)
     const activeCancellations = cancellations.filter(c => c.applies);
@@ -354,8 +369,8 @@ export function checkManglikDosha(
     // Get affected houses
     const affectedHouses = isManglik ? MANGLIK_HOUSES : [];
 
-    // Get remedies
-    const remedies = getRemedies(effectiveManglik ? severity : 'None');
+    // Get remedies — provide whenever isManglik is true (even with cancellations)
+    const remedies = getRemedies(isManglik ? severity : 'None');
 
     // Generate description
     const description = {

@@ -1,125 +1,49 @@
-# Jataks Database (Birth Charts)
+# Jataks Database
 
-This folder contains astrological birth data for family members and relatives.
+Astrological birth chart database sourced from:
+**ASTROLOGICAL CHART DATABASE FEB 2014-DESKTOP-3RRLJHF.xlsx**
 
-## Database Structure
+## Contents
 
-- **JATAKS_DATABASE.json** - Main database with all birth details
-- Individual files for each person (optional)
+| File | Name | DOB | Time | Place | In Excel |
+|------|------|-----|------|-------|----------|
+| rajkumar-profile.json | Rajkumar | 1963-09-15 | 06:00 | Nandli/Aspur, Rajasthan | ✅ Row 6 |
+| priyanka-profile.json | Priyanka Jain | 1984-10-23 | 05:50 | Ahmedabad, Gujarat | ✅ Row 9 |
+| priyansh-profile.json | Priyansh Singh Chauhan | 2000-10-26 | 00:50 | Indore, MP | ✅ Row 3 |
+| vishwaraj-profile.json | Vishwaraj Singh Chauhan | 1994-09-26 | 02:17 | Indore, MP | ✅ Row 4 |
+| mummy-profile.json | Mummy | 1947-09-05 | 05:00 | Nandli, Rajasthan | ✅ Row 5 |
+| kanchi-profile.json | Kanchi Jain | 2004-09-08 | 01:05 | Aspur, Rajasthan | ✅ Row 7 |
+| kiwangi-profile.json | Kiwangi Jain | 2010-12-21 | 10:10 | Idar, Gujarat | ✅ Row 8 |
+| ajit-profile.json | Ajit Singh Chauhan | 1975-09-07 | 05:35 | Banswara, Rajasthan | ✅ Row 10 |
+| bittu-profile.json | Dhairya Bittu Arthuna | 2021-05-02 | 05:45 | Banswara, Rajasthan | ✅ Row 11 |
+| naman-profile.json | Naman Shah | 1997-03-29 | 03:32 | Partapur, Rajasthan | ✅ Row 12 |
+| jaya-profile.json | Jaya Sisodia | 1994-06-25 | 11:00 | Indore, MP | ✅ Row 13 |
+| pankaj-profile.json | Pankaj Jain | 1979-07-28 | 23:50 | Dungarpur, Rajasthan | ➕ Added |
+| hunar-profile.json | Hunar Jain | 1996-09-09 | 12:47 | Dungarpur, Rajasthan | ➕ Added |
 
-## Data Fields
+## Excel Source Data
 
-Each jatak (birth chart) contains:
-- **Name**: Full name of the person
-- **Date of Birth**: ISO format (YYYY-MM-DD)
-- **Time of Birth**: 24-hour format (HH:MM)
-- **Place of Birth**: City, State, Country
-- **Coordinates**: Latitude and Longitude
-- **Relationship**: How this person relates to you
-- **Moon Rashi**: Calculated Moon sign (if available)
-- **Notes**: Additional information
+Original Excel columns: `NAME | DATE OF BIRTH | TIME | PLACE | HOW U RECALL THIS PERSON?`
 
-## Current Database
+Excel serial dates decoded using epoch Jan 1 1900 (with Excel leap-year bug correction):
+- 17415 → 1947-09-05 (Mummy)
+- 23269 → 1963-09-15 (Rajkumar)
+- 27644 → 1975-09-07 (Ajit)
+- 34510 → 1994-06-25 (Jaya)
+- 34603 → 1994-09-26 (Vishwaraj)
+- 35518 → 1997-03-29 (Naman)
+- 38238 → 2004-09-08 (Kanchi)
+- 44318 → 2021-05-02 (Bittu)
 
-Total Jataks: 13
+Time fractions decoded (Excel stores time as fraction of 24h):
+- 0.20833 → 05:00 (Mummy)
+- 0.25 → 06:00 (Rajkumar)
+- 0.24305 → 05:50 (Priyanka)
 
-### Family Members
+## Format
 
-1. **Rajkumar** (Self)
-   - Born: 15 Sep 1963, 6:00 AM
-   - Place: Aspur, Dungarpur, Rajasthan
-   - Moon Rashi: Cancer (कर्क)
-
-2. **Priyanka Jain** (Wife)
-   - Born: 23 Oct 1984, 5:50 AM
-   - Place: Ahmedabad, Gujarat
-   - Moon Rashi: Taurus (वृषभ)
-
-3. **Mummy** (Mother)
-   - Born: 5 Sep 1947, 5:00 AM
-   - Place: Nandli, Rajasthan
-
-4. **Priyansh Singh Chauhan** (Son)
-   - Born: 26 Oct 2000, 12:50 AM
-   - Place: Indore, Madhya Pradesh
-
-5. **Vishwaraj Singh Chauhan** (Son)
-   - Born: 26 Sep 1994, 2:17 AM
-   - Place: Indore, Madhya Pradesh
-
-6. **Kanchi Jain** (Daughter)
-   - Born: 8 Sep 2004, 1:05 AM
-   - Place: Aspur, Rajasthan
-
-7. **Kiwangi Jain** (Daughter)
-   - Born: 21 Dec 2010, 10:10 AM
-   - Place: Idar, Gujarat
-
-### Extended Family & Friends
-
-8. **Ajit Singh Chauhan**
-   - Born: 7 Sep 1975, 5:35 AM
-   - Place: Banswara, Rajasthan
-
-9. **Pankaj Jain**
-   - Born: 28 Jul 1979, 11:50 PM
-   - Place: Dungarpur, Rajasthan
-
-10. **Hunar Jain**
-    - Born: 9 Sep 1996, 12:47 PM
-    - Place: Dungarpur, Rajasthan
-
-11. **Naman Shah**
-    - Born: 29 Mar 1997, 3:32 AM
-    - Place: Partapur, Rajasthan
-
-12. **Miss Jaya Sisodia**
-    - Born: 25 Jun 1994, 11:00 AM
-    - Place: Indore, Madhya Pradesh
-
-13. **Bittu Son Arthuna**
-    - Born: 2 May 2021, 5:45 AM
-    - Place: Banswara, Rajasthan
-
-## Usage
-
-### Import into App
-
-1. Open the Vedic Rajkumar app
-2. Click User Profile icon
-3. Click "Import Data"
-4. Use the JSON from JATAKS_DATABASE.json
-
-### Generate Transit Reports
-
-For each person, you can:
-- Calculate current transits
-- Generate PDF reports
-- Compare transit patterns
-- Track historical readings
-
-## Coordinate References
-
-- **Dungarpur**: 23.84°N, 73.71°E
-- **Aspur**: 23.84°N, 73.71°E
-- **Nandli**: 23.55°N, 74.08°E
-- **Ahmedabad**: 23.03°N, 72.58°E
-- **Indore**: 22.72°N, 75.86°E
-- **Idar**: 23.84°N, 73.01°E
-- **Banswara**: 23.54°N, 74.44°E
-- **Partapur**: 23.50°N, 74.00°E
-
-## Notes
-
-- All times are in local Indian Standard Time (IST)
-- Coordinates verified using latitudelongitude.org
-- Ayanamsa: Lahiri (Chitrapaksha) - standard for Vedic astrology
-- Moon Rashi calculated using sidereal zodiac
-
-## Privacy
-
-This database contains personal information. Keep it secure and do not share publicly without consent.
-
----
-
-**Last Updated**: March 1, 2026
+All profiles use:
+- Dates: ISO 8601 `YYYY-MM-DD`
+- Times: 24-hour `HH:MM`
+- Coordinates: Decimal degrees
+- Ayanamsa: Lahiri (Chitrapaksha)

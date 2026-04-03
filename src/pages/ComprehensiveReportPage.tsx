@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ComprehensiveReportForm } from "@/components/ComprehensiveReportForm";
-import LanguageToggle from "@/components/LanguageToggle";
+import EnhancedLanguageToggle from "@/components/EnhancedLanguageToggle";
 import { Link } from "react-router-dom";
 
 const ComprehensiveReportPage = () => {
@@ -26,7 +26,7 @@ const ComprehensiveReportPage = () => {
             </Link>
           </div>
           <div className="flex items-center gap-2">
-            <LanguageToggle lang={lang} onChange={setLang} />
+            <EnhancedLanguageToggle currentLang={lang} onChange={setLang} showRegion={false} autoDetect={false} />
           </div>
         </div>
       </header>

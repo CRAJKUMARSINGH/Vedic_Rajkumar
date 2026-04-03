@@ -1,6 +1,6 @@
 {
   "profile": {
-    "name": "Bittu Son Arthuna",
+    "name": "Dhairya Bittu Arthuna",
     "email": "",
     "defaultLocation": "Banswara, Rajasthan",
     "savedBirthDetails": [
@@ -15,5 +15,7 @@
     ]
   },
   "readings": [],
-  "exportDate": "2026-03-01T07:45:00.000Z"
+  "exportDate": "2026-03-26T00:00:00.000Z",
+  "source": "ASTROLOGICAL CHART DATABASE FEB 2014-DESKTOP-3RRLJHF.xlsx",
+  "excelRow": 11
 }

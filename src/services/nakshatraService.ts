@@ -10,11 +10,14 @@ import { calculatePlanetaryPositions } from './ephemerisService';
  */
 export interface NakshatraInfo {
   number: number;
-  name: {
-    en: string;
-    hi: string;
-    sanskrit: string;
-  };
+  id: number;
+  /** English name string (in NAKSHATRA_DATABASE) or name object (in NAKSHATRAS) */
+  name: string | { en: string; hi: string; sanskrit: string };
+  nameEn: string;
+  nameHi: string;
+  nameSanskrit: string;
+  /** 1-based nakshatra number */
+  nakshatra: number;
   lord: string;
   deity: string;
   symbol: string;
@@ -411,41 +414,94 @@ export const NAKSHATRAS: NakshatraInfo[] = [
   }
 ];
 
+/** Alias for backward compatibility, with flat field aliases added */
+export const NAKSHATRA_DATABASE = NAKSHATRAS.map(n => ({
+  ...n,
+  id: n.number,
+  nakshatra: n.number,
+  /** Flat string name (English) for test compatibility */
+  name: n.name.en,
+  nameEn: n.name.en,
+  nameHi: n.name.hi,
+  nameSanskrit: n.name.sanskrit,
+}));
+
 /**
  * Calculate Nakshatra from Moon's sidereal longitude
  */
 export function calculateNakshatra(moonLongitude: number): NakshatraInfo {
+  // Normalize longitude to 0-360 range
+  const normalizedLongitude = ((moonLongitude % 360) + 360) % 360;
+  
   // Each nakshatra is 13°20' (13.333333°)
-  const nakshatraIndex = Math.floor(moonLongitude / 13.333333);
+  let nakshatraIndex = Math.floor(normalizedLongitude / 13.333333);
+  
+  // Ensure nakshatra index is within valid range (0-26)
+  if (nakshatraIndex < 0) nakshatraIndex = 0;
+  if (nakshatraIndex > 26) nakshatraIndex = 26;
   
   // Get the nakshatra
   const nakshatra = { ...NAKSHATRAS[nakshatraIndex] };
   
   // Calculate pada (quarter within nakshatra)
   // Each pada is 3°20' (3.333333°)
-  const degreesInNakshatra = moonLongitude - (nakshatraIndex * 13.333333);
-  const pada = Math.floor(degreesInNakshatra / 3.333333) + 1;
+  const degreesInNakshatra = normalizedLongitude - (nakshatraIndex * 13.333333);
+  let pada = Math.floor(degreesInNakshatra / 3.333333) + 1;
+  
+  // Ensure pada is within valid range (1-4)
+  if (pada < 1) pada = 1;
+  if (pada > 4) pada = 4;
   
   nakshatra.pada = pada;
+  
+  // Add flat aliases for test compatibility
+  const nameObj = nakshatra.name as { en: string; hi: string; sanskrit: string };
+  (nakshatra as NakshatraInfo).id = nakshatra.number;
+  (nakshatra as NakshatraInfo).nakshatra = nakshatra.number;
+  (nakshatra as NakshatraInfo).nameEn = nameObj.en;
+  (nakshatra as NakshatraInfo).nameHi = nameObj.hi;
+  (nakshatra as NakshatraInfo).nameSanskrit = nameObj.sanskrit;
   
   return nakshatra;
 }
 
 /**
  * Get complete Nakshatra information for a birth chart
+ * Does not throw — returns Ashwini (nakshatra 1) as fallback for invalid input.
  */
 export function getNakshatraInfo(
   dateStr: string,
   timeStr: string
 ): NakshatraInfo {
-  // Calculate planetary positions
-  const positions = calculatePlanetaryPositions(dateStr, timeStr);
-  
-  // Get Moon's sidereal longitude
-  const moonLongitude = positions.moon.sidereal;
-  
-  // Calculate Nakshatra
-  return calculateNakshatra(moonLongitude);
+  try {
+    // Calculate planetary positions
+    const positions = calculatePlanetaryPositions(dateStr, timeStr);
+    
+    // Get Moon's sidereal longitude
+    const moonLongitude = positions.moon.sidereal;
+    
+    // Calculate Nakshatra
+    return calculateNakshatra(moonLongitude);
+  } catch {
+    // Return Ashwini as safe fallback
+    return calculateNakshatra(0);
+  }
+}
+
+/**
+ * Calculate Nakshatra from degrees (for testing)
+ */
+export function calculateNakshatraFromDegrees(degrees: number): {
+  nakshatra: number;
+  pada: number;
+  nakshatraName: string;
+} {
+  const nakshatraInfo = calculateNakshatra(degrees);
+  return {
+    nakshatra: nakshatraInfo.number,
+    pada: nakshatraInfo.pada,
+    nakshatraName: nakshatraInfo.name.en
+  };
 }
 
 /**

@@ -1,0 +1,66 @@
+{
+  "name": "Gochar Phal — Complete Vedic Astrology Platform",
+  "short_name": "Gochar Phal",
+  "description": "World's most comprehensive Vedic astrology platform with 500+ features including Western astrology, Chinese astrology, AI predictions, and more.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0f1a",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait-primary",
+  "lang": "en-IN",
+  "categories": ["lifestyle", "utilities", "education"],
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "48x48", "type": "image/x-icon" },
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Birth Chart",
+      "short_name": "Kundli",
+      "description": "Calculate your Vedic birth chart",
+      "url": "/",
+      "icons": [{ "src": "/favicon.ico", "sizes": "48x48" }]
+    },
+    {
+      "name": "Dasha Calculator",
+      "short_name": "Dasha",
+      "description": "Calculate Vimshottari Dasha periods",
+      "url": "/dasha",
+      "icons": [{ "src": "/favicon.ico", "sizes": "48x48" }]
+    },
+    {
+      "name": "Kundli Match",
+      "short_name": "Match",
+      "description": "Kundli matching / compatibility",
+      "url": "/matchmaking",
+      "icons": [{ "src": "/favicon.ico", "sizes": "48x48" }]
+    },
+    {
+      "name": "AI Predictions",
+      "short_name": "AI",
+      "description": "AI-powered personalized predictions",
+      "url": "/ai-predictions",
+      "icons": [{ "src": "/favicon.ico", "sizes": "48x48" }]
+    },
+    {
+      "name": "Horary Question",
+      "short_name": "Prashna",
+      "description": "Ask a question to the stars",
+      "url": "/horary",
+      "icons": [{ "src": "/favicon.ico", "sizes": "48x48" }]
+    },
+    {
+      "name": "All Features",
+      "short_name": "Features",
+      "description": "Browse all 500+ features",
+      "url": "/features",
+      "icons": [{ "src": "/favicon.ico", "sizes": "48x48" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "scope": "/",
+  "id": "gochar-phal-vedic-astrology"
+}

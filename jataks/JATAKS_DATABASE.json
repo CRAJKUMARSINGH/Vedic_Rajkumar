@@ -1,6 +1,8 @@
 {
   "databaseName": "Astrological Chart Database",
-  "createdDate": "2026-03-01",
+  "sourceFile": "ASTROLOGICAL CHART DATABASE FEB 2014-DESKTOP-3RRLJHF.xlsx",
+  "createdDate": "2014-02-01",
+  "lastUpdated": "2026-03-26",
   "totalJataks": 13,
   "jataks": [
     {
@@ -16,7 +18,8 @@
         "longitude": "73.71°E"
       },
       "relationship": "Friend/Relative",
-      "notes": ""
+      "inExcel": false,
+      "notes": "Added separately — not in original Excel"
     },
     {
       "id": "jatak_002",
@@ -31,7 +34,9 @@
         "longitude": "75.86°E"
       },
       "relationship": "Son",
-      "notes": "Time updated: 00:50 AM"
+      "inExcel": true,
+      "excelRow": 3,
+      "notes": ""
     },
     {
       "id": "jatak_003",
@@ -46,7 +51,9 @@
         "longitude": "75.86°E"
       },
       "relationship": "Son",
-      "notes": "Time updated: 02:17 AM"
+      "inExcel": true,
+      "excelRow": 4,
+      "notes": "Excel serial date 34603 = 1994-09-26"
     },
     {
       "id": "jatak_004",
@@ -61,7 +68,9 @@
         "longitude": "74.08°E"
       },
       "relationship": "Mother",
-      "notes": ""
+      "inExcel": true,
+      "excelRow": 5,
+      "notes": "Excel serial date 17415 = 1947-09-05; time 0.20833 = 05:00"
     },
     {
       "id": "jatak_005",
@@ -74,12 +83,14 @@
       "coordinates": {
         "latitude": "23.84°N",
         "longitude": "73.71°E",
-        "note": "Original data: 23-55, 74-08 (Nandli), corrected to Aspur coordinates"
+        "originalExcel": "23-55, 74-08 (Nandli)"
       },
       "relationship": "Self",
       "moonRashi": "Cancer (कर्क)",
       "moonRashiIndex": 3,
-      "notes": "Primary user - coordinates verified"
+      "inExcel": true,
+      "excelRow": 6,
+      "notes": "Excel serial 23269 = 1963-09-15; time 0.25 = 06:00; coords corrected to Aspur"
     },
     {
       "id": "jatak_006",
@@ -94,7 +105,9 @@
         "longitude": "73.71°E"
       },
       "relationship": "Daughter",
-      "notes": ""
+      "inExcel": true,
+      "excelRow": 7,
+      "notes": "Excel serial 38238 = 2004-09-08"
     },
     {
       "id": "jatak_007",
@@ -109,6 +122,8 @@
         "longitude": "73.01°E"
       },
       "relationship": "Daughter",
+      "inExcel": true,
+      "excelRow": 8,
       "notes": ""
     },
     {
@@ -126,7 +141,9 @@
       "relationship": "Wife",
       "moonRashi": "Taurus (वृषभ)",
       "moonRashiIndex": 1,
-      "notes": "Primary user - coordinates verified"
+      "inExcel": true,
+      "excelRow": 9,
+      "notes": "Excel serial 0.24305 = 05:50"
     },
     {
       "id": "jatak_009",
@@ -141,7 +158,9 @@
         "longitude": "74.44°E"
       },
       "relationship": "Brother/Relative",
-      "notes": ""
+      "inExcel": true,
+      "excelRow": 10,
+      "notes": "Excel serial 27644 = 1975-09-07"
     },
     {
       "id": "jatak_010",
@@ -156,11 +175,12 @@
         "longitude": "73.71°E"
       },
       "relationship": "Niece/Nephew",
-      "notes": ""
+      "inExcel": false,
+      "notes": "Added separately — not in original Excel"
     },
     {
       "id": "jatak_011",
-      "name": "Bittu Son Arthuna",
+      "name": "Dhairya Bittu Arthuna",
       "dateOfBirth": "2021-05-02",
       "timeOfBirth": "05:45",
       "placeOfBirth": "Banswara",
@@ -171,7 +191,9 @@
         "longitude": "74.44°E"
       },
       "relationship": "Relative's Child",
-      "notes": ""
+      "inExcel": true,
+      "excelRow": 11,
+      "notes": "Excel serial 44318 = 2021-05-02; full name from Excel: DHAIRYA BITTU ARTHUNA"
     },
     {
       "id": "jatak_012",
@@ -186,11 +208,13 @@
         "longitude": "74.00°E"
       },
       "relationship": "Friend/Relative",
-      "notes": ""
+      "inExcel": true,
+      "excelRow": 12,
+      "notes": "Excel serial 35518 = 1997-03-29"
     },
     {
       "id": "jatak_013",
-      "name": "Miss Jaya Sisodia",
+      "name": "Jaya Sisodia",
       "dateOfBirth": "1994-06-25",
       "timeOfBirth": "11:00",
       "placeOfBirth": "Indore",
@@ -201,7 +225,9 @@
         "longitude": "75.86°E"
       },
       "relationship": "Friend/Relative",
-      "notes": ""
+      "inExcel": true,
+      "excelRow": 13,
+      "notes": "Excel: 'Jaya Sisodia Indore'; serial 34510 = 1994-06-25"
     }
   ],
   "metadata": {
@@ -209,6 +235,8 @@
     "timeFormat": "24-hour (HH:MM)",
     "coordinateSystem": "Decimal degrees",
     "ayanamsa": "Lahiri (Chitrapaksha)",
-    "calculationMethod": "Vedic/Sidereal"
+    "calculationMethod": "Vedic/Sidereal",
+    "excelColumns": ["NAME", "DATE OF BIRTH", "TIME", "PLACE", "HOW U RECALL THIS PERSON?"],
+    "excelDateNote": "Serial dates converted: epoch Jan 1 1900, leap-year bug corrected"
   }
 }

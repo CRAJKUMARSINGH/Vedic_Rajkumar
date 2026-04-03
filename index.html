@@ -1,30 +1,176 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- TODO: Set the document title to the name of your application -->
-    <title>Lovable App</title>
-    <meta name="description" content="Lovable Generated Project">
-    <meta name="author" content="Lovable" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- TODO: Update og:title to match your application name -->
-    
-    
+    <!-- Primary Meta -->
+    <title>Gochar Phal — Complete Vedic Astrology Platform</title>
+    <meta name="description" content="World's most comprehensive Vedic astrology platform. Free birth chart, transit predictions, Dasha, Yogas, Ashtakavarga, Western astrology, Chinese astrology, AI predictions and 500+ features. Bilingual Hindi/English." />
+    <meta name="keywords" content="vedic astrology, gochar phal, kundli, birth chart, transit calculator, vimshottari dasha, yoga analysis, ashtakavarga, shadbala, nakshatra, rashi, jyotish, free horoscope, western astrology, chinese astrology, numerology, medical astrology, financial astrology" />
+    <meta name="author" content="Gochar Phal" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="canonical" href="https://gochar-phal.vercel.app/" />
+
+    <!-- Language alternates -->
+    <link rel="alternate" hreflang="en" href="https://gochar-phal.vercel.app/" />
+    <link rel="alternate" hreflang="hi" href="https://gochar-phal.vercel.app/?lang=hi" />
+    <link rel="alternate" hreflang="x-default" href="https://gochar-phal.vercel.app/" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#7c3aed" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#4c1d95" media="(prefers-color-scheme: dark)" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Gochar Phal" />
+    <meta name="application-name" content="Gochar Phal" />
+    <meta name="msapplication-TileColor" content="#7c3aed" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7c3aed" />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/73040615-f56f-4c5b-a53d-cb2e6a7ccbbb/id-preview-60d5c240--3c6eccb3-10d8-4cf8-9554-1144641fe9bf.lovable.app-1771777100808.png">
+    <meta property="og:site_name" content="Gochar Phal" />
+    <meta property="og:url" content="https://gochar-phal.vercel.app/" />
+    <meta property="og:title" content="Gochar Phal — Complete Vedic Astrology Platform" />
+    <meta property="og:description" content="World's most comprehensive Vedic astrology platform with 500+ features. Free birth chart, transit predictions, AI insights, Western & Chinese astrology. Bilingual Hindi/English." />
+    <meta property="og:image" content="https://gochar-phal.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Gochar Phal - Vedic Astrology Platform" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:locale:alternate" content="hi_IN" />
 
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Lovable" />
-    <meta name="twitter:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/73040615-f56f-4c5b-a53d-cb2e6a7ccbbb/id-preview-60d5c240--3c6eccb3-10d8-4cf8-9554-1144641fe9bf.lovable.app-1771777100808.png">
-    <meta property="og:title" content="Lovable App">
-  <meta name="twitter:title" content="Lovable App">
-  <meta property="og:description" content="Lovable Generated Project">
-  <meta name="twitter:description" content="Lovable Generated Project">
-</head>
+    <meta name="twitter:site" content="@gocharphal" />
+    <meta name="twitter:creator" content="@gocharphal" />
+    <meta name="twitter:title" content="Gochar Phal — Complete Vedic Astrology Platform" />
+    <meta name="twitter:description" content="500+ features: Birth chart, Dasha, Yogas, Western astrology, Chinese astrology, AI predictions. Free & bilingual." />
+    <meta name="twitter:image" content="https://gochar-phal.vercel.app/og-image.png" />
+    <meta name="twitter:image:alt" content="Gochar Phal Vedic Astrology" />
 
+    <!-- Structured Data: WebApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Gochar Phal",
+      "alternateName": "गोचर फल",
+      "description": "World's most comprehensive Vedic astrology platform with 500+ features including birth chart, transit predictions, Dasha, Yogas, Western astrology, Chinese astrology, AI predictions and more.",
+      "url": "https://gochar-phal.vercel.app/",
+      "applicationCategory": "LifestyleApplication",
+      "applicationSubCategory": "Astrology",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/InStock"
+      },
+      "inLanguage": ["en", "hi"],
+      "featureList": [
+        "Vedic Birth Chart (Kundli)",
+        "Transit Predictions (Gochar Phal)",
+        "Vimshottari Dasha System",
+        "Yoga Analysis (100+ Yogas)",
+        "Ashtakavarga Scoring",
+        "Shadbala Strength",
+        "Kundali Milan (36-point matching)",
+        "Western Astrology",
+        "Chinese Astrology",
+        "AI Predictions",
+        "Horary Astrology",
+        "Medical Astrology",
+        "Financial Astrology",
+        "Numerology",
+        "Lal Kitab",
+        "KP System",
+        "Jaimini System"
+      ],
+      "screenshot": "https://gochar-phal.vercel.app/og-image.png",
+      "softwareVersion": "2.0.0",
+      "datePublished": "2026-03-01",
+      "dateModified": "2026-03-27"
+    }
+    </script>
+
+    <!-- Structured Data: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Gochar Phal",
+      "url": "https://gochar-phal.vercel.app/",
+      "logo": "https://gochar-phal.vercel.app/favicon.ico",
+      "sameAs": [],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "availableLanguage": ["English", "Hindi"]
+      }
+    }
+    </script>
+
+    <!-- Structured Data: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gochar-phal.vercel.app/" },
+        { "@type": "ListItem", "position": 2, "name": "Birth Chart", "item": "https://gochar-phal.vercel.app/" },
+        { "@type": "ListItem", "position": 3, "name": "Dasha", "item": "https://gochar-phal.vercel.app/dasha" }
+      ]
+    }
+    </script>
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://nominatim.openstreetmap.org" />
+
+    <!-- Critical CSS: prevent FOUC -->
+    <style>
+      html { background: hsl(35, 30%, 97%); }
+      html.dark { background: hsl(240, 30%, 8%); }
+      #root { min-height: 100vh; }
+      /* Prevent layout shift during font load */
+      body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    </style>
+
+    <!-- Dark mode: apply before render to prevent flash -->
+    <script>
+      (function() {
+        try {
+          var theme = localStorage.getItem('theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          if (theme === 'dark') document.documentElement.classList.add('dark');
+        } catch(e) {}
+      })();
+    </script>
+  </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <div style="padding:2rem;text-align:center;font-family:sans-serif;">
+        <h1>🕉️ Gochar Phal</h1>
+        <p>This application requires JavaScript to run. Please enable JavaScript in your browser.</p>
+        <p>यह एप्लिकेशन चलाने के लिए JavaScript आवश्यक है।</p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

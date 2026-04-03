@@ -1,14 +1,21 @@
 import { useState } from "react";
 import { KaalSarpForm } from "@/components/KaalSarpForm";
-import LanguageToggle from "@/components/LanguageToggle";
+import EnhancedLanguageToggle from "@/components/EnhancedLanguageToggle";
 import { Link } from "react-router-dom";
+import { SEO } from "@/components/SEO";
 
 const KaalSarpPage = () => {
   const [lang, setLang] = useState<"en" | "hi">("en");
   const isHi = lang === "hi";
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <SEO
+        title="Kaal Sarp Yoga Analysis"
+        description="Check if you have Kaal Sarp Yoga in your birth chart. Get detailed analysis of all 12 types with remedies and predictions."
+        keywords="kaal sarp yoga, kaal sarp dosha, kundli analysis, vedic astrology, rahu ketu"
+        canonical="/kaalsarp"
+      />
       {/* Header */}
       <header className="border-b border-border bg-card">
         <div className="container max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -26,7 +33,7 @@ const KaalSarpPage = () => {
             </Link>
           </div>
           <div className="flex items-center gap-2">
-            <LanguageToggle lang={lang} onChange={setLang} />
+            <EnhancedLanguageToggle currentLang={lang} onChange={setLang} showRegion={false} autoDetect={false} />
           </div>
         </div>
       </header>
@@ -67,7 +74,7 @@ const KaalSarpPage = () => {
           </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 };
 

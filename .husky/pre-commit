@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+# Pre-commit hook — Phase 7 (Dev Experience)
+# Runs: lint-staged → typecheck → vitest (fast, no watch)
+
+npx lint-staged
+
+# Type check (fast, no emit)
+npm run typecheck
+
+# Run unit tests (single pass, no watch)
+npm run test
