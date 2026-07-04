@@ -1,0 +1,845 @@
+/**
+ * Week 0: Global CSS Architecture
+ * Proper layer structure, design tokens, and Vedic-specific utilities
+ */
+
+/* ─── Font Loading ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ─── Style Imports ────────────────────────────────────────────────────────── */
+@import './styles/enterprise.css';
+
+/* ─── Tailwind Layers ──────────────────────────────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base Layer: Design Tokens ────────────────────────────────────────────── */
+@layer base {
+  :root {
+    /* Semantic colors — light mode */
+    --background: 35 30% 97%;
+    --foreground: 240 20% 15%;
+    --card: 35 25% 95%;
+    --card-foreground: 240 20% 15%;
+    --popover: 35 30% 97%;
+    --popover-foreground: 240 20% 15%;
+    --primary: 30 85% 52%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 40% 25%;
+    --secondary-foreground: 35 30% 95%;
+    --muted: 35 15% 90%;
+    --muted-foreground: 240 10% 45%;
+    --accent: 15 75% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 35 20% 85%;
+    --input: 35 20% 88%;
+    --ring: 30 85% 52%;
+    --radius: 0.625rem;
+
+    /* Sidebar */
+    --sidebar-background: 240 40% 20%;
+    --sidebar-foreground: 35 30% 95%;
+    --sidebar-primary: 30 85% 52%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 35% 30%;
+    --sidebar-accent-foreground: 35 30% 95%;
+    --sidebar-border: 240 30% 30%;
+    --sidebar-ring: 30 85% 52%;
+
+    /* Vedic-specific tokens */
+    --gold: 42 90% 55%;
+    --gold-foreground: 35 50% 15%;
+    --saffron: 25 90% 55%;
+    --saffron-foreground: 0 0% 100%;
+    --indigo-deep: 240 45% 20%;
+    --indigo-deep-foreground: 35 30% 95%;
+    --favorable: 145 60% 40%;
+    --unfavorable: 0 65% 50%;
+    --mixed: 40 80% 50%;
+    --neutral: 220 15% 55%;
+
+    /* Planet colors */
+    --planet-sun: 30 90% 55%;
+    --planet-moon: 220 20% 75%;
+    --planet-mercury: 145 55% 45%;
+    --planet-venus: 330 70% 60%;
+    --planet-mars: 0 75% 55%;
+    --planet-jupiter: 40 85% 55%;
+    --planet-saturn: 220 25% 45%;
+    --planet-rahu: 270 60% 55%;
+    --planet-ketu: 25 55% 45%;
+
+    /* 2025 Design Trends: Neon accent palette */
+    --neon-magenta: 320 100% 60%;
+    --neon-cyan: 185 100% 55%;
+    --neon-gold: 45 100% 60%;
+    --neon-violet: 270 100% 65%;
+    --neon-green: 145 100% 50%;
+
+    /* Glassmorphism tokens */
+    --glass-bg: 255 255 255 / 0.08;
+    --glass-border: 255 255 255 / 0.15;
+    --glass-blur: 16px;
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+
+    /* Neumorphism tokens (light) */
+    --neu-bg: 35 30% 94%;
+    --neu-shadow-light: #ffffff;
+    --neu-shadow-dark: #c8b89a;
+
+    /* Bento grid gap */
+    --bento-gap: 1rem;
+
+    /* Rashi element colors */
+    --element-fire: 15 85% 55%;
+    --element-earth: 90 45% 40%;
+    --element-air: 200 70% 55%;
+    --element-water: 210 80% 55%;
+
+    /* Chart colors */
+    /* Auspicious (Hindi Bill Note) Theme Tokens - Enhanced */
+    --auspicious-bg: 45 80% 95%; /* #FFF5E6 - Warm Cream */
+    --auspicious-primary: 0 100% 27%; /* #8B0000 - Deep Maroon */
+    --auspicious-secondary: 25 100% 38%; /* #C05000 - Burnt Orange */
+    --auspicious-accent: 45 65% 55%; /* #D4AF37 - Gold */
+    --auspicious-border: 25 60% 30%; /* #8B4513 - Brown */
+    --auspicious-gradient: linear-gradient(180deg, #8b0000, #b22222, #8b0000);
+    --auspicious-shadow: 0 4px 20px rgba(139, 0, 0, 0.15);
+
+    /* Financial Auspicious Colors (from Hindi Bill Note) */
+    --auspicious-profit: 142 70% 45%; /* #2ECC71 - Prosperity Green */
+    --auspicious-loss: 0 70% 55%; /* #E74C3C - Warning Red */
+    --auspicious-neutral: 210 20% 55%; /* #7F8C8D - Neutral Grey */
+    --auspicious-wealth: 45 90% 50%; /* #F1C40F - Wealth Yellow */
+    --auspicious-royal: 270 50% 40%; /* #6B4C9A - Royal Purple */
+    --auspicious-divine: 30 100% 50%; /* #FF8C00 - Divine Saffron */
+    --auspicious-pearl: 40 30% 95%; /* #FAF7F0 - Pearl White */
+    --auspicious-vermilion: 5 85% 55%; /* #E34234 - Vermilion */
+    --auspicious-emerald: 160 60% 40%; /* #2E8B57 - Emerald */
+    --auspicious-sapphire: 220 60% 45%; /* #1E5AA8 - Sapphire */
+
+    /* Sacred Geometry Pattern Colors */
+    --sacred-dot: hsl(var(--auspicious-accent) / 0.3);
+    --sacred-line: hsl(var(--auspicious-secondary) / 0.2);
+    --mandala-stroke: hsl(var(--auspicious-accent) / 0.15);
+  }
+
+  .dark {
+    --background: 240 30% 8%;
+    --foreground: 35 25% 92%;
+    --card: 240 28% 12%;
+    --card-foreground: 35 25% 92%;
+    --popover: 240 28% 12%;
+    --popover-foreground: 35 25% 92%;
+    --primary: 30 85% 52%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 35 20% 20%;
+    --secondary-foreground: 35 25% 92%;
+    --muted: 240 20% 18%;
+    --muted-foreground: 35 15% 60%;
+    --accent: 15 75% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 240 20% 22%;
+    --input: 240 20% 22%;
+    --ring: 30 85% 52%;
+    --sidebar-background: 240 30% 8%;
+    --sidebar-foreground: 35 25% 92%;
+    --sidebar-primary: 30 85% 52%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 25% 15%;
+    --sidebar-accent-foreground: 35 25% 92%;
+    --sidebar-border: 240 20% 18%;
+    --sidebar-ring: 30 85% 52%;
+    --gold: 42 80% 50%;
+    --gold-foreground: 35 50% 95%;
+    --saffron: 25 85% 55%;
+    --favorable: 145 55% 45%;
+    --unfavorable: 0 60% 55%;
+    --mixed: 40 75% 55%;
+
+    /* Dark mode neon — brighter in dark */
+    --neon-magenta: 320 100% 65%;
+    --neon-cyan: 185 100% 60%;
+    --neon-gold: 45 100% 65%;
+    --neon-violet: 270 100% 70%;
+    --neon-green: 145 100% 55%;
+
+    /* Glassmorphism dark */
+    --glass-bg: 0 0 0 / 0.25;
+    --glass-border: 255 255 255 / 0.1;
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+
+    /* Neumorphism dark */
+    --neu-bg: 240 28% 12%;
+    --neu-shadow-light: #2a2d4a;
+    --neu-shadow-dark: #0d0f1e;
+  }
+
+  /* Reset */
+  *,
+  *::before,
+  *::after {
+    @apply border-border box-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  /* Focus styles */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+
+  /* Selection */
+  ::selection {
+    background: hsl(var(--primary) / 0.2);
+    color: hsl(var(--foreground));
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
+
+/* ─── Component Layer ──────────────────────────────────────────────────────── */
+@layer components {
+  /* Vedic card with sacred geometry border */
+  .vedic-card {
+    @apply bg-card border border-border rounded-xl p-4 shadow-sm;
+    background-image: none;
+  }
+
+  .auspicious-card {
+    @apply bg-white border-2 border-[hsl(var(--auspicious-secondary)/0.5)] rounded-2xl p-6 shadow-vedic;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .auspicious-card::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    border: 1px solid hsl(var(--auspicious-accent) / 0.4);
+    border-radius: calc(1rem - 6px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .auspicious-card:hover {
+    @apply shadow-gold -translate-y-1;
+    border-color: hsl(var(--auspicious-accent));
+  }
+
+  .auspicious-header {
+    background: var(--auspicious-gradient);
+    @apply text-white py-4 px-6 rounded-t-2xl font-heading text-xl shadow-lg flex items-center justify-between border-b-2 border-[hsl(var(--auspicious-accent)/0.5)];
+    position: relative;
+  }
+
+  .auspicious-header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--auspicious-accent)), transparent);
+  }
+
+  /* Favorable/Unfavorable/Mixed indicators */
+  .indicator-favorable {
+    @apply text-favorable bg-favorable/10 border border-favorable/20 rounded-full px-2 py-0.5 text-xs font-medium;
+  }
+  .indicator-unfavorable {
+    @apply text-unfavorable bg-unfavorable/10 border border-unfavorable/20 rounded-full px-2 py-0.5 text-xs font-medium;
+  }
+  .indicator-mixed {
+    @apply text-mixed bg-mixed/10 border border-mixed/20 rounded-full px-2 py-0.5 text-xs font-medium;
+  }
+
+  /* Planet badge */
+  .planet-badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border;
+  }
+
+  /* Rashi badge */
+  .rashi-badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-muted;
+  }
+
+  /* Score bar */
+  .score-bar {
+    @apply w-full bg-muted rounded-full h-2 overflow-hidden;
+  }
+  .score-bar-fill {
+    @apply h-full rounded-full transition-all duration-500;
+  }
+
+  /* Page header */
+  .page-header {
+    @apply border-b border-border bg-card sticky top-0 z-40;
+  }
+
+  /* Section title */
+  .section-title {
+    @apply text-lg font-heading font-semibold text-foreground;
+  }
+
+  /* Bilingual label */
+  .bilingual-label {
+    @apply text-xs text-muted-foreground font-hindi;
+  }
+
+  /* ── 2025 Design Trends ─────────────────────────────────────────────────── */
+
+  /* Glassmorphism card */
+  .glass-card {
+    background: rgba(var(--glass-bg));
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid rgba(var(--glass-border));
+    box-shadow: var(--glass-shadow);
+    @apply rounded-2xl;
+  }
+
+  /* Neon glow utilities */
+  .neon-glow-magenta {
+    box-shadow:
+      0 0 12px hsl(var(--neon-magenta) / 0.5),
+      0 0 24px hsl(var(--neon-magenta) / 0.25);
+  }
+  .neon-glow-cyan {
+    box-shadow:
+      0 0 12px hsl(var(--neon-cyan) / 0.5),
+      0 0 24px hsl(var(--neon-cyan) / 0.25);
+  }
+  .neon-glow-gold {
+    box-shadow:
+      0 0 12px hsl(var(--neon-gold) / 0.5),
+      0 0 24px hsl(var(--neon-gold) / 0.25);
+  }
+  .neon-glow-violet {
+    box-shadow:
+      0 0 12px hsl(var(--neon-violet) / 0.5),
+      0 0 24px hsl(var(--neon-violet) / 0.25);
+  }
+
+  /* Neumorphism button/card */
+  .neu-card {
+    background: hsl(var(--neu-bg));
+    box-shadow:
+      6px 6px 12px var(--neu-shadow-dark),
+      -6px -6px 12px var(--neu-shadow-light);
+    @apply rounded-2xl;
+  }
+  .neu-inset {
+    background: hsl(var(--neu-bg));
+    box-shadow:
+      inset 4px 4px 8px var(--neu-shadow-dark),
+      inset -4px -4px 8px var(--neu-shadow-light);
+    @apply rounded-xl;
+  }
+
+  /* Bento grid */
+  .bento-grid {
+    display: grid;
+    gap: var(--bento-gap);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .bento-grid-2 {
+    display: grid;
+    gap: var(--bento-gap);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bento-grid-3 {
+    display: grid;
+    gap: var(--bento-gap);
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .bento-span-2 {
+    grid-column: span 2;
+  }
+  .bento-span-3 {
+    grid-column: span 3;
+  }
+  .bento-row-2 {
+    grid-row: span 2;
+  }
+
+  /* Planet glow cards (neon per planet) */
+  .planet-card-sun {
+    @apply neon-glow-gold border-[hsl(var(--planet-sun)/0.4)];
+  }
+  .planet-card-moon {
+    box-shadow: 0 0 12px hsl(220 60% 70% / 0.4);
+  }
+  .planet-card-mars {
+    box-shadow: 0 0 12px hsl(var(--planet-mars) / 0.4);
+  }
+  .planet-card-rahu {
+    @apply neon-glow-violet;
+  }
+  .planet-card-ketu {
+    box-shadow: 0 0 12px hsl(var(--neon-magenta) / 0.35);
+  }
+}
+
+/* ─── Utility Layer ────────────────────────────────────────────────────────── */
+@layer utilities {
+  /* Font utilities */
+  .font-heading {
+    font-family: 'Crimson Pro', Georgia, serif;
+  }
+  .font-body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  .font-hindi {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+  .font-mono-astro {
+    font-family: 'Courier New', monospace;
+  }
+  .font-cinzel {
+    font-family: 'Cinzel', Georgia, serif;
+  }
+
+  /* Vedic color utilities */
+  .text-favorable {
+    color: hsl(var(--favorable));
+  }
+  .text-unfavorable {
+    color: hsl(var(--unfavorable));
+  }
+  .text-mixed {
+    color: hsl(var(--mixed));
+  }
+  .text-gold {
+    color: hsl(var(--gold));
+  }
+  .text-saffron {
+    color: hsl(var(--saffron));
+  }
+  .bg-favorable {
+    background-color: hsl(var(--favorable));
+  }
+  .bg-unfavorable {
+    background-color: hsl(var(--unfavorable));
+  }
+  .bg-mixed {
+    background-color: hsl(var(--mixed));
+  }
+  .bg-gold {
+    background-color: hsl(var(--gold));
+  }
+  .bg-saffron {
+    background-color: hsl(var(--saffron));
+  }
+
+  /* Planet color utilities */
+  .text-planet-sun {
+    color: hsl(var(--planet-sun));
+  }
+  .text-planet-moon {
+    color: hsl(var(--planet-moon));
+  }
+  .text-planet-mercury {
+    color: hsl(var(--planet-mercury));
+  }
+  .text-planet-venus {
+    color: hsl(var(--planet-venus));
+  }
+  .text-planet-mars {
+    color: hsl(var(--planet-mars));
+  }
+  .text-planet-jupiter {
+    color: hsl(var(--planet-jupiter));
+  }
+  .text-planet-saturn {
+    color: hsl(var(--planet-saturn));
+  }
+  .text-planet-rahu {
+    color: hsl(var(--planet-rahu));
+  }
+  .text-planet-ketu {
+    color: hsl(var(--planet-ketu));
+  }
+
+  /* Safe area insets for mobile */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+  .pl-safe {
+    padding-left: env(safe-area-inset-left);
+  }
+  .pr-safe {
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Text balance */
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Gradient text */
+  .gradient-text-gold {
+    background: linear-gradient(135deg, hsl(var(--gold)), hsl(var(--saffron)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .gradient-text-vedic {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .gradient-text-neon {
+    background: linear-gradient(135deg, hsl(var(--neon-magenta)), hsl(var(--neon-cyan)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-auspicious {
+    background: var(--auspicious-gradient);
+    @apply text-white shadow-md;
+  }
+
+  .bg-auspicious-pattern {
+    background-color: hsl(var(--auspicious-bg));
+    background-image:
+      radial-gradient(hsl(var(--auspicious-accent) / 0.15) 1px, transparent 1px),
+      linear-gradient(to right, hsl(var(--auspicious-accent) / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--auspicious-accent) / 0.05) 1px, transparent 1px),
+      url('https://www.transparenttextures.com/patterns/p6.png');
+    background-size:
+      40px 40px,
+      100px 100px,
+      100px 100px,
+      auto;
+  }
+
+  .sacred-divider {
+    @apply flex items-center justify-center gap-4 my-12 opacity-50;
+  }
+
+  .sacred-divider::before,
+  .sacred-divider::after {
+    content: '';
+    @apply h-[1px] w-32 bg-gradient-to-r from-transparent via-[hsl(var(--auspicious-accent))] to-transparent;
+  }
+
+  /* Neon text colors */
+  .text-neon-magenta {
+    color: hsl(var(--neon-magenta));
+  }
+  .text-neon-cyan {
+    color: hsl(var(--neon-cyan));
+  }
+  .text-neon-gold {
+    color: hsl(var(--neon-gold));
+  }
+  .text-neon-violet {
+    color: hsl(var(--neon-violet));
+  }
+
+  /* Auspicious Financial Colors (from Hindi Bill Note) */
+  .text-auspicious-profit {
+    color: hsl(var(--auspicious-profit));
+  }
+  .text-auspicious-loss {
+    color: hsl(var(--auspicious-loss));
+  }
+  .text-auspicious-wealth {
+    color: hsl(var(--auspicious-wealth));
+  }
+  .text-auspicious-royal {
+    color: hsl(var(--auspicious-royal));
+  }
+  .text-auspicious-divine {
+    color: hsl(var(--auspicious-divine));
+  }
+  .text-auspicious-vermilion {
+    color: hsl(var(--auspicious-vermilion));
+  }
+  .text-auspicious-emerald {
+    color: hsl(var(--auspicious-emerald));
+  }
+  .text-auspicious-sapphire {
+    color: hsl(var(--auspicious-sapphire));
+  }
+
+  .bg-auspicious-profit {
+    background-color: hsl(var(--auspicious-profit));
+  }
+  .bg-auspicious-loss {
+    background-color: hsl(var(--auspicious-loss));
+  }
+  .bg-auspicious-wealth {
+    background-color: hsl(var(--auspicious-wealth));
+  }
+  .bg-auspicious-royal {
+    background-color: hsl(var(--auspicious-royal));
+  }
+  .bg-auspicious-divine {
+    background-color: hsl(var(--auspicious-divine));
+  }
+  .bg-auspicious-pearl {
+    background-color: hsl(var(--auspicious-pearl));
+  }
+  .bg-auspicious-vermilion {
+    background-color: hsl(var(--auspicious-vermilion));
+  }
+  .bg-auspicious-emerald {
+    background-color: hsl(var(--auspicious-emerald));
+  }
+  .bg-auspicious-sapphire {
+    background-color: hsl(var(--auspicious-sapphire));
+  }
+
+  /* Sacred Pattern Backgrounds */
+  .bg-sacred-mandala {
+    background-color: hsl(var(--auspicious-pearl));
+    background-image:
+      radial-gradient(circle at 20% 80%, hsl(var(--auspicious-gold) / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(var(--auspicious-divine) / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, hsl(var(--auspicious-emerald) / 0.05) 0%, transparent 30%);
+  }
+
+  .bg-wealth-pattern {
+    background-color: hsl(var(--auspicious-pearl));
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 35px,
+        hsl(var(--auspicious-wealth) / 0.03) 35px,
+        hsl(var(--auspicious-wealth) / 0.03) 70px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 35px,
+        hsl(var(--auspicious-gold) / 0.02) 35px,
+        hsl(var(--auspicious-gold) / 0.02) 70px
+      );
+  }
+
+  .border-auspicious-gold {
+    border-color: hsl(var(--auspicious-gold));
+  }
+  .border-auspicious-divine {
+    border-color: hsl(var(--auspicious-divine));
+  }
+  .border-auspicious-vermilion {
+    border-color: hsl(var(--auspicious-vermilion));
+  }
+
+  /* Glow effects for auspicious colors */
+  .glow-auspicious-gold {
+    box-shadow:
+      0 0 20px hsl(var(--auspicious-gold) / 0.4),
+      0 0 40px hsl(var(--auspicious-gold) / 0.2);
+  }
+  .glow-auspicious-divine {
+    box-shadow:
+      0 0 20px hsl(var(--auspicious-divine) / 0.4),
+      0 0 40px hsl(var(--auspicious-divine) / 0.2);
+  }
+  .glow-auspicious-emerald {
+    box-shadow:
+      0 0 20px hsl(var(--auspicious-emerald) / 0.4),
+      0 0 40px hsl(var(--auspicious-emerald) / 0.2);
+  }
+
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  /* Auspicious Animation Classes */
+  .animate-auspicious-glow {
+    animation: auspicious-glow 3s ease-in-out infinite;
+  }
+  .animate-divine-pulse {
+    animation: divine-pulse 4s ease-in-out infinite;
+  }
+  .animate-rotate-sacred {
+    animation: rotate-sacred 20s linear infinite;
+  }
+  .animate-float-auspicious {
+    animation: float-auspicious 6s ease-in-out infinite;
+  }
+
+  /* Shimmer effect for auspicious elements */
+  .auspicious-shimmer {
+    background: linear-gradient(90deg, transparent, hsl(var(--auspicious-gold) / 0.3), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+}
+
+/* ─── Keyframes ────────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes auspicious-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 5px hsl(var(--auspicious-gold) / 0.3),
+      0 0 10px hsl(var(--auspicious-gold) / 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 15px hsl(var(--auspicious-gold) / 0.5),
+      0 0 30px hsl(var(--auspicious-gold) / 0.3);
+  }
+}
+
+@keyframes divine-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes rotate-sacred {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float-auspicious {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ─── Print Styles ─────────────────────────────────────────────────────────── */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .page-header {
+    position: static !important;
+  }
+}
+
+/* ─── Reduced Motion ───────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
