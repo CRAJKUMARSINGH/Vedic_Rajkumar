@@ -1,0 +1,1 @@
+- [Vedic API stack](vedic-api.md) — astronomy-engine named imports only; Body values are plain strings at runtime; Lahiri ayanamsha formula; full endpoint surface built.
