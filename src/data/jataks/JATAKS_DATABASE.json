@@ -276,6 +276,22 @@
       "relationship": "Friend/Relative",
       "inExcel": false,
       "notes": "Added manually — 8 October 1999, 7:43 AM, Udaipur, Rajasthan"
+    },
+    {
+      "id": "jatak_017",
+      "name": "Swami Rajeev Anand",
+      "dateOfBirth": "1989-05-10",
+      "timeOfBirth": "05:10",
+      "placeOfBirth": "Gonda",
+      "state": "Jharkhand",
+      "country": "India",
+      "coordinates": {
+        "latitude": "24.50°N",
+        "longitude": "87.13°E"
+      },
+      "relationship": "Friend",
+      "inExcel": false,
+      "notes": "Added manually via user request"
     }
   ],
   "metadata": {
