@@ -11,6 +11,7 @@ import { shadcn } from '@clerk/themes';
 import MainLayout from '@/components/MainLayout';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import LandingPage from './pages/LandingPage';
+import LandingPageV3 from './pages/LandingPageV3';
 import CareerAstrology from './pages/CareerAstrology';
 import KaalSarpPage from './pages/KaalSarpPage';
 import ComprehensiveReportPage from './pages/ComprehensiveReportPage';
@@ -132,11 +133,12 @@ const AnimatedRoutes = () => {
         style={{ minHeight: '100vh' }}
       >
         <Routes location={location}>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<LandingPageV3 />} />
           <Route path="/app" element={<IndexPage />} />
           <Route path="/welcome" element={<LandingPageV2 />} />
           <Route path="/landing-classic" element={<LandingPage />} />
-          <Route path="/landing-v2" element={<Navigate to="/" replace />} />
+          <Route path="/landing-v3" element={<Navigate to="/" replace />} />
+          <Route path="/landing-v2" element={<Navigate to="/welcome" replace />} />
           <Route path="/career-astrology" element={<CareerAstrology />} />
           <Route path="/kaalsarp" element={<KaalSarpPage />} />
           <Route path="/comprehensive" element={<ComprehensiveReportPage />} />

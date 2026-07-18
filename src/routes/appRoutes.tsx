@@ -24,6 +24,7 @@ export type AppRoute = {
 };
 
 const LandingPageV2 = lazy(() => import('@/pages/LandingPageV2'));
+const LandingPageV3 = lazy(() => import('@/pages/LandingPageV3'));
 const MatchMaking = lazy(() => import('@/pages/MatchMaking'));
 const EnhancedKundliMilan = lazy(() => import('@/pages/EnhancedKundliMilan'));
 const VaastuAssessmentPage = lazy(() => import('@/pages/VaastuAssessmentPage'));
@@ -107,9 +108,11 @@ function route(path: string, element: JSX.Element): AppRoute {
 }
 
 export const APP_ROUTES: AppRoute[] = [
-  route('/', <LandingPageV2 />),
+  route('/', <LandingPageV3 />),
+  route('/welcome', <LandingPageV2 />),
   route('/landing-classic', <LandingPage />),
-  route('/landing-v2', <Navigate to="/" replace />),
+  route('/landing-v3', <Navigate to="/" replace />),
+  route('/landing-v2', <Navigate to="/welcome" replace />),
   route('/career-astrology', <CareerAstrology />),
   route('/kaalsarp', <KaalSarpPage />),
   route('/comprehensive', <ComprehensiveReportPage />),
