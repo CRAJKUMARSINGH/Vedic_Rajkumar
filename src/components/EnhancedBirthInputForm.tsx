@@ -16,7 +16,7 @@ import { searchLocation, formatCoordinates, type LocationResult } from "@/servic
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 
-import jataksDB from "../../jataks/JATAKS_DATABASE.json";
+import jataksDB from "../data/jataks/JATAKS_DATABASE.json";
 
 interface EnhancedBirthInputFormProps {
   lang: "en" | "hi";

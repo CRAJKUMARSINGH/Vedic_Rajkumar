@@ -1,7 +1,9 @@
-import jataksDb from '../../jataks/JATAKS_DATABASE.json';
-import ebookIndexRaw from '../../KNOWLEDGE_BASE/ebook_index.md?raw';
-import implementationQueueRaw from '../../KNOWLEDGE_BASE/implementation_queue.md?raw';
-import interpretationEngineRaw from '../../KNOWLEDGE_BASE/INTERPRETATION_ENGINE_v2.1.md?raw';
+import jataksDb from './jataks/JATAKS_DATABASE.json';
+// KNOWLEDGE_BASE markdown files — referenced as raw text for knowledge-base
+// features. Stubbed as empty strings since the files don't exist in the repo.
+const ebookIndexRaw: string = '';
+const implementationQueueRaw: string = '';
+const interpretationEngineRaw: string = '';
 
 type JatakRecord = {
   id: string;
