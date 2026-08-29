@@ -1,0 +1,1 @@
+{\n  " pipeline\: {\n \dev\: {\n \dependsOn\: [\build\],\n \outputs\: []\n },\n \build\: {\n \outputs\: [\dist/**\]\n },\n \test\: {\n \outputs\: []\n },\n \typecheck\: {\n \outputs\: []\n }\n },\n \globalEnv\: [\NODE_ENV\],\n \tasks\: {\n \dev\: {\n \cache\: false\n }\n },\n \slug\: \vedic-rajkumar\,\n \workspaces\: [\packages/*\]\n}

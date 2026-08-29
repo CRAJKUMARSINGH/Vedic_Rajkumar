@@ -32,3 +32,14 @@ Thumbs.db
 # Test reports
 playwright-report/
 test-results/
+
+# AI agent temp folders
+.agents/
+.gemini/
+.grok/
+
+# Local temp/repo files
+remote_repo/
+__jataks_raw.txt
+creat.md
+patch.md
