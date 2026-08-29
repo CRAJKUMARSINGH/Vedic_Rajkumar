@@ -21,6 +21,9 @@ export type NavLink = {
   label: string;
   labelHi: string;
   badge?: string;
+  group?: string;
+  isSectionHeader?: boolean;
+  isCoreFeature?: boolean;
 };
 
 export type FeatureEntry = {
@@ -37,6 +40,7 @@ export type FeatureEntry = {
   showInDesktop?: boolean;
   showInMobileSheet?: boolean;
   showInBottomBar?: boolean;
+  isCoreFeature?: boolean;
 };
 
 export const FEATURE_CATEGORIES: {
@@ -114,6 +118,7 @@ export const FEATURE_CATALOG: FeatureEntry[] = [
     icon: '🌟',
     category: 'foundation',
     showInBottomBar: true,
+    isCoreFeature: true,
   },
   {
     path: '/divisional-charts',
@@ -171,7 +176,6 @@ export const FEATURE_CATALOG: FeatureEntry[] = [
     descriptionHi: 'विम्शोत्तरी दशा अवधि और भविष्यवाणी',
     icon: '🕒',
     category: 'timing',
-    showInBottomBar: true,
   },
   {
     path: '/dasha-timeline',
@@ -232,6 +236,8 @@ export const FEATURE_CATALOG: FeatureEntry[] = [
     icon: '📅',
     category: 'daily-muhurat',
     isNew: true,
+    showInBottomBar: true,
+    isCoreFeature: true,
   },
   {
     path: '/muhurat',
@@ -260,6 +266,17 @@ export const FEATURE_CATALOG: FeatureEntry[] = [
     icon: '💒',
     category: 'daily-muhurat',
     badge: 'New',
+    isNew: true,
+  },
+  {
+    path: '/priyansh-joining-muhurat',
+    label: 'Priyansh Joining Muhurat',
+    labelHi: 'प्रियांश योगदान मुहूर्त',
+    description: 'Priyansh S.C. Miami USA job joining muhurat + Ganesha motif PDF',
+    descriptionHi: 'प्रियांश एस.सी. मियामी यूएसए नौकरी योगदान मुहूर्त + गणेश मोटिफ PDF',
+    icon: '🌟',
+    category: 'daily-muhurat',
+    badge: 'Special Report',
     isNew: true,
   },
   {
@@ -292,6 +309,8 @@ export const FEATURE_CATALOG: FeatureEntry[] = [
     descriptionHi: 'पूर्ण 36-बिंदु विवाह मिलान',
     icon: '👫',
     category: 'marriage',
+    showInBottomBar: true,
+    isCoreFeature: true,
   },
   {
     path: '/enhanced-matchmaking',
@@ -609,6 +628,19 @@ export const FEATURE_CATALOG: FeatureEntry[] = [
 
   // ── AI & Prashna ──
   {
+    path: '/prashna',
+    label: 'Prashna',
+    labelHi: 'प्रश्न',
+    description: 'Horary astrology and AI-powered Prashna engine',
+    descriptionHi: 'घोर ज्योतिष और AI संचालित प्रश्न इंजन',
+    icon: '🔮',
+    category: 'ai-prashna',
+    badge: 'AI',
+    isNew: true,
+    showInBottomBar: true,
+    isCoreFeature: true,
+  },
+  {
     path: '/prashna-ai',
     label: 'Prashna AI',
     labelHi: 'प्रश्न AI',
@@ -618,7 +650,6 @@ export const FEATURE_CATALOG: FeatureEntry[] = [
     category: 'ai-prashna',
     badge: 'AI',
     isNew: true,
-    showInBottomBar: true,
   },
   {
     path: '/prashna-history',
@@ -720,7 +751,6 @@ export const FEATURE_CATALOG: FeatureEntry[] = [
     descriptionHi: 'आपकी सहेजी कुंडली और रीडिंग',
     icon: '📚',
     category: 'platform',
-    showInBottomBar: true,
   },
   {
     path: '/enterprise',
@@ -767,6 +797,7 @@ export function featureToNavLink(feature: FeatureEntry): NavLink {
     label: feature.label,
     labelHi: feature.labelHi,
     badge: feature.badge,
+    isCoreFeature: feature.isCoreFeature,
   };
 }
 
@@ -775,17 +806,56 @@ function isShown(feature: FeatureEntry, flag: 'showInDesktop' | 'showInMobileShe
   return value === undefined ? true : value;
 }
 
-export const DESKTOP_NAV_LINKS: NavLink[] = FEATURE_CATALOG.filter(f =>
-  isShown(f, 'showInDesktop')
-).map(featureToNavLink);
+const CORE_PATHS = ['/horoscope', '/prashna', '/matchmaking', '/panchang'];
 
-export const MOBILE_SHEET_NAV_LINKS: NavLink[] = FEATURE_CATALOG.filter(f =>
-  isShown(f, 'showInMobileSheet')
-).map(featureToNavLink);
+function isCore(feature: FeatureEntry): boolean {
+  return feature.isCoreFeature === true;
+}
 
-export const BOTTOM_BAR_NAV_LINKS: NavLink[] = FEATURE_CATALOG.filter(f => f.showInBottomBar).map(
-  featureToNavLink
-);
+const allDesktopFeatures = FEATURE_CATALOG.filter(f => isShown(f, 'showInDesktop'));
+const coreDesktopFeatures = allDesktopFeatures.filter(f => isCore(f) || f.path === '/');
+const otherDesktopFeatures = allDesktopFeatures.filter(f => !isCore(f) && f.path !== '/');
+
+export const DESKTOP_NAV_LINKS: NavLink[] = [
+  ...coreDesktopFeatures.map(featureToNavLink),
+  {
+    href: '',
+    label: 'More',
+    labelHi: 'अधिक',
+    group: 'more',
+    isSectionHeader: true,
+  },
+  ...otherDesktopFeatures.map(f => ({ ...featureToNavLink(f), group: 'more' })),
+];
+
+const allMobileFeatures = FEATURE_CATALOG.filter(f => isShown(f, 'showInMobileSheet'));
+const coreMobileFeatures = allMobileFeatures.filter(f => isCore(f) || f.path === '/');
+const otherMobileFeatures = allMobileFeatures.filter(f => !isCore(f) && f.path !== '/');
+
+export const MOBILE_SHEET_NAV_LINKS: NavLink[] = [
+  {
+    href: '',
+    label: 'Core Tools',
+    labelHi: 'मुख्य टूल्स',
+    group: 'core',
+    isSectionHeader: true,
+  },
+  ...coreMobileFeatures.map(f => ({ ...featureToNavLink(f), group: 'core' })),
+  {
+    href: '',
+    label: 'Advanced / Coming Soon',
+    labelHi: 'उन्नत / जल्द आ रहा है',
+    group: 'advanced',
+    isSectionHeader: true,
+  },
+  ...otherMobileFeatures.map(f => ({ ...featureToNavLink(f), group: 'advanced' })),
+];
+
+const BOTTOM_BAR_ORDER = ['/', '/horoscope', '/prashna', '/matchmaking', '/panchang'];
+export const BOTTOM_BAR_NAV_LINKS: NavLink[] = BOTTOM_BAR_ORDER.map(path => {
+  const feature = FEATURE_CATALOG.find(f => f.path === path);
+  return feature ? featureToNavLink(feature) : null;
+}).filter((x): x is NavLink => x !== null);
 
 /** Category labels for All Features page filter tabs */
 export const ALL_FEATURES_CATEGORY_TABS = [

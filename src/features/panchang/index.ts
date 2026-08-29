@@ -1,8 +1,30 @@
 /**
- * Panchang + Muhurta feature barrel.
- *
- * Public surface of the panchang feature module.
+ * Panchang + Muhurta feature — public barrel.
  * Import from '@/features/panchang' instead of reaching into subdirectories.
  */
 
-export type { PanchangData, MuhurtaResult, MuhurtaQuery } from './types';
+export type {
+  TithiName,
+  Paksha,
+  Tithi,
+  VaraName,
+  Vara,
+  NakshatraName,
+  NakshatraInfo,
+  YogaName,
+  Yoga,
+  KaranaName,
+  Karana,
+  InauspiciousPeriod,
+  AuspiciousPeriod,
+  AstronomicalEvents,
+  PanchangData,
+  MuhurtaPurpose,
+  MuhurtaQuery,
+  MuhurtaQuality,
+  MuhurtaWindow,
+  InauspiciousWindow,
+  MuhurtaResult,
+} from './types';
+
+export { getPanchang, getMuhurta } from './stubs';

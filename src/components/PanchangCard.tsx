@@ -28,7 +28,8 @@ import {
   Sunset,
   Timer,
   Gift,
-  Zap
+  Zap,
+  Download
 } from 'lucide-react';
 
 interface PanchangCardProps {
@@ -47,6 +48,7 @@ const PanchangCard: React.FC<PanchangCardProps> = ({
   className = ''
 }) => {
   const [selectedTab, setSelectedTab] = useState<'panchang' | 'muhurat' | 'festivals'>('panchang');
+  const [downloading, setDownloading] = useState(false);
 
   const isHi = lang === 'hi';
 
@@ -90,22 +92,273 @@ const PanchangCard: React.FC<PanchangCardProps> = ({
     }
   };
 
+  const buildPDFConfig = (): import('@/services/vedicGaneshPDFGenerator').GaneshPDFConfig => {
+    const dateStr = new Date(date).toLocaleDateString(isHi ? 'hi-IN' : 'en-IN', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    const sections: import('@/services/vedicGaneshPDFGenerator').PDFSection[] = [];
+
+    sections.push({
+      icon: '🌙',
+      title: isHi ? 'तिथि (Tithi)' : 'Tithi — Lunar Day',
+      titleHi: isHi ? 'तिथि' : undefined,
+      accentColor: [37, 99, 235],
+      body: [
+        (isHi ? panchangData.tithi.nameHi : panchangData.tithi.name) +
+        ' — ' +
+        (isHi ? `${panchangData.tithi.typeHi} पक्ष` : `${panchangData.tithi.type} paksha`),
+        [
+          (isHi ? 'प्रकृति: ' : 'Nature: ') + (isHi ? panchangData.tithi.natureHi : panchangData.tithi.nature),
+          (isHi ? 'समाप्ति समय: ' : 'End Time: ') + panchangData.tithi.endTime,
+        ],
+      ],
+    });
+
+    sections.push({
+      icon: '⭐',
+      title: isHi ? 'नक्षत्र (Nakshatra)' : 'Nakshatra — Moon Constellation',
+      titleHi: isHi ? 'नक्षत्र' : undefined,
+      accentColor: [124, 58, 237],
+      body: [
+        (isHi ? panchangData.nakshatra.nameHi : panchangData.nakshatra.name) +
+        (isHi ? ` — पाद ${panchangData.nakshatra.pada}` : ` — Pada ${panchangData.nakshatra.pada}`),
+        [
+          (isHi ? 'स्वामी: ' : 'Lord: ') + (isHi ? panchangData.nakshatra.lordHi : panchangData.nakshatra.lord),
+          (isHi ? 'समाप्ति समय: ' : 'End Time: ') + panchangData.nakshatra.endTime,
+        ],
+      ],
+    });
+
+    sections.push({
+      icon: '⚡',
+      title: isHi ? 'योग (Yoga)' : 'Yoga — Sun-Moon Union',
+      titleHi: isHi ? 'योग' : undefined,
+      accentColor: [202, 138, 4],
+      body: [
+        isHi ? panchangData.yoga.nameHi : panchangData.yoga.name,
+        [
+          (isHi ? 'प्रकार: ' : 'Type: ') + (isHi ? panchangData.yoga.typeHi : panchangData.yoga.type),
+          (isHi ? 'प्रभाव: ' : 'Effect: ') + (isHi ? panchangData.yoga.effectsHi[0] : panchangData.yoga.effects[0]),
+          (isHi ? 'समाप्ति समय: ' : 'End Time: ') + panchangData.yoga.endTime,
+        ],
+      ],
+    });
+
+    sections.push({
+      icon: '⏱️',
+      title: isHi ? 'करण (Karana)' : 'Karana — Half Tithi',
+      titleHi: isHi ? 'करण' : undefined,
+      accentColor: [79, 70, 229],
+      body: [
+        isHi ? panchangData.karana.nameHi : panchangData.karana.name,
+        [
+          (isHi ? 'स्वामी: ' : 'Lord: ') + (isHi ? panchangData.karana.lordHi : panchangData.karana.lord),
+          (isHi ? 'प्रकृति: ' : 'Nature: ') + (isHi ? panchangData.karana.natureHi : panchangData.karana.nature),
+          (isHi ? 'समाप्ति समय: ' : 'End Time: ') + panchangData.karana.endTime,
+        ],
+      ],
+    });
+
+    const muhuratBody: (string | string[])[] = [];
+    muhuratBody.push(
+      (isHi ? '🏆 अभिजित मुहूर्त: ' : '🏆 Abhijit Muhurat: ') +
+      `${panchangData.abhijitMuhurat.start} — ${panchangData.abhijitMuhurat.end}`
+    );
+    if (panchangData.auspiciousTimes.length > 0) {
+      muhuratBody.push(isHi ? '✅ अन्य शुभ समय:' : '✅ Other Auspicious Times:');
+      muhuratBody.push(
+        panchangData.auspiciousTimes.map(
+          (t) =>
+            `${isHi ? t.nameHi : t.name}: ${t.startTime} — ${t.endTime} (${t.duration})`
+        )
+      );
+    }
+    muhuratBody.push(
+      (isHi ? '🔴 राहु काल: ' : '🔴 Rahu Kaal: ') +
+      `${panchangData.rahuKaal.start} — ${panchangData.rahuKaal.end}`
+    );
+    if (panchangData.inauspiciousTimes.length > 0) {
+      muhuratBody.push(isHi ? '⚠️ अन्य अशुभ काल:' : '⚠️ Other Inauspicious Times:');
+      muhuratBody.push(
+        panchangData.inauspiciousTimes.map(
+          (t) =>
+            `${isHi ? t.nameHi : t.name}: ${t.startTime} — ${t.endTime} (${t.duration}) — ${isHi ? 'बचें: ' : 'Avoid: '}${(isHi ? t.avoidHi : t.avoid).join(', ')}`
+        )
+      );
+    }
+
+    sections.push({
+      icon: '🕐',
+      title: isHi ? 'मुहूर्त (Muhurat)' : 'Muhurat — Auspicious & Inauspicious Times',
+      titleHi: isHi ? 'मुहूर्त' : undefined,
+      accentColor: [22, 101, 52],
+      body: muhuratBody,
+    });
+
+    if (panchangData.festivals.length > 0) {
+      const festivalBody: (string | string[])[] = [];
+      panchangData.festivals.forEach((festival, idx) => {
+        festivalBody.push(
+          `🎊 ${idx + 1}. ${isHi ? festival.nameHi : festival.name} (${isHi ? festival.typeHi : festival.type})`
+        );
+        festivalBody.push([
+          (isHi ? 'विवरण: ' : 'Description: ') + (isHi ? festival.descriptionHi : festival.description),
+          (isHi ? 'महत्व: ' : 'Significance: ') + (isHi ? festival.significanceHi : festival.significance),
+        ]);
+      });
+      sections.push({
+        icon: '🎁',
+        title: isHi ? 'त्योहार (Festivals)' : 'Festivals & Observances',
+        titleHi: isHi ? 'त्योहार' : undefined,
+        accentColor: [157, 23, 77],
+        body: festivalBody,
+      });
+    }
+
+    const tables: import('@/services/vedicGaneshPDFGenerator').PDFTable[] = [
+      {
+        title: isHi ? 'पंचांग के 5 अंग' : 'Five Limbs of Panchang',
+        titleHi: isHi ? 'पंचांग पांच अंग' : undefined,
+        accentColor: [120, 53, 15],
+        headers: [
+          isHi ? 'अंग' : 'Element',
+          isHi ? 'नाम' : 'Name',
+          isHi ? 'विवरण' : 'Details',
+          isHi ? 'समाप्ति' : 'End Time',
+        ],
+        rows: [
+          [
+            isHi ? 'तिथि' : 'Tithi',
+            isHi ? panchangData.tithi.nameHi : panchangData.tithi.name,
+            (isHi ? `${panchangData.tithi.typeHi} पक्ष • ` : `${panchangData.tithi.type} Paksha • `) +
+            (isHi ? panchangData.tithi.natureHi : panchangData.tithi.nature),
+            panchangData.tithi.endTime,
+          ],
+          [
+            isHi ? 'नक्षत्र' : 'Nakshatra',
+            isHi ? panchangData.nakshatra.nameHi : panchangData.nakshatra.name,
+            (isHi ? `पाद ${panchangData.nakshatra.pada} • ` : `Pada ${panchangData.nakshatra.pada} • `) +
+            (isHi ? `स्वामी: ${panchangData.nakshatra.lordHi}` : `Lord: ${panchangData.nakshatra.lord}`),
+            panchangData.nakshatra.endTime,
+          ],
+          [
+            isHi ? 'योग' : 'Yoga',
+            isHi ? panchangData.yoga.nameHi : panchangData.yoga.name,
+            (isHi ? 'प्रकार: ' : 'Type: ') +
+            (isHi ? panchangData.yoga.typeHi : panchangData.yoga.type),
+            panchangData.yoga.endTime,
+          ],
+          [
+            isHi ? 'करण' : 'Karana',
+            isHi ? panchangData.karana.nameHi : panchangData.karana.name,
+            (isHi ? 'प्रकृति: ' : 'Nature: ') +
+            (isHi ? panchangData.karana.natureHi : panchangData.karana.nature),
+            panchangData.karana.endTime,
+          ],
+          [
+            isHi ? 'वार' : 'Vara (Day)',
+            new Date(date).toLocaleDateString(isHi ? 'hi-IN' : 'en-IN', { weekday: 'long' }),
+            isHi ? 'खगोलीय सूर्योदय/सूर्यास्त' : 'Astronomical Sunrise/Sunset',
+            `${panchangData.sunrise} / ${panchangData.sunset}`,
+          ],
+        ],
+      },
+    ];
+
+    return {
+      reportTitle: isHi ? 'दैनिक पंचांग रिपोर्ट' : 'Daily Panchang Report',
+      reportTitleHi: isHi ? 'आज का पंचांग' : undefined,
+      subtitle: dateStr,
+      subtitleHi: undefined,
+      theme: 'premium',
+      filename: `PANCHANG_REPORT_${date}.pdf`,
+      footerBlessing:
+        '॥ श्री गणेशाय नमः ॐ वक्रतुण्ड महाकाय सूर्यकोटि समप्रभः। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥',
+      subjectInfo: [
+        { label: isHi ? 'दिनांक / Date' : 'Date', value: dateStr },
+        {
+          label: isHi ? 'स्थान / Location' : 'Location',
+          value: isHi
+            ? `अक्षांश: ${latitude.toFixed(4)}, देशांतर: ${longitude.toFixed(4)}`
+            : `Lat: ${latitude.toFixed(4)}, Lng: ${longitude.toFixed(4)}`,
+        },
+        {
+          label: isHi ? 'नक्षत्र / Coordinates' : 'Coordinates',
+          value: `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`,
+        },
+        {
+          label: isHi ? 'सूर्योदय / Sunrise' : 'Sunrise',
+          value: panchangData.sunrise,
+        },
+        {
+          label: isHi ? 'सूर्यास्त / Sunset' : 'Sunset',
+          value: panchangData.sunset,
+        },
+        {
+          label: isHi ? 'चंद्रोदय / Moonrise' : 'Moonrise',
+          value: panchangData.moonrise || '—',
+        },
+        {
+          label: isHi ? 'चंद्रास्त / Moonset' : 'Moonset',
+          value: panchangData.moonset || '—',
+        },
+        {
+          label: isHi ? 'रिपोर्ट दिनांक / Generated' : 'Generated',
+          value: new Date().toISOString().slice(0, 10),
+        },
+      ],
+      sections,
+      tables,
+    };
+  };
+
+  const handleDownloadPDF = async () => {
+    setDownloading(true);
+    try {
+      const { generateVedicGaneshPDF } = await import('@/services/vedicGaneshPDFGenerator');
+      generateVedicGaneshPDF(buildPDFConfig());
+    } catch (err) {
+      console.error('PDF download failed:', err);
+    } finally {
+      setTimeout(() => setDownloading(false), 1500);
+    }
+  };
+
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle className={`text-lg font-semibold flex items-center gap-2 ${isHi ? 'font-hindi' : ''}`}>
-          <Calendar className="h-5 w-5" />
-          {isHi ? 'आज का पंचांग' : 'Today\'s Panchang'}
-        </CardTitle>
-        
-        {/* Date and Location */}
-        <div className="text-sm text-muted-foreground">
-          <p>{new Date(date).toLocaleDateString(isHi ? 'hi-IN' : 'en-IN', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-          })}</p>
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <CardTitle className={`text-lg font-semibold flex items-center gap-2 ${isHi ? 'font-hindi' : ''}`}>
+              <Calendar className="h-5 w-5" />
+              {isHi ? 'आज का पंचांग' : 'Today\'s Panchang'}
+            </CardTitle>
+            
+            {/* Date and Location */}
+            <div className="text-sm text-muted-foreground mt-1">
+              <p>{new Date(date).toLocaleDateString(isHi ? 'hi-IN' : 'en-IN', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              })}</p>
+            </div>
+          </div>
+          <Button
+            onClick={handleDownloadPDF}
+            disabled={downloading}
+            size="sm"
+            className="flex-shrink-0 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-medium shadow-sm"
+          >
+            <Download className="mr-2 h-4 w-4" />
+            {downloading
+              ? (isHi ? 'PDF बन रहा है…' : 'Generating PDF…')
+              : (isHi ? 'PDF डाउनलोड करें' : 'Download PDF')}
+          </Button>
         </div>
       </CardHeader>
 

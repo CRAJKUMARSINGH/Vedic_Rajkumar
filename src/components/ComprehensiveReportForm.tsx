@@ -30,6 +30,7 @@ export const ComprehensiveReportForm: React.FC<ComprehensiveReportProps> = ({ is
   const [ketuHouse, setKetuHouse] = useState('');
   const [reportType, setReportType] = useState<ReportType>('all');
   const [loading, setLoading] = useState(false);
+  const [downloading, setDownloading] = useState(false);
   
   const [reports, setReports] = useState<{
     manglik?: ManglikReport;
@@ -92,6 +93,240 @@ export const ComprehensiveReportForm: React.FC<ComprehensiveReportProps> = ({ is
 
   const getStatusColor = (hasCondition: boolean) => {
     return hasCondition ? "text-red-600" : "text-green-600";
+  };
+
+  const buildGaneshPDFConfig = (): import('@/services/vedicGaneshPDFGenerator').GaneshPDFConfig => {
+    const subjectInfo: { label: string; value: string }[] = [
+      { label: 'Name / नाम', value: name },
+      { label: 'DOB / जन्म तिथि', value: new Date(birthDate).toLocaleDateString() },
+      { label: 'Moon Sign / चंद्र राशि', value: moonSign },
+      { label: 'Ascendant / लग्न', value: ascendant },
+      { label: 'Report Type / रिपोर्ट प्रकार', value: reportType === 'all' ? 'All Reports' : reportType },
+      { label: 'Generated On / जेनरेट किया गया', value: new Date().toLocaleDateString() },
+    ];
+
+    const sections: import('@/services/vedicGaneshPDFGenerator').PDFSection[] = [];
+    const tables: import('@/services/vedicGaneshPDFGenerator').PDFTable[] = [];
+
+    const overviewBody: (string | string[])[] = [];
+    if (reports.manglik) {
+      overviewBody.push(`🔥 MANGLIK YOGA: ${reports.manglik.manglikType} (${reports.manglik.manglikTypeHi})`);
+      overviewBody.push([
+        `Intensity / तीव्रता: ${reports.manglik.intensity}/10`,
+        `Marriage Compatibility / विवाह संगतता: ${reports.manglik.marriageCompatibility}/10`,
+        `Affected Houses / प्रभावित भाव: ${reports.manglik.affectedHouses.join(', ') || 'None'}`,
+        `Advice / सलाह: ${isHindi ? reports.manglik.overallAdviceHi : reports.manglik.overallAdvice}`,
+      ]);
+    }
+    if (reports.sadesati) {
+      overviewBody.push(`🪐 SADE SATI: ${reports.sadesati.sadeSatiPhase} (${reports.sadesati.sadeSatiPhaseHi})`);
+      overviewBody.push([
+        `Currently Active / वर्तमान में सक्रिय: ${reports.sadesati.isCurrentlyInSadeSati ? 'Yes' : 'No'}`,
+        `Overall Impact / कुल प्रभाव: ${reports.sadesati.overallImpact}/10`,
+        `Saturn Position / शनि स्थिति: ${reports.sadesati.saturnPosition}`,
+        `Success Timeline / सफलता समयरेखा: ${isHindi ? reports.sadesati.successTimelineHi : reports.sadesati.successTimeline}`,
+      ]);
+    }
+    if (reports.kaalsarp) {
+      overviewBody.push(`🐍 KAAL SARP YOGA: ${reports.kaalsarp.yogaType} (${reports.kaalsarp.yogaTypeHi})`);
+      overviewBody.push([
+        `Intensity / तीव्रता: ${reports.kaalsarp.intensity} (${reports.kaalsarp.intensityHi})`,
+        `Overall Impact / कुल प्रभाव: ${reports.kaalsarp.overallImpact}/10`,
+        `Rahu Position / राहु स्थिति: ${reports.kaalsarp.rahuPosition}`,
+        `Ketu Position / केतु स्थिति: ${reports.kaalsarp.ketuPosition}`,
+      ]);
+    }
+    if (reports.career) {
+      overviewBody.push(`💼 CAREER ANALYSIS / करियर विश्लेषण`);
+      overviewBody.push([
+        `Career Potential / करियर क्षमता: ${reports.career.careerPotential}/10`,
+        `Business Potential / व्यवसाय क्षमता: ${reports.career.businessPotential}/10`,
+        `Job Potential / नौकरी क्षमता: ${reports.career.jobPotential}/10`,
+        `Success Age / सफलता आयु: ${isHindi ? reports.career.successAgeHi : reports.career.successAge}`,
+      ]);
+    }
+    if (overviewBody.length > 0) {
+      sections.push({
+        icon: '🎯',
+        title: 'OVERVIEW / सारांश',
+        titleHi: 'व्यापक विश्लेषण सारांश',
+        accentColor: [120, 53, 15],
+        body: overviewBody,
+      });
+    }
+
+    const remediesBody: (string | string[])[] = [];
+    if (reports.manglik && reports.manglik.remedies && reports.manglik.remedies[0]) {
+      remediesBody.push('✨ Manglik Remedies / मांगलिक उपाय');
+      remediesBody.push((isHindi ? reports.manglik.remediesHi : reports.manglik.remedies[0]) || []);
+    }
+    if (reports.sadesati && reports.sadesati.remedies) {
+      remediesBody.push('🪐 Sade Sati Remedies / साढ़े साती उपाय');
+      remediesBody.push(isHindi ? reports.sadesati.remediesHi : reports.sadesati.remedies);
+    }
+    if (reports.kaalsarp && reports.kaalsarp.generalRemedies) {
+      remediesBody.push('🐍 Kaal Sarp Remedies / काल सर्प उपाय');
+      remediesBody.push(isHindi ? reports.kaalsarp.generalRemediesHi : reports.kaalsarp.generalRemedies);
+    }
+    if (reports.career && reports.career.remedies) {
+      remediesBody.push('💼 Career Remedies / करियर उपाय');
+      remediesBody.push(isHindi ? reports.career.remediesHi : reports.career.remedies);
+    }
+    if (remediesBody.length > 0) {
+      sections.push({
+        icon: '🛡️',
+        title: 'REMEDIES / उपाय',
+        titleHi: 'दोष निवारण उपाय',
+        accentColor: [22, 101, 52],
+        body: remediesBody,
+      });
+    }
+
+    const timingBody: (string | string[])[] = [];
+    if (reports.sadesati && reports.sadesati.peakPeriods) {
+      timingBody.push('🪐 Sade Sati Peak Periods / साढ़े साती शिखर अवधि');
+      timingBody.push(isHindi ? reports.sadesati.peakPeriodsHi : reports.sadesati.peakPeriods);
+    }
+    if (reports.career && reports.career.favorablePeriods) {
+      timingBody.push('💼 Career Favorable Periods / करियर अनुकूल अवधि');
+      timingBody.push(isHindi ? reports.career.favorablePeriodsHi : reports.career.favorablePeriods);
+    }
+    if (timingBody.length > 0) {
+      sections.push({
+        icon: '⏰',
+        title: 'TIMING / समय',
+        titleHi: 'शुभ समय और अवधियां',
+        accentColor: [30, 64, 175],
+        body: timingBody,
+      });
+    }
+
+    const relationshipsBody: (string | string[])[] = [];
+    if (reports.manglik) {
+      const compScore = reports.manglik.marriageCompatibility;
+      const rating = compScore >= 8 ? '⭐⭐⭐⭐⭐ Excellent / उत्कृष्ट' : compScore >= 6 ? '⭐⭐⭐⭐ Good / अच्छा' : '⭐⭐⭐ Caution / सावधानी';
+      relationshipsBody.push(`💖 Marriage Compatibility / विवाह संगतता: ${compScore}/10 — ${rating}`);
+      if (reports.manglik.cancellationConditions && reports.manglik.cancellationConditions.length > 0) {
+        relationshipsBody.push('Cancellation Conditions / रद्दीकरण शर्तें:');
+        relationshipsBody.push(isHindi ? reports.manglik.cancellationConditionsHi : reports.manglik.cancellationConditions);
+      }
+      if (reports.manglik.effects) {
+        const eff = reports.manglik.effects as any;
+        if (eff.positive) relationshipsBody.push('Positive Effects / सकारात्मक प्रभाव:', eff.positive);
+        if (eff.negative) relationshipsBody.push('Negative Effects / नकारात्मक प्रभाव:', eff.negative);
+      }
+    }
+    if (relationshipsBody.length > 0) {
+      sections.push({
+        icon: '❤️',
+        title: 'RELATIONSHIPS / रिश्ते',
+        titleHi: 'विवाह और संबंध विश्लेषण',
+        accentColor: [157, 23, 77],
+        body: relationshipsBody,
+      });
+    }
+
+    const careerBody: (string | string[])[] = [];
+    if (reports.career) {
+      careerBody.push(`📊 Career Potential / करियर क्षमता: ${reports.career.careerPotential}/10`);
+      careerBody.push(`📈 Business vs Job / व्यवसाय बनाम नौकरी: ${isHindi ? reports.career.businessVsJobAdviceHi : reports.career.businessVsJobAdvice}`);
+      careerBody.push(`💰 Financial Growth / वित्तीय विकास: ${isHindi ? reports.career.financialGrowthHi : reports.career.financialGrowth}`);
+      careerBody.push(`🏆 Overall Outlook / कुल दृष्टिकोण: ${isHindi ? reports.career.overallOutlookHi : reports.career.overallOutlook}`);
+      if (reports.career.suitableFields && reports.career.suitableFields.length > 0) {
+        careerBody.push('🎯 Suitable Fields / उपयुक्त क्षेत्र:');
+        careerBody.push(isHindi ? reports.career.suitableFieldsHi : reports.career.suitableFields);
+      }
+      if (reports.career.strengths && reports.career.strengths.length > 0) {
+        careerBody.push('💪 Strengths / शक्तियां:');
+        careerBody.push(isHindi ? reports.career.strengthsHi : reports.career.strengths);
+      }
+      if (reports.career.challenges && reports.career.challenges.length > 0) {
+        careerBody.push('⚠️ Challenges / चुनौतियां:');
+        careerBody.push(isHindi ? reports.career.challengesHi : reports.career.challenges);
+      }
+    }
+    if (careerBody.length > 0) {
+      sections.push({
+        icon: '💼',
+        title: 'CAREER / करियर',
+        titleHi: 'विस्तृत करियर विश्लेषण',
+        accentColor: [8, 47, 73],
+        body: careerBody,
+      });
+    }
+
+    if (reports.career) {
+      tables.push({
+        title: '📊 CAREER POTENTIAL SCORECARD',
+        titleHi: 'करियर स्कोरकार्ड',
+        accentColor: [120, 53, 15],
+        headers: ['Parameter / मापदंड', 'Score / स्कोर', 'Rating / रेटिंग'],
+        rows: [
+          ['Career Potential / करियर क्षमता', `${reports.career.careerPotential}/10`, reports.career.careerPotential >= 8 ? '⭐ Excellent' : reports.career.careerPotential >= 6 ? '✅ Good' : '⚠️ Moderate'],
+          ['Business Potential / व्यवसाय क्षमता', `${reports.career.businessPotential}/10`, reports.career.businessPotential >= 8 ? '⭐ Excellent' : reports.career.businessPotential >= 6 ? '✅ Good' : '⚠️ Moderate'],
+          ['Job Potential / नौकरी क्षमता', `${reports.career.jobPotential}/10`, reports.career.jobPotential >= 8 ? '⭐ Excellent' : reports.career.jobPotential >= 6 ? '✅ Good' : '⚠️ Moderate'],
+          ['Mitigation (if KaalSarp)', reports.kaalsarp ? `${reports.kaalsarp.mitigationPotential}/10` : 'N/A', reports.kaalsarp && reports.kaalsarp.mitigationPotential >= 8 ? '⭐ High' : '✅ Manageable'],
+        ],
+      });
+    }
+
+    if (reports.manglik || reports.sadesati || reports.kaalsarp) {
+      const summaryRows: (string | number)[][] = [];
+      if (reports.manglik) summaryRows.push(['Manglik Yoga / मांगलिक योग', reports.manglik.manglikType, `${reports.manglik.intensity}/10`, reports.manglik.hasManglikYoga ? '🔴 Active' : '✅ None']);
+      if (reports.sadesati) summaryRows.push(['Sade Sati / साढ़े साती', reports.sadesati.sadeSatiPhase, `${reports.sadesati.overallImpact}/10`, reports.sadesati.isCurrentlyInSadeSati ? '🟠 Active' : '✅ Clear']);
+      if (reports.kaalsarp) summaryRows.push(['Kaal Sarp / काल सर्प', reports.kaalsarp.intensity, `${reports.kaalsarp.overallImpact}/10`, reports.kaalsarp.hasKaalSarpYoga ? '🟣 Active' : '✅ None']);
+      if (summaryRows.length > 0) {
+        tables.push({
+          title: '📋 DOSHA SUMMARY TABLE',
+          titleHi: 'दोष सारांश तालिका',
+          accentColor: [153, 27, 27],
+          headers: ['Dosha / दोष', 'Type / प्रकार', 'Impact / प्रभाव', 'Status / स्थिति'],
+          rows: summaryRows,
+        });
+      }
+    }
+
+    if (reports.career && reports.career.gemstones && reports.career.gemstones.length > 0) {
+      const gemstoneRows = reports.career.gemstones.map((g, i) => [
+        (i + 1).toString(),
+        g,
+        (isHindi ? reports.career!.gemstonesHi : reports.career!.gemstones)[i] || g,
+        'Wear as per counsel / परामर्श से धारण करें',
+      ]);
+      tables.push({
+        title: '💎 GEMSTONE GUIDANCE',
+        titleHi: 'रत्न मार्गदर्शन',
+        accentColor: [8, 47, 73],
+        headers: ['#', 'Gemstone / रत्न (EN)', 'रत्न (HI)', 'Advice / सलाह'],
+        rows: gemstoneRows,
+      });
+    }
+
+    return {
+      reportTitle: 'COMPREHENSIVE VEDIC ASTROLOGY REPORT',
+      reportTitleHi: 'व्यापक वैदिक ज्योतिष रिपोर्ट',
+      subtitle: `Generated for ${name} | Vedic Rajkumar Analysis Engine`,
+      subtitleHi: `${name} के लिए जेनरेट किया गया | वैदिक राजकुमार विश्लेषण इंजन`,
+      theme: 'premium',
+      filename: `COMPREHENSIVE_REPORT_${name.replace(/\s+/g, '_').toUpperCase()}_${new Date().toISOString().slice(0, 10)}.pdf`,
+      footerBlessing: '॥ श्री गणेशाय नमः ॐ वक्रतुण्ड महाकाय सूर्यकोटि समप्रभः। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥',
+      subjectInfo,
+      sections,
+      tables,
+    };
+  };
+
+  const handleDownloadPDF = async () => {
+    setDownloading(true);
+    try {
+      const { generateVedicGaneshPDF } = await import('@/services/vedicGaneshPDFGenerator');
+      generateVedicGaneshPDF(buildGaneshPDFConfig());
+    } catch (err) {
+      console.error('PDF download failed:', err);
+      alert(isHindi ? 'PDF डाउनलोड विफल। कंसोल में विवरण देखें।' : 'PDF download failed. Check console for details.');
+    } finally {
+      setTimeout(() => setDownloading(false), 1500);
+    }
   };
 
   if (Object.keys(reports).length > 0) {
@@ -496,7 +731,15 @@ export const ComprehensiveReportForm: React.FC<ComprehensiveReportProps> = ({ is
           </TabsContent>
         </Tabs>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center gap-3">
+          <Button
+            onClick={handleDownloadPDF}
+            disabled={downloading}
+          >
+            {downloading
+              ? (isHindi ? 'PDF बन रहा है...' : 'Generating PDF...')
+              : (isHindi ? '📥 PDF डाउनलोड करें' : '📥 Download PDF')}
+          </Button>
           <Button 
             onClick={() => {
               setReports({});

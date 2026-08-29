@@ -896,3 +896,517 @@ export function exportTransitWithNarrative(
   const fileName = `Transit_Analysis_${data.transitDate}.pdf`;
   doc.save(fileName);
 }
+
+export async function exportGaneshTransitPDF(data: PDFExportData, lang: 'en' | 'hi' = 'en'): Promise<void> {
+  const { generateVedicGaneshPDF } = await import('./vedicGaneshPDFGenerator');
+  const isHi = lang === 'hi';
+
+  const subjectInfo = [
+    { label: isHi ? 'जन्म तिथि' : 'Birth Date', value: data.birthDate },
+    { label: isHi ? 'जन्म समय' : 'Birth Time', value: data.birthTime },
+    { label: isHi ? 'जन्म स्थान' : 'Birth Place', value: data.birthLocation },
+    { label: isHi ? 'चन्द्र राशि' : 'Moon Sign', value: data.moonRashi },
+    { label: isHi ? 'गोचर तिथि' : 'Transit Date', value: data.transitDate },
+    ...(data.latitude && data.longitude ? [
+      { label: isHi ? 'अक्षांश' : 'Latitude', value: data.latitude },
+      { label: isHi ? 'देशांतर' : 'Longitude', value: data.longitude },
+    ] : []),
+  ];
+
+  const scoreColor = data.overallScore >= 5
+    ? (isHi ? 'शुभ (अनुकूल)' : 'Favorable')
+    : data.overallScore >= 3
+    ? (isHi ? 'वेध (मिश्रित)' : 'Vedha (Mixed)')
+    : (isHi ? 'अशुभ (प्रतिकूल)' : 'Unfavorable');
+
+  const overviewBody = isHi
+    ? [
+        `गोचर तिथि ${data.transitDate} के लिए ${data.moonRashi} चन्द्र राशि पर ग्रहों की स्थिति का विश्लेषण।`,
+        [
+          `कुल ग्रह: ${data.results.length}`,
+          `समग्र स्कोर: ${data.overallScore}/9`,
+          `सामग्रिक स्थिति: ${scoreColor}`,
+        ],
+      ]
+    : [
+        `Transit analysis for Moon sign ${data.moonRashi} on ${data.transitDate}, based on Phaladeepika and Brihat Parashara Hora Shastra principles.`,
+        [
+          `Total planets evaluated: ${data.results.length}`,
+          `Overall score: ${data.overallScore}/9`,
+          `Collective status: ${scoreColor}`,
+        ],
+      ];
+
+  const summaryText = isHi
+    ? `${data.overallScore} ग्रह शुभ स्थिति में (बिना वेध)। ${
+        data.overallScore <= 2
+          ? 'सावधानी बरतें, आध्यात्मिक कार्य उपयुक्त।'
+          : data.overallScore <= 5
+          ? 'मिश्रित दिन, संतुलन बनाएं।'
+          : 'अनुकूल दिन, कार्य आगे बढ़ाएं।'
+      }`
+    : `${data.overallScore} planet(s) effectively favorable (without Vedha). ${
+        data.overallScore <= 2
+          ? 'Exercise caution; spiritual activities recommended.'
+          : data.overallScore <= 5
+          ? 'Mixed day; maintain balance.'
+          : 'Favorable day; proceed with plans.'
+      }`;
+
+  const analysisBody = isHi
+    ? [
+        `प्रत्येक ग्रह की स्थिति का मूल (बेस) अनुकूलता तथा वेध (संकट) के आधार पर विश्लेषण किया गया है। वेध सक्रिय होने पर शुभ परिणाम को अवरुद्ध किया जाता है।`,
+        [summaryText],
+      ]
+    : [
+        `Each planet's position is evaluated for base favorability from Moon sign and Vedha (obstruction) status. Active Vedha blocks otherwise favorable results.`,
+        [summaryText],
+      ];
+
+  const narrativeBody = isHi
+    ? [
+        `भगवान गणेश की कृपा से इस गोचर का आपके जीवन पर विस्तृत प्रभाव पड़ेगा। शुभ ग्रहों के स्थान से सफलता मिलेगी जबकि अशुभ ग्रह सावधानी बरतने की सलाह देते हैं।`,
+        [
+          `मन को शांत रखें और श्री गणेश की साधना करें।`,
+          `सत्य और धर्म के मार्ग पर चलें।`,
+          `प्रत्येक कार्य को विधि-विधान से आरम्भ करें।`,
+        ],
+      ]
+    : [
+        `By the grace of Lord Ganesha, this planetary transit will have a broad impact on your life. Favorable planets support success while unfavorable ones advise caution.`,
+        [
+          `Keep the mind calm and meditate on Lord Ganesha.`,
+          `Walk the path of truth and dharma.`,
+          `Begin every task with proper ritual and intention.`,
+        ],
+      ];
+
+  const sections = [
+    {
+      title: isHi ? 'अध्याय 1: विवरण सार' : 'Chapter 1: Overview',
+      titleHi: isHi ? 'अध्याय 1: विवरण सार' : undefined,
+      body: overviewBody,
+      accentColor: [120, 53, 15] as [number, number, number],
+      icon: '📜',
+    },
+    {
+      title: isHi ? 'अध्याय 2: गोचर विश्लेषण' : 'Chapter 2: Transit Analysis',
+      titleHi: isHi ? 'अध्याय 2: गोचर विश्लेषण' : undefined,
+      body: analysisBody,
+      accentColor: [217, 119, 6] as [number, number, number],
+      icon: '🔍',
+    },
+    {
+      title: isHi ? 'अध्याय 3: सार एवं उपदेश' : 'Chapter 3: Narrative & Guidance',
+      titleHi: isHi ? 'अध्याय 3: सार एवं उपदेश' : undefined,
+      body: narrativeBody,
+      accentColor: [154, 52, 18] as [number, number, number],
+      icon: '🙏',
+    },
+  ];
+
+  const tableHeaders = isHi
+    ? ['ग्रह', 'वर्तमान राशि', 'भाव', 'मूल', 'वेध?', 'स्थिति', '+/-', 'अंक', 'मुख्य प्रभाव']
+    : ['Planet', 'Current Sign', 'House', 'Base', 'Vedha?', 'Status', '+/-', 'Rating', 'Key Effect'];
+
+  const tableRows = data.results.map(r => {
+    const planetName = isHi ? r.planet.hi : r.planet.en;
+    const rashiName = isHi ? RASHIS[r.currentRashi].hi : RASHIS[r.currentRashi].en;
+    const baseStatus = r.baseFavorable ? (isHi ? 'शुभ' : 'Fav') : (isHi ? 'अशुभ' : 'Unfav');
+    const vedhaStatus = r.vedhaActive ? (isHi ? 'हाँ' : 'Yes') : (isHi ? 'नहीं' : 'No');
+    const effectiveStatus = r.effectiveStatus === 'favorable'
+      ? (isHi ? 'शुभ ✅' : 'Fav ✅')
+      : r.effectiveStatus === 'mixed'
+      ? (isHi ? 'वेध ⚠️' : 'Vedha ⚠️')
+      : (isHi ? 'अशुभ ❌' : 'Unfav ❌');
+    const score = r.scoreContribution > 0 ? '+1' : '0';
+    const effect = isHi ? r.effectHi : r.effectEn;
+    return [
+      `${r.planet.symbol} ${planetName}`,
+      `${RASHIS[r.currentRashi].symbol} ${rashiName}`,
+      r.houseFromMoon.toString(),
+      baseStatus,
+      vedhaStatus,
+      effectiveStatus,
+      score,
+      `${r.rating}/9`,
+      effect,
+    ];
+  });
+
+  const tables = [{
+    title: isHi ? 'गोचर परिणाम सारणी' : 'Transit Results Table',
+    titleHi: isHi ? 'गोचर परिणाम सारणी' : undefined,
+    headers: tableHeaders,
+    rows: tableRows,
+    accentColor: [120, 53, 15] as [number, number, number],
+  }];
+
+  const filename = `Ganesh_Gochar_Phal_${data.birthDate.replace(/\//g, '-')}_${data.transitDate.replace(/\//g, '-')}.pdf`;
+
+  generateVedicGaneshPDF({
+    reportTitle: isHi ? 'गोचर फल रिपोर्ट' : 'Gochar Phal Report',
+    reportTitleHi: isHi ? 'गोचर फल रिपोर्ट' : undefined,
+    subtitle: isHi
+      ? 'वैदिक गोचर विश्लेषण • फलदीपिका एवं बृहत् पाराशर होरा शास्त्र'
+      : 'Vedic Transit Analysis • Phaladeepika & Brihat Parashara Hora Shastra',
+    subtitleHi: isHi
+      ? 'वैदिक गोचर विश्लेषण • फलदीपिका एवं बृहत् पाराशर होरा शास्त्र'
+      : undefined,
+    subjectInfo,
+    sections,
+    tables,
+    filename,
+    theme: 'premium',
+  });
+}
+
+export async function exportGaneshBrihatKundli(
+  data: BrihatKundliData,
+  template: ReportTemplate = 'standard',
+  lang: 'en' | 'hi' = 'en',
+): Promise<void> {
+  const { generateVedicGaneshPDF } = await import('./vedicGaneshPDFGenerator');
+  const isHi = lang === 'hi';
+
+  const subjectInfo = [
+    { label: isHi ? 'जन्म तिथि' : 'Birth Date', value: data.birthDate },
+    { label: isHi ? 'जन्म समय' : 'Birth Time', value: data.birthTime },
+    { label: isHi ? 'जन्म स्थान' : 'Birth Place', value: data.birthLocation },
+    { label: isHi ? 'अक्षांश' : 'Latitude', value: `${data.latitude}°` },
+    { label: isHi ? 'देशांतर' : 'Longitude', value: `${data.longitude}°` },
+    { label: isHi ? 'लग्न राशि' : 'Ascendant', value: isHi ? data.kundliData.ascendant.ascendant.rashiNameHi : data.kundliData.ascendant.ascendant.rashiName },
+    { label: isHi ? 'चन्द्र राशि' : 'Moon Sign', value: isHi ? data.horoscope.general.moonSignNameHi : data.horoscope.general.moonSignName },
+    { label: isHi ? 'रिपोर्ट स्तर' : 'Report Tier', value: template },
+  ];
+
+  const ascendantText = isHi
+    ? `आपका लग्न ${data.kundliData.ascendant.ascendant.rashiNameHi} राशि में ${data.kundliData.ascendant.ascendant.degrees.toFixed(2)}° पर है। लग्न स्वामी ${data.kundliData.houses[0].lordHi} है।`
+    : `Your ascendant is ${data.kundliData.ascendant.ascendant.rashiName} at ${data.kundliData.ascendant.ascendant.degrees.toFixed(2)}°. Ascendant lord is ${data.kundliData.houses[0].lord}.`;
+
+  const overviewBody = isHi
+    ? [
+        `यह बृहत् कुंडली रिपोर्ट ${template} स्तर पर वैदिक ज्योतिष के सिद्धांतों पर आधारित है। इसमें जन्म विवरण, लग्न विश्लेषण, ग्रह स्थितियां तथा भविष्यवाणियां सम्मिलित हैं।`,
+        [ascendantText],
+      ]
+    : [
+        `This Brihat Kundli report at the ${template} tier is based on Vedic astrology principles. It includes birth details, ascendant analysis, planetary positions, and predictive insights.`,
+        [ascendantText],
+      ];
+
+  const generalPred = isHi ? data.horoscope.general.predictionHi : data.horoscope.general.prediction;
+  const careerPred = isHi ? data.horoscope.career.predictionHi : data.horoscope.career.prediction;
+  const healthPred = isHi ? data.horoscope.health.predictionHi : data.horoscope.health.prediction;
+
+  const analysisBody = isHi
+    ? [
+        `कुंडली विश्लेषण के मुख्य परिणाम निम्नलिखित हैं:`,
+        [
+          `सामान्य: ${generalPred}`,
+          `करियर: ${careerPred}`,
+          `स्वास्थ्य: ${healthPred}`,
+        ],
+      ]
+    : [
+        `Key highlights from the horoscope analysis:`,
+        [
+          `General: ${generalPred}`,
+          `Career: ${careerPred}`,
+          `Health: ${healthPred}`,
+        ],
+      ];
+
+  const sectionAccent = template === 'premium' ? [154, 52, 18] : template === 'basic' ? [153, 27, 27] : [120, 53, 15];
+
+  const sections = [
+    {
+      title: isHi ? 'अध्याय 1: जन्म विवरण एवं सार' : 'Chapter 1: Birth Details & Overview',
+      titleHi: isHi ? 'अध्याय 1: जन्म विवरण एवं सार' : undefined,
+      body: overviewBody,
+      accentColor: sectionAccent as [number, number, number],
+      icon: '📋',
+    },
+    {
+      title: isHi ? 'अध्याय 2: भविष्यवाणी विश्लेषण' : 'Chapter 2: Predictive Analysis',
+      titleHi: isHi ? 'अध्याय 2: भविष्यवाणी विश्लेषण' : undefined,
+      body: analysisBody,
+      accentColor: [217, 119, 6] as [number, number, number],
+      icon: '🔮',
+    },
+  ];
+
+  if (template !== 'basic') {
+    const careerBody = isHi
+      ? [
+          `करियर क्षेत्र में ग्रहों की स्थिति अनुसार आपकी प्रगति निर्धारित होती है। लग्न स्वामी तथा दशाविध भावों का ध्यान रखते हुए निर्णय लें।`,
+          [`नियमित रूप से गणेश साधना करें।`, `नए प्रस्तावों का विश्लेषण पूर्वक स्वीकार करें।`],
+        ]
+      : [
+          `Your career progression is governed by planetary dispositions. Take decisions considering the ascendant lord and significations of the 10th house.`,
+          [`Practice regular Ganesh sadhana.`, `Evaluate new proposals thoroughly before accepting.`],
+        ];
+    const healthBody = isHi
+      ? [
+          `स्वास्थ्य के लिए लग्न, छठे भाव तथा उनके स्वामियों की स्थिति महत्वपूर्ण है। संतुलित आहार और दिनचर्या अपनाएं।`,
+          [`प्रातःकाल सूर्य नमस्कार करें।`, `दही एवं चन्दन का उपयोग करें।`],
+        ]
+      : [
+          `Health depends on the ascendant, 6th house, and their lords. Maintain a balanced diet and disciplined daily routine.`,
+          [`Practice Surya Namaskar in the morning.`, `Use curd and sandalwood as remedies.`],
+        ];
+    sections.push(
+      {
+        title: isHi ? 'अध्याय 3: करियर मार्गदर्शन' : 'Chapter 3: Career Guidance',
+        titleHi: isHi ? 'अध्याय 3: करियर मार्गदर्शन' : undefined,
+        body: careerBody,
+        accentColor: [120, 53, 15] as [number, number, number],
+        icon: '💼',
+      },
+      {
+        title: isHi ? 'अध्याय 4: स्वास्थ्य सलाह' : 'Chapter 4: Health Advice',
+        titleHi: isHi ? 'अध्याय 4: स्वास्थ्य सलाह' : undefined,
+        body: healthBody,
+        accentColor: [154, 52, 18] as [number, number, number],
+        icon: '🌿',
+      }
+    );
+  }
+
+  if (template === 'premium') {
+    const remediesBody = isHi
+      ? [
+          `शुभ परिणाम हेतु निम्नलिखित उपाय अपनाएं:`,
+          [`बुधवार को दूर्वा अर्पित करें।`, `गणेश चतुर्थी पर विशेष पूजा करें।`, `मोदक का भोग लगाएं।`],
+        ]
+      : [
+          `For favorable results, adopt the following remedies:`,
+          [`Offer durva grass on Wednesdays.`, `Perform special worship on Ganesh Chaturthi.`, `Offer modak sweets as prasad.`],
+        ];
+    sections.push({
+      title: isHi ? 'अध्याय 5: उपाय एवं साधना' : 'Chapter 5: Remedies & Sadhana',
+      titleHi: isHi ? 'अध्याय 5: उपाय एवं साधना' : undefined,
+      body: remediesBody,
+      accentColor: [153, 27, 27] as [number, number, number],
+      icon: '🕉️',
+    });
+  }
+
+  const planetHeaders = isHi
+    ? ['ग्रह', 'राशि', 'अंश', 'भाव', 'गुणवत्ता', 'शक्ति']
+    : ['Planet', 'Sign', 'Degrees', 'House', 'Dignity', 'Strength'];
+
+  const planetRows = data.kundliData.planets.map(planet => {
+    const dignity = data.kundliData.dignityData.find(d => d.planet === planet.name);
+    return [
+      planet.name,
+      isHi ? planet.rashiNameHi : planet.rashiName,
+      `${planet.degrees.toFixed(2)}°`,
+      planet.house.toString(),
+      dignity ? (isHi ? dignity.descriptionHi : dignity.description) : (isHi ? 'तटस्थ' : 'Neutral'),
+      dignity ? `${dignity.strength}%` : '50%',
+    ];
+  });
+
+  const houseHeaders = isHi
+    ? ['भाव', 'राशि', 'स्वामी', 'ग्रह']
+    : ['House', 'Sign', 'Lord', 'Planets'];
+
+  const houseRows = data.kundliData.houses.map(house => [
+    house.houseNumber.toString(),
+    isHi ? house.rashiNameHi : house.rashiName,
+    isHi ? house.lordHi : house.lord,
+    house.planets.map(p => p.name).join(', ') || (isHi ? 'कोई नहीं' : 'None'),
+  ]);
+
+  const tables = [
+    {
+      title: isHi ? 'ग्रह स्थितियां' : 'Planetary Positions',
+      titleHi: isHi ? 'ग्रह स्थितियां' : undefined,
+      headers: planetHeaders,
+      rows: planetRows,
+      accentColor: [120, 53, 15] as [number, number, number],
+    },
+    {
+      title: isHi ? 'भाव विवरण' : 'Houses Details',
+      titleHi: isHi ? 'भाव विवरण' : undefined,
+      headers: houseHeaders,
+      rows: houseRows,
+      accentColor: [217, 119, 6] as [number, number, number],
+    },
+  ];
+
+  const reportTitleMap: Record<ReportTemplate, string> = {
+    basic: isHi ? 'बेसिक बृहत् कुंडली' : 'Basic Brihat Kundli',
+    standard: isHi ? 'मानक बृहत् कुंडली' : 'Standard Brihat Kundli',
+    premium: isHi ? 'प्रीमियम बृहत् कुंडली' : 'Premium Brihat Kundli',
+  };
+
+  const themeMap: Record<ReportTemplate, 'classic' | 'premium' | 'royal'> = {
+    basic: 'classic',
+    standard: 'premium',
+    premium: 'royal',
+  };
+
+  const filename = `Ganesh_Brihat_Kundli_${template}_${data.birthDate.replace(/\//g, '-')}.pdf`;
+
+  generateVedicGaneshPDF({
+    reportTitle: reportTitleMap[template],
+    reportTitleHi: isHi ? reportTitleMap[template] : undefined,
+    subtitle: isHi
+      ? 'संपूर्ण वैदिक ज्योतिष विश्लेषण • बृहत् पाराशर होरा शास्त्र'
+      : 'Complete Vedic Astrology Analysis • Brihat Parashara Hora Shastra',
+    subtitleHi: isHi
+      ? 'संपूर्ण वैदिक ज्योतिष विश्लेषण • बृहत् पाराशर होरा शास्त्र'
+      : undefined,
+    subjectInfo,
+    sections,
+    tables,
+    filename,
+    theme: themeMap[template],
+  });
+}
+
+export async function exportGaneshTransitWithNarrative(
+  data: TransitNarrativePDFData,
+  lang: 'en' | 'hi' = 'en',
+): Promise<void> {
+  const { generateVedicGaneshPDF } = await import('./vedicGaneshPDFGenerator');
+  const isHi = lang === 'hi';
+
+  const subjectInfo = [
+    { label: isHi ? 'जन्म तिथि' : 'Birth Date', value: data.birthDate },
+    { label: isHi ? 'जन्म समय' : 'Birth Time', value: data.birthTime },
+    { label: isHi ? 'जन्म स्थान' : 'Birth Place', value: data.birthLocation },
+    { label: isHi ? 'चन्द्र राशि' : 'Moon Sign', value: data.moonRashi },
+    { label: isHi ? 'गोचर तिथि' : 'Transit Date', value: data.transitDate },
+    ...(data.latitude && data.longitude ? [
+      { label: isHi ? 'अक्षांश' : 'Latitude', value: data.latitude },
+      { label: isHi ? 'देशांतर' : 'Longitude', value: data.longitude },
+    ] : []),
+    { label: isHi ? 'अयनांश' : 'Ayanamsa', value: data.ayanamsa ?? 'Lahiri' },
+    { label: isHi ? 'इंजन' : 'Engine', value: data.ephemerisMode ?? 'SwissEph' },
+  ];
+
+  const overviewBody = isHi
+    ? [
+        `गोचर विश्लेषण रिपोर्ट: चन्द्र राशि ${data.moonRashi} पर गोचर तिथि ${data.transitDate} के ग्रहों का विस्तृत विश्लेषण। समग्र स्कोर ${data.overallScore}/9 है।`,
+        [
+          `अयनांश पद्धति: ${data.ayanamsa ?? 'Lahiri'}`,
+          `एफेमेरिस इंजन: ${data.ephemerisMode ?? 'SwissEph'}`,
+          `उत्पन्न तिथि: ${new Date().toLocaleString(isHi ? 'hi-IN' : 'en-IN')}`,
+        ],
+      ]
+    : [
+        `Transit analysis report: detailed planetary evaluation for Moon sign ${data.moonRashi} on ${data.transitDate}. Overall score is ${data.overallScore}/9.`,
+        [
+          `Ayanamsa: ${data.ayanamsa ?? 'Lahiri'}`,
+          `Ephemeris engine: ${data.ephemerisMode ?? 'SwissEph'}`,
+          `Generated: ${new Date().toLocaleString('en-IN')}`,
+        ],
+      ];
+
+  const summaryText = isHi
+    ? `${data.overallScore} ग्रह प्रभावी रूप से शुभ हैं (बिना वेध)। ${
+        data.overallScore <= 2 ? 'सावधानी बरतें।' :
+        data.overallScore <= 5 ? 'मिश्रित दिन, संतुलन बनाएं।' : 'अनुकूल दिन, कार्य आगे बढ़ाएं।'
+      }`
+    : `${data.overallScore} planet(s) effectively favorable (without Vedha). ${
+        data.overallScore <= 2 ? 'Exercise caution.' :
+        data.overallScore <= 5 ? 'Mixed day; maintain balance.' : 'Favorable day; proceed with plans.'
+      }`;
+
+  const analysisBody = isHi
+    ? [
+        `नीचे सारणी में प्रत्येक ग्रह का मूल अनुकूलता, वेध की स्थिति तथा प्रभावी परिणाम दिखाया गया है।`,
+        [summaryText],
+      ]
+    : [
+        `The table below lists each planet's base favorability, Vedha obstruction status, and effective outcome.`,
+        [summaryText],
+      ];
+
+  const narrativeBody = [
+    data.narrativeEn,
+    ...(data.narrativeHi ? [data.narrativeHi] : []),
+  ];
+
+  const sections = [
+    {
+      title: isHi ? 'अध्याय 1: रिपोर्ट सार' : 'Chapter 1: Report Overview',
+      titleHi: isHi ? 'अध्याय 1: रिपोर्ट सार' : undefined,
+      body: overviewBody,
+      accentColor: [120, 53, 15] as [number, number, number],
+      icon: '📜',
+    },
+    {
+      title: isHi ? 'अध्याय 2: गोचर परिणाम' : 'Chapter 2: Transit Outcomes',
+      titleHi: isHi ? 'अध्याय 2: गोचर परिणाम' : undefined,
+      body: analysisBody,
+      accentColor: [217, 119, 6] as [number, number, number],
+      icon: '📊',
+    },
+    {
+      title: isHi ? 'अध्याय 3: विस्तृत विवरण' : 'Chapter 3: Narrative Analysis',
+      titleHi: isHi ? 'अध्याय 3: विस्तृत विवरण' : undefined,
+      body: narrativeBody,
+      accentColor: [154, 52, 18] as [number, number, number],
+      icon: '📖',
+    },
+  ];
+
+  const tableHeaders = isHi
+    ? ['ग्रह', 'राशि', 'भाव', 'मूल', 'वेध', 'स्थिति', '+/-', 'मुख्य प्रभाव']
+    : ['Planet', 'Sign', 'House', 'Base', 'Vedha', 'Status', '+/-', 'Key Effect'];
+
+  const tableRows = data.results.map(r => {
+    const planetName = isHi ? r.planet.hi : r.planet.en;
+    const rashiName = isHi ? (RASHIS[r.currentRashi]?.hi ?? '') : (RASHIS[r.currentRashi]?.en ?? '');
+    const rashiSym = RASHIS[r.currentRashi]?.symbol ?? '';
+    const baseStatus = r.baseFavorable ? (isHi ? 'शुभ' : 'Fav') : (isHi ? 'अशुभ' : 'Unfav');
+    const vedhaStatus = r.vedhaActive ? (r.vedhaNote ?? (isHi ? 'हाँ' : 'Yes')) : (isHi ? 'नहीं' : 'No');
+    const effectiveStatus = r.effectiveStatus === 'favorable'
+      ? (isHi ? 'शुभ ✅' : 'Fav ✅')
+      : r.effectiveStatus === 'mixed'
+      ? (isHi ? 'वेध ⚠️' : 'Vedha ⚠️')
+      : (isHi ? 'अशुभ ❌' : 'Unfav ❌');
+    const score = r.scoreContribution > 0 ? '+1' : '0';
+    const effect = isHi ? r.effectHi : r.effectEn;
+    return [
+      `${r.planet.symbol} ${planetName}`,
+      `${rashiSym} ${rashiName}`,
+      String(r.houseFromMoon),
+      baseStatus,
+      vedhaStatus,
+      effectiveStatus,
+      score,
+      effect,
+    ];
+  });
+
+  const tables = [{
+    title: isHi ? 'गोचर विश्लेषण सारणी' : 'Transit Analysis Table',
+    titleHi: isHi ? 'गोचर विश्लेषण सारणी' : undefined,
+    headers: tableHeaders,
+    rows: tableRows,
+    accentColor: [120, 53, 15] as [number, number, number],
+  }];
+
+  const filename = `Ganesh_Transit_Narrative_${data.transitDate.replace(/\//g, '-')}.pdf`;
+
+  generateVedicGaneshPDF({
+    reportTitle: isHi ? 'गोचर विश्लेषण रिपोर्ट' : 'Transit Analysis Report',
+    reportTitleHi: isHi ? 'गोचर विश्लेषण रिपोर्ट' : undefined,
+    subtitle: isHi
+      ? 'द्विभाषी विवरण सहित वैदिक गोचर विश्लेषण'
+      : 'Vedic Transit Analysis with Bilingual Narrative',
+    subtitleHi: isHi
+      ? 'द्विभाषी विवरण सहित वैदिक गोचर विश्लेषण'
+      : undefined,
+    subjectInfo,
+    sections,
+    tables,
+    footerBlessing: `॥ श्री गणेशाय नमः ॐ वक्रतुण्ड महाकाय सूर्यकोटि समप्रभः। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥ ॥ Ayanamsa: ${data.ayanamsa ?? 'Lahiri'} | Engine: ${data.ephemerisMode ?? 'SwissEph'} ॥`,
+    filename,
+    theme: 'premium',
+  });
+}

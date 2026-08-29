@@ -25,69 +25,54 @@ const FeedbackEmailWidget = lazy(() =>
   import('@/components/FeedbackEmailWidget').then(m => ({ default: m.FeedbackEmailWidget }))
 );
 
+/**
+ * CORE FEATURES — the four active features in the current release.
+ * All other features are Coming Soon (see /features for the roadmap).
+ * Do not add features here that are not yet working end-to-end.
+ */
 const FEATURES = [
   {
     icon: '🌟',
-    title: 'Personalized Kundli & Dasha',
-    titleHi: 'व्यक्तिगत कुंडली और दशा',
-    href: '/app?tab=kundli',
-    desc: 'Birth chart analysis, current Mahadasha, remedies, and predictions.',
+    title: 'Kundli — Birth Chart',
+    titleHi: 'कुंडली — जन्म कुंडली',
+    href: '/horoscope',
+    badge: null,
+    desc: 'Accurate Vedic birth chart with Lahiri ayanamsa, 9-planet positions, 12-house analysis, Vimshottari Dasha sequence, and Ascendant-based whole-sign houses.',
+    status: 'active',
   },
   {
     icon: '🔮',
-    title: 'Prashna / Ask AI',
-    titleHi: 'प्रश्न / AI ज्योतिष',
-    href: '/question',
-    desc: 'Ask any life question — get Vedic analysis with yes/no verdict and remedies.',
+    title: 'Prashna — Ask a Question',
+    titleHi: 'प्रश्न — प्रश्न कुंडली',
+    href: '/prashna',
+    badge: null,
+    desc: 'Vedic horary astrology: cast a chart for the moment your question arises. Get a clear yes/no/maybe verdict with significators, timing, and remedies.',
+    status: 'active',
   },
   {
     icon: '💑',
-    title: 'Kundli Milan',
+    title: 'Kundli Milan — Matchmaking',
     titleHi: 'कुंडली मिलान',
     href: '/matchmaking',
-    desc: 'Ashtakoot Guna Milan and planetary compatibility for marriage matching.',
-  },
-  {
-    icon: '🪷',
-    title: 'Vedic Remedies',
-    titleHi: 'वैदिक उपाय',
-    href: '/remedies',
-    desc: 'Gemstones, mantras, fasts, and charity based on your chart.',
+    badge: null,
+    desc: 'Complete Ashtakuta analysis (36-point, all 8 kutas), Manglik Dosha check, Navamsha D9 comparison, Dasha period matching, and specific remedies for doshas.',
+    status: 'active',
   },
   {
     icon: '📅',
-    title: 'Muhurta & Panchang',
-    titleHi: 'मुहूर्त और पंचांग',
+    title: 'Panchang & Muhurta',
+    titleHi: 'पंचांग और मुहूर्त',
     href: '/panchang',
-    desc: 'Daily Panchang, Rahu Kaal, Abhijit Muhurta, and electional timing.',
-  },
-  {
-    icon: '🪐',
-    title: 'Gochar & Transits',
-    titleHi: 'गोचर और ट्रांज़िट',
-    href: '/transit-analysis',
-    desc: 'Vedha-corrected transit analysis with bilingual reports.',
-  },
-  {
-    icon: '⚡',
-    title: 'KP & Jaimini',
-    titleHi: 'KP और जैमिनी',
-    href: '/kp-system',
-    desc: 'Krishnamurti Paddhati sub-lords and Jaimini Chara Dasha systems.',
-  },
-  {
-    icon: '💰',
-    title: 'Career & Finance',
-    titleHi: 'करियर और वित्त',
-    href: '/career-astrology',
-    desc: '10th house analysis, Dasamsha chart, and wealth timing windows.',
+    badge: null,
+    desc: 'Daily Panchang with all five limbs (Tithi, Vara, Nakshatra, Yoga, Karana), Rahu Kalam, Abhijit Muhurta, and purpose-specific auspicious window finder.',
+    status: 'active',
   },
 ];
 
 const TRUST_SIGNALS = [
-  '10,000+ Accurate Readings',
-  'Vedic + KP + Jaimini Systems',
-  'Live Panchang & Transits',
+  'Lahiri Ayanamsa — Government of India Standard',
+  'Full 36-Point Ashtakuta Matchmaking',
+  'Daily Panchang with Rahu Kalam & Abhijit',
 ];
 
 const TESTIMONIALS = [
@@ -110,9 +95,9 @@ const TESTIMONIALS = [
 ];
 
 const STATS = [
-  { value: '26+', label: 'Feature Modules' },
+  { value: '4', label: 'Core Features — Active Now' },
   { value: '9', label: 'Grahas Calculated' },
-  { value: '120', label: 'Dasha Cycle Years' },
+  { value: '120', label: 'Vimshottari Dasha Years' },
   { value: 'EN/HI', label: 'Bilingual Engine' },
 ];
 
@@ -170,11 +155,11 @@ export const LandingPageV3 = () => {
             <a href="#features" className="hover:text-amber-400 transition-colors">
               Features
             </a>
-            <Link to="/question" className="hover:text-amber-400 transition-colors">
+            <Link to="/prashna" className="hover:text-amber-400 transition-colors">
               Ask AI
             </Link>
-            <Link to="/app" className="hover:text-amber-400 transition-colors">
-              Dashboard
+            <Link to="/horoscope" className="hover:text-amber-400 transition-colors">
+              Kundli
             </Link>
             <Link to="/pricing" className="hover:text-amber-400 transition-colors">
               Pricing
@@ -186,7 +171,7 @@ export const LandingPageV3 = () => {
             size="sm"
             className="rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold hover:from-amber-400 hover:to-amber-500 shadow-[0_4px_20px_rgba(245,158,11,0.25)]"
           >
-            <Link to="/app?tab=kundli">Get Started Free</Link>
+            <Link to="/horoscope">Get Started Free</Link>
           </Button>
         </div>
       </nav>
@@ -226,7 +211,7 @@ export const LandingPageV3 = () => {
                 size="lg"
                 className="rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold hover:from-amber-400 hover:to-amber-500 h-12 px-8 shadow-[0_5px_25px_rgba(245,158,11,0.3)]"
               >
-                <Link to="/question" className="flex items-center gap-2">
+                <Link to="/prashna" className="flex items-center gap-2">
                   Ask Any Question Astrologically
                   <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -237,7 +222,7 @@ export const LandingPageV3 = () => {
                 variant="outline"
                 className="rounded-full border-slate-700 bg-slate-900/40 text-slate-300 hover:bg-slate-800/80 hover:text-white h-12 px-8"
               >
-                <Link to="/app?tab=kundli">Generate Free Kundli</Link>
+                <Link to="/horoscope">Generate Free Kundli</Link>
               </Button>
             </div>
 
@@ -287,7 +272,7 @@ export const LandingPageV3 = () => {
                   window in Q3 — Venus transiting 7th from Moon.{' '}
                   <span className="text-emerald-400">Remedy:</span> Friday fast + white flowers to
                   Mahalakshmi.{' '}
-                  <Link to="/question" className="text-amber-400 hover:underline ml-1">
+                  <Link to="/prashna" className="text-amber-400 hover:underline ml-1">
                     Try your question →
                   </Link>
                 </div>
@@ -301,11 +286,15 @@ export const LandingPageV3 = () => {
           <div className="text-center mb-14 space-y-3">
             <Badge className="rounded-full border border-purple-500/20 bg-purple-500/5 text-purple-300 text-xs font-semibold px-4 py-1 uppercase">
               <Telescope className="h-3.5 w-3.5 inline mr-1.5" />
-              Everything Vedic Astrology
+              Active Now
             </Badge>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              One Platform. Ancient Precision. AI Intelligence.
+              Four Features. Done Right.
             </h2>
+            <p className="text-slate-400 text-sm max-w-xl mx-auto">
+              We ship fewer features than most astrology apps — because every one of ours is built to actually work.
+              More modules are on the roadmap; these four are ready today.
+            </p>
           </div>
 
           <motion.div
@@ -320,7 +309,7 @@ export const LandingPageV3 = () => {
                 <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-br from-amber-500/15 to-purple-600/0 opacity-0 group-hover:opacity-100 transition-opacity blur-sm" />
                 <Link
                   to={f.href}
-                  className="relative flex flex-col h-full rounded-2xl border border-slate-800/80 bg-[#050512]/60 backdrop-blur-md p-5 hover:border-slate-700 transition-all"
+                  className="relative flex flex-col h-full rounded-2xl border border-slate-800/80 bg-[#050512]/60 backdrop-blur-md p-5 hover:border-amber-500/40 transition-all"
                 >
                   <span className="text-2xl mb-3">{f.icon}</span>
                   <h3 className="text-base font-bold text-white group-hover:text-amber-300 transition-colors">
@@ -328,11 +317,27 @@ export const LandingPageV3 = () => {
                   </h3>
                   <p className="text-[11px] text-slate-500 mt-0.5">{f.titleHi}</p>
                   <p className="text-xs text-slate-400 leading-relaxed mt-2 flex-1">{f.desc}</p>
-                  <ArrowRight className="h-4 w-4 text-slate-600 group-hover:text-amber-400 mt-3 transition-colors" />
+                  <div className="flex items-center justify-between mt-3">
+                    <span className="text-[10px] font-semibold text-emerald-400 uppercase tracking-wider">
+                      ● Live
+                    </span>
+                    <ArrowRight className="h-4 w-4 text-slate-600 group-hover:text-amber-400 transition-colors" />
+                  </div>
                 </Link>
               </motion.div>
             ))}
           </motion.div>
+
+          {/* Coming Soon teaser */}
+          <div className="mt-8 text-center">
+            <p className="text-slate-500 text-sm">
+              Divisional Charts, Transits, Remedies, KP, Jaimini and 15+ more modules —
+              {' '}
+              <Link to="/features" className="text-amber-400 hover:underline">
+                see the full roadmap →
+              </Link>
+            </p>
+          </div>
         </section>
 
         {/* Stats + testimonials */}
@@ -394,7 +399,7 @@ export const LandingPageV3 = () => {
                 <Link to="/pricing">View Pricing</Link>
               </Button>
               <Button asChild variant="outline" className="rounded-full border-slate-700">
-                <Link to="/app">Open Dashboard</Link>
+                <Link to="/horoscope">Open Kundli</Link>
               </Button>
             </div>
           </div>
@@ -431,7 +436,7 @@ export const LandingPageV3 = () => {
               size="lg"
               className="rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-bold h-12 px-10"
             >
-              <Link to="/app?tab=kundli" className="flex items-center gap-2">
+              <Link to="/horoscope" className="flex items-center gap-2">
                 Start Your Vedic Journey — Free
                 <Zap className="h-4 w-4" />
               </Link>
@@ -445,10 +450,10 @@ export const LandingPageV3 = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-500">
           <p>© 2026 Vedic Rajkumar — Lahiri sidereal · BPHS & Phaladeepika</p>
           <div className="flex flex-wrap gap-5 justify-center uppercase tracking-widest text-[10px]">
-            <Link to="/question" className="hover:text-amber-400 transition-colors">
+            <Link to="/prashna" className="hover:text-amber-400 transition-colors">
               Ask AI
             </Link>
-            <Link to="/app?tab=kundli" className="hover:text-amber-400 transition-colors">
+            <Link to="/horoscope" className="hover:text-amber-400 transition-colors">
               Kundli
             </Link>
             <Link to="/panchang" className="hover:text-amber-400 transition-colors">
@@ -460,8 +465,8 @@ export const LandingPageV3 = () => {
             <Link to="/pricing" className="hover:text-amber-400 transition-colors">
               Pricing
             </Link>
-            <Link to="/knowledge" className="hover:text-amber-400 transition-colors">
-              Library
+            <Link to="/features" className="hover:text-amber-400 transition-colors">
+              Roadmap
             </Link>
           </div>
         </div>

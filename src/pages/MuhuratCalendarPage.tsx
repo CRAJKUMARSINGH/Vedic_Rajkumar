@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Calendar, Clock, Sun, Moon, Star, AlertTriangle, CheckCircle, Sparkles } from 'lucide-react';
+import { Calendar, Clock, Sun, Moon, Star, AlertTriangle, CheckCircle, Sparkles, Download } from 'lucide-react';
 import type { EventType } from '@/services/eventMuhuratService';
 
 interface MuhuratDay {
@@ -44,6 +44,20 @@ export default function MuhuratCalendarPage() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedEvent, setSelectedEvent] = useState<EventType>('marriage');
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
+  const [activeTab, setActiveTab] = useState<string>('panchang');
+  const [downloading, setDownloading] = useState(false);
+
+  const handleDownloadPDF = async () => {
+    setDownloading(true);
+    try {
+      const { generateVedicGaneshPDF } = await import('@/services/vedicGaneshPDFGenerator');
+      generateVedicGaneshPDF(buildPDFConfig());
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setTimeout(() => setDownloading(false), 1500);
+    }
+  };
 
   // Generate sample muhurat data for current month
   const monthDays = useMemo(() => {
@@ -73,6 +87,149 @@ export default function MuhuratCalendarPage() {
     d => d.date.toDateString() === selectedDate.toDateString()
   );
 
+  const buildPDFConfig = () => {
+    const eventLabel = EVENT_TYPES.find(e => e.value === selectedEvent)?.label ?? { en: 'Event', hi: 'कार्यक्रम' };
+    const formattedDate = selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    const formattedDateHi = selectedDate.toLocaleDateString('hi-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+    const reportTitle = `${eventLabel.en} Muhurat - ${formattedDate}`;
+    const reportTitleHi = `${eventLabel.hi} मुहूर्त - ${formattedDateHi}`;
+    const subtitle = language === 'en' ? 'Auspicious Timings & Panchang Analysis' : 'शुभ समय और पंचांग विश्लेषण';
+    const subtitleHi = language === 'hi' ? 'शुभ समय और पंचांग विश्लेषण' : 'Auspicious Timings & Panchang Analysis';
+
+    const subjectInfo = [
+      { label: 'Date', value: formattedDate },
+      { label: 'तारीख', value: formattedDateHi },
+      { label: 'Event Type', value: eventLabel.en },
+      { label: 'कार्यक्रम प्रकार', value: eventLabel.hi },
+      { label: 'Language', value: language === 'en' ? 'English' : 'हिंदी' },
+      { label: 'भाषा', value: language === 'en' ? 'English' : 'हिंदी' }
+    ];
+
+    const GREEN: [number, number, number] = [22, 163, 74];
+    const RED: [number, number, number] = [220, 38, 38];
+    const GOLD: [number, number, number] = [202, 138, 4];
+
+    const sections: any[] = [];
+
+    if (selectedDayData) {
+      const qualityLabel = selectedDayData.overallQuality >= 80 ? 'Excellent' :
+        selectedDayData.overallQuality >= 65 ? 'Good' :
+        selectedDayData.overallQuality >= 50 ? 'Average' : 'Poor';
+      const qualityLabelHi = selectedDayData.overallQuality >= 80 ? 'उत्कृष्ट' :
+        selectedDayData.overallQuality >= 65 ? 'अच्छा' :
+        selectedDayData.overallQuality >= 50 ? 'औसत' : 'खराब';
+
+      sections.push({
+        title: 'Selected Day Quality Overview',
+        titleHi: 'चयनित दिन गुणवत्ता अवलोकन',
+        accentColor: GOLD,
+        icon: '⭐',
+        body: [
+          `Overall Quality Score: ${selectedDayData.overallQuality}/100 (${qualityLabel})`,
+          `समग्र गुणवत्ता स्कोर: ${selectedDayData.overallQuality}/100 (${qualityLabelHi})`,
+          [
+            `Tithi: ${selectedDayData.tithi}`,
+            `Nakshatra: ${selectedDayData.nakshatra}`,
+            `Yoga: ${selectedDayData.yoga}`,
+            `Karana: ${selectedDayData.karana}`,
+            `Var (Day): ${selectedDayData.var}`
+          ]
+        ]
+      });
+
+      sections.push({
+        title: 'Panchang Elements',
+        titleHi: 'पंचांग तत्व',
+        accentColor: GOLD,
+        icon: '🌙',
+        body: [
+          [
+            `Tithi (Lunar Day): ${selectedDayData.tithi}`,
+            `Nakshatra (Lunar Mansion): ${selectedDayData.nakshatra}`,
+            `Yoga (Auspicious Union): ${selectedDayData.yoga}`,
+            `Karana (Half Lunar Day): ${selectedDayData.karana}`,
+            `Var (Weekday): ${selectedDayData.var}`
+          ]
+        ]
+      });
+    }
+
+    sections.push({
+      title: 'Auspicious Periods',
+      titleHi: 'शुभ समय',
+      accentColor: GREEN,
+      icon: '✅',
+      body: [
+        [
+          'Abhijit Muhurat: 12:00 PM - 12:48 PM (48 minutes) - Most auspicious period, ideal for all important work',
+          'अभिजित मुहूर्त: 12:00 PM - 12:48 PM (48 मिनट) - सबसे शुभ समय, सभी महत्वपूर्ण कार्यों के लिए आदर्श',
+          'Brahma Muhurat: 4:24 AM - 6:00 AM (96 minutes) - Sacred pre-dawn period for meditation and spiritual practices',
+          'ब्रह्म मुहूर्त: 4:24 AM - 6:00 AM (96 मिनट) - ध्यान और आध्यात्मिक अभ्यास के लिए पवित्र प्रभात काल'
+        ]
+      ]
+    });
+
+    const rahuKaalTime = selectedDayData?.var === 'Sunday' ? '4:30 PM - 6:00 PM' :
+      selectedDayData?.var === 'Monday' ? '7:30 AM - 9:00 AM' :
+      selectedDayData?.var === 'Tuesday' ? '3:00 PM - 4:30 PM' :
+      selectedDayData?.var === 'Wednesday' ? '12:00 PM - 1:30 PM' :
+      selectedDayData?.var === 'Thursday' ? '1:30 PM - 3:00 PM' :
+      selectedDayData?.var === 'Friday' ? '10:30 AM - 12:00 PM' :
+      selectedDayData?.var === 'Saturday' ? '9:00 AM - 10:30 AM' : 'Varies';
+
+    sections.push({
+      title: 'Inauspicious Periods to Avoid',
+      titleHi: 'एवड़े अशुभ समय',
+      accentColor: RED,
+      icon: '❌',
+      body: [
+        [
+          `Rahu Kaal: ${rahuKaalTime} (90 minutes) - Avoid starting new work, travel, and important decisions`,
+          `राहु काल: ${rahuKaalTime} (90 मिनट) - नया काम, यात्रा और महत्वपूर्ण निर्णय से बचें`
+        ]
+      ]
+    });
+
+    const monthTableRows = monthDays.map((day) => {
+      const dateStr = day.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      const qualityBadge = day.overallQuality >= 80 ? `✅ ${day.overallQuality}/100` :
+        day.overallQuality >= 60 ? `⚠️ ${day.overallQuality}/100` :
+        `❌ ${day.overallQuality}/100`;
+      return [
+        dateStr,
+        qualityBadge,
+        day.tithi,
+        day.nakshatra,
+        day.yoga,
+        day.karana,
+        day.var
+      ];
+    });
+
+    const filename = `Muhurat_${eventLabel.en}_${selectedDate.getFullYear()}_${String(selectedDate.getMonth() + 1).padStart(2, '0')}_${String(selectedDate.getDate()).padStart(2, '0')}.pdf`;
+
+    return {
+      reportTitle,
+      reportTitleHi,
+      subtitle,
+      subtitleHi,
+      subjectInfo,
+      sections,
+      tables: [
+        {
+          title: 'Monthly Muhurat Calendar Overview',
+          titleHi: 'मासिक मुहूर्त कैलेंडर अवलोकन',
+          accentColor: GOLD,
+          headers: ['Date', 'Quality', 'Tithi', 'Nakshatra', 'Yoga', 'Karana', 'Var'],
+          rows: monthTableRows
+        }
+      ],
+      filename,
+      theme: 'premium' as const
+    };
+  };
+
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
   };
@@ -101,12 +258,22 @@ export default function MuhuratCalendarPage() {
                 {language === 'en' ? 'Muhurat Calendar' : 'मुहूर्त कैलेंडर'}
               </CardTitle>
             </div>
-            <Button
-              variant="outline"
-              onClick={() => setLanguage(language === 'en' ? 'hi' : 'en')}
-            >
-              {language === 'en' ? 'हिंदी' : 'English'}
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                onClick={handleDownloadPDF}
+                disabled={downloading}
+              >
+                <Download className="h-4 w-4 mr-2" />
+                {downloading ? (language === 'en' ? 'Generating...' : 'बन रहा है...') : (language === 'en' ? 'Download PDF' : 'PDF डाउनलोड')}
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => setLanguage(language === 'en' ? 'hi' : 'en')}
+              >
+                {language === 'en' ? 'हिंदी' : 'English'}
+              </Button>
+            </div>
           </div>
           <CardDescription>
             {language === 'en'
@@ -215,7 +382,7 @@ export default function MuhuratCalendarPage() {
 
       {/* Selected Date Details */}
       {selectedDayData && (
-        <Tabs defaultValue="panchang" className="space-y-4">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="panchang">
               {language === 'en' ? 'Panchang' : 'पंचांग'}
@@ -232,6 +399,7 @@ export default function MuhuratCalendarPage() {
           </TabsList>
 
           {/* Panchang Tab */}
+          {activeTab === 'panchang' && (
           <TabsContent value="panchang">
             <Card>
               <CardHeader>
@@ -305,8 +473,10 @@ export default function MuhuratCalendarPage() {
               </CardContent>
             </Card>
           </TabsContent>
+          )}
 
           {/* Periods Tab */}
+          {activeTab === 'periods' && (
           <TabsContent value="periods">
             <div className="space-y-4">
               {/* Auspicious Periods */}
@@ -384,8 +554,10 @@ export default function MuhuratCalendarPage() {
               </Card>
             </div>
           </TabsContent>
+          )}
 
           {/* Muhurat Tab */}
+          {activeTab === 'muhurat' && (
           <TabsContent value="muhurat">
             <Card>
               <CardHeader>
@@ -438,8 +610,10 @@ export default function MuhuratCalendarPage() {
               </CardContent>
             </Card>
           </TabsContent>
+          )}
 
           {/* Timeline Tab */}
+          {activeTab === 'timeline' && (
           <TabsContent value="timeline">
             <Card>
               <CardHeader>
@@ -508,6 +682,7 @@ export default function MuhuratCalendarPage() {
               </CardContent>
             </Card>
           </TabsContent>
+          )}
         </Tabs>
       )}
     </div>

@@ -1,1 +1,0 @@
-- [Artifact port detection](artifact-port-detection.md) — artifact-managed workflows need a supported port; use restartWorkflow() callback, not restart_workflow tool.

@@ -1,11 +1,5 @@
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
-import LandingPage from '@/pages/LandingPage';
-import CareerAstrology from '@/pages/CareerAstrology';
-import KaalSarpPage from '@/pages/KaalSarpPage';
-import ComprehensiveReportPage from '@/pages/ComprehensiveReportPage';
-import SignInPage from '@/pages/SignInPage';
-import SignUpPage from '@/pages/SignUpPage';
 
 import {
   type NavLink,
@@ -23,8 +17,12 @@ export type AppRoute = {
   element: JSX.Element;
 };
 
-const LandingPageV2 = lazy(() => import('@/pages/LandingPageV2'));
 const LandingPageV3 = lazy(() => import('@/pages/LandingPageV3'));
+const CareerAstrology = lazy(() => import('@/pages/CareerAstrology'));
+const KaalSarpPage = lazy(() => import('@/pages/KaalSarpPage'));
+const ComprehensiveReportPage = lazy(() => import('@/pages/ComprehensiveReportPage'));
+const SignInPage = lazy(() => import('@/pages/SignInPage'));
+const SignUpPage = lazy(() => import('@/pages/SignUpPage'));
 const MatchMaking = lazy(() => import('@/pages/MatchMaking'));
 const EnhancedKundliMilan = lazy(() => import('@/pages/EnhancedKundliMilan'));
 const VaastuAssessmentPage = lazy(() => import('@/pages/VaastuAssessmentPage'));
@@ -102,6 +100,7 @@ const VidhyaKarmaDarshanPage = lazy(() => import('@/pages/VidhyaKarmaDarshanPage
 const NotFound = lazy(() => import('@/pages/NotFound'));
 const IndexPage = lazy(() => import('@/pages/Index'));
 const VedicAPage = lazy(() => import('@/pages/VedicAPage'));
+const PriyanshMuhuratPage = lazy(() => import('@/pages/PriyanshMuhuratPage'));
 
 function route(path: string, element: JSX.Element): AppRoute {
   return { path, element };
@@ -109,10 +108,10 @@ function route(path: string, element: JSX.Element): AppRoute {
 
 export const APP_ROUTES: AppRoute[] = [
   route('/', <LandingPageV3 />),
-  route('/welcome', <LandingPageV2 />),
-  route('/landing-classic', <LandingPage />),
+  route('/welcome', <Navigate to="/" replace />),
+  route('/landing-classic', <Navigate to="/" replace />),
   route('/landing-v3', <Navigate to="/" replace />),
-  route('/landing-v2', <Navigate to="/welcome" replace />),
+  route('/landing-v2', <Navigate to="/" replace />),
   route('/career-astrology', <CareerAstrology />),
   route('/kaalsarp', <KaalSarpPage />),
   route('/comprehensive', <ComprehensiveReportPage />),
@@ -204,6 +203,7 @@ export const APP_ROUTES: AppRoute[] = [
   route('/my-readings', <MyReadingsPage />),
   route('/index', <IndexPage />),
   route('/vedic-a', <VedicAPage />),
+  route('/priyansh-joining-muhurat', <PriyanshMuhuratPage />),
   route('/sign-in/*', <SignInPage />),
   route('/sign-up/*', <SignUpPage />),
   route('*', <NotFound />),

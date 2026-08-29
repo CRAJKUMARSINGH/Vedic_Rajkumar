@@ -1,8 +1,18 @@
 /**
- * Prashna (Horary Astrology) feature barrel.
- *
- * Public surface of the prashna feature module.
+ * Prashna (Horary) feature — public barrel.
  * Import from '@/features/prashna' instead of reaching into subdirectories.
  */
 
-export type { PrashnaQuery, PrashnaAnswer, PrashnaSession } from './types';
+export type {
+  PrashnaTopicCategory,
+  PrashnaQuery,
+  PrashnaVerdict,
+  PrashnaSignificator,
+  PrashnaTiming,
+  PrashnaRemedy,
+  PrashnaAnswer,
+  PrashnaSession,
+  PrashnaHistoryItem,
+} from './types';
+
+export { answerPrashna, createPrashnaSession } from './stubs';
