@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -20,9 +20,10 @@ import DarkModeToggle from './DarkModeToggle';
  *   real href and remove the Coming Soon route entry in src/routes/index.tsx.
  */
 const NAV_LINKS = [
-  // ── Landing / Shell ──────────────────────────────────────────────────────────
-  { href: '/',           label: 'Home',        labelHi: 'होम',         badge: null,    group: 'shell' },
+  // ── Shell / workspace ────────────────────────────────────────────────────────
+  { href: '/',           label: 'Home',         labelHi: 'होम',         badge: null,    group: 'shell' },
   { href: '/app',        label: '⚡ Workspace', labelHi: '⚡ वर्कस्पेस', badge: 'App',   group: 'shell' },
+  { href: '/dashboard',  label: 'Dashboard',    labelHi: 'डैशबोर्ड',    badge: null,    group: 'shell' },
 
   // ── Core Feature 1: Kundli ───────────────────────────────────────────────────
   { href: '/horoscope',         label: 'Kundli',          labelHi: 'कुंडली',              badge: null,    group: 'core' },

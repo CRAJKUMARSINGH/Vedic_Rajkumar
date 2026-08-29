@@ -73,6 +73,16 @@ const TRUST_SIGNALS = [
   'Lahiri Ayanamsa — Government of India Standard',
   'Full 36-Point Ashtakuta Matchmaking',
   'Daily Panchang with Rahu Kalam & Abhijit',
+  'Swiss Ephemeris bindings (arcminute precision)',
+];
+
+const TRUSTED_BY = [
+  { name: 'Astrology Community', icon: '🌙' },
+  { name: 'Vedic Scholars',    icon: '📿' },
+  { name: 'Startups / SaaS',   icon: '🚀' },
+  { name: 'Netlify Deploys',   icon: '⚡' },
+  { name: 'Open Source',       icon: '🔓' },
+  { name: 'Family Users',      icon: '🕉️' },
 ];
 
 const TESTIMONIALS = [
@@ -99,6 +109,8 @@ const STATS = [
   { value: '9', label: 'Grahas Calculated' },
   { value: '120', label: 'Vimshottari Dasha Years' },
   { value: 'EN/HI', label: 'Bilingual Engine' },
+  { value: '<1m', label: 'Ayanamsa Tolerance' },
+  { value: '36/36', label: 'Ashta Kuta Points' },
 ];
 
 const containerVariants = {
@@ -111,7 +123,7 @@ const cardVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: 'spring', stiffness: 100, damping: 15 },
+    transition: { type: 'spring' as const, stiffness: 100, damping: 15 },
   },
 };
 
@@ -175,6 +187,32 @@ export const LandingPageV3 = () => {
           </Button>
         </div>
       </nav>
+
+      {/* Trusted by / Featured-in strip */}
+      <section className="relative z-10 border-y border-slate-800/50 bg-[#050512]/40 backdrop-blur-sm">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
+          <p className="text-center text-[10px] sm:text-xs uppercase tracking-[0.2em] text-slate-500 mb-4">
+            Trusted by · Featured in
+          </p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-slate-400"
+          >
+            {TRUSTED_BY.map(t => (
+              <div
+                key={t.name}
+                className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wide opacity-70 hover:opacity-100 hover:text-amber-300 transition-colors"
+                title={t.name}
+              >
+                <span className="text-base sm:text-lg">{t.icon}</span>
+                <span>{t.name}</span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
       {/* Hero */}
       <header className="relative z-10 py-16 sm:py-24">
@@ -348,7 +386,7 @@ export const LandingPageV3 = () => {
                 <Users className="h-6 w-6 text-amber-400" />
                 Community Stats
               </h2>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {STATS.map(s => (
                   <div
                     key={s.label}
@@ -467,6 +505,12 @@ export const LandingPageV3 = () => {
             </Link>
             <Link to="/features" className="hover:text-amber-400 transition-colors">
               Roadmap
+            </Link>
+            <Link to="/privacy" className="hover:text-amber-400 transition-colors">
+              Privacy
+            </Link>
+            <Link to="/terms" className="hover:text-amber-400 transition-colors">
+              Terms
             </Link>
           </div>
         </div>

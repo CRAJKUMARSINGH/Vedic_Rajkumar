@@ -47,13 +47,14 @@ const DashaTimelinePage      = lazy(() => import('@/pages/DashaTimelinePage'));
 const MahadashaChildrenPage  = lazy(() => import('@/pages/MahadashaChildrenPage'));
 
 // ─── Infra / User pages ───────────────────────────────────────────────────────
-const LandingPageV2   = lazy(() => import('@/pages/LandingPageV2'));
 const IndexPage       = lazy(() => import('@/pages/Index'));
 const MyReadingsPage  = lazy(() => import('@/pages/MyReadingsPage'));
 const FeedbackPage    = lazy(() => import('@/pages/FeedbackPage'));
 const PricingPage     = lazy(() => import('@/pages/PricingPage'));
 const NotFound        = lazy(() => import('@/pages/NotFound'));
 const PriyanshMuhuratPage = lazy(() => import('@/pages/PriyanshMuhuratPage'));
+const PrivacyPolicyPage   = lazy(() => import('@/pages/PrivacyPolicyPage'));
+const TermsOfServicePage  = lazy(() => import('@/pages/TermsOfServicePage'));
 
 // ─── Route config type ────────────────────────────────────────────────────────
 export interface RouteConfig {
@@ -69,16 +70,17 @@ export const routes: RouteConfig[] = [
   // ── Landing / shell ─────────────────────────────────────────────────────────
   { path: '/',                element: <LandingPageV3 /> },
   { path: '/app',             element: <IndexPage /> },
-  { path: '/welcome',         element: <LandingPageV2 /> },
+  { path: '/welcome',         element: <Navigate to="/" replace /> },
 
   // ── Canonical redirects (keep old URLs alive) ────────────────────────────────
   { path: '/landing-v3',          element: <Navigate to="/"           replace /> },
-  { path: '/landing-v2',          element: <Navigate to="/welcome"     replace /> },
+  { path: '/landing-v2',          element: <Navigate to="/"           replace /> },
   { path: '/kundli',              element: <Navigate to="/horoscope"   replace /> },
   { path: '/prasna',              element: <Navigate to="/prashna"     replace /> },
   { path: '/vedic-marriage',      element: <Navigate to="/marriage"    replace /> },
   { path: '/index',               element: <Navigate to="/app"         replace /> },
   // Internal admin redirects — no public Coming Soon needed
+  { path: '/dashboard',           element: <Navigate to="/app"         replace /> },
   { path: '/analytics',           element: <Navigate to="/app"         replace /> },
   { path: '/feature-requests',    element: <Navigate to="/app"         replace /> },
   { path: '/feedback-dashboard',  element: <Navigate to="/app"         replace /> },
@@ -134,6 +136,10 @@ export const routes: RouteConfig[] = [
   // ── Special Reports ──────────────────────────────────────────────────────────
   { path: '/priyansh-joining-muhurat', element: <PriyanshMuhuratPage /> },
   { path: '/priyansh-muhurat',         element: <Navigate to="/priyansh-joining-muhurat" replace /> },
+
+  // ── Legal ────────────────────────────────────────────────────────────────────
+  { path: '/privacy', element: <PrivacyPolicyPage /> },
+  { path: '/terms',   element: <TermsOfServicePage /> },
 
   // ══════════════════════════════════════════════════════════════════════════════
   // ARCHIVED FEATURES — Coming Soon
