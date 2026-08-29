@@ -53,6 +53,7 @@ const MyReadingsPage  = lazy(() => import('@/pages/MyReadingsPage'));
 const FeedbackPage    = lazy(() => import('@/pages/FeedbackPage'));
 const PricingPage     = lazy(() => import('@/pages/PricingPage'));
 const NotFound        = lazy(() => import('@/pages/NotFound'));
+const PriyanshMuhuratPage = lazy(() => import('@/pages/PriyanshMuhuratPage'));
 
 // ─── Route config type ────────────────────────────────────────────────────────
 export interface RouteConfig {
@@ -129,6 +130,10 @@ export const routes: RouteConfig[] = [
   // ── Auth ─────────────────────────────────────────────────────────────────────
   { path: '/sign-in/*',           element: <SignInPage /> },
   { path: '/sign-up/*',           element: <SignUpPage /> },
+
+  // ── Special Reports ──────────────────────────────────────────────────────────
+  { path: '/priyansh-joining-muhurat', element: <PriyanshMuhuratPage /> },
+  { path: '/priyansh-muhurat',         element: <Navigate to="/priyansh-joining-muhurat" replace /> },
 
   // ══════════════════════════════════════════════════════════════════════════════
   // ARCHIVED FEATURES — Coming Soon

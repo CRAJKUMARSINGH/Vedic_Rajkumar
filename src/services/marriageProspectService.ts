@@ -1,5 +1,6 @@
 // src/services/marriageProspectService.ts
-import { findMarriageProspect, Kundli, MarriageScore } from  @vedic/marriage-prospect-finder;
+import type { Kundli, MarriageScore } from '@vedic/marriage-prospect-finder';
+import { findMarriageProspect } from '@vedic/marriage-prospect-finder';
 
 /**
  * Wrapper around the remote marriage-prospect-finder package.

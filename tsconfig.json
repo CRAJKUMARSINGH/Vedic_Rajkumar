@@ -20,6 +20,6 @@
     },
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["src", "tests", "supabase", "vite.config.ts", "tailwind.config.ts"],
-  "exclude": ["dist", "node_modules"]
+  "include": ["src", "vite.config.ts", "tailwind.config.ts", "vitest.config.ts"],
+  "exclude": ["dist", "node_modules", "supabase/functions", "tests"]
 }
