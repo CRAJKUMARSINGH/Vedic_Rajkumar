@@ -308,7 +308,7 @@ function renderSection(
   const pal = palette(theme);
   const accent: [number, number, number] = section.accentColor ?? pal.outer;
   const LINE_H = 5.0;
-  const SAFETY = 55;
+  const SAFETY = 62;
 
   const needNewPageForTitle = (): boolean => {
     const titleHeight = 8 + 3 + 15;
@@ -329,14 +329,18 @@ function renderSection(
   doc.setTextColor(255, 248, 220);
   doc.setFontSize(10.5);
   doc.setFont('helvetica', 'bold');
-  const icon = section.icon ? `${section.icon}  ` : '';
-  doc.text(icon + section.title, x + 5, y + 5.5);
+  const safeTitle = sanitizeForHelveticLatin1(
+    stripDevanagariAndBoxGlyphs(section.title),
+    section.title
+  );
+  doc.text(safeTitle, x + 5, y + 5.5);
 
   if (section.titleHi) {
     doc.setFontSize(7.5);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(254, 243, 199);
-    doc.text(section.titleHi, pageW / 2, y + 5.5, { align: 'center' });
+    const tHi = sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(section.titleHi), '');
+    if (tHi) doc.text(tHi, pageW / 2, y + 5.5, { align: 'center' });
   }
 
   y += 12;
@@ -354,7 +358,11 @@ function renderSection(
     }
     if (Array.isArray(block)) {
       for (const item of block) {
-        const split = doc.splitTextToSize(item, maxW - 6);
+        const safeItem = sanitizeForHelveticLatin1(
+          stripDevanagariAndBoxGlyphs(String(item)),
+          String(item)
+        );
+        const split = doc.splitTextToSize(safeItem, maxW - 6);
         const needed = split.length * LINE_H + 2;
         if (y + needed > pageH - SAFETY) {
           doc.addPage();
@@ -370,7 +378,11 @@ function renderSection(
       }
       y += 1.5;
     } else {
-      const split = doc.splitTextToSize(block, maxW);
+      const safeBlock = sanitizeForHelveticLatin1(
+        stripDevanagariAndBoxGlyphs(String(block)),
+        String(block)
+      );
+      const split = doc.splitTextToSize(safeBlock, maxW);
       const needed = split.length * LINE_H + 2;
       if (y + needed > pageH - SAFETY) {
         doc.addPage();
@@ -402,7 +414,7 @@ function renderTable(
   const themeKey = (table as any)._themeOverride ?? 'premium';
   const pal = palette(themeKey);
   const accent: [number, number, number] = table.accentColor ?? pal.outer;
-  const SAFETY = 55;
+  const SAFETY = 62;
 
   const titleHeight = 8 + 15;
   if (y + titleHeight > pageH - SAFETY) {
@@ -420,19 +432,33 @@ function renderTable(
   doc.setTextColor(255, 248, 220);
   doc.setFontSize(10.5);
   doc.setFont('helvetica', 'bold');
-  doc.text(table.title, x + 5, y + 5.5);
+  const safeTitle = sanitizeForHelveticLatin1(
+    stripDevanagariAndBoxGlyphs(table.title),
+    table.title
+  );
+  doc.text(safeTitle, x + 5, y + 5.5);
   if (table.titleHi) {
     doc.setFontSize(7.5);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(254, 243, 199);
-    doc.text(table.titleHi, pageW / 2, y + 5.5, { align: 'center' });
+    const tHi = sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(table.titleHi), '');
+    if (tHi) doc.text(tHi, pageW / 2, y + 5.5, { align: 'center' });
   }
 
   y += 12;
 
+  const safeHeaders = table.headers.map(h =>
+    sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(String(h)), String(h))
+  );
+  const safeRows = table.rows.map(r =>
+    r.map(cell =>
+      sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(String(cell)), String(cell))
+    )
+  );
+
   const buildColumnStyles = (): Record<number, any> => {
     const styles: Record<number, any> = {};
-    const n = table.headers.length;
+    const n = safeHeaders.length;
     const explicit = table.columnWidths ?? {};
     const assigned: Record<number, number> = {};
     let remaining = maxW;
@@ -446,31 +472,31 @@ function renderTable(
     }
 
     if (Object.keys(assigned).length === 0) {
-      const header0 = (table.headers[0] ?? '').toLowerCase();
-      const header1 = (table.headers[1] ?? '').toLowerCase();
-      const header2 = (table.headers[2] ?? '').toLowerCase();
-      const headerN_1 = (table.headers[n - 1] ?? '').toLowerCase();
+      const header0 = (safeHeaders[0] ?? '').toLowerCase();
+      const header1 = (safeHeaders[1] ?? '').toLowerCase();
+      const header2 = (safeHeaders[2] ?? '').toLowerCase();
+      const headerN_1 = (safeHeaders[n - 1] ?? '').toLowerCase();
 
       if (header0 === '#' || header0.startsWith('no.') || header0.startsWith('sl')) {
         assigned[0] = 8; remaining -= 8;
-      } else if (/time|मुहूर्त|edt|ist|hour/.test(header0)) {
+      } else if (/time|edt|ist|hour/.test(header0)) {
         assigned[0] = 30; remaining -= 30;
       }
 
-      if (/quality|score|गुणवत्ता|0-100|\/100/.test(header2)) {
+      if (/quality|score|0-100|\/100/.test(header2)) {
         assigned[2] = 22; remaining -= 22;
-      } else if (/week|सप्ताह|rule|नियम/.test(header0) && n >= 3) {
+      } else if (/week|rule/.test(header0) && n >= 3) {
         if (assigned[0] === undefined) { assigned[0] = 30; remaining -= 30; }
       }
 
-      if (/verdict|result|निर्णय|conclusion/.test(headerN_1)) {
+      if (/verdict|result|conclusion/.test(headerN_1)) {
         assigned[n - 1] = Math.min(50, remaining - 20);
         remaining -= assigned[n - 1];
-      } else if (/checklist|ritual|चेकलिस्ट|item|सामग्री/.test(headerN_1)) {
+      } else if (/checklist|ritual|item/.test(headerN_1)) {
         assigned[n - 1] = Math.max(remaining, 50);
       }
 
-      if (/energy|ऊर्जा|expected|event|events/.test(header1) && assigned[1] === undefined && n >= 4) {
+      if (/energy|expected|event|events/.test(header1) && assigned[1] === undefined && n >= 4) {
         assigned[1] = 32; remaining -= 32;
       }
     } else {
@@ -517,9 +543,9 @@ function renderTable(
 
   autoTable(doc, {
     startY: y,
-    margin: { left: x, right: pageW - x - maxW, top: 15, bottom: 30 },
-    head: [table.headers],
-    body: table.rows.map(r => r),
+    margin: { left: x, right: pageW - x - maxW, top: 15, bottom: 38 },
+    head: [safeHeaders],
+    body: safeRows,
     theme: 'grid',
     tableWidth: maxW,
     useCss: false,
@@ -554,13 +580,13 @@ function renderTable(
     didDrawCell: (data) => {
       if (data.section === 'body' && typeof data.cell.text[0] === 'string') {
         const txt = data.cell.text[0] as string;
-        if (txt.includes('⭐') || txt.includes('🏆') || txt.includes('BEST') || txt.includes('✅')) {
+        if (/BEST|EXCELLENT/.test(txt) || /\(\d+\/\d+\) (BEST|EXCELLENT|FANTASTIC)/.test(txt) || txt.includes('🏆') || txt.includes('✅ ACCEPTABLE') || txt.includes('✅ GOOD') || txt.includes('✅ EXCELLENT')) {
           data.cell.styles.textColor = themeKey === 'magenta' ? [157, 23, 77] : [22, 163, 74];
           data.cell.styles.fillColor = themeKey === 'magenta' ? [252, 231, 243] : [220, 252, 231];
-        } else if (txt.includes('❌') || txt.includes('AVOID') || txt.includes('🔴')) {
+        } else if (txt.includes('AVOID') || txt.includes('ABSOLUTELY AVOID')) {
           data.cell.styles.textColor = [225, 29, 72];
           data.cell.styles.fillColor = themeKey === 'magenta' ? [255, 228, 238] : [254, 226, 226];
-        } else if (txt.includes('⚠️') || txt.includes('CAUTION')) {
+        } else if (txt.includes('CAUTION') || txt.includes('WARNING') || txt.includes('SLUGGISH')) {
           data.cell.styles.textColor = themeKey === 'magenta' ? [194, 65, 12] : [202, 138, 4];
           data.cell.styles.fillColor = themeKey === 'magenta' ? [254, 240, 245] : [254, 243, 199];
         }
@@ -589,6 +615,47 @@ function drawWatermark(doc: jsPDF, pageW: number, pageH: number, theme?: 'classi
 // ────────────────────────────────────────────────────────────────────────
 // 6. SUBJECT INFO BOX
 // ────────────────────────────────────────────────────────────────────────
+const LATIN1_SAFE_RE = /[\x00-\xFF]/;
+function sanitizeForHelveticLatin1(text: string, fallback = ''): string {
+  if (!text) return fallback;
+  let out = '';
+  for (const ch of String(text)) {
+    const cp = ch.codePointAt(0) ?? 0;
+    if (cp <= 0xFF) {
+      out += ch;
+    } else if (ch === '|' || ch === '•' || ch === '-') {
+      out += ch;
+    } else {
+      out += fallback;
+    }
+  }
+  return out.replace(/\s+/g, ' ').trim();
+}
+function stripDevanagariAndBoxGlyphs(text: string): string {
+  if (!text) return '';
+  return String(text)
+    .replace(/[\u0900-\u097F]/g, '')
+    .replace(/\u2500-\u257F/g, '|')
+    .replace(/\u2580-\u259F/g, '')
+    .replace(/\u2000-\u206F/g, '')
+    .replace(/\s*\/\s*\/\s*/g, ' / ')
+    .replace(/\s*\/\s*\//g, '')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/\s*\/\s*$/g, '')
+    .replace(/^\s*\/\s*/g, '')
+    .trim();
+}
+function measureLabelWidth(doc: jsPDF, rawText: string, fallbackMm = 55): number {
+  try {
+    const safe = sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(rawText));
+    if (!safe) return fallbackMm;
+    const w = doc.getTextWidth(safe);
+    if (!Number.isFinite(w) || w <= 0) return fallbackMm;
+    return Math.min(Math.max(w, fallbackMm * 0.6), fallbackMm);
+  } catch {
+    return fallbackMm;
+  }
+}
 function renderSubjectInfoBox(
   doc: jsPDF,
   info: { label: string; value: string }[],
@@ -598,9 +665,26 @@ function renderSubjectInfoBox(
   theme: 'classic' | 'premium' | 'royal' | 'magenta' = 'premium'
 ): { endY: number } {
   const pal = palette(theme);
-  const rowH = 6.0;
-  const numRows = Math.ceil(info.length / 2);
-  const boxH = 6 + numRows * rowH + 5;
+  const colGap = 6;
+  const labelColFixedMm = 52;
+  const colW = (maxW - 10 - colGap) / 2;
+  const valueColFixedMm = colW - labelColFixedMm - colGap - 2;
+  const lineH = 6.0;
+  const padTop = 11;
+  const boxTop = y;
+  const items = info.map(it => ({
+    label: sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(it.label), it.label),
+    value: String(it.value).trim(),
+  }));
+  const rows: { ly: number; left: { label: string; value: string } | null; right: { label: string; value: string } | null; }[] = [];
+  let curY = y + padTop;
+  for (let i = 0; i < items.length; i += 2) {
+    const l = items[i] ?? null;
+    const r = items[i + 1] ?? null;
+    rows.push({ ly: curY, left: l, right: r });
+    curY += lineH;
+  }
+  const boxH = (curY - y) + 6;
   doc.setFillColor(pal.softFill[0], pal.softFill[1], pal.softFill[2]);
   doc.setDrawColor(pal.lineTint[0], pal.lineTint[1], pal.lineTint[2]);
   doc.setLineWidth(0.5);
@@ -611,28 +695,39 @@ function renderSubjectInfoBox(
   doc.setTextColor(pal.gold[0], pal.gold[1], pal.gold[2]);
   doc.setFontSize(9.5);
   doc.setFont('helvetica', 'bold');
-  doc.text('📋 REPORT SUBJECT / जन्म विवरण', x + 5, y + 3.8);
+  doc.text('REPORT SUBJECT / CLIENT INFO', x + 5, y + 3.8);
 
-  y += 11;
-
-  info.forEach((item, idx) => {
-    const col = idx % 2;
-    const row = Math.floor(idx / 2);
-    const lx = x + 5 + col * (maxW / 2);
-    const ly = y + row * rowH;
-    doc.setTextColor(pal.labelText[0], pal.labelText[1], pal.labelText[2]);
-    doc.setFontSize(7.8);
-    doc.setFont('helvetica', 'bold');
-    const labelTxt = item.label + ':';
-    doc.text(labelTxt, lx, ly);
-    doc.setTextColor(24, 24, 27);
-    doc.setFontSize(7.8);
-    doc.setFont('helvetica', 'normal');
-    const maxValLen = 38;
-    const val = String(item.value).slice(0, maxValLen);
-    doc.text(val, lx + 1.5 + doc.getTextWidth(labelTxt), ly);
-  });
-  return { endY: y + numRows * rowH + 6 };
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(7.8);
+  for (const row of rows) {
+    if (row.left) {
+      const colX = x + 5;
+      const labelTxt = row.left.label ? (row.left.label.endsWith(':') ? row.left.label : `${row.left.label}:`) : '';
+      doc.setTextColor(pal.labelText[0], pal.labelText[1], pal.labelText[2]);
+      doc.text(labelTxt, colX, row.ly);
+      const valX = colX + labelColFixedMm + 1;
+      const valMaxChars = Math.max(20, Math.floor((valueColFixedMm) / 1.6));
+      const valueTxt = String(row.left.value || '').slice(0, valMaxChars);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(24, 24, 27);
+      doc.text(valueTxt, valX, row.ly);
+      doc.setFont('helvetica', 'bold');
+    }
+    if (row.right) {
+      const colX = x + 5 + colW + colGap;
+      const labelTxt = row.right.label ? (row.right.label.endsWith(':') ? row.right.label : `${row.right.label}:`) : '';
+      doc.setTextColor(pal.labelText[0], pal.labelText[1], pal.labelText[2]);
+      doc.text(labelTxt, colX, row.ly);
+      const valX = colX + labelColFixedMm + 1;
+      const valMaxChars = Math.max(20, Math.floor((valueColFixedMm) / 1.6));
+      const valueTxt = String(row.right.value || '').slice(0, valMaxChars);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(24, 24, 27);
+      doc.text(valueTxt, valX, row.ly);
+      doc.setFont('helvetica', 'bold');
+    }
+  }
+  return { endY: boxTop + boxH + 1 };
 }
 
 // ────────────────────────────────────────────────────────────────────────
@@ -648,19 +743,24 @@ function renderFooter(
   theme: 'classic' | 'premium' | 'royal' | 'magenta' = 'premium'
 ): void {
   const pal = palette(theme);
-  const y = pageH - 8;
+  const safeBlessing = sanitizeForHelveticLatin1(
+    stripDevanagariAndBoxGlyphs(blessing),
+    'Shri Ganeshaya Namah. Om Vakratunda Mahakaya Suryakoti Samaprabhah | Nirvighnam Kuru Me Dev Sarvakaryeshu Sarvada ||'
+  );
+  const footerBottom = pageH - 5;
+  const lineY = footerBottom - 5;
   doc.setDrawColor(pal.lineTint[0], pal.lineTint[1], pal.lineTint[2]);
   doc.setLineWidth(0.3);
-  doc.line(14, y - 3, pageW - 14, y - 3);
-  doc.setTextColor(pal.labelText[0], pal.labelText[1], pal.labelText[2]);
-  doc.setFontSize(6.5);
+  doc.line(14, lineY, pageW - 14, lineY);
   doc.setFont('helvetica', 'italic');
-  doc.text(blessing, pageW / 2, y - 0.5, { align: 'center', maxWidth: pageW - 40 });
+  doc.setFontSize(6);
   doc.setTextColor(pal.labelText[0], pal.labelText[1], pal.labelText[2]);
-  doc.setFontSize(6.5);
+  doc.text(safeBlessing, pageW / 2, lineY + 2.2, { align: 'center', maxWidth: pageW - 40 });
   doc.setFont('helvetica', 'normal');
-  doc.text(`Page ${currentPage} / ${totalPages}   •   Generated by Vedic Rajkumar`, pageW - 14, y - 0.5, { align: 'right' });
+  doc.setFontSize(6.5);
+  doc.text(`Page ${currentPage} / ${totalPages}   •   Generated by Vedic Rajkumar`, pageW - 14, footerBottom - 0.5, { align: 'right' });
 }
+export const FOOTER_REQUIRED_MM = 18;
 
 // ────────────────────────────────────────────────────────────────────────
 // 8. MAIN GENERATOR
@@ -684,28 +784,39 @@ export function buildVedicGaneshPDF(config: GaneshPDFConfig): jsPDF {
 
   // Title + subtitle below header banner
   doc.setFillColor(accent[0], accent[1], accent[2]);
-  doc.roundedRect(contentX, y + 1, contentW, 14, 2, 2, 'F');
+  const titleBoxH = 14;
+  doc.roundedRect(contentX, y + 1, contentW, titleBoxH, 2, 2, 'F');
   doc.setFillColor(gold[0], gold[1], gold[2]);
-  doc.roundedRect(contentX, y + 1, 4, 14, 2, 0, 'F');
+  doc.roundedRect(contentX, y + 1, 4, titleBoxH, 2, 0, 'F');
+
+  const safeReportTitle = sanitizeForHelveticLatin1(config.reportTitle, config.reportTitle);
+  const safeSubtitle = sanitizeForHelveticLatin1(
+    stripDevanagariAndBoxGlyphs(config.subtitle).replace(/┃/g, '|').replace(/\s*\|(?=\s)/g, ' • '),
+    config.subtitle
+  );
+
   doc.setTextColor(255, 248, 220);
   doc.setFontSize(14);
   doc.setFont('helvetica', 'bold');
-  doc.text(config.reportTitle, pageW / 2, y + 6.5, { align: 'center' });
+  doc.text(safeReportTitle, pageW / 2, y + 6.5, { align: 'center' });
   doc.setFontSize(8.5);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(254, 243, 199);
-  doc.text(config.subtitle, pageW / 2, y + 11, { align: 'center' });
+  doc.text(safeSubtitle, pageW / 2, y + 11, { align: 'center' });
   if (config.reportTitleHi) {
     doc.setFontSize(7.5);
-    doc.text(config.reportTitleHi, pageW / 2, y + 14, { align: 'center' });
+    const tHi = sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(config.reportTitleHi), '');
+    if (tHi) doc.text(tHi, pageW / 2, y + 14, { align: 'center' });
   }
   y += 20;
 
   const subjectBox = renderSubjectInfoBox(doc, config.subjectInfo, contentX, y, contentW, theme);
   y = subjectBox.endY + 5;
 
+  const PAGE_BREAK_THRESHOLD = 68;
+
   for (const section of config.sections) {
-    if (y > pageH - 55) {
+    if (y > pageH - PAGE_BREAK_THRESHOLD) {
       doc.addPage();
       drawDecorativeBorder(doc, pageW, pageH, theme);
       drawWatermark(doc, pageW, pageH, theme);
@@ -718,7 +829,7 @@ export function buildVedicGaneshPDF(config: GaneshPDFConfig): jsPDF {
 
   if (config.tables) {
     for (const table of config.tables) {
-      if (y > pageH - 55) {
+      if (y > pageH - PAGE_BREAK_THRESHOLD) {
         doc.addPage();
         drawDecorativeBorder(doc, pageW, pageH, theme);
         drawWatermark(doc, pageW, pageH, theme);
