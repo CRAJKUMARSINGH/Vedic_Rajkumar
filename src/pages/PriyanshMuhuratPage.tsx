@@ -1,26 +1,27 @@
 import { useState, useMemo, memo } from 'react';
-import { Download, Printer, CalendarCheck, MapPin, Clock, Award } from 'lucide-react';
+import { Download, Printer, CalendarCheck, MapPin, Clock, Award, Share2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { SEO } from '@/components/SEO';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import ShareReportModal from '@/components/ShareReportModal';
 
 const VARA_COLORS: Record<string, string> = {
-  Tuesday: 'bg-red-500/20 text-red-400 border-red-500/30',
+  Tuesday: 'bg-fuchsia-500/20 text-fuchsia-300 border-fuchsia-500/30',
 };
 
 const GRADE_CONFIG: Record<string, { bg: string; text: string; border: string; label: string }> = {
-  'A+': { bg: 'bg-emerald-500/20', text: 'text-emerald-300', border: 'border-emerald-500/40', label: 'Excellent' },
-  'A':  { bg: 'bg-teal-500/20',   text: 'text-teal-300',   border: 'border-teal-500/40',   label: 'Very Good' },
-  'B+': { bg: 'bg-blue-500/20',   text: 'text-blue-300',   border: 'border-blue-500/40',   label: 'Good' },
-  'B':  { bg: 'bg-amber-500/20',  text: 'text-amber-300',  border: 'border-amber-500/40',  label: 'Moderate' },
-  'C':  { bg: 'bg-slate-500/15',  text: 'text-slate-400',  border: 'border-slate-500/30',  label: 'Fair' },
-  'Avoid': { bg: 'bg-red-500/15', text: 'text-red-400',    border: 'border-red-500/30',    label: 'Avoid' },
+  'A+': { bg: 'bg-fuchsia-500/20', text: 'text-fuchsia-300', border: 'border-fuchsia-500/40', label: 'Excellent' },
+  'A':  { bg: 'bg-pink-500/20',    text: 'text-pink-300',    border: 'border-pink-500/40',   label: 'Very Good' },
+  'B+': { bg: 'bg-rose-500/20',    text: 'text-rose-300',    border: 'border-rose-500/40',   label: 'Good' },
+  'B':  { bg: 'bg-magenta-500/20', text: 'text-magenta-300', border: 'border-magenta-500/40',label: 'Moderate' },
+  'C':  { bg: 'bg-slate-500/15',   text: 'text-slate-400',   border: 'border-slate-500/30',  label: 'Fair' },
+  'Avoid': { bg: 'bg-rose-600/15', text: 'text-rose-400',    border: 'border-rose-500/30',   label: 'Avoid' },
 };
 
 const ScoreRing = memo(function ScoreRing({ score, size = 56 }: { score: number; size?: number }) {
-  const color = score >= 85 ? 'stroke-emerald-500' : score >= 70 ? 'stroke-teal-500' : score >= 55 ? 'stroke-blue-500' : score >= 40 ? 'stroke-amber-500' : 'stroke-red-500';
+  const color = score >= 85 ? 'stroke-fuchsia-500' : score >= 70 ? 'stroke-pink-500' : score >= 55 ? 'stroke-rose-500' : score >= 40 ? 'stroke-magenta-500' : 'stroke-rose-600';
   const r = size * 0.39;
   const circ = 2 * Math.PI * r;
   const fill = circ * (score / 100);
@@ -86,7 +87,7 @@ function buildPDFConfig(): import('@/services/vedicGaneshPDFGenerator').GaneshPD
     reportTitleHi: 'प्रियांश सिंह चौहान • नौकरी योगदान शुभ मुहूर्त',
     subtitle: 'MIAMI, FLORIDA, USA ┃ 1 SEPTEMBER 2026 ┃ 8:00 AM - 6:00 PM EDT',
     subtitleHi: 'मियामी, फ्लोरिडा, यूएसए ┃ १ सितंबर २०२६ ┃ ८:०० - १८:०० EDT',
-    theme: 'premium',
+    theme: 'magenta',
     filename: 'PRIYANSH_JOINING_MUHURAT_GANESH_REPORT.pdf',
     footerBlessing: '॥ श्री गणेशाय नमः ॐ वक्रतुण्ड महाकाय सूर्यकोटि समप्रभः। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥',
     subjectInfo: [
@@ -100,7 +101,7 @@ function buildPDFConfig(): import('@/services/vedicGaneshPDFGenerator').GaneshPD
       { label: 'Report Date', value: new Date().toISOString().slice(0, 10) },
     ],
   sections: [
-    { icon: '🏆', title: 'CORRECT MUHURAT RECOMMENDATION (Within 8AM-6PM EDT, TUESDAY)', titleHi: 'सही मुहूर्त सलाह', accentColor: [22, 101, 52], body: [
+    { icon: '🏆', title: 'CORRECT MUHURAT RECOMMENDATION (Within 8AM-6PM EDT, TUESDAY)', titleHi: 'सही मुहूर्त सलाह', accentColor: [192, 38, 211], body: [
       '⭐⭐⭐⭐⭐ #1 PRIMARY & ABSOLUTE BEST RECOMMENDED JOINING TIME: 12:48 PM - 1:45 PM EDT',
       ['Falls perfectly in ABHIJIT MUHURAT CORE (8th Muhurat — Quality 95/100)', 'Abhijit destroys ALL obstacles; INDEPENDENT of doshas; PURIFIES everything', 'Tuesday (Mars Day = his Mahadasha Lord!) + Auspicious Nakshatra + Siddha Yoga + Abhijit = QUADRUPLE BLESSING'],
       '⭐⭐⭐⭐ #2 SECONDARY CHOICE: 3:15 PM - 4:30 PM EDT',
@@ -110,7 +111,7 @@ function buildPDFConfig(): import('@/services/vedicGaneshPDFGenerator').GaneshPD
       '❌🔴 NON-NEGOTIABLE — ABSOLUTELY AVOID: 4:40 PM - 6:00 PM EDT',
       ['THIS ENTIRE 80-MINUTE WINDOW = RAHU KAAL ON TUESDAY. NEVER JOIN IN RAHU KAAL.', 'Effects: Hostile coworkers, broken HR promises, confusion, toxic environment.', 'If 6 PM is hard deadline → finish ALL rituals BY 4:30 PM LATEST.'],
     ]},
-    { icon: '📅', title: '1 SEPT 2026 — PANCHANG ANALYSIS (Miami, 5-Limbs)', titleHi: 'पंचांग विश्लेषण', accentColor: [120, 53, 15], body: [
+    { icon: '📅', title: '1 SEPT 2026 — PANCHANG ANALYSIS (Miami, 5-Limbs)', titleHi: 'पंचांग विश्लेषण', accentColor: [217, 70, 239], body: [
       ['VAR (Day): TUESDAY (Mangalvaar) ✅ HIGHLY AUSPICIOUS. Lord = Mars + Hanuman.',
       '⚡ SPECIAL: Tuesday = MARS DAY = HIS MAHADASHA LORD DAY. DOUBLE MARS ENERGY 🔥🔥 — COSMIC SYNERGY.',
       'TITHI: Shukla Paksha Chaturthi/Panchami Zone ✅ FAVORABLE for contracts.',
@@ -119,7 +120,7 @@ function buildPDFConfig(): import('@/services/vedicGaneshPDFGenerator').GaneshPD
       'KARANA: Bava / Balava / Kaulava ✅ Positive for new beginnings.',
       'SUNRISE: 7:00 AM EDT | SUNSET: 7:52 PM EDT | Day ~12h52m.']
     ]},
-    { icon: '🪐', title: 'BIRTH CHART & CAREER INDICATORS (Foreign Destiny)', titleHi: 'कुंडली एवं करियर संकेत', accentColor: [30, 64, 175], body: [
+    { icon: '🪐', title: 'BIRTH CHART & CAREER INDICATORS (Foreign Destiny)', titleHi: 'कुंडली एवं करियर संकेत', accentColor: [236, 72, 153], body: [
       'MAHADASHA IN PROGRESS: MARS (Sept 2020 - Sept 2027) 🔥 ACTION / COURAGE / MANIFESTATION — PEAK AT AGE 25.',
       ['Mars Mahadasha at 25 = PEAK. This USA move is karmic destiny.',
       'Antardasha: Mars-Rahu → Mars-Jupiter transition = Sudden positive life events.',
@@ -139,7 +140,7 @@ function buildPDFConfig(): import('@/services/vedicGaneshPDFGenerator').GaneshPD
       '🏆 12:48 PM - 1:45 PM ▸ PRIME JOINING (ABHIJIT — TUESDAY + MARS MAHADASHA!)', ['Spine STRAIGHT. GENUINE smile (Venus → good relations!). Handshake: Firm-WARM, 2-3 pumps, eye contact.', 'While SIGNING: Mentally "Ganeshaya Namah × 5 + Shri Hanumate Namah × 3". Accept offer/ID WITH BOTH HANDS. Accept drink → 1 sip minimum.'],
       '3:00 PM+ ▸ POST-JOINING', ['First lunch with GRATITUDE. WITHIN 3 DAYS: Donate $5-$11 charity. CALL PARENTS AFTER JOINING! Share excitement!']
     ]},
-    { icon: '🧿', title: '1ST MONTH PROTECTION REMEDIES + LIFELONG USA AURA SHIELD', titleHi: 'पहले महीने के सुरक्षा उपाय', accentColor: [146, 64, 14], body: [
+    { icon: '🧿', title: '1ST MONTH PROTECTION REMEDIES + LIFELONG USA AURA SHIELD', titleHi: 'पहले महीने के सुरक्षा उपाय', accentColor: [244, 114, 182], body: [
       '🪢 RED MAULI (Kalava) WITH 7 KNOTS on RIGHT WRIST → Hanuman Kavach. Tuesday joining + 7 knots = DOUBLE MARS-HANUMAN PROTECTION 🔥.',
       '🕉️ VIBHUTI / TRIPUND BHASM: Apply 3 HORIZONTAL lines on forehead EVERYDAY before leaving. (Shiva armor!)',
       '🪙 SILVER PIECE: Small silver coin/ring in wallet 100% of time. Moon blessing: mental peace + money flow.',
@@ -148,7 +149,7 @@ function buildPDFConfig(): import('@/services/vedicGaneshPDFGenerator').GaneshPD
       '😟 WORKPLACE EMERGENCY (21-second aura reset):',
       ['① Hold breath 8 sec → slow exhale ② Touch 3rd eye 2 sec ③ 2 slow deep breaths ④ Mentally: Om Namah Shivaya × 3 + Om Shri Hanumate Namah × 1']
     ]},
-    { icon: '💎', title: 'GEMSTONE GUIDANCE (Career + Wellbeing — USA budget alternatives)', titleHi: 'रत्न सलाह', accentColor: [8, 47, 73], body: [
+    { icon: '💎', title: 'GEMSTONE GUIDANCE (Career + Wellbeing — USA budget alternatives)', titleHi: 'रत्न सलाह', accentColor: [194, 65, 12], body: [
       '💚 #1 EMERALD (PANNA) — MERCURY (Intellect, Communication, Coworkers, Docs, Software!)',
       ['Weight: 3.25-4.50 Ratti. QUALITY > WEIGHT. Gold/Silver ring. LITTLE finger RIGHT hand. Wear WEDNESDAY morning after sunrise.', '🔥 USA BUDGET ALTERNATIVE: GREEN PERIDOT bracelet <$20. 90% same Mercury results. DAILY WEAR.'],
       '🤍 #2 PEARL (MOTI) — MOON (Mental peace + culture-shock resilience)',
@@ -156,14 +157,14 @@ function buildPDFConfig(): import('@/services/vedicGaneshPDFGenerator').GaneshPD
       '🔴 #3 RED CORAL (MOONGA) — MARS (OPTIONAL Mahadasha boost!)',
       ['Ring finger, Tuesday. ✅ BUDGET ALT: RED MAULI 7-knot you already wear = 50% boost! No cost!']
     ]},
-    { icon: '🧘', title: '11-MINUTE DAILY USA SADHANA (Culture-Shock Anchor)', titleHi: '११ मिनट दैनिक साधना', accentColor: [6, 78, 59], body: [
+    { icon: '🧘', title: '11-MINUTE DAILY USA SADHANA (Culture-Shock Anchor)', titleHi: '११ मिनट दैनिक साधना', accentColor: [219, 39, 119], body: [
       'America is fast-paced. Culture shock is real. Burnout is real. Your 11 minutes = anchor. MAKE the time.',
       ['① WAKE → Splash cold water + Om Gam Ganapataye Namah × 21 (5 min) → Aura reset + obstacle removal.',
        '② BREAKFAST → Hands over food + Gratitude: "Annapurne Sadapurne..." or "Thank you for this food" (2 min) → Anna Lakshmi food purity.',
        '③ BEDTIME → 3 deep breaths + Self forgiveness for ANY mistake + Recall 1 GOOD moment (even coffee!) (4 min) → Prevents karma buildup; rewires positivity.',
        'TOTAL = 11 MIN. EVERY. SINGLE. DAY.']
     ]},
-    { icon: '🕉️', title: 'FINAL SPIRITUAL MESSAGE (Chauhan Vansh Lineage Blessing)', titleHi: 'अंतिम आध्यात्मिक संदेश', accentColor: [127, 29, 29], body: [
+    { icon: '🕉️', title: 'FINAL SPIRITUAL MESSAGE (Chauhan Vansh Lineage Blessing)', titleHi: 'अंतिम आध्यात्मिक संदेश', accentColor: [225, 29, 72], body: [
       '',
       '"Beloved Priyansh Beta,',
       'You are in MARS MAHADASHA — 7-year cycle of ACTION, COURAGE, and MANIFESTATION.',
@@ -181,17 +182,21 @@ function buildPDFConfig(): import('@/services/vedicGaneshPDFGenerator').GaneshPD
     ]},
   ],
   tables: [
-    { title: '⏰ 8AM-6PM EDT WINDOW — HOUR-BY-HOUR MUHURAT (TUESDAY 1 SEPT)', titleHi: 'घंटेवार मुहूर्त', accentColor: [120, 53, 15],
+    { title: '⏰ 8AM-6PM EDT WINDOW — HOUR-BY-HOUR MUHURAT (TUESDAY 1 SEPT)', titleHi: 'घंटेवार मुहूर्त', accentColor: [217, 70, 239],
       headers: ['Time EDT', 'Vedic Period', 'Quality 0-100', 'Verdict'],
+      columnWidths: { 0: 28, 1: 52, 2: 22, 3: 80 },
       rows: HOUR_SLOTS.map(s => [s.time, s.period, `${s.quality}/100`, s.verdict]) },
-    { title: '📈 1-MONTH FORECAST (1 Sep → 30 Sep 2026)', titleHi: '१ महिना भविष्यवाणी', accentColor: [30, 64, 175],
+    { title: '📈 1-MONTH FORECAST (1 Sep → 30 Sep 2026)', titleHi: '१ महिना भविष्यवाणी', accentColor: [236, 72, 153],
       headers: ['Week', 'Energy', 'Expected Events', '⚠️ CAUTION', '💡 ACTION TIP'],
+      columnWidths: { 0: 22, 1: 28, 2: 46, 3: 38, 4: 48 },
       rows: WEEKLY_FORECAST.map(w => [w.week, w.energy, w.events, w.caution, w.tip]) },
-    { title: '🔴 5 NON-NEGOTIABLE LIFE RULES (1st Month & Beyond USA)', titleHi: '५ नियम', accentColor: [153, 27, 27],
+    { title: '🔴 5 NON-NEGOTIABLE LIFE RULES (1st Month & Beyond USA)', titleHi: '५ नियम', accentColor: [225, 29, 72],
       headers: ['#', 'Rule', 'Why it Matters'],
+      columnWidths: { 0: 8, 1: 76, 2: 98 },
       rows: FIVE_RULES.map(r => [r.n.toString(), r.rule, r.why]) },
-    { title: '✅ PRINT & CARRY — JOINING DAY 15-POINT CHECKLIST', titleHi: 'चेकलिस्ट', accentColor: [22, 101, 52],
+    { title: '✅ PRINT & CARRY — JOINING DAY 15-POINT CHECKLIST', titleHi: 'चेकलिस्ट', accentColor: [192, 38, 211],
       headers: ['#', 'Item / Ritual'],
+      columnWidths: { 0: 8, 1: 174 },
       rows: CHECKLIST_ITEMS.map((item, i) => [(i+1).toString(), item]) },
   ],
   };
@@ -230,7 +235,7 @@ export default function PriyanshMuhuratPage() {
 
       <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 print:px-0 print:py-0">
         {/* Hero Header */}
-        <div className="mb-8 rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-950/30 via-orange-950/20 to-red-950/20 p-6 sm:p-8">
+        <div className="mb-8 rounded-2xl border border-fuchsia-500/20 bg-gradient-to-br from-fuchsia-950/30 via-pink-950/20 to-rose-950/20 p-6 sm:p-8">
           <div className="flex flex-wrap items-start justify-between gap-6">
             <div className="min-w-0 flex-1">
               <Badge className={`mb-3 rounded-lg border font-semibold ${tuesdayClass}`}>
@@ -240,32 +245,32 @@ export default function PriyanshMuhuratPage() {
               <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                 🌟 Priyansh Singh Chauhan
               </h1>
-              <h2 className="mt-1 text-xl font-bold text-amber-200 sm:text-2xl">
+              <h2 className="mt-1 text-xl font-bold text-pink-200 sm:text-2xl">
                 New Job Joining Muhurat Report
               </h2>
               <div className="mt-4 flex flex-wrap gap-4 text-sm text-slate-300">
                 <div className="flex items-center gap-1.5">
-                  <MapPin className="h-4 w-4 text-amber-400" />
+                  <MapPin className="h-4 w-4 text-pink-400" />
                   Miami, Florida, USA
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CalendarCheck className="h-4 w-4 text-amber-400" />
+                  <CalendarCheck className="h-4 w-4 text-pink-400" />
                   Tuesday, 1 September 2026
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <Clock className="h-4 w-4 text-amber-400" />
+                  <Clock className="h-4 w-4 text-pink-400" />
                   8:00 AM — 6:00 PM EDT
                 </div>
               </div>
               <div className="mt-4 flex flex-wrap gap-4 text-xs text-slate-400">
                 <span>DOB: 26 Oct 2000 · 00:50 AM IST · Indore MP India</span>
-                <span>Mahadasha: <span className="text-red-400 font-semibold">MARS 2020–2027 🔥</span></span>
+                <span>Mahadasha: <span className="text-fuchsia-400 font-semibold">MARS 2020–2027 🔥</span></span>
               </div>
             </div>
             <div className="flex flex-col items-center gap-3">
               <ScoreRing score={totalScore} size={96} />
               <div className="text-center">
-                <p className="text-xs font-bold uppercase tracking-wider text-emerald-300">Overall Auspiciousness</p>
+                <p className="text-xs font-bold uppercase tracking-wider text-fuchsia-300">Overall Auspiciousness</p>
                 <p className="text-[11px] text-slate-400">Tuesday + Mars Mahadasha + Abhijit = Quadruple Blessing</p>
               </div>
             </div>
@@ -276,36 +281,39 @@ export default function PriyanshMuhuratPage() {
             <Button
               onClick={handleDownloadPDF}
               disabled={downloading}
-              className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-black font-semibold shadow-lg shadow-amber-500/20"
+              className="bg-gradient-to-r from-fuchsia-500 to-pink-500 hover:from-fuchsia-400 hover:to-pink-400 text-white font-semibold shadow-lg shadow-fuchsia-500/20"
             >
               <Download className="mr-2 h-4 w-4" />
               {downloading ? 'Generating PDF…' : '⬇️ Download Ganesha Motif A4 Report (PDF)'}
             </Button>
-            <Button onClick={handlePrint} variant="outline" className="border-amber-500/30 text-amber-200 hover:bg-amber-500/10">
+            <Button onClick={handlePrint} variant="outline" className="border-fuchsia-500/30 text-fuchsia-200 hover:bg-fuchsia-500/10">
               <Printer className="mr-2 h-4 w-4" />
               🖨️ Print A4 Motif Page
             </Button>
-            <Badge className="ml-auto self-center bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">
+            <ShareReportModal
+              title="Priyansh Singh Chauhan • New Job Joining Muhurat Report — Miami, 1 Sep 2026"
+            />
+            <Badge className="ml-auto self-center bg-fuchsia-500/15 border border-fuchsia-500/30 text-fuchsia-300">
               <Award className="mr-1.5 h-3 w-3" /> Reusable Motif Border + Ganesh Header • A4 Standard
             </Badge>
           </div>
 
           {/* Recommendation */}
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-4">
-              <p className="text-xs font-bold uppercase tracking-wider text-emerald-300">⭐ #1 Prime Slot</p>
+            <div className="rounded-xl border border-fuchsia-500/30 bg-fuchsia-950/20 p-4">
+              <p className="text-xs font-bold uppercase tracking-wider text-fuchsia-300">⭐ #1 Prime Slot</p>
               <p className="mt-1 text-lg font-extrabold text-white">12:48 PM — 1:45 PM EDT</p>
-              <p className="text-[11px] text-emerald-300/80 mt-0.5">🌟🌟 ABHIJIT MUHURAT CORE • Quality 95/100 • Destroys all Doshas</p>
+              <p className="text-[11px] text-fuchsia-300/80 mt-0.5">🌟🌟 ABHIJIT MUHURAT CORE • Quality 95/100 • Destroys all Doshas</p>
             </div>
-            <div className="rounded-xl border border-teal-500/30 bg-teal-950/20 p-4">
-              <p className="text-xs font-bold uppercase tracking-wider text-teal-300">⭐⭐⭐⭐ #2 Secondary</p>
+            <div className="rounded-xl border border-pink-500/30 bg-pink-950/20 p-4">
+              <p className="text-xs font-bold uppercase tracking-wider text-pink-300">⭐⭐⭐⭐ #2 Secondary</p>
               <p className="mt-1 text-lg font-extrabold text-white">3:15 PM — 4:30 PM EDT</p>
-              <p className="text-[11px] text-teal-300/80 mt-0.5">Pure Clear Zone • Free of all Doshas • 88/100</p>
+              <p className="text-[11px] text-pink-300/80 mt-0.5">Pure Clear Zone • Free of all Doshas • 88/100</p>
             </div>
-            <div className="rounded-xl border border-red-500/30 bg-red-950/20 p-4">
-              <p className="text-xs font-bold uppercase tracking-wider text-red-300">🚫 ABSOLUTELY AVOID</p>
+            <div className="rounded-xl border border-rose-500/30 bg-rose-950/20 p-4">
+              <p className="text-xs font-bold uppercase tracking-wider text-rose-300">🚫 ABSOLUTELY AVOID</p>
               <p className="mt-1 text-lg font-extrabold text-white">4:40 PM — 6:00 PM EDT</p>
-              <p className="text-[11px] text-red-300/80 mt-0.5">🔴 RAHU KAAL on TUESDAY • 0/100 • Non-negotiable avoidance</p>
+              <p className="text-[11px] text-rose-300/80 mt-0.5">🔴 RAHU KAAL on TUESDAY • 0/100 • Non-negotiable avoidance</p>
             </div>
           </div>
         </div>
@@ -313,13 +321,13 @@ export default function PriyanshMuhuratPage() {
         {/* Tabbed Sections */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-1 h-auto p-1 bg-white/[0.03] border border-white/10 rounded-xl">
-            <TabsTrigger value="hourly" className="rounded-lg data-[state=active]:bg-amber-500/20 data-[state=active]:text-amber-200 py-2">⏰ Hourly</TabsTrigger>
-            <TabsTrigger value="panchang" className="rounded-lg data-[state=active]:bg-amber-500/20 data-[state=active]:text-amber-200 py-2">📅 Panchang</TabsTrigger>
-            <TabsTrigger value="rituals" className="rounded-lg data-[state=active]:bg-amber-500/20 data-[state=active]:text-amber-200 py-2">🧘 Rituals</TabsTrigger>
-            <TabsTrigger value="remedies" className="rounded-lg data-[state=active]:bg-amber-500/20 data-[state=active]:text-amber-200 py-2">🧿 Remedies</TabsTrigger>
-            <TabsTrigger value="gemstones" className="rounded-lg data-[state=active]:bg-amber-500/20 data-[state=active]:text-amber-200 py-2">💎 Gemstones</TabsTrigger>
-            <TabsTrigger value="forecast" className="rounded-lg data-[state=active]:bg-amber-500/20 data-[state=active]:text-amber-200 py-2">📈 Forecast</TabsTrigger>
-            <TabsTrigger value="checklist" className="rounded-lg data-[state=active]:bg-amber-500/20 data-[state=active]:text-amber-200 py-2">✅ Checklist</TabsTrigger>
+            <TabsTrigger value="hourly" className="rounded-lg data-[state=active]:bg-fuchsia-500/20 data-[state=active]:text-fuchsia-200 py-2">⏰ Hourly</TabsTrigger>
+            <TabsTrigger value="panchang" className="rounded-lg data-[state=active]:bg-fuchsia-500/20 data-[state=active]:text-fuchsia-200 py-2">📅 Panchang</TabsTrigger>
+            <TabsTrigger value="rituals" className="rounded-lg data-[state=active]:bg-fuchsia-500/20 data-[state=active]:text-fuchsia-200 py-2">🧘 Rituals</TabsTrigger>
+            <TabsTrigger value="remedies" className="rounded-lg data-[state=active]:bg-fuchsia-500/20 data-[state=active]:text-fuchsia-200 py-2">🧿 Remedies</TabsTrigger>
+            <TabsTrigger value="gemstones" className="rounded-lg data-[state=active]:bg-fuchsia-500/20 data-[state=active]:text-fuchsia-200 py-2">💎 Gemstones</TabsTrigger>
+            <TabsTrigger value="forecast" className="rounded-lg data-[state=active]:bg-fuchsia-500/20 data-[state=active]:text-fuchsia-200 py-2">📈 Forecast</TabsTrigger>
+            <TabsTrigger value="checklist" className="rounded-lg data-[state=active]:bg-fuchsia-500/20 data-[state=active]:text-fuchsia-200 py-2">✅ Checklist</TabsTrigger>
           </TabsList>
 
           {/* Hourly */}
@@ -327,14 +335,14 @@ export default function PriyanshMuhuratPage() {
           <TabsContent value="hourly">
             <Card className="border-white/10 bg-[#0d131e]">
               <CardHeader><CardTitle className="text-xl text-white">⏰ 8AM–6PM EDT — Hour-by-Hour Muhurat Breakdown (Tuesday 1 Sep 2026)</CardTitle>
-                <CardDescription className="text-slate-400">Vedic period rating with quality score 0–100. <span className="text-red-400">Rahu Kaal 4:40–6:00 PM</span> = mandatory avoidance.</CardDescription></CardHeader>
+                <CardDescription className="text-slate-400">Vedic period rating with quality score 0–100. <span className="text-rose-400">Rahu Kaal 4:40–6:00 PM</span> = mandatory avoidance.</CardDescription></CardHeader>
               <CardContent className="space-y-3">
                 {HOUR_SLOTS.map((slot, i) => {
                   const gc = GRADE_CONFIG[slot.grade] ?? GRADE_CONFIG['C'];
                   const isPrime = slot.quality >= 95;
                   const isAvoid = slot.grade === 'Avoid';
                   return (
-                    <div key={i} className={`rounded-xl border p-4 transition-all ${isPrime ? 'border-emerald-500/40 bg-emerald-950/20 ring-2 ring-emerald-500/20' : isAvoid ? 'border-red-500/30 bg-red-950/15' : 'border-white/10 bg-white/[0.02] hover:border-white/20'}`}>
+                    <div key={i} className={`rounded-xl border p-4 transition-all ${isPrime ? 'border-fuchsia-500/40 bg-fuchsia-950/20 ring-2 ring-fuchsia-500/20' : isAvoid ? 'border-rose-500/30 bg-rose-950/15' : 'border-white/10 bg-white/[0.02] hover:border-white/20'}`}>
                       <div className="flex flex-wrap items-center gap-4">
                         <ScoreRing score={slot.quality} size={64} />
                         <div className="min-w-0 flex-1">
@@ -343,11 +351,11 @@ export default function PriyanshMuhuratPage() {
                             <span className={`text-[11px] px-2 py-0.5 rounded-full border font-bold ${gc.bg} ${gc.text} ${gc.border}`}>
                               {slot.grade} · {gc.label}
                             </span>
-                            {isPrime && <span className="text-[11px] px-2 py-0.5 rounded-full bg-yellow-500/20 border border-yellow-500/40 text-yellow-300 font-bold">🏆 Prime Best</span>}
-                            {isAvoid && <span className="text-[11px] px-2 py-0.5 rounded-full bg-red-500/20 border border-red-500/40 text-red-300 font-bold">🚫 Rahu Kaal</span>}
+                            {isPrime && <span className="text-[11px] px-2 py-0.5 rounded-full bg-pink-500/20 border border-pink-500/40 text-pink-300 font-bold">🏆 Prime Best</span>}
+                            {isAvoid && <span className="text-[11px] px-2 py-0.5 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold">🚫 Rahu Kaal</span>}
                           </div>
                           <p className="text-sm text-slate-300">{slot.period}</p>
-                          <p className={`text-sm font-semibold mt-1 ${isPrime ? 'text-emerald-300' : isAvoid ? 'text-red-300' : 'text-slate-200'}`}>{slot.verdict}</p>
+                          <p className={`text-sm font-semibold mt-1 ${isPrime ? 'text-fuchsia-300' : isAvoid ? 'text-rose-300' : 'text-slate-200'}`}>{slot.verdict}</p>
                         </div>
                       </div>
                     </div>
@@ -367,12 +375,12 @@ export default function PriyanshMuhuratPage() {
               <CardContent>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {[
-                    { l: 'Var (Day)', v: 'Tuesday (Mangalvaar)', s: 'HIGHLY AUSPICIOUS', c: 'text-red-300', e: '🔥 Mars Lord + Hanuman' },
-                    { l: 'Tithi', v: 'Shukla Paksha Chaturthi/Panchami', s: 'FAVORABLE', c: 'text-emerald-300', e: 'Contracts & new starts' },
-                    { l: 'Nakshatra', v: 'Uttara Ashadha/Shravana/U.Bhadrapada', s: 'BEST Career', c: 'text-emerald-300', e: '✅ Foreign settlement pattern' },
-                    { l: 'Yoga', v: 'Siddha / Shubha / Shiva class', s: 'HIGHLY AUSPICIOUS', c: 'text-emerald-300', e: 'Siddha Yoga = EVERYTHING succeeds' },
-                    { l: 'Karana', v: 'Bava / Balava / Kaulava', s: 'Positive', c: 'text-teal-300', e: 'New beginnings blessed' },
-                    { l: 'Sunrise / Sunset', v: '7:00 AM / 7:52 PM EDT', s: 'Day ~12h52m', c: 'text-amber-300', e: 'Abhijit ~12:48–13:51' },
+                    { l: 'Var (Day)', v: 'Tuesday (Mangalvaar)', s: 'HIGHLY AUSPICIOUS', c: 'text-fuchsia-300', e: '🔥 Mars Lord + Hanuman' },
+                    { l: 'Tithi', v: 'Shukla Paksha Chaturthi/Panchami', s: 'FAVORABLE', c: 'text-pink-300', e: 'Contracts & new starts' },
+                    { l: 'Nakshatra', v: 'Uttara Ashadha/Shravana/U.Bhadrapada', s: 'BEST Career', c: 'text-pink-300', e: '✅ Foreign settlement pattern' },
+                    { l: 'Yoga', v: 'Siddha / Shubha / Shiva class', s: 'HIGHLY AUSPICIOUS', c: 'text-fuchsia-300', e: 'Siddha Yoga = EVERYTHING succeeds' },
+                    { l: 'Karana', v: 'Bava / Balava / Kaulava', s: 'Positive', c: 'text-rose-300', e: 'New beginnings blessed' },
+                    { l: 'Sunrise / Sunset', v: '7:00 AM / 7:52 PM EDT', s: 'Day ~12h52m', c: 'text-magenta-300', e: 'Abhijit ~12:48–13:51' },
                   ].map((p, i) => (
                     <div key={i} className="rounded-lg border border-white/10 bg-white/[0.02] p-4">
                       <p className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">{p.l}</p>
@@ -383,16 +391,16 @@ export default function PriyanshMuhuratPage() {
                   ))}
                 </div>
 
-                <div className="mt-5 rounded-xl border border-blue-500/20 bg-blue-950/15 p-5">
-                  <h3 className="font-bold text-blue-200 flex items-center gap-2"><span>🪐</span> Birth Chart & Career Foreign Destiny Indicators</h3>
+                <div className="mt-5 rounded-xl border border-fuchsia-500/20 bg-fuchsia-950/15 p-5">
+                  <h3 className="font-bold text-fuchsia-200 flex items-center gap-2"><span>🪐</span> Birth Chart & Career Foreign Destiny Indicators</h3>
                   <div className="mt-3 space-y-2 text-sm text-slate-300 leading-relaxed">
-                    <p>🔥 <span className="text-red-300 font-semibold">MAHADASHA:</span> MARS (Sept 2020 – Sept 2027) — PEAK at age 25. USA move = karmic destiny.</p>
-                    <p>⚡ <span className="text-amber-300 font-semibold">ANTARDASHA:</span> Mars-Rahu → Mars-Jupiter transition = Sudden positive life events (this job!).</p>
-                    <p>🏢 <span className="text-emerald-300 font-semibold">10th HOUSE (KARMA):</span> Strong placement → Foreign career explicitly indicated.</p>
-                    <p>✈️ <span className="text-teal-300 font-semibold">12th HOUSE:</span> ACTIVATED ✅ → Foreign settlement. Miami = E/SE from Indore = AUSPICIOUS direction.</p>
-                    <p>🧭 <span className="text-violet-300 font-semibold">NAKSHATRA FAMILY:</span> Jyeshtha/Anuradha (Scorpio cluster) → CLASSIC FOREIGN SUCCESS pattern.</p>
-                    <p>🌟 <span className="text-emerald-300 font-semibold">TRANSIT MERCURY = OWN SIGN (VIRGO):</span> Intellect, Business & Communication TRIPLY AMPLIFIED ✅✅✅</p>
-                    <p>🪴 <span className="text-amber-300 font-semibold">TRANSIT JUPITER in TAURUS:</span> Blessings & expansion. Saturn stable → career structure FIRM.</p>
+                    <p>🔥 <span className="text-fuchsia-300 font-semibold">MAHADASHA:</span> MARS (Sept 2020 – Sept 2027) — PEAK at age 25. USA move = karmic destiny.</p>
+                    <p>⚡ <span className="text-pink-300 font-semibold">ANTARDASHA:</span> Mars-Rahu → Mars-Jupiter transition = Sudden positive life events (this job!).</p>
+                    <p>🏢 <span className="text-fuchsia-300 font-semibold">10th HOUSE (KARMA):</span> Strong placement → Foreign career explicitly indicated.</p>
+                    <p>✈️ <span className="text-rose-300 font-semibold">12th HOUSE:</span> ACTIVATED ✅ → Foreign settlement. Miami = E/SE from Indore = AUSPICIOUS direction.</p>
+                    <p>🧭 <span className="text-magenta-300 font-semibold">NAKSHATRA FAMILY:</span> Jyeshtha/Anuradha (Scorpio cluster) → CLASSIC FOREIGN SUCCESS pattern.</p>
+                    <p>🌟 <span className="text-pink-300 font-semibold">TRANSIT MERCURY = OWN SIGN (VIRGO):</span> Intellect, Business & Communication TRIPLY AMPLIFIED ✅✅✅</p>
+                    <p>🪴 <span className="text-fuchsia-300 font-semibold">TRANSIT JUPITER in TAURUS:</span> Blessings & expansion. Saturn stable → career structure FIRM.</p>
                   </div>
                 </div>
               </CardContent>
@@ -408,50 +416,50 @@ export default function PriyanshMuhuratPage() {
                 <CardDescription className="text-slate-400">Spiritual timetable from Brahma Muhurat through Abhijit prime joining.</CardDescription></CardHeader>
               <CardContent className="space-y-3">
                 {[
-                  { t: '5:00 – 5:45 AM', h: '🌅 BRAHMA MUHURAT (Most powerful 96 min)', c: 'from-amber-950/30', items: [
+                  { t: '5:00 – 5:45 AM', h: '🌅 BRAHMA MUHURAT (Most powerful 96 min)', c: 'from-fuchsia-950/30', items: [
                     'Bath with Ganga water drops in bucket (CRITICAL USA aura purification)',
                     'Wear NEW clothes: 🔴 RED / SAFFRON / MAROON / CORAL (Tuesday Mars colors!) or White + red scarf',
                     '20 min SILENT MEDITATION — visualize walking into office with SMILE & confidence',
                     'Maha Mrityunjaya Mantra × 11 rounds (protection) + HANUMAN CHALISA × 1 (TUESDAY MANDATORY!)',
                   ]},
-                  { t: '5:45 – 6:30 AM', h: '🕉️ GANESH + HANUMAN + GURU VANDANA', c: 'from-red-950/25', items: [
+                  { t: '5:45 – 6:30 AM', h: '🕉️ GANESH + HANUMAN + GURU VANDANA', c: 'from-rose-950/25', items: [
                     'Light 1 GHEE DIYA + 2 SANDALWOOD incense. Offer MODAK/Ladoo + bananas + Indian sweet to Ganesha',
                     'OFFER JAGGERY + CHANA (gram) to HANUMAN (TUESDAY MANDATORY!) with Sindoor tilak',
                     'Ganesh Atharvashirsha × 1 OR Vakratunda Mahakaya × 7',
                     'Prayer: "Ganpati ji — remove all obstacles from my USA journey. Hanuman Ji — courage for my TRUTH."',
                   ]},
-                  { t: '6:30 – 7:00 AM', h: '🪐 NAVAGRAHA SHANTI (9 Planet Peace Offering)', c: 'from-yellow-950/25', items: [
+                  { t: '6:30 – 7:00 AM', h: '🪐 NAVAGRAHA SHANTI (9 Planet Peace Offering)', c: 'from-pink-950/25', items: [
                     'SUN: Copper vessel Arghya + red flower + roli to East rising sun',
                     'MARS (Tuesday Lord!): Red flower + sindoor tilak on forehead + 1 piece jaggery',
                     'MERCURY (Career!): Eat GREEN MOONG DAL SPROUTS — MUST for software/office boost!',
                     'JUPITER: Yellow flowers/dal. Navagraha Mantra × 3 rounds.',
                   ]},
-                  { t: '7:00 – 7:45 AM', h: '🍲 BREAKFAST & DRESSING (TUESDAY COLOR PROTOCOL!)', c: 'from-green-950/20', items: [
+                  { t: '7:00 – 7:45 AM', h: '🍲 BREAKFAST & DRESSING (TUESDAY COLOR PROTOCOL!)', c: 'from-magenta-950/20', items: [
                     '✅ EAT BEFORE LEAVING. Poha, Upma, Idli, Dalia, Fruits, Milk+Haldi, GREEN MOONG SPROUTS',
                     '❌ AVOID: Meat, eggs, onion, garlic, heavy/oily food, alcohol, black coffee empty stomach',
                     '👔 BEST OUTFIT: 🔴 RED / SAFFRON / MAROON / CORAL • GOOD: EMERALD GREEN / White+red • OK: Yellow/Cream',
                     '❌ NEVER WEAR: All Black, Dark Grey, Dark Navy (Saturn clashes Mars day). Wear NEW if possible!',
                   ]},
-                  { t: '8:00 AM', h: '🚶 DEPARTURE (RIGHT FOOT FIRST — 100% MANDATORY!)', c: 'from-blue-950/20', items: [
+                  { t: '8:00 AM', h: '🚶 DEPARTURE (RIGHT FOOT FIRST — 100% MANDATORY!)', c: 'from-purple-950/20', items: [
                     'Exit bedroom + Exit house: RIGHT FOOT FIRST ALWAYS',
                     'Before entering car: Touch ×4 corners clockwise + Prayer "Om Vayave Swaha" (travel safety)',
                     'LEFT pocket (heart side): Ganesha photo/small idol',
                     'RIGHT pocket: Hanuman photo + Sindoor tiny container + 1 steel coin + 1 puffed rice (muri) + RED handkerchief (Mars color!) + sanitizer',
                   ]},
-                  { t: '12:15 PM', h: '🏢 OFFICE RITUALS (15 min before Abhijit!)', c: 'from-violet-950/20', items: [
+                  { t: '12:15 PM', h: '🏢 OFFICE RITUALS (15 min before Abhijit!)', c: 'from-fuchsia-950/20', items: [
                     'Right foot first out of car. Building entrance: 3 SLOW deep breaths + silent OM',
                     'Threshold touch: Right hand lightly on entrance floor before crossing. Slight forehead bow.',
                     'Before sitting: Stand 10 sec facing chair → namaste prayer for success & learning',
                     'Sprinkle 2-3 water drops CLOCKWISE around chair base. Sit EAST or SOUTH if possible.',
                   ]},
-                  { t: '🏆 12:48 PM – 1:45 PM', h: '🌟🌟 PRIME JOINING (ABHIJIT MUHURAT — TUESDAY + MARS MAHADASHA!)', c: 'from-emerald-950/30', items: [
+                  { t: '🏆 12:48 PM – 1:45 PM', h: '🌟🌟 PRIME JOINING (ABHIJIT MUHURAT — TUESDAY + MARS MAHADASHA!)', c: 'from-pink-950/30', items: [
                     'Spine STRAIGHT but relaxed. Slouch blocks Lakshmi! GENUINE smile (Venus activates good relations).',
                     'Handshake: FIRM but WARM — 2-3 pumps, EYE contact, NEVER limp/crushing.',
                     'While SIGNING papers: Mentally "Ganeshaya Namah × 5 + Shri Hanumate Namah × 3" (silently)',
                     'Accept offer letter / ID badge: WITH BOTH HANDS (respect!). Accept drink → 1 SIP minimum before down.',
                     'Introductions: SINCERE 1-line compliment: "I am excited to learn from your experienced team!"',
                   ]},
-                  { t: '3:00 PM+', h: '✨ POST-JOINING RITUALS', c: 'from-amber-950/20', items: [
+                  { t: '3:00 PM+', h: '✨ POST-JOINING RITUALS', c: 'from-rose-950/20', items: [
                     'First lunch: Eat with GRATITUDE, not rushed. If prasadam from home — EAT FIRST.',
                     'WITHIN 3 DAYS: Donate $5–$11 to charity / homeless person (Saturn Shanti)',
                     '📞 CALL PARENTS AFTER JOINING! Share excitement. 5 min = more powerful than any gemstone. Father=Sun=Career. Mother=Moon=Mental peace.',
@@ -460,14 +468,14 @@ export default function PriyanshMuhuratPage() {
                   <div key={i} className={`rounded-xl border border-white/10 bg-gradient-to-r ${block.c} to-transparent p-5`}>
                     <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
                       <div>
-                        <p className="text-xs font-bold uppercase tracking-wider text-amber-300">{block.t}</p>
+                        <p className="text-xs font-bold uppercase tracking-wider text-pink-300">{block.t}</p>
                         <h3 className="text-lg font-bold text-white mt-0.5">{block.h}</h3>
                       </div>
                     </div>
                     <ul className="space-y-1.5">
                       {block.items.map((it, j) => (
                         <li key={j} className="flex gap-2 text-sm text-slate-300 leading-relaxed">
-                          <span className="text-amber-400 mt-0.5">•</span>
+                          <span className="text-fuchsia-400 mt-0.5">•</span>
                           <span>{it}</span>
                         </li>
                       ))}
@@ -505,8 +513,8 @@ export default function PriyanshMuhuratPage() {
                   </div>
                 ))}
 
-                <div className="mt-6 rounded-xl border border-emerald-500/20 bg-emerald-950/15 p-5">
-                  <h3 className="font-bold text-emerald-200 mb-3 flex items-center gap-2"><span>🧘</span> 11-Minute Daily USA Sadhana (Culture-Shock Anchor)</h3>
+                <div className="mt-6 rounded-xl border border-fuchsia-500/20 bg-fuchsia-950/15 p-5">
+                  <h3 className="font-bold text-fuchsia-200 mb-3 flex items-center gap-2"><span>🧘</span> 11-Minute Daily USA Sadhana (Culture-Shock Anchor)</h3>
                   <p className="text-sm text-slate-300 mb-3"><em>America is fast-paced. Culture shock is real. Burnout is real. Your 11 minutes = anchor. DO NOT let anyone convince you "you don\'t have 11 minutes." You do. MAKE the time.</em></p>
                   <div className="space-y-2 text-sm">
                     {[
@@ -515,11 +523,11 @@ export default function PriyanshMuhuratPage() {
                       ['③ BEDTIME (4 min)', '3 deep breaths. Self forgiveness for ANY mistake (no guilt — only learning!). Recall 1 GOOD moment (even "the coffee was good"). → Self-forgiveness prevents karma buildup. Positive memory rewires brain for USA positivity.'],
                     ].map(([s, b], i) => (
                       <div key={i} className="rounded-lg border border-white/5 bg-black/20 p-3">
-                        <p className="text-emerald-300 font-bold text-xs uppercase tracking-wider">{s}</p>
+                        <p className="text-fuchsia-300 font-bold text-xs uppercase tracking-wider">{s}</p>
                         <p className="text-slate-300 text-sm mt-0.5">{b}</p>
                       </div>
                     ))}
-                    <p className="text-center text-amber-300 font-bold text-sm mt-2">TOTAL = 11 MINUTES. EVERY. SINGLE. DAY.</p>
+                    <p className="text-center text-pink-300 font-bold text-sm mt-2">TOTAL = 11 MINUTES. EVERY. SINGLE. DAY.</p>
                   </div>
                 </div>
               </CardContent>
@@ -538,15 +546,15 @@ export default function PriyanshMuhuratPage() {
                   { rank: '#1', color: 'text-emerald-300', name: 'EMERALD (PANNA) — MERCURY PLANET', purpose: 'Intellect, Communication, Coworkers, Documentation, Software Career ✅ THE most important planet for software/office/corporate.',
                     weight: '3.25 — 4.50 Ratti (2.9–4.1 ct). QUALITY > WEIGHT ALWAYS.', metal: 'Gold ring (BEST). Silver = affordable (~90% same efficacy). Finger: LITTLE finger → RIGHT hand.', wear: 'WEDNESDAY morning, 60-90 min after sunrise. Soak overnight in milk + Ganga water; wash; wear before sunrise facing East.',
                     alt: '🔥 USA BUDGET ALTERNATIVE: GREEN PERIDOT bracelet ($15–$25 at any crystal shop). 90% same Mercury results. DAILY WEAR.',
-                    bg: 'from-emerald-950/25' },
+                    bg: 'from-fuchsia-950/25' },
                   { rank: '#2', color: 'text-slate-200', name: 'PEARL (MOTI) — MOON PLANET', purpose: 'Mental peace & culture-shock resilience in FAR AWAY foreign land. Mother blessings. Stabilizes emotions during homesickness.',
                     weight: '5–7 ratti standard.', metal: 'Silver ring or pendant. Day: MONDAY. Finger: Little or Ring finger.', wear: 'Monday morning, after sunrise, after milk/Ganga water soak.',
                     alt: '✅ BUDGET ALT: Mother\'s used silver ring / any hand-me-down silver jewelry = same or stronger mother blessing!',
-                    bg: 'from-slate-900/50' },
-                  { rank: '#3', color: 'text-red-300', name: 'RED CORAL (MOONGA) — MARS (OPTIONAL Mahadasha boost!)', purpose: 'Extra Mars Mahadasha support during this peak 7-year ACTION period. Courage, energy, manifestation boost.',
+                    bg: 'from-pink-900/30' },
+                  { rank: '#3', color: 'text-rose-300', name: 'RED CORAL (MOONGA) — MARS (OPTIONAL Mahadasha boost!)', purpose: 'Extra Mars Mahadasha support during this peak 7-year ACTION period. Courage, energy, manifestation boost.',
                     weight: '3–6 ratti. Quality is critical — ensure no cracks/blemishes.', metal: 'Gold or Silver. Finger: RING finger → RIGHT hand. Day: TUESDAY morning.', wear: 'Tuesday morning. Dip in milk/Ganga water overnight. Wear with sindoor tilak on forehead.',
                     alt: '✅✅ BUDGET ALTERNATIVE (ZERO COST!): The RED MAULI 7-knot thread you are ALREADY wearing on your RIGHT wrist = 50% of the same Mars boost. You don\'t need extra!',
-                    bg: 'from-red-950/25' },
+                    bg: 'from-rose-950/25' },
                 ].map((g, i) => (
                   <div key={i} className={`rounded-xl border border-white/10 bg-gradient-to-r ${g.bg} to-transparent p-5`}>
                     <div className="flex flex-wrap items-start gap-3 mb-3">
@@ -569,9 +577,9 @@ export default function PriyanshMuhuratPage() {
                         <p className="text-xs font-semibold uppercase text-slate-400">Wearing Protocol</p>
                         <p className="text-white mt-1">{g.wear}</p>
                       </div>
-                      <div className="rounded-lg border border-amber-500/20 bg-amber-950/15 p-3 sm:col-span-2">
-                        <p className="text-xs font-semibold uppercase text-amber-300">💡 Budget Accessible Alternative (USA market!)</p>
-                        <p className="text-amber-100 mt-1 text-sm">{g.alt}</p>
+                      <div className="rounded-lg border border-fuchsia-500/20 bg-fuchsia-950/15 p-3 sm:col-span-2">
+                        <p className="text-xs font-semibold uppercase text-fuchsia-300">💡 Budget Accessible Alternative (USA market!)</p>
+                        <p className="text-fuchsia-100 mt-1 text-sm">{g.alt}</p>
                       </div>
                     </div>
                   </div>
@@ -592,32 +600,32 @@ export default function PriyanshMuhuratPage() {
                   <div key={i} className="rounded-xl border border-white/10 bg-white/[0.02] p-5 hover:border-white/20">
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                       <h3 className="font-bold text-white">{w.week}</h3>
-                      <span className="text-sm font-semibold text-amber-300">{w.energy}</span>
+                      <span className="text-sm font-semibold text-fuchsia-300">{w.energy}</span>
                     </div>
                     <div className="grid gap-3 sm:grid-cols-3 text-sm">
                       <div className="rounded-lg bg-black/20 border border-white/5 p-3">
                         <p className="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Expected Events</p>
                         <p className="text-slate-200 mt-1">{w.events}</p>
                       </div>
-                      <div className="rounded-lg bg-red-950/15 border border-red-500/20 p-3">
-                        <p className="text-[10px] uppercase tracking-wider text-red-400 font-bold">⚠️ CAUTION</p>
-                        <p className="text-red-200/80 mt-1">{w.caution}</p>
+                      <div className="rounded-lg bg-rose-950/15 border border-rose-500/20 p-3">
+                        <p className="text-[10px] uppercase tracking-wider text-rose-400 font-bold">⚠️ CAUTION</p>
+                        <p className="text-rose-200/80 mt-1">{w.caution}</p>
                       </div>
-                      <div className="rounded-lg bg-emerald-950/15 border border-emerald-500/20 p-3">
-                        <p className="text-[10px] uppercase tracking-wider text-emerald-400 font-bold">💡 ACTION TIP</p>
-                        <p className="text-emerald-200/80 mt-1">{w.tip}</p>
+                      <div className="rounded-lg bg-fuchsia-950/15 border border-fuchsia-500/20 p-3">
+                        <p className="text-[10px] uppercase tracking-wider text-fuchsia-400 font-bold">💡 ACTION TIP</p>
+                        <p className="text-fuchsia-200/80 mt-1">{w.tip}</p>
                       </div>
                     </div>
                   </div>
                 ))}
 
-                <div className="mt-5 rounded-xl border border-red-500/20 bg-red-950/15 p-5">
-                  <h3 className="font-bold text-red-200 mb-3">🔴 5 NON-NEGOTIABLE LIFE RULES — 1st Month & Forever USA</h3>
+                <div className="mt-5 rounded-xl border border-rose-500/20 bg-rose-950/15 p-5">
+                  <h3 className="font-bold text-rose-200 mb-3">🔴 5 NON-NEGOTIABLE LIFE RULES — 1st Month & Forever USA</h3>
                   <div className="space-y-2.5">
                     {FIVE_RULES.map(r => (
                       <div key={r.n} className="rounded-lg border border-white/5 bg-black/20 p-3.5">
                         <div className="flex items-start gap-3">
-                          <span className="flex-shrink-0 flex items-center justify-center h-7 w-7 rounded-full bg-red-500/20 border border-red-500/40 text-red-300 font-black text-sm">{r.n}</span>
+                          <span className="flex-shrink-0 flex items-center justify-center h-7 w-7 rounded-full bg-fuchsia-500/20 border border-fuchsia-500/40 text-fuchsia-300 font-black text-sm">{r.n}</span>
                           <div className="min-w-0">
                             <p className="text-white font-bold text-sm">{r.rule}</p>
                             <p className="text-slate-300 text-sm mt-0.5 leading-relaxed">{r.why}</p>
@@ -628,23 +636,23 @@ export default function PriyanshMuhuratPage() {
                   </div>
                 </div>
 
-                <div className="mt-5 rounded-xl border border-amber-500/20 bg-gradient-to-br from-amber-950/30 to-orange-950/20 p-6">
-                  <h3 className="font-extrabold text-amber-200 text-lg mb-3">🕉️ Final Spiritual Message — Chauhan Vansh Lineage Blessing</h3>
+                <div className="mt-5 rounded-xl border border-fuchsia-500/20 bg-gradient-to-br from-fuchsia-950/30 to-pink-950/20 p-6">
+                  <h3 className="font-extrabold text-fuchsia-200 text-lg mb-3">🕉️ Final Spiritual Message — Chauhan Vansh Lineage Blessing</h3>
                   <div className="space-y-2.5 text-slate-200 text-sm leading-relaxed">
                     <p><em>Beloved Priyansh Beta,</em></p>
-                    <p>You are in <span className="text-red-300 font-bold">MARS MAHADASHA</span> — 7-year cycle of ACTION, COURAGE, and MANIFESTATION.</p>
+                    <p>You are in <span className="text-fuchsia-300 font-bold">MARS MAHADASHA</span> — 7-year cycle of ACTION, COURAGE, and MANIFESTATION.</p>
                     <p>Miami is not an accident. It is a karmically prepared destination, cultivated over MANY lifetimes, for your NEXT evolution. The gods have been arranging this for a very long time.</p>
-                    <p>You carry the bloodline and blessings of the <span className="text-amber-300 font-bold">CHAUHAN VANSH</span> — the lineage of warriors, leaders, and defenders of Dharma. When Prithviraj Chauhan rode into battle, he did not carry fear. Carry that same light into every American office:</p>
-                    <ul className="ml-5 space-y-1 list-disc text-amber-100/90">
+                    <p>You carry the bloodline and blessings of the <span className="text-pink-300 font-bold">CHAUHAN VANSH</span> — the lineage of warriors, leaders, and defenders of Dharma. When Prithviraj Chauhan rode into battle, he did not carry fear. Carry that same light into every American office:</p>
+                    <ul className="ml-5 space-y-1 list-disc text-pink-100/90">
                       <li>Speak <b>TRUTH</b> even if it makes you unpopular</li>
                       <li>Work with <b>INTEGRITY</b> even when the camera is off</li>
                       <li><b>RESPECT</b> every human being you meet — from the janitor to the CEO</li>
                       <li>Never forget where you came from. Indore raised you. America will give you the platform.</li>
                     </ul>
-                    <p>Every past "No" from the Universe was not a rejection — it was <b className="text-emerald-300">protection</b>. Saving you for THIS exact "Yes." This exact city. This exact Tuesday in Abhijit Muhurat.</p>
+                    <p>Every past "No" from the Universe was not a rejection — it was <b className="text-fuchsia-300">protection</b>. Saving you for THIS exact "Yes." This exact city. This exact Tuesday in Abhijit Muhurat.</p>
                     <p>This USA chapter is not just about a job. It is becoming the man your 10-year-old self watched in wonder. It is making parents proud beyond words. It is opening doors for your sister, future children, extended family back home. <em>This job is a launching pad — not the destination.</em></p>
                     <p>You are not alone in that Miami building on Tuesday Sep 1, 2026:</p>
-                    <ul className="ml-5 space-y-1 list-disc text-amber-100/90">
+                    <ul className="ml-5 space-y-1 list-disc text-pink-100/90">
                       <li>Your <b>Ancestors</b> walk with you.</li>
                       <li>Lord <b>Ganesha</b> clears every obstacle before you even see it.</li>
                       <li>Lord <b>Hanuman</b> carries your courage when yours runs out.</li>
@@ -653,7 +661,7 @@ export default function PriyanshMuhuratPage() {
                       <li>Maa <b>Saraswati</b> speaks through your words and your code commits.</li>
                     </ul>
                     <p>The only person who can fail you on September 1 — is <b>YOURSELF</b> if you forget to show up with love, respect, and humility. Everything else is already taken care of by the Divine Plan.</p>
-                    <p className="text-center font-bold text-amber-200 mt-3 text-base tracking-wide">
+                    <p className="text-center font-bold text-fuchsia-200 mt-3 text-base tracking-wide">
                       🕉️ Ganpati Bappa Morya! 🙏 &nbsp;|&nbsp; Jai Shri Ram! 🚩 &nbsp;|&nbsp; Har Har Mahadev! 🔱 &nbsp;|&nbsp; Bajrang Bali Ki Jai! 💨
                     </p>
                   </div>
@@ -672,8 +680,8 @@ export default function PriyanshMuhuratPage() {
               <CardContent>
                 <div className="grid gap-2 sm:grid-cols-2">
                   {CHECKLIST_ITEMS.map((item, i) => (
-                    <label key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.02] p-4 hover:border-amber-500/30 hover:bg-amber-950/10 cursor-pointer transition-all">
-                      <input type="checkbox" className="mt-0.5 h-4 w-4 accent-amber-500 rounded" />
+                    <label key={i} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.02] p-4 hover:border-fuchsia-500/30 hover:bg-fuchsia-950/10 cursor-pointer transition-all">
+                      <input type="checkbox" className="mt-0.5 h-4 w-4 accent-fuchsia-500 rounded" />
                       <div className="flex-1 min-w-0">
                         <span className="text-[11px] text-slate-500 font-bold mr-2">#{i+1}</span>
                         <span className="text-sm text-slate-200 leading-snug">{item}</span>
@@ -688,18 +696,18 @@ export default function PriyanshMuhuratPage() {
         </Tabs>
 
         {/* Bottom CTA Bar */}
-        <div className="mt-8 rounded-2xl border border-amber-500/20 bg-gradient-to-r from-amber-950/30 via-orange-950/20 to-red-950/20 p-5 sm:p-6">
+        <div className="mt-8 rounded-2xl border border-fuchsia-500/20 bg-gradient-to-r from-fuchsia-950/30 via-pink-950/20 to-rose-950/20 p-5 sm:p-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <p className="font-bold text-amber-200">📄 Ready to save this report?</p>
+              <p className="font-bold text-fuchsia-200">📄 Ready to save this report?</p>
               <p className="text-sm text-slate-400">Download the full multi-page motif-bordered A4 PDF with Lord Ganesha geometric header, Kalash/Om/Swastika/Trishul corner motifs, watermark on every page, and all sections+tables formatted for printing. This is the EXACT same report as the standalone generator script produces.</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Button onClick={handleDownloadPDF} disabled={downloading} className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-black font-semibold shadow-lg shadow-amber-500/20">
+              <Button onClick={handleDownloadPDF} disabled={downloading} className="bg-gradient-to-r from-fuchsia-500 to-pink-500 hover:from-fuchsia-400 hover:to-pink-400 text-white font-semibold shadow-lg shadow-fuchsia-500/20">
                 <Download className="mr-2 h-4 w-4" />
                 {downloading ? 'Generating…' : 'Download Ganesha Motif PDF'}
               </Button>
-              <Button onClick={handlePrint} variant="outline" className="border-amber-500/30 text-amber-200 hover:bg-amber-500/10">
+              <Button onClick={handlePrint} variant="outline" className="border-fuchsia-500/30 text-fuchsia-200 hover:bg-fuchsia-500/10">
                 <Printer className="mr-2 h-4 w-4" /> Print
               </Button>
             </div>

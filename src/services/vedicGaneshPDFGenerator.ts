@@ -29,6 +29,7 @@ export interface PDFTable {
   headers: string[];
   rows: (string | number)[][];
   accentColor?: [number, number, number];
+  columnWidths?: Record<number, number | 'auto' | 'wrap'>;
 }
 
 export interface GaneshPDFConfig {
@@ -41,19 +42,31 @@ export interface GaneshPDFConfig {
   tables?: PDFTable[];
   footerBlessing?: string;
   filename: string;
-  theme?: 'classic' | 'premium' | 'royal';
+  theme?: 'classic' | 'premium' | 'royal' | 'magenta';
 }
+
+const THEME_PALETTE: Record<
+  Exclude<GaneshPDFConfig['theme'], undefined>,
+  { outer: [number,number,number]; inner: [number,number,number]; accent: [number,number,number]; banner: [number,number,number]; gold: [number,number,number]; softFill: [number,number,number]; labelText: [number,number,number]; lineTint: [number,number,number] }
+> = {
+  classic: { outer: [153,27,27], inner: [251,191,36], accent: [234,88,12], banner: [153,27,27], gold: [251,191,36], softFill: [255,249,219], labelText: [120,53,15], lineTint: [220,160,80] },
+  premium: { outer: [120,53,15], inner: [250,204,21], accent: [217,119,6], banner: [120,53,15], gold: [250,204,21], softFill: [255,249,219], labelText: [120,53,15], lineTint: [220,160,80] },
+  royal:   { outer: [146,64,14], inner: [251,191,36], accent: [154,52,18], banner: [146,64,14], gold: [251,191,36], softFill: [255,249,219], labelText: [120,53,15], lineTint: [220,160,80] },
+  magenta: { outer: [157,23,77], inner: [244,114,182], accent: [236,72,153], banner: [157,23,77], gold: [251,207,232], softFill: [253,232,242], labelText: [157,23,77], lineTint: [234,128,180] },
+};
+const palette = (theme: GaneshPDFConfig['theme']) => THEME_PALETTE[(theme ?? 'premium') as keyof typeof THEME_PALETTE];
 
 // ────────────────────────────────────────────────────────────────────────
 // 1. PAGE BORDER — Kalash + Om motif corners
 // ────────────────────────────────────────────────────────────────────────
-function drawDecorativeBorder(doc: jsPDF, pageW: number, pageH: number, theme: 'classic' | 'premium' | 'royal' = 'premium'): void {
+function drawDecorativeBorder(doc: jsPDF, pageW: number, pageH: number, theme: 'classic' | 'premium' | 'royal' | 'magenta' = 'premium'): void {
   const outer = 6;
   const inner = 11;
   const colors = {
-    classic:  { outer: [153, 27, 27], inner: [251, 191, 36], accent: [234, 88, 12] }, // Deep red, gold, saffron
-    premium:  { outer: [120, 53, 15],  inner: [250, 204, 21], accent: [217, 119, 6] }, // Brown, gold, saffron
+    classic:  { outer: [153, 27, 27], inner: [251, 191, 36], accent: [234, 88, 12] },
+    premium:  { outer: [120, 53, 15],  inner: [250, 204, 21], accent: [217, 119, 6] },
     royal:    { outer: [146, 64, 14],  inner: [251, 191, 36], accent: [154, 52, 18] },
+    magenta:  { outer: [157, 23, 77],  inner: [244, 114, 182], accent: [236, 72, 153] },
   }[theme];
 
   // Outer double border
@@ -160,11 +173,12 @@ function drawTrishul(doc: jsPDF, x: number, y: number, colors: { outer: number[]
 // ────────────────────────────────────────────────────────────────────────
 // 2. GANESHA HEADER (vector Ganesha — geometric)
 // ────────────────────────────────────────────────────────────────────────
-function drawGaneshHeader(doc: jsPDF, pageW: number, theme: 'classic' | 'premium' | 'royal'): number {
+function drawGaneshHeader(doc: jsPDF, pageW: number, theme: 'classic' | 'premium' | 'royal' | 'magenta'): number {
   const colors = {
     classic: { banner: [153, 27, 27], gold: [251, 191, 36], skin: [249, 115, 22] },
     premium: { banner: [120, 53, 15], gold: [250, 204, 21], skin: [251, 146, 60] },
     royal:   { banner: [146, 64, 14], gold: [251, 191, 36], skin: [234, 88, 12] },
+    magenta: { banner: [157, 23, 77], gold: [244, 114, 182], skin: [251, 207, 232] },
   }[theme];
 
   // ── Saffron gradient banner (2 rectangles)
@@ -290,13 +304,26 @@ function renderSection(
   pageW: number,
   pageH: number
 ): { y: number } {
-  const accent: [number, number, number] = section.accentColor ?? [120, 53, 15];
-  const safe: [number, number, number] = [250, 204, 21];
   const theme = (section as any)._themeOverride ?? 'premium';
+  const pal = palette(theme);
+  const accent: [number, number, number] = section.accentColor ?? pal.outer;
+  const LINE_H = 5.0;
+  const SAFETY = 55;
+
+  const needNewPageForTitle = (): boolean => {
+    const titleHeight = 8 + 3 + 15;
+    return y + titleHeight > pageH - SAFETY;
+  };
+  if (needNewPageForTitle()) {
+    doc.addPage();
+    drawDecorativeBorder(doc, pageW, pageH, theme as any);
+    drawWatermark(doc, pageW, pageH, theme as any);
+    y = 15;
+  }
 
   doc.setFillColor(accent[0], accent[1], accent[2]);
   doc.roundedRect(x, y, maxW, 8, 1.5, 1.5, 'F');
-  doc.setFillColor(safe[0], safe[1], safe[2]);
+  doc.setFillColor(pal.gold[0], pal.gold[1], pal.gold[2]);
   doc.roundedRect(x, y, 3, 8, 1.5, 0, 'F');
 
   doc.setTextColor(255, 248, 220);
@@ -312,34 +339,48 @@ function renderSection(
     doc.text(section.titleHi, pageW / 2, y + 5.5, { align: 'center' });
   }
 
-  y += 11;
+  y += 12;
 
   doc.setTextColor(24, 24, 27);
   doc.setFontSize(9);
   doc.setFont('helvetica', 'normal');
 
   for (const block of section.body) {
-    if (y > pageH - 40) {
+    if (y > pageH - SAFETY) {
       doc.addPage();
       drawDecorativeBorder(doc, pageW, pageH, theme as any);
-      drawWatermark(doc, pageW, pageH);
+      drawWatermark(doc, pageW, pageH, theme as any);
       y = 15;
     }
     if (Array.isArray(block)) {
       for (const item of block) {
+        const split = doc.splitTextToSize(item, maxW - 6);
+        const needed = split.length * LINE_H + 2;
+        if (y + needed > pageH - SAFETY) {
+          doc.addPage();
+          drawDecorativeBorder(doc, pageW, pageH, theme as any);
+          drawWatermark(doc, pageW, pageH, theme as any);
+          y = 15;
+        }
         doc.setFillColor(accent[0], accent[1], accent[2]);
         doc.circle(x + 2.2, y - 1.6, 0.8, 'F');
-        const split = doc.splitTextToSize(item, maxW - 6);
         doc.setTextColor(24, 24, 27);
         doc.text(split, x + 5, y);
-        y += split.length * 4.4 + 1;
+        y += split.length * LINE_H + 1;
       }
-      y += 1;
+      y += 1.5;
     } else {
       const split = doc.splitTextToSize(block, maxW);
+      const needed = split.length * LINE_H + 2;
+      if (y + needed > pageH - SAFETY) {
+        doc.addPage();
+        drawDecorativeBorder(doc, pageW, pageH, theme as any);
+        drawWatermark(doc, pageW, pageH, theme as any);
+        y = 15;
+      }
       doc.setTextColor(24, 24, 27);
       doc.text(split, x, y);
-      y += split.length * 4.4 + 1;
+      y += split.length * LINE_H + 1;
     }
   }
 
@@ -358,12 +399,23 @@ function renderTable(
   pageW: number,
   pageH: number
 ): { endY: number } {
-  const accent: [number, number, number] = table.accentColor ?? [120, 53, 15];
+  const themeKey = (table as any)._themeOverride ?? 'premium';
+  const pal = palette(themeKey);
+  const accent: [number, number, number] = table.accentColor ?? pal.outer;
+  const SAFETY = 55;
+
+  const titleHeight = 8 + 15;
+  if (y + titleHeight > pageH - SAFETY) {
+    doc.addPage();
+    drawDecorativeBorder(doc, pageW, pageH, themeKey as any);
+    drawWatermark(doc, pageW, pageH, themeKey as any);
+    y = 15;
+  }
 
   // Subtitle-bar with icon
   doc.setFillColor(accent[0], accent[1], accent[2]);
   doc.roundedRect(x, y, maxW, 8, 1.5, 1.5, 'F');
-  doc.setFillColor(250, 204, 21);
+  doc.setFillColor(pal.gold[0], pal.gold[1], pal.gold[2]);
   doc.roundedRect(x, y, 3, 8, 1.5, 0, 'F');
   doc.setTextColor(255, 248, 220);
   doc.setFontSize(10.5);
@@ -376,21 +428,111 @@ function renderTable(
     doc.text(table.titleHi, pageW / 2, y + 5.5, { align: 'center' });
   }
 
-  y += 11;
+  y += 12;
+
+  const buildColumnStyles = (): Record<number, any> => {
+    const styles: Record<number, any> = {};
+    const n = table.headers.length;
+    const explicit = table.columnWidths ?? {};
+    const assigned: Record<number, number> = {};
+    let remaining = maxW;
+
+    for (let i = 0; i < n; i++) {
+      const w = explicit[i];
+      if (typeof w === 'number' && w > 0) {
+        assigned[i] = Math.min(w, maxW);
+        remaining -= assigned[i];
+      }
+    }
+
+    if (Object.keys(assigned).length === 0) {
+      const header0 = (table.headers[0] ?? '').toLowerCase();
+      const header1 = (table.headers[1] ?? '').toLowerCase();
+      const header2 = (table.headers[2] ?? '').toLowerCase();
+      const headerN_1 = (table.headers[n - 1] ?? '').toLowerCase();
+
+      if (header0 === '#' || header0.startsWith('no.') || header0.startsWith('sl')) {
+        assigned[0] = 8; remaining -= 8;
+      } else if (/time|मुहूर्त|edt|ist|hour/.test(header0)) {
+        assigned[0] = 30; remaining -= 30;
+      }
+
+      if (/quality|score|गुणवत्ता|0-100|\/100/.test(header2)) {
+        assigned[2] = 22; remaining -= 22;
+      } else if (/week|सप्ताह|rule|नियम/.test(header0) && n >= 3) {
+        if (assigned[0] === undefined) { assigned[0] = 30; remaining -= 30; }
+      }
+
+      if (/verdict|result|निर्णय|conclusion/.test(headerN_1)) {
+        assigned[n - 1] = Math.min(50, remaining - 20);
+        remaining -= assigned[n - 1];
+      } else if (/checklist|ritual|चेकलिस्ट|item|सामग्री/.test(headerN_1)) {
+        assigned[n - 1] = Math.max(remaining, 50);
+      }
+
+      if (/energy|ऊर्जा|expected|event|events/.test(header1) && assigned[1] === undefined && n >= 4) {
+        assigned[1] = 32; remaining -= 32;
+      }
+    } else {
+      for (let i = 0; i < n; i++) {
+        const w = explicit[i];
+        if (typeof w === 'number' && w > 0) {
+          if (assigned[i] === undefined) {
+            assigned[i] = w;
+            remaining -= w;
+          }
+        }
+      }
+    }
+
+    const unsetCount = Math.max(1, n - Object.keys(assigned).length);
+    const share = Math.max(18, Math.floor(remaining / unsetCount));
+    let leftover = remaining;
+    for (let i = 0; i < n; i++) {
+      if (assigned[i] === undefined) {
+        const isLast = i === n - 1;
+        const mine = isLast ? leftover : share;
+        assigned[i] = Math.max(10, mine);
+        leftover -= mine;
+      }
+    }
+
+    for (let i = 0; i < n; i++) {
+      styles[i] = {
+        cellWidth: assigned[i],
+        minCellWidth: assigned[i],
+        maxCellWidth: assigned[i],
+        overflow: 'linebreak',
+        cellPadding: 2.4,
+        valign: 'middle',
+      };
+      if (i === 0) {
+        styles[i].fontStyle = 'bold';
+        styles[i].textColor = pal.labelText;
+      }
+    }
+    return styles;
+  };
+  const finalColumnStyles = buildColumnStyles();
 
   autoTable(doc, {
     startY: y,
-    margin: { left: x, right: pageW - x - maxW },
+    margin: { left: x, right: pageW - x - maxW, top: 15, bottom: 30 },
     head: [table.headers],
     body: table.rows.map(r => r),
     theme: 'grid',
+    tableWidth: maxW,
+    useCss: false,
+    rowPageBreak: 'auto',
     styles: {
       fontSize: 8,
-      cellPadding: 2,
-      lineColor: [220, 160, 80],
+      cellPadding: 2.4,
+      lineColor: pal.lineTint,
       lineWidth: 0.15,
       textColor: [24, 24, 27],
       font: 'helvetica',
+      overflow: 'linebreak',
+      valign: 'middle',
     },
     headStyles: {
       fillColor: accent,
@@ -400,40 +542,45 @@ function renderTable(
       fontSize: 8.5,
     },
     alternateRowStyles: {
-      fillColor: [255, 249, 219],
+      fillColor: pal.softFill,
     },
-    columnStyles: {
-      0: { fontStyle: 'bold', cellWidth: 'auto', textColor: [120, 53, 15] },
+    columnStyles: finalColumnStyles,
+    didDrawPage: (d) => {
+      const currentPageNum = doc.getNumberOfPages();
+      doc.setPage(currentPageNum);
+      drawDecorativeBorder(doc, pageW, pageH, themeKey as any);
+      drawWatermark(doc, pageW, pageH, themeKey as any);
     },
     didDrawCell: (data) => {
       if (data.section === 'body' && typeof data.cell.text[0] === 'string') {
         const txt = data.cell.text[0] as string;
         if (txt.includes('⭐') || txt.includes('🏆') || txt.includes('BEST') || txt.includes('✅')) {
-          data.cell.styles.textColor = [22, 163, 74];
-          data.cell.styles.fillColor = [220, 252, 231];
+          data.cell.styles.textColor = themeKey === 'magenta' ? [157, 23, 77] : [22, 163, 74];
+          data.cell.styles.fillColor = themeKey === 'magenta' ? [252, 231, 243] : [220, 252, 231];
         } else if (txt.includes('❌') || txt.includes('AVOID') || txt.includes('🔴')) {
-          data.cell.styles.textColor = [220, 38, 38];
-          data.cell.styles.fillColor = [254, 226, 226];
+          data.cell.styles.textColor = [225, 29, 72];
+          data.cell.styles.fillColor = themeKey === 'magenta' ? [255, 228, 238] : [254, 226, 226];
         } else if (txt.includes('⚠️') || txt.includes('CAUTION')) {
-          data.cell.styles.textColor = [202, 138, 4];
-          data.cell.styles.fillColor = [254, 243, 199];
+          data.cell.styles.textColor = themeKey === 'magenta' ? [194, 65, 12] : [202, 138, 4];
+          data.cell.styles.fillColor = themeKey === 'magenta' ? [254, 240, 245] : [254, 243, 199];
         }
       }
     },
   });
 
-  const endY = (doc as any).lastAutoTable.finalY + 4;
+  const endY = (doc as any).lastAutoTable.finalY + 5;
   return { endY };
 }
 
 // ────────────────────────────────────────────────────────────────────────
 // 5. WATERMARK — center
 // ────────────────────────────────────────────────────────────────────────
-function drawWatermark(doc: jsPDF, pageW: number, pageH: number): void {
-  doc.setTextColor(233, 213, 163);
+function drawWatermark(doc: jsPDF, pageW: number, pageH: number, theme?: 'classic' | 'premium' | 'royal' | 'magenta'): void {
+  const isMagenta = theme === 'magenta';
+  const tint: [number, number, number] = isMagenta ? [244, 182, 214] : [233, 213, 163];
+  doc.setTextColor(tint[0], tint[1], tint[2]);
   doc.setFontSize(42);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(233, 213, 163);
   doc.text('ॐ', pageW / 2, pageH / 2 - 5, { align: 'center' });
   doc.setFontSize(28);
   doc.text('卐', pageW / 2, pageH / 2 + 20, { align: 'center' });
@@ -447,39 +594,45 @@ function renderSubjectInfoBox(
   info: { label: string; value: string }[],
   x: number,
   y: number,
-  maxW: number
+  maxW: number,
+  theme: 'classic' | 'premium' | 'royal' | 'magenta' = 'premium'
 ): { endY: number } {
-  const rows = 4;
-  const boxH = 6 + Math.ceil(info.length / 2) * 5.2 + 4;
-  doc.setFillColor(255, 249, 219);
-  doc.setDrawColor(202, 138, 4);
+  const pal = palette(theme);
+  const rowH = 6.0;
+  const numRows = Math.ceil(info.length / 2);
+  const boxH = 6 + numRows * rowH + 5;
+  doc.setFillColor(pal.softFill[0], pal.softFill[1], pal.softFill[2]);
+  doc.setDrawColor(pal.lineTint[0], pal.lineTint[1], pal.lineTint[2]);
   doc.setLineWidth(0.5);
   doc.roundedRect(x, y, maxW, boxH, 2, 2, 'FD');
 
-  doc.setFillColor(120, 53, 15);
-  doc.roundedRect(x, y, maxW, 5, 2, 0, 'F');
-  doc.setTextColor(250, 204, 21);
+  doc.setFillColor(pal.labelText[0], pal.labelText[1], pal.labelText[2]);
+  doc.roundedRect(x, y, maxW, 5.5, 2, 0, 'F');
+  doc.setTextColor(pal.gold[0], pal.gold[1], pal.gold[2]);
   doc.setFontSize(9.5);
   doc.setFont('helvetica', 'bold');
-  doc.text('📋 REPORT SUBJECT / जन्म विवरण', x + 5, y + 3.5);
+  doc.text('📋 REPORT SUBJECT / जन्म विवरण', x + 5, y + 3.8);
 
-  y += 10;
+  y += 11;
 
-  const colW = maxW / 2 - 8;
   info.forEach((item, idx) => {
     const col = idx % 2;
     const row = Math.floor(idx / 2);
     const lx = x + 5 + col * (maxW / 2);
-    const ly = y + row * 5.2;
-    doc.setTextColor(120, 53, 15);
-    doc.setFontSize(7.5);
+    const ly = y + row * rowH;
+    doc.setTextColor(pal.labelText[0], pal.labelText[1], pal.labelText[2]);
+    doc.setFontSize(7.8);
     doc.setFont('helvetica', 'bold');
-    doc.text(item.label + ':', lx, ly);
+    const labelTxt = item.label + ':';
+    doc.text(labelTxt, lx, ly);
     doc.setTextColor(24, 24, 27);
+    doc.setFontSize(7.8);
     doc.setFont('helvetica', 'normal');
-    doc.text(String(item.value).slice(0, 40), lx + 2 + doc.getTextWidth(item.label + ': '), ly);
+    const maxValLen = 38;
+    const val = String(item.value).slice(0, maxValLen);
+    doc.text(val, lx + 1.5 + doc.getTextWidth(labelTxt), ly);
   });
-  return { endY: y + Math.ceil(info.length / 2) * 5.2 + 6 };
+  return { endY: y + numRows * rowH + 6 };
 }
 
 // ────────────────────────────────────────────────────────────────────────
@@ -491,17 +644,19 @@ function renderFooter(
   pageH: number,
   blessing: string,
   currentPage: number,
-  totalPages: number
+  totalPages: number,
+  theme: 'classic' | 'premium' | 'royal' | 'magenta' = 'premium'
 ): void {
+  const pal = palette(theme);
   const y = pageH - 8;
-  doc.setDrawColor(202, 138, 4);
+  doc.setDrawColor(pal.lineTint[0], pal.lineTint[1], pal.lineTint[2]);
   doc.setLineWidth(0.3);
   doc.line(14, y - 3, pageW - 14, y - 3);
-  doc.setTextColor(120, 53, 15);
+  doc.setTextColor(pal.labelText[0], pal.labelText[1], pal.labelText[2]);
   doc.setFontSize(6.5);
   doc.setFont('helvetica', 'italic');
   doc.text(blessing, pageW / 2, y - 0.5, { align: 'center', maxWidth: pageW - 40 });
-  doc.setTextColor(156, 80, 20);
+  doc.setTextColor(pal.labelText[0], pal.labelText[1], pal.labelText[2]);
   doc.setFontSize(6.5);
   doc.setFont('helvetica', 'normal');
   doc.text(`Page ${currentPage} / ${totalPages}   •   Generated by Vedic Rajkumar`, pageW - 14, y - 0.5, { align: 'right' });
@@ -510,21 +665,21 @@ function renderFooter(
 // ────────────────────────────────────────────────────────────────────────
 // 8. MAIN GENERATOR
 // ────────────────────────────────────────────────────────────────────────
-export function generateVedicGaneshPDF(config: GaneshPDFConfig): jsPDF {
-  const theme: 'classic' | 'premium' | 'royal' = config.theme ?? 'premium';
+export function buildVedicGaneshPDF(config: GaneshPDFConfig): jsPDF {
+  const theme: 'classic' | 'premium' | 'royal' | 'magenta' = config.theme ?? 'premium';
   const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
   const pageW = 210;
   const pageH = 297;
   const margin = 14;
   const contentW = pageW - margin * 2;
   const contentX = margin;
-  const accent: [number, number, number] = theme === 'classic' ? [153, 27, 27] : theme === 'royal' ? [146, 64, 14] : [120, 53, 15];
-  const gold: [number, number, number] = [250, 204, 21];
+  const accent: [number, number, number] = theme === 'classic' ? [153, 27, 27] : theme === 'royal' ? [146, 64, 14] : theme === 'magenta' ? [157, 23, 77] : [120, 53, 15];
+  const gold: [number, number, number] = theme === 'magenta' ? [251, 207, 232] : [250, 204, 21];
   const blessing = config.footerBlessing ?? '॥ श्री गणेशाय नमः ॐ वक्रतुण्ड महाकाय सूर्यकोटि समप्रभः। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥';
 
   // ── PAGE 1 ────────────────────────────────────────────────────────
   drawDecorativeBorder(doc, pageW, pageH, theme);
-  drawWatermark(doc, pageW, pageH);
+  drawWatermark(doc, pageW, pageH, theme);
   let y = drawGaneshHeader(doc, pageW, theme);
 
   // Title + subtitle below header banner
@@ -546,31 +701,32 @@ export function generateVedicGaneshPDF(config: GaneshPDFConfig): jsPDF {
   }
   y += 20;
 
-  const subjectBox = renderSubjectInfoBox(doc, config.subjectInfo, contentX, y, contentW);
-  y = subjectBox.endY + 4;
+  const subjectBox = renderSubjectInfoBox(doc, config.subjectInfo, contentX, y, contentW, theme);
+  y = subjectBox.endY + 5;
 
   for (const section of config.sections) {
-    if (y > pageH - 50) {
+    if (y > pageH - 55) {
       doc.addPage();
       drawDecorativeBorder(doc, pageW, pageH, theme);
-      drawWatermark(doc, pageW, pageH);
+      drawWatermark(doc, pageW, pageH, theme);
       y = 15;
     }
     (section as any)._themeOverride = theme;
     const end = renderSection(doc, section, contentX, y, contentW, pageW, pageH);
-    y = end.y + 3;
+    y = end.y + 4;
   }
 
   if (config.tables) {
     for (const table of config.tables) {
-      if (y > pageH - 50) {
+      if (y > pageH - 55) {
         doc.addPage();
         drawDecorativeBorder(doc, pageW, pageH, theme);
-        drawWatermark(doc, pageW, pageH);
+        drawWatermark(doc, pageW, pageH, theme);
         y = 15;
       }
+      (table as any)._themeOverride = theme;
       const end = renderTable(doc, table, contentX, y, contentW, pageW, pageH);
-      y = end.endY + 3;
+      y = end.endY + 4;
     }
   }
 
@@ -578,11 +734,61 @@ export function generateVedicGaneshPDF(config: GaneshPDFConfig): jsPDF {
   const total = doc.getNumberOfPages();
   for (let i = 1; i <= total; i++) {
     doc.setPage(i);
-    renderFooter(doc, pageW, pageH, blessing, i, total);
+    renderFooter(doc, pageW, pageH, blessing, i, total, theme);
   }
 
+  return doc;
+}
+
+export function generateVedicGaneshPDFBuffer(config: GaneshPDFConfig): Uint8Array | ArrayBuffer | string {
+  const doc = buildVedicGaneshPDF(config);
+  try {
+    const arr = doc.output('uint8array') as unknown;
+    if (arr instanceof Uint8Array && arr.length > 0) return arr;
+  } catch { /* fallthrough */ }
+  try {
+    const ab = doc.output('arraybuffer') as unknown;
+    if (ab instanceof ArrayBuffer && ab.byteLength > 0) return ab;
+  } catch { /* fallthrough */ }
+  return doc.output();
+}
+
+export function generateVedicGaneshPDF(config: GaneshPDFConfig): jsPDF {
+  const doc = buildVedicGaneshPDF(config);
   doc.save(config.filename);
   return doc;
+}
+
+export function extractClientName(subjectInfo: { label: string; value: string }[]): string {
+  const nameEntry = subjectInfo.find(item =>
+    /^name$/i.test(item.label.trim()) ||
+    /^name\s*\//i.test(item.label.trim()) ||
+    item.label.toLowerCase().includes('client') ||
+    item.label.toLowerCase().includes('नाम')
+  );
+  if (nameEntry) {
+    return nameEntry.value
+      .trim()
+      .replace(/[^\w\u00C0-\u024F\u1E00-\u1EFF\s-]/g, '')
+      .replace(/\s+/g, '_')
+      .replace(/_+/g, '_')
+      .replace(/^_|_$/g, '');
+  }
+  const fallback = subjectInfo[0]?.value ?? 'Unknown_Client';
+  return fallback
+    .trim()
+    .replace(/[^\w\u00C0-\u024F\u1E00-\u1EFF\s-]/g, '')
+    .replace(/\s+/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_|_$/g, '');
+}
+
+export function getTodayFolderName(): string {
+  const now = new Date();
+  const yyyy = now.getFullYear();
+  const mm = String(now.getMonth() + 1).padStart(2, '0');
+  const dd = String(now.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
 }
 
 /**
@@ -608,6 +814,16 @@ export function generateVedicGaneshPDF(config: GaneshPDFConfig): jsPDF {
  *  ✔ Professional autoTables with conditional emoji-based color cells
  *  ✔ Footer with Vakratunda Mahakaya Ganesh blessing + page numbers
  */
-export default { generateVedicGaneshPDF, drawDecorativeBorder, drawGaneshHeader, renderTable, renderSection };
+export default {
+  generateVedicGaneshPDF,
+  buildVedicGaneshPDF,
+  generateVedicGaneshPDFBuffer,
+  extractClientName,
+  getTodayFolderName,
+  drawDecorativeBorder,
+  drawGaneshHeader,
+  renderTable,
+  renderSection,
+};
 export const ESSENTIAL_PDF_GENERATOR = generateVedicGaneshPDF;
 export const REGISTER_AS_DEFAULT_FOR_FUTURE_TASKS = true;

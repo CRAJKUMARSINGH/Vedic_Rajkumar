@@ -56,6 +56,14 @@ const PriyanshMuhuratPage = lazy(() => import('@/pages/PriyanshMuhuratPage'));
 const PrivacyPolicyPage   = lazy(() => import('@/pages/PrivacyPolicyPage'));
 const TermsOfServicePage  = lazy(() => import('@/pages/TermsOfServicePage'));
 
+// ─── Supplement / Synthesis pages ─────────────────────────────────────────────
+const SupplementsPage             = lazy(() => import('@/pages/SupplementsPage'));
+const SynthesisPage               = lazy(() => import('@/pages/SynthesisPage'));
+const ShadbalaSupplementPage      = lazy(() => import('@/pages/ShadbalaSupplementPage'));
+const JaiminiSupplementPage       = lazy(() => import('@/pages/JaiminiSupplementPage'));
+const YogaInsightsSupplementPage  = lazy(() => import('@/pages/YogaInsightsSupplementPage'));
+const PsychologicalProfilePage    = lazy(() => import('@/pages/PsychologicalProfilePage'));
+
 // ─── Route config type ────────────────────────────────────────────────────────
 export interface RouteConfig {
   path: string;
@@ -140,6 +148,20 @@ export const routes: RouteConfig[] = [
   // ── Legal ────────────────────────────────────────────────────────────────────
   { path: '/privacy', element: <PrivacyPolicyPage /> },
   { path: '/terms',   element: <TermsOfServicePage /> },
+
+  // ── Supplements & Synthesis (active — supplement core features with deep analysis)
+  //   These are not the 4 core features but are working end-to-end, so they get
+  //   the real page component instead of ComingSoon. Nav does not promote them.
+  { path: '/supplements',                       element: <SupplementsPage /> },
+  { path: '/supplements/shadbala',              element: <ShadbalaSupplementPage /> },
+  { path: '/supplements/jaimini',               element: <JaiminiSupplementPage /> },
+  { path: '/supplements/yoga-insights',         element: <YogaInsightsSupplementPage /> },
+  { path: '/supplements/psychological-profile', element: <PsychologicalProfilePage /> },
+  { path: '/shadbala-supplement',               element: <Navigate to="/supplements/shadbala" replace /> },
+  { path: '/jaimini-supplement',                element: <Navigate to="/supplements/jaimini" replace /> },
+  { path: '/yoga-insights-supplement',          element: <Navigate to="/supplements/yoga-insights" replace /> },
+  { path: '/psychological-profile',             element: <Navigate to="/supplements/psychological-profile" replace /> },
+  { path: '/synthesis',                         element: <SynthesisPage /> },
 
   // ══════════════════════════════════════════════════════════════════════════════
   // ARCHIVED FEATURES — Coming Soon

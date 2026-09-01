@@ -6,11 +6,12 @@
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronRight, Home } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import type { ReactNode } from 'react';
 
 interface BreadcrumbItem {
   label: string;
   href: string;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
 }
 
 interface BreadcrumbNavigationProps {
@@ -134,7 +135,7 @@ function generateBreadcrumbsFromPath(pathname: string, lang: 'en' | 'hi'): Bread
 interface BreadcrumbWithActionsProps extends BreadcrumbNavigationProps {
   quickActions?: Array<{
     label: string;
-    icon: React.ReactNode;
+    icon: ReactNode;
     onClick: () => void;
     shortcut?: string;
   }>;

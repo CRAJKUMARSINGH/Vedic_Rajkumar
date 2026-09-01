@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
-import { useChartCalculation } from '@/hooks/useChartCalculation';
-import { EnhancedBirthInputForm } from '@/components/EnhancedBirthInputForm';
+import { useState } from 'react';
+import { useChartCalculation, type BirthInput } from '@/hooks/useChartCalculation';
+import EnhancedBirthInputForm from '@/components/EnhancedBirthInputForm';
 import { SynthesisDashboard } from '@/components/synthesis/SynthesisDashboard';
-import { BirthChartInput } from '@/lib/astrology/types';
-import { MainLayout } from '@/components/MainLayout';
+import MainLayout from '@/components/MainLayout';
 import { SEO } from '@/components/SEO';
 
+const parseCoords = (loc: string) => {
+  const m = loc.match(/\(([^,]+),\s*([^)]+)\)/);
+  if (m) { const lat = parseFloat(m[1]), lon = parseFloat(m[2]); if (!isNaN(lat) && !isNaN(lon)) return { lat, lon }; }
+  return { lat: 23.0, lon: 72.0 };
+};
+
 export default function SynthesisPage() {
-  const [birthData, setBirthData] = useState<BirthChartInput | null>(null);
-  const chart = useChartCalculation(birthData);
+  const [rawBirth, setRawBirth] = useState<{ date: string; time: string; location: string } | null>(null);
+  const [birthData, setBirthData] = useState<BirthInput | null>(null);
+  const { data: chart, isCalculating } = useChartCalculation(birthData);
+
+  const handleSubmit = (data: { date: string; time: string; location: string }) => {
+    const coords = parseCoords(data.location);
+    setRawBirth(data);
+    setBirthData({ date: data.date, time: data.time, lat: coords.lat, lon: coords.lon });
+  };
 
   return (
     <MainLayout>
@@ -23,10 +35,10 @@ export default function SynthesisPage() {
           </h1>
           
           <div className="mb-8">
-            <EnhancedBirthInputForm onSubmit={setBirthData} />
+            <EnhancedBirthInputForm lang="en" onSubmit={handleSubmit} />
           </div>
 
-          {chart && (
+          {rawBirth && (
             <div className="mt-8">
               <SynthesisDashboard chart={chart} />
             </div>

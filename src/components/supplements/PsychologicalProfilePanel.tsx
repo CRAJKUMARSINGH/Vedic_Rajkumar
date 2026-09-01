@@ -32,15 +32,15 @@
  */
 
 import { useState } from "react";
-import { assembleEngineData }  from "../services/engineDataAssembler";
-import { searchLocation }      from "../services/geocodingService";
-import EnhancedBirthInputForm from "./EnhancedBirthInputForm";
+import { assembleEngineData }  from "@/services/engineDataAssembler";
+import { searchLocation }      from "@/services/geocodingService";
+import EnhancedBirthInputForm from "@/components/EnhancedBirthInputForm";
 import type {
   PsychologicalProfile,
   NakshatraFear,
   RahuKetuKarmicStatement,
   SaturnWoundStatement,
-} from "../services/psychologicalProfileService";
+} from "@/services/psychologicalProfileService";
 
 // ─── Constants ──────────────────────────────────────────────────────────────────
 
@@ -142,7 +142,7 @@ function FearTab({ data }: { data: NakshatraFear }) {
       <div className="rounded-xl border border-white/10 bg-white/[0.025] p-4">
         <p className="text-xs font-semibold text-amber-500 uppercase tracking-wide mb-3">Nakshatra Group Context</p>
         <div className="flex items-center gap-2 flex-wrap">
-          {data.group.split('–').map((n, i) => (
+          {data.group.split('–').map((n: string, i: number) => (
             <span
               key={i}
               className={`text-xs px-2.5 py-1 rounded-lg border font-medium ${
@@ -330,7 +330,7 @@ function SaturnTab({ data }: { data: SaturnWoundStatement }) {
             Problems in these areas often trace back to the Saturn wound — not to those houses' significations directly.
           </p>
           <div className="flex flex-wrap gap-2">
-            {data.aspectedHouses.map(h => (
+            {data.aspectedHouses.map((h: number) => (
               <div key={h} className="rounded-lg border border-slate-500/20 bg-slate-500/10 px-3 py-2">
                 <p className="text-xs font-bold text-slate-300">{ORDINAL[h]} House</p>
                 <p className="text-[9px] text-slate-500">{HOUSE_KEYWORDS[h] ?? ''}</p>
@@ -504,8 +504,8 @@ export function PsychologicalProfilePanel() {
               {/* Split into the 3 sentences for visual breathing room */}
               {synthesis_narrative
                 .split(/(?<=[.!?])\s+/)
-                .filter(s => s.trim().length > 0)
-                .map((sentence, i) => (
+                .filter((s: string) => s.trim().length > 0)
+                .map((sentence: string, i: number) => (
                   <p key={i} className="text-sm text-purple-100/85 leading-[1.9] mb-2 last:mb-0">
                     {sentence}
                   </p>

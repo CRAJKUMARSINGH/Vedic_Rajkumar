@@ -225,7 +225,7 @@ export const LandingPageV3 = () => {
             transition={{ duration: 0.7 }}
             className="space-y-6 relative"
           >
-            <Badge className="rounded-full border border-amber-500/20 bg-amber-500/5 px-4 py-1.5 text-amber-300 text-xs font-semibold tracking-wider uppercase inline-flex items-center gap-2">
+            <Badge variant="outline" className="rounded-full border border-amber-500/20 bg-amber-500/5 px-4 py-1.5 text-amber-300 text-xs font-semibold tracking-wider uppercase inline-flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
               Powered by Ancient Wisdom + Modern AI
             </Badge>
@@ -322,7 +322,7 @@ export const LandingPageV3 = () => {
         {/* Features grid */}
         <section id="features" className="max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-24">
           <div className="text-center mb-14 space-y-3">
-            <Badge className="rounded-full border border-purple-500/20 bg-purple-500/5 text-purple-300 text-xs font-semibold px-4 py-1 uppercase">
+            <Badge variant="outline" className="rounded-full border border-purple-500/20 bg-purple-500/5 text-purple-300 text-xs font-semibold px-4 py-1 uppercase">
               <Telescope className="h-3.5 w-3.5 inline mr-1.5" />
               Active Now
             </Badge>
@@ -457,8 +457,9 @@ export const LandingPageV3 = () => {
         {/* Final CTA */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
             className="rounded-3xl border border-slate-800 bg-[#050512]/80 p-10 sm:p-14"
           >
