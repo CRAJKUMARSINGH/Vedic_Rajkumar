@@ -23,34 +23,21 @@ const NAV_LINKS = [
   // ── Shell / workspace ────────────────────────────────────────────────────────
   { href: '/',           label: 'Home',         labelHi: 'होम',         badge: null,    group: 'shell' },
   { href: '/app',        label: '⚡ Workspace', labelHi: '⚡ वर्कस्पेस', badge: 'App',   group: 'shell' },
-  { href: '/dashboard',  label: 'Dashboard',    labelHi: 'डैशबोर्ड',    badge: null,    group: 'shell' },
 
   // ── Core Feature 1: Kundli ───────────────────────────────────────────────────
   { href: '/horoscope',         label: 'Kundli',          labelHi: 'कुंडली',              badge: null,    group: 'core' },
-  { href: '/dasha',             label: 'Dasha',           labelHi: 'दशा',                badge: null,    group: 'core' },
-  { href: '/dasha-timeline',    label: 'Dasha Timeline',  labelHi: 'दशा टाइमलाइन',        badge: null,    group: 'core' },
 
   // ── Core Feature 2: Prashna ──────────────────────────────────────────────────
   { href: '/prashna',           label: 'Prashna',         labelHi: 'प्रश्न',              badge: 'AI',    group: 'core' },
-  { href: '/prashna-ai',        label: 'Prashna Engine',  labelHi: 'प्रश्न इंजन',         badge: 'AI',    group: 'core' },
-  { href: '/prashna-history',   label: 'Prashna History', labelHi: 'प्रश्न इतिहास',        badge: null,    group: 'core' },
 
   // ── Core Feature 3: Matchmaking ──────────────────────────────────────────────
   { href: '/matchmaking',         label: 'Kundli Milan',         labelHi: 'कुंडली मिलान',    badge: null,  group: 'core' },
-  { href: '/enhanced-matchmaking',label: 'Enhanced Milan',        labelHi: 'उन्नत मिलान',     badge: 'New', group: 'core' },
-  { href: '/kundli-compare',      label: 'Compare Kundlis',      labelHi: 'कुंडली तुलना',    badge: 'New', group: 'core' },
-  { href: '/marriage',            label: 'Vedic Marriage',       labelHi: 'वैदिक विवाह',     badge: 'Pro', group: 'core' },
-  { href: '/wedding-muhurat',     label: 'Wedding Muhurat',      labelHi: 'विवाह मुहूर्त',   badge: 'New', group: 'core' },
 
   // ── Core Feature 4: Panchang ─────────────────────────────────────────────────
   { href: '/panchang',          label: 'Panchang',        labelHi: 'पंचांग',              badge: null,    group: 'core' },
-  { href: '/muhurat',           label: 'Muhurat',         labelHi: 'मुहूर्त',             badge: null,    group: 'core' },
-  { href: '/enhanced-muhurat',  label: 'Muhurta Finder',  labelHi: 'मुहूर्त खोजक',        badge: 'New',   group: 'core' },
 
-  // ── User / Account ───────────────────────────────────────────────────────────
-  { href: '/my-readings',       label: 'My Readings',     labelHi: 'मेरी रीडिंग',          badge: null,    group: 'user' },
-  { href: '/pricing',           label: 'Pricing',         labelHi: 'मूल्य',                badge: null,    group: 'user' },
-  { href: '/feedback',          label: 'Feedback',        labelHi: 'प्रतिक्रिया',           badge: null,    group: 'user' },
+  // ── Roadmap ─────────────────────────────────────────────────────────────────
+  { href: '/features',          label: 'Roadmap',         labelHi: 'रोडमैप',               badge: null,    group: 'user' },
 ];
 
 interface NavigationProps {
@@ -64,36 +51,38 @@ export default function Navigation({ lang, onLangToggle }: NavigationProps) {
   const isHi = lang === 'hi';
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-[hsl(var(--auspicious-accent)/0.3)] bg-gradient-to-r from-[#8B0000] via-[#B22222] to-[#8B0000] shadow-lg">
+    <nav aria-label="Main navigation" className="sticky top-0 z-50 w-full border-b border-[hsl(var(--auspicious-accent)/0.3)] bg-gradient-to-r from-[#8B0000] via-[#B22222] to-[#8B0000] shadow-lg">
       <div className="max-w-screen-2xl mx-auto px-4 flex h-14 items-center gap-4">
         {/* Logo — routes to /app workspace so users aren't kicked back to marketing */}
         <Link
           to="/app"
           className="flex items-center gap-2 font-serif font-bold text-white text-lg shrink-0 group"
+          aria-label={isHi ? 'वैदिक राजकुमार मुख्य पृष्ठ' : 'Vedic Rajkumar Home Workspace'}
         >
-          <span className="text-2xl group-hover:scale-110 transition-transform">🪔</span>
+          <span className="text-2xl group-hover:scale-110 transition-transform" aria-hidden="true">🪔</span>
           <span className="hidden sm:inline tracking-wide drop-shadow-sm">
             {isHi ? 'वैदिक राजकुमार' : 'Vedic Rajkumar'}
           </span>
-          <span className="text-xs text-[hsl(var(--auspicious-accent))] opacity-70">✦</span>
+          <span className="text-xs text-[hsl(var(--auspicious-accent))] opacity-70" aria-hidden="true">✦</span>
         </Link>
 
         {/* Desktop nav — scrollable */}
         <div className="flex-1 overflow-x-auto hidden md:flex">
-          <div className="flex gap-1 min-w-max items-center">
+          <div className="flex gap-1 min-w-max items-center" role="menubar">
             {NAV_LINKS.map((l, idx) => {
               const prevGroup = idx > 0 ? NAV_LINKS[idx - 1].group : l.group;
               const showDivider = idx > 0 && l.group !== prevGroup;
+              const isCurrent = location.pathname === l.href;
               return (
                 <React.Fragment key={l.href}>
                   {showDivider && (
                     <span className="h-4 w-px bg-white/20 mx-1 shrink-0" aria-hidden="true" />
                   )}
-                  <Link to={l.href}>
+                  <Link to={l.href} aria-current={isCurrent ? 'page' : undefined}>
                     <Button
                       variant="ghost"
                       size="sm"
-                      className={`relative text-xs px-2.5 text-white/90 hover:text-white hover:bg-white/10 ${location.pathname === l.href ? 'bg-white/20 text-white font-bold' : ''} ${isHi ? 'font-hindi' : ''}`}
+                      className={`relative text-xs px-2.5 text-white/90 hover:text-white hover:bg-white/10 ${isCurrent ? 'bg-white/20 text-white font-bold' : ''} ${isHi ? 'font-hindi' : ''}`}
                     >
                       {isHi ? l.labelHi : l.label}
                       {l.badge && (
@@ -116,6 +105,7 @@ export default function Navigation({ lang, onLangToggle }: NavigationProps) {
             size="sm"
             onClick={onLangToggle}
             className="text-xs font-bold border-white/30 text-white hover:bg-white/10 hover:text-white"
+            aria-label={isHi ? 'Switch to English language' : 'हिंदी भाषा में बदलें'}
           >
             {isHi ? 'EN' : 'हिं'}
           </Button>
@@ -132,6 +122,7 @@ export default function Navigation({ lang, onLangToggle }: NavigationProps) {
                 variant="ghost"
                 size="icon"
                 className="md:hidden h-8 w-8 text-white hover:bg-white/10"
+                aria-label={isHi ? 'नेविगेशन मेनू खोलें' : 'Open navigation menu'}
               >
                 <Menu className="h-4 w-4" />
               </Button>

@@ -28,11 +28,11 @@
  */
 
 import { useState, useMemo } from "react";
-import { assembleEngineData }    from "../services/engineDataAssembler";
-import { searchLocation }        from "../services/geocodingService";
-import EnhancedBirthInputForm   from "./EnhancedBirthInputForm";
-import type { DashaResult, DashaPeriod, AntarDasha, PratyantarDasha } from "../services/dashaService";
-import type { ShadabalaResult }  from "../services/shadabalaService";
+import { assembleEngineData }    from "@/services/engineDataAssembler";
+import { searchLocation }        from "@/services/geocodingService";
+import EnhancedBirthInputForm   from "@/components/EnhancedBirthInputForm";
+import type { DashaResult, DashaPeriod, AntarDasha, PratyantarDasha } from "@/services/dashaService";
+import type { ShadabalaResult }  from "@/services/shadabalaService";
 
 // ─── Constants ─────────────────────────────────────────────────────────────────
 

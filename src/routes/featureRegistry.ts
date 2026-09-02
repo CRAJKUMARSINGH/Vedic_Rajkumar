@@ -333,7 +333,7 @@ export const FEATURE_CATALOG: FeatureEntry[] = [
     isNew: true,
   },
   {
-    path: '/vedic-marriage',
+    path: '/marriage',
     label: 'Vedic Marriage',
     labelHi: 'वैदिक विवाह',
     description: 'Classical Vedic marriage analysis',

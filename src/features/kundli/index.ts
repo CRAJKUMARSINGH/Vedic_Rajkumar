@@ -21,4 +21,4 @@ export type {
   DashaResult,
 } from './types';
 
-export { calculateChart, calculateVimshottariDasha } from './stubs';
+export { calculateChart, calculateVimshottariDasha } from './engine';

@@ -23,6 +23,7 @@ export type Database = {
           id: string
           moon_rashi_index: number
           overall_score: number
+          owner_id: string | null
           results: Json
           transit_date: string
         }
@@ -34,6 +35,7 @@ export type Database = {
           id?: string
           moon_rashi_index: number
           overall_score: number
+          owner_id?: string | null
           results: Json
           transit_date: string
         }
@@ -45,6 +47,7 @@ export type Database = {
           id?: string
           moon_rashi_index?: number
           overall_score?: number
+          owner_id?: string | null
           results?: Json
           transit_date?: string
         }

@@ -28,7 +28,13 @@ const FIVE_RULES = [
   { n: 5, rule: 'CALL PARENTS EVERY WEEK — MIN: WED + SUN.', why: 'Father = SUN = Career framework. Mother = MOON = Mental peace. You CANNOT succeed long-term with EITHER blessing missing. 5 min call OK. Script: "Just calling to say hi, how are you?" DO IT.' },
 ];
 
-const CHECKLIST_ITEMS = [
+const WEEKLY_ENRICHMENT_TABLE = [
+  { wk: 'W1 (Sep 1-6)', k1: 'Listen 80%. Ask only clarifying questions', k2: 'Intro + Codebase README & docs × 1 full pass', k3: 'Tuesday join day rituals + Birds Saturday', k4: 'Name of janitor + 3 coworkers. NO gossip', k5: '3 names + roles written in notebook Sunday' },
+  { wk: 'W2 (Sep 7-13)', k1: 'First small ticket or task, DOUBLE-CHECK then ship', k2: '1 core framework tutorial / course (Udemy/Coursera free)', k3: 'Tue Hanuman, Wed Mercury (Green sprouts), Mon Shiva', k4: 'Gym / 30-min walk 4x this week. 8h sleep.', k5: 'Task completion screenshot + 1 learning note' },
+  { wk: 'W3 (Sep 14-20)', k1: 'Deadline week. PAUSE 5s before sending ANY message.', k2: 'Deep-dive: repo architecture &amp; debugging (Chrome DevTools)', k3: 'HANUMAN CHALISA DAILY this week (Mars test!)', k4: 'Conflict if it occurs: SILENCE. Schedule 1:1 with mentor.', k5: 'Friday 5pm: self-retro 3 wins + 2 improvements.' },
+  { wk: 'W4 (Sep 21-27)', k1: 'Saturn review. Process, quality, consistency. NO CORNERS.', k2: '2 LeetCode easy + doc the system design of ONE feature.', k3: 'Saturn fav day: Saturday early. Birds + Neelanjana fast.', k4: 'Wins tracker file started. Every small win = entry.', k5: '3 wins to show; 2 questions prepped for 1:1.' },
+  { wk: 'W5 (Sep 28-30)', k1: 'Thank You notes × 3-5 people who helped you this month.', k2: '1 public / portfolio commit or blog post.', k3: '40-day Shiva countdown check-in. 3/4 complete = on track.', k4: 'Dinner with ONE coworker. Build rapport out of office.', k5: 'Month-end self-review email draft to yourself.' },
+];
   '🎯 Join at 12:48 - 1:45 PM EDT (ABHIJIT MUHURAT CORE) — #1 slot!',
   '🛕 Brahma Muhurat Puja + HANUMAN CHALISA (TUESDAY!) before leaving',
   '👔 Outfit: 🔴 RED / Saffron / Emerald Green (Tuesday Mars colors)',

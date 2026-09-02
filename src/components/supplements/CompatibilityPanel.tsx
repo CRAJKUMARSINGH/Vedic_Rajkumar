@@ -35,10 +35,10 @@
  */
 
 import { useState } from "react";
-import { assembleEngineData } from "../services/engineDataAssembler";
-import { searchLocation }     from "../services/geocodingService";
-import EnhancedBirthInputForm from "./EnhancedBirthInputForm";
-import type { EngineData }    from "../services/engineDataAssembler";
+import { assembleEngineData } from "@/services/engineDataAssembler";
+import { searchLocation }     from "@/services/geocodingService";
+import EnhancedBirthInputForm from "@/components/EnhancedBirthInputForm";
+import type { EngineData }    from "@/services/engineDataAssembler";
 
 // ─── Constants ──────────────────────────────────────────────────────────────────
 

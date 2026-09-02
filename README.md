@@ -77,7 +77,9 @@ npm run preview    # Preview the build locally
 npm run lint       # Run ESLint across .js/.jsx/.ts/.tsx
 npm run typecheck  # Run TypeScript compiler (no emit)
 npm run test       # Start Vitest in watch mode
-npm run test:run   # Run Vitest once (CI mode)
+npm run test:run   # Run Vitest once (CI mode — all 16 test files)
+npm run test:core  # Run core gate tests (ephemeris, vedic engine, nav)
+npm run ci:core    # Run core gate + production build (CI pipeline)
 npm run test:e2e   # Run Playwright E2E tests
 ```
 

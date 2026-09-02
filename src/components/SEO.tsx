@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-const SITE_URL = 'https://gochar-phal.vercel.app';
+const SITE_URL = (import.meta.env.VITE_SITE_URL ?? 'https://vedicrajkumar.com').replace(/\/$/, '');
 const SITE_NAME = 'Vedic Rajkumar';
 const DEFAULT_IMAGE = '/og-image.png';
 
@@ -16,7 +16,7 @@ interface SEOProps {
 
 export const SEO = ({
   title,
-  description = 'Free Vedic astrology with accurate Kundli, transit predictions, matchmaking, career guidance and more. Bilingual Hindi/English.',
+  description = 'Focused Vedic astrology tools for Kundli, Prashna, Kundli Milan, Panchang, and related Jyotish analysis. Bilingual Hindi/English.',
   keywords = 'vedic astrology, kundli, horoscope, jyotish, birth chart, nakshatra, rashi, transit, gochar phal',
   canonical,
   ogImage = DEFAULT_IMAGE,
@@ -24,7 +24,8 @@ export const SEO = ({
   noIndex = false,
 }: SEOProps) => {
   const siteTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
-  const canonicalUrl = canonical ? `${SITE_URL}${canonical}` : SITE_URL;
+  const canonicalPath = canonical && canonical !== '/' ? canonical : '';
+  const canonicalUrl = `${SITE_URL}${canonicalPath}`;
   const imageUrl = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`;
 
   return (
@@ -68,7 +69,7 @@ export const webAppSchema = {
   '@type': 'WebApplication',
   name: SITE_NAME,
   url: SITE_URL,
-  description: 'Comprehensive Vedic astrology platform with free Kundli, horoscope, transit predictions and more.',
+  description: 'Focused Vedic astrology platform with Kundli, Prashna, Kundli Milan, Panchang, and related Jyotish tools.',
   applicationCategory: 'LifestyleApplication',
   operatingSystem: 'Web Browser',
   inLanguage: ['en', 'hi'],

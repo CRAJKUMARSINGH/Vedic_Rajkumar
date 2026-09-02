@@ -70,10 +70,10 @@ const FEATURES = [
 ];
 
 const TRUST_SIGNALS = [
-  'Lahiri Ayanamsa — Government of India Standard',
+  'Sidereal Lahiri Ayanamsa by default',
   'Full 36-Point Ashtakuta Matchmaking',
   'Daily Panchang with Rahu Kalam & Abhijit',
-  'Swiss Ephemeris bindings (arcminute precision)',
+  'Reference-chart validation in progress',
 ];
 
 const TRUSTED_BY = [
@@ -131,8 +131,8 @@ export const LandingPageV3 = () => {
   return (
     <div className="min-h-screen bg-[#020208] text-slate-100 font-sans selection:bg-amber-500/30 selection:text-white relative overflow-hidden">
       <SEO
-        title="Vedic Rajkumar | AI Astrology — Answer Every Question"
-        description="Vedic astrology AI answers for marriage, career, health, and more. Online kundli, prashna astrology, remedies, muhurta — bilingual EN/HI."
+        title="Vedic Rajkumar | Focused Vedic Astrology Tools"
+        description="Focused Vedic astrology tools for Kundli, Prashna, Matchmaking, and Panchang/Muhurta. Bilingual EN/HI prototype with transparent roadmap."
         keywords="vedic astrology AI, online kundli, prashna astrology, jyotish answers, vedic remedies, muhurta"
         canonical="/"
         structuredData={webAppSchema}
@@ -239,8 +239,9 @@ export const LandingPageV3 = () => {
             </h1>
 
             <p className="max-w-2xl mx-auto text-sm sm:text-base text-slate-400 leading-relaxed">
-              Vedic Rajkumar — your complete AI astrologer. Birth charts, Prashna (horary), remedies,
-              muhurta, matchmaking, and instant answers to all life questions.
+              Vedic Rajkumar focuses on four practical Jyotish tools: Kundli, Prashna,
+              Matchmaking, and Panchang/Muhurta. Advanced modules remain on the roadmap
+              until their calculations are fully validated.
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center pt-2">
@@ -250,7 +251,7 @@ export const LandingPageV3 = () => {
                 className="rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold hover:from-amber-400 hover:to-amber-500 h-12 px-8 shadow-[0_5px_25px_rgba(245,158,11,0.3)]"
               >
                 <Link to="/prashna" className="flex items-center gap-2">
-                  Ask Any Question Astrologically
+                  Ask a Prashna Question
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
@@ -288,7 +289,7 @@ export const LandingPageV3 = () => {
             <div className="flex items-center gap-2 mb-4">
               <MessageSquareQuote className="h-5 w-5 text-amber-400" />
               <h2 className="text-lg sm:text-xl font-bold text-white">
-                Ask Anything — Get Vedic Answers Instantly
+                Ask a Focused Prashna Question
               </h2>
             </div>
 
@@ -330,8 +331,8 @@ export const LandingPageV3 = () => {
               Four Features. Done Right.
             </h2>
             <p className="text-slate-400 text-sm max-w-xl mx-auto">
-              We ship fewer features than most astrology apps — because every one of ours is built to actually work.
-              More modules are on the roadmap; these four are ready today.
+              The app now favors depth over breadth: Kundli, Prashna, Matchmaking, and
+              Panchang/Muhurta are the active focus while advanced modules graduate one by one.
             </p>
           </div>
 

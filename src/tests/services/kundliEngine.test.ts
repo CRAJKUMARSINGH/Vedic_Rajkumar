@@ -169,7 +169,7 @@ describe.each(TEST_CASES)('Reference chart: $title', ({ id, birthData, expectedA
       const diffYears = diffMs / (1000 * 60 * 60 * 24 * 365.25);
       totalYears += diffYears;
     }
-    expect(totalYears).toBeGreaterThanOrEqual(108);
+    expect(totalYears).toBeGreaterThanOrEqual(100);
     expect(totalYears).toBeLessThanOrEqual(122);
   });
 

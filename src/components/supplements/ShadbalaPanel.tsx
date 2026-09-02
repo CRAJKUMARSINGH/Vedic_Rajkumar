@@ -29,10 +29,10 @@
  */
 
 import { useState } from "react";
-import { assembleEngineData } from "../services/engineDataAssembler";
-import { searchLocation } from "../services/geocodingService";
-import EnhancedBirthInputForm from "./EnhancedBirthInputForm";
-import type { ShadabalaResult, ShadabalaAnalysis } from "../services/shadabalaService";
+import { assembleEngineData } from "@/services/engineDataAssembler";
+import { searchLocation } from "@/services/geocodingService";
+import EnhancedBirthInputForm from "@/components/EnhancedBirthInputForm";
+import type { ShadabalaResult, ShadabalaAnalysis } from "@/services/shadabalaService";
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 

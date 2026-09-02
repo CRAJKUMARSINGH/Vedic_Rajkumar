@@ -9,6 +9,9 @@ import {
   sarvaAVBindu,
   computePanchanga,
   vRashiIdx,
+  vNakIdx,
+  vNakLord,
+  nakFraction,
   NAKSHATRAS
 } from '../../services/vedicAstroEngine';
 
@@ -76,6 +79,14 @@ describe('VedicAstroEngine - Comprehensive Tests', () => {
   });
 
   describe('5. Vimshottari Dasha', () => {
+    it('should start exactly at Magha with Ketu and full balance', () => {
+      const moonSidLon = 120; // 0° Magha
+      expect(vNakIdx(moonSidLon)).toBe(9);
+      expect(NAKSHATRAS[vNakIdx(moonSidLon)]).toBe('Magha');
+      expect(vNakLord(moonSidLon)).toBe('Ketu');
+      expect(nakFraction(moonSidLon)).toBeCloseTo(0, 8);
+    });
+
     it('should validate total dasha period is 120 years', () => {
       const moonSidLon = 120; // 0 Magha
       const birthJD = 2451545.0;

@@ -13,21 +13,21 @@ export interface PageSEO {
   schema?: Record<string, unknown>;
 }
 
-const BASE_URL = 'https://gochar-phal.vercel.app';
+const BASE_URL = (import.meta.env.VITE_SITE_URL ?? 'https://vedicrajkumar.com').replace(/\/$/, '');
 const DEFAULT_OG = `${BASE_URL}/og-image.png`;
 
 export const SEO_PAGES: Record<string, PageSEO> = {
   home: {
-    title: 'Vedic Rajkumar – Free Vedic Astrology & Gochar Phal',
-    description: 'Get accurate Vedic astrology readings: transit predictions, birth chart, Kundli Milan, Dasha, Yogas, Ashtakavarga and 100+ features. Free, bilingual (Hindi/English), PWA.',
-    keywords: 'vedic astrology, gochar phal, kundli, birth chart, transit predictions, jyotish, free astrology',
+    title: 'Vedic Rajkumar - Focused Vedic Astrology Tools',
+    description: 'Use focused Vedic astrology tools for Kundli, Prashna, Kundli Milan, Panchang, Dasha, and related Jyotish analysis. Bilingual Hindi/English.',
+    keywords: 'vedic astrology, kundli, prashna, kundli milan, panchang, dasha, jyotish',
     canonical: '/',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
       name: 'Vedic Rajkumar',
       url: BASE_URL,
-      description: 'Comprehensive Vedic astrology platform with 100+ features',
+      description: 'Focused Vedic astrology platform with Kundli, Prashna, Kundli Milan, Panchang, and related Jyotish tools',
       applicationCategory: 'LifestyleApplication',
       operatingSystem: 'Web',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
@@ -145,8 +145,8 @@ export const SEO_PAGES: Record<string, PageSEO> = {
  */
 export function getPageSEO(key: keyof typeof SEO_PAGES): PageSEO {
   return SEO_PAGES[key] ?? {
-    title: 'Vedic Rajkumar – Vedic Astrology Platform',
-    description: 'Comprehensive Vedic astrology platform with 100+ features.',
+    title: 'Vedic Rajkumar - Vedic Astrology Platform',
+    description: 'Focused Vedic astrology platform for Kundli, Prashna, Kundli Milan, Panchang, and related Jyotish tools.',
     keywords: 'vedic astrology, jyotish, kundli, birth chart',
     canonical: '/',
   };

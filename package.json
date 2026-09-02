@@ -14,6 +14,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest",
     "test:run": "vitest run",
+    "test:core": "vitest run src/tests/featureRegistryNav.test.ts src/tests/services/ephemerisService.test.ts src/tests/services/vedicAstroEngine.test.ts",
+    "ci:core": "npm run test:core && npm run build",
     "test:e2e": "playwright test"
   },
   "dependencies": {

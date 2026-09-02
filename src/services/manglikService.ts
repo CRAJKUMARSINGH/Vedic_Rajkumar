@@ -343,8 +343,7 @@ export function checkManglikDosha(
     // Check if Manglik
     const isManglik = isMarsInManglikHouse(marsHouse);
 
-    // Calculate severity
-    const severity = calculateSeverity(marsHouse, marsRashi);
+    let severity = calculateSeverity(marsHouse, marsRashi);
 
     // Get all planets for cancellation checks (with ascendant-based houses)
     const planetsForCancellation = positions.planets.map((p: any) => ({
@@ -366,8 +365,20 @@ export function checkManglikDosha(
     const activeCancellations = cancellations.filter(c => c.applies);
     const effectiveManglik = isManglik && activeCancellations.length < 2; // Need at least 2 cancellations to nullify
 
-    // Get affected houses
-    const affectedHouses = isManglik ? MANGLIK_HOUSES : [];
+    // Get affected houses from Lagna and Moon
+    const moon = positions.planets.find((p: any) => p.name === 'Moon');
+    const toHouseFromMoon = moon ? (rashi: number) => ((rashi - moon.rashiIndex + 12) % 12) + 1 : null;
+    const marsHouseFromMoon = toHouseFromMoon ? toHouseFromMoon(mars.rashiIndex) : null;
+
+    const affectedHouses: number[] = [];
+    if (isMarsInManglikHouse(marsHouse)) affectedHouses.push(marsHouse);
+    if (marsHouseFromMoon && isMarsInManglikHouse(marsHouseFromMoon) && !affectedHouses.includes(marsHouseFromMoon)) {
+      affectedHouses.push(marsHouseFromMoon);
+    }
+
+    if (affectedHouses.length > 1 && (severity === 'Low' || severity === 'None')) {
+      severity = 'Medium';
+    }
 
     // Get remedies — provide whenever isManglik is true (even with cancellations)
     const remedies = getRemedies(isManglik ? severity : 'None');
@@ -416,4 +427,9 @@ export function checkManglikDosha(
       remedies: { en: [], hi: [] }
     };
   }
+}
+
+export const calculateManglikSeverity = calculateSeverity;
+export function checkCancellationConditions(cancellations: ManglikCancellation[]) {
+  return cancellations.filter(c => c.applies || c.applicable);
 }

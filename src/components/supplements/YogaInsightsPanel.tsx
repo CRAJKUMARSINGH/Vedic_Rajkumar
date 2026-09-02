@@ -28,10 +28,10 @@
  */
 
 import { useState, useMemo } from "react";
-import { assembleEngineData }  from "../services/engineDataAssembler";
-import { searchLocation }      from "../services/geocodingService";
-import EnhancedBirthInputForm from "./EnhancedBirthInputForm";
-import type { YogaResult, YogaAnalysis } from "../services/yogaService";
+import { assembleEngineData }  from "@/services/engineDataAssembler";
+import { searchLocation }      from "@/services/geocodingService";
+import EnhancedBirthInputForm from "@/components/EnhancedBirthInputForm";
+import type { YogaResult, YogaAnalysis } from "@/services/yogaService";
 
 // ─── Constants ──────────────────────────────────────────────────────────────────
 

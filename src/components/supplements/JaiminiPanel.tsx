@@ -32,9 +32,9 @@
  */
 
 import { useState, useMemo } from "react";
-import { assembleEngineData }  from "../services/engineDataAssembler";
-import { searchLocation }      from "../services/geocodingService";
-import EnhancedBirthInputForm from "./EnhancedBirthInputForm";
+import { assembleEngineData }  from "@/services/engineDataAssembler";
+import { searchLocation }      from "@/services/geocodingService";
+import EnhancedBirthInputForm from "@/components/EnhancedBirthInputForm";
 import type {
   JaiminiAnalysis,
   Karaka,
@@ -42,7 +42,7 @@ import type {
   PadaLagna,
   CharaDasha,
   JaiminiYoga,
-} from "../services/jaiminiService";
+} from "@/services/jaiminiService";
 
 // ─── Constants ──────────────────────────────────────────────────────────────────
 

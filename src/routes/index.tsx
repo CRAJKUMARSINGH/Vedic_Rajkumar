@@ -51,6 +51,7 @@ const IndexPage       = lazy(() => import('@/pages/Index'));
 const MyReadingsPage  = lazy(() => import('@/pages/MyReadingsPage'));
 const FeedbackPage    = lazy(() => import('@/pages/FeedbackPage'));
 const PricingPage     = lazy(() => import('@/pages/PricingPage'));
+const AllFeaturesPage = lazy(() => import('@/pages/AllFeaturesPage'));
 const NotFound        = lazy(() => import('@/pages/NotFound'));
 const PriyanshMuhuratPage = lazy(() => import('@/pages/PriyanshMuhuratPage'));
 const PrivacyPolicyPage   = lazy(() => import('@/pages/PrivacyPolicyPage'));
@@ -441,8 +442,7 @@ export const routes: RouteConfig[] = [
   },
   {
     path: '/features',
-    element: <ComingSoon feature="All Features" eta="Ongoing"
-      description="Complete feature roadmap and module index for Vedic Rajkumar." />,
+    element: <AllFeaturesPage />,
   },
   {
     path: '/api-docs',

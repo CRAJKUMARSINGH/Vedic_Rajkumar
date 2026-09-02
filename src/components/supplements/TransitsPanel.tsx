@@ -36,12 +36,12 @@
  */
 
 import { useState, useCallback } from "react";
-import { assembleEngineData }       from "../services/engineDataAssembler";
-import { calculateDynamicTransits } from "../services/dynamicTransitService";
-import { searchLocation }           from "../services/geocodingService";
-import EnhancedBirthInputForm      from "./EnhancedBirthInputForm";
+import { assembleEngineData }       from "@/services/engineDataAssembler";
+import { calculateDynamicTransits } from "@/services/dynamicTransitService";
+import { searchLocation }           from "@/services/geocodingService";
+import EnhancedBirthInputForm      from "@/components/EnhancedBirthInputForm";
 import type { TransitResult }       from "../data/transitData";
-import type { DynamicTransitOutput } from "../services/dynamicTransitService";
+import type { DynamicTransitOutput } from "@/services/dynamicTransitService";
 
 // ─── Constants ──────────────────────────────────────────────────────────────────
 

@@ -7,7 +7,7 @@
 
 import { readFileSync } from 'fs';
 
-const db = JSON.parse(readFileSync('./jataks/JATAKS_DATABASE.json', 'utf8'));
+const db = JSON.parse(readFileSync('./src/data/jataks/JATAKS_DATABASE.json', 'utf8'));
 
 let passed = 0;
 let failed = 0;

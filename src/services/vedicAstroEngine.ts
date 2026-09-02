@@ -92,12 +92,12 @@ export type VRashi=typeof RASHIS[number];
 export const NAKSHATRAS=['Ashwini','Bharani','Krittika','Rohini','Mrigashira','Ardra','Punarvasu','Pushya','Ashlesha','Magha','Purva Phalguni','Uttara Phalguni','Hasta','Chitra','Swati','Vishakha','Anuradha','Jyeshtha','Mula','Purva Ashadha','Uttara Ashadha','Shravana','Dhanishtha','Shatabhisha','Purva Bhadrapada','Uttara Bhadrapada','Revati'] as const;
 export const NAKSHATRA_LORDS=['Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury','Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury','Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury'];
 export const RASHI_LORDS_MAP:Record<string,string>={Aries:'Mars',Taurus:'Venus',Gemini:'Mercury',Cancer:'Moon',Leo:'Sun',Virgo:'Mercury',Libra:'Venus',Scorpio:'Mars',Sagittarius:'Jupiter',Capricorn:'Saturn',Aquarius:'Saturn',Pisces:'Jupiter'};
-export function vRashiIdx(lon:number):number{return Math.floor(lon/30);}
+export function vRashiIdx(lon:number):number{return Math.floor(norm(lon)/30);}
 export function vGetRashi(lon:number):VRashi{return RASHIS[vRashiIdx(lon)];}
-export function vNakIdx(lon:number):number{return Math.floor(lon/(360/27));}
+export function vNakIdx(lon:number):number{return Math.min(26, Math.floor(norm(lon)/(360/27)));}
 export function vGetNak(lon:number):string{return NAKSHATRAS[vNakIdx(lon)];}
 export function vNakLord(lon:number):string{return NAKSHATRA_LORDS[vNakIdx(lon)];}
-export function nakFraction(lon:number):number{return(lon%(360/27))/(360/27);}
+export function nakFraction(lon:number):number{const span=360/27, l=norm(lon), start=vNakIdx(l)*span;return Math.min(1,Math.max(0,(l-start)/span));}
 export function vHouse(pRashiIdx:number,ascRashiIdx:number):number{return((pRashiIdx-ascRashiIdx+12)%12)+1;}
 export function vDignity(planet:string,rashi:VRashi):string{
   const EX:Record<string,string>={Sun:'Aries',Moon:'Taurus',Mars:'Capricorn',Mercury:'Virgo',Jupiter:'Cancer',Venus:'Pisces',Saturn:'Libra',Rahu:'Gemini',Ketu:'Sagittarius'};
