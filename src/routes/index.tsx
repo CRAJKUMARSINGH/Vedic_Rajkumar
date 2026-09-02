@@ -43,6 +43,22 @@ const EnhancedMuhurtaFinder  = lazy(() => import('@/pages/EnhancedMuhurtaFinder'
 
 // ─── Dasha (closely tied to Kundli core — keep active) ───────────────────────
 const DashaPage              = lazy(() => import('@/pages/DashaPage'));
+const VarshaphalPage = lazy(() => import('@/pages/VarshaphalPage'));
+const CareerAstrologyPage = lazy(() => import('@/pages/CareerAstrologyPage'));
+const LoveAstrologyPage = lazy(() => import('@/pages/LoveAstrologyPage'));
+const RemediesPage = lazy(() => import('@/pages/RemediesPage'));
+const GemstonesPage = lazy(() => import('@/pages/GemstonesPage'));
+const NakshatraPrecautionsPage = lazy(() => import('@/pages/NakshatraPrecautionsPage'));
+const DynamicTransitPage = lazy(() => import('@/pages/DynamicTransitPage'));
+const TransitAnalysisPage = lazy(() => import('@/pages/TransitAnalysisPage'));
+const AIPredictionsPage = lazy(() => import('@/pages/AIPredictionsPage'));
+const KnowledgeBasePage = lazy(() => import('@/pages/KnowledgeBasePage'));
+const LiveConsultationPage = lazy(() => import('@/pages/LiveConsultationPage'));
+const LearningPlatformPage = lazy(() => import('@/pages/LearningPlatformPage'));
+const AstrologerMarketplacePage = lazy(() => import('@/pages/AstrologerMarketplacePage'));
+const CommunityForumPage = lazy(() => import('@/pages/CommunityForumPage'));
+const MobileAppPage = lazy(() => import('@/pages/MobileAppPage'));
+
 const DashaTimelinePage      = lazy(() => import('@/pages/DashaTimelinePage'));
 const MahadashaChildrenPage  = lazy(() => import('@/pages/MahadashaChildrenPage'));
 
@@ -189,19 +205,6 @@ export const routes: RouteConfig[] = [
     path: '/ashtakavarga',
     element: <ComingSoon feature="Ashtakavarga" eta="Week 5"
       description="Sarvashtakavarga and Bhinnashtakavarga charts with transit scoring." />,
-  },
-  {
-    path: '/enhanced-ashtakavarga',
-    element: <Navigate to="/ashtakavarga" replace />,
-  },
-  {
-    path: '/yogas',
-    element: <ComingSoon feature="Yoga Identification" eta="Week 5"
-      description="Detection and interpretation of Raj Yogas, Dhana Yogas, Arishta Yogas, and more." />,
-  },
-  {
-    path: '/yogas-identification',
-    element: <Navigate to="/yogas" replace />,
   },
   {
     path: '/sade-sati',
