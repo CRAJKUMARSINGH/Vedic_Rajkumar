@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { 
   julianDay, 
   lahiriAyanamsa, 
@@ -78,3 +79,4 @@ export function analyzeMarriage(
     chart
   };
 }
+

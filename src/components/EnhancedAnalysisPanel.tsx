@@ -9,7 +9,8 @@ interface Props {
 
 export default function EnhancedAnalysisPanel({ answer, isHi }: Props) {
   // If it's not enhanced (missing these fields), don't render this panel
-  if (!answer.sixLayerRemedy || !answer.thereforeClause) return null;
+  const sixLayerRemedy = answer.remedies?.sixLayerStack;
+  if (!sixLayerRemedy || !answer.thereforeClause) return null;
 
   return (
     <div className="bg-white dark:bg-slate-900 border rounded-xl overflow-hidden shadow-sm mt-8">
@@ -74,24 +75,24 @@ export default function EnhancedAnalysisPanel({ answer, isHi }: Props) {
             {isHi ? '6-स्तरीय व्यावहारिक उपाय (Layer 12)' : '6-Layer Remedial Stack (Layer 12)'}
           </h4>
           <p className="text-xs text-slate-500 mb-3">
-            Targeting weakest planet: <strong>{answer.sixLayerRemedy.planet}</strong>
+            Targeting weakest planet: <strong>{sixLayerRemedy.planet}</strong>
           </p>
           <div className="grid md:grid-cols-2 gap-3 text-sm">
             <div className="p-3 border rounded bg-slate-50 dark:bg-slate-800/50">
               <span className="font-semibold text-slate-700 dark:text-slate-300 block">1. Behavioral</span>
-              <span className="text-slate-600 dark:text-slate-400">{answer.sixLayerRemedy.layer1_behavioral}</span>
+              <span className="text-slate-600 dark:text-slate-400">{sixLayerRemedy.layer1_behavioral}</span>
             </div>
             <div className="p-3 border rounded bg-slate-50 dark:bg-slate-800/50">
               <span className="font-semibold text-slate-700 dark:text-slate-300 block">2. Psychological</span>
-              <span className="text-slate-600 dark:text-slate-400">{answer.sixLayerRemedy.layer2_psychological}</span>
+              <span className="text-slate-600 dark:text-slate-400">{sixLayerRemedy.layer2_psychological}</span>
             </div>
             <div className="p-3 border rounded bg-slate-50 dark:bg-slate-800/50">
               <span className="font-semibold text-slate-700 dark:text-slate-300 block">3. Spiritual</span>
-              <span className="text-slate-600 dark:text-slate-400">{answer.sixLayerRemedy.layer3_spiritual}</span>
+              <span className="text-slate-600 dark:text-slate-400">{sixLayerRemedy.layer3_spiritual}</span>
             </div>
             <div className="p-3 border rounded bg-slate-50 dark:bg-slate-800/50">
               <span className="font-semibold text-slate-700 dark:text-slate-300 block">4. Practical</span>
-              <span className="text-slate-600 dark:text-slate-400">{answer.sixLayerRemedy.layer4_practical}</span>
+              <span className="text-slate-600 dark:text-slate-400">{sixLayerRemedy.layer4_practical}</span>
             </div>
           </div>
         </section>

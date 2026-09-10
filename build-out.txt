@@ -1,0 +1,31 @@
+
+> vedic-rajkumar@0.1.0 build
+> vite build
+
+[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32mΓ£ô[39m 622 modules transformed.
+x Build failed in 19.85s
+error during build:
+[vite:esbuild] Transform failed with 1 error:
+C:/Users/Rajkumar/Vedic_Rajkumar/src/components/AdvancedAstrologyCard.tsx:179:107: ERROR: Cannot use "&&" with "??" without parentheses
+file: C:/Users/Rajkumar/Vedic_Rajkumar/src/components/AdvancedAstrologyCard.tsx:179:107
+
+Cannot use "&&" with "??" without parentheses
+177|  
+178|                  {/* Debt Planets */}
+179|                  {(lalKitabData as any).debtPlanets ?? lalKitabData.chartData?.debtPlanets ?? [].length > 0 && (
+   |                                                                                                             ^
+180|                    <div>
+181|                      <h4 className={`font-semibold mb-3 ${isHi ? 'font-hindi' : ''}`}>
+
+    at failureErrorWithLog (C:\Users\Rajkumar\Vedic_Rajkumar\node_modules\esbuild\lib\main.js:1472:15)
+    at C:\Users\Rajkumar\Vedic_Rajkumar\node_modules\esbuild\lib\main.js:755:50
+    at responseCallbacks.<computed> (C:\Users\Rajkumar\Vedic_Rajkumar\node_modules\esbuild\lib\main.js:622:9)
+    at handleIncomingPacket (C:\Users\Rajkumar\Vedic_Rajkumar\node_modules\esbuild\lib\main.js:677:12)
+    at Socket.readFromStdout (C:\Users\Rajkumar\Vedic_Rajkumar\node_modules\esbuild\lib\main.js:600:7)
+    at Socket.emit (node:events:509:20)
+    at addChunk (node:internal/streams/readable:568:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:519:3)
+    at Readable.push (node:internal/streams/readable:399:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)

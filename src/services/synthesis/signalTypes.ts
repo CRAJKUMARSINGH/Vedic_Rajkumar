@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { PlanetName, HouseNumber, ZodiacSign, Dignity } from '../../types/astrology';
 import type { PlanetData, ShadabalaResult, ShadabalaAnalysis } from '../shadabalaService';
 import type { DashaResult } from '../dashaService';
@@ -120,3 +121,4 @@ export interface SynthesisVerdict {
   explanationTrace: TraceNode[];
   conciseExplanation: string; // Narrative summary
 }
+

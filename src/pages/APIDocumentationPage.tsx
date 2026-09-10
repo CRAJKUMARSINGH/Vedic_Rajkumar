@@ -285,7 +285,7 @@ const APIDocumentationPage = () => {
               {[
                 { plan: 'Free', price: '₹0/month', requests: '1,000/day', features: ['All basic endpoints', 'Birth chart', 'Dasha', 'Panchang'], color: 'border-gray-200' },
                 { plan: 'Developer', price: '₹999/month', requests: '10,000/day', features: ['All endpoints', 'Compatibility', 'Yogas', 'Priority support'], color: 'border-blue-300' },
-                { plan: 'Enterprise', price: '₹4,999/month', requests: 'Unlimited', features: ['All endpoints', 'White-label', 'SLA guarantee', 'Dedicated support'], color: 'border-purple-300' },
+                { plan: 'Enterprise', price: '₹4,999/month', requests: 'Unlimited', features: ['All endpoints', 'White-label', 'SLA included', 'Dedicated support'], color: 'border-purple-300' },
               ].map(plan => (
                 <div key={plan.plan} className={`bg-card border-2 rounded-xl p-5 ${plan.color}`}>
                   <div className="flex items-center justify-between mb-3">

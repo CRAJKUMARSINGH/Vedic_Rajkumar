@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import Navigation from './Navigation';
 import { BreadcrumbNavigation } from './BreadcrumbNavigation';
 import MobileNavigation from './MobileNavigation';
+import UpgradeBanner from './UpgradeBanner';
+import { PrototypeStatusBanner } from './PrototypeStatusBanner';
 import { darkModeService } from '@/services/darkModeService';
 import { type SupportedLanguage } from '@/services/multiLanguageService';
 
@@ -38,6 +40,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
   if (isLandingPage) {
     return (
       <div className="min-h-screen bg-slate-950 text-foreground transition-colors duration-300">
+        <PrototypeStatusBanner isHi={lang === 'hi'} showValidation={false} />
         <main>{children}</main>
 
         <Suspense fallback={null}>{import.meta.env.DEV && <PerformanceMonitor />}</Suspense>
@@ -47,6 +50,8 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-auspicious-pattern text-foreground transition-colors duration-300">
+      <PrototypeStatusBanner isHi={lang === 'hi'} />
+      <UpgradeBanner isHi={lang === 'hi'} />
       <Navigation lang={lang === 'hi' ? 'hi' : 'en'} onLangToggle={handleLangToggle} />
 
       <main className="flex-1">

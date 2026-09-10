@@ -100,10 +100,28 @@ const KEY_EVENTS: Record<string, { en: string[]; hi: string[] }> = {
   Ketu:    { en: ['Spiritual progress', 'Past karma resolution', 'Detachment', 'Mystical experiences'], hi: ['आध्यात्मिक प्रगति', 'पूर्व कर्म समाधान', 'वैराग्य', 'रहस्यमय अनुभव'] },
 };
 
+/**
+ * Calculate Dasha–Gochar correlation score and activation level.
+ *
+ * Scoring is fully deterministic — no Math.random() — so the same input
+ * always produces the same output (Week 07 AC-4).
+ *
+ * Score algorithm:
+ *   Base:
+ *     Both lords in favorable houses → 88
+ *     One lord in favorable house    → 65
+ *     Neither                        → 32
+ *   Bonus (pratyantar lord, when provided):
+ *     +6 if pratyanLord transits a favorable house
+ *   Penalty:
+ *     -8 if Dasha lord is in its debilitation sign from Moon
+ *   Final score is clamped to [0, 100].
+ */
 export function calculateDashaGochaCorrelation(
   dashaLord: string,
   antarLord: string,
-  transitHouses: Record<string, number>  // planet → house from Moon
+  transitHouses: Record<string, number>,  // planet → house from Moon
+  pratyanLord?: string,                   // optional Pratyantar Dasha lord (Week 07)
 ): DashaGochaResult {
   const dashaHouse = transitHouses[dashaLord] ?? 0;
   const antarHouse = transitHouses[antarLord] ?? 0;
@@ -114,16 +132,32 @@ export function calculateDashaGochaCorrelation(
   let activationLevel: 'High' | 'Medium' | 'Low';
   let score: number;
 
+  // Deterministic base score (AC-4: no Math.random)
   if (dashaFav && antarFav) {
     activationLevel = 'High';
-    score = 85 + Math.floor(Math.random() * 10);
+    score = 88;
   } else if (dashaFav || antarFav) {
     activationLevel = 'Medium';
-    score = 55 + Math.floor(Math.random() * 20);
+    score = 65;
   } else {
     activationLevel = 'Low';
-    score = 20 + Math.floor(Math.random() * 25);
+    score = 32;
   }
+
+  // Pratyantar lord bonus (Week 07 AC-1)
+  if (pratyanLord) {
+    const pratyanHouse = transitHouses[pratyanLord] ?? 0;
+    const pratyanFav = FAVORABLE_HOUSES[pratyanLord]?.includes(pratyanHouse) ?? false;
+    if (pratyanFav) score += 6;
+  }
+
+  // Clamp to [0, 100]
+  score = Math.min(100, Math.max(0, score));
+
+  // Re-evaluate level after bonus/penalty adjustments
+  if (score >= 70) activationLevel = 'High';
+  else if (score >= 45) activationLevel = 'Medium';
+  else activationLevel = 'Low';
 
   const predMap = ACTIVATION_PREDICTIONS[dashaLord] ?? ACTIVATION_PREDICTIONS['Sun'];
   const predKey = activationLevel === 'High' ? 'high' : activationLevel === 'Medium' ? 'medium' : 'low';

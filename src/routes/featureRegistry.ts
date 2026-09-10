@@ -166,6 +166,18 @@ export const FEATURE_CATALOG: FeatureEntry[] = [
     icon: '📄',
     category: 'foundation',
   },
+  {
+    path: '/report-preview',
+    label: 'Report Shell Demo',
+    labelHi: 'रिपोर्ट शेल डेमो',
+    description: 'Standardized report UI shell demo for Kundli and Matchmaking layouts',
+    descriptionHi: 'कुंडली और मैचमेकिंग लेआउट के लिए मानकीकृत रिपोर्ट यूआई शेल डेमो',
+    icon: '🧾',
+    category: 'foundation',
+    badge: 'Scaffold',
+    isNew: true,
+    showInDesktop: true,
+  },
 
   // ── Timing & cycles ──
   {
@@ -187,6 +199,32 @@ export const FEATURE_CATALOG: FeatureEntry[] = [
     category: 'timing',
     badge: 'New',
     isNew: true,
+  },
+  {
+    path: '/dasha-transit',
+    label: 'Dasha–Transit Correlation',
+    labelHi: 'दशा–गोचर संगम',
+    description: 'B.V. Raman correlation: when Dasha and transit align for peak activation',
+    descriptionHi: 'रमण सिद्धांत: दशा और गोचर का संगम — सर्वोच्च सक्रियता काल',
+    icon: '🪐',
+    category: 'timing',
+    badge: 'New',
+    isNew: true,
+    showInDesktop: true,
+    showInMobileSheet: true,
+  },
+  {
+    path: '/transit-timeline',
+    label: 'Transit Timeline',
+    labelHi: 'गोचर टाइमलाइन',
+    description: 'Visual Gantt-style timeline of planetary sign changes with retrograde tracking',
+    descriptionHi: 'ग्रह राशि परिवर्तन की दृश्य गैंट-शैली टाइमलाइन — वक्री ट्रैकिंग सहित',
+    icon: '⏱️',
+    category: 'timing',
+    badge: 'Scaffold',
+    isNew: true,
+    showInDesktop: true,
+    showInMobileSheet: true,
   },
   {
     path: '/dynamic-transit',
@@ -320,6 +358,19 @@ export const FEATURE_CATALOG: FeatureEntry[] = [
     descriptionHi: 'विस्तृत कुंडली मिलान विश्लेषण',
     icon: '💑',
     category: 'marriage',
+  },
+  {
+    path: '/prospect-comparison',
+    label: 'Prospect Comparison',
+    labelHi: 'संभावित मिलान तुलना',
+    description: 'Compare multiple marriage prospects side-by-side with Ashtakuta scoring and Manglik cross-check',
+    descriptionHi: 'अष्टकूट स्कोरिंग और मांगलिक क्रॉस-चेक के साथ कई विवाह संभावनाओं की तुलना करें',
+    icon: '⚖️',
+    category: 'marriage',
+    badge: 'New',
+    isNew: true,
+    showInDesktop: true,
+    showInMobileSheet: true,
   },
   {
     path: '/kundli-compare',
@@ -694,6 +745,50 @@ export const FEATURE_CATALOG: FeatureEntry[] = [
 
   // ── Platform ──
   {
+    path: '/privacy-settings',
+    label: 'Privacy Settings',
+    labelHi: 'गोपनीयता सेटिंग्स',
+    description: 'Manage consent, export your data, or permanently delete your stored records.',
+    descriptionHi: 'सहमति प्रबंधित करें, अपना डेटा निर्यात करें, या स्थायी रूप से हटाएं।',
+    icon: '🛡️',
+    category: 'platform',
+    showInBottomBar: false,
+    isCoreFeature: false,
+  },
+  {
+    path: '/validation',
+    label: 'Validation Dashboard',
+    labelHi: 'मान्यता डैशबोर्ड',
+    description: 'Week 2 prototype: reference chart mismatches, summaries, Week 2 progress (house cusps & antardasha)',
+    descriptionHi: 'सप्ताह 2 प्रोटोटाइप: संदर्भ चार्ट बेमेल, सारांश, सप्ताह 2 प्रगति (हाउस कस्प्स और अंतरदशा)',
+    icon: '🧪',
+    category: 'platform',
+    badge: 'Internal',
+  },
+  {
+    path: '/accuracy',
+    label: 'Accuracy Dashboard',
+    labelHi: 'सटीकता डैशबोर्ड',
+    description: 'Live in-browser accuracy: runs the 15-chart validation suite against the live engine',
+    descriptionHi: 'लाइव ब्राउज़र सटीकता: लाइव इंजन के खिलाफ 15-चार्ट सत्यापन सूट चलाता है',
+    icon: '🎯',
+    category: 'platform',
+    badge: 'Internal',
+  },
+  {
+    path: '/family-profiles',
+    label: 'Family Profiles',
+    labelHi: 'परिवार प्रोफाइल',
+    description: 'Save birth details for family members — load into any chart instantly',
+    descriptionHi: 'परिवार के सदस्यों का जन्म विवरण सहेजें — किसी भी कुंडली में तुरंत लोड करें',
+    icon: '👨‍👩‍👧‍👦',
+    category: 'platform',
+    badge: 'New',
+    isNew: true,
+    showInDesktop: true,
+    showInMobileSheet: true,
+  },
+  {
     path: '/knowledge',
     label: 'Knowledge',
     labelHi: 'ज्ञान',
@@ -806,7 +901,7 @@ function isShown(feature: FeatureEntry, flag: 'showInDesktop' | 'showInMobileShe
   return value === undefined ? true : value;
 }
 
-const CORE_PATHS = ['/horoscope', '/prashna', '/matchmaking', '/panchang'];
+const _CORE_PATHS = ['/horoscope', '/prashna', '/matchmaking', '/panchang'];
 
 function isCore(feature: FeatureEntry): boolean {
   return feature.isCoreFeature === true;

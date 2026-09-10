@@ -12,12 +12,12 @@ const PLANS = [
   {
     name: 'Professional', nameHi: 'प्रोफेशनल', price: '₹4,999', period: '/month',
     features: ['All features', '10,000 API calls/day', 'Full white-label', 'Priority support', '25 user accounts', 'Custom domain', 'PDF reports'],
-    color: 'border-primary', badge: 'Most Popular',
+    color: 'border-primary', badge: 'Recommended',
   },
   {
     name: 'Enterprise', nameHi: 'एंटरप्राइज', price: 'Custom', period: '',
-    features: ['Unlimited everything', 'Dedicated server', 'Custom integrations', '24/7 support', 'Unlimited users', 'SLA guarantee', 'Training included', 'Source code access'],
-    color: 'border-purple-400', badge: 'Best Value',
+    features: ['Unlimited everything', 'Dedicated server', 'Custom integrations', '24/7 support', 'Unlimited users', 'SLA included', 'Training included', 'Source code access'],
+    color: 'border-purple-400', badge: 'Full Suite',
   },
 ];
 

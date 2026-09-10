@@ -13,7 +13,7 @@
  *   4. PrasnaReadingHistory — localStorage, last 15 readings
  */
 
-import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -92,6 +92,16 @@ const PrashnaKundaliChart = lazy(() => import('@/components/PrashnaKundaliChart'
 import jataksDb from '@/data/jataks/JATAKS_DATABASE.json';
 import { useSubjectiveAnalysis } from '@/hooks/useSubjectiveAnalysis';
 import EnhancedAnalysisPanel from '@/components/EnhancedAnalysisPanel';
+import { ValidationInProgressNotice } from '@/components/PrototypeStatusBanner';
+import EnhancedLanguageToggle from '@/components/EnhancedLanguageToggle';
+import { type SupportedLanguage } from '@/services/multiLanguageService';
+import ChartLoadingState from '@/components/ChartLoadingState';
+import ChartEmptyState from '@/components/ChartEmptyState';
+import ChartErrorState from '@/components/ChartErrorState';
+import { LoadingSkeleton } from '@/components/ui/loading-skeleton';
+import FamilyProfileSelector from '@/components/FamilyProfileSelector';
+import { getProfileById } from '@/lib/familyProfiles';
+import type { FamilyProfile } from '@/lib/familyProfiles';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -140,10 +150,12 @@ function parseCoord(raw: string | undefined): number {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const QuestionPage = () => {
-  const [isHi, setIsHi] = useState(false);
+  const [lang, setLang] = useState<SupportedLanguage>('en');
   useEffect(() => {
-    setIsHi(new URLSearchParams(window.location.search).get('lang') === 'hi');
+    const urlLang = new URLSearchParams(window.location.search).get('lang');
+    if (urlLang === 'hi') setLang('hi');
   }, []);
+  const isHi = lang === 'hi';
 
   // Mode: jatak vs anonymous
   const [mode, setMode] = useState<'jatak' | 'anonymous'>(
@@ -158,6 +170,26 @@ const QuestionPage = () => {
   const [customPlace, setCustomPlace] = useState('New Delhi');
   const [customLat, setCustomLat] = useState('28.6139');
   const [customLon, setCustomLon] = useState('77.2090');
+  const [selectedProfileId, setSelectedProfileId] = useState<string | undefined>();
+
+  // Handle profile selection
+  const handleProfileSelect = (profile: FamilyProfile) => {
+    // Validate profile before using it to prevent data leakage
+    const validatedProfile = getProfileById(profile.id);
+    if (!validatedProfile) {
+      return;
+    }
+    
+    setSelectedProfileId(profile.id);
+    setCustomName(validatedProfile.name);
+    setCustomDate(validatedProfile.birthDate);
+    setCustomTime(validatedProfile.birthTime);
+    setCustomPlace(validatedProfile.birthPlace);
+    setCustomLat(validatedProfile.birthLat.toString());
+    setCustomLon(validatedProfile.birthLon.toString());
+    setMode('jatak');
+    setSelectedJatakId('custom');
+  };
 
   // Prompt states
   const [showBirthPrompt, setShowBirthPrompt] = useState(false);
@@ -460,6 +492,17 @@ const QuestionPage = () => {
     setTimeout(() => setCopied(false), 1800);
   };
 
+  const questionTextareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleRetry = () => {
+    if (question.trim() !== '') {
+      void onSubmit(false);
+    } else {
+      setError(null);
+      questionTextareaRef.current?.focus();
+    }
+  };
+
   // Detect if this is a progeny question (house 5)
   const isProgenyQuestion = result?.category.house === 5;
 
@@ -505,9 +548,19 @@ const QuestionPage = () => {
           >
             <ArrowLeft className="w-4 h-4 mr-1" /> {isHi ? 'होम' : 'Home'}
           </Link>
-          <Button variant="ghost" size="sm" onClick={() => setIsHi(v => !v)}>
-            {isHi ? 'EN' : 'हिं'}
-          </Button>
+          <div className="flex items-center gap-3">
+            <FamilyProfileSelector
+              onSelect={handleProfileSelect}
+              selectedId={selectedProfileId}
+              triggerLabel={isHi ? 'परिवार प्रोफ़ाइल' : 'Family Profile'}
+              lang={lang}
+            />
+            <EnhancedLanguageToggle
+              currentLang={lang}
+              onChange={setLang}
+              showRegion={false}
+            />
+          </div>
         </div>
 
         <motion.div
@@ -532,8 +585,14 @@ const QuestionPage = () => {
           </p>
         </motion.div>
 
+        <div className="mb-6">
+          <ValidationInProgressNotice isHi={isHi} compact={true} />
+        </div>
+
         {/* ── SECTION 1: Universal Prasna Research bar ── */}
-        <UniversalPrasnaResearch isHi={isHi} initialQuestion={question} />
+        <div className="mb-6">
+          <UniversalPrasnaResearch isHi={isHi} initialQuestion={question} />
+        </div>
 
         {/* ── SECTION 2: Ask-Your-Question form ── */}
         <Card className="border-amber-200 shadow-lg mb-6">
@@ -686,6 +745,7 @@ const QuestionPage = () => {
                 {isHi ? 'आपका प्रश्न' : 'Your question'}
               </Label>
               <Textarea
+                ref={questionTextareaRef}
                 value={question}
                 onChange={e => setQuestion(e.target.value)}
                 placeholder={
@@ -808,8 +868,8 @@ const QuestionPage = () => {
                     </h4>
                     <p className="text-sm text-amber-800 dark:text-amber-300 mt-1 leading-relaxed">
                       {isHi
-                        ? 'जन्म विवरण (तिथि, समय, स्थान) जोड़ने से आपकी कुंडली और वर्तमान गोचर का गहरा विश्लेषण मिलकर 90% तक सटीक भविष्यवाणियां देता है। क्या आप जन्म विवरण प्रदान करना चाहेंगे?'
-                        : 'Providing your birth details enables combined Natal Chart + Gochar (Transit) calculations. This yields up to 90% higher predictive precision. Would you like to enter your birth details?'}
+                        ? 'अपना जन्म विवरण देने से जन्म कुंडली + गोचर का संयुक्त विश्लेषण संभव होता है, जिससे अधिक पूर्ण और सुदृढ़ फलादेश मिलता है। क्या आप अपना जन्म विवरण दर्ज करना चाहेंगे?'
+                        : 'Providing your birth details enables a combined Natal Chart + Gochar (Transit) analysis, producing a more complete and grounded reading. Would you like to enter your birth details?'}
                     </p>
                   </div>
                 </div>
@@ -868,22 +928,49 @@ const QuestionPage = () => {
               </Button>
             </div>
 
-            {error && (
-              <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
-                <AlertTitle>{isHi ? 'त्रुटि' : 'Error'}</AlertTitle>
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
           </CardContent>
         </Card>
 
         {/* ── SECTION 3: Results panel ── */}
+        {loading && (
+          <ChartLoadingState
+            message={
+              isHi
+                ? 'प्रश्न मार्ग विधियों से आपका प्रश्न विश्लेषण हो रहा है…'
+                : 'Analyzing your question with Prasna Marga methods…'
+            }
+            className="mb-6"
+          />
+        )}
+
+        {!loading && error && (
+          <ChartErrorState
+            message={error}
+            onRetry={handleRetry}
+            className="mb-6"
+          />
+        )}
+
+        {!loading && !error && !result && (
+          <ChartEmptyState
+            icon={<HelpCircle className="h-8 w-8" />}
+            title={isHi ? 'अभी कोई प्रश्न विश्लेषण नहीं हुआ' : 'No question analyzed yet'}
+            description={
+              isHi
+                ? "ऊपर अपना प्रश्न दर्ज करें और 'फलादेश पाएं' दबाएं — प्रश्न समय की कुंडली, राशि-विश्लेषण, और प्रश्न मार्ग मीटर दिखेंगे।"
+                : "Enter your question above and click Get Phaladesh. You'll see the Prashna chart, verdict summary, and Prasna Marga strength meters."
+            }
+          />
+        )}
+
         {result && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="space-y-6"
+            aria-live="polite"
+            aria-atomic="false"
+            aria-label={isHi ? 'प्रश्न विश्लेषण परिणाम' : 'Prashna analysis result'}
           >
             <Card className="border-amber-300 shadow-xl">
               <CardHeader
@@ -945,13 +1032,17 @@ const QuestionPage = () => {
 
               <CardContent className="pt-6">
                 <Tabs defaultValue="summary">
-                  <TabsList className="grid w-full grid-cols-4">
-                    <TabsTrigger value="summary">{isHi ? 'सारांश' : 'Summary'}</TabsTrigger>
-                    <TabsTrigger value="classical">
+                  <TabsList className="grid grid-cols-2 gap-1 sm:grid-cols-4 sm:gap-2 w-full">
+                    <TabsTrigger value="summary" className="text-xs sm:text-sm shrink-0 min-w-0 whitespace-normal">
+                      {isHi ? 'सारांश' : 'Summary'}
+                    </TabsTrigger>
+                    <TabsTrigger value="classical" className="text-xs sm:text-sm shrink-0 min-w-0 whitespace-normal">
                       {isHi ? 'शास्त्रीय फलादेश' : 'Classical Reading'}
                     </TabsTrigger>
-                    <TabsTrigger value="indicators">{isHi ? 'योग' : 'Indicators'}</TabsTrigger>
-                    <TabsTrigger value="chart">
+                    <TabsTrigger value="indicators" className="text-xs sm:text-sm shrink-0 min-w-0 whitespace-normal">
+                      {isHi ? 'योग' : 'Indicators'}
+                    </TabsTrigger>
+                    <TabsTrigger value="chart" className="text-xs sm:text-sm shrink-0 min-w-0 whitespace-normal">
                       {isHi ? 'प्रश्न कुंडली' : 'Prashna Chart'}
                     </TabsTrigger>
                   </TabsList>
@@ -1316,10 +1407,16 @@ const QuestionPage = () => {
                         </div>
                       </div>
                     ) : (
-                      <div className="text-center py-6 text-slate-500">
-                        {isHi
-                          ? 'शास्त्रीय फलादेश लोड हो रहा है...'
-                          : 'Loading classical reading...'}
+                      <div
+                        role="status"
+                        aria-live="polite"
+                        className="space-y-4"
+                      >
+                        <LoadingSkeleton variant="card" rows={3} />
+                        <LoadingSkeleton variant="card" rows={5} />
+                        <LoadingSkeleton variant="card" rows={4} />
+                        <LoadingSkeleton variant="card" rows={3} />
+                        <LoadingSkeleton variant="card" rows={4} />
                       </div>
                     )}
                   </TabsContent>
@@ -1364,9 +1461,12 @@ const QuestionPage = () => {
                   <TabsContent value="chart" className="mt-4">
                     <Suspense
                       fallback={
-                        <div className="flex items-center justify-center h-48 text-slate-500 text-sm">
-                          <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                          {isHi ? 'कुंडली लोड हो रही है...' : 'Loading chart...'}
+                        <div role="status" aria-label={isHi ? 'कुंडली लोड हो रही है' : 'Loading chart'}>
+                          <div className="space-y-3 p-2">
+                            <div className="h-4 w-1/3 rounded bg-muted animate-pulse" />
+                            <div className="h-48 w-full rounded bg-muted animate-pulse" />
+                            <div className="h-3 w-2/3 rounded bg-muted animate-pulse" />
+                          </div>
                         </div>
                       }
                     >

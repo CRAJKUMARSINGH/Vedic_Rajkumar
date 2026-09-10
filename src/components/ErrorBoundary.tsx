@@ -1,4 +1,5 @@
 import { Component, type ReactNode, type ErrorInfo } from "react";
+import { captureException } from "@/lib/errorMonitoring";
 
 interface Props {
   children: ReactNode;
@@ -14,6 +15,9 @@ interface State {
 /**
  * Global error boundary — catches render errors in the subtree and shows
  * a friendly fallback instead of a blank screen.
+ *
+ * Week 4: wires captureException so all unhandled render errors are
+ * forwarded to the error monitoring adapter (Sentry or console fallback).
  */
 export class ErrorBoundary extends Component<Props, State> {
   state: State = { hasError: false, error: null };
@@ -23,6 +27,11 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
+    // Forward to Sentry (or console fallback) before calling the prop callback
+    captureException(error, {
+      context: 'ErrorBoundary',
+      extra: { componentStack: info.componentStack ?? '' },
+    });
     console.error("[ErrorBoundary]", error, info.componentStack);
     this.props.onError?.(error, info);
   }

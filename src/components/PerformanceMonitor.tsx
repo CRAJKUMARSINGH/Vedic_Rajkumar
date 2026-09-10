@@ -11,6 +11,8 @@ interface PerformanceMetrics {
   memoryLimit: number;
   totalRequests: number;
   cachedRequests: number;
+  cacheHitRate?: number;
+  recommendations?: string[];
 }
 
 export const PerformanceMonitor = () => {
@@ -22,7 +24,7 @@ export const PerformanceMonitor = () => {
     // Simulate performance monitoring
     const interval = setInterval(() => {
       const report = performanceMonitor.generateReport();
-      setMetrics(report.metrics);
+      setMetrics(report.metrics as unknown as PerformanceMetrics);
     }, 5000);
 
     return () => clearInterval(interval);
@@ -158,7 +160,7 @@ export const PerformanceMonitor = () => {
               <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
                 <p className="text-sm font-medium text-yellow-800">Recommendations:</p>
                 <ul className="mt-2 text-sm text-yellow-700 space-y-1">
-                  {metrics.recommendations.map((rec, idx) => (
+                  {(metrics.recommendations ?? []).map((rec, idx) => (
                     <li key={idx} className="flex items-start">
                       <span className="mr-2">•</span>
                       <span>{rec}</span>

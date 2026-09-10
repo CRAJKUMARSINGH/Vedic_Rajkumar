@@ -4,7 +4,8 @@
  */
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Star, CheckCircle2, X, ArrowRight, Zap } from "lucide-react";
+import { Sparkles, Star, CheckCircle2, X, ArrowRight, Zap, FlaskConical, Info } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -108,6 +109,50 @@ export default function WelcomeModal({ open, onClose, isHi = false }: Props) {
                       : "This app is built on classical Prasna Marga and Swiss Ephemeris. Choose a plan to get started:"}
                   </p>
 
+                  <div className="mb-6 space-y-3">
+                    <div>
+                      <Badge className="bg-indigo-600 text-white border-0 text-[10px] px-2 py-0.5">
+                        <FlaskConical className="w-3 h-3 mr-1" />
+                        {isHi ? "प्रोटोटाइप" : "PROTOTYPE"}
+                      </Badge>
+                    </div>
+
+                    <div className="rounded-lg border border-amber-200 bg-amber-50/80 px-4 py-3">
+                      <div className={`flex items-start gap-2.5 ${isHi ? "font-hindi" : ""}`}>
+                        <FlaskConical className="w-4 h-4 mt-0.5 text-amber-600 shrink-0" />
+                        <div className="text-sm">
+                          <p className="font-semibold text-amber-900">
+                            {isHi
+                              ? "सटीकता सत्यापन — कार्य प्रगति पर है"
+                              : "Accuracy Validation — Work in Progress"}
+                          </p>
+                          <p className="text-amber-800/90 mt-0.5">
+                            {isHi
+                              ? "15 संदर्भ चार्ट्स की तुलना स्विस इफेमेरिडिस के साथ की जा रही है। हाउस कस्प्स और अंतरदशा मान्यता चालू है।"
+                              : "15 reference charts are being benchmarked against Swiss Ephemeris. House cusp and antardasha validation is underway."}
+                          </p>
+                          <Link
+                            to="/validation"
+                            className="inline-flex items-center gap-1 mt-1.5 text-xs font-medium text-amber-700 hover:text-amber-900 underline-offset-2 hover:underline"
+                          >
+                            {isHi
+                              ? "मान्यता डैशबोर्ड देखें →"
+                              : "View validation dashboard →"}
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className={`rounded-lg border border-indigo-200 bg-indigo-50/60 px-4 py-3 flex items-start gap-2.5 ${isHi ? "font-hindi" : ""}`}>
+                      <Info className="w-4 h-4 mt-0.5 text-indigo-500 shrink-0" />
+                      <p className="text-sm text-indigo-800/90">
+                        {isHi
+                          ? "ज्योतिष परिणाम शैक्षणिक संदर्भ के लिए ही हैं — जीवन निर्णय लेने से पहले एक योग्य ज्योतिषी से परामर्श करें।"
+                          : "Astrological results are for educational reference only — consult a qualified astrologer before making life decisions."}
+                      </p>
+                    </div>
+                  </div>
+
                   <div className="grid sm:grid-cols-2 gap-4 mb-6">
                     {/* Free card */}
                     <div className="border-2 border-slate-200 rounded-xl p-5 hover:border-slate-400 transition-colors cursor-pointer group" onClick={() => handleStart("free")}>
@@ -135,8 +180,8 @@ export default function WelcomeModal({ open, onClose, isHi = false }: Props) {
                     <div className="border-2 border-amber-400 rounded-xl p-5 bg-gradient-to-br from-amber-50 to-orange-50 cursor-pointer group relative" onClick={() => handleStart("pro")}>
                       <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                         <Badge className="bg-amber-500 text-white border-0 text-xs px-3 py-1">
-                          <Star className="w-3 h-3 mr-1" />
-                          {isHi ? "सबसे लोकप्रिय" : "Most Popular"}
+                          <Sparkles className="w-3 h-3 mr-1" />
+                          {isHi ? "अनुशंसित" : "Recommended"}
                         </Badge>
                       </div>
                       <div className="flex items-center justify-between mb-2">
@@ -220,13 +265,13 @@ export default function WelcomeModal({ open, onClose, isHi = false }: Props) {
                       </p>
                       <p className={isHi ? "font-hindi" : ""}>
                         {isHi
-                          ? "UPI / नेटबैंकिंग के माध्यम से ₹499/माह। 30 दिन की मनी-बैक गारंटी।"
-                          : "₹499/month via UPI / Netbanking. 30-day money-back guarantee."}
+                          ? "लक्ष्य मूल्य: UPI / नेटबैंकिंग के माध्यम से ₹499/माह, 30-दिन की मनी-बैक नीति के साथ।"
+                          : "Target pricing: ₹499/month via UPI / Netbanking, with a 30-day refund policy."}
                       </p>
                       <p className="mt-1 italic text-amber-600">
                         {isHi
-                          ? "(डेमो में, प्रो तुरंत सक्रिय होता है — वास्तविक भुगतान गेटवे जल्द आएगा)"
-                          : "(Demo mode — Pro activates instantly. Real payment gateway coming soon)"}
+                          ? "(डेमो मोड: प्रो तुरंत सक्रिय होता है। वास्तविक भुगतान गेटवे और बिलिंग जल्द आएगा।)"
+                          : "(Demo mode: Pro activates instantly. Real payment gateway and billing coming soon.)"}
                       </p>
                     </div>
                   )}

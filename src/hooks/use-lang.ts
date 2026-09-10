@@ -1,32 +1,28 @@
-import { create } from 'zustand';
+/**
+ * use-lang.ts
+ * Simple language state hook — no external state manager needed.
+ */
+import { useState, useEffect } from 'react';
 
 type Lang = 'en' | 'hi';
 
-interface LangState {
-  lang: Lang;
-  toggle: () => void;
-  setLang: (lang: Lang) => void;
+let _lang: Lang = 'en';
+const _listeners = new Set<() => void>();
+
+function notifyAll() { _listeners.forEach(fn => fn()); }
+
+export function useLang() {
+  const [lang, setLangState] = useState<Lang>(_lang);
+  useEffect(() => {
+    const sync = () => setLangState(_lang);
+    _listeners.add(sync);
+    return () => { _listeners.delete(sync); };
+  }, []);
+  const setLang = (next: Lang) => { _lang = next; notifyAll(); };
+  const toggle = () => setLang(_lang === 'en' ? 'hi' : 'en');
+  return { lang, setLang, toggle };
 }
 
-export const useLang = create<LangState>((set) => ({
-  lang: 'en',
-  toggle: () => set((state) => ({ lang: state.lang === 'en' ? 'hi' : 'en' })),
-  setLang: (lang) => set({ lang }),
-}));
-
-/** Simple translation helper — picks the right string for the active lang. */
 export function t(key: { en: string; hi: string }, lang: Lang): string {
   return lang === 'hi' ? key.hi : key.en;
-}
-
-/**
- * Tagged-template helper that returns the string for the active lang.
- * Usage: Trans({ en: 'Birth Chart', hi: 'जन्म कुंडली' }, lang)
- */
-export function Trans(
-  strings: { en: string; hi: string } | string,
-  lang: Lang = 'en',
-): string {
-  if (typeof strings === 'string') return strings;
-  return lang === 'hi' ? strings.hi : strings.en;
 }

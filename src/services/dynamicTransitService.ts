@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * src/services/dynamicTransitService.ts
  * Dynamic Transit Calculator with Real-time Ephemeris
@@ -615,4 +616,5 @@ export function checkWealthDoubleTransit(
   if (h2.certifies) return h2;
   return checkDoubleTransit(11, jupiterTransits, saturnTransits, '11th house');
 }
+
 

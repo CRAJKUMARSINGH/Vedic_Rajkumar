@@ -843,3 +843,15 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ─── Week 4: Consent Banner Animation ─────────────────────────────────────── */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

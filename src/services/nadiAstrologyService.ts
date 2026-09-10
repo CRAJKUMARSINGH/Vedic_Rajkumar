@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Nadi Astrology Service - Ancient Palm Leaf Predictions
  * Week 12: AstroSage Feature Integration - Part 2

@@ -88,7 +88,7 @@ function ChartRow({ chart, isHi, vargottamas }: { chart: DivisionalChart; isHi: 
             )}
           </div>
           <p className={`text-xs text-muted-foreground mt-0.5 ${isHi ? 'font-hindi' : ''}`}>
-            {isHi ? chart.purpose.hi : chart.purpose.en}
+            {isHi ? (chart.purposeObj?.hi ?? chart.purpose) : (chart.purposeObj?.en ?? chart.purpose)}
           </p>
         </div>
         <span className="text-muted-foreground ml-2">{open ? '▲' : '▼'}</span>
@@ -252,3 +252,4 @@ const DivisionalChartsCard = ({ planetLongitudes, ascendantLongitude, lang }: Pr
 };
 
 export default DivisionalChartsCard;
+

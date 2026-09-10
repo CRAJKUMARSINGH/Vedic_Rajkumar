@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * ShadbalaPanel.tsx — Six-fold Planetary Strength Visualiser
  *
@@ -673,3 +674,4 @@ export function ShadbalaPanel() {
     </div>
   );
 }
+

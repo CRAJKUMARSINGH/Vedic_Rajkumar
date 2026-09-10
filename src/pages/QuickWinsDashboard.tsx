@@ -5,6 +5,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -127,6 +128,71 @@ export const QuickWinsDashboard: React.FC<QuickWinsDashboardProps> = ({ language
           </h1>
           <p className="text-gray-600">{t.subtitle}</p>
         </div>
+
+        {/* ── Explore new scaffold features ─────────────────────────────── */}
+        <Card className="p-5 mb-8 border-l-4 border-l-teal-500 bg-teal-50/50">
+          <h2 className="text-lg font-bold text-teal-800 mb-1">
+            🆕 {language === 'hi' ? 'नई सुविधाएँ' : 'New Features'}
+          </h2>
+          <p className="text-sm text-teal-700 mb-4">
+            {language === 'hi'
+              ? 'हाल ही में जोड़े गए पेज — अभी एक्सप्लोर करें।'
+              : 'Recently added pages — start using them today.'}
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <Link
+              to="/family-profiles"
+              className="flex items-center gap-3 p-3 rounded-xl border border-teal-200 bg-white hover:bg-teal-50 transition-colors group"
+            >
+              <span className="text-2xl">👨‍👩‍👧‍👦</span>
+              <div>
+                <p className="text-sm font-semibold text-gray-800 group-hover:text-teal-700">
+                  {language === 'hi' ? 'परिवार प्रोफाइल' : 'Family Profiles'}
+                </p>
+                <p className="text-xs text-gray-500">
+                  {language === 'hi' ? 'सदस्यों को सहेजें, फिर एक क्लिक से लोड करें' : 'Save members, then load with one click'}
+                </p>
+                <Badge className="mt-1 text-[10px] bg-teal-100 text-teal-700 border-teal-200 px-1.5 py-0">
+                  New
+                </Badge>
+              </div>
+            </Link>
+            <Link
+              to="/transit-timeline"
+              className="flex items-center gap-3 p-3 rounded-xl border border-teal-200 bg-white hover:bg-teal-50 transition-colors group"
+            >
+              <span className="text-2xl">⏱️</span>
+              <div>
+                <p className="text-sm font-semibold text-gray-800 group-hover:text-teal-700">
+                  {language === 'hi' ? 'गोचर टाइमलाइन' : 'Transit Timeline'}
+                </p>
+                <p className="text-xs text-gray-500">
+                  {language === 'hi' ? 'राशियों में ग्रहों की गति देखें' : 'See planets move across signs'}
+                </p>
+                <Badge className="mt-1 text-[10px] bg-amber-100 text-amber-700 border-amber-200 px-1.5 py-0">
+                  Beta
+                </Badge>
+              </div>
+            </Link>
+            <Link
+              to="/report-preview"
+              className="flex items-center gap-3 p-3 rounded-xl border border-teal-200 bg-white hover:bg-teal-50 transition-colors group"
+            >
+              <span className="text-2xl">🧾</span>
+              <div>
+                <p className="text-sm font-semibold text-gray-800 group-hover:text-teal-700">
+                  {language === 'hi' ? 'रिपोर्ट शेल' : 'Report Shell'}
+                </p>
+                <p className="text-xs text-gray-500">
+                  {language === 'hi' ? 'प्रीमियम रिपोर्ट लेआउट प्रीव्यू' : 'Preview premium report layouts'}
+                </p>
+                <Badge className="mt-1 text-[10px] bg-amber-100 text-amber-700 border-amber-200 px-1.5 py-0">
+                  Beta
+                </Badge>
+              </div>
+            </Link>
+          </div>
+        </Card>
 
         {/* Overview Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">

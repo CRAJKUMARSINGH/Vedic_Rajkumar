@@ -1,0 +1,2 @@
+src/components/PanchangCard.tsx(450,9): error TS1109: Expression expected.
+src/components/PanchangCard.tsx(451,1): error TS1005: '}' expected.

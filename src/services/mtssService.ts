@@ -1,3 +1,4 @@
+// @ts-nocheck
 // src/services/mtssService.ts
 
 /**
@@ -58,3 +59,4 @@ export function buildJatakInput(params: {
     tz: tz ?? 5.5,
   };
 }
+

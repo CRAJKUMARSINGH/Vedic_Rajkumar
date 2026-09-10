@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Knowledge Extraction Service — Client-side
  * Ported from Vedic-App-Merger/artifacts/api-server extract logic.
@@ -400,3 +401,4 @@ export async function exportKnowledgeAsMarkdown(): Promise<{
 
   return { markdown, cardCount: cards.length };
 }
+

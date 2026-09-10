@@ -71,36 +71,33 @@ const FEATURES = [
 
 const TRUST_SIGNALS = [
   'Sidereal Lahiri Ayanamsa by default',
-  'Full 36-Point Ashtakuta Matchmaking',
+  'All 8 Ashtakuta Kutas (36-point scale)',
   'Daily Panchang with Rahu Kalam & Abhijit',
   'Reference-chart validation in progress',
 ];
 
-const TRUSTED_BY = [
-  { name: 'Astrology Community', icon: '🌙' },
-  { name: 'Vedic Scholars',    icon: '📿' },
-  { name: 'Startups / SaaS',   icon: '🚀' },
+const FOUNDATIONS = [
+  { name: 'Lahiri Ayanamsa',   icon: '🌙' },
+  { name: 'BPHS & Phaladeepika', icon: '📿' },
+  { name: 'Swiss Ephemeris',   icon: '�' },
   { name: 'Netlify Deploys',   icon: '⚡' },
-  { name: 'Open Source',       icon: '🔓' },
-  { name: 'Family Users',      icon: '🕉️' },
+  { name: 'Open Source Core',  icon: '🔓' },
+  { name: 'Family-first UX',   icon: '🕉️' },
 ];
 
-const TESTIMONIALS = [
+const FOCUS_POINTS = [
   {
     quote:
-      'I asked about marriage timing and got a detailed Prashna answer with remedies — spot on.',
-    name: 'Priya M.',
-    location: 'Mumbai',
+      'Four focused Jyotish tools — Kundli, Prashna, Matchmaking, and Panchang — refined one module at a time.',
+    label: 'Depth over breadth',
   },
   {
-    quote: 'The free Kundli is more accurate than paid apps I tried before.',
-    name: 'Arjun S.',
-    location: 'Bangalore',
+    quote: 'Bilingual English / Hindi throughout, designed for families and serious students.',
+    label: 'Bilingual by default',
   },
   {
-    quote: 'Bilingual Hindi/English answers make this perfect for my family.',
-    name: 'Meera K.',
-    location: 'Jaipur',
+    quote: 'Validation work is active; the roadmap stays visible so expectations are honest.',
+    label: 'Transparent roadmap',
   },
 ];
 
@@ -109,8 +106,8 @@ const STATS = [
   { value: '9', label: 'Grahas Calculated' },
   { value: '120', label: 'Vimshottari Dasha Years' },
   { value: 'EN/HI', label: 'Bilingual Engine' },
-  { value: '<1m', label: 'Ayanamsa Tolerance' },
-  { value: '36/36', label: 'Ashta Kuta Points' },
+  { value: 'Lahiri', label: 'Ayanamsa Standard' },
+  { value: '8/8', label: 'Ashta Kuta Kutas' },
 ];
 
 const containerVariants = {
@@ -188,11 +185,11 @@ export const LandingPageV3 = () => {
         </div>
       </nav>
 
-      {/* Trusted by / Featured-in strip */}
+      {/* Foundations / Built-on strip */}
       <section className="relative z-10 border-y border-slate-800/50 bg-[#050512]/40 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
           <p className="text-center text-[10px] sm:text-xs uppercase tracking-[0.2em] text-slate-500 mb-4">
-            Trusted by · Featured in
+            Foundations · Built on
           </p>
           <motion.div
             initial={{ opacity: 0 }}
@@ -200,7 +197,7 @@ export const LandingPageV3 = () => {
             viewport={{ once: true }}
             className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-slate-400"
           >
-            {TRUSTED_BY.map(t => (
+            {FOUNDATIONS.map(t => (
               <div
                 key={t.name}
                 className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wide opacity-70 hover:opacity-100 hover:text-amber-300 transition-colors"
@@ -328,7 +325,7 @@ export const LandingPageV3 = () => {
               Active Now
             </Badge>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              Four Features. Done Right.
+              Four Features. Built with Care.
             </h2>
             <p className="text-slate-400 text-sm max-w-xl mx-auto">
               The app now favors depth over breadth: Kundli, Prashna, Matchmaking, and
@@ -379,13 +376,13 @@ export const LandingPageV3 = () => {
           </div>
         </section>
 
-        {/* Stats + testimonials */}
+        {/* Stats + focus principles */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid gap-8 lg:grid-cols-2">
             <div>
               <h2 className="text-2xl font-extrabold text-white mb-6 flex items-center gap-2">
                 <Users className="h-6 w-6 text-amber-400" />
-                Community Stats
+                Engine Snapshot
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {STATS.map(s => (
@@ -403,19 +400,22 @@ export const LandingPageV3 = () => {
             <div>
               <h2 className="text-2xl font-extrabold text-white mb-6 flex items-center gap-2">
                 <Star className="h-6 w-6 text-amber-400" />
-                What Seekers Say
+                Product Principles
               </h2>
               <div className="space-y-4">
-                {TESTIMONIALS.map(t => (
-                  <blockquote
-                    key={t.name}
+                {FOCUS_POINTS.map(t => (
+                  <div
+                    key={t.label}
                     className="rounded-2xl border border-slate-800/60 bg-[#050512]/60 p-4"
                   >
-                    <p className="text-sm text-slate-300 leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
-                    <footer className="mt-2 text-xs text-slate-500">
-                      — {t.name}, {t.location}
-                    </footer>
-                  </blockquote>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+                      <p className="text-[11px] font-semibold uppercase tracking-wider text-amber-300">
+                        {t.label}
+                      </p>
+                    </div>
+                    <p className="text-sm text-slate-300 leading-relaxed">{t.quote}</p>
+                  </div>
                 ))}
               </div>
             </div>

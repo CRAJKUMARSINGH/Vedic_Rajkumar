@@ -42,6 +42,7 @@
 - Write Vitest tests for all calculation utilities.
 - Tests go in `src/tests/` or co-located `*.test.ts` files.
 - Cover edge cases: leap years, southern hemisphere, time zone offsets, DST.
+- **Accuracy Validation Suite**: Run `npm run validate:accuracy` to validate against 15 reference charts with Swiss Ephemeris comparison. Extended with house cusps and antardasha validation (Week 02). Reports generated in `dist/accuracy-report.txt` and `dist/accuracy-summary.json`.
 
 ## Git Workflow
 - Work on feature branches: `git checkout -b feature/<name>`.

@@ -47,7 +47,7 @@ const AllFeaturesPage = () => {
           <div className="container max-w-5xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
             <div className="min-w-0">
               <p className="text-xs font-semibold uppercase tracking-wide text-primary">
-                Week 3 product focus
+                Current product focus
               </p>
               <h1 className={`text-xl font-bold ${isHi ? 'font-hindi' : ''}`}>
                 {isHi ? 'सुविधा रोडमैप' : 'Feature Roadmap'}

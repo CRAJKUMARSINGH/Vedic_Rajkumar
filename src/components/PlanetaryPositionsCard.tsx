@@ -4,6 +4,7 @@
  */
 
 import { Card } from "@/components/ui/card";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import type { CompletePlanetaryPositions } from "@/services/ephemerisService";
 
 interface PlanetaryPositionsCardProps {

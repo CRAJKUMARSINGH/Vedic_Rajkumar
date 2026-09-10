@@ -230,7 +230,7 @@ const HoroscopeCard: React.FC<HoroscopeCardProps> = ({ birthDate, lang, classNam
                           </span>
                         </div>
                         <div className="flex gap-1">
-                          {prediction.luckyNumbers.map(num => (
+                          {(prediction.luckyNumbers as number[]).map((num: number) => (
                             <Badge key={num} variant="secondary" className="text-xs">
                               {num}
                             </Badge>
@@ -246,7 +246,7 @@ const HoroscopeCard: React.FC<HoroscopeCardProps> = ({ birthDate, lang, classNam
                           </span>
                         </div>
                         <div className="flex gap-1">
-                          {(isHi ? prediction.luckyColorsHi : prediction.luckyColors).map(color => (
+                          {((isHi ? prediction.luckyColorsHi : prediction.luckyColors) as string[]).map((color: string) => (
                             <Badge key={color} variant="outline" className="text-xs">
                               {color}
                             </Badge>

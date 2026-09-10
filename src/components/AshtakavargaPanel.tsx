@@ -33,7 +33,7 @@ import {
 } from '@/services/classicalAshtakavargaService';
 import { assembleEngineData } from '@/services/engineDataAssembler';
 import { searchLocation } from '@/services/geocodingService';
-import EnhancedBirthInputForm, { type BirthSubmitData } from '@/components/EnhancedBirthInputForm';
+import EnhancedBirthInputForm from '@/components/EnhancedBirthInputForm';
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -104,15 +104,13 @@ export function AshtakavargaPanel() {
 
   // ── Form submit ──────────────────────────────────────────────────────────────
 
-  async function handleSubmit(data: BirthSubmitData) {
+  async function handleSubmit(data: { date: string; time: string; location: string }) {
     setIsComputing(true);
     setError(null);
     try {
-      let lat = data.lat ?? 28.6139, lng = data.lng ?? 77.2090;
-      if (data.lat === undefined || data.lng === undefined) {
-        const geo = await searchLocation(data.location);
-        if (geo.length > 0) { lat = geo[0].lat; lng = geo[0].lon; }
-      }
+      let lat = 28.6139, lng = 77.2090;
+      const geo = await searchLocation(data.location);
+      if (geo.length > 0) { lat = geo[0].lat; lng = geo[0].lon; }
 
       const birthDate  = parseBirthDate(data.date, data.time);
       const engineData = assembleEngineData(birthDate, lat, lng);
@@ -601,3 +599,4 @@ export function AshtakavargaPanel() {
     </div>
   );
 }
+

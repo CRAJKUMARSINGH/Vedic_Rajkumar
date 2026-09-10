@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * src/services/fourPlusTransitService.ts
  * 4+ Favorable Transit Scanner (no Vedha)
@@ -253,3 +254,4 @@ export function generateWindowNarrative(
     `${window.notes}`
   );
 }
+

@@ -30,7 +30,7 @@ import type {
   PrashnaTiming,
   PrashnaVerdict,
 } from './types';
-import { calculateChart } from '@/features/kundli/stubs';
+import { calculateChart } from '@/features/kundli/engine';
 
 // ─── Deterministic helpers ────────────────────────────────────────────────────
 

@@ -87,7 +87,7 @@ import {
   HeartHandshake,
   Baby,
   Stethoscope,
-  Ring,
+  Circle,
   Award as AwardIcon
 } from 'lucide-react';
 import { 
@@ -484,7 +484,7 @@ const YogasIdentificationDashboard = () => {
                   <Card 
                     key={yoga.id}
                     className={`cursor-pointer transition-all ${
-                      selectedYoga?.id === yoga.id ? 'ring-2 ring-primary' : ''
+                      selectedYoga?.id === yoga.id ? 'Circle-2 Circle-primary' : ''
                     }`}
                     onClick={() => setSelectedYoga(yoga)}
                   >

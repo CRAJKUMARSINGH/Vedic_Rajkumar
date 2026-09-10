@@ -634,7 +634,7 @@ const MobileAppDashboard = () => {
                       <p className="text-sm text-muted-foreground mb-2">{notification.message}</p>
                       <div className="flex items-center gap-4 text-xs text-muted-foreground">
                         <span>Type: {notification.type}</span>
-                        <span>Sent: {formatDuration(Date.now() - notification.sentAt.getTime())} ago</span>
+                        <span>Sent: {formatDuration(Date.now() - (notification.sentAt?.getTime() ?? Date.now()))} ago</span>
                         {notification.readAt && (
                           <span>Read: {formatDuration(Date.now() - notification.readAt.getTime())} ago</span>
                         )}
@@ -702,3 +702,4 @@ const MobileAppDashboard = () => {
 };
 
 export default MobileAppDashboard;
+

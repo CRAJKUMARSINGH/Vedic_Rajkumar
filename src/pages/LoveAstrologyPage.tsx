@@ -30,8 +30,8 @@ const LoveAstrologyPage = () => {
   };
 
   const planets = chart.planetaryPositions?.planets ?? null;
-  const venusStrength = planets ? (chart.shadbala?.planets?.find(p => p.planet === 'Venus')?.totalStrength ?? 50) : null;
-  const moonStrength = planets ? (chart.shadbala?.planets?.find(p => p.planet === 'Moon')?.totalStrength ?? 50) : null;
+  const venusStrength = planets ? (chart.shadbala?.planets?.find(p => p.planet === 'Venus')?.totalRupas ?? 50) : null;
+  const moonStrength = planets ? (chart.shadbala?.planets?.find(p => p.planet === 'Moon')?.totalRupas ?? 50) : null;
   const venus = planets?.find(p => p.name === 'Venus');
   const moon = planets?.find(p => p.name === 'Moon');
 
@@ -151,3 +151,4 @@ const LoveAstrologyPage = () => {
 };
 
 export default LoveAstrologyPage;
+

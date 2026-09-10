@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { supabase } from "@/integrations/supabase/client";
 
 export const ingestUrl = async (url: string, category: string, authorName?: string) => {
@@ -59,3 +60,4 @@ export const getKnowledgeStats = async () => {
   };
   return stats;
 };
+

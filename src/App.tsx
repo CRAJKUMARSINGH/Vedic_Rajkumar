@@ -1,10 +1,10 @@
 /**
-/**
  * App.tsx — application root.
  *
  * This file is intentionally thin:
  *   - Registers the service worker on mount
  *   - Composes Providers (all context) + MainLayout + lazy routes + page transitions
+ *   - Mounts the ConsentBanner (Week 4) outside the main layout so it floats globally
  *
  * Route definitions  → src/routes/index.tsx
  * Provider hierarchy → src/Providers.tsx
@@ -16,6 +16,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Providers from '@/Providers';
 import MainLayout from '@/components/MainLayout';
+import ConsentBanner from '@/components/ConsentBanner';
 import { routes } from '@/routes';
 import { registerServiceWorker, setupConnectionListeners } from '@/utils/serviceWorkerRegistration';
 
@@ -71,6 +72,8 @@ export default function App() {
           <AnimatedRoutes />
         </Suspense>
       </MainLayout>
+      {/* ConsentBanner floats above all content — self-manages its visibility */}
+      <ConsentBanner />
     </Providers>
   );
 }

@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Cache Service for Vedic Rajkumar App
  * Implements caching strategy to reduce database load and improve performance

@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 import {
   type NavLink,
@@ -25,6 +26,7 @@ const SignInPage = lazy(() => import('@/pages/SignInPage'));
 const SignUpPage = lazy(() => import('@/pages/SignUpPage'));
 const MatchMaking = lazy(() => import('@/pages/MatchMaking'));
 const EnhancedKundliMilan = lazy(() => import('@/pages/EnhancedKundliMilan'));
+const ProspectComparisonPage = lazy(() => import('@/pages/ProspectComparisonPage'));
 const VaastuAssessmentPage = lazy(() => import('@/pages/VaastuAssessmentPage'));
 const MuhuratCalendarPage = lazy(() => import('@/pages/MuhuratCalendarPage'));
 const EnhancedMuhurtaFinder = lazy(() => import('@/pages/EnhancedMuhurtaFinder'));
@@ -95,12 +97,21 @@ const MyReadingsPage = lazy(() => import('@/pages/MyReadingsPage'));
 const KundliComparePage = lazy(() => import('@/pages/KundliComparePage'));
 const WeddingMuhuratPage = lazy(() => import('@/pages/WeddingMuhuratPage'));
 const DashaTimelinePage = lazy(() => import('@/pages/DashaTimelinePage'));
+const DashaTransitCorrelationPage = lazy(() => import('@/pages/DashaTransitCorrelationPage'));
+const FamilyProfilesPage = lazy(() => import('@/pages/FamilyProfilesPage'));
+const TransitTimelinePage = lazy(() => import('@/pages/TransitTimelinePage'));
+const ReportPreviewPage = lazy(() => import('@/pages/ReportPreviewPage'));
+const AccuracyDashboardPage = lazy(() => import('@/pages/AccuracyDashboardPage'));
 const VedicMarriagePage = lazy(() => import('@/pages/VedicMarriagePage'));
 const VidhyaKarmaDarshanPage = lazy(() => import('@/pages/VidhyaKarmaDarshanPage'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 const IndexPage = lazy(() => import('@/pages/Index'));
 const VedicAPage = lazy(() => import('@/pages/VedicAPage'));
 const PriyanshMuhuratPage = lazy(() => import('@/pages/PriyanshMuhuratPage'));
+// ─── Week 4: Production hardening pages ───────────────────────────────────────
+const PrivacyPolicyPage = lazy(() => import('@/pages/PrivacyPolicyPage'));
+const TermsOfServicePage = lazy(() => import('@/pages/TermsOfServicePage'));
+const PrivacySettingsPage = lazy(() => import('@/pages/PrivacySettingsPage'));
 
 function route(path: string, element: JSX.Element): AppRoute {
   return { path, element };
@@ -115,8 +126,10 @@ export const APP_ROUTES: AppRoute[] = [
   route('/career-astrology', <CareerAstrology />),
   route('/kaalsarp', <KaalSarpPage />),
   route('/comprehensive', <ComprehensiveReportPage />),
+  route('/report-preview', <ReportPreviewPage />),
   route('/matchmaking', <MatchMaking />),
   route('/enhanced-matchmaking', <EnhancedKundliMilan />),
+  route('/prospect-comparison', <ProspectComparisonPage />),
   route('/vaastu', <VaastuAssessmentPage />),
   route('/muhurat', <MuhuratCalendarPage />),
   route('/enhanced-muhurat', <EnhancedMuhurtaFinder />),
@@ -197,15 +210,25 @@ export const APP_ROUTES: AppRoute[] = [
   route('/kundli-compare', <KundliComparePage />),
   route('/wedding-muhurat', <WeddingMuhuratPage />),
   route('/dasha-timeline', <DashaTimelinePage />),
+  route('/dasha-transit', <DashaTransitCorrelationPage />),
+  route('/transit-timeline', <TransitTimelinePage />),
+  route('/family-profiles', <FamilyProfilesPage />),
+  route('/accuracy', <AccuracyDashboardPage />),
   route('/mtss', <MTSSPanel />),
   route('/vidhya-karma', <VidhyaKarmaDarshanPage />),
   route('/nakshatra-precautions', <NakshatraPrecautionsPage />),
-  route('/my-readings', <MyReadingsPage />),
+  route('/my-readings', <ProtectedRoute><MyReadingsPage /></ProtectedRoute>),
   route('/index', <IndexPage />),
   route('/vedic-a', <VedicAPage />),
   route('/priyansh-joining-muhurat', <PriyanshMuhuratPage />),
   route('/sign-in/*', <SignInPage />),
   route('/sign-up/*', <SignUpPage />),
+  // ─── Week 4: Production hardening — privacy & legal pages ─────────────────
+  route('/privacy-policy', <PrivacyPolicyPage />),
+  route('/privacy', <Navigate to="/privacy-policy" replace />),
+  route('/terms', <TermsOfServicePage />),
+  route('/terms-of-service', <Navigate to="/terms" replace />),
+  route('/privacy-settings', <PrivacySettingsPage />),
   route('*', <NotFound />),
 ];
 

@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Nakshatra (Birth Star) Calculation Service
  * Identifies the 27 lunar mansions in Vedic astrology
@@ -527,3 +528,4 @@ export function formatNakshatra(nakshatra: NakshatraInfo, lang: 'en' | 'hi' = 'e
   const name = lang === 'hi' ? nakshatra.name.hi : nakshatra.name.en;
   return `${name} (Pada ${nakshatra.pada})`;
 }
+

@@ -14,6 +14,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import type { ReferenceType } from '@/services/dashaForecastService';
 import { Users } from 'lucide-react';
+import FamilyProfileSelector from '@/components/FamilyProfileSelector';
+import { getProfileById } from '@/lib/familyProfiles';
+import type { FamilyProfile } from '@/lib/familyProfiles';
 
 const DashaCard = lazy(() => import('@/components/DashaCard'));
 const YogaCard = lazy(() => import('@/components/YogaCard'));
@@ -45,6 +48,7 @@ const DashaPage = () => {
   );
   const [birthInput, setBirthInput] = useState<BirthInput | null>(null);
   const [referenceType, setReferenceType] = useState<ReferenceType | null>(null);
+  const [selectedProfileId, setSelectedProfileId] = useState<string | undefined>();
 
   const { data: chart, isCalculating } = useChartCalculation(birthInput);
 
@@ -56,6 +60,22 @@ const DashaPage = () => {
     setReferenceType('natal');
     setRawBirth(data);
     setBirthInput({ date: data.date, time: data.time, lat: coords.lat, lon: coords.lon });
+  };
+
+  const handleProfileSelect = (profile: FamilyProfile) => {
+    // Validate profile before using it to prevent data leakage
+    const validatedProfile = getProfileById(profile.id);
+    if (!validatedProfile) {
+      return;
+    }
+    
+    setSelectedProfileId(profile.id);
+    const location = `${validatedProfile.birthPlace} (${validatedProfile.birthLat}, ${validatedProfile.birthLon})`;
+    handleSubmit({
+      date: validatedProfile.birthDate,
+      time: validatedProfile.birthTime,
+      location,
+    });
   };
 
   const handleQuestionTime = () => {
@@ -97,6 +117,12 @@ const DashaPage = () => {
               </div>
             </div>
             <div className="flex items-center gap-2">
+              <FamilyProfileSelector
+                onSelect={handleProfileSelect}
+                selectedId={selectedProfileId}
+                triggerLabel={isHi ? 'परिवार प्रोफ़ाइल' : 'Family Profile'}
+                lang={lang}
+              />
               <Link
                 to="/"
                 className={`text-sm text-primary underline underline-offset-2 ${isHi ? 'font-hindi' : ''}`}

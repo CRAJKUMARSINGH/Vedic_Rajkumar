@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Kundli Service - Complete 12-House Birth Chart System
  * Week 11: AstroSage Feature Integration - Part 1

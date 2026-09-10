@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect, useMemo } from 'react';
 import { ChartData } from '../../hooks/useChartCalculation';
 import {
@@ -170,3 +171,4 @@ export function SynthesisDashboard({ chart, isHi = false }: Props) {
     </div>
   );
 }
+

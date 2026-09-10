@@ -1,58 +1,58 @@
-import { useState, useCallback } from "react";
-import { useUser } from "@clerk/react";
-import { useNavigate, Link } from "react-router-dom";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { motion, AnimatePresence } from "framer-motion";
-import { BookOpen, Trash2, Star, Calendar, MapPin, Clock, Plus, ArrowLeft, LogIn } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { useToast } from "@/hooks/use-toast";
+/**
+ * MyReadingsPage.tsx
+ *
+ * Displays the current user's saved astrology readings.
+ * Reads are fetched from Supabase `saved_readings` via the authenticated
+ * Supabase client (Clerk JWT forwarded) so RLS owner-scoping is enforced.
+ *
+ * Week 3: Replaced bare fetch() calls with typed dataLayerService calls.
+ */
 
-interface Reading {
-  id: string;
-  title: string | null;
-  birth_date: string;
-  birth_time: string | null;
-  birth_location: string | null;
-  chart_type: string;
-  notes: string | null;
-  results: Record<string, unknown> | null;
-  created_at: string;
-}
+import { useState, useCallback } from 'react';
+import { useUser } from '@clerk/react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  BookOpen, Trash2, Star, Calendar, MapPin, Clock, Plus, ArrowLeft, ShieldCheck,
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
+import { useAuthenticatedSupabase } from '@/hooks/useAuthenticatedSupabase';
+import DataPrivacyPanel from '@/components/DataPrivacyPanel';
+import {
+  getSavedReadings, deleteSavedReading,
+  type SavedReading,
+} from '@/services/dataLayerService';
 
-const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
-
-async function fetchReadings(): Promise<Reading[]> {
-  const res = await fetch(`${BASE}/api/readings`, { credentials: "include" });
-  if (!res.ok) throw new Error("Failed to load readings");
-  return res.json();
-}
-
-async function deleteReading(id: string): Promise<void> {
-  const res = await fetch(`${BASE}/api/readings/${id}`, {
-    method: "DELETE",
-    credentials: "include",
-  });
-  if (!res.ok) throw new Error("Failed to delete reading");
-}
+const BASE = (import.meta.env.BASE_URL as string).replace(/\/$/, '');
 
 const chartTypeLabel: Record<string, string> = {
-  transit: "Transit",
-  natal: "Natal Chart",
-  dasha: "Dasha",
-  matching: "Match Making",
-  divisional: "Divisional",
+  transit:    'Transit',
+  natal:      'Natal Chart',
+  dasha:      'Dasha',
+  matching:   'Match Making',
+  divisional: 'Divisional',
 };
 
 function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-IN", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
+  return new Date(iso).toLocaleDateString('en-IN', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
   });
 }
 
-function ReadingCard({ reading, onDelete }: { reading: Reading; onDelete: (id: string) => void }) {
+// ── Reading card ──────────────────────────────────────────────────────────────
+
+function ReadingCard({
+  reading,
+  onDelete,
+}: {
+  reading: SavedReading;
+  onDelete: (id: string) => void;
+}) {
   const [confirming, setConfirming] = useState(false);
   const label = chartTypeLabel[reading.chart_type] ?? reading.chart_type;
 
@@ -68,9 +68,12 @@ function ReadingCard({ reading, onDelete }: { reading: Reading; onDelete: (id: s
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap mb-1">
             <h3 className="font-semibold text-base leading-tight text-foreground truncate">
-              {reading.title || reading.birth_location || "Unnamed Reading"}
+              {reading.title || reading.birth_location || 'Unnamed Reading'}
             </h3>
-            <Badge variant="secondary" className="shrink-0 text-xs bg-amber-100 text-amber-800 border-0">
+            <Badge
+              variant="secondary"
+              className="shrink-0 text-xs bg-amber-100 text-amber-800 border-0"
+            >
               {label}
             </Badge>
           </div>
@@ -97,7 +100,9 @@ function ReadingCard({ reading, onDelete }: { reading: Reading; onDelete: (id: s
           </div>
 
           {reading.notes && (
-            <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{reading.notes}</p>
+            <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+              {reading.notes}
+            </p>
           )}
 
           <p className="mt-3 text-xs text-muted-foreground/70">
@@ -131,6 +136,7 @@ function ReadingCard({ reading, onDelete }: { reading: Reading; onDelete: (id: s
               variant="ghost"
               className="h-8 w-8 text-muted-foreground hover:text-destructive"
               onClick={() => setConfirming(true)}
+              aria-label="Delete reading"
             >
               <Trash2 className="h-4 w-4" />
             </Button>
@@ -141,56 +147,51 @@ function ReadingCard({ reading, onDelete }: { reading: Reading; onDelete: (id: s
   );
 }
 
+// ── Page ──────────────────────────────────────────────────────────────────────
+
 export default function MyReadingsPage() {
-  const { isLoaded, isSignedIn, user } = useUser();
+  const { user } = useUser();
   const navigate = useNavigate();
   const { toast } = useToast();
   const qc = useQueryClient();
+  const supabase = useAuthenticatedSupabase();
 
-  const { data: readings, isLoading, isError } = useQuery<Reading[]>({
-    queryKey: ["my-readings"],
-    queryFn: fetchReadings,
-    enabled: isLoaded && isSignedIn === true,
+  const userId = user?.id ?? '';
+
+  const { data: readings, isLoading, isError } = useQuery<SavedReading[]>({
+    queryKey: ['my-readings', userId],
+    queryFn:  () => getSavedReadings(supabase, userId),
+    enabled:  Boolean(userId),
   });
 
   const deleteMutation = useMutation({
-    mutationFn: deleteReading,
+    mutationFn: (id: string) => deleteSavedReading(supabase, id),
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ["my-readings"] });
-      toast({ title: "Reading deleted" });
+      void qc.invalidateQueries({ queryKey: ['my-readings', userId] });
+      toast({ title: 'Reading deleted' });
     },
     onError: () => {
-      toast({ title: "Failed to delete", variant: "destructive" });
+      toast({ title: 'Failed to delete', variant: 'destructive' });
     },
   });
 
-  const handleDelete = useCallback((id: string) => {
-    deleteMutation.mutate(id);
-  }, [deleteMutation]);
+  const handleDelete = useCallback(
+    (id: string) => { deleteMutation.mutate(id); },
+    [deleteMutation],
+  );
 
-  if (!isLoaded) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-muted-foreground animate-pulse">Loading…</div>
-      </div>
-    );
-  }
-
-  if (!isSignedIn) {
+  // ProtectedRoute already handles the unauthenticated redirect —
+  // but we keep a defensive guard for safety.
+  if (!user) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-6 px-4 text-center">
         <div className="text-5xl">⭐</div>
-        <h1 className="text-2xl font-bold text-foreground">Sign in to view your readings</h1>
-        <p className="text-muted-foreground max-w-sm">
-          Create an account to save and revisit your Vedic astrology readings from any device.
-        </p>
+        <h1 className="text-2xl font-bold text-foreground">
+          Sign in to view your readings
+        </h1>
         <Button onClick={() => navigate(`${BASE}/sign-in`)} className="gap-2">
-          <LogIn className="h-4 w-4" />
           Sign In
         </Button>
-        <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-          ← Back to home
-        </Link>
       </div>
     );
   }
@@ -209,7 +210,7 @@ export default function MyReadingsPage() {
               My Saved Readings
             </h1>
             <p className="text-sm text-muted-foreground mt-0.5">
-              {user?.firstName ? `${user.firstName}'s` : "Your"} personal Vedic astrology archive
+              {user?.firstName ? `${user.firstName}'s` : 'Your'} personal Vedic astrology archive
             </p>
           </div>
           <Button asChild size="sm" className="gap-1.5 shrink-0">
@@ -233,19 +234,24 @@ export default function MyReadingsPage() {
           <div className="rounded-2xl border border-destructive/30 bg-destructive/5 p-6 text-center">
             <p className="text-destructive font-medium">Failed to load readings</p>
             <p className="text-sm text-muted-foreground mt-1">
-              Make sure the Supabase <code className="text-xs bg-muted px-1 rounded">saved_readings</code> table exists. See setup instructions below.
+              Make sure the{' '}
+              <code className="text-xs bg-muted px-1 rounded">saved_readings</code> table
+              exists and your Supabase environment is configured.
             </p>
           </div>
         )}
 
-        {!isLoading && !isError && readings?.length === 0 && (
+        {!isLoading && !isError && (readings?.length ?? 0) === 0 && (
           <div className="flex flex-col items-center gap-4 py-20 text-center">
             <div className="h-16 w-16 rounded-2xl bg-amber-100 flex items-center justify-center">
               <Star className="h-8 w-8 text-amber-600" />
             </div>
-            <h2 className="text-lg font-semibold text-foreground">No readings saved yet</h2>
+            <h2 className="text-lg font-semibold text-foreground">
+              No readings saved yet
+            </h2>
             <p className="text-muted-foreground text-sm max-w-xs">
-              Run a transit or birth chart reading and click "Save Reading" to archive it here.
+              Run a transit or birth chart reading and click &ldquo;Save Reading&rdquo; to
+              archive it here.
             </p>
             <Button asChild variant="outline">
               <Link to="/">Start a Reading</Link>
@@ -263,32 +269,20 @@ export default function MyReadingsPage() {
           </AnimatePresence>
         )}
 
-        {/* Supabase setup note */}
-        {isError && (
-          <details className="mt-6 rounded-xl border p-4 text-sm">
-            <summary className="font-medium cursor-pointer">Database setup instructions</summary>
-            <p className="mt-3 text-muted-foreground mb-2">
-              Run this SQL in your Supabase SQL Editor to create the <code>saved_readings</code> table:
-            </p>
-            <pre className="bg-muted rounded-lg p-3 text-xs overflow-x-auto whitespace-pre-wrap">
-{`CREATE TABLE IF NOT EXISTS saved_readings (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id TEXT NOT NULL,
-  title TEXT,
-  birth_date TEXT NOT NULL,
-  birth_time TEXT,
-  birth_location TEXT,
-  chart_type TEXT DEFAULT 'transit',
-  notes TEXT,
-  results JSONB,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-CREATE INDEX IF NOT EXISTS saved_readings_user_id_idx
-  ON saved_readings(user_id);`}
-            </pre>
-          </details>
-        )}
+        {/* ── Data Privacy Controls ───────────────────────────────────────── */}
+        <div className="mt-10 pt-6 border-t border-border/50">
+          <div className="flex items-center gap-2 mb-4">
+            <ShieldCheck className="h-4 w-4 text-amber-500" aria-hidden="true" />
+            <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+              Privacy & Data
+            </h2>
+          </div>
+          <DataPrivacyPanel
+            onDeleteSuccess={() => {
+              void qc.invalidateQueries({ queryKey: ['my-readings', userId] });
+            }}
+          />
+        </div>
       </div>
     </div>
   );

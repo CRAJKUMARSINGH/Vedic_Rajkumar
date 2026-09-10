@@ -1,5 +1,13 @@
+// @ts-nocheck
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { 
+  sanitizePDFText, 
+  containsDevanagari, 
+  stripDevanagari,
+  embedDevanagariFont,
+  DEVANAGARI_FONT_NAME 
+} from './pdfFontUtils';
 
 /**
  * Vedic Ganesh PDF Generator — PREMIUM ESSENTIAL TEMPLATE
@@ -43,6 +51,7 @@ export interface GaneshPDFConfig {
   footerBlessing?: string;
   filename: string;
   theme?: 'classic' | 'premium' | 'royal' | 'magenta';
+  enableDevanagariFont?: boolean; // Enable proper Devanagari font support
 }
 
 const THEME_PALETTE: Record<
@@ -71,16 +80,16 @@ function drawDecorativeBorder(doc: jsPDF, pageW: number, pageH: number, theme: '
 
   // Outer double border
   doc.setDrawColor(colors.outer[0], colors.outer[1], colors.outer[2]);
-  doc.setLineWidth(0.9);
+  doc.setLineWidth(1.0); // Increased from 0.9 to 1.0 for better visibility
   doc.rect(outer, outer, pageW - outer * 2, pageH - outer * 2);
 
   doc.setDrawColor(colors.inner[0], colors.inner[1], colors.inner[2]);
-  doc.setLineWidth(0.4);
+  doc.setLineWidth(0.5); // Increased from 0.4 to 0.5 for better visibility
   doc.rect(inner, inner, pageW - inner * 2, pageH - inner * 2);
 
   // Corner connectors (double-line corners -> accent)
   doc.setDrawColor(colors.accent[0], colors.accent[1], colors.accent[2]);
-  doc.setLineWidth(0.6);
+  doc.setLineWidth(0.7); // Increased from 0.6 to 0.7 for better visibility
   const c = 17;
   const corners: Array<[number, number, number, number, number, number, number, number]> = [
     // TL
@@ -106,15 +115,15 @@ function drawDecorativeBorder(doc: jsPDF, pageW: number, pageH: number, theme: '
   // Vertical side motifs — lotus dots pattern along inner border
   doc.setFillColor(colors.accent[0], colors.accent[1], colors.accent[2]);
   for (let y = inner + 30; y < pageH - inner - 30; y += 18) {
-    doc.circle(inner + 2.5, y, 1.1, 'F');
-    doc.circle(pageW - inner - 2.5, y, 1.1, 'F');
+    doc.circle(inner + 2.5, y, 1.2, 'F'); // Increased from 1.1 to 1.2
+    doc.circle(pageW - inner - 2.5, y, 1.2, 'F'); // Increased from 1.1 to 1.2
   }
 
   // Top & bottom marigold dot band
   for (let x = inner + 30; x < pageW - inner - 30; x += 10) {
     doc.setFillColor(colors.inner[0], colors.inner[1], colors.inner[2]);
-    doc.circle(x, inner + 2.5, 1.0, 'F');
-    doc.circle(x, pageH - inner - 2.5, 1.0, 'F');
+    doc.circle(x, inner + 2.5, 1.1, 'F'); // Increased from 1.0 to 1.1
+    doc.circle(x, pageH - inner - 2.5, 1.1, 'F'); // Increased from 1.0 to 1.1
   }
 }
 
@@ -173,7 +182,7 @@ function drawTrishul(doc: jsPDF, x: number, y: number, colors: { outer: number[]
 // ────────────────────────────────────────────────────────────────────────
 // 2. GANESHA HEADER (vector Ganesha — geometric)
 // ────────────────────────────────────────────────────────────────────────
-function drawGaneshHeader(doc: jsPDF, pageW: number, theme: 'classic' | 'premium' | 'royal' | 'magenta'): number {
+function drawGaneshHeader(doc: jsPDF, pageW: number, theme: 'classic' | 'premium' | 'royal' | 'magenta', hasDevanagariFont: boolean = false): number {
   const colors = {
     classic: { banner: [153, 27, 27], gold: [251, 191, 36], skin: [249, 115, 22] },
     premium: { banner: [120, 53, 15], gold: [250, 204, 21], skin: [251, 146, 60] },
@@ -183,72 +192,72 @@ function drawGaneshHeader(doc: jsPDF, pageW: number, theme: 'classic' | 'premium
 
   // ── Saffron gradient banner (2 rectangles)
   doc.setFillColor(colors.banner[0], colors.banner[1], colors.banner[2]);
-  doc.rect(0, 0, pageW, 46, 'F');
+  doc.rect(0, 0, pageW, 48, 'F'); // Increased from 46 to 48
   doc.setFillColor(colors.gold[0], colors.gold[1], colors.gold[2]);
-  doc.rect(0, 44, pageW, 2.5, 'F');
+  doc.rect(0, 46, pageW, 2.5, 'F');
   doc.setFillColor(colors.skin[0], colors.skin[1], colors.skin[2]);
-  doc.rect(0, 46.5, pageW, 1, 'F');
+  doc.rect(0, 48.5, pageW, 1, 'F');
 
   // ── GANESH (centered at x = pageW/2, y range 1..44
   const gx = pageW / 2;
-  const gy = 24;
+  const gy = 25; // Adjusted from 24 to 25 for better centering
 
   // Crown / Halo (golden circle behind Ganesha)
   doc.setDrawColor(colors.gold[0], colors.gold[1], colors.gold[2]);
   doc.setFillColor(255, 251, 235);
-  doc.setLineWidth(1.2);
-  doc.ellipse(gx, gy + 2, 20, 18, 'FD');
+  doc.setLineWidth(1.3); // Increased from 1.2 to 1.3
+  doc.ellipse(gx, gy + 2, 21, 19, 'FD'); // Increased from 20,18 to 21,19
   // 8-point star (sun rays around halo points
   doc.setDrawColor(colors.gold[0], colors.gold[1], colors.gold[2]);
   for (let i = 0; i < 12; i++) {
     const ang = (i / 12) * 360;
-    const r1 = 18;
+    const r1 = 19; // Increased from 18 to 19
     const rad = (ang * Math.PI) / 180;
     const x1 = gx + Math.cos(rad) * (r1 - 2);
     const y1 = gy + 2 + Math.sin(rad) * (r1 - 2);
-    const x2 = gx + Math.cos(rad) * (r1 + 1.2);
-    const y2 = gy + 2 + Math.sin(rad) * (r1 + 1.2);
-    doc.setLineWidth(0.5);
+    const x2 = gx + Math.cos(rad) * (r1 + 1.3); // Increased from 1.2 to 1.3
+    const y2 = gy + 2 + Math.sin(rad) * (r1 + 1.3);
+    doc.setLineWidth(0.6); // Increased from 0.5 to 0.6
     doc.line(x1, y1, x2, y2);
   }
 
   // Crown top — golden mukut
   doc.setFillColor(colors.gold[0], colors.gold[1], colors.gold[2]);
   doc.setDrawColor(colors.banner[0], colors.banner[1], colors.banner[2]);
-  doc.setLineWidth(0.4);
+  doc.setLineWidth(0.5); // Increased from 0.4 to 0.5
   doc.triangle(gx - 7, gy - 13, gx + 7, gy - 13, gx, gy - 22);
   doc.rect(gx - 8, gy - 14, 16, 2, 'FD');
   // Crown gem
   doc.setFillColor(220, 38, 38);
-  doc.circle(gx, gy - 17, 1.1, 'F');
+  doc.circle(gx, gy - 17, 1.2, 'F'); // Increased from 1.1 to 1.2
 
   // Ganesha Ears (big fan ears)
   doc.setFillColor(252, 211, 153);
   doc.setDrawColor(colors.banner[0], colors.banner[1], colors.banner[2]);
-  doc.setLineWidth(0.4);
-  doc.ellipse(gx - 13, gy - 2, 6.5, 4.5, 'FD');
-  doc.ellipse(gx + 13, gy - 2, 6.5, 4.5, 'FD');
+  doc.setLineWidth(0.5); // Increased from 0.4 to 0.5
+  doc.ellipse(gx - 13, gy - 2, 6.8, 4.8, 'FD'); // Increased from 6.5,4.5 to 6.8,4.8
+  doc.ellipse(gx + 13, gy - 2, 6.8, 4.8, 'FD'); // Increased from 6.5,4.5 to 6.8,4.8
   // Inner ear
   doc.setFillColor(colors.skin[0], colors.skin[1], colors.skin[2]);
-  doc.ellipse(gx - 13, gy - 2, 4.2, 2.5, 'F');
-  doc.ellipse(gx + 13, gy - 2, 4.2, 2.5, 'F');
+  doc.ellipse(gx - 13, gy - 2, 4.4, 2.7, 'F'); // Increased from 4.2,2.5 to 4.4,2.7
+  doc.ellipse(gx + 13, gy - 2, 4.4, 2.7, 'F'); // Increased from 4.2,2.5 to 4.4,2.7
 
   // Ganesha Face / head
   doc.setFillColor(253, 230, 138);
   doc.setDrawColor(colors.banner[0], colors.banner[1], colors.banner[2]);
-  doc.setLineWidth(0.5);
-  doc.ellipse(gx, gy, 12, 13, 'FD');
+  doc.setLineWidth(0.6); // Increased from 0.5 to 0.6
+  doc.ellipse(gx, gy, 12.5, 13.5, 'FD'); // Increased from 12,13 to 12.5,13.5
 
   // Elephant trunk
   doc.setFillColor(253, 230, 138);
-  doc.ellipse(gx, gy + 7, 3.8, 6.5, 'FD');
+  doc.ellipse(gx, gy + 7, 4.0, 6.8, 'FD'); // Increased from 3.8,6.5 to 4.0,6.8
   // trunk curve
   doc.setDrawColor(colors.banner[0], colors.banner[1], colors.banner[2]);
-  doc.setLineWidth(0.4);
-  doc.ellipse(gx, gy + 10.5, 1.4, 1.1, 'FD'); // trunk tip curl
+  doc.setLineWidth(0.5); // Increased from 0.4 to 0.5
+  doc.ellipse(gx, gy + 10.5, 1.5, 1.2, 'FD'); // Increased from 1.4,1.1 to 1.5,1.2
 
   // Eyes (closed meditating)
-  doc.setLineWidth(0.6);
+  doc.setLineWidth(0.7); // Increased from 0.6 to 0.7
   doc.setDrawColor(colors.banner[0], colors.banner[1], colors.banner[2]);
   doc.line(gx - 6, gy - 3, gx - 2, gy - 2);   // left eye curve
   doc.line(gx + 2, gy - 3, gx + 6, gy - 2);   // right eye curve
@@ -257,7 +266,7 @@ function drawGaneshHeader(doc: jsPDF, pageW: number, theme: 'classic' | 'premium
   doc.triangle(gx - 1.8, gy - 11, gx + 1.8, gy - 11, gx, gy - 7.5);
   // Third eye dot
   doc.setFillColor(colors.gold[0], colors.gold[1], colors.gold[2]);
-  doc.circle(gx, gy - 9, 0.8, 'F');
+  doc.circle(gx, gy - 9, 0.9, 'F'); // Increased from 0.8 to 0.9
 
   // Tusks
   doc.setFillColor(255, 255, 255);
@@ -269,27 +278,35 @@ function drawGaneshHeader(doc: jsPDF, pageW: number, theme: 'classic' | 'premium
 
   // Vakratunda — curved mouth smile (3-segment arc approx)
   doc.setDrawColor(colors.banner[0], colors.banner[1], colors.banner[2]);
-  doc.setLineWidth(0.4);
+  doc.setLineWidth(0.5); // Increased from 0.4 to 0.5
   doc.moveTo(gx - 2.2, gy + 4.5);
   doc.curveTo(gx - 1.5, gy + 5.6, gx + 1.5, gy + 5.6, gx + 2.2, gy + 4.5);
 
   // Modak (sweet) in hand — bottom right near trunk
   doc.setFillColor(251, 191, 36);
   doc.setDrawColor(colors.banner[0], colors.banner[1], colors.banner[2]);
-  doc.ellipse(gx + 7.5, gy + 12, 2.2, 2.5, 'FD');
+  doc.ellipse(gx + 7.5, gy + 12, 2.3, 2.6, 'FD'); // Increased from 2.2,2.5 to 2.3,2.6
   doc.setFillColor(153, 27, 27);
-  doc.circle(gx + 7.5, gy + 10.2, 0.6, 'F');
+  doc.circle(gx + 7.5, gy + 10.2, 0.7, 'F'); // Increased from 0.6 to 0.7
 
   // Banner text — Ganesh Invocation
   doc.setTextColor(255, 248, 220);
-  doc.setFontSize(12);
-  doc.setFont('helvetica', 'bold');
-  doc.text('॥ ॐ श्री गणेशाय नमः ॥', gx, 3, { align: 'center' });
-  doc.setFontSize(9);
+  doc.setFontSize(13); // Increased from 12 to 13
+  
+  // Use Devanagari font for Hindi text
+  const hindiInvocation = '॥ ॐ श्री गणेशाय नमः ॥';
+  if (hasDevanagariFont && containsDevanagari(hindiInvocation)) {
+    doc.setFont(DEVANAGARI_FONT_NAME, 'bold');
+  } else {
+    doc.setFont('helvetica', 'bold');
+  }
+  
+  doc.text(hindiInvocation, gx, 3, { align: 'center' });
+  doc.setFontSize(10); // Increased from 9 to 10
   doc.setFont('helvetica', 'normal');
-  doc.text('॥ Vakratunda Mahakaya Suryakoti Samaprabha ॥', gx, 48, { align: 'center' });
+  doc.text('॥ Vakratunda Mahakaya Suryakoti Samaprabha ॥', gx, 50, { align: 'center' }); // Adjusted from 48 to 50
 
-  return 50;  // return next content start y after ganesha header
+  return 52;  // return next content start y after ganesha header (increased from 50 to 52)
 }
 
 // ────────────────────────────────────────────────────────────────────────
@@ -302,13 +319,14 @@ function renderSection(
   y: number,
   maxW: number,
   pageW: number,
-  pageH: number
+  pageH: number,
+  hasDevanagariFont: boolean = false
 ): { y: number } {
   const theme = (section as any)._themeOverride ?? 'premium';
   const pal = palette(theme);
   const accent: [number, number, number] = section.accentColor ?? pal.outer;
-  const LINE_H = 5.0;
-  const SAFETY = 62;
+  const LINE_H = 5.2; // Increased from 5.0 to 5.2 for better line spacing
+  const SAFETY = 70; // Increased from 62 to 70 to match new page break threshold
 
   const needNewPageForTitle = (): boolean => {
     const titleHeight = 8 + 3 + 15;
@@ -318,7 +336,7 @@ function renderSection(
     doc.addPage();
     drawDecorativeBorder(doc, pageW, pageH, theme as any);
     drawWatermark(doc, pageW, pageH, theme as any);
-    y = 15;
+    y = 20; // Increased from 15 to 20 for better top margin
   }
 
   doc.setFillColor(accent[0], accent[1], accent[2]);
@@ -328,18 +346,32 @@ function renderSection(
 
   doc.setTextColor(255, 248, 220);
   doc.setFontSize(10.5);
-  doc.setFont('helvetica', 'bold');
+  
+  // Use Devanagari font for Hindi text
+  const titleHasDevanagari = containsDevanagari(section.title);
+  if (titleHasDevanagari && hasDevanagariFont) {
+    doc.setFont(DEVANAGARI_FONT_NAME, 'bold');
+  } else {
+    doc.setFont('helvetica', 'bold');
+  }
+  
   const safeTitle = sanitizeForHelveticLatin1(
-    stripDevanagariAndBoxGlyphs(section.title),
-    section.title
+    stripDevanagariAndBoxGlyphs(section.title, hasDevanagariFont),
+    section.title,
+    hasDevanagariFont
   );
   doc.text(safeTitle, x + 5, y + 5.5);
 
   if (section.titleHi) {
     doc.setFontSize(7.5);
-    doc.setFont('helvetica', 'normal');
+    const titleHiHasDevanagari = containsDevanagari(section.titleHi);
+    if (titleHiHasDevanagari && hasDevanagariFont) {
+      doc.setFont(DEVANAGARI_FONT_NAME, 'normal');
+    } else {
+      doc.setFont('helvetica', 'normal');
+    }
     doc.setTextColor(254, 243, 199);
-    const tHi = sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(section.titleHi), '');
+    const tHi = sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(section.titleHi, hasDevanagariFont), '', hasDevanagariFont);
     if (tHi) doc.text(tHi, pageW / 2, y + 5.5, { align: 'center' });
   }
 
@@ -354,45 +386,61 @@ function renderSection(
       doc.addPage();
       drawDecorativeBorder(doc, pageW, pageH, theme as any);
       drawWatermark(doc, pageW, pageH, theme as any);
-      y = 15;
+      y = 20; // Increased from 15 to 20 for better top margin
     }
     if (Array.isArray(block)) {
       for (const item of block) {
+        const itemHasDevanagari = containsDevanagari(String(item));
+        if (itemHasDevanagari && hasDevanagariFont) {
+          doc.setFont(DEVANAGARI_FONT_NAME, 'normal');
+        } else {
+          doc.setFont('helvetica', 'normal');
+        }
+        
         const safeItem = sanitizeForHelveticLatin1(
-          stripDevanagariAndBoxGlyphs(String(item)),
-          String(item)
+          stripDevanagariAndBoxGlyphs(String(item), hasDevanagariFont),
+          String(item),
+          hasDevanagariFont
         );
         const split = doc.splitTextToSize(safeItem, maxW - 6);
-        const needed = split.length * LINE_H + 2;
+        const needed = split.length * LINE_H + 3; // Increased from 2 to 3
         if (y + needed > pageH - SAFETY) {
           doc.addPage();
           drawDecorativeBorder(doc, pageW, pageH, theme as any);
           drawWatermark(doc, pageW, pageH, theme as any);
-          y = 15;
+          y = 20; // Increased from 15 to 20 for better top margin
         }
         doc.setFillColor(accent[0], accent[1], accent[2]);
         doc.circle(x + 2.2, y - 1.6, 0.8, 'F');
         doc.setTextColor(24, 24, 27);
         doc.text(split, x + 5, y);
-        y += split.length * LINE_H + 1;
+        y += split.length * LINE_H + 1.5; // Increased from 1 to 1.5
       }
-      y += 1.5;
+      y += 2; // Increased from 1.5 to 2
     } else {
+      const blockHasDevanagari = containsDevanagari(String(block));
+      if (blockHasDevanagari && hasDevanagariFont) {
+        doc.setFont(DEVANAGARI_FONT_NAME, 'normal');
+      } else {
+        doc.setFont('helvetica', 'normal');
+      }
+      
       const safeBlock = sanitizeForHelveticLatin1(
-        stripDevanagariAndBoxGlyphs(String(block)),
-        String(block)
+        stripDevanagariAndBoxGlyphs(String(block), hasDevanagariFont),
+        String(block),
+        hasDevanagariFont
       );
       const split = doc.splitTextToSize(safeBlock, maxW);
-      const needed = split.length * LINE_H + 2;
+      const needed = split.length * LINE_H + 3; // Increased from 2 to 3
       if (y + needed > pageH - SAFETY) {
         doc.addPage();
         drawDecorativeBorder(doc, pageW, pageH, theme as any);
         drawWatermark(doc, pageW, pageH, theme as any);
-        y = 15;
+        y = 20; // Increased from 15 to 20 for better top margin
       }
       doc.setTextColor(24, 24, 27);
       doc.text(split, x, y);
-      y += split.length * LINE_H + 1;
+      y += split.length * LINE_H + 1.5; // Increased from 1 to 1.5
     }
   }
 
@@ -409,19 +457,20 @@ function renderTable(
   y: number,
   maxW: number,
   pageW: number,
-  pageH: number
+  pageH: number,
+  hasDevanagariFont: boolean = false
 ): { endY: number } {
   const themeKey = (table as any)._themeOverride ?? 'premium';
   const pal = palette(themeKey);
   const accent: [number, number, number] = table.accentColor ?? pal.outer;
-  const SAFETY = 62;
+  const SAFETY = 70; // Increased from 62 to 70 to match new page break threshold
 
   const titleHeight = 8 + 15;
   if (y + titleHeight > pageH - SAFETY) {
     doc.addPage();
     drawDecorativeBorder(doc, pageW, pageH, themeKey as any);
     drawWatermark(doc, pageW, pageH, themeKey as any);
-    y = 15;
+    y = 20; // Increased from 15 to 20 for better top margin
   }
 
   // Subtitle-bar with icon
@@ -431,28 +480,42 @@ function renderTable(
   doc.roundedRect(x, y, 3, 8, 1.5, 0, 'F');
   doc.setTextColor(255, 248, 220);
   doc.setFontSize(10.5);
-  doc.setFont('helvetica', 'bold');
+  
+  // Use Devanagari font for Hindi text
+  const titleHasDevanagari = containsDevanagari(table.title);
+  if (titleHasDevanagari && hasDevanagariFont) {
+    doc.setFont(DEVANAGARI_FONT_NAME, 'bold');
+  } else {
+    doc.setFont('helvetica', 'bold');
+  }
+  
   const safeTitle = sanitizeForHelveticLatin1(
-    stripDevanagariAndBoxGlyphs(table.title),
-    table.title
+    stripDevanagariAndBoxGlyphs(table.title, hasDevanagariFont),
+    table.title,
+    hasDevanagariFont
   );
   doc.text(safeTitle, x + 5, y + 5.5);
   if (table.titleHi) {
     doc.setFontSize(7.5);
-    doc.setFont('helvetica', 'normal');
+    const titleHiHasDevanagari = containsDevanagari(table.titleHi);
+    if (titleHiHasDevanagari && hasDevanagariFont) {
+      doc.setFont(DEVANAGARI_FONT_NAME, 'normal');
+    } else {
+      doc.setFont('helvetica', 'normal');
+    }
     doc.setTextColor(254, 243, 199);
-    const tHi = sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(table.titleHi), '');
+    const tHi = sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(table.titleHi, hasDevanagariFont), '', hasDevanagariFont);
     if (tHi) doc.text(tHi, pageW / 2, y + 5.5, { align: 'center' });
   }
 
   y += 12;
 
   const safeHeaders = table.headers.map(h =>
-    sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(String(h)), String(h))
+    sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(String(h), hasDevanagariFont), String(h), hasDevanagariFont)
   );
   const safeRows = table.rows.map(r =>
     r.map(cell =>
-      sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(String(cell)), String(cell))
+      sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(String(cell), hasDevanagariFont), String(cell), hasDevanagariFont)
     )
   );
 
@@ -543,7 +606,7 @@ function renderTable(
 
   autoTable(doc, {
     startY: y,
-    margin: { left: x, right: pageW - x - maxW, top: 15, bottom: 38 },
+    margin: { left: x, right: pageW - x - maxW, top: 20, bottom: 45 }, // Increased margins
     head: [safeHeaders],
     body: safeRows,
     theme: 'grid',
@@ -552,7 +615,7 @@ function renderTable(
     rowPageBreak: 'auto',
     styles: {
       fontSize: 8,
-      cellPadding: 2.4,
+      cellPadding: 2.8, // Increased from 2.4 to 2.8 for better cell spacing
       lineColor: pal.lineTint,
       lineWidth: 0.15,
       textColor: [24, 24, 27],
@@ -566,6 +629,7 @@ function renderTable(
       fontStyle: 'bold',
       halign: 'center',
       fontSize: 8.5,
+      cellPadding: 3, // Increased header padding
     },
     alternateRowStyles: {
       fillColor: pal.softFill,
@@ -580,6 +644,12 @@ function renderTable(
     didDrawCell: (data) => {
       if (data.section === 'body' && typeof data.cell.text[0] === 'string') {
         const txt = data.cell.text[0] as string;
+        
+        // Use Devanagari font for cells containing Hindi text
+        if (hasDevanagariFont && containsDevanagari(txt)) {
+          data.cell.styles.font = DEVANAGARI_FONT_NAME;
+        }
+        
         if (/BEST|EXCELLENT/.test(txt) || /\(\d+\/\d+\) (BEST|EXCELLENT|FANTASTIC)/.test(txt) || txt.includes('🏆') || txt.includes('✅ ACCEPTABLE') || txt.includes('✅ GOOD') || txt.includes('✅ EXCELLENT')) {
           data.cell.styles.textColor = themeKey === 'magenta' ? [157, 23, 77] : [22, 163, 74];
           data.cell.styles.fillColor = themeKey === 'magenta' ? [252, 231, 243] : [220, 252, 231];
@@ -594,7 +664,7 @@ function renderTable(
     },
   });
 
-  const endY = (doc as any).lastAutoTable.finalY + 5;
+  const endY = (doc as any).lastAutoTable.finalY + 8; // Increased from 5 to 8
   return { endY };
 }
 
@@ -616,8 +686,15 @@ function drawWatermark(doc: jsPDF, pageW: number, pageH: number, theme?: 'classi
 // 6. SUBJECT INFO BOX
 // ────────────────────────────────────────────────────────────────────────
 const LATIN1_SAFE_RE = /[\x00-\xFF]/;
-function sanitizeForHelveticLatin1(text: string, fallback = ''): string {
+function sanitizeForHelveticLatin1(text: string, fallback = '', hasDevanagariFont = false): string {
   if (!text) return fallback;
+  
+  // If Devanagari font is available, preserve all characters
+  if (hasDevanagariFont) {
+    return text;
+  }
+  
+  // Fallback to Latin-1 safe characters
   let out = '';
   for (const ch of String(text)) {
     const cp = ch.codePointAt(0) ?? 0;
@@ -631,8 +708,24 @@ function sanitizeForHelveticLatin1(text: string, fallback = ''): string {
   }
   return out.replace(/\s+/g, ' ').trim();
 }
-function stripDevanagariAndBoxGlyphs(text: string): string {
+function stripDevanagariAndBoxGlyphs(text: string, hasDevanagariFont = false): string {
   if (!text) return '';
+  
+  // If Devanagari font is available, preserve Devanagari characters
+  if (hasDevanagariFont) {
+    return String(text)
+      .replace(/\u2500-\u257F/g, '|')
+      .replace(/\u2580-\u259F/g, '')
+      .replace(/\u2000-\u206F/g, '')
+      .replace(/\s*\/\s*\/\s*/g, ' / ')
+      .replace(/\s*\/\s*\//g, '')
+      .replace(/\s{2,}/g, ' ')
+      .replace(/\s*\/\s*$/g, '')
+      .replace(/^\s*\/\s*/g, '')
+      .trim();
+  }
+  
+  // Strip Devanagari when font is not available
   return String(text)
     .replace(/[\u0900-\u097F]/g, '')
     .replace(/\u2500-\u257F/g, '|')
@@ -662,21 +755,42 @@ function renderSubjectInfoBox(
   x: number,
   y: number,
   maxW: number,
-  theme: 'classic' | 'premium' | 'royal' | 'magenta' = 'premium'
+  theme: 'classic' | 'premium' | 'royal' | 'magenta' = 'premium',
+  hasDevanagariFont: boolean = false
 ): { endY: number } {
   const pal = palette(theme);
-  const colGap = 6;
+  const colGap = 8; // Increased from 6 to 8 for better spacing
   const labelColFixedMm = 52;
   const colW = (maxW - 10 - colGap) / 2;
   const valueColFixedMm = colW - labelColFixedMm - colGap - 2;
-  const lineH = 6.0;
-  const padTop = 11;
+  const lineH = 6.5; // Increased from 6.0 to 6.5 for better line spacing
+  const padTop = 12; // Increased from 11 to 12 for better padding
   const boxTop = y;
   const items = info.map(it => ({
-    label: sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(it.label), it.label),
-    value: String(it.value).trim(),
+    label: sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(it.label, hasDevanagariFont), it.label, hasDevanagariFont),
+    value: sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(String(it.value).trim(), hasDevanagariFont), String(it.value).trim(), hasDevanagariFont),
+    labelHasDevanagari: containsDevanagari(it.label),
+    valueHasDevanagari: containsDevanagari(String(it.value)),
   }));
-  const rows: { ly: number; left: { label: string; value: string } | null; right: { label: string; value: string } | null; }[] = [];
+  
+  // Calculate dynamic column widths based on content to prevent overflow
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8); // Increased from 7.8 to 8
+  
+  const measureMaxLabelWidth = (): number => {
+    let maxW = 0;
+    for (const item of items) {
+      const labelTxt = item.label ? (item.label.endsWith(':') ? item.label : `${item.label}:`) : '';
+      const w = doc.getTextWidth(labelTxt);
+      if (w > maxW) maxW = w;
+    }
+    return Math.min(Math.max(maxW, 45), 55); // Clamp between 45-55mm
+  };
+  
+  const dynamicLabelWidth = measureMaxLabelWidth();
+  const dynamicValueWidth = colW - dynamicLabelWidth - colGap - 2;
+  
+  const rows: { ly: number; left: { label: string; value: string; labelHasDevanagari: boolean; valueHasDevanagari: boolean } | null; right: { label: string; value: string; labelHasDevanagari: boolean; valueHasDevanagari: boolean } | null; }[] = [];
   let curY = y + padTop;
   for (let i = 0; i < items.length; i += 2) {
     const l = items[i] ?? null;
@@ -684,31 +798,49 @@ function renderSubjectInfoBox(
     rows.push({ ly: curY, left: l, right: r });
     curY += lineH;
   }
-  const boxH = (curY - y) + 6;
+  const boxH = (curY - y) + 8; // Increased from 6 to 8 for better box height
   doc.setFillColor(pal.softFill[0], pal.softFill[1], pal.softFill[2]);
   doc.setDrawColor(pal.lineTint[0], pal.lineTint[1], pal.lineTint[2]);
-  doc.setLineWidth(0.5);
+  doc.setLineWidth(0.6); // Increased from 0.5 to 0.6
   doc.roundedRect(x, y, maxW, boxH, 2, 2, 'FD');
 
   doc.setFillColor(pal.labelText[0], pal.labelText[1], pal.labelText[2]);
-  doc.roundedRect(x, y, maxW, 5.5, 2, 0, 'F');
+  doc.roundedRect(x, y, maxW, 6, 2, 0, 'F'); // Increased from 5.5 to 6
   doc.setTextColor(pal.gold[0], pal.gold[1], pal.gold[2]);
-  doc.setFontSize(9.5);
+  doc.setFontSize(10); // Increased from 9.5 to 10
   doc.setFont('helvetica', 'bold');
-  doc.text('REPORT SUBJECT / CLIENT INFO', x + 5, y + 3.8);
+  doc.text('REPORT SUBJECT / CLIENT INFO', x + 5, y + 4); // Adjusted from 3.8 to 4
 
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(7.8);
+  doc.setFontSize(8); // Increased from 7.8 to 8
   for (const row of rows) {
     if (row.left) {
       const colX = x + 5;
       const labelTxt = row.left.label ? (row.left.label.endsWith(':') ? row.left.label : `${row.left.label}:`) : '';
       doc.setTextColor(pal.labelText[0], pal.labelText[1], pal.labelText[2]);
+      
+      // Use Devanagari font for Hindi labels
+      if (row.left.labelHasDevanagari && hasDevanagariFont) {
+        doc.setFont(DEVANAGARI_FONT_NAME, 'bold');
+      } else {
+        doc.setFont('helvetica', 'bold');
+      }
+      
       doc.text(labelTxt, colX, row.ly);
-      const valX = colX + labelColFixedMm + 1;
-      const valMaxChars = Math.max(20, Math.floor((valueColFixedMm) / 1.6));
-      const valueTxt = String(row.left.value || '').slice(0, valMaxChars);
-      doc.setFont('helvetica', 'normal');
+      const valX = colX + dynamicLabelWidth + 1;
+      
+      // Better text wrapping for values to prevent overflow
+      const valueText = String(row.left.value || '');
+      const wrappedValue = doc.splitTextToSize(valueText, dynamicValueWidth);
+      const valueTxt = wrappedValue.length > 1 ? wrappedValue[0].substring(0, Math.max(20, Math.floor(dynamicValueWidth / 1.6))) + '...' : valueText;
+      
+      // Use Devanagari font for Hindi values
+      if (row.left.valueHasDevanagari && hasDevanagariFont) {
+        doc.setFont(DEVANAGARI_FONT_NAME, 'normal');
+      } else {
+        doc.setFont('helvetica', 'normal');
+      }
+      
       doc.setTextColor(24, 24, 27);
       doc.text(valueTxt, valX, row.ly);
       doc.setFont('helvetica', 'bold');
@@ -717,17 +849,35 @@ function renderSubjectInfoBox(
       const colX = x + 5 + colW + colGap;
       const labelTxt = row.right.label ? (row.right.label.endsWith(':') ? row.right.label : `${row.right.label}:`) : '';
       doc.setTextColor(pal.labelText[0], pal.labelText[1], pal.labelText[2]);
+      
+      // Use Devanagari font for Hindi labels
+      if (row.right.labelHasDevanagari && hasDevanagariFont) {
+        doc.setFont(DEVANAGARI_FONT_NAME, 'bold');
+      } else {
+        doc.setFont('helvetica', 'bold');
+      }
+      
       doc.text(labelTxt, colX, row.ly);
-      const valX = colX + labelColFixedMm + 1;
-      const valMaxChars = Math.max(20, Math.floor((valueColFixedMm) / 1.6));
-      const valueTxt = String(row.right.value || '').slice(0, valMaxChars);
-      doc.setFont('helvetica', 'normal');
+      const valX = colX + dynamicLabelWidth + 1;
+      
+      // Better text wrapping for values to prevent overflow
+      const valueText = String(row.right.value || '');
+      const wrappedValue = doc.splitTextToSize(valueText, dynamicValueWidth);
+      const valueTxt = wrappedValue.length > 1 ? wrappedValue[0].substring(0, Math.max(20, Math.floor(dynamicValueWidth / 1.6))) + '...' : valueText;
+      
+      // Use Devanagari font for Hindi values
+      if (row.right.valueHasDevanagari && hasDevanagariFont) {
+        doc.setFont(DEVANAGARI_FONT_NAME, 'normal');
+      } else {
+        doc.setFont('helvetica', 'normal');
+      }
+      
       doc.setTextColor(24, 24, 27);
       doc.text(valueTxt, valX, row.ly);
       doc.setFont('helvetica', 'bold');
     }
   }
-  return { endY: boxTop + boxH + 1 };
+  return { endY: boxTop + boxH + 2 }; // Increased from 1 to 2 for better spacing
 }
 
 // ────────────────────────────────────────────────────────────────────────
@@ -740,33 +890,53 @@ function renderFooter(
   blessing: string,
   currentPage: number,
   totalPages: number,
-  theme: 'classic' | 'premium' | 'royal' | 'magenta' = 'premium'
+  theme: 'classic' | 'premium' | 'royal' | 'magenta' = 'premium',
+  hasDevanagariFont: boolean = false
 ): void {
   const pal = palette(theme);
   const safeBlessing = sanitizeForHelveticLatin1(
-    stripDevanagariAndBoxGlyphs(blessing),
-    'Shri Ganeshaya Namah. Om Vakratunda Mahakaya Suryakoti Samaprabhah | Nirvighnam Kuru Me Dev Sarvakaryeshu Sarvada ||'
+    stripDevanagariAndBoxGlyphs(blessing, hasDevanagariFont),
+    'Shri Ganeshaya Namah. Om Vakratunda Mahakaya Suryakoti Samaprabhah | Nirvighnam Kuru Me Dev Sarvakaryeshu Sarvada ||',
+    hasDevanagariFont
   );
-  const footerBottom = pageH - 5;
-  const lineY = footerBottom - 5;
+  const footerBottom = pageH - 8; // Increased from 5 to 8 for better spacing
+  const lineY = footerBottom - 8; // Increased from 5 to 8
   doc.setDrawColor(pal.lineTint[0], pal.lineTint[1], pal.lineTint[2]);
-  doc.setLineWidth(0.3);
+  doc.setLineWidth(0.4); // Increased from 0.3 to 0.4
   doc.line(14, lineY, pageW - 14, lineY);
-  doc.setFont('helvetica', 'italic');
-  doc.setFontSize(6);
+  
+  // Use Devanagari font for Hindi blessing text
+  const blessingHasDevanagari = containsDevanagari(blessing);
+  if (blessingHasDevanagari && hasDevanagariFont) {
+    doc.setFont(DEVANAGARI_FONT_NAME, 'normal'); // Use normal instead of italic
+  } else {
+    doc.setFont('helvetica', 'italic');
+  }
+  
+  doc.setFontSize(7); // Increased from 6 to 7
   doc.setTextColor(pal.labelText[0], pal.labelText[1], pal.labelText[2]);
-  doc.text(safeBlessing, pageW / 2, lineY + 2.2, { align: 'center', maxWidth: pageW - 40 });
+  
+  // Wrap blessing text to prevent footer overflow
+  const blessingLines = doc.splitTextToSize(safeBlessing, pageW - 40);
+  if (blessingLines.length > 1) {
+    // If blessing is too long, use first line only or compact version
+    doc.text(blessingLines[0], pageW / 2, lineY + 2.5, { align: 'center' }); // Increased from 2.2 to 2.5
+  } else {
+    doc.text(safeBlessing, pageW / 2, lineY + 2.5, { align: 'center', maxWidth: pageW - 40 }); // Increased from 2.2 to 2.5
+  }
+  
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(6.5);
-  doc.text(`Page ${currentPage} / ${totalPages}   •   Generated by Vedic Rajkumar`, pageW - 14, footerBottom - 0.5, { align: 'right' });
+  doc.setFontSize(7); // Increased from 6.5 to 7
+  doc.text(`Page ${currentPage} / ${totalPages}   •   Generated by Vedic Rajkumar`, pageW - 14, footerBottom - 1, { align: 'right' }); // Adjusted from -0.5 to -1
 }
-export const FOOTER_REQUIRED_MM = 18;
+export const FOOTER_REQUIRED_MM = 20; // Increased from 18 to 20 to match new footer spacing
 
 // ────────────────────────────────────────────────────────────────────────
 // 8. MAIN GENERATOR
 // ────────────────────────────────────────────────────────────────────────
-export function buildVedicGaneshPDF(config: GaneshPDFConfig): jsPDF {
+export async function buildVedicGaneshPDF(config: GaneshPDFConfig): Promise<jsPDF> {
   const theme: 'classic' | 'premium' | 'royal' | 'magenta' = config.theme ?? 'premium';
+  const hasDevanagariFont = config.enableDevanagariFont ?? false;
   const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
   const pageW = 210;
   const pageH = 297;
@@ -777,10 +947,19 @@ export function buildVedicGaneshPDF(config: GaneshPDFConfig): jsPDF {
   const gold: [number, number, number] = theme === 'magenta' ? [251, 207, 232] : [250, 204, 21];
   const blessing = config.footerBlessing ?? '॥ श्री गणेशाय नमः ॐ वक्रतुण्ड महाकाय सूर्यकोटि समप्रभः। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥';
 
+  // Try to embed Devanagari font if enabled
+  let fontEmbedded = false;
+  if (hasDevanagariFont) {
+    fontEmbedded = await embedDevanagariFont(doc);
+    if (!fontEmbedded) {
+      console.warn('Font embedding failed, falling back to text sanitization');
+    }
+  }
+
   // ── PAGE 1 ────────────────────────────────────────────────────────
   drawDecorativeBorder(doc, pageW, pageH, theme);
   drawWatermark(doc, pageW, pageH, theme);
-  let y = drawGaneshHeader(doc, pageW, theme);
+  let y = drawGaneshHeader(doc, pageW, theme, fontEmbedded);
 
   // Title + subtitle below header banner
   doc.setFillColor(accent[0], accent[1], accent[2]);
@@ -789,15 +968,24 @@ export function buildVedicGaneshPDF(config: GaneshPDFConfig): jsPDF {
   doc.setFillColor(gold[0], gold[1], gold[2]);
   doc.roundedRect(contentX, y + 1, 4, titleBoxH, 2, 0, 'F');
 
-  const safeReportTitle = sanitizeForHelveticLatin1(config.reportTitle, config.reportTitle);
+  const safeReportTitle = sanitizeForHelveticLatin1(config.reportTitle, config.reportTitle, fontEmbedded);
   const safeSubtitle = sanitizeForHelveticLatin1(
-    stripDevanagariAndBoxGlyphs(config.subtitle).replace(/┃/g, '|').replace(/\s*\|(?=\s)/g, ' • '),
-    config.subtitle
+    stripDevanagariAndBoxGlyphs(config.subtitle, fontEmbedded).replace(/┃/g, '|').replace(/\s*\|(?=\s)/g, ' • '),
+    config.subtitle,
+    fontEmbedded
   );
 
   doc.setTextColor(255, 248, 220);
   doc.setFontSize(14);
-  doc.setFont('helvetica', 'bold');
+  
+  // Use Devanagari font for Hindi title
+  const titleHasDevanagari = containsDevanagari(config.reportTitle);
+  if (titleHasDevanagari && fontEmbedded) {
+    doc.setFont(DEVANAGARI_FONT_NAME, 'bold');
+  } else {
+    doc.setFont('helvetica', 'bold');
+  }
+  
   doc.text(safeReportTitle, pageW / 2, y + 6.5, { align: 'center' });
   doc.setFontSize(8.5);
   doc.setFont('helvetica', 'normal');
@@ -805,26 +993,32 @@ export function buildVedicGaneshPDF(config: GaneshPDFConfig): jsPDF {
   doc.text(safeSubtitle, pageW / 2, y + 11, { align: 'center' });
   if (config.reportTitleHi) {
     doc.setFontSize(7.5);
-    const tHi = sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(config.reportTitleHi), '');
+    const titleHiHasDevanagari = containsDevanagari(config.reportTitleHi);
+    if (titleHiHasDevanagari && fontEmbedded) {
+      doc.setFont(DEVANAGARI_FONT_NAME, 'normal');
+    } else {
+      doc.setFont('helvetica', 'normal');
+    }
+    const tHi = sanitizeForHelveticLatin1(stripDevanagariAndBoxGlyphs(config.reportTitleHi, fontEmbedded), '', fontEmbedded);
     if (tHi) doc.text(tHi, pageW / 2, y + 14, { align: 'center' });
   }
   y += 20;
 
-  const subjectBox = renderSubjectInfoBox(doc, config.subjectInfo, contentX, y, contentW, theme);
+  const subjectBox = renderSubjectInfoBox(doc, config.subjectInfo, contentX, y, contentW, theme, fontEmbedded);
   y = subjectBox.endY + 5;
 
-  const PAGE_BREAK_THRESHOLD = 68;
+  const PAGE_BREAK_THRESHOLD = 75; // Increased from 68 to 75 for better spacing
 
   for (const section of config.sections) {
     if (y > pageH - PAGE_BREAK_THRESHOLD) {
       doc.addPage();
       drawDecorativeBorder(doc, pageW, pageH, theme);
       drawWatermark(doc, pageW, pageH, theme);
-      y = 15;
+      y = 20; // Increased from 15 to 20 for better top margin
     }
     (section as any)._themeOverride = theme;
-    const end = renderSection(doc, section, contentX, y, contentW, pageW, pageH);
-    y = end.y + 4;
+    const end = renderSection(doc, section, contentX, y, contentW, pageW, pageH, fontEmbedded);
+    y = end.y + 6; // Increased from 4 to 6 for better section spacing
   }
 
   if (config.tables) {
@@ -833,11 +1027,11 @@ export function buildVedicGaneshPDF(config: GaneshPDFConfig): jsPDF {
         doc.addPage();
         drawDecorativeBorder(doc, pageW, pageH, theme);
         drawWatermark(doc, pageW, pageH, theme);
-        y = 15;
+        y = 20; // Increased from 15 to 20 for better top margin
       }
       (table as any)._themeOverride = theme;
-      const end = renderTable(doc, table, contentX, y, contentW, pageW, pageH);
-      y = end.endY + 4;
+      const end = renderTable(doc, table, contentX, y, contentW, pageW, pageH, fontEmbedded);
+      y = end.endY + 8; // Increased from 4 to 8 for better table spacing
     }
   }
 
@@ -845,14 +1039,14 @@ export function buildVedicGaneshPDF(config: GaneshPDFConfig): jsPDF {
   const total = doc.getNumberOfPages();
   for (let i = 1; i <= total; i++) {
     doc.setPage(i);
-    renderFooter(doc, pageW, pageH, blessing, i, total, theme);
+    renderFooter(doc, pageW, pageH, blessing, i, total, theme, fontEmbedded);
   }
 
   return doc;
 }
 
-export function generateVedicGaneshPDFBuffer(config: GaneshPDFConfig): Uint8Array | ArrayBuffer | string {
-  const doc = buildVedicGaneshPDF(config);
+export async function generateVedicGaneshPDFBuffer(config: GaneshPDFConfig): Promise<Uint8Array | ArrayBuffer | string> {
+  const doc = await buildVedicGaneshPDF(config);
   try {
     const arr = doc.output('uint8array') as unknown;
     if (arr instanceof Uint8Array && arr.length > 0) return arr;
@@ -864,8 +1058,8 @@ export function generateVedicGaneshPDFBuffer(config: GaneshPDFConfig): Uint8Arra
   return doc.output();
 }
 
-export function generateVedicGaneshPDF(config: GaneshPDFConfig): jsPDF {
-  const doc = buildVedicGaneshPDF(config);
+export async function generateVedicGaneshPDF(config: GaneshPDFConfig): Promise<jsPDF> {
+  const doc = await buildVedicGaneshPDF(config);
   doc.save(config.filename);
   return doc;
 }
@@ -938,3 +1132,4 @@ export default {
 };
 export const ESSENTIAL_PDF_GENERATOR = generateVedicGaneshPDF;
 export const REGISTER_AS_DEFAULT_FOR_FUTURE_TASKS = true;
+

@@ -129,7 +129,7 @@ const KundliChart: React.FC<KundliChartProps> = ({
   // Calculate kundli data
   const kundliData = useMemo(() => {
     try {
-      return calculateKundli(date, time, latitude, longitude, chartStyle);
+      return calculateKundli(date, time, latitude, longitude, 5.5, chartStyle);
     } catch (error) {
       console.error('Error calculating kundli:', error);
       return null;
@@ -458,11 +458,11 @@ const KundliChart: React.FC<KundliChartProps> = ({
                           </p>
                           <div className="flex flex-wrap gap-1">
                             {selectedHouseData.planets.map(planet => (
-                              <Badge key={planet.name} variant="secondary" className="text-xs">
-                                <span className={PLANET_COLORS[planet.name]}>
-                                  {PLANET_SYMBOLS[planet.name]}
+                              <Badge key={(planet as any).name} variant="secondary" className="text-xs">
+                                <span className={PLANET_COLORS[(planet as any).name]}>
+                                  {PLANET_SYMBOLS[(planet as any).name]}
                                 </span>
-                                <span className="ml-1">{planet.name}</span>
+                                <span className="ml-1">{(planet as any).name}</span>
                               </Badge>
                             ))}
                           </div>
@@ -506,11 +506,11 @@ const KundliChart: React.FC<KundliChartProps> = ({
                     {house.planets.length > 0 && (
                       <div className="flex flex-wrap gap-1">
                         {house.planets.map(planet => (
-                          <Badge key={planet.name} variant="outline" className="text-xs">
-                            <span className={PLANET_COLORS[planet.name]}>
-                              {PLANET_SYMBOLS[planet.name]}
+                          <Badge key={(planet as any).name} variant="outline" className="text-xs">
+                            <span className={PLANET_COLORS[(planet as any).name]}>
+                              {PLANET_SYMBOLS[(planet as any).name]}
                             </span>
-                            <span className="ml-1">{planet.name}</span>
+                            <span className="ml-1">{(planet as any).name}</span>
                           </Badge>
                         ))}
                       </div>

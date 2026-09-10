@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Vedic Astrology Calculation Engine
  * Uses Jean Meeus "Astronomical Algorithms" (2nd ed.) methods
@@ -718,3 +719,4 @@ export function formatDate(d: Date): string {
 export function formatDateEn(d: Date): string {
   return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 }
+

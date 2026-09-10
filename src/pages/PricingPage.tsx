@@ -21,27 +21,27 @@ import {
   PLANS, PRO_FEATURES, getSubscription,
 } from "@/services/subscriptionService";
 
-const TESTIMONIALS = [
+const HIGHLIGHTS = [
   {
-    name: "Rajesh Kothari",
-    location: "Udaipur",
-    text: "The Prashna Marga analysis with bilingual answers changed how I approach important decisions.",
-    textHi: "द्विभाषी उत्तरों के साथ प्रश्न मार्ग विश्लेषण ने मेरे निर्णय लेने के तरीके को बदल दिया।",
-    plan: "Pro",
+    name: "Focused Scope",
+    location: "4 Core Tools",
+    text: "The app prioritizes Kundli, Prashna, Matchmaking, and Panchang — polished before broader modules graduate.",
+    textHi: "ऐप केंद्रित है: कुंडली, प्रश्न, कुंडली मिलान और पंचांग — बाकी मॉड्यूल बाद में।",
+    plan: "Approach",
   },
   {
-    name: "Sunita Singhvi",
-    location: "Jaipur",
-    text: "The transit alerts and matchmaking report saved me months of uncertainty.",
-    textHi: "गोचर अलर्ट और कुंडली मिलान रिपोर्ट ने महीनों की अनिश्चितता समाप्त की।",
-    plan: "Pro",
+    name: "Bilingual UX",
+    location: "EN + HI",
+    text: "Every reading and report is written natively in both English and Hindi for families and students.",
+    textHi: "हर विश्लेषण और रिपोर्ट अंग्रेजी और हिंदी दोनों में उपलब्ध है।",
+    plan: "Default",
   },
   {
-    name: "Vikram Nahar",
-    location: "Dungarpur",
-    text: "Even the free plan is incredibly detailed — the Prasna chart is spot on.",
-    textHi: "निःशुल्क प्लान भी अत्यंत विस्तृत है — प्रश्न कुंडली एकदम सटीक।",
-    plan: "Free",
+    name: "Transparent Roadmap",
+    location: "Honest Status",
+    text: "Validation-in-progress and Coming Soon pages keep expectations clear instead of over-promising.",
+    textHi: "वैलिडेशन की स्थिति और रोडमैप स्पष्ट रूप से दिखाई देते हैं।",
+    plan: "Philosophy",
   },
 ];
 
@@ -59,10 +59,10 @@ const FAQS = [
     aHi: "नाम दर्ज करें और सक्रिय करें — प्रो तुरंत खुल जाता है। असली भुगतान जल्द आएगा।",
   },
   {
-    q: "Can I cancel Pro anytime?",
-    a: "Yes — 30-day money-back guarantee, no questions asked.",
-    qHi: "क्या प्रो कभी भी रद्द किया जा सकता है?",
-    aHi: "हाँ — 30 दिन की मनी-बैक गारंटी, कोई सवाल नहीं।",
+    q: "What is the refund policy once billing goes live?",
+    a: "Our target policy is a 30-day refund window for the paid tier; final terms will be published when billing launches.",
+    qHi: "बिलिंग शुरू होने पर रिफंड नीति क्या होगी?",
+    aHi: "लक्ष्य नीति 30 दिन की रिफंड विंडो है; अंतिम शर्तें बिलिंग लॉन्च पर प्रकाशित होंगी।",
   },
   {
     q: "Does Pro include Hindi answers?",
@@ -211,8 +211,8 @@ export default function PricingPage() {
             <Card className={`border-2 h-full relative ${currentPlan === "pro" ? "border-amber-500" : "border-amber-400"}`}>
               <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
                 <Badge className="bg-amber-500 text-white border-0 px-4 py-1">
-                  <Star className="w-3 h-3 mr-1 fill-white" />
-                  {isHi ? "सबसे लोकप्रिय" : "Most Popular"}
+                  <Sparkles className="w-3 h-3 mr-1" />
+                  {isHi ? "अनुशंसित" : "Recommended"}
                 </Badge>
               </div>
               <CardHeader className="bg-gradient-to-br from-amber-100 to-orange-100 rounded-t-xl pb-4">
@@ -230,10 +230,10 @@ export default function PricingPage() {
                 <div className="mt-2">
                   <span className="text-3xl font-bold text-amber-900">₹499</span>
                   <span className={`text-amber-700 ml-1 text-sm ${isHi ? "font-hindi" : ""}`}>
-                    {isHi ? "/ माह" : "/ month"}
+                    {isHi ? "/ माह (लक्ष्य)" : "/ month (target)"}
                   </span>
-                  <span className="ml-2 text-xs text-emerald-700 font-medium bg-emerald-100 px-2 py-0.5 rounded">
-                    {isHi ? "30 दिन गारंटी" : "30-day guarantee"}
+                  <span className="ml-2 text-xs text-amber-700 font-medium bg-amber-100 px-2 py-0.5 rounded">
+                    {isHi ? "डेमो मोड — जल्द बिलिंग" : "Demo mode — billing soon"}
                   </span>
                 </div>
               </CardHeader>
@@ -341,21 +341,22 @@ export default function PricingPage() {
           </div>
         </motion.div>
 
-        {/* Testimonials */}
+        {/* Product Highlights */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}>
           <h2 className={`text-2xl font-bold text-amber-900 text-center mb-6 ${isHi ? "font-hindi" : ""}`}>
-            {isHi ? "उपयोगकर्ताओं की राय" : "What users say"}
+            {isHi ? "क्या अपेक्षा करें" : "What to expect"}
           </h2>
           <div className="grid sm:grid-cols-3 gap-4">
-            {TESTIMONIALS.map((t, i) => (
+            {HIGHLIGHTS.map((t, i) => (
               <Card key={i} className="border-amber-200 bg-white">
                 <CardContent className="pt-5">
-                  <div className="flex gap-0.5 mb-3">
-                    {[...Array(5)].map((_, j) => (
-                      <Star key={j} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                    ))}
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="h-2 w-2 rounded-full bg-amber-400" />
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-amber-600">
+                      {isHi ? (t.plan === "Approach" ? "दृष्टिकोण" : t.plan === "Default" ? "डिफ़ॉल्ट" : "दर्शन") : t.plan}
+                    </p>
                   </div>
-                  <p className={`text-sm text-slate-600 mb-3 italic ${isHi ? "font-hindi" : ""}`}>
+                  <p className={`text-sm text-slate-600 mb-3 ${isHi ? "font-hindi" : ""}`}>
                     "{isHi ? t.textHi : t.text}"
                   </p>
                   <div className="flex items-center justify-between">
@@ -363,8 +364,8 @@ export default function PricingPage() {
                       <p className="text-xs font-semibold text-slate-700">{t.name}</p>
                       <p className="text-xs text-slate-400">{t.location}</p>
                     </div>
-                    <Badge className={t.plan === "Pro" ? "bg-amber-100 text-amber-700 border-amber-200" : "bg-slate-100 text-slate-500 border-slate-200"}>
-                      {t.plan}
+                    <Badge className="bg-amber-50 text-amber-700 border-amber-200">
+                      {isHi ? "महत्वपूर्ण" : "Focus"}
                     </Badge>
                   </div>
                 </CardContent>

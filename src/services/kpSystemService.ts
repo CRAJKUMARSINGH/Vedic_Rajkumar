@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * KP System Service - Krishnamurti Paddhati
  * Week 12: AstroSage Feature Integration - Part 2

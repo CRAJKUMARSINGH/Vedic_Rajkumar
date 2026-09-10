@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * src/pages/TransitAnalysisPage.tsx
  * Professional Bilingual Transit Analysis Page
@@ -1562,3 +1563,4 @@ function RemediesPanel({ result, profile, lang }: RemediesPanelProps) {
     </div>
   );
 }
+

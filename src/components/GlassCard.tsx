@@ -1,15 +1,16 @@
 // src/components/GlassCard.tsx
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, type HTMLMotionProps } from "framer-motion";
 
-interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
+// Omit HTML drag events that conflict with framer-motion's onDrag type
+type GlassCardProps = Omit<HTMLMotionProps<"div">, "onDrag" | "onDragStart" | "onDragEnd"> & {
   children: React.ReactNode;
   className?: string;
-}
+};
 
 /**
- * A reusable card with glass‑morphism background, subtle shadow and micro‑animations.
- * Uses Tailwind CSS utilities for styling and framer‑motion for hover/enter effects.
+ * A reusable card with glass-morphism background, subtle shadow and micro-animations.
+ * Uses Tailwind CSS utilities for styling and framer-motion for hover/enter effects.
  */
 export const GlassCard: React.FC<GlassCardProps> = ({ children, className = "", ...rest }) => {
   return (

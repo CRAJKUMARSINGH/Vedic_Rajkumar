@@ -4,8 +4,7 @@
  * ============================================================
  *
  * These stubs stand in for the full Kundli Milan engine until
- * Week 4, when real chart calculations replace the ephemeris stubs,
- * and Week 5, when Supabase persistence is added.
+ * the real chart calculations replace the ephemeris stubs.
  *
  * ALL KNOWN GAPS (from the user's issue list) are scaffolded here
  * as typed stub implementations:
@@ -18,13 +17,9 @@
  *   ✓ Remedies (specific not generic) → buildRemedies()
  *   ✓ Multi-prospect comparison      → compareProspects()
  *   ✓ CompatibilityResult shape      → calculateCompatibility()
- *   (PDF report generation → Week 5+ in matchmaking/pdfReport.ts)
+ *   (PDF report generation → future milestone)
  *
- * HOW TO REPLACE (Week 4):
- *   1. Replace calculateChart() calls with the real engine
- *   2. Replace stub Nakshatra/Rashi lookups with real chart data
- *   3. Implement real dosha cancellation logic from classical texts
- *   4. Keep the same function signatures so callers need no changes
+ * Week 8 gap fix: removed @ts-nocheck, switched to real kundli engine.
  * ============================================================
  */
 
@@ -44,7 +39,7 @@ import type {
   YoniAnimal,
 } from './types';
 import type { Planet, Sign } from '@/features/kundli/types';
-import { calculateChart, calculateVimshottariDasha } from '@/features/kundli/stubs';
+import { calculateChart, calculateVimshottariDasha } from '@/features/kundli/engine';
 
 // ─── Complete 14×14 Yoni compatibility matrix ─────────────────────────────────
 /**
@@ -286,6 +281,10 @@ function stubDashaPeriodMatch(
   const p1Current = p1Dasha.periods[0];
   const p2Current = p2Dasha.periods[0];
 
+  if (!p1Current || !p2Current) {
+    throw new Error('Could not compute dasha periods for matchmaking stub');
+  }
+
   return {
     person1CurrentMaha: { planet: p1Current.planet, endsAt: p1Current.endDate },
     person2CurrentMaha: { planet: p2Current.planet, endsAt: p2Current.endDate },
@@ -435,7 +434,7 @@ export async function calculateCompatibility(
   if (ashtakuta.kutas.find(k => k.kuta === 'Nadi')?.scored === 8) {
     strengths.push('Different Nadi — excellent health and progeny prospects.');
   }
-  if (ashtakuta.kutas.find(k => k.kuta === 'Graha Maitri')?.scored >= 4) {
+  if ((ashtakuta.kutas.find(k => k.kuta === 'Graha Maitri')?.scored ?? 0) >= 4) {
     strengths.push('Strong Graha Maitri — good intellectual and mental harmony.');
   }
   if (!p1Manglik.isPresent && !p2Manglik.isPresent) {
@@ -484,8 +483,9 @@ export async function calculateCompatibility(
 /**
  * compareProspects
  *
- * Runs calculateCompatibility for the base person against each prospect
- * and returns a ranked comparison.
+ * Runs calculateEnhancedAshtakuta for the base person against each prospect
+ * and returns a ranked comparison using effective score
+ * (raw Ashtakuta score minus 4 points per critical issue).
  *
  * @param basePerson    Birth data of the base person (typically the male).
  * @param prospects     Array of birth data for each prospect to compare.
@@ -495,47 +495,137 @@ export async function compareProspects(
   basePerson: import('@/features/kundli/types').BirthData,
   prospects: import('@/features/kundli/types').BirthData[],
 ): Promise<ProspectComparison> {
-  const summaries: ProspectSummary[] = await Promise.all(
+  // Import here to avoid circular dependency at module load time
+  const { calculateEnhancedAshtakuta } = await import('@/services/ashtakutaServiceEnhanced');
+
+  // Run all comparisons in parallel
+  const summaries: Array<ProspectSummary & { _effectiveScore: number }> = await Promise.all(
     prospects.map(async (prospect, idx) => {
-      const result = await calculateCompatibility({
-        person1: basePerson,
-        person2: prospect,
-      });
-      const bestKuta = result.ashtakuta.kutas.reduce((best, k) =>
-        k.scored / k.maxPoints > best.scored / best.maxPoints ? k : best
-      );
-      const weakestKuta = result.ashtakuta.kutas.reduce((worst, k) =>
-        k.scored / k.maxPoints < worst.scored / worst.maxPoints ? k : worst
-      );
-      return {
-        prospectId: `prospect_${idx + 1}`,
-        name: prospect.name,
-        ashtakutaScore: result.ashtakuta.totalPoints,
-        overallRating: result.ashtakuta.overallRating,
-        manglikDosha: result.manglik.person2.isPresent && !result.manglik.person2.isCancelled,
-        criticalDosha: result.ashtakuta.criticalDoshas.length > 0,
-        bestKuta: { name: bestKuta.kuta, scored: bestKuta.scored, maxPoints: bestKuta.maxPoints },
-        weakestKuta: { name: weakestKuta.kuta, scored: weakestKuta.scored, maxPoints: weakestKuta.maxPoints },
-        shortcomings: result.shortcomings,
-        strengths: result.strengths,
-      };
-    })
+      try {
+        const enhanced = await calculateEnhancedAshtakuta(
+          {
+            name: basePerson.name,
+            dateOfBirth: basePerson.date,
+            timeOfBirth: basePerson.time,
+            placeOfBirth: basePerson.place,
+          },
+          {
+            name: prospect.name,
+            dateOfBirth: prospect.date,
+            timeOfBirth: prospect.time,
+            placeOfBirth: prospect.place,
+          },
+        );
+
+        const { ashtakuta, manglikAnalysis, criticalIssues } = enhanced;
+        const rawScore = ashtakuta.totalPoints;
+        const effectiveScore = rawScore - criticalIssues.length * 4;
+
+        // KutaCategory matches CompatibilityReport categories array shape
+        type KutaCategory = { category: string; points: number; maxPoints: number };
+        const kutas = (ashtakuta.categories ?? []) as KutaCategory[];
+
+        const bestKuta = kutas.length > 0
+          ? kutas.reduce((b, k) => k.points / k.maxPoints > b.points / b.maxPoints ? k : b)
+          : { category: 'N/A', points: 0, maxPoints: 1 };
+        const weakestKuta = kutas.length > 0
+          ? kutas.reduce((w, k) => k.points / k.maxPoints < w.points / w.maxPoints ? k : w)
+          : { category: 'N/A', points: 0, maxPoints: 1 };
+
+        const strengths = kutas
+          .filter(k => k.points === k.maxPoints)
+          .map(k => `${k.category}: ${k.points}/${k.maxPoints} (full marks)`)
+          .slice(0, 5);
+
+        // Shortcomings: critical issues + zero-score kutas
+        const shortcomings = [
+          ...criticalIssues,
+          ...kutas
+            .filter(k => k.points === 0)
+            .map(k => `${k.category}: 0 points`),
+        ].slice(0, 5);
+
+        let overallRating: ProspectSummary['overallRating'];
+        if (rawScore >= 28) overallRating = 'Excellent';
+        else if (rawScore >= 21) overallRating = 'Good';
+        else if (rawScore >= 14) overallRating = 'Average';
+        else overallRating = 'Poor';
+
+        return {
+          prospectId: `prospect_${idx + 1}`,
+          name: prospect.name,
+          ashtakutaScore: rawScore,
+          overallRating,
+          manglikDosha: manglikAnalysis.mismatch,
+          criticalDosha: criticalIssues.length > 0,
+          bestKuta: {
+            name: bestKuta.category,
+            scored: bestKuta.points,
+            maxPoints: bestKuta.maxPoints,
+          },
+          weakestKuta: {
+            name: weakestKuta.category,
+            scored: weakestKuta.points,
+            maxPoints: weakestKuta.maxPoints,
+          },
+          shortcomings,
+          strengths,
+          _effectiveScore: effectiveScore,
+        };
+      } catch (err) {
+        console.error(`[compareProspects] Failed for prospect "${prospect.name}":`, err);
+        // Return a placeholder summary so the overall comparison doesn't break
+        return {
+          prospectId: `prospect_${idx + 1}`,
+          name: prospect.name,
+          ashtakutaScore: 0,
+          overallRating: 'Poor' as const,
+          manglikDosha: false,
+          criticalDosha: false,
+          bestKuta: { name: 'N/A', scored: 0, maxPoints: 1 },
+          weakestKuta: { name: 'N/A', scored: 0, maxPoints: 1 },
+          shortcomings: [`Calculation failed: ${err instanceof Error ? err.message : String(err)}`],
+          strengths: [],
+          _effectiveScore: 0,
+        };
+      }
+    }),
   );
 
-  // Rank: highest score first; if tied, prefer no critical dosha
+  // Sort by effective score desc; tie-break by fewest critical issues
   summaries.sort((a, b) => {
-    if (b.ashtakutaScore !== a.ashtakutaScore) return b.ashtakutaScore - a.ashtakutaScore;
+    if (b._effectiveScore !== a._effectiveScore) return b._effectiveScore - a._effectiveScore;
     return Number(a.criticalDosha) - Number(b.criticalDosha);
   });
 
   const recommended = summaries[0];
+  const secondBest = summaries[1];
+
+  const reasonSuffix = secondBest
+    ? ` vs ${secondBest.name}'s ${secondBest.ashtakutaScore}/36` +
+      (secondBest.criticalDosha ? ' (with critical dosha)' : '')
+    : '';
+
+  const recommendationReason =
+    `${recommended.name} scores ${recommended.ashtakutaScore}/36` +
+    (recommended._effectiveScore !== recommended.ashtakutaScore
+      ? ` (effective ${recommended._effectiveScore}/36 after dosha adjustment)`
+      : '') +
+    (recommended.criticalDosha
+      ? ' — critical dosha present, remedies advised'
+      : ' with no critical doshas') +
+    reasonSuffix + '.';
+
+  // Strip internal _effectiveScore before returning (not in ProspectSummary type)
+  const cleanSummaries: ProspectSummary[] = summaries.map(
+    ({ _effectiveScore: _ignored, ...rest }) => rest,
+  );
 
   return {
     basePerson,
-    prospects: summaries,
+    prospects: cleanSummaries,
     recommendedProspectId: recommended.prospectId,
-    recommendationReason:
-      `${recommended.name} has the highest Ashtakuta score (${recommended.ashtakutaScore}/36) ` +
-      `${recommended.criticalDosha ? 'though a critical dosha is present — see remedies' : 'with no critical doshas'}.`,
+    recommendationReason,
   };
 }
+

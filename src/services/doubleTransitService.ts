@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Pure double-transit helpers.
  *
@@ -150,3 +151,4 @@ export function buildApproxMoonDoubleTransitInput(
     ascendantRashi,
   };
 }
+

@@ -174,6 +174,7 @@ function CurrentPeriodCard({
   correlation: any;
   lang: 'en' | 'hi';
 }) {
+  if (!activeDasha) return null;
   const t = LABELS[lang];
   const isHi = lang === 'hi';
 
@@ -256,6 +257,7 @@ function MonthlyOutlookCard({
   monthlyOutlook: any[];
   lang: 'en' | 'hi';
 }) {
+  if (!monthlyOutlook || !Array.isArray(monthlyOutlook)) return null;
   const t = LABELS[lang];
   const isHi = lang === 'hi';
 
@@ -301,6 +303,7 @@ function MajorTransitsCard({
   transitPositions: any[];
   lang: 'en' | 'hi';
 }) {
+  if (!transitPositions || !Array.isArray(transitPositions)) return null;
   const t = LABELS[lang];
   const isHi = lang === 'hi';
 
@@ -360,6 +363,7 @@ function KeyEventsCard({
   correlation: any;
   lang: 'en' | 'hi';
 }) {
+  if (!correlation) return null;
   const t = LABELS[lang];
   const isHi = lang === 'hi';
 
@@ -373,7 +377,7 @@ function KeyEventsCard({
       </CardHeader>
       <CardContent className="space-y-3">
         {/* Chandrashtama Warning */}
-        {correlation.isChandrashtama && (
+        {correlation?.isChandrashtama && (
           <div className="p-3 rounded-lg bg-orange-500/10 border border-orange-500/30">
             <div className="flex items-start gap-2">
               <AlertCircle className="h-4 w-4 text-orange-400 mt-0.5 shrink-0" aria-hidden="true" />
@@ -386,19 +390,21 @@ function KeyEventsCard({
         )}
 
         {/* Ashtakavarga Summary */}
-        <div className="p-3 rounded-lg bg-muted/50">
-          <p className="text-xs text-muted-foreground mb-2">{t.ashtakavargaStrength}</p>
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium">{correlation.ashtakavargaSummary.overallStrength}</span>
-            <span className="text-xs text-muted-foreground">
-              Avg: {correlation.ashtakavargaSummary.averageScore.toFixed(1)}
-            </span>
+        {correlation?.ashtakavargaSummary && (
+          <div className="p-3 rounded-lg bg-muted/50">
+            <p className="text-xs text-muted-foreground mb-2">{t.ashtakavargaStrength}</p>
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium">{correlation.ashtakavargaSummary.overallStrength}</span>
+              <span className="text-xs text-muted-foreground">
+                Avg: {correlation.ashtakavargaSummary.averageScore.toFixed(1)}
+              </span>
+            </div>
+            <div className="flex gap-4 mt-2 text-xs">
+              <span className="text-emerald-400">Favorable: {correlation.ashtakavargaSummary.favorableTransits}</span>
+              <span className="text-red-400">Unfavorable: {correlation.ashtakavargaSummary.unfavorableTransits}</span>
+            </div>
           </div>
-          <div className="flex gap-4 mt-2 text-xs">
-            <span className="text-emerald-400">Favorable: {correlation.ashtakavargaSummary.favorableTransits}</span>
-            <span className="text-red-400">Unfavorable: {correlation.ashtakavargaSummary.unfavorableTransits}</span>
-          </div>
-        </div>
+        )}
       </CardContent>
     </Card>
   );
@@ -467,7 +473,7 @@ export default function DashaTransitTimelineView() {
         place: form.place,
       };
 
-      const correlationResult = computeCorrelation(birthData, form.targetDate);
+      const correlationResult = await computeCorrelation(birthData, form.targetDate);
       setResult(correlationResult);
     } catch (err) {
       setError((err as Error).message ?? 'Failed to generate timeline');
@@ -533,7 +539,7 @@ export default function DashaTransitTimelineView() {
             <FamilyProfileSelector
               onSelect={handleProfileSelect}
               selectedId={selectedProfileId}
-              triggerLabel={isHi ? 'परिवार प्रोफ़ाइल' : 'Family Profiles'}
+              triggerLabel={isHi ? 'परिवार प्रोफ़ाइल' : 'Family Profile'}
             />
           </div>
 
@@ -653,7 +659,7 @@ export default function DashaTransitTimelineView() {
         {/* Results Section */}
         <div aria-live="polite" aria-atomic="false">
           {isLoading && (
-            <div className="space-y-4">
+            <div data-testid="loading-skeleton" className="space-y-4">
               <LoadingSkeleton variant="card" rows={3} />
               <LoadingSkeleton variant="table" rows={4} />
             </div>

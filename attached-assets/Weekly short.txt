@@ -1,0 +1,107 @@
+Weekly Prompt Templates for Kiro, Devin, Trae, and Antigravity
+These prompts are based on the prescribed weekly plan for enriching the Vedic_Rajkumar app. They keep the same priority order: accuracy first, then security and production hardening, then core flow polish, then a small number of high-value features.
+How to use: Paste each prompt into the corresponding tool at the start of the week. Replace any placeholders with your actual repo path, preferred branch name, and any known constraints. Review outputs weekly so you do not expand scope too early.
+Primary tool
+Kiro
+Week 1
+Accuracy foundation
+Create a full spec for an accuracy validation suite for the Vedic_Rajkumar app. The suite should validate 12–15 reference charts against Swiss Ephemeris or another trusted reference. Cover lagna, planet signs and degrees, nakshatra and pada, and Vimshottari dasha start points. Produce requirements, design, task breakdown, implementation plan, and tests. Keep the output focused on correctness and repeatability, not feature expansion.
+Week 2
+Accuracy expansion
+Using the existing validation suite, identify and implement missing edge-case rules in the astrology engine. Improve ayanamsa handling and add test coverage for D9, D10, and core dasha calculations. Follow a spec-driven flow: requirements, design, tasks, implementation, and tests. Show where current logic differs from the expected reference outputs.
+Week 3
+Security and data layer
+Create a structured spec to harden the data layer of Vedic_Rajkumar. Implement Supabase RLS for user-owned data, secure Clerk-to-Supabase linking, and add data export and delete endpoints. Include basic rate limiting for sensitive or expensive endpoints. Deliver requirements, design, tasks, implementation, and validation tests.
+Week 4
+Production hardening
+Create a production-hardening spec for Vedic_Rajkumar. Add privacy policy flows, consent handling, production-safe environment validation, and error monitoring hooks. Keep the project clearly marked as a prototype where appropriate. Deliver implementation details, tests where applicable, and a list of follow-up risks.
+Week 5
+Core polish I
+Write a spec and implement UX polish for Kundli and Prashna in Vedic_Rajkumar. Standardize loading, empty, error, and success states. Improve mobile responsiveness and accessibility. Keep the scope limited to the two core flows. Include a before/after checklist and tests if practical.
+Week 6
+Core polish II
+Write a spec and implement UX polish for Matchmaking and Panchang in Vedic_Rajkumar. Standardize state handling, improve keyboard navigation and visible focus states, and fix consistency issues across layouts. Keep the implementation narrow and testable.
+Week 7
+Selective feature 1
+Create a spec for one high-ROI feature only. Preferred options are Dasha + Transit correlation view or improved professional PDF reports. Evaluate complexity, user value, and fit with the current architecture, then implement the chosen feature with tests. Do not introduce feature sprawl.
+Week 8
+Selective feature 2
+Based on the current state of the product, either implement multi-profile family mode or harden the week 7 feature. Follow a full spec-driven workflow. Favor depth, reliability, and production readiness over adding a broad new surface area.
+Parallel worker
+Devin
+Week 1
+Validation suite
+Build a validation suite for the Vedic_Rajkumar repo that runs 15 known charts and outputs a side-by-side comparison report against Swiss Ephemeris. Acceptance criteria: reproducible runs, readable report output, clear mismatch reporting, and tests or scripts that can be rerun in CI.
+Week 2
+Accuracy follow-through
+Extend the accuracy validation suite to include house cusps, more planetary checkpoints, and additional dasha validation points. Flag all mismatches clearly and propose likely causes. Acceptance criteria: broader coverage, stable output format, and a short summary of unresolved issues.
+Week 3
+Security implementation
+Implement complete Supabase RLS policies for saved charts and reading-related tables in Vedic_Rajkumar. Add export and delete flows for user data. Acceptance criteria: user data isolation, tested policies, and documentation of assumptions.
+Week 4
+PDF polish
+Fix PDF report issues in Vedic_Rajkumar. Eliminate overlapping text, embed proper Devanagari font support, and improve the visual layout while preserving the existing Ganesh-style motif. Acceptance criteria: clean rendering on sample reports and no overlap on common content lengths.
+Week 5
+Testing expansion
+Generate integration tests for the Kundli and Prashna user journeys in Vedic_Rajkumar and repair failing paths uncovered by the tests. Acceptance criteria: passing tests for the main happy paths, at least some key edge cases, and reduced manual regression risk.
+Week 6
+Regression hardening
+Extend integration and unit coverage to Matchmaking and Panchang in Vedic_Rajkumar. Acceptance criteria: automated coverage of the core flows, clear test organization, and fixes for any broken states discovered during implementation.
+Week 7
+Feature build
+Implement multi-profile family mode in Vedic_Rajkumar with profile switching, saved birth data handling, and a clean UI integration. Acceptance criteria: multiple profiles can be created, selected, edited, and used across core chart flows without data leakage.
+Week 8
+Timeline feature
+Build a Dasha + Transit timeline view for Vedic_Rajkumar that presents current Mahadasha and Antardasha alongside major transit windows in a readable format. Acceptance criteria: usable timeline presentation, clear data sourcing, and stable rendering across common user scenarios.
+Daily driver
+Trae
+Week 1
+UI and copy cleanup
+Help me improve the Vedic_Rajkumar front end quickly. Remove or soften any unsupported trust claims, tighten landing-page messaging, and polish small UI inconsistencies. Focus on speed, clarity, and low-risk improvements only.
+Week 2
+Rapid prototyping
+Prototype a lightweight validation dashboard UI for Vedic_Rajkumar that can display chart comparison results, mismatches, and summary status. Keep it fast to build and easy to change. Do not over-engineer the backend integration yet.
+Week 3
+Security UI support
+Create front-end screens and components for privacy settings, consent prompts, and user data management actions in Vedic_Rajkumar. Focus on quick, clean implementation that can later connect to the hardened backend flows.
+Week 4
+Deployment messaging
+Improve product messaging in Vedic_Rajkumar so the app clearly communicates prototype status, validation-in-progress status, and user expectations. Add lightweight banners, notices, and polished onboarding text without changing the core information architecture.
+Week 5
+Core polish I
+Quickly improve Kundli and Prashna UX in Vedic_Rajkumar. Add better loading skeletons, empty states, responsive layout fixes, and cleaner visual consistency. Keep the work focused on practical UI improvements that can be reviewed quickly.
+Week 6
+Core polish II
+Quickly improve Matchmaking and Panchang UX in Vedic_Rajkumar. Clean up interaction states, improve bilingual English/Hindi copy where needed, and make the visual experience more consistent on mobile and desktop.
+Week 7
+Feature UI scaffolding
+Scaffold the UI for the next approved high-value feature in Vedic_Rajkumar, such as family profiles or a transit timeline. Optimize for speed, clarity, and easy iteration. Treat this as a front-end-first prototype that can later be hardened.
+Week 8
+Refinement loop
+Based on recent testing or pilot feedback, refine the new or updated UI flows in Vedic_Rajkumar. Improve labels, reduce confusion, simplify friction points, and keep the changes small and practical.
+Optional specialist
+Antigravity
+Week 1
+Research sprint I
+Run a multi-agent research pass on the best ways to validate ayanamsa correctness for a Vedic astrology web app like Vedic_Rajkumar. Compare methods, trusted references, and practical implementation trade-offs. Return a concise recommendation.
+Week 2
+Research sprint II
+Explore edge cases in chart accuracy validation for Vedic_Rajkumar, including planetary positions, house calculations, and dasha timing. Compare different validation approaches and recommend a sustainable long-term workflow.
+Week 3
+Architecture review
+Analyze the current architecture of a React + TypeScript astrology app like Vedic_Rajkumar from a production-readiness perspective. Focus on deployment reliability, privacy-sensitive data handling, service boundaries, and maintainability. Return gap analysis plus proposed options.
+Week 4
+Risk review
+Run a multi-agent product risk review for Vedic_Rajkumar. Focus on trust claims, unfinished preview modules, missing operational safeguards, and areas where the product may over-promise relative to current validation depth. Return prioritized risks and mitigation suggestions.
+Week 5
+UX research
+Research the best ways to present complex astrological data in a web product without overwhelming users. Focus on clarity, progressive disclosure, and trust-building patterns relevant to Vedic_Rajkumar. Provide practical examples and ranked recommendations.
+Week 6
+Accessibility and mobile review
+Explore accessibility and mobile-friendly presentation approaches for dense astrology interfaces like charts, timelines, and comparison views in Vedic_Rajkumar. Return practical recommendations that can guide the next UI polish pass.
+Week 7
+Advanced feature exploration
+Explore several advanced feature directions for Vedic_Rajkumar, such as deeper KP support, Jaimini extensions, or enhanced transit-correlation features. Compare engineering complexity, product value, and validation risk. Recommend what should and should not be pursued next.
+Week 8
+Decision support
+Synthesize the prior research for Vedic_Rajkumar into a final recommendation on which advanced feature to build next, which to defer, and which to archive. Optimize for product trust, maintainability, and user value, not breadth.

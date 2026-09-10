@@ -30,7 +30,7 @@ const MarkdownViewer: React.FC = () => {
           throw new Error(`Document not found (${response.status})`);
         }
         const text = await response.text();
-        const html = marked.parse(text);
+        const html = String(await Promise.resolve(marked.parse(text)));
         if (!cancelled) {
           setContent(DOMPurify.sanitize(html));
         }

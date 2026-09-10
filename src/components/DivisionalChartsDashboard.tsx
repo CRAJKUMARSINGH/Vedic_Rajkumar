@@ -496,7 +496,7 @@ const DivisionalChartsDashboard = () => {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground">
-                      {selectedChart.interpretations.overall}
+                      {selectedChart.interpretations.overallVerdict ?? selectedChart.interpretations.finalResolvedMeaning}
                     </p>
                   </CardContent>
                 </Card>
@@ -548,7 +548,7 @@ const DivisionalChartsDashboard = () => {
                   </CardHeader>
                   <CardContent>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      {selectedChart.interpretations.recommendations.map((recommendation, index) => (
+                      {(selectedChart.interpretations.contradictionFlags ?? []).map((recommendation: string, index: number) => (
                         <li key={index} className="flex items-center gap-2">
                           <Info className="w-3 h-3 text-blue-500" />
                           {recommendation}
@@ -566,7 +566,7 @@ const DivisionalChartsDashboard = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Shield className="w-5 h-5" />
-                    Remedies & Solutions
+                    Remedies &amp; Solutions
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -574,12 +574,10 @@ const DivisionalChartsDashboard = () => {
                     <div>
                       <h4 className="font-semibold mb-2">General Remedies</h4>
                       <ul className="text-sm text-muted-foreground space-y-1">
-                        {selectedChart.interpretations.remedies.map((remedy, index) => (
-                          <li key={index} className="flex items-center gap-2">
-                            <CheckCircle className="w-3 h-3 text-green-500" />
-                            {remedy}
-                          </li>
-                        ))}
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="w-3 h-3 text-green-500" />
+                          {selectedChart.interpretations.finalResolvedMeaning}
+                        </li>
                       </ul>
                     </div>
                   </div>

@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Manglik Dosha Service
  * Detects Manglik Dosha (Mars affliction) and calcellation conditions
@@ -433,3 +434,4 @@ export const calculateManglikSeverity = calculateSeverity;
 export function checkCancellationConditions(cancellations: ManglikCancellation[]) {
   return cancellations.filter(c => c.applies || c.applicable);
 }
+

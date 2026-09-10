@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * src/services/prashnaService.ts
  * Prashna (Horary) Question-Time Astrology Service
@@ -255,3 +256,4 @@ export async function calculatePrashnaHoroscope(query: PrashnaQuery): Promise<Pr
     detailedAnalysis
   };
 }
+

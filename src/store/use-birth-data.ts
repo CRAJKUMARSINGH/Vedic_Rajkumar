@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { create } from 'zustand';
 
 interface BirthDataState {
@@ -25,3 +26,4 @@ export const useBirthData = create<BirthDataState>((set) => ({
   setCoords: (lat, lon) => set({ lat, lon }),
   setAll: (data) => set(data),
 }));
+

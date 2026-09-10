@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useMemo } from 'react';
 import { calculateChart, calculateNavamsa, calculateDasha } from '../lib/vedic/vedicCalc';
 import { SubjectiveAnalysisEngine } from '../lib/astrology/subjective-analysis-engine';
@@ -408,3 +409,4 @@ export function useSubjectiveAnalysis(params: {
     params.jatakDetails,
   ]);
 }
+

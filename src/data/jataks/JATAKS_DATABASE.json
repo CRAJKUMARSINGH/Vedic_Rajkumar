@@ -3,7 +3,7 @@
   "sourceFile": "ASTROLOGICAL CHART DATABASE FEB 2014-DESKTOP-3RRLJHF.xlsx",
   "createdDate": "2014-02-01",
   "lastUpdated": "2026-05-26",
-  "totalJataks": 17,
+  "totalJataks": 20,
   "jataks": [
     {
       "id": "jatak_001",
@@ -292,6 +292,63 @@
       "relationship": "Friend",
       "inExcel": false,
       "notes": "Added manually via user request"
+    },
+    {
+      "id": "jatak_018",
+      "name": "Arpit",
+      "dateOfBirth": "2001-10-03",
+      "timeOfBirth": "08:05",
+      "placeOfBirth": "Shikohabad",
+      "state": "Uttar Pradesh",
+      "country": "India",
+      "coordinates": {
+        "latitude": "27.11°N",
+        "longitude": "78.59°E"
+      },
+      "relationship": "Prospect (Male)",
+      "nakshatra": "Swati",
+      "moonRashi": "Libra (तुला)",
+      "moonRashiIndex": 6,
+      "inExcel": false,
+      "notes": "Marriage matching prospect – 2026"
+    },
+    {
+      "id": "jatak_019",
+      "name": "Anukrati Sharma",
+      "dateOfBirth": "2002-01-11",
+      "timeOfBirth": "15:02",
+      "placeOfBirth": "Aligarh",
+      "state": "Uttar Pradesh",
+      "country": "India",
+      "coordinates": {
+        "latitude": "27.88°N",
+        "longitude": "78.08°E"
+      },
+      "relationship": "Prospect (Female) – Girl01",
+      "nakshatra": "Pushya",
+      "moonRashi": "Cancer (कर्क)",
+      "moonRashiIndex": 3,
+      "inExcel": false,
+      "notes": "Match prospect for Arpit – expected ~24/36"
+    },
+    {
+      "id": "jatak_020",
+      "name": "Parshvi Sharma",
+      "dateOfBirth": "2002-02-02",
+      "timeOfBirth": "21:12",
+      "placeOfBirth": "Kota",
+      "state": "Rajasthan",
+      "country": "India",
+      "coordinates": {
+        "latitude": "25.18°N",
+        "longitude": "75.83°E"
+      },
+      "relationship": "Prospect (Female) – Girl02",
+      "nakshatra": "Mrigashirsha",
+      "moonRashi": "Gemini (मिथुन)",
+      "moonRashiIndex": 2,
+      "inExcel": false,
+      "notes": "Match prospect for Arpit – expected ~27/36"
     }
   ],
   "metadata": {

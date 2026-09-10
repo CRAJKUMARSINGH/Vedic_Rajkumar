@@ -43,7 +43,7 @@ import { assembleEngineData } from '@/services/engineDataAssembler';
 import { calculateDynamicTransits } from '@/services/dynamicTransitService';
 import { searchLocation } from '@/services/geocodingService';
 import { calculateAshtakavarga, type PlanetName } from '@/services/classicalAshtakavargaService';
-import EnhancedBirthInputForm, { type BirthSubmitData } from '@/components/EnhancedBirthInputForm';
+import EnhancedBirthInputForm from '@/components/EnhancedBirthInputForm';
 import type { EngineData } from '@/services/engineDataAssembler';
 import type { DynamicTransitOutput } from '@/services/dynamicTransitService';
 import type { TransitResult } from '@/data/transitData';
@@ -134,7 +134,7 @@ function getPlanetStrength(engineData: EngineData, planet: string) {
 
 function shadbalaVerdict(row: any) {
   if (!row) return { label: 'unmeasured', tone: 'text-slate-300', prose: 'its strength is not separately measured in the current Shadbala table' };
-  const score = row.totalShadabala ?? 0;
+  const score = row.totalRupas ?? 0;
   const required = row.requiredShadabala ?? 390;
   const ratio = required ? score / required : 1;
   if (ratio >= 1.25) return { label: 'very strong', tone: 'text-emerald-300', prose: 'has more than enough force to deliver its promise without much external help' };
@@ -450,8 +450,8 @@ function ShadabalaYogaTab({ engineData }: { engineData: EngineData }) {
   const { shadabala, shadabalaAnalysis, yogaAnalysis } = engineData;
 
   const planets9 = (shadabala ?? []).filter((p: any) => p.planet !== 'Rahu' && p.planet !== 'Ketu' && p.planet !== 'Ascendant');
-  const sorted   = [...planets9].sort((a: any, b: any) => (b.totalShadabala ?? 0) - (a.totalShadabala ?? 0));
-  const maxScore = sorted[0]?.totalShadabala ?? 1;
+  const sorted   = [...planets9].sort((a: any, b: any) => (b.totalRupas ?? b.totalRupas ?? 0) - (a.totalRupas ?? a.totalRupas ?? 0));
+  const maxScore = sorted[0]?.totalRupas ?? sorted[0]?.totalRupas ?? 1;
 
   const presentYogas = yogaAnalysis?.presentYogas ?? [];
   const doshaYogas   = yogaAnalysis?.doshaYogas   ?? [];
@@ -468,7 +468,7 @@ function ShadabalaYogaTab({ engineData }: { engineData: EngineData }) {
         <p className="text-xs font-semibold text-amber-500 uppercase tracking-wide mb-4">Shadbala — Planetary Strength</p>
         <div className="space-y-3">
           {sorted.map((p: any) => {
-            const score    = p.totalShadabala ?? 0;
+            const score    = p.totalRupas ?? 0;
             const pct      = (score / maxScore) * 100;
             const required = p.requiredShadabala ?? 390;
             const passing  = score >= required;
@@ -930,11 +930,11 @@ function GrandfatherForecastTab({ engineData, transit, birthDate, subjectLabel }
   const doshas = engineData.yogaAnalysis?.doshaYogas ?? [];
   const strongestPlanets = [...(engineData.shadabala ?? [])]
     .filter((p: any) => !['Rahu', 'Ketu', 'Ascendant'].includes(p.planet))
-    .sort((a: any, b: any) => (b.totalShadabala ?? 0) - (a.totalShadabala ?? 0))
+    .sort((a: any, b: any) => (b.totalRupas ?? 0) - (a.totalRupas ?? 0))
     .slice(0, 3);
   const weakPlanets = [...(engineData.shadabala ?? [])]
     .filter((p: any) => !['Rahu', 'Ketu', 'Ascendant'].includes(p.planet))
-    .sort((a: any, b: any) => (a.totalShadabala ?? 0) - (b.totalShadabala ?? 0))
+    .sort((a: any, b: any) => (a.totalRupas ?? 0) - (b.totalRupas ?? 0))
     .slice(0, 2);
   const transitNorm = transit ? normaliseScore(transit.totalScore) : null;
   const favorableTransits = transit?.transits.filter((t: TransitResult) => t.effectiveStatus === 'favorable') ?? [];
@@ -975,7 +975,7 @@ function GrandfatherForecastTab({ engineData, transit, birthDate, subjectLabel }
   const paragraphs = [
     `My child, I would not read ${subjectLabel} by one rule alone. A single score is arithmetic; a forecast is judgement. The active clock is ${dasha.md} Mahadasha with ${dasha.ad !== 'Unknown' ? `${dasha.ad} Antardasha` : 'the current sub-period not separately named'}. The Mahadasha lord is ${mdStrength.label}: ${mdStrength.prose}. The Antardasha lord is ${adStrength.label}: ${adStrength.prose}. Therefore the first conclusion is simple: the period does not merely ask what the chart promises, it asks whether the acting planets have the strength to carry that promise into events.`,
     `Now I put Ashtakavarga on top of this, because without it transit talk becomes hollow. ${dasha.md} has BAV ${mdBavScore ?? 'not available'}/8 in its natal sign and the receiving field has SAV ${mdSavScore ?? 'not available'}. ${dasha.ad !== 'Unknown' ? `${dasha.ad} shows BAV ${adBavScore ?? 'not available'}/8 with SAV ${adSavScore ?? 'not available'}.` : ''} A high BAV says the planet has personal consent to act; a high SAV says the field itself is fertile. When both are low, even a famous yoga waits quietly like a lamp without oil.`,
-    `The Shadbala table gives the muscle of the chart. The strongest workers are ${proseList(strongestPlanets.map((p: any) => `${p.planet} (${Math.round(p.totalShadabala ?? 0)})`))}. The weaker or more tired workers are ${proseList(weakPlanets.map((p: any) => `${p.planet} (${Math.round(p.totalShadabala ?? 0)})`))}. So the native should lean on the strong planets' domains and treat the weak planets' domains with correction, humility, and slower commitments.`,
+    `The Shadbala table gives the muscle of the chart. The strongest workers are ${proseList(strongestPlanets.map((p: any) => `${p.planet} (${Math.round(p.totalRupas ?? 0)})`))}. The weaker or more tired workers are ${proseList(weakPlanets.map((p: any) => `${p.planet} (${Math.round(p.totalRupas ?? 0)})`))}. So the native should lean on the strong planets' domains and treat the weak planets' domains with correction, humility, and slower commitments.`,
     transit
       ? `Today the gochara score is ${transitNorm}/100, classed as ${transit.overallStatus}. Favor comes through ${proseList(favorableTransits.slice(0, 4).map((t: TransitResult) => t.planet.en))}; resistance comes through ${proseList(difficultTransits.slice(0, 4).map((t: TransitResult) => t.planet.en))}. Transit is not king; it is the messenger. It delivers only what dasha authorizes and what Shadbala can carry.`
       : `The live transit layer has not returned a score, so I will not pretend certainty. In such a case, dasha, Shadbala, and Ashtakavarga must carry the judgement until gochara is available.`,
@@ -1034,15 +1034,13 @@ export function DashboardShell() {
   const [loading,      setLoading]      = useState(false);
   const [error,        setError]        = useState<string | null>(null);
 
-  async function handleSubmit(form: BirthSubmitData) {
+  async function handleSubmit(form: { date: string; time: string; location: string }) {
     setLoading(true);
     setError(null);
     try {
-      let lat = form.lat ?? 28.6139, lng = form.lng ?? 77.2090;
-      if (form.lat === undefined || form.lng === undefined) {
-        const geo = await searchLocation(form.location);
-        if (geo.length > 0) { lat = geo[0].lat; lng = geo[0].lon; }
-      }
+      let lat = 28.6139, lng = 77.2090;
+      const geo = await searchLocation(form.location);
+      if (geo.length > 0) { lat = geo[0].lat; lng = geo[0].lon; }
 
       const bd = parseBirthDate(form.date, form.time);
       setBirthDate(bd);
@@ -1186,3 +1184,4 @@ export function DashboardShell() {
     </div>
   );
 }
+

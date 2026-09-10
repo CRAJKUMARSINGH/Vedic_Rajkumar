@@ -208,7 +208,7 @@ export function analyzeMangalDosha(d1: ChartData): MangalDoshaResult {
   const baseSeverity = houseSeverityMap[mars.house] || 'None';
 
   let finalLevel: DoshaLevel = overallLevel;
-  let finalSeverity = baseSeverity;
+  let finalSeverity: 'High' | 'Medium' | 'Low' | 'Severe' | 'None' = baseSeverity as 'High' | 'Medium' | 'Low' | 'Severe' | 'None';
 
   if (overallDosha && activeCancellations.length >= 2) {
     finalLevel = 'None';

@@ -484,7 +484,7 @@ const FeedbackPage = () => {
                         <Star
                           key={i}
                           className={`w-4 h-4 ${
-                            i < item.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
+                            i < (item.rating ?? 0) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
                           }`}
                         />
                       ))}
@@ -606,3 +606,5 @@ const FeedbackPage = () => {
 };
 
 export default FeedbackPage;
+
+

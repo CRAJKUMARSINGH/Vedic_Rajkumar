@@ -164,11 +164,11 @@ export function MuhurtaFinderPanel({ isHi = false, natalMoonRashi = 3 }: Muhurta
       const ashtakavargaScore = (moonAV[houseFromNatalMoon] || 4) + 24;
 
       const panchang = {
-        tithi: { name: tithiName, paksha, quality: [4, 9, 14, 30].includes(tithiNum) ? 'inauspicious' as const : 'auspicious' as const },
+        tithi: { name: tithiName, paksha: (tithiNum <= 15 ? 'Shukla' : 'Krishna') as 'Shukla' | 'Krishna', quality: [4, 9, 14, 30].includes(tithiNum) ? 'inauspicious' as const : 'auspicious' as const },
         nakshatra: { name: nakName, quality: [3, 4, 7, 11, 12, 16, 21, 22, 26].includes(nakIndex) ? 'auspicious' as const : 'neutral' as const },
         yoga: { name: yogaName, quality: [6, 9, 10, 13, 15, 17, 19, 27].includes(yogaIndex + 1) ? 'inauspicious' as const : 'auspicious' as const },
-        karana: { name: karanaName, quality: karanaName === 'Vishti' ? 'inauspicious' : 'auspicious' },
-        vara: { name: varaName, day: varaName, planet: varaPlanet, quality: 'auspicious' }
+        karana: { name: karanaName, quality: (karanaName === 'Vishti' ? 'inauspicious' : 'auspicious') as 'auspicious' | 'inauspicious' },
+        vara: { name: varaName, day: varaName, planet: varaPlanet, quality: 'auspicious' as const }
       };
 
       let score = 50;

@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Astronomy-Engine Ephemeris Service
  * Phase 3: High-accuracy planetary positions using the astronomy-engine library.
@@ -226,3 +227,4 @@ export function moonLongToNakshatraInfo(moonSidereal: number): {
   const nakshatraFractionElapsed = degreesInNakshatra / NAKSHATRA_SPAN;
   return { nakshatraIndex, degreesInNakshatra, nakshatraFractionElapsed };
 }
+

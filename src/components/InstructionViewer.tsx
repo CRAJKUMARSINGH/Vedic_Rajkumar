@@ -21,7 +21,7 @@ const InstructionViewer: React.FC = () => {
         if (!res.ok) throw new Error('Not found');
         const md = await res.text();
         if (!cancelled) {
-          setHtml(DOMPurify.sanitize(marked.parse(md)));
+          setHtml(DOMPurify.sanitize(String(await Promise.resolve(marked.parse(md)))));
         }
       } catch {
         if (!cancelled) {

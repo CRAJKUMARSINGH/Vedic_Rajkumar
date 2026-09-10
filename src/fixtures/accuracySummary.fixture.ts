@@ -1,0 +1,30 @@
+import { type AccuracySummaryJSON } from '@/tests/validation/reportFormatter';
+
+export const ACCURACY_SUMMARY_FIXTURE: AccuracySummaryJSON = {
+  runAt: new Date('2026-09-05T07:17:06.283Z').toISOString(),
+  engine: 'precisionEphemerisService (Meeus full perturbation + Lahiri ayanamsa)',
+  totalCharts: 15,
+  passCharts: 14,
+  warnCharts: 1,
+  failCharts: 0,
+  fieldAccuracyPct: 99.6,
+  week1Verdict: 'PASS',
+  rashiFailureCount: 0,
+  charts: [
+    { id: 'REF-001', name: 'Priyansh Singh Chauhan', status: 'WARN', passCount: 19, failCount: 0, warnCount: 1, failures: [] },
+    { id: 'REF-002', name: 'Swami Vivekananda',        status: 'PASS', passCount: 19, failCount: 0, warnCount: 0, failures: [] },
+    { id: 'REF-003', name: 'Mahatma Gandhi',           status: 'PASS', passCount: 19, failCount: 0, warnCount: 0, failures: [] },
+    { id: 'REF-004', name: 'Albert Einstein',        status: 'PASS', passCount: 14, failCount: 0, warnCount: 0, failures: [] },
+    { id: 'REF-005', name: 'Narendra Modi',        status: 'PASS', passCount: 14, failCount: 0, warnCount: 0, failures: [] },
+    { id: 'REF-006', name: 'Rajkumar',              status: 'PASS', passCount: 19, failCount: 0, warnCount: 0, failures: [] },
+    { id: 'REF-007', name: 'Jawaharlal Nehru',       status: 'PASS', passCount: 14, failCount: 0, warnCount: 0, failures: [] },
+    { id: 'REF-008', name: 'Indira Gandhi',        status: 'PASS', passCount: 14, failCount: 0, warnCount: 0, failures: [] },
+    { id: 'REF-009', name: 'Sachin Tendulkar',      status: 'PASS', passCount: 19, failCount: 0, warnCount: 0, failures: [] },
+    { id: 'REF-010', name: 'Lata Mangeshkar',        status: 'PASS', passCount: 14, failCount: 0, warnCount: 0, failures: [] },
+    { id: 'REF-011', name: 'Amitabh Bachchan',      status: 'PASS', passCount: 14, failCount: 0, warnCount: 0, failures: [] },
+    { id: 'REF-012', name: 'Atal Bihari Vajpayee',  status: 'PASS', passCount: 14, failCount: 0, warnCount: 0, failures: [] },
+    { id: 'REF-013', name: 'Veerpratap Singh Rathore', status: 'PASS', passCount: 20, failCount: 0, warnCount: 0, failures: [] },
+    { id: 'REF-014', name: 'Vishwaraj Singh Chauhan',  status: 'PASS', passCount: 14, failCount: 0, warnCount: 0, failures: [] },
+    { id: 'REF-015', name: 'Mummy (Rajkumar mother)',   status: 'PASS', passCount: 14, failCount: 0, warnCount: 0, failures: [] },
+  ],
+};

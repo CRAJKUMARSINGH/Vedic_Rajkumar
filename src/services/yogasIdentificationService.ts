@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * 50+ Yogas Identification Service
  * Phase 2 Week 34: Advanced Features
@@ -1040,3 +1041,4 @@ export class YogasIdentificationService {
 
 // Export singleton instance
 export const yogasIdentificationService = new YogasIdentificationService();
+

@@ -33,7 +33,7 @@ const KaalSarpPage = () => {
             </Link>
           </div>
           <div className="flex items-center gap-2">
-            <EnhancedLanguageToggle currentLang={lang} onChange={setLang} showRegion={false} autoDetect={false} />
+            <EnhancedLanguageToggle currentLang={lang} onChange={(l) => setLang(l as typeof lang)} showRegion={false} autoDetect={false} />
           </div>
         </div>
       </header>
@@ -79,3 +79,6 @@ const KaalSarpPage = () => {
 };
 
 export default KaalSarpPage;
+
+
+

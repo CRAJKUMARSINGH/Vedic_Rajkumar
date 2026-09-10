@@ -21,6 +21,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import FamilyProfileSelector from "@/components/FamilyProfileSelector";
+import { getProfileById } from "@/lib/familyProfiles";
+import type { FamilyProfile } from "@/lib/familyProfiles";
+import { cn } from "@/lib/utils";
+import EnhancedLanguageToggle from "@/components/EnhancedLanguageToggle";
+import { type SupportedLanguage } from "@/services/multiLanguageService";
 import {
   ArrowLeft,
   History,
@@ -29,6 +35,7 @@ import {
   Languages,
   Info,
   Book,
+  User,
 } from "lucide-react";
 
 export default function PrashnaEngine() {
@@ -38,6 +45,17 @@ export default function PrashnaEngine() {
   const [direction, setDirection] = useState("");
   const [language, setLanguage] = useState("both");
   const [result, setResult] = useState<any>(null);
+  const [nativeProfile, setNativeProfile] = useState<FamilyProfile | null>(null);
+  const [nativeProfileId, setNativeProfileId] = useState<string | undefined>();
+  const [uiLang, setUiLang] = useState<SupportedLanguage>("en");
+  const isUiHi = uiLang === "hi";
+
+  const handleNativeSelect = (profile: FamilyProfile) => {
+    const validated = getProfileById(profile.id);
+    if (!validated) return;
+    setNativeProfileId(profile.id);
+    setNativeProfile(validated);
+  };
 
   const mutation = useMutation({
     mutationFn: askPrashna,
@@ -67,13 +85,16 @@ export default function PrashnaEngine() {
   return (
     <div className="min-h-screen bg-auspicious-pattern p-6 font-body">
       <div className="max-w-5xl mx-auto space-y-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between flex-wrap gap-2">
           <Button variant="ghost" size="sm" onClick={() => navigate("/prashna")}>
             <ArrowLeft className="w-4 h-4 mr-2" /> Basic Prashna
           </Button>
-          <Button variant="outline" size="sm" onClick={() => navigate("/prashna-history")}>
-            <History className="w-4 h-4 mr-2" /> View History
-          </Button>
+          <div className="flex items-center gap-2">
+            <EnhancedLanguageToggle currentLang={uiLang} onChange={setUiLang} showRegion={false} autoDetect={false} />
+            <Button variant="outline" size="sm" onClick={() => navigate("/prashna-history")}>
+              <History className="w-4 h-4 mr-2" /> View History
+            </Button>
+          </div>
         </div>
 
         <div className="space-y-2 text-center sm:text-left">
@@ -93,7 +114,39 @@ export default function PrashnaEngine() {
                 </div>
               </div>
               <div className="p-6">
-                <p className="text-xs text-[#3E2723]/70 mb-6 font-medium italic">Focus your mind on a single, clear question.</p>
+                <p className="text-xs text-[#3E2723]/70 mb-4 font-medium italic">Focus your mind on a single, clear question.</p>
+
+                <div className="mb-6 rounded-lg border border-primary/15 bg-primary/5 p-3">
+                  <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
+                    <div className="flex items-center gap-2">
+                      <User className="w-4 h-4 text-primary" />
+                      <Label className={cn("text-xs font-semibold uppercase tracking-wider text-muted-foreground", isUiHi && "font-hindi tracking-normal normal-case")}>
+                        {isUiHi ? "प्रश्नकर्ता जन्म जानकारी" : "Question Asker Birth Info"}
+                      </Label>
+                    </div>
+                    <FamilyProfileSelector
+                      onSelect={handleNativeSelect}
+                      selectedId={nativeProfileId}
+                      triggerLabel={isUiHi ? "परिवार प्रोफ़ाइल" : "Family Profile"}
+                      lang={uiLang}
+                      className="!py-1 !px-3 text-xs"
+                    />
+                  </div>
+                  <p className={cn("text-[10px] text-muted-foreground italic mb-2", isUiHi && "font-hindi text-[11px] not-italic")}>
+                    {isUiHi
+                      ? "इस प्रश्न से जुड़े सन्दर्भ हेतु परिवार प्रोफ़ाइल लोड करें — प्रश्न का स्वयं प्रश्न समय के आधार पर गणना होती है।"
+                      : "Load a family profile to attach asker context to this question. Prashna calculation always uses question time."}
+                  </p>
+                  {nativeProfile ? (
+                    <div className="space-y-1 text-xs text-[#3E2723]/80 bg-background/50 rounded-md p-2.5 border border-border/40">
+                      <div className="flex justify-between"><span className="text-muted-foreground">Name:</span><span className="font-medium">{nativeProfile.name}</span></div>
+                      <div className="flex justify-between"><span className="text-muted-foreground">DOB:</span><span className="font-medium tabular-nums">{nativeProfile.birthDate}</span></div>
+                      <div className="flex justify-between"><span className="text-muted-foreground">Time:</span><span className="font-medium tabular-nums">{nativeProfile.birthTime || 'Unknown'}</span></div>
+                      <div className="flex justify-between"><span className="text-muted-foreground">Place:</span><span className="font-medium">{nativeProfile.birthPlace}</span></div>
+                    </div>
+                  ) : null}
+                </div>
+
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
                     <Label htmlFor="question" className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Your Question</Label>
@@ -168,8 +221,12 @@ export default function PrashnaEngine() {
                   <div className="absolute inset-0 flex items-center justify-center font-hindi text-4xl">OM</div>
                 </div>
                 <div className="text-center space-y-2">
-                  <h3 className="font-heading text-2xl font-medium animate-pulse">Calculating Prashna Lagna</h3>
-                  <p className="text-sm text-muted-foreground">Aligning planetary positions with the current moment...</p>
+                  <h3 className={cn("font-heading text-2xl font-medium animate-pulse", isUiHi && "font-hindi text-xl")}>
+                    {isUiHi ? "प्रश्न लग्न गणना (इस क्षण की लग्न)" : "Calculating Prashna Lagna (Ascendant for this moment)"}
+                  </h3>
+                  <p className={cn("text-sm text-muted-foreground", isUiHi && "font-hindi")}>
+                    {isUiHi ? "वर्तमान क्षण के साथ ग्रह स्थितियों का संरेखण..." : "Aligning planetary positions with the current moment..."}
+                  </p>
                 </div>
               </div>
             ) : result ? (

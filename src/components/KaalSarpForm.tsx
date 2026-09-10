@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { generateKaalSarpReport, KaalSarpReport } from '../data/kaalSarpData';
+import { generateKaalSarpReport } from '../data/kaalSarpData';
+import type { KaalSarpReport } from '../data/kaalSarpData';
 import { LanguageToggle } from './LanguageToggle';
 import { Button } from './ui/button';
 import { Input } from './ui/input';

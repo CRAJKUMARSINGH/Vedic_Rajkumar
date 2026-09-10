@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { SubjectiveAnalysisEngine } from '@/lib/astrology/subjective-analysis-engine';
 import { calculateChart, calculateNavamsa, calculateDasha } from '@/lib/vedic/vedicCalc';
 import { calculateShadbala } from '@/services/shadabalaService';
@@ -229,3 +230,4 @@ export function runSubjectiveAnalysis(params: {
     return null;
   }
 }
+

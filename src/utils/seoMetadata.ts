@@ -35,8 +35,8 @@ export const SEO_PAGES: Record<string, PageSEO> = {
   },
 
   matchmaking: {
-    title: 'Kundli Milan – Free 36-Point Marriage Compatibility | Vedic Rajkumar',
-    description: 'Check marriage compatibility with accurate Kundli Milan. Full 36-point Ashtakuta analysis, Nadi dosha, Bhakoot dosha, Gana matching and remedies.',
+    title: 'Kundli Milan – 36-Point Marriage Compatibility | Vedic Rajkumar',
+    description: 'Check marriage compatibility with Kundli Milan. Full 36-point Ashtakuta analysis, Nadi dosha, Bhakoot dosha, Gana matching and remedies.',
     keywords: 'kundli milan, gun milan, marriage compatibility, ashtakuta, 36 guna, nadi dosha, bhakoot dosha, vedic astrology',
     canonical: '/matchmaking',
   },
@@ -85,7 +85,7 @@ export const SEO_PAGES: Record<string, PageSEO> = {
 
   careerAstrology: {
     title: 'Career Astrology – 10th House Analysis & Career Guidance | Vedic Rajkumar',
-    description: 'Get personalized career guidance through Vedic astrology. 10th house analysis, planetary career indicators, best career fields and timing.',
+    description: 'Get personalized career guidance through Vedic astrology. 10th house analysis, planetary career indicators, recommended career fields and timing.',
     keywords: 'career astrology, 10th house, career guidance, vedic astrology career, profession astrology',
     canonical: '/career-astrology',
   },
@@ -99,7 +99,7 @@ export const SEO_PAGES: Record<string, PageSEO> = {
 
   muhurat: {
     title: 'Muhurat Calculator – Auspicious Timing for All Events | Vedic Rajkumar',
-    description: 'Find the most auspicious muhurat for marriage, business, travel, house warming and more. Complete Panchang with Rahu Kaal and Abhijit Muhurat.',
+    description: 'Find auspicious muhurat recommendations for marriage, business, travel, house warming and more. Complete Panchang with Rahu Kaal and Abhijit Muhurat.',
     keywords: 'muhurat calculator, auspicious timing, panchang, rahu kaal, abhijit muhurat, vedic calendar',
     canonical: '/muhurat',
   },
@@ -127,7 +127,7 @@ export const SEO_PAGES: Record<string, PageSEO> = {
 
   babyNames: {
     title: 'Baby Name Suggestions – Nakshatra-Based Hindu Names | Vedic Rajkumar',
-    description: 'Find the perfect baby name based on birth nakshatra and lucky letters. 1000+ Hindu names with meanings, numerology scores and pronunciation.',
+    description: 'Find suitable baby names based on birth nakshatra and lucky letters. 1000+ Hindu names with meanings, numerology scores and pronunciation.',
     keywords: 'baby names, nakshatra names, hindu baby names, lucky letters, vedic naming',
     canonical: '/baby-names',
   },

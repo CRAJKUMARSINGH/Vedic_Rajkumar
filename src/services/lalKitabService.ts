@@ -116,11 +116,11 @@ export const LAL_KITAB_PRINCIPLES = {
       'Varsh Kundali: Annual chart that shows yearly predictions'
     ],
     hi: [
-      'पक्का घर: प्रत्येक ग्रह का एक स्थायी घर होता है जहां वह सबसे सहज महसूस करता है',
-      'अंधा ग्रह: ऐसे ग्रह जो कुछ घरों को नहीं देख सकते, अंधे स्थान बनाते हैं',
-      'ऋणानुबंधन: पिछले जन्मों के कर्म ऋण जो वर्तमान जीवन में प्रकट होते हैं',
-      'टोटके: सरल, व्यावहारिक उपाय जो किफायती और करने में आसान हैं',
-      'वर्ष कुंडली: वार्षिक चार्ट जो वार्षिक भविष्यवाणियां दिखाता है'
+      'αñ¬αñòαÑìαñòαñ╛ αñÿαñ░: αñ¬αÑìαñ░αññαÑìαñ»αÑçαñò αñùαÑìαñ░αñ╣ αñòαñ╛ αñÅαñò αñ╕αÑìαñÑαñ╛αñ»αÑÇ αñÿαñ░ αñ╣αÑïαññαñ╛ αñ╣αÑê αñ£αñ╣αñ╛αñé αñ╡αñ╣ αñ╕αñ¼αñ╕αÑç αñ╕αñ╣αñ£ αñ«αñ╣αñ╕αÑéαñ╕ αñòαñ░αññαñ╛ αñ╣αÑê',
+      'αñàαñéαñºαñ╛ αñùαÑìαñ░αñ╣: αñÉαñ╕αÑç αñùαÑìαñ░αñ╣ αñ£αÑï αñòαÑüαñ¢ αñÿαñ░αÑïαñé αñòαÑï αñ¿αñ╣αÑÇαñé αñªαÑçαñû αñ╕αñòαññαÑç, αñàαñéαñºαÑç αñ╕αÑìαñÑαñ╛αñ¿ αñ¼αñ¿αñ╛αññαÑç αñ╣αÑêαñé',
+      'αñïαñúαñ╛αñ¿αÑüαñ¼αñéαñºαñ¿: αñ¬αñ┐αñ¢αñ▓αÑç αñ£αñ¿αÑìαñ«αÑïαñé αñòαÑç αñòαñ░αÑìαñ« αñïαñú αñ£αÑï αñ╡αñ░αÑìαññαñ«αñ╛αñ¿ αñ£αÑÇαñ╡αñ¿ αñ«αÑçαñé αñ¬αÑìαñ░αñòαñƒ αñ╣αÑïαññαÑç αñ╣αÑêαñé',
+      'αñƒαÑïαñƒαñòαÑç: αñ╕αñ░αñ▓, αñ╡αÑìαñ»αñ╛αñ╡αñ╣αñ╛αñ░αñ┐αñò αñëαñ¬αñ╛αñ» αñ£αÑï αñòαñ┐αñ½αñ╛αñ»αññαÑÇ αñöαñ░ αñòαñ░αñ¿αÑç αñ«αÑçαñé αñåαñ╕αñ╛αñ¿ αñ╣αÑêαñé',
+      'αñ╡αñ░αÑìαñ╖ αñòαÑüαñéαñíαñ▓αÑÇ: αñ╡αñ╛αñ░αÑìαñ╖αñ┐αñò αñÜαñ╛αñ░αÑìαñƒ αñ£αÑï αñ╡αñ╛αñ░αÑìαñ╖αñ┐αñò αñ¡αñ╡αñ┐αñ╖αÑìαñ»αñ╡αñ╛αñúαñ┐αñ»αñ╛αñé αñªαñ┐αñûαñ╛αññαñ╛ αñ╣αÑê'
     ]
   }
 };
@@ -202,16 +202,16 @@ function generatePlanetEffects(
   isPuccaGhar: boolean,
   isAndha: boolean
 ): { en: string[]; hi: string[] } {
-  const effects = { en: [], hi: [] };
+  const effects: { en: string[]; hi: string[] } = { en: [], hi: [] };
   
   if (isPuccaGhar) {
     effects.en.push(`${planet} is in its permanent house (Pucca Ghar) - Very favorable`);
-    effects.hi.push(`${planet} अपने स्थायी घर (पक्का घर) में है - बहुत अनुकूल`);
+    effects.hi.push(`${planet} αñàαñ¬αñ¿αÑç αñ╕αÑìαñÑαñ╛αñ»αÑÇ αñÿαñ░ (αñ¬αñòαÑìαñòαñ╛ αñÿαñ░) αñ«αÑçαñé αñ╣αÑê - αñ¼αñ╣αÑüαññ αñàαñ¿αÑüαñòαÑéαñ▓`);
   }
   
   if (isAndha) {
     effects.en.push(`${planet} is blind (Andha) in this position - Creates blind spots`);
-    effects.hi.push(`${planet} इस स्थिति में अंधा है - अंधे स्थान बनाता है`);
+    effects.hi.push(`${planet} αñçαñ╕ αñ╕αÑìαñÑαñ┐αññαñ┐ αñ«αÑçαñé αñàαñéαñºαñ╛ αñ╣αÑê - αñàαñéαñºαÑç αñ╕αÑìαñÑαñ╛αñ¿ αñ¼αñ¿αñ╛αññαñ╛ αñ╣αÑê`);
   }
   
   // Add house-specific effects
@@ -226,18 +226,18 @@ function generatePlanetEffects(
  * Get Lal Kitab specific house effects
  */
 function getLalKitabHouseEffects(planet: string, house: number): { en: string[]; hi: string[] } {
-  const effects = { en: [], hi: [] };
+  const effects: { en: string[]; hi: string[] } = { en: [], hi: [] };
   
   // Simplified Lal Kitab house effects
   if (planet === 'Sun' && house === 10) {
     effects.en.push('Excellent for career and government positions');
-    effects.hi.push('करियर और सरकारी पदों के लिए उत्कृष्ट');
+    effects.hi.push('αñòαñ░αñ┐αñ»αñ░ αñöαñ░ αñ╕αñ░αñòαñ╛αñ░αÑÇ αñ¬αñªαÑïαñé αñòαÑç αñ▓αñ┐αñÅ αñëαññαÑìαñòαÑâαñ╖αÑìαñƒ');
   } else if (planet === 'Moon' && house === 4) {
     effects.en.push('Strong emotional foundation and mother relationship');
-    effects.hi.push('मजबूत भावनात्मक आधार और मां के साथ संबंध');
+    effects.hi.push('αñ«αñ£αñ¼αÑéαññ αñ¡αñ╛αñ╡αñ¿αñ╛αññαÑìαñ«αñò αñåαñºαñ╛αñ░ αñöαñ░ αñ«αñ╛αñé αñòαÑç αñ╕αñ╛αñÑ αñ╕αñéαñ¼αñéαñº');
   } else if (planet === 'Jupiter' && house === 9) {
     effects.en.push('Great fortune, wisdom, and spiritual growth');
-    effects.hi.push('महान भाग्य, ज्ञान और आध्यात्मिक विकास');
+    effects.hi.push('αñ«αñ╣αñ╛αñ¿ αñ¡αñ╛αñùαÑìαñ», αñ£αÑìαñ₧αñ╛αñ¿ αñöαñ░ αñåαñºαÑìαñ»αñ╛αññαÑìαñ«αñ┐αñò αñ╡αñ┐αñòαñ╛αñ╕');
   }
   
   return effects;
@@ -248,21 +248,21 @@ function getLalKitabHouseEffects(planet: string, house: number): { en: string[];
  */
 function getHouseSignificance(houseNumber: number): { en: string; hi: string } {
   const significances: Record<number, { en: string; hi: string }> = {
-    1: { en: 'Self, personality, physical body', hi: 'स्वयं, व्यक्तित्व, भौतिक शरीर' },
-    2: { en: 'Wealth, family, speech', hi: 'धन, परिवार, वाणी' },
-    3: { en: 'Siblings, courage, communication', hi: 'भाई-बहन, साहस, संचार' },
-    4: { en: 'Mother, home, emotions, property', hi: 'माता, घर, भावनाएं, संपत्ति' },
-    5: { en: 'Children, creativity, intelligence', hi: 'बच्चे, रचनात्मकता, बुद्धि' },
-    6: { en: 'Enemies, diseases, debts, service', hi: 'शत्रु, रोग, ऋण, सेवा' },
-    7: { en: 'Marriage, partnerships, business', hi: 'विवाह, साझेदारी, व्यापार' },
-    8: { en: 'Longevity, transformation, occult', hi: 'दीर्घायु, परिवर्तन, गुप्त विद्या' },
-    9: { en: 'Fortune, father, spirituality, dharma', hi: 'भाग्य, पिता, आध्यात्मिकता, धर्म' },
-    10: { en: 'Career, reputation, authority', hi: 'करियर, प्रतिष्ठा, अधिकार' },
-    11: { en: 'Gains, income, fulfillment of desires', hi: 'लाभ, आय, इच्छाओं की पूर्ति' },
-    12: { en: 'Losses, expenses, spirituality, moksha', hi: 'हानि, व्यय, आध्यात्मिकता, मोक्ष' }
+    1: { en: 'Self, personality, physical body', hi: 'αñ╕αÑìαñ╡αñ»αñé, αñ╡αÑìαñ»αñòαÑìαññαñ┐αññαÑìαñ╡, αñ¡αÑîαññαñ┐αñò αñ╢αñ░αÑÇαñ░' },
+    2: { en: 'Wealth, family, speech', hi: 'αñºαñ¿, αñ¬αñ░αñ┐αñ╡αñ╛αñ░, αñ╡αñ╛αñúαÑÇ' },
+    3: { en: 'Siblings, courage, communication', hi: 'αñ¡αñ╛αñê-αñ¼αñ╣αñ¿, αñ╕αñ╛αñ╣αñ╕, αñ╕αñéαñÜαñ╛αñ░' },
+    4: { en: 'Mother, home, emotions, property', hi: 'αñ«αñ╛αññαñ╛, αñÿαñ░, αñ¡αñ╛αñ╡αñ¿αñ╛αñÅαñé, αñ╕αñéαñ¬αññαÑìαññαñ┐' },
+    5: { en: 'Children, creativity, intelligence', hi: 'αñ¼αñÜαÑìαñÜαÑç, αñ░αñÜαñ¿αñ╛αññαÑìαñ«αñòαññαñ╛, αñ¼αÑüαñªαÑìαñºαñ┐' },
+    6: { en: 'Enemies, diseases, debts, service', hi: 'αñ╢αññαÑìαñ░αÑü, αñ░αÑïαñù, αñïαñú, αñ╕αÑçαñ╡αñ╛' },
+    7: { en: 'Marriage, partnerships, business', hi: 'αñ╡αñ┐αñ╡αñ╛αñ╣, αñ╕αñ╛αñ¥αÑçαñªαñ╛αñ░αÑÇ, αñ╡αÑìαñ»αñ╛αñ¬αñ╛αñ░' },
+    8: { en: 'Longevity, transformation, occult', hi: 'αñªαÑÇαñ░αÑìαñÿαñ╛αñ»αÑü, αñ¬αñ░αñ┐αñ╡αñ░αÑìαññαñ¿, αñùαÑüαñ¬αÑìαññ αñ╡αñ┐αñªαÑìαñ»αñ╛' },
+    9: { en: 'Fortune, father, spirituality, dharma', hi: 'αñ¡αñ╛αñùαÑìαñ», αñ¬αñ┐αññαñ╛, αñåαñºαÑìαñ»αñ╛αññαÑìαñ«αñ┐αñòαññαñ╛, αñºαñ░αÑìαñ«' },
+    10: { en: 'Career, reputation, authority', hi: 'αñòαñ░αñ┐αñ»αñ░, αñ¬αÑìαñ░αññαñ┐αñ╖αÑìαñáαñ╛, αñàαñºαñ┐αñòαñ╛αñ░' },
+    11: { en: 'Gains, income, fulfillment of desires', hi: 'αñ▓αñ╛αñ¡, αñåαñ», αñçαñÜαÑìαñ¢αñ╛αñôαñé αñòαÑÇ αñ¬αÑéαñ░αÑìαññαñ┐' },
+    12: { en: 'Losses, expenses, spirituality, moksha', hi: 'αñ╣αñ╛αñ¿αñ┐, αñ╡αÑìαñ»αñ», αñåαñºαÑìαñ»αñ╛αññαÑìαñ«αñ┐αñòαññαñ╛, αñ«αÑïαñòαÑìαñ╖' }
   };
   
-  return significances[houseNumber] || { en: 'Unknown', hi: 'अज्ञात' };
+  return significances[houseNumber] || { en: 'Unknown', hi: 'αñàαñ£αÑìαñ₧αñ╛αññ' };
 }
 
 /**
@@ -353,50 +353,50 @@ function identifyDebtPlanets(
  * Get effects of karmic debts
  */
 function getDebtEffects(debtType: DebtPlanet['debtType'], severity: DebtPlanet['severity']): { en: string[]; hi: string[] } {
-  const effects = { en: [], hi: [] };
+  const effects: { en: string[]; hi: string[] } = { en: [], hi: [] };
   
   switch (debtType) {
     case 'Pitru Rin':
       effects.en.push('Challenges with father or paternal lineage');
       effects.en.push('Obstacles in career and authority');
-      effects.hi.push('पिता या पैतृक वंश के साथ चुनौतियां');
-      effects.hi.push('करियर और अधिकार में बाधाएं');
+      effects.hi.push('αñ¬αñ┐αññαñ╛ αñ»αñ╛ αñ¬αÑêαññαÑâαñò αñ╡αñéαñ╢ αñòαÑç αñ╕αñ╛αñÑ αñÜαÑüαñ¿αÑîαññαñ┐αñ»αñ╛αñé');
+      effects.hi.push('αñòαñ░αñ┐αñ»αñ░ αñöαñ░ αñàαñºαñ┐αñòαñ╛αñ░ αñ«αÑçαñé αñ¼αñ╛αñºαñ╛αñÅαñé');
       break;
     case 'Matru Rin':
       effects.en.push('Issues with mother or maternal relationships');
       effects.en.push('Emotional instability and home problems');
-      effects.hi.push('माता या मातृ संबंधों के साथ समस्याएं');
-      effects.hi.push('भावनात्मक अस्थिरता और घर की समस्याएं');
+      effects.hi.push('αñ«αñ╛αññαñ╛ αñ»αñ╛ αñ«αñ╛αññαÑâ αñ╕αñéαñ¼αñéαñºαÑïαñé αñòαÑç αñ╕αñ╛αñÑ αñ╕αñ«αñ╕αÑìαñ»αñ╛αñÅαñé');
+      effects.hi.push('αñ¡αñ╛αñ╡αñ¿αñ╛αññαÑìαñ«αñò αñàαñ╕αÑìαñÑαñ┐αñ░αññαñ╛ αñöαñ░ αñÿαñ░ αñòαÑÇ αñ╕αñ«αñ╕αÑìαñ»αñ╛αñÅαñé');
       break;
     case 'Stri Rin':
       effects.en.push('Marital problems and relationship issues');
       effects.en.push('Difficulties with women in general');
-      effects.hi.push('वैवाहिक समस्याएं और संबंध मुद्दे');
-      effects.hi.push('सामान्य रूप से महिलाओं के साथ कठिनाइयां');
+      effects.hi.push('αñ╡αÑêαñ╡αñ╛αñ╣αñ┐αñò αñ╕αñ«αñ╕αÑìαñ»αñ╛αñÅαñé αñöαñ░ αñ╕αñéαñ¼αñéαñº αñ«αÑüαñªαÑìαñªαÑç');
+      effects.hi.push('αñ╕αñ╛αñ«αñ╛αñ¿αÑìαñ» αñ░αÑéαñ¬ αñ╕αÑç αñ«αñ╣αñ┐αñ▓αñ╛αñôαñé αñòαÑç αñ╕αñ╛αñÑ αñòαñáαñ┐αñ¿αñ╛αñçαñ»αñ╛αñé');
       break;
     case 'Bhratru Rin':
       effects.en.push('Conflicts with siblings');
       effects.en.push('Lack of courage and communication issues');
-      effects.hi.push('भाई-बहनों के साथ संघर्ष');
-      effects.hi.push('साहस की कमी और संचार समस्याएं');
+      effects.hi.push('αñ¡αñ╛αñê-αñ¼αñ╣αñ¿αÑïαñé αñòαÑç αñ╕αñ╛αñÑ αñ╕αñéαñÿαñ░αÑìαñ╖');
+      effects.hi.push('αñ╕αñ╛αñ╣αñ╕ αñòαÑÇ αñòαñ«αÑÇ αñöαñ░ αñ╕αñéαñÜαñ╛αñ░ αñ╕αñ«αñ╕αÑìαñ»αñ╛αñÅαñé');
       break;
     case 'Putra Rin':
       effects.en.push('Challenges with children');
       effects.en.push('Creative blocks and intelligence issues');
-      effects.hi.push('बच्चों के साथ चुनौतियां');
-      effects.hi.push('रचनात्मक अवरोध और बुद्धि समस्याएं');
+      effects.hi.push('αñ¼αñÜαÑìαñÜαÑïαñé αñòαÑç αñ╕αñ╛αñÑ αñÜαÑüαñ¿αÑîαññαñ┐αñ»αñ╛αñé');
+      effects.hi.push('αñ░αñÜαñ¿αñ╛αññαÑìαñ«αñò αñàαñ╡αñ░αÑïαñº αñöαñ░ αñ¼αÑüαñªαÑìαñºαñ┐ αñ╕αñ«αñ╕αÑìαñ»αñ╛αñÅαñé');
       break;
     case 'Guru Rin':
       effects.en.push('Disrespect to teachers and elders');
       effects.en.push('Lack of wisdom and spiritual growth');
-      effects.hi.push('शिक्षकों और बड़ों का अनादर');
-      effects.hi.push('ज्ञान और आध्यात्मिक विकास की कमी');
+      effects.hi.push('αñ╢αñ┐αñòαÑìαñ╖αñòαÑïαñé αñöαñ░ αñ¼αñíαñ╝αÑïαñé αñòαñ╛ αñàαñ¿αñ╛αñªαñ░');
+      effects.hi.push('αñ£αÑìαñ₧αñ╛αñ¿ αñöαñ░ αñåαñºαÑìαñ»αñ╛αññαÑìαñ«αñ┐αñò αñ╡αñ┐αñòαñ╛αñ╕ αñòαÑÇ αñòαñ«αÑÇ');
       break;
   }
   
   if (severity === 'high') {
     effects.en.push('Severe manifestation - immediate remedies required');
-    effects.hi.push('गंभीर प्रकटीकरण - तत्काल उपाय आवश्यक');
+    effects.hi.push('αñùαñéαñ¡αÑÇαñ░ αñ¬αÑìαñ░αñòαñƒαÑÇαñòαñ░αñú - αññαññαÑìαñòαñ╛αñ▓ αñëαñ¬αñ╛αñ» αñåαñ╡αñ╢αÑìαñ»αñò');
   }
   
   return effects;
@@ -519,10 +519,10 @@ export function generateLalKitabAnalysis(
       'Avoid actions that worsen Andha planet effects'
     ],
     hi: [
-      'सर्वोत्तम परिणामों के लिए लाल किताब के उपाय (टोटके) का पालन करें',
-      'निर्धारित उपायों के माध्यम से कर्म ऋण चुकाएं',
-      'सरल दैनिक प्रथाओं से कमजोर ग्रहों को मजबूत करें',
-      'अंधा ग्रह प्रभावों को बिगाड़ने वाली क्रियाओं से बचें'
+      'αñ╕αñ░αÑìαñ╡αÑïαññαÑìαññαñ« αñ¬αñ░αñ┐αñúαñ╛αñ«αÑïαñé αñòαÑç αñ▓αñ┐αñÅ αñ▓αñ╛αñ▓ αñòαñ┐αññαñ╛αñ¼ αñòαÑç αñëαñ¬αñ╛αñ» (αñƒαÑïαñƒαñòαÑç) αñòαñ╛ αñ¬αñ╛αñ▓αñ¿ αñòαñ░αÑçαñé',
+      'αñ¿αñ┐αñ░αÑìαñºαñ╛αñ░αñ┐αññ αñëαñ¬αñ╛αñ»αÑïαñé αñòαÑç αñ«αñ╛αñºαÑìαñ»αñ« αñ╕αÑç αñòαñ░αÑìαñ« αñïαñú αñÜαÑüαñòαñ╛αñÅαñé',
+      'αñ╕αñ░αñ▓ αñªαÑêαñ¿αñ┐αñò αñ¬αÑìαñ░αñÑαñ╛αñôαñé αñ╕αÑç αñòαñ«αñ£αÑïαñ░ αñùαÑìαñ░αñ╣αÑïαñé αñòαÑï αñ«αñ£αñ¼αÑéαññ αñòαñ░αÑçαñé',
+      'αñàαñéαñºαñ╛ αñùαÑìαñ░αñ╣ αñ¬αÑìαñ░αñ¡αñ╛αñ╡αÑïαñé αñòαÑï αñ¼αñ┐αñùαñ╛αñíαñ╝αñ¿αÑç αñ╡αñ╛αñ▓αÑÇ αñòαÑìαñ░αñ┐αñ»αñ╛αñôαñé αñ╕αÑç αñ¼αñÜαÑçαñé'
     ]
   };
   
@@ -545,3 +545,5 @@ export default {
   identifyDebtPlanets,
   generateLalKitabAnalysis
 };
+
+

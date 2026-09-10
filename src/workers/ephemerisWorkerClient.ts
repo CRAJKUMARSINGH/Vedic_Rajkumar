@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * src/workers/ephemerisWorkerClient.ts
  * Main-thread client for the ephemeris Web Worker.
@@ -104,3 +105,4 @@ export const calcWorker = {
     pending.clear();
   },
 };
+

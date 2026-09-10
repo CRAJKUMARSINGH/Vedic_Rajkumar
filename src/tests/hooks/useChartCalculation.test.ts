@@ -154,7 +154,7 @@ describe('useChartCalculation', () => {
 
     await waitFor(() => expect(result.current.data.planetaryPositions).not.toBeNull(), { timeout: 1000 });
 
-    rerender({ input: null });
+    rerender({ input: null as unknown as BirthInput });
     expect(result.current.data.planetaryPositions).toBeNull();
     expect(result.current.errors).toEqual({});
   });
@@ -201,3 +201,4 @@ describe('useChartCalculation', () => {
     expect(result.current.isCalculating).toBe(false);
   });
 });
+

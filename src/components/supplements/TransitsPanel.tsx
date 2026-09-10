@@ -40,7 +40,7 @@ import { assembleEngineData }       from "@/services/engineDataAssembler";
 import { calculateDynamicTransits } from "@/services/dynamicTransitService";
 import { searchLocation }           from "@/services/geocodingService";
 import EnhancedBirthInputForm      from "@/components/EnhancedBirthInputForm";
-import type { TransitResult }       from "../data/transitData";
+import type { TransitResult }       from "@/data/transitData";
 import type { DynamicTransitOutput } from "@/services/dynamicTransitService";
 
 // ─── Constants ──────────────────────────────────────────────────────────────────
@@ -174,7 +174,7 @@ function PlanetCard({ t }: { t: TransitResult }) {
       {/* Base favorable houses */}
       <div className="flex items-center gap-2 flex-wrap">
         <span className="text-[9px] text-slate-500">Favorable houses for {t.planet.en}:</span>
-        {t.planet.favorableHouses.map(h => (
+        {t.planet.favorableHouses.map((h: number) => (
           <span
             key={h}
             className={`text-[9px] px-1.5 py-0.5 rounded border ${
@@ -727,3 +727,4 @@ export function TransitsPanel() {
     </div>
   );
 }
+

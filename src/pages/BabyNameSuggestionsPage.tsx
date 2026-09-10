@@ -443,7 +443,7 @@ export default function BabyNameSuggestionsPage() {
                     </div>
 
                     <div className="flex gap-1 flex-wrap">
-                      {rec.name.tags.slice(0, 3).map((tag, idx) => (
+                      {rec.name.tags.slice(0, 3).map((tag: string, idx: number) => (
                         <Badge key={idx} variant="outline" className="text-xs">
                           {tag}
                         </Badge>

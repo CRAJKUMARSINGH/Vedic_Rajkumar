@@ -1,6 +1,6 @@
 import React from 'react';
 import { DashaTimeline } from '@/components/supplements/DashaTimeline';
-import { MainLayout } from '@/components/MainLayout';
+import MainLayout from '@/components/MainLayout';
 import { SEO } from '@/components/SEO';
 
 export default function DetailedDashaTimelinePage() {

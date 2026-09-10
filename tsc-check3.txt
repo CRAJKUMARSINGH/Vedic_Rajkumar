@@ -1,0 +1,59 @@
+src/components/supplements/TransitsPanel.tsx(43,42): error TS2307: Cannot find module '../data/transitData' or its corresponding type declarations.
+src/components/supplements/TransitsPanel.tsx(177,39): error TS7006: Parameter 'h' implicitly has an 'any' type.
+src/pages/CareerAstrology.tsx(189,54): error TS2322: Type 'Dispatch<SetStateAction<"en" | "hi">>' is not assignable to type '(lang: SupportedLanguage) => void'.
+  Types of parameters 'value' and 'lang' are incompatible.
+    Type 'SupportedLanguage' is not assignable to type 'SetStateAction<"en" | "hi">'.
+      Type '"bn"' is not assignable to type 'SetStateAction<"en" | "hi">'.
+src/pages/ComprehensiveReportPage.tsx(29,56): error TS2322: Type 'Dispatch<SetStateAction<"en" | "hi">>' is not assignable to type '(lang: SupportedLanguage) => void'.
+  Types of parameters 'value' and 'lang' are incompatible.
+    Type 'SupportedLanguage' is not assignable to type 'SetStateAction<"en" | "hi">'.
+      Type '"bn"' is not assignable to type 'SetStateAction<"en" | "hi">'.
+src/pages/FeedbackPage.tsx(487,33): error TS18048: 'item.rating' is possibly 'undefined'.
+src/pages/KaalSarpPage.tsx(36,56): error TS2322: Type 'Dispatch<SetStateAction<"en" | "hi">>' is not assignable to type '(lang: SupportedLanguage) => void'.
+  Types of parameters 'value' and 'lang' are incompatible.
+    Type 'SupportedLanguage' is not assignable to type 'SetStateAction<"en" | "hi">'.
+      Type '"bn"' is not assignable to type 'SetStateAction<"en" | "hi">'.
+src/pages/MatchMaking.tsx(150,22): error TS18046: 'error' is of type 'unknown'.
+src/pages/MatchMaking.tsx(276,54): error TS2322: Type 'Dispatch<SetStateAction<"en" | "hi">>' is not assignable to type '(lang: SupportedLanguage) => void'.
+  Types of parameters 'value' and 'lang' are incompatible.
+    Type 'SupportedLanguage' is not assignable to type 'SetStateAction<"en" | "hi">'.
+      Type '"bn"' is not assignable to type 'SetStateAction<"en" | "hi">'.
+src/services/lalKitabService.ts(208,21): error TS2345: Argument of type 'string' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(209,21): error TS2345: Argument of type 'string' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(213,21): error TS2345: Argument of type 'string' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(214,21): error TS2345: Argument of type 'string' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(219,19): error TS2345: Argument of type 'string' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(220,19): error TS2345: Argument of type 'string' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(233,21): error TS2345: Argument of type '"Excellent for career and government positions"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(234,21): error TS2345: Argument of type '"αñòαñ░αñ┐αñ»αñ░ αñöαñ░ αñ╕αñ░αñòαñ╛αñ░αÑÇ αñ¬αñªαÑïαñé αñòαÑç αñ▓αñ┐αñÅ αñëαññαÑìαñòαÑâαñ╖αÑìαñƒ"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(236,21): error TS2345: Argument of type '"Strong emotional foundation and mother relationship"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(237,21): error TS2345: Argument of type '"αñ«αñ£αñ¼αÑéαññ αñ¡αñ╛αñ╡αñ¿αñ╛αññαÑìαñ«αñò αñåαñºαñ╛αñ░ αñöαñ░ αñ«αñ╛αñé αñòαÑç αñ╕αñ╛αñÑ αñ╕αñéαñ¼αñéαñº"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(239,21): error TS2345: Argument of type '"Great fortune, wisdom, and spiritual growth"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(240,21): error TS2345: Argument of type '"αñ«αñ╣αñ╛αñ¿ αñ¡αñ╛αñùαÑìαñ», αñ£αÑìαñ₧αñ╛αñ¿ αñöαñ░ αñåαñºαÑìαñ»αñ╛αññαÑìαñ«αñ┐αñò αñ╡αñ┐αñòαñ╛αñ╕"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(360,23): error TS2345: Argument of type '"Challenges with father or paternal lineage"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(361,23): error TS2345: Argument of type '"Obstacles in career and authority"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(362,23): error TS2345: Argument of type '"αñ¬αñ┐αññαñ╛ αñ»αñ╛ αñ¬αÑêαññαÑâαñò αñ╡αñéαñ╢ αñòαÑç αñ╕αñ╛αñÑ αñÜαÑüαñ¿αÑîαññαñ┐αñ»αñ╛αñé"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(363,23): error TS2345: Argument of type '"αñòαñ░αñ┐αñ»αñ░ αñöαñ░ αñàαñºαñ┐αñòαñ╛αñ░ αñ«αÑçαñé αñ¼αñ╛αñºαñ╛αñÅαñé"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(366,23): error TS2345: Argument of type '"Issues with mother or maternal relationships"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(367,23): error TS2345: Argument of type '"Emotional instability and home problems"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(368,23): error TS2345: Argument of type '"αñ«αñ╛αññαñ╛ αñ»αñ╛ αñ«αñ╛αññαÑâ αñ╕αñéαñ¼αñéαñºαÑïαñé αñòαÑç αñ╕αñ╛αñÑ αñ╕αñ«αñ╕αÑìαñ»αñ╛αñÅαñé"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(369,23): error TS2345: Argument of type '"αñ¡αñ╛αñ╡αñ¿αñ╛αññαÑìαñ«αñò αñàαñ╕αÑìαñÑαñ┐αñ░αññαñ╛ αñöαñ░ αñÿαñ░ αñòαÑÇ αñ╕αñ«αñ╕αÑìαñ»αñ╛αñÅαñé"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(372,23): error TS2345: Argument of type '"Marital problems and relationship issues"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(373,23): error TS2345: Argument of type '"Difficulties with women in general"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(374,23): error TS2345: Argument of type '"αñ╡αÑêαñ╡αñ╛αñ╣αñ┐αñò αñ╕αñ«αñ╕αÑìαñ»αñ╛αñÅαñé αñöαñ░ αñ╕αñéαñ¼αñéαñº αñ«αÑüαñªαÑìαñªαÑç"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(375,23): error TS2345: Argument of type '"αñ╕αñ╛αñ«αñ╛αñ¿αÑìαñ» αñ░αÑéαñ¬ αñ╕αÑç αñ«αñ╣αñ┐αñ▓αñ╛αñôαñé αñòαÑç αñ╕αñ╛αñÑ αñòαñáαñ┐αñ¿αñ╛αñçαñ»αñ╛αñé"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(378,23): error TS2345: Argument of type '"Conflicts with siblings"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(379,23): error TS2345: Argument of type '"Lack of courage and communication issues"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(380,23): error TS2345: Argument of type '"αñ¡αñ╛αñê-αñ¼αñ╣αñ¿αÑïαñé αñòαÑç αñ╕αñ╛αñÑ αñ╕αñéαñÿαñ░αÑìαñ╖"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(381,23): error TS2345: Argument of type '"αñ╕αñ╛αñ╣αñ╕ αñòαÑÇ αñòαñ«αÑÇ αñöαñ░ αñ╕αñéαñÜαñ╛αñ░ αñ╕αñ«αñ╕αÑìαñ»αñ╛αñÅαñé"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(384,23): error TS2345: Argument of type '"Challenges with children"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(385,23): error TS2345: Argument of type '"Creative blocks and intelligence issues"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(386,23): error TS2345: Argument of type '"αñ¼αñÜαÑìαñÜαÑïαñé αñòαÑç αñ╕αñ╛αñÑ αñÜαÑüαñ¿αÑîαññαñ┐αñ»αñ╛αñé"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(387,23): error TS2345: Argument of type '"αñ░αñÜαñ¿αñ╛αññαÑìαñ«αñò αñàαñ╡αñ░αÑïαñº αñöαñ░ αñ¼αÑüαñªαÑìαñºαñ┐ αñ╕αñ«αñ╕αÑìαñ»αñ╛αñÅαñé"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(390,23): error TS2345: Argument of type '"Disrespect to teachers and elders"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(391,23): error TS2345: Argument of type '"Lack of wisdom and spiritual growth"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(392,23): error TS2345: Argument of type '"αñ╢αñ┐αñòαÑìαñ╖αñòαÑïαñé αñöαñ░ αñ¼αñíαñ╝αÑïαñé αñòαñ╛ αñàαñ¿αñ╛αñªαñ░"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(393,23): error TS2345: Argument of type '"αñ£αÑìαñ₧αñ╛αñ¿ αñöαñ░ αñåαñºαÑìαñ»αñ╛αññαÑìαñ«αñ┐αñò αñ╡αñ┐αñòαñ╛αñ╕ αñòαÑÇ αñòαñ«αÑÇ"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(398,21): error TS2345: Argument of type '"Severe manifestation - immediate remedies required"' is not assignable to parameter of type 'never'.
+src/services/lalKitabService.ts(399,21): error TS2345: Argument of type '"αñùαñéαñ¡αÑÇαñ░ αñ¬αÑìαñ░αñòαñƒαÑÇαñòαñ░αñú - αññαññαÑìαñòαñ╛αñ▓ αñëαñ¬αñ╛αñ» αñåαñ╡αñ╢αÑìαñ»αñò"' is not assignable to parameter of type 'never'.
+src/tests/hooks/useChartCalculation.test.ts(157,16): error TS2322: Type 'null' is not assignable to type 'BirthInput'.

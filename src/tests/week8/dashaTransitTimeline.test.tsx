@@ -1,5 +1,5 @@
 /**
- * dashaTransitTimeline.test.ts
+ * dashaTransitTimeline.test.tsx
  *
  * Week 08: Dasha + Transit Timeline Tests
  *
@@ -12,11 +12,23 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { MemoryRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import DashaTransitTimelineView from '@/components/DashaTransitTimelineView';
+
+function renderView() {
+  return render(
+    <HelmetProvider>
+      <MemoryRouter>
+        <DashaTransitTimelineView />
+      </MemoryRouter>
+    </HelmetProvider>,
+  );
+}
 
 // Mock the necessary services
 vi.mock('@/services/dashaTransitCorrelationService', () => ({
-  computeCorrelation: vi.fn(() => ({
+  computeCorrelation: vi.fn(() => new Promise((resolve) => setTimeout(() => resolve({
     activeDasha: {
       mahaLord: 'Jupiter',
       antarLord: 'Saturn',
@@ -93,11 +105,11 @@ vi.mock('@/services/dashaTransitCorrelationService', () => ({
       unfavorableTransits: 3,
     },
     calculatedAt: new Date().toISOString(),
-  })),
+  }), 120)))
 }));
 
 vi.mock('@/components/ui/loading-skeleton', () => ({
-  LoadingSkeleton: () => <div data-testid="loading-skeleton">Loading...</div>,
+  LoadingSkeleton: () => <div>Loading...</div>,
 }));
 
 vi.mock('@/components/ChartErrorState', () => ({
@@ -126,25 +138,25 @@ vi.mock('@/components/EnhancedLanguageToggle', () => ({
 
 describe('DashaTransitTimelineView', () => {
   it('should render without crashing', () => {
-    render(<DashaTransitTimelineView />);
+    renderView();
     expect(screen.getByText('Dasha + Transit Timeline')).toBeInTheDocument();
   });
 
   it('should display the form initially', () => {
-    render(<DashaTransitTimelineView />);
+    renderView();
     expect(screen.getByLabelText('Name')).toBeInTheDocument();
     expect(screen.getByLabelText('Date of Birth')).toBeInTheDocument();
     expect(screen.getByLabelText('Time of Birth')).toBeInTheDocument();
   });
 
   it('should have a calculate button', () => {
-    render(<DashaTransitTimelineView />);
+    renderView();
     const calculateButton = screen.getByText('Generate Timeline');
     expect(calculateButton).toBeInTheDocument();
   });
 
   it('should show loading state when calculating', async () => {
-    render(<DashaTransitTimelineView />);
+    renderView();
     
     const calculateButton = screen.getByText('Generate Timeline');
     fireEvent.click(calculateButton);
@@ -155,7 +167,7 @@ describe('DashaTransitTimelineView', () => {
   });
 
   it('should display results after successful calculation', async () => {
-    render(<DashaTransitTimelineView />);
+    renderView();
     
     // Fill in the form
     const nameInput = screen.getByLabelText('Name');
@@ -177,19 +189,19 @@ describe('DashaTransitTimelineView', () => {
   });
 
   it('should support language toggle', () => {
-    render(<DashaTransitTimelineView />);
+    renderView();
     const langToggle = screen.getByTestId('lang-toggle');
     expect(langToggle).toBeInTheDocument();
   });
 
   it('should display family profile selector', () => {
-    render(<DashaTransitTimelineView />);
+    renderView();
     const profileSelector = screen.getByTestId('profile-selector');
     expect(profileSelector).toBeInTheDocument();
   });
 
   it('should show validation banner', () => {
-    render(<DashaTransitTimelineView />);
+    renderView();
     const validationBanner = screen.getByTestId('validation-banner');
     expect(validationBanner).toBeInTheDocument();
   });

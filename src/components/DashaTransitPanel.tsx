@@ -156,7 +156,7 @@ export default function DashaTransitPanel({
           results={transitResults}
           lang={hiLang}
           moonRashiIndex={moonRashiIndex}
-          birthData={rawBirthData ?? null}
+          birthData={rawBirthData ?? undefined}
           transitDate={transitDate ?? new Date().toISOString().split("T")[0]}
         />
       </Suspense>

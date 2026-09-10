@@ -18,6 +18,7 @@ import { Toaster as Sonner } from '@/components/ui/sonner';
 import { ClerkProvider, useClerk } from '@clerk/react';
 import { shadcn } from '@clerk/themes';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import { isProduction, isDevelopment } from '@/lib/envConfig';
 
 // ─── QueryClient singleton ────────────────────────────────────────────────────
 
@@ -77,8 +78,21 @@ function ClerkQueryCacheInvalidator() {
 function ClerkProviderWithNavigate({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
 
-  // If no Clerk key is configured (dev / demo mode), skip Clerk entirely
+  // R4 (Week 4): Guard Clerk key — warn in dev, throw in production
   if (!publishableKey) {
+    if (isProduction()) {
+      throw new Error(
+        '[Vedic Rajkumar] VITE_CLERK_PUBLISHABLE_KEY is not set in production. ' +
+        'Authentication will not work. Set the key in your deployment environment.',
+      );
+    }
+    if (isDevelopment()) {
+      console.warn(
+        '[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. ' +
+        'Auth features are disabled. Copy .env.example → .env and fill in the key.',
+      );
+    }
+    // Skip Clerk in dev/demo mode — render children without auth
     return <>{children}</>;
   }
 

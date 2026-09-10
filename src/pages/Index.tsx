@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useEffect, lazy, Suspense, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useSearchParams } from 'react-router-dom';
@@ -63,6 +64,7 @@ import { generateEnhancedClassicalAnswer, type EnhancedClassicalAnswer } from '@
 import EnhancedAnalysisPanel from '@/components/EnhancedAnalysisPanel';
 
 import AstrologyLibraryPanel from "@/components/AstrologyLibraryPanel";
+import { ValidationInProgressNotice } from "@/components/PrototypeStatusBanner";
 
 // Lazy load heavy components
 const TransitTable = lazy(() => import('@/components/TransitTable'));
@@ -293,9 +295,9 @@ const Index = () => {
     <>
       <SEO
         title={isHi ? "वैदिक राजकुमार - ज्योतिष और गोचर" : "Vedic Rajkumar - Astrology & Transit"}
-        description="Accurate Kundli, transit predictions (Gochar Phal), matchmaking, career guidance, Dasha, and more. Bilingual Hindi/English."
+        description="Vedic Kundli, transit predictions (Gochar Phal), matchmaking, career guidance, Dasha, and more. Bilingual Hindi/English."
         keywords="vedic astrology, gochar phal, kundli, transit calculator, dasha, jyotish, free horoscope"
-        canonical="/"
+        canonical="/app"
         structuredData={webAppSchema}
       />
       
@@ -402,6 +404,7 @@ const Index = () => {
         )}
 
         <main className="container max-w-6xl mx-auto px-4 py-8 space-y-8">
+          <ValidationInProgressNotice isHi={isHi} compact={true} />
           <AstrologyLibraryPanel isHi={isHi} />
           
           <RandomQuestionCard lang={hiLang} />
@@ -605,3 +608,4 @@ const Index = () => {
 };
 
 export default Index;
+

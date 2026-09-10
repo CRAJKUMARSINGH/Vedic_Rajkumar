@@ -141,7 +141,7 @@ const CareerAstrology = () => {
       console.error('Career analysis error:', error);
       toast({
         title: isHi ? "❌ विश्लेषण त्रुटि" : "❌ Analysis Error",
-        description: error instanceof Error ? error.message : t.errors.analysisFailed,
+        description: error instanceof Error ? (error as Error).message : t.errors.analysisFailed,
         variant: "destructive"
       });
     } finally {
@@ -186,7 +186,7 @@ const CareerAstrology = () => {
               </p>
             </div>
           </div>
-          <EnhancedLanguageToggle currentLang={lang} onChange={setLang} showRegion={false} autoDetect={false} />
+          <EnhancedLanguageToggle currentLang={lang} onChange={(l) => setLang(l as typeof lang)} showRegion={false} autoDetect={false} />
         </div>
       </header>
 
@@ -357,3 +357,5 @@ const CareerAstrology = () => {
 };
 
 export default CareerAstrology;
+
+
