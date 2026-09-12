@@ -39,7 +39,8 @@ const LABELS = {
   en: {
     title: 'Kundali Milan',
     subtitle: 'Marriage Compatibility Analysis',
-    description: 'Traditional Ashtakuta system for marriage matching based on Vedic astrology principles',
+    description:
+      'Traditional 36-point Ashtakuta matching: 8 Kutas · Mangal Dosha cross-check · Remedies for flagged Doshas',
     malePartner: 'Male Partner Details',
     femalePartner: 'Female Partner Details',
     name: 'Full Name',
@@ -50,20 +51,29 @@ const LABELS = {
     calculating: 'Calculating…',
     newMatch: 'New Match',
     sampleData: 'Load Sample Data',
-    emptyTitle: 'Enter partner details',
-    emptyDesc: "Fill in both partners' birth details above and click Calculate Compatibility. Tip: use the Family Profile buttons above each form to pre-fill a saved profile in one click.",
+    emptyTitle: 'Enter both partner details',
+    emptyDesc:
+      "Fill in Name, DOB, Time, and Place for both partners below and click Calculate. ⚡ Tip: click Family Profile above each form to pre-fill a saved person in one click.",
     resultHeading: 'Compatibility Result',
+    helper: {
+      dateFmt: 'Format: YYYY-MM-DD',
+      timeFmt: '24-hour format · HH:MM · use the exact clock time on the birth certificate',
+      placeFmt: 'City, State (reference only — for your records)',
+    },
     errors: {
-      fillAllFields: 'Please fill all required fields for both partners',
-      calculationFailed: 'Compatibility calculation failed. Please check the data and try again.',
+      fillAllFields:
+        'Please complete Name, Date, Time, and Place for both the Male and Female partner.',
+      calculationFailed:
+        'Compatibility calculation failed. Please double-check dates and times, then try again.',
       invalidDate: 'Please enter valid dates in YYYY-MM-DD format',
-      invalidTime: 'Please enter valid time in HH:MM format',
+      invalidTime: 'Please enter valid time in HH:MM 24-hour format',
     },
   },
   hi: {
     title: 'कुंडली मिलान',
     subtitle: 'विवाह अनुकूलता विश्लेषण',
-    description: 'वैदिक ज्योतिष सिद्धांतों पर आधारित विवाह मिलान के लिए पारंपरिक अष्टकूट प्रणाली',
+    description:
+      'शास्त्रीय 36-अंक अष्टकूट मिलान: 8 कूट · मंगल दोष जाँच · दोषों के लिए सुझाए गए उपाय',
     malePartner: 'पुरुष साथी का विवरण',
     femalePartner: 'महिला साथी का विवरण',
     name: 'पूरा नाम',
@@ -74,14 +84,22 @@ const LABELS = {
     calculating: 'गणना हो रही है…',
     newMatch: 'नया मिलान',
     sampleData: 'नमूना डेटा',
-    emptyTitle: 'साथी विवरण भरें',
-    emptyDesc: 'दोनों साथियों का जन्म विवरण भरें और अनुकूलता की गणना करें पर क्लिक करें। सुझाव: एक क्लिक में सहेजी गई प्रोफ़ाइल पूर्व-भरने के लिए प्रत्येक फ़ॉर्म के ऊपर परिवार प्रोफ़ाइल बटन का उपयोग करें।',
+    emptyTitle: 'दोनों साथियों का विवरण भरें',
+    emptyDesc:
+      'नीचे दोनों साथियों का नाम, जन्म तिथि, समय और स्थान भरें और गणना करें पर क्लिक करें। ⚡ सुझाव: एक क्लिक में सहेजी गई प्रोफ़ाइल भरने के लिए प्रत्येक फ़ॉर्म के ऊपर परिवार प्रोफ़ाइल बटन दबाएँ।',
     resultHeading: 'अनुकूलता परिणाम',
+    helper: {
+      dateFmt: 'प्रारूप: YYYY-MM-DD',
+      timeFmt: '24-घंटा प्रारूप · HH:MM · जन्म प्रमाण पत्र पर छपा सटीक समय प्रयोग करें',
+      placeFmt: 'शहर, राज्य (केवल आपके रिकॉर्ड के लिए संदर्भ)',
+    },
     errors: {
-      fillAllFields: 'कृपया दोनों साझीदारों के लिए सभी आवश्यक फ़ील्ड भरें',
-      calculationFailed: 'अनुकूलता गणना विफल हुई। कृपया डेटा जांचें और पुनः प्रयास करें।',
+      fillAllFields:
+        'कृपया पुरुष और महिला दोनों साथियों के लिए नाम, तिथि, समय और स्थान सभी भरें।',
+      calculationFailed:
+        'अनुकूलता गणना विफल हुई। कृपया तिथि और समय दोबारा जाँचें, फिर पुनः प्रयास करें।',
       invalidDate: 'कृपया YYYY-MM-DD प्रारूप में वैध तिथियां दर्ज करें',
-      invalidTime: 'कृपया HH:MM प्रारूप में वैध समय दर्ज करें',
+      invalidTime: 'कृपया HH:MM 24-घंटा प्रारूप में वैध समय दर्ज करें',
     },
   },
 } as const;
@@ -115,6 +133,11 @@ function PartnerForm({
       onFieldChange();
     };
 
+  const helperTxt = (key: keyof typeof LABELS.en.helper): string => {
+    if (!('helper' in t)) return '';
+    return t.helper ? t.helper[key] : '';
+  };
+
   return (
     <Card className={cn('border-2', borderColor)}>
       <CardHeader>
@@ -147,8 +170,15 @@ function PartnerForm({
             value={partner.dateOfBirth}
             onChange={update('dateOfBirth')}
             aria-required="true"
+            aria-describedby={`${idPrefix}-date-help`}
             className="mt-1"
           />
+          <p
+            id={`${idPrefix}-date-help`}
+            className={cn('mt-1 text-[11px] text-muted-foreground', isHi && 'font-hindi')}
+          >
+            {helperTxt('dateFmt')}
+          </p>
         </div>
         <div>
           <Label htmlFor={`${idPrefix}-time`} className={isHi ? 'font-hindi' : ''}>
@@ -160,8 +190,15 @@ function PartnerForm({
             value={partner.timeOfBirth}
             onChange={update('timeOfBirth')}
             aria-required="true"
+            aria-describedby={`${idPrefix}-time-help`}
             className="mt-1"
           />
+          <p
+            id={`${idPrefix}-time-help`}
+            className={cn('mt-1 text-[11px] text-muted-foreground', isHi && 'font-hindi')}
+          >
+            {helperTxt('timeFmt')}
+          </p>
         </div>
         <div>
           <Label htmlFor={`${idPrefix}-place`} className={isHi ? 'font-hindi' : ''}>
@@ -173,8 +210,15 @@ function PartnerForm({
             onChange={update('placeOfBirth')}
             placeholder={isHi ? 'जन्म स्थान दर्ज करें' : 'Enter birth place'}
             aria-required="true"
+            aria-describedby={`${idPrefix}-place-help`}
             className="mt-1"
           />
+          <p
+            id={`${idPrefix}-place-help`}
+            className={cn('mt-1 text-[11px] text-muted-foreground', isHi && 'font-hindi')}
+          >
+            {helperTxt('placeFmt')}
+          </p>
         </div>
       </CardContent>
     </Card>

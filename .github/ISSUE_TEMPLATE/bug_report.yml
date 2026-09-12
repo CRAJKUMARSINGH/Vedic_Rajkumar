@@ -1,0 +1,138 @@
+name: 🐛 Bug Report
+description: Report something that is broken, incorrect, or behaves unexpectedly.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a clear bug report! 🙏 The more detail you give, the faster we can reproduce and fix it.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which area is this bug in?
+      multiple: false
+      options:
+        - Kundli / Birth Chart
+        - Prashna / Horary
+        - Kundli Milan / Matchmaking
+        - Panchang / Muhurat
+        - PDF Export / Print
+        - Family Profiles
+        - Language / Hindi / Devanagari
+        - Build / TypeScript / Lint
+        - Dev environment / setup
+        - CI / Netlify / Deployment
+        - Other (please describe below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Clear, concise description of what actually happened vs. what you expected to happen.
+      placeholder: "When I click X, Y crashes with error Z. I expected to see result W."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Step-by-step so anyone can reproduce. Include exact inputs if applicable.
+      placeholder: |
+        1. Go to '...'
+        2. Enter birth data: '...' (date, time, city)
+        3. Click on '....'
+        4. See error / incorrect output
+    validations:
+      required: true
+
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Exact inputs (if chart / calculation related)
+      description: |
+        For Kundli / Prashna / Milan / Panchang bugs, paste ALL inputs so we can reproduce exactly.
+        Example:
+          - Name: X Y
+          - Birth date: 1990-01-15 (DD-MM-YYYY or ISO)
+          - Birth time: 14:35 local
+          - Place: New Delhi, India (28.6139, 77.2090), TZ Asia/Kolkata (UTC+5:30)
+          - Any flags: Swiss Eph ON, Lahiri ayanamsa
+      placeholder: |
+        Paste full inputs here — this alone usually lets us fix 80% of calculation bugs immediately.
+      render: text
+    validations:
+      required: false
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser / Environment
+      multiple: false
+      options:
+        - Chrome Desktop (latest)
+        - Firefox Desktop (latest)
+        - Safari Desktop (latest)
+        - Edge Desktop (latest)
+        - Chrome Mobile (Android)
+        - Safari Mobile (iOS)
+        - Node / CLI (not in browser)
+        - Other (please describe)
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating System
+      placeholder: "Windows 11 · macOS 14 · Ubuntu 24 · iOS 17 · Android 14"
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots / Console errors
+      description: Drag & drop screenshots here. If there's a browser console error, paste the FULL error + stack trace as text.
+      placeholder: Screenshots, error stack traces, network requests that return 5xx etc.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How badly does this affect you or others?
+      multiple: false
+      options:
+        - "🟢 Minor — cosmetic / typo / works with workaround"
+        - "🟡 Medium — feature works but output is wrong in edge cases"
+        - "🔴 Major — feature broken / wrong output for common inputs / page crashes"
+        - "⚫ Blocker — app won't start / data loss / security issue (use SECURITY.md instead)"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Pre-flight checks
+      options:
+        - label: I have searched existing issues (open & closed) to make sure this isn't already reported.
+          required: true
+        - label: I have included exact inputs if this is a calculation bug.
+          required: false
+        - label: If this is a potential SECURITY issue (data leak, auth bypass, etc.), I have instead followed the private disclosure process in SECURITY.md and did NOT file a public issue.
+          required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else we should know?
+      description: Context, workarounds you've tried, links, screenshots — anything useful.
+      placeholder: "Optional additional context."
+    validations:
+      required: false

@@ -14,12 +14,14 @@
 
 import { useState, Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
+import { Calendar as CalendarIcon, RotateCcw } from 'lucide-react';
 import EnhancedLanguageToggle from '@/components/EnhancedLanguageToggle';
 import { LoadingSkeleton } from '@/components/ui/loading-skeleton';
 import ChartErrorState from '@/components/ChartErrorState';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { cn } from '@/lib/utils';
 import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 import { type SupportedLanguage } from '@/services/multiLanguageService';
 import { SEO } from '@/components/SEO';
 import { ValidationInProgressNotice } from '@/components/PrototypeStatusBanner';
@@ -112,9 +114,22 @@ const PanchangPage = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Date */}
               <div className="flex flex-col gap-1.5">
-                <Label htmlFor="panchang-date">
-                  {isHi ? 'तिथि' : 'Date'}
-                </Label>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="panchang-date">
+                    {isHi ? 'तिथि' : 'Date'}
+                  </Label>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setDate(new Date().toISOString().split('T')[0])}
+                    className="h-7 text-[11px] gap-1.5"
+                    aria-label={isHi ? 'आज की तिथि पर वापस जाएँ' : 'Reset date to today'}
+                  >
+                    <RotateCcw className="h-3 w-3" aria-hidden="true" />
+                    {isHi ? 'आज' : 'Today'}
+                  </Button>
+                </div>
                 <input
                   id="panchang-date"
                   type="date"
@@ -147,6 +162,45 @@ const PanchangPage = () => {
                     : "10 major Indian cities preset for accurate sunrise/sunset-based Panchang timings."}
                 </p>
               </div>
+            </div>
+
+            {/* Quick 5-limbs legend — reduce jargon confusion (Week 08 polish) */}
+            <div className="rounded-lg border border-dashed border-muted p-3">
+              <p
+                className={cn(
+                  "text-[11px] font-semibold text-foreground/80 uppercase tracking-wider mb-2",
+                  isHi && "font-hindi normal-case tracking-normal",
+                )}
+              >
+                {isHi ? 'पंचांग के 5 अंग — संक्षिप्त परिचय' : 'The 5 Limbs of Panchang — quick guide'}
+              </p>
+              <dl
+                className={cn(
+                  "grid grid-cols-1 sm:grid-cols-5 gap-x-4 gap-y-1.5 text-[11px] text-muted-foreground",
+                  isHi && "font-hindi text-[12px]",
+                )}
+              >
+                <div>
+                  <dt className="font-semibold text-foreground/80">Tithi · तिथि</dt>
+                  <dd>{isHi ? 'सूर्य-चंद्र दूरी का 1/30 — लूनर डे' : 'Lunar day — 1/30 of Sun–Moon angle'}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-foreground/80">Vara · वार</dt>
+                  <dd>{isHi ? 'सप्ताह का दिन — सूर्य से शनि' : 'Weekday — Sun through Saturn'}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-foreground/80">Nakshatra · नक्षत्र</dt>
+                  <dd>{isHi ? 'चन्द्रमा के 27 स्टेलर में से एक' : 'One of 27 stellar mansions of the Moon'}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-foreground/80">Yoga · योग</dt>
+                  <dd>{isHi ? 'सूर्य+चन्द्र की लंबित युति' : 'Sum of Sun + Moon longitudes'}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-foreground/80">Karana · करण</dt>
+                  <dd>{isHi ? 'तिथि का आधा — 11 प्रकार' : 'Half a Tithi — 11 varieties'}</dd>
+                </div>
+              </dl>
             </div>
           </section>
 

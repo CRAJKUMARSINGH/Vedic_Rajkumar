@@ -1,0 +1,118 @@
+name: ✨ Feature Request / Idea
+description: Suggest a new feature, improvement, or rule implementation for Vedic Rajkumar.
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        💡 Thank you for sharing an idea! Whether it's a tiny quality-of-life tweak or a full new module, we want to hear it.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of feature is this?
+      multiple: false
+      options:
+        - New Jyotish rule / calculation
+        - New page / module (KP, Jaimini, Lal Kitab, Varshaphal, Nadi, Vaastu, etc.)
+        - UI / UX improvement
+        - PDF / report export enhancement
+        - Bilingual / language addition (Tamil, Telugu, etc.)
+        - Performance / accessibility
+        - Developer tooling (tests, CI, build, docs)
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which area does it relate to most?
+      multiple: false
+      options:
+        - Kundli / Birth Chart
+        - Prashna / Horary
+        - Kundli Milan / Matchmaking
+        - Panchang / Muhurat
+        - Dasha / Transit systems
+        - Ashtakavarga
+        - Family Profiles
+        - Language / i18n
+        - Mobile / responsive
+        - Build / DevX / CI
+        - Not specific to one area
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem or pain point
+      description: |
+        Describe what you're trying to do and what is currently missing, awkward, slow, or incomplete.
+        Frame it as a USER NEED, not just a solution: "As someone planning my daughter's wedding, I need to…"
+      placeholder: "I'm always frustrated when […] because […]"
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Your proposed solution / idea
+      description: Describe the feature you'd like to see. Be specific — mockups, sketches, copy examples, and reference rules help a lot.
+      placeholder: |
+        I'd like to see […]. Here's roughly how it could work:
+        1. User does X
+        2. System shows Y
+        3. Result: Z
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: Classical / scholarly references (if Jyotish rule-related)
+      description: |
+        If this is a rule implementation, cite the text + chapter/verse so we can cross-reference.
+        Examples:
+          - Brihat Parashara Hora Shastra Ch. 46 vs. 11–14
+          - Prashna Marga Part 2 p. 118 (Ranjan Publications ed.)
+          - KP Reader Vol. III, example 7 on page 45
+      placeholder: Paste references, links to charts, screenshots from reference books, etc.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: How important is this to you?
+      multiple: false
+      options:
+        - "Nice-to-have — would be cool but I can live without it"
+        - "Useful — would improve my workflow or save me time regularly"
+        - "Important — this blocks me or my family from using a feature fully"
+        - "Critical — without this, the app doesn't serve my main use case"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: interest
+    attributes:
+      label: Would you like to contribute?
+      options:
+        - label: Yes, I'd be willing to help implement this with guidance from maintainers.
+          required: false
+        - label: Yes, I can provide test inputs / reference charts / translation strings.
+          required: false
+        - label: I'd prefer the maintainers / community build this.
+          required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Mockups, links to similar tools, screenshots from other apps, alternative approaches — whatever helps!
+      placeholder: Optional additional context.
+    validations:
+      required: false

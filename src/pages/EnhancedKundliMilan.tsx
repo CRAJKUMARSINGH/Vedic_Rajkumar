@@ -325,6 +325,11 @@ function PersonCard({
           </div>
         </div>
       </div>
+      <p className={cn("text-[10px] text-muted-foreground", isHi && "font-hindi")}>
+        {isHi
+          ? "सुझाव: जन्म प्रमाण-पत्र पर छपा सटीक समय प्रयोग करें — 5 मिनट का भी अंतर नक्षत्र पाद को बदल सकता है।"
+          : "Tip: use the exact clock time from the birth certificate — even 5 minutes can shift Nakshatra pada."}
+      </p>
 
       <div>
         <label className={lbl}>{t.placeOfBirth}</label>
