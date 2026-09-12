@@ -23,12 +23,12 @@ import { SEO } from '@/components/SEO';
 import ChartLoadingState from '@/components/ChartLoadingState';
 import ChartEmptyState from '@/components/ChartEmptyState';
 import ChartErrorState from '@/components/ChartErrorState';
-import {
-  runAccuracyCheck,
+import { runAccuracyCheck,
   type AccuracyDashboardResult,
   type AccuracyStatus,
 } from '@/services/accuracyDashboardService';
 import { cn } from '@/lib/utils';
+import { ValidationInProgressNotice } from '@/components/PrototypeStatusBanner';
 
 // ─── Status helpers ───────────────────────────────────────────────────────────
 
@@ -107,6 +107,8 @@ export default function AccuracyDashboardPage() {
       </header>
 
       <main className="container max-w-5xl mx-auto px-4 py-8 space-y-6">
+
+        <ValidationInProgressNotice compact={false} />
 
         {/* Loading */}
         {isLoading && (
