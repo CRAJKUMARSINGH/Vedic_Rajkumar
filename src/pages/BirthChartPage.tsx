@@ -35,6 +35,7 @@ import { type SupportedLanguage } from '@/services/multiLanguageService';
 import FamilyProfileSelector from '@/components/FamilyProfileSelector';
 import { getProfileById } from '@/lib/familyProfiles';
 import type { FamilyProfile } from '@/lib/familyProfiles';
+import { cn } from '@/lib/utils';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -306,7 +307,17 @@ export default function BirthChartPage() {
                 onChange={handleChange('date')}
                 className="rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-required="true"
+                aria-describedby="bc-date-help"
               />
+              <p
+                id="bc-date-help"
+                className={cn(
+                  'text-[11px] text-muted-foreground mt-0.5',
+                  isHi && 'font-hindi text-[12px]',
+                )}
+              >
+                {isHi ? 'यू.सी. प्रारूप YYYY-MM-DD' : 'ISO format YYYY-MM-DD'}
+              </p>
             </div>
 
             {/* Time */}
@@ -321,7 +332,19 @@ export default function BirthChartPage() {
                 onChange={handleChange('time')}
                 className="rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-required="true"
+                aria-describedby="bc-time-help"
               />
+              <p
+                id="bc-time-help"
+                className={cn(
+                  'text-[11px] text-muted-foreground mt-0.5',
+                  isHi && 'font-hindi text-[12px]',
+                )}
+              >
+                {isHi
+                  ? 'जन्म प्रमाण-पत्र पर छपा सटीक समय प्रयोग करें'
+                  : 'Use the exact clock time shown on the birth certificate'}
+              </p>
             </div>
 
             {/* Latitude */}
@@ -338,7 +361,19 @@ export default function BirthChartPage() {
                 placeholder="e.g. 24.58"
                 className="rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-required="true"
+                aria-describedby="bc-lat-help"
               />
+              <p
+                id="bc-lat-help"
+                className={cn(
+                  'text-[11px] text-muted-foreground mt-0.5',
+                  isHi && 'font-hindi text-[12px]',
+                )}
+              >
+                {isHi
+                  ? 'उत्तरी गोलार्ध = धनात्मक (+), दक्षिणी = ऋणात्मक (−)'
+                  : 'Northern hemisphere = positive (+), Southern = negative (−)'}
+              </p>
             </div>
 
             {/* Longitude */}
@@ -355,7 +390,19 @@ export default function BirthChartPage() {
                 placeholder="e.g. 73.68"
                 className="rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-required="true"
+                aria-describedby="bc-lon-help"
               />
+              <p
+                id="bc-lon-help"
+                className={cn(
+                  'text-[11px] text-muted-foreground mt-0.5',
+                  isHi && 'font-hindi text-[12px]',
+                )}
+              >
+                {isHi
+                  ? 'पूर्वी गोलार्ध = धनात्मक (+), पश्चिमी = ऋणात्मक (−)'
+                  : 'Eastern hemisphere = positive (+), Western = negative (−)'}
+              </p>
             </div>
 
             {/* Timezone */}
@@ -370,7 +417,19 @@ export default function BirthChartPage() {
                 onChange={handleChange('timezone')}
                 placeholder="e.g. Asia/Kolkata"
                 className="rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                aria-describedby="bc-tz-help"
               />
+              <p
+                id="bc-tz-help"
+                className={cn(
+                  'text-[11px] text-muted-foreground mt-0.5',
+                  isHi && 'font-hindi text-[12px]',
+                )}
+              >
+                {isHi
+                  ? 'उदा. Asia/Kolkata · America/New_York · Europe/London'
+                  : 'Examples: Asia/Kolkata · America/New_York · Europe/London'}
+              </p>
             </div>
 
             {/* Place */}
@@ -385,7 +444,19 @@ export default function BirthChartPage() {
                 onChange={handleChange('place')}
                 placeholder="e.g. Udaipur, Rajasthan"
                 className="rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                aria-describedby="bc-place-help"
               />
+              <p
+                id="bc-place-help"
+                className={cn(
+                  'text-[11px] text-muted-foreground mt-0.5',
+                  isHi && 'font-hindi text-[12px]',
+                )}
+              >
+                {isHi
+                  ? 'शहर, राज्य — केवल आपकी सुविधा के लिए'
+                  : 'City, State/Region — displayed for your reference only'}
+              </p>
             </div>
           </div>
 
