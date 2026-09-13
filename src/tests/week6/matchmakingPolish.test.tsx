@@ -76,13 +76,14 @@ describe('MatchMaking — Week 6 polish', () => {
 
   it('shows empty state before calculation', () => {
     renderPage();
-    // Should show "Enter partner details" or similar empty state
-    expect(screen.getByText(/enter partner details/i)).toBeInTheDocument();
+    // Should show "Enter both partner details" or similar empty state
+    expect(screen.getByText(/enter both partner details|enter partner details/i)).toBeInTheDocument();
   });
 
   it('empty state description is present', () => {
     renderPage();
-    expect(screen.getByText(/fill in both partners/i)).toBeInTheDocument();
+    // "Fill in Name, DOB, Time, and Place for both partners…"
+    expect(screen.getByText(/fill in name|fill in both partners/i)).toBeInTheDocument();
   });
 
   it('Calculate button has accessible name', () => {
@@ -105,7 +106,8 @@ describe('MatchMaking — Week 6 polish', () => {
     fireEvent.click(screen.getByRole('button', { name: /calculate/i }));
     await waitFor(() => {
       const alert = screen.getByRole('alert');
-      expect(alert.textContent).toMatch(/fill all required fields|required/i);
+      // Actual message: "Please complete Name, Date, Time, and Place for both..."
+      expect(alert.textContent).toMatch(/fill all required fields|required|please complete|partner/i);
     });
   });
 

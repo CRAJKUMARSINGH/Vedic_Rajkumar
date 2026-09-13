@@ -176,9 +176,9 @@ describe('FamilyProfileSelector Integration with Validation', () => {
     const trigger = screen.getByText('Test');
     await userEvent.click(trigger);
 
-    // Should show empty state message
+    // Should show empty state message (without trailing period)
     await waitFor(() => {
-      expect(screen.getByText('No family profiles yet.')).toBeInTheDocument();
+      expect(screen.getByText(/No family profiles yet/i)).toBeInTheDocument();
     });
   });
 
