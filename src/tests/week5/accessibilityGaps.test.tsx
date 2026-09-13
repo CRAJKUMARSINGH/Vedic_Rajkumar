@@ -44,8 +44,13 @@ function renderPanchangPage() {
 describe('PanchangPage — accessibility', () => {
   it('has an accessible label for the date input', () => {
     renderPanchangPage();
-    // The date input should be findable via its label
-    expect(screen.getByLabelText(/date/i)).toBeInTheDocument();
+    // The date input should be findable — use getAllByLabelText since the
+    // page may have multiple elements matching /date/i (label + aria-label)
+    const dateInputs = screen.getAllByLabelText(/date/i);
+    expect(dateInputs.length).toBeGreaterThanOrEqual(1);
+    // At least one should be the actual date input
+    const actualInput = dateInputs.find((el) => el.tagName === 'INPUT');
+    expect(actualInput).toBeInTheDocument();
   });
 
   it('has an accessible label for the city select', () => {
