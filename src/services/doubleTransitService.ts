@@ -1,4 +1,3 @@
-// @ts-nocheck
 /**
  * Pure double-transit helpers.
  *
@@ -6,6 +5,8 @@
  * Jupiter/Saturn gate from the natal Moon. Use dynamicTransitService when exact
  * transit positions are already available; use this file when the caller only
  * has natal Moon rashi plus approximate current Jupiter/Saturn rashis.
+ *
+ * Conforms to the Parashara and K.N. Rao double-transit principles.
  */
 
 export type MoonDoubleTransitType =
@@ -35,7 +36,7 @@ export interface MoonDoubleTransitResult {
   thereforeVerdict: string;
 }
 
-export const DOUBLE_TRANSIT_RASHI_NAMES = [
+export const DOUBLE_TRANSIT_RASHI_NAMES: readonly string[] = [
   'Aries',
   'Taurus',
   'Gemini',
@@ -48,7 +49,7 @@ export const DOUBLE_TRANSIT_RASHI_NAMES = [
   'Capricorn',
   'Aquarius',
   'Pisces',
-];
+] as const;
 
 export function approxJupiterRashi(date: Date = new Date()): number {
   const year = date.getFullYear();
@@ -139,6 +140,18 @@ export function checkWealthMoonDoubleTransit(
   return checkMoonDoubleTransit(data, 'wealth', { jupiter: [2, 5, 9, 11], saturn: [2, 11] });
 }
 
+export function checkChildMoonDoubleTransit(
+  data: MoonDoubleTransitInput
+): MoonDoubleTransitResult {
+  return checkMoonDoubleTransit(data, 'child', { jupiter: [1, 5, 9, 11], saturn: [3, 5, 11] });
+}
+
+export function checkForeignMoonDoubleTransit(
+  data: MoonDoubleTransitInput
+): MoonDoubleTransitResult {
+  return checkMoonDoubleTransit(data, 'foreign', { jupiter: [9, 12], saturn: [9, 12] });
+}
+
 export function buildApproxMoonDoubleTransitInput(
   natalMoonRashi: number,
   date: Date = new Date(),
@@ -152,3 +165,47 @@ export function buildApproxMoonDoubleTransitInput(
   };
 }
 
+/**
+ * Derives double-transit input dynamically from calculated ephemeris planetary positions,
+ * falling back gracefully to date-based approximation if specific planets are omitted.
+ */
+export function buildExactMoonDoubleTransitInput(
+  natalMoonRashi: number,
+  planets?: Array<{ name: string; longitude?: number; sign?: number }>,
+  ascendantRashi?: number,
+  fallbackDate: Date = new Date()
+): MoonDoubleTransitInput {
+  let jupiterRashi = approxJupiterRashi(fallbackDate);
+  let saturnRashi = approxSaturnRashi(fallbackDate);
+
+  if (planets && planets.length > 0) {
+    const jup = planets.find(
+      (p) => p.name.toLowerCase() === 'jupiter' || p.name.toLowerCase() === 'guru'
+    );
+    if (jup) {
+      if (typeof jup.sign === 'number') {
+        jupiterRashi = jup.sign;
+      } else if (typeof jup.longitude === 'number') {
+        jupiterRashi = Math.floor((jup.longitude % 360) / 30);
+      }
+    }
+
+    const sat = planets.find(
+      (p) => p.name.toLowerCase() === 'saturn' || p.name.toLowerCase() === 'shani'
+    );
+    if (sat) {
+      if (typeof sat.sign === 'number') {
+        saturnRashi = sat.sign;
+      } else if (typeof sat.longitude === 'number') {
+        saturnRashi = Math.floor((sat.longitude % 360) / 30);
+      }
+    }
+  }
+
+  return {
+    natalMoonRashi,
+    transitJupiterRashi: jupiterRashi,
+    transitSaturnRashi: saturnRashi,
+    ascendantRashi,
+  };
+}
