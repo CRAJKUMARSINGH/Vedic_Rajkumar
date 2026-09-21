@@ -104,42 +104,50 @@ describe('validateEnv — development mode (warns, does not throw)', () => {
 
 // ─── validateEnv — production mode ──────────────────────────────────────────
 
-describe('validateEnv — production mode (throws on missing vars)', () => {
+describe('validateEnv — production mode (warns and continues)', () => {
   afterEach(() => vi.unstubAllEnvs());
 
-  it('throws when VITE_SUPABASE_URL is missing in production', async () => {
+  it('warns and continues when VITE_SUPABASE_URL is missing in production', async () => {
     vi.stubEnv('MODE', 'production');
     vi.stubEnv('VITE_SUPABASE_URL', '');
     vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'real-key');
     vi.stubEnv('VITE_CLERK_PUBLISHABLE_KEY', 'pk_live_real');
 
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const { validateEnv } = await loadEnvConfig();
-    expect(() => validateEnv()).toThrowError(/Missing required environment variables/);
-    expect(() => validateEnv()).toThrowError(/VITE_SUPABASE_URL/);
+    expect(() => validateEnv()).not.toThrow();
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('VITE_SUPABASE_URL'));
+    warnSpy.mockRestore();
   });
 
-  it('throws listing all missing keys in production', async () => {
+  it('warns and continues while listing all missing keys in production', async () => {
     vi.stubEnv('MODE', 'production');
     vi.stubEnv('VITE_SUPABASE_URL', '');
     vi.stubEnv('VITE_SUPABASE_ANON_KEY', '');
     vi.stubEnv('VITE_CLERK_PUBLISHABLE_KEY', '');
 
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const { validateEnv } = await loadEnvConfig();
-    expect(() => validateEnv()).toThrowError(/VITE_SUPABASE_URL/);
-    expect(() => validateEnv()).toThrowError(/VITE_SUPABASE_ANON_KEY/);
-    expect(() => validateEnv()).toThrowError(/VITE_CLERK_PUBLISHABLE_KEY/);
+    expect(() => validateEnv()).not.toThrow();
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('VITE_SUPABASE_URL'));
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('VITE_SUPABASE_ANON_KEY'));
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('VITE_CLERK_PUBLISHABLE_KEY'));
+    warnSpy.mockRestore();
   });
 
-  it('does not throw when all vars are present in production', async () => {
+  it('does not warn when all vars are present in production', async () => {
     vi.stubEnv('MODE', 'production');
     vi.stubEnv('VITE_SUPABASE_URL', 'https://real.supabase.co');
     vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'real-anon-key');
     vi.stubEnv('VITE_CLERK_PUBLISHABLE_KEY', 'pk_live_real');
 
     const infoSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const { validateEnv } = await loadEnvConfig();
     expect(() => validateEnv()).not.toThrow();
+    expect(warnSpy).not.toHaveBeenCalledWith(expect.stringContaining('Missing or placeholder env vars'));
     infoSpy.mockRestore();
+    warnSpy.mockRestore();
   });
 });
 
