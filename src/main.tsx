@@ -3,7 +3,7 @@
  * Initializes the React app with all required providers and global setup.
  *
  * Boot order:
- *  1. validateEnv()           — fail fast if required env vars are missing
+ *  1. validateEnv()           — warn about missing integrations without blocking the shell
  *  2. initErrorMonitoring()   — wire Sentry (or console fallback) before React mounts
  *  3. createRoot / render     — mount the React tree
  */
@@ -16,7 +16,7 @@ import { validateEnv } from '@/lib/envConfig';
 import { initErrorMonitoring, captureException } from '@/lib/errorMonitoring';
 
 // ─── Step 1: Validate environment variables ───────────────────────────────────
-// Throws in production if required vars are missing; warns in development.
+// Warns about missing integration variables; the shell can run in demo/offline mode.
 validateEnv();
 
 // ─── Step 2: Start error monitoring ──────────────────────────────────────────
