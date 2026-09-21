@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vedic-rajkumar-v2';
+const CACHE_NAME = 'vedic-rajkumar-v3';
 const APP_SHELL = ['/', '/index.html'];
 const STATIC_ASSET_PATTERN = /\.(?:js|css|wasm|png|jpg|jpeg|svg|webp|ico)$/i;
 
@@ -38,10 +38,11 @@ self.addEventListener('fetch', event => {
 
   if (!STATIC_ASSET_PATTERN.test(requestUrl.pathname)) return;
 
+  // Network-first prevents a deployed hash from being paired with a stale
+  // app shell. Fall back to cache only when the network is unavailable.
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) return cached;
-      return fetch(event.request).then(response => {
+    fetch(event.request)
+      .then(response => {
         if (!response || response.status !== 200 || response.type !== 'basic') {
           return response;
         }
@@ -49,7 +50,7 @@ self.addEventListener('fetch', event => {
         const responseToCache = response.clone();
         caches.open(CACHE_NAME).then(cache => cache.put(event.request, responseToCache));
         return response;
-      });
-    })
+      })
+      .catch(() => caches.match(event.request))
   );
 });
