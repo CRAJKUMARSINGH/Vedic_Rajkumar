@@ -18,7 +18,6 @@ import { Toaster as Sonner } from '@/components/ui/sonner';
 import { ClerkProvider, useClerk } from '@clerk/react';
 import { shadcn } from '@clerk/themes';
 import ErrorBoundary from '@/components/ErrorBoundary';
-import { isDevelopment } from '@/lib/envConfig';
 
 // ─── QueryClient singleton ────────────────────────────────────────────────────
 
@@ -82,12 +81,10 @@ function ClerkProviderWithNavigate({ children }: { children: React.ReactNode }) 
   // The public shell must remain usable in demo/offline mode when a deployment
   // has not configured Clerk yet.
   if (!publishableKey) {
-    if (isDevelopment() || import.meta.env.MODE === 'production') {
-      console.warn(
-        '[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. ' +
-        'Auth features are disabled. Configure it in the deployment environment to enable sign-in.',
-      );
-    }
+    console.warn(
+      '[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. ' +
+      'Auth features are disabled. Configure it in the deployment environment to enable sign-in.',
+    );
     return <>{children}</>;
   }
 
