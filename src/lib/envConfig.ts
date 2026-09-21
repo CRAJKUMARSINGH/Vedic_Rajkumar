@@ -3,10 +3,9 @@
  *
  * Week 4: Environment configuration validation and helpers.
  *
- * Validates required VITE_* environment variables at application startup.
- * In production mode, missing required vars throw a descriptive error so
- * the app fails fast rather than silently misbehaving.
- * In development mode, missing vars emit console.warn with a helpful hint.
+ * Validates the VITE_* environment variables at application startup.
+ * Missing integration variables never prevent the React shell from mounting:
+ * the app can run in offline/demo mode while warning about disabled features.
  *
  * Usage:
  *   import { validateEnv, isProduction, isDevelopment, env } from '@/lib/envConfig';
@@ -71,8 +70,8 @@ export const env: AppEnv = {
 /**
  * Validate required environment variables.
  *
- * - In production: throws an Error if any required key is absent or a placeholder.
- * - In development: emits console.warn for each missing required key; does not throw.
+ * - In every mode: emits console.warn for missing required keys; never throws,
+ *   so a deployment without optional integrations still has a usable UI.
  * - Optionally warns about missing optional keys in all modes.
  *
  * Call once in src/main.tsx before createRoot().
@@ -95,18 +94,11 @@ export function validateEnv(): void {
     const keyList = missing.join(', ');
     const hint = 'Copy .env.example to .env and fill in the missing values.';
 
-    if (isProduction()) {
-      throw new Error(
-        `[Vedic Rajkumar] Missing required environment variables in production: ${keyList}. ` +
-        hint,
-      );
-    } else {
-      console.warn(
-        `[Vedic Rajkumar] ⚠️  Missing or placeholder env vars: ${keyList}.\n` +
-        `${hint}\n` +
-        `Some features (auth, database) will not work without these.`,
-      );
-    }
+    console.warn(
+      `[Vedic Rajkumar] ⚠️  Missing or placeholder env vars: ${keyList}.\n` +
+      `${hint}\n` +
+      'The app will run in demo/offline mode; auth and database features will be disabled.',
+    );
   }
 
   // Warn about optional keys regardless of mode
