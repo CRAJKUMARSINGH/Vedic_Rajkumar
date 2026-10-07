@@ -7,6 +7,9 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      'swisseph-wasm': process.env.VITE_USE_EDGE_EPHEMERIS
+        ? fileURLToPath(new URL('./src/stubs/swisseph-stub.ts', import.meta.url))
+        : 'swisseph-wasm',
     },
   },
   server: {
@@ -15,10 +18,15 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      // pdfjs-dist is dynamically imported with a graceful fallback in
-      // src/services/knowledgeExtractService.ts — mark it external so
-      // Rollup doesn't fail the build when the package is absent.
       external: ['pdfjs-dist'],
+      output: {
+        manualChunks: {
+          'swisseph': ['swisseph-wasm'],
+          'pdf': ['jspdf', 'jspdf-autotable'],
+          'charts': ['recharts'],
+          'ui': ['@radix-ui/react-dialog', '@radix-ui/react-select'],
+        },
+      },
     },
   },
   test: {
