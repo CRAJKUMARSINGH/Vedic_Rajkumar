@@ -16,6 +16,8 @@
     "test:run": "vitest run",
     "test:core": "vitest run src/tests/featureRegistryNav.test.ts src/tests/services/ephemerisService.test.ts src/tests/services/vedicAstroEngine.test.ts",
     "validate:accuracy": "vitest run src/tests/validation/accuracySuite.test.ts --reporter=verbose",
+    "test:a11y": "vitest run src/tests/week5/accessibilityGaps.test.tsx",
+    "test:perf": "lhci autorun --config=.lighthouserc.json",
     "ci:core": "npm run test:core && npm run build",
     "test:e2e": "playwright test"
   },

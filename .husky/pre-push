@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 echo "🔍 Running typecheck + tests before push..."
 
 npx tsc --noEmit || { echo "❌ Typecheck failed — push aborted."; exit 1; }
