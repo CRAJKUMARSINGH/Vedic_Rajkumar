@@ -19,6 +19,7 @@ import Providers from '@/Providers';
 import MainLayout from '@/components/MainLayout';
 import ConsentBanner from '@/components/ConsentBanner';
 import { routes } from '@/routes';
+import { funnelEvent } from '@/analytics/funnels';
 import { registerServiceWorker, setupConnectionListeners } from '@/utils/serviceWorkerRegistration';
 
 // ─── Page transition config ───────────────────────────────────────────────────
@@ -37,6 +38,10 @@ const PageLoader = lazy(() => import('@/components/PageLoader'));
 
 function AnimatedRoutes() {
   const location = useLocation();
+
+  useEffect(() => {
+    funnelEvent('page_view', { path: location.pathname });
+  }, [location.pathname]);
 
   return (
     <AnimatePresence mode="wait" initial={false}>

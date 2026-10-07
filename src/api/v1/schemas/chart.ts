@@ -32,5 +32,7 @@ export const ErrorResponse = z.object({
   }),
 });
 
+/* eslint-disable no-redeclare */
 export type BirthInput = z.infer<typeof BirthInput>;
 export type ChartResponse = z.infer<typeof ChartResponse>;
+/* eslint-enable no-redeclare */

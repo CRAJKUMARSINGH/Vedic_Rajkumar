@@ -6,7 +6,7 @@
  * Supports both North Indian and South Indian chart styles
  */
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -19,6 +19,7 @@ import {
   type ChartHouse,
 } from '@/services/kundliService';
 import { AccessibleChart } from '@/components/charts/AccessibleChart';
+import { funnelEvent } from '@/analytics/funnels';
 
 interface KundliChartProps {
   date: string;
@@ -136,6 +137,12 @@ const KundliChart: React.FC<KundliChartProps> = ({
       return null;
     }
   }, [date, time, latitude, longitude, chartStyle]);
+
+  useEffect(() => {
+    if (kundliData) {
+      funnelEvent('chart_created', { style: chartStyle });
+    }
+  }, [kundliData, chartStyle]);
 
   // Get chart layout
   const chartLayout = useMemo(() => {
