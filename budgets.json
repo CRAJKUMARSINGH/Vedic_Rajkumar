@@ -1,0 +1,22 @@
+{
+  "budgets": [
+    {
+      "path": "/index.html",
+      "resourceSizes": [
+        {
+          "resourceType": "script",
+          "budget": 200
+        }
+      ]
+    },
+    {
+      "path": "/chart/*",
+      "resourceSizes": [
+        {
+          "resourceType": "total",
+          "budget": 500
+        }
+      ]
+    }
+  ]
+}

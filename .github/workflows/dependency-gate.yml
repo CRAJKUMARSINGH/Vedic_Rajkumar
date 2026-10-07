@@ -1,0 +1,68 @@
+name: Dependency Gate
+
+# ── Triggers ──────────────────────────────────────────────────────────────────
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+
+# ── Jobs ──────────────────────────────────────────────────────────────────────
+jobs:
+  dependency-audit:
+    name: Audit Dependencies
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # Install without running postinstall scripts (security best practice)
+      - name: Install dependencies (no scripts)
+        run: npm ci --ignore-scripts
+
+      # Fail on moderate+ vulnerabilities
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+
+      # Verify lockfile was not modified by install (reproducibility check)
+      - name: Verify lockfile integrity
+        run: git diff --exit-code package-lock.json
+
+      # Check for unused dependencies
+      - name: Check for unused dependencies
+        run: |
+          npx depcheck \
+            --ignores "@types/*,vitest,playwright,@playwright/*,tsx,postcss,autoprefixer,tailwindcss,eslint*,prettier*,@commitlint/*,husky" \
+            --ignore-dirs "archive,dist,node_modules" \
+        continue-on-error: true   # Warning only — don't fail build for unused dev deps
+
+  license-check:
+    name: License Compliance
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci --ignore-scripts
+
+      # Deny GPL / AGPL licenses in production dependencies
+      - name: Check for prohibited licenses
+        run: |
+          npx license-checker \
+            --production \
+            --excludePrivatePackages \
+            --failOn "GPL-2.0;GPL-3.0;AGPL-3.0;LGPL-2.0;LGPL-2.1;LGPL-3.0"
+        continue-on-error: true   # Advisory only for now — harden after first audit pass
