@@ -6,6 +6,8 @@ node_modules/
 dist/
 build/
 out/
+.temp/
+supabase/.temp/
 
 # Environment
 .env
