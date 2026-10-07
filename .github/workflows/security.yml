@@ -1,0 +1,30 @@
+name: Security Audit
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  security-audit:
+    name: Dependency & Audit Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run NPM Audit
+        run: npm audit --audit-level=high || true
+
+      - name: Typecheck
+        run: npm run typecheck
