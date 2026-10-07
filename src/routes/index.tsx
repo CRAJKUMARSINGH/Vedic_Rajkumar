@@ -215,6 +215,8 @@ export const routes: RouteConfig[] = [
   { path: '/privacy',            element: <PrivacyPolicyPage /> },
   { path: '/terms',              element: <TermsOfServicePage /> },
   { path: '/privacy-settings',   element: <PrivacySettingsPage /> },
+  { path: '/settings/data',      element: <PrivacySettingsPage /> },  // Week 5: GDPR/DPDP canonical route
+  { path: '/settings/privacy',   element: <PrivacySettingsPage /> },  // alias
 
   // ── Supplements & Synthesis (active — supplement core features with deep analysis)
   //   These are not the 4 core features but are working end-to-end, so they get
