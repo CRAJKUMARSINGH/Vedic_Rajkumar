@@ -6,7 +6,8 @@
  *
  * Provider order (outermost → innermost):
  *   HelmetProvider → QueryClientProvider → TooltipProvider
- *     → ErrorBoundary → BrowserRouter → ClerkProviderWithNavigate
+ *     → ErrorBoundary → FlagsmithProvider → BrowserRouter
+ *       → ClerkProviderWithNavigate
  */
 
 import { useEffect, useRef } from 'react';
@@ -18,6 +19,7 @@ import { Toaster as Sonner } from '@/components/ui/sonner';
 import { ClerkProvider, useClerk } from '@clerk/react';
 import { shadcn } from '@clerk/themes';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import { FlagsmithProvider } from '@/features/flags/provider';
 
 // ─── QueryClient singleton ────────────────────────────────────────────────────
 
@@ -123,11 +125,13 @@ export default function Providers({ children }: ProvidersProps) {
           {/* Sonner toast container — sibling to children, not a wrapper */}
           <Sonner />
           <ErrorBoundary>
-            <BrowserRouter>
-              <ClerkProviderWithNavigate>
-                {children}
-              </ClerkProviderWithNavigate>
-            </BrowserRouter>
+            <FlagsmithProvider>
+              <BrowserRouter>
+                <ClerkProviderWithNavigate>
+                  {children}
+                </ClerkProviderWithNavigate>
+              </BrowserRouter>
+            </FlagsmithProvider>
           </ErrorBoundary>
         </TooltipProvider>
       </QueryClientProvider>

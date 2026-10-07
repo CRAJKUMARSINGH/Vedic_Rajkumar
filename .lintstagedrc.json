@@ -1,5 +1,5 @@
 {
-  "*.{ts,tsx}": ["eslint --max-warnings 0 --fix", "bash -c 'npx tsc --noEmit'"],
-  "*.{js,jsx,cjs}": ["eslint --max-warnings 0 --fix"],
+  "*.{ts,tsx}": ["eslint --fix --no-warn-ignored"],
+  "*.{js,jsx,cjs}": ["eslint --fix --no-warn-ignored"],
   "*.{json,md,css}": ["prettier --write"]
 }

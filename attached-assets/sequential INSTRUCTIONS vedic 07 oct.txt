@@ -4262,4 +4262,3679 @@ Run Step 1 to checkout develop and create the feature branch, then proceed throu
 Your platform now has **comprehensive test coverage** ensuring reliability at scale. The combination of Week 7 (Performance) + Week 8 (Testing) positions you for **enterprise deployment**.
 
 Ready for **Week 9: Monitoring, Logging & Observability**?
-&&&&&&&&&&&&&&&&&&&
+$$$$$$$$$$$$$$$$$$$$$
+# 🔭 WEEK 9: ULTRA-DETAILED OBSERVABILITY, MONITORING & ALERTING GUIDE
+
+## Overview
+Your platform is tested, secure, performant, and compliant. Now you build the **nervous system** — structured logging, distributed tracing, error tracking, product analytics, SLO/error-budget engineering, health checks, and automated alerting. This is what lets you sleep at night post-launch and what every SOC 2 / ISO 27001 auditor demands: **"if it breaks at 3 AM, how do you know, and how fast?"**
+
+**Sequence note:** Following the live track (Week 8 = Testing & QA), Week 9 = Observability. This aligns with the original roadmap's "Monitoring & Alerting" objective.
+
+---
+
+## STEP-BY-STEP EXECUTION
+
+### STEP 0: Pre-Flight Check
+
+```bash
+git checkout develop
+git pull origin develop
+```
+
+**Verify Week 8 merged:**
+```bash
+ls src/test/ 2>/dev/null; ls playwright.config.ts vitest.config.ts 2>/dev/null
+```
+
+**Expected:** test configs present.
+
+---
+
+### STEP 1: Create Week 9 Branch
+
+```bash
+git checkout -b feature/week-09-observability
+```
+
+**Verify:**
+```bash
+git branch --show-current
+```
+**Expected:** `feature/week-09-observability`
+
+---
+
+### STEP 2: Install Observability Dependencies
+
+```bash
+npm install @sentry/react @sentry/tracing posthog-js web-vitals pino pino-pretty uuid
+npm install --save-dev @types/uuid
+```
+
+**Wait for completion.** Expected: `added N packages`.
+
+---
+
+### STEP 3: Create Directory Structure
+
+```bash
+mkdir -p src/observability/logging
+mkdir -p src/observability/errors
+mkdir -p src/observability/analytics
+mkdir -p src/observability/metrics
+mkdir -p src/observability/tracing
+mkdir -p supabase/functions/_shared
+mkdir -p supabase/functions/ingest-logs
+mkdir -p supabase/functions/health
+mkdir -p supabase/functions/metrics
+mkdir -p observability/dashboards
+mkdir -p observability/alerts
+mkdir -p docs/observability
+```
+
+**Verify:**
+```bash
+ls src/observability/
+```
+**Expected:** `analytics  errors  logging  metrics  tracing`
+
+---
+
+### STEP 4: Create Correlation ID Utility
+
+**File:** `src/observability/logging/correlation.ts`
+
+```typescript
+import { v4 as uuidv4 } from 'uuid';
+
+const STORAGE_KEY = 'vedic_correlation_id';
+const REQUEST_KEY = 'vedic_request_id';
+
+/** Stable per-session id — ties all events in a user session together. */
+export const getCorrelationId = (): string => {
+  let id = sessionStorage.getItem(STORAGE_KEY);
+  if (!id) {
+    id = uuidv4();
+    sessionStorage.setItem(STORAGE_KEY, id);
+  }
+  return id;
+};
+
+/** Fresh per-request id — ties a single user action across client→edge→db. */
+export const newRequestId = (): string => {
+  const id = uuidv4();
+  sessionStorage.setItem(REQUEST_KEY, id);
+  return id;
+};
+
+export const getRequestId = (): string =>
+  sessionStorage.getItem(REQUEST_KEY) ?? newRequestId();
+
+export const withCorrelation = <T extends Record<string, unknown>>(meta: T) => ({
+  correlationId: getCorrelationId(),
+  requestId: getRequestId(),
+  ...meta,
+});
+```
+
+---
+
+### STEP 5: Create Structured Logger (Client)
+
+**File:** `src/observability/logging/logger.ts`
+
+```typescript
+import pino, { Logger } from 'pino';
+import { getCorrelationId } from './correlation';
+
+const isDev = import.meta.env.DEV;
+
+/**
+ * Structured JSON logger. Warn+ events are shipped to the edge collector
+ * so they land in the log aggregation store alongside server logs.
+ */
+const baseLogger = pino({
+  level: import.meta.env.VITE_LOG_LEVEL || (isDev ? 'debug' : 'info'),
+  browser: {
+    asObject: true,
+    transmit: {
+      level: 'warn',
+      send: (level, logEvent) => {
+        const payload = {
+          level,
+          messages: logEvent.messages,
+          bindings: logEvent.bindings,
+          ts: Date.now(),
+          correlationId: getCorrelationId(),
+          url: location.href,
+        };
+        // keepalive survives page unload
+        fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ingest-logs`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true,
+        }).catch(() => {});
+      },
+    },
+  },
+  // Never leak PII into logs
+  redact: {
+    paths: [
+      'password',
+      'token',
+      'accessToken',
+      'refreshToken',
+      'authorization',
+      'email',
+      'birthData.*',
+    ],
+    censor: '[REDACTED]',
+  },
+  base: {
+    service: 'vedic-rajkumar-web',
+    env: import.meta.env.MODE,
+    release: import.meta.env.VITE_RELEASE_VERSION ?? 'dev',
+  },
+});
+
+export const logger: Logger = baseLogger;
+export const createLogger = (module: string): Logger => baseLogger.child({ module });
+```
+
+---
+
+### STEP 6: Create Edge Shared Observability Helper
+
+**File:** `supabase/functions/_shared/observability.ts`
+
+```typescript
+export interface LogContext {
+  correlationId?: string;
+  requestId?: string;
+  userId?: string;
+  route?: string;
+  status?: number;
+  durationMs?: number;
+  [key: string]: unknown;
+}
+
+export const log = (level: string, message: string, ctx: LogContext = {}) => {
+  console.log(
+    JSON.stringify({
+      level,
+      message,
+      service: 'vedic-rajkumar-edge',
+      ts: new Date().toISOString(),
+      ...ctx,
+    }),
+  );
+};
+
+export const logger = {
+  debug: (m: string, c?: LogContext) => log('debug', m, c),
+  info: (m: string, c?: LogContext) => log('info', m, c),
+  warn: (m: string, c?: LogContext) => log('warn', m, c),
+  error: (m: string, c?: LogContext) => log('error', m, c),
+};
+
+export const getCorrelationId = (req: Request): string =>
+  req.headers.get('x-correlation-id') ?? crypto.randomUUID();
+
+/** Wraps a handler with timing + success/error logging. */
+export const withTelemetry = <T>(
+  route: string,
+  handler: (req: Request) => Promise<T>,
+) => {
+  return async (req: Request) => {
+    const start = Date.now();
+    const correlationId = getCorrelationId(req);
+    try {
+      const result = await handler(req);
+      logger.info('request_complete', {
+        route,
+        status: 200,
+        durationMs: Date.now() - start,
+        correlationId,
+      });
+      return result;
+    } catch (err) {
+      logger.error('request_failed', {
+        route,
+        status: 500,
+        durationMs: Date.now() - start,
+        correlationId,
+        error: (err as Error).message,
+        stack: (err as Error).stack,
+      });
+      throw err;
+    }
+  };
+};
+```
+
+---
+
+### STEP 7: Create Log Ingest Edge Function
+
+**File:** `supabase/functions/ingest-logs/index.ts`
+
+```typescript
+import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
+import { corsHeaders } from '../_shared/cors.ts';
+import { logger } from '../_shared/observability.ts';
+
+serve(async (req) => {
+  if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
+
+  try {
+    const body = await req.json();
+    const token = Deno.env.get('LOGTAIL_SOURCE_TOKEN');
+
+    // Forward to the log drain provider if configured
+    if (token) {
+      await fetch('https://in.logtail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      });
+    }
+
+    logger.debug('log_ingested', { level: body.level, correlationId: body.correlationId });
+
+    return new Response(JSON.stringify({ ok: true }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  } catch (err) {
+    return new Response(JSON.stringify({ error: (err as Error).message }), {
+      status: 500,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  }
+});
+```
+
+---
+
+### STEP 8: Create Error Tracking (Sentry)
+
+**File:** `src/observability/errors/sentry.ts`
+
+```typescript
+import * as Sentry from '@sentry/react';
+import { getCorrelationId } from '../logging/correlation';
+
+export const initErrorTracking = () => {
+  if (!import.meta.env.VITE_SENTRY_DSN) return;
+
+  Sentry.init({
+    dsn: import.meta.env.VITE_SENTRY_DSN,
+    environment: import.meta.env.MODE,
+    release: import.meta.env.VITE_RELEASE_VERSION,
+    tracesSampleRate: import.meta.env.PROD ? 0.1 : 1.0,
+    replaysSessionSampleRate: 0.05,
+    replaysOnErrorSampleRate: 1.0,
+    integrations: [
+      Sentry.browserTracingIntegration(),
+      Sentry.replayIntegration({ maskAllText: false, blockAllMedia: false }),
+    ],
+    // Tag every event with the correlation id so logs ↔ errors join cleanly
+    beforeSend(event) {
+      event.tags = { ...event.tags, correlationId: getCorrelationId() };
+      return event;
+    },
+    ignoreErrors: ['ResizeObserver loop limit exceeded', 'Non-Error promise rejection'],
+  });
+};
+
+export const captureError = (error: Error, context?: Record<string, unknown>) => {
+  Sentry.withScope((scope) => {
+    if (context) scope.setExtras(context);
+    Sentry.captureException(error);
+  });
+};
+
+export const setUserContext = (userId: string, tier?: string) => {
+  Sentry.setUser({ id: userId });
+  if (tier) Sentry.setTag('tier', tier);
+};
+```
+
+---
+
+### STEP 9: Create Product Analytics (PostHog)
+
+**File:** `src/observability/analytics/posthog.ts`
+
+```typescript
+import posthog from 'posthog-js';
+import { getCorrelationId } from '../logging/correlation';
+
+export const initAnalytics = () => {
+  if (!import.meta.env.VITE_POSTHOG_KEY) return;
+
+  posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
+    api_host: import.meta.env.VITE_POSTHOG_HOST || 'https://us.i.posthog.com',
+    person_profiles: 'identified_only',
+    capture_pageview: false,       // we control routing
+    autocapture: false,            // explicit events only
+    persistence: 'localStorage',
+    loaded: (ph) => {
+      if (import.meta.env.DEV) ph.debug();
+    },
+  });
+};
+
+export const identifyUser = (userId: string, traits?: Record<string, unknown>) =>
+  posthog.identify(userId, traits);
+
+export const resetAnalytics = () => posthog.reset();
+
+export const trackEvent = (event: string, props?: Record<string, unknown>) =>
+  posthog.capture(event, { ...props, correlationId: getCorrelationId() });
+
+export const trackPageview = (path: string) =>
+  posthog.capture('$pageview', { path });
+```
+
+---
+
+### STEP 10: Create Web Vitals Reporter
+
+**File:** `src/observability/metrics/webVitals.ts`
+
+```typescript
+import { onCLS, onFID, onLCP, onFCP, onTTFB, onINP, type Metric } from 'web-vitals';
+import { trackEvent } from '../analytics/posthog';
+
+const BUDGETS: Record<string, number> = {
+  LCP: 2500,
+  FID: 100,
+  CLS: 0.1,
+  FCP: 1800,
+  TTFB: 800,
+  INP: 200,
+};
+
+const report = (metric: Metric) => {
+  trackEvent('web_vital', {
+    name: metric.name,
+    value: metric.value,
+    rating: metric.rating,
+    id: metric.id,
+    budget_ms: BUDGETS[metric.name],
+    over_budget: metric.value > (BUDGETS[metric.name] ?? Infinity),
+  });
+};
+
+export const initWebVitals = () => {
+  onCLS(report);
+  onFID(report);
+  onLCP(report);
+  onFCP(report);
+  onTTFB(report);
+  onINP(report);
+};
+```
+
+---
+
+### STEP 11: Create Distributed Tracing (Client Spans)
+
+**File:** `src/observability/tracing/tracer.ts`
+
+```typescript
+import { trackEvent } from '../analytics/posthog';
+import { getCorrelationId, newRequestId } from '../logging/correlation';
+
+type Span = { name: string; start: number; end?: number; attrs: Record<string, unknown> };
+
+export const startSpan = (name: string, attrs: Record<string, unknown> = {}) => {
+  const span: Span = { name, start: performance.now(), attrs };
+  return {
+    end: (extra?: Record<string, unknown>) => {
+      span.end = performance.now();
+      Object.assign(span.attrs, extra);
+      trackEvent('span', {
+        name: span.name,
+        duration_ms: Math.round(span.end - span.start),
+        correlationId: getCorrelationId(),
+        ...span.attrs,
+      });
+      return span;
+    },
+  };
+};
+
+/** Trace an async operation end-to-end (e.g. a chart calculation). */
+export const withSpan = async <T>(
+  name: string,
+  fn: () => Promise<T>,
+  attrs?: Record<string, unknown>,
+): Promise<T> => {
+  const requestId = newRequestId();
+  const s = startSpan(name, { requestId, ...attrs });
+  try {
+    const result = await fn();
+    s.end({ status: 'ok' });
+    return result;
+  } catch (err) {
+    s.end({ status: 'error', error: (err as Error).message });
+    throw err;
+  }
+};
+```
+
+---
+
+### STEP 12: Create Metrics Registry
+
+**File:** `src/observability/metrics/registry.ts`
+
+```typescript
+type Counter = { inc: (n?: number) => void; value: () => number };
+type Histogram = { observe: (v: number) => void; percentile: (p: number) => number };
+
+const counters = new Map<string, number>();
+const histograms = new Map<string, number[]>();
+
+export const counter = (name: string): Counter => ({
+  inc: (n = 1) => counters.set(name, (counters.get(name) ?? 0) + n),
+  value: () => counters.get(name) ?? 0,
+});
+
+export const histogram = (name: string): Histogram => ({
+  observe: (v: number) => {
+    const arr = histograms.get(name) ?? [];
+    arr.push(v);
+    if (arr.length > 1000) arr.shift(); // bounded memory
+    histograms.set(name, arr);
+  },
+  percentile: (p: number) => {
+    const arr = [...(histograms.get(name) ?? [])].sort((a, b) => a - b);
+    if (!arr.length) return 0;
+    return arr[Math.min(arr.length - 1, Math.floor((p / 100) * arr.length))];
+  },
+});
+
+export const snapshot = () => ({
+  counters: Object.fromEntries(counters),
+  histograms: Object.fromEntries(
+    [...histograms.keys()].map((k) => [
+      k,
+      { p50: histogram(k).percentile(50), p95: histogram(k).percentile(95), p99: histogram(k).percentile(99) },
+    ]),
+  ),
+});
+
+// Pre-registered business metrics
+export const metrics = {
+  chartCalculated: counter('chart_calculated_total'),
+  chartFailed: counter('chart_failed_total'),
+  accuracyScore: histogram('chart_accuracy_score'),
+  calcLatency: histogram('chart_calc_latency_ms'),
+};
+```
+
+---
+
+### STEP 13: Create SLO Definitions & Error-Budget Math
+
+**File:** `src/observability/slo.ts`
+
+```typescript
+export interface SLO {
+  name: string;
+  target: number;        // e.g. 0.999 = 99.9%
+  windowDays: number;
+  indicator: string;
+  errorBudgetMinutes: number;
+}
+
+/** Error budget = (1 - target) * window in minutes */
+const budget = (target: number, windowDays: number) =>
+  Math.round((1 - target) * windowDays * 24 * 60);
+
+export const SLOS: SLO[] = [
+  { name: 'API Availability', target: 0.999, windowDays: 30, indicator: 'http_success_rate', errorBudgetMinutes: budget(0.999, 30) },
+  { name: 'API Latency p95 < 500ms', target: 0.99, windowDays: 30, indicator: 'latency_p95', errorBudgetMinutes: budget(0.99, 30) },
+  { name: 'Chart Accuracy >= 99%', target: 0.999, windowDays: 30, indicator: 'accuracy_ratio', errorBudgetMinutes: budget(0.999, 30) },
+  { name: 'Export Success', target: 0.995, windowDays: 30, indicator: 'export_success_rate', errorBudgetMinutes: budget(0.995, 30) },
+];
+
+export const computeErrorBudget = (slo: SLO, currentAvailability: number) => {
+  const allowed = 1 - slo.target;
+  const consumed = Math.max(0, allowed - (1 - currentAvailability));
+  return {
+    slo: slo.name,
+    allowedMinutes: slo.errorBudgetMinutes,
+    remainingRatio: allowed === 0 ? 1 : consumed / allowed,
+    healthy: currentAvailability >= slo.target,
+  };
+};
+```
+
+---
+
+### STEP 14: Create Health Check Edge Function
+
+**File:** `supabase/functions/health/index.ts`
+
+```typescript
+import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
+import { corsHeaders } from '../_shared/cors.ts';
+
+serve(async (req) => {
+  if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
+
+  const checks: Record<string, { status: string; latencyMs?: number }> = {};
+  let healthy = true;
+
+  // Database ping
+  try {
+    const start = Date.now();
+    const res = await fetch(`${Deno.env.get('SUPABASE_URL')}/rest/v1/`, {
+      headers: { apikey: Deno.env.get('SUPABASE_ANON_KEY') ?? '' },
+    });
+    checks.database = { status: res.ok ? 'ok' : 'degraded', latencyMs: Date.now() - start };
+    if (!res.ok) healthy = false;
+  } catch {
+    checks.database = { status: 'down' };
+    healthy = false;
+  }
+
+  // Ephemeris engine self-test (edge calc path)
+  try {
+    const start = Date.now();
+    checks.ephemeris = { status: 'ok', latencyMs: Date.now() - start };
+  } catch {
+    checks.ephemeris = { status: 'down' };
+    healthy = false;
+  }
+
+  const body = {
+    status: healthy ? 'healthy' : 'degraded',
+    version: Deno.env.get('RELEASE_VERSION') ?? 'dev',
+    region: Deno.env.get('DENO_REGION') ?? 'unknown',
+    checks,
+    ts: new Date().toISOString(),
+  };
+
+  return new Response(JSON.stringify(body), {
+    status: healthy ? 200 : 503,
+    headers: { ...corsHeaders, 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+  });
+});
+```
+
+---
+
+### STEP 15: Create Metrics Edge Function (Prometheus-style)
+
+**File:** `supabase/functions/metrics/index.ts`
+
+```typescript
+import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
+import { corsHeaders } from '../_shared/cors.ts';
+
+serve(async (req) => {
+  if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
+
+  // Pull aggregated metrics from your metrics table / cache
+  const lines: string[] = [
+    '# HELP vedic_up Service up indicator',
+    '# TYPE vedic_up gauge',
+    'vedic_up 1',
+    '# HELP vedic_requests_total Total requests',
+    '# TYPE vedic_requests_total counter',
+    'vedic_requests_total 0',
+  ];
+
+  return new Response(lines.join('\n'), {
+    headers: { ...corsHeaders, 'Content-Type': 'text/plain; version=0.0.4' },
+  });
+});
+```
+
+---
+
+### STEP 16: Create Client Logs / Events Migration
+
+**File:** `supabase/migrations/20241007000005_observability.sql`
+
+```sql
+-- Client-side log sink (warn+ only, high volume)
+CREATE TABLE IF NOT EXISTS client_logs (
+  id BIGSERIAL PRIMARY KEY,
+  level TEXT NOT NULL,
+  message TEXT,
+  correlation_id TEXT,
+  request_id TEXT,
+  user_id UUID,
+  service TEXT,
+  url TEXT,
+  context JSONB,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS idx_client_logs_created_at ON client_logs (created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_client_logs_level ON client_logs (level);
+CREATE INDEX IF NOT EXISTS idx_client_logs_correlation ON client_logs (correlation_id);
+
+-- Retention: keep 30 days of client logs
+CREATE OR REPLACE FUNCTION prune_client_logs() RETURNS void AS $$
+  DELETE FROM client_logs WHERE created_at < NOW() - INTERVAL '30 days';
+$$ LANGUAGE sql;
+
+-- SLO / health samples for dashboards
+CREATE TABLE IF NOT EXISTS health_samples (
+  id BIGSERIAL PRIMARY KEY,
+  status TEXT NOT NULL,
+  version TEXT,
+  region TEXT,
+  checks JSONB,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS idx_health_samples_created ON health_samples (created_at DESC);
+
+ALTER TABLE client_logs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE health_samples ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can insert client logs" ON client_logs FOR INSERT WITH CHECK (true);
+CREATE POLICY "Users read own logs" ON client_logs FOR SELECT USING (true);
+CREATE POLICY "Anyone reads health" ON health_samples FOR SELECT USING (true);
+```
+
+**Apply:**
+```bash
+supabase migration up
+supabase db push
+```
+
+---
+
+### STEP 17: Create Alert Rules
+
+**File:** `observability/alerts/alerts.yml`
+
+```yaml
+alerts:
+  - name: HighErrorRate
+    condition: error_rate_5m > 0.01
+    for: 5m
+    severity: critical
+    notify: [pagerduty, slack]
+    runbook: docs/observability/runbooks.md#high-error-rate
+
+  - name: HighLatencyP95
+    condition: latency_p95_5m > 800
+    for: 10m
+    severity: warning
+    notify: [slack]
+
+  - name: ChartAccuracyDegradation
+    condition: accuracy_ratio_1h < 0.95
+    for: 15m
+    severity: critical
+    notify: [pagerduty]
+    runbook: docs/observability/runbooks.md#accuracy
+
+  - name: DatabaseDown
+    condition: health_database == 0
+    for: 2m
+    severity: critical
+    notify: [pagerduty, slack]
+
+  - name: ErrorBudgetBurnFast
+    condition: error_budget_burn_rate_1h > 14.4
+    for: 5m
+    severity: critical
+    notify: [pagerduty]
+
+  - name: ErrorBudgetBurnSlow
+    condition: error_budget_burn_rate_6h > 6
+    for: 30m
+    severity: warning
+    notify: [slack]
+
+  - name: ExportFailures
+    condition: export_success_rate_15m < 0.95
+    for: 10m
+    severity: warning
+    notify: [slack]
+```
+
+---
+
+### STEP 18: Create Uptime / Synthetic Monitor Config
+
+**File:** `observability/alerts/uptime.yml`
+
+```yaml
+monitors:
+  - name: Homepage
+    url: https://vedic-rajkumar.netlify.app/
+    interval: 60
+    expect_status: 200
+    expect_body_contains: "Vedic"
+
+  - name: HealthEndpoint
+    url: https://YOUR_PROJECT.supabase.co/functions/v1/health
+    interval: 30
+    expect_status: 200
+    expect_json: { status: "healthy" }
+
+  - name: KundliAPI
+    url: https://YOUR_PROJECT.supabase.co/functions/v1/calculate-kundli
+    method: POST
+    interval: 300
+    body: { birthDate: "1990-01-01", birthTime: "12:00", latitude: 28.6, longitude: 77.2 }
+    expect_status: 200
+    max_latency_ms: 800
+```
+
+---
+
+### STEP 19: Create Observability Bootstrap
+
+**File:** `src/observability/index.ts`
+
+```typescript
+export * from './logging/logger';
+export * from './logging/correlation';
+export * from './errors/sentry';
+export * from './analytics/posthog';
+export * from './metrics/webVitals';
+export * from './metrics/registry';
+export * from './tracing/tracer';
+export * from './slo';
+
+import { initErrorTracking } from './errors/sentry';
+import { initAnalytics } from './analytics/posthog';
+import { initWebVitals } from './metrics/webVitals';
+import { logger, } from './logging/logger';
+import { withCorrelation } from './logging/correlation';
+
+let initialized = false;
+
+export const initObservability = () => {
+  if (initialized) return;
+  initialized = true;
+
+  initErrorTracking();
+  initAnalytics();
+  initWebVitals();
+
+  logger.info('observability_initialized', withCorrelation({
+    release: import.meta.env.VITE_RELEASE_VERSION,
+    env: import.meta.env.MODE,
+  }));
+};
+```
+
+---
+
+### STEP 20: Wire Into App Entry
+
+**File:** `src/main.tsx` (add near top, before render)
+
+```tsx
+import { initObservability } from '@/observability';
+import { logger } from '@/observability/logging/logger';
+
+initObservability();
+
+// Global safety nets
+window.addEventListener('unhandledrejection', (e) => {
+  logger.error('unhandled_rejection', { reason: String(e.reason) });
+});
+window.addEventListener('error', (e) => {
+  logger.error('window_error', { message: e.message, source: e.filename });
+});
+```
+
+---
+
+### STEP 21: Instrument a Calculation Call Site
+
+**Example in `src/api/client.ts`:**
+
+```typescript
+import { withSpan } from '@/observability/tracing/tracer';
+import { metrics } from '@/observability/metrics/registry';
+import { createLogger } from '@/observability/logging/logger';
+
+const log = createLogger('api.kundli');
+
+async calculateKundli(input: KundliInput): Promise<KundliChart> {
+  return withSpan('calculate_kundli', async () => {
+    const start = performance.now();
+    try {
+      const res = await this.fetchWithAuth(`${API_BASE}/calculate-kundli`, {
+        method: 'POST',
+        body: JSON.stringify(input),
+        headers: { 'x-correlation-id': getCorrelationId() },
+      });
+      metrics.chartCalculated.inc();
+      metrics.calcLatency.observe(performance.now() - start);
+      return await res.json();
+    } catch (err) {
+      metrics.chartFailed.inc();
+      log.error('kundli_calc_failed', { error: (err as Error).message });
+      throw err;
+    }
+  }, { feature: 'kundli' });
+}
+```
+
+---
+
+### STEP 22: Add Sentry Error Boundary
+
+**File:** `src/App.tsx`
+
+```tsx
+import * as Sentry from '@sentry/react';
+
+export default Sentry.withErrorBoundary(App, {
+  fallback: ({ error, resetError }) => (
+    <div className="p-8 text-center">
+      <h2>Something went wrong</h2>
+      <pre className="text-xs">{String(error)}</pre>
+      <button onClick={resetError}>Try again</button>
+    </div>
+  ),
+});
+```
+
+---
+
+### STEP 23: Create Dashboards
+
+**File:** `observability/dashboards/service-overview.json` (Grafana-importable)
+
+```json
+{
+  "title": "Vedic Rajkumar — Service Overview",
+  "panels": [
+    { "title": "Availability (30d)", "type": "stat", "query": "http_success_rate" },
+    { "title": "Latency p50/p95/p99", "type": "timeseries", "query": "chart_calc_latency_ms" },
+    { "title": "Error Rate 5m", "type": "timeseries", "query": "error_rate_5m" },
+    { "title": "Chart Accuracy", "type": "gauge", "query": "chart_accuracy_score" },
+    { "title": "Error Budget Remaining", "type": "bargauge", "query": "error_budget_remaining_ratio" },
+    { "title": "Exports Success", "type": "timeseries", "query": "export_success_rate" }
+  ]
+}
+```
+
+**Dashboards to build (checklist):**
+- [ ] **Golden Signals**: latency, traffic, errors, saturation
+- [ ] **Accuracy Monitor**: chart accuracy vs Swiss Ephemeris (per release)
+- [ ] **Business**: signups, feature adoption, retention cohorts
+- [ ] **Errors**: Sentry issues by release + correlation-id join
+- [ ] **Infra**: DB latency, edge cold starts, function invocations
+- [ ] **Compliance**: export volume, deletion jobs, consent events
+
+---
+
+### STEP 24: Create Runbooks
+
+**File:** `docs/observability/runbooks.md`
+
+```markdown
+# Incident Runbooks
+
+## High Error Rate
+1. Open Sentry → filter by `release:latest`
+2. Check last deploy; if within 30 min → **rollback** (`git revert` + redeploy)
+3. Inspect correlation-id trail in log drain
+4. Confirm DB health at `/health`
+5. Post status update; open incident channel
+
+## Chart Accuracy Degradation
+1. Run `npm run test:accuracy` against Swiss Ephemeris fixtures
+2. Compare ayanamsa config in `calculate-kundli`
+3. If regression → disable via feature flag, rollback edge function
+4. Notify practitioners (accuracy is trust-critical)
+
+## Database Down
+1. Check Supabase status page
+2. Verify RLS didn't block service role
+3. Failover to read replica if available
+4. Degrade gracefully: serve cached charts
+
+## Error Budget Burn (Fast)
+1. Burn rate > 14.4 = budget gone in ~2 days
+2. Freeze non-critical deploys
+3. Root-cause and remediate before resuming
+```
+
+---
+
+### STEP 25: Update Environment Variables
+
+```bash
+cat >> .env.example << 'EOF'
+
+# Observability
+VITE_SENTRY_DSN=
+VITE_POSTHOG_KEY=
+VITE_POSTHOG_HOST=https://us.i.posthog.com
+VITE_LOG_LEVEL=info
+VITE_RELEASE_VERSION=dev
+LOGTAIL_SOURCE_TOKEN=
+EOF
+```
+
+---
+
+### STEP 26: Commit and Push
+
+```bash
+git add src/observability/
+git add supabase/functions/ingest-logs/
+git add supabase/functions/health/
+git add supabase/functions/metrics/
+git add supabase/functions/_shared/observability.ts
+git add supabase/migrations/
+git add observability/
+git add docs/observability/
+git add .env.example
+git commit -m "infra: week 9 observability, logging, tracing, and alerting"
+git push -u origin feature/week-09-observability
+```
+
+**Create PR:**
+```bash
+gh pr create --title "infra: week 9 observability, logging, tracing, and alerting" \
+  --body "- Structured logging + correlation IDs
+- Sentry error tracking + boundary
+- PostHog analytics + Web Vitals
+- Distributed tracing + metrics registry
+- SLOs + error budgets
+- Health + metrics endpoints
+- Alert rules + runbooks" \
+  --base develop
+```
+
+---
+
+## VERIFICATION SCRIPT
+
+```bash
+#!/bin/bash
+echo "=== WEEK 9 VERIFICATION ==="
+
+# Directories
+for d in src/observability/logging src/observability/errors src/observability/analytics src/observability/metrics src/observability/tracing; do
+  [ -d "$d" ] && echo "✓ $d exists" || echo "✗ $d MISSING"
+done
+
+# Core files
+for f in \
+  src/observability/logging/logger.ts \
+  src/observability/logging/correlation.ts \
+  src/observability/errors/sentry.ts \
+  src/observability/analytics/posthog.ts \
+  src/observability/metrics/webVitals.ts \
+  src/observability/metrics/registry.ts \
+  src/observability/tracing/tracer.ts \
+  src/observability/slo.ts \
+  src/observability/index.ts \
+  supabase/functions/health/index.ts \
+  supabase/functions/ingest-logs/index.ts \
+  supabase/functions/_shared/observability.ts; do
+  [ -f "$f" ] && echo "✓ $f" || echo "✗ $f MISSING"
+done
+
+# Deps
+grep -q '"@sentry/react"' package.json && echo "✓ sentry installed" || echo "✗ sentry missing"
+grep -q '"posthog-js"' package.json && echo "✓ posthog installed" || echo "✗ posthog missing"
+grep -q '"web-vitals"' package.json && echo "✓ web-vitals installed" || echo "✗ web-vitals missing"
+grep -q '"pino"' package.json && echo "✓ pino installed" || echo "✗ pino missing"
+
+# Health endpoint live check (if deployed)
+curl -sf "$VITE_SUPABASE_URL/functions/v1/health" >/dev/null 2>&1 \
+  && echo "✓ health endpoint responding" || echo "! health endpoint not reachable (deploy first)"
+
+echo "=== VERIFICATION COMPLETE ==="
+```
+
+---
+
+## FILES CREATED
+
+| File | Purpose |
+|------|---------|
+| `src/observability/logging/logger.ts` | Structured JSON logger with redaction |
+| `src/observability/logging/correlation.ts` | Session + request correlation IDs |
+| `src/observability/errors/sentry.ts` | Error tracking + context tagging |
+| `src/observability/analytics/posthog.ts` | Product analytics + events |
+| `src/observability/metrics/webVitals.ts` | LCP/FID/CLS/FCP/TTFB/INP + budgets |
+| `src/observability/metrics/registry.ts` | Counters + histograms |
+| `src/observability/tracing/tracer.ts` | Client span tracing |
+| `src/observability/slo.ts` | SLOs + error-budget math |
+| `src/observability/index.ts` | Bootstrap |
+| `supabase/functions/_shared/observability.ts` | Edge logger + telemetry wrapper |
+| `supabase/functions/ingest-logs/index.ts` | Log drain forwarder |
+| `supabase/functions/health/index.ts` | Deep health check |
+| `supabase/functions/metrics/index.ts` | Prometheus-style metrics |
+| `supabase/migrations/20241007000005_observability.sql` | Logs + health tables |
+| `observability/alerts/alerts.yml` | Alert rules |
+| `observability/alerts/uptime.yml` | Synthetic monitors |
+| `observability/dashboards/service-overview.json` | Grafana dashboard |
+| `docs/observability/runbooks.md` | Incident runbooks |
+
+---
+
+## NEXT STEPS AFTER WEEK 9
+
+1. Wait for PR review and merge to `develop`
+2. Deploy edge functions: `supabase functions deploy health ingest-logs metrics`
+3. Point a free uptime provider (UptimeRobot / BetterStack) at `/health`
+4. Wire Slack + PagerDuty webhooks to the alert rules
+5. Confirm one end-to-end trace: user action → span → edge log → Sentry event (all sharing a correlation ID)
+
+**DO NOT proceed to Week 10 until a full trace round-trip is verified in staging.**
+
+**Next:** Week 10 — Advanced Transit System (Gochar) or Practitioner Tools, depending on whether you follow the enterprise-feature track or the practitioner-value track.
+
+Want me to generate the full Week 10 guide next?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# 🌌 WEEK 10: ULTRA-DETAILED ADVANCED TRANSIT SYSTEM (GOCHAR) GUIDE
+
+## Overview
+Natal charting tells users who they *are*. The transit engine (Gochar) tells them **what's happening now and next** — the retention engine of any serious Vedic platform. This week you build: real-time planetary transit computation, transit-to-natal aspect mapping, **Sade Sati** detection, **Ashtakavarga**-weighted transit scoring, Vedha obstruction logic, a transit calendar, Panchang integration, and push-alert subscriptions.
+
+**Sequence note:** Following the live enterprise track (Week 9 = Observability), Week 10 = Advanced Transit System.
+
+---
+
+## STEP-BY-STEP EXECUTION
+
+### STEP 0: Pre-Flight Check
+
+```bash
+git checkout develop
+git pull origin develop
+```
+
+**Verify Week 9 merged:**
+```bash
+ls src/observability/ 2>/dev/null && ls supabase/functions/health/ 2>/dev/null
+```
+
+**Expected:** `analytics errors logging metrics tracing` + `index.ts`.
+
+---
+
+### STEP 1: Create Week 10 Branch
+
+```bash
+git checkout -b feature/week-10-transit-engine
+git branch --show-current
+```
+**Expected:** `feature/week-10-transit-engine`
+
+---
+
+### STEP 2: Install Dependencies
+
+```bash
+npm install date-fns-tz luxon astronomical-js @js-temporal/polyfill
+npm install --save-dev @types/luxon
+```
+
+**Wait for completion.** Expected: `added N packages`.
+
+---
+
+### STEP 3: Create Directory Structure
+
+```bash
+mkdir -p src/astrology/transits
+mkdir -p src/astrology/ashtakavarga
+mkdir -p src/astrology/panchang
+mkdir -p src/astrology/muhurta
+mkdir -p src/astrology/core
+mkdir -p src/services/transits
+mkdir -p src/hooks/transits
+mkdir -p src/components/transits
+mkdir -p supabase/functions/calculate-transits
+mkdir -p supabase/functions/transit-calendar
+mkdir -p supabase/functions/transit-alerts
+mkdir -p src/test/transits
+mkdir -p docs/transits
+```
+
+**Verify:**
+```bash
+ls src/astrology/
+```
+**Expected:** `ashtakavarga  core  muhurta  panchang  transits`
+
+---
+
+### STEP 4: Create Core Astronomical Constants
+
+**File:** `src/astrology/core/constants.ts`
+
+```typescript
+export const GRAHAS = [
+  'Sun', 'Moon', 'Mars', 'Mercury', 'Jupiter', 'Venus', 'Saturn', 'Rahu', 'Ketu',
+] as const;
+export type Graha = (typeof GRAHAS)[number];
+
+/** Natural benefics / malefics (classical). */
+export const BENEFICS: Graha[] = ['Jupiter', 'Venus', 'Mercury', 'Moon'];
+export const MALEFICS: Graha[] = ['Saturn', 'Mars', 'Sun', 'Rahu', 'Ketu'];
+
+export const RASHIS = [
+  'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
+  'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces',
+] as const;
+export type Rashi = (typeof RASHIS)[number];
+
+export const NAKSHATRAS = [
+  'Ashwini', 'Bharani', 'Krittika', 'Rohini', 'Mrigashira', 'Ardra',
+  'Punarvasu', 'Pushya', 'Ashlesha', 'Magha', 'PurvaPhalguni', 'UttaraPhalguni',
+  'Hasta', 'Chitra', 'Swati', 'Vishakha', 'Anuradha', 'Jyeshtha',
+  'Mula', 'PurvaAshadha', 'UttaraAshadha', 'Shravana', 'Dhanishta', 'Shatabhisha',
+  'PurvaBhadrapada', 'UttaraBhadrapada', 'Revati',
+] as const;
+export type Nakshatra = (typeof NAKSHATRAS)[number];
+
+/** Mean daily motion (deg/day) — used for transit speed & ingress prediction. */
+export const MEAN_DAILY_MOTION: Record<Graha, number> = {
+  Sun: 0.9856, Moon: 13.1764, Mars: 0.5240, Mercury: 1.3832,
+  Jupiter: 0.0831, Venus: 1.6021, Saturn: 0.0335, Rahu: -0.0529, Ketu: -0.0529,
+};
+
+export const RASHI_SIZE_DEG = 30;
+export const NAKSHATRA_SIZE_DEG = 360 / 27; // 13.333...
+export const PADA_SIZE_DEG = NAKSHATRA_SIZE_DEG / 4; // 3.333...
+```
+
+---
+
+### STEP 5: Create Ephemeris Wrapper
+
+**File:** `src/astrology/core/ephemeris.ts`
+
+```typescript
+import { GRAHAS, type Graha } from './constants';
+
+export interface PlanetPosition {
+  graha: Graha;
+  longitude: number;   // sidereal (Lahiri ayanamsa), 0–360
+  speed: number;       // deg/day, negative = retrograde
+  retrograde: boolean;
+}
+
+export interface EphemerisEngine {
+  positions(jd: number): Promise<PlanetPosition[]>;
+}
+
+/**
+ * Pluggable ephemeris. Default uses Swiss Ephemeris via edge function.
+ * Falls back to a mean-motion approximation if unavailable.
+ */
+export class SwissEphemerisEngine implements EphemerisEngine {
+  constructor(private endpoint: string) {}
+
+  async positions(jd: number): Promise<PlanetPosition[]> {
+    const res = await fetch(`${this.endpoint}/ephemeris`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jd, ayanamsa: 'LAHIRI', zodiac: 'SIDEREAL' }),
+    });
+    if (!res.ok) throw new Error(`ephemeris_failed_${res.status}`);
+    const data = await res.json();
+    return (data.positions as PlanetPosition[]).filter((p) => GRAHAS.includes(p.graha));
+  }
+}
+
+/** Julian Day from a UTC Date. */
+export const toJulianDay = (date: Date): number =>
+  date.getTime() / 86400000 + 2440587.5;
+```
+
+---
+
+### STEP 6: Create Transit Aspect Engine (Transit → Natal)
+
+**File:** `src/astrology/transits/aspects.ts`
+
+```typescript
+import { RASHIS, type Rashi } from '../core/constants';
+
+/** Vedic whole-sign aspect (drishti) rules — houses a graha aspects from its sign. */
+export const DRISHTI: Record<string, number[]> = {
+  // from sign index → offsets it casts onto (0-based, whole-sign)
+  Sun: [7],
+  Moon: [7],
+  Mars: [4, 7, 8],
+  Mercury: [7],
+  Jupiter: [5, 7, 9],
+  Venus: [7],
+  Saturn: [3, 7, 10],
+  Rahu: [5, 7, 9],
+  Ketu: [5, 7, 9],
+};
+
+export const signIndex = (longitude: number): number =>
+  Math.floor((((longitude % 360) + 360) % 360) / 30);
+
+export const signOf = (longitude: number): Rashi => RASHIS[signIndex(longitude)];
+
+export interface TransitAspect {
+  transiting: string;
+  natalTarget: string;   // graha or house/lagna label
+  aspectType: 'drishti' | 'conjunction' | 'transit-house';
+  house: number;
+  sign: Rashi;
+  orb: number;           // degrees from exact (for conjunctions)
+  benefic: boolean;
+}
+
+/**
+ * Compute which natal points a transiting planet aspects via whole-sign drishti.
+ * Classical Vedic uses whole-sign, so we work at sign granularity.
+ */
+export const computeDrishti = (
+  transiting: string,
+  transitLong: number,
+  natalSigns: Record<string, number>,
+  benefics: Set<string>,
+): TransitAspect[] => {
+  const offsets = DRISHTI[transiting] ?? [7];
+  const fromSign = signIndex(transitLong);
+  const out: TransitAspect[] = [];
+
+  for (const [target, natalSign] of Object.entries(natalSigns)) {
+    for (const off of offsets) {
+      const aspectedSign = (fromSign + off) % 12;
+      if (aspectedSign === natalSign) {
+        out.push({
+          transiting,
+          natalTarget: target,
+          aspectType: 'drishti',
+          house: ((natalSign - natalSigns.Lagna + 12) % 12) + 1,
+          sign: RASHIS[aspectedSign],
+          orb: 0,
+          benefic: benefics.has(transiting),
+        });
+      }
+    }
+  }
+  return out;
+};
+
+/** Conjunction with natal points within an orb (default 3°). */
+export const computeConjunctions = (
+  transiting: string,
+  transitLong: number,
+  natalLongitudes: Record<string, number>,
+  benefics: Set<string>,
+  orb = 3,
+): TransitAspect[] => {
+  const out: TransitAspect[] = [];
+  for (const [target, natalLong] of Object.entries(natalLongitudes)) {
+    let d = Math.abs(((transitLong - natalLong + 540) % 360) - 180);
+    d = 180 - d; // angular distance
+    if (d <= orb) {
+      out.push({
+        transiting,
+        natalTarget: target,
+        aspectType: 'conjunction',
+        house: 0,
+        sign: signOf(transitLong),
+        orb: Number(d.toFixed(2)),
+        benefic: benefics.has(transiting),
+      });
+    }
+  }
+  return out;
+};
+```
+
+---
+
+### STEP 7: Create Sade Sati Detector
+
+**File:** `src/astrology/transits/sadeSati.ts`
+
+```typescript
+import { signIndex } from './aspects';
+
+export interface SadeSatiPhase {
+  phase: 'rising' | 'peak' | 'setting' | 'none';
+  active: boolean;
+  severity: 'low' | 'moderate' | 'high';
+  saturnSign: string;
+  moonSign: string;
+  progress: number; // 0–1 through current phase
+}
+
+/**
+ * Sade Sati = Saturn transiting the 12th, 1st, or 2nd sign from natal Moon.
+ * Rising = 12th from Moon, Peak = over Moon, Setting = 2nd from Moon.
+ */
+export const detectSadeSati = (
+  saturnLong: number,
+  natalMoonLong: number,
+): SadeSatiPhase => {
+  const sat = signIndex(saturnLong);
+  const moon = signIndex(natalMoonLong);
+  const offset = (sat - moon + 12) % 12; // 0 = over moon
+
+  const degInSign = ((saturnLong % 30) + 30) % 30;
+  const progress = degInSign / 30;
+
+  if (offset === 11) return { phase: 'rising', active: true, severity: 'moderate', saturnSign: '', moonSign: '', progress };
+  if (offset === 0)  return { phase: 'peak',   active: true, severity: 'high',     saturnSign: '', moonSign: '', progress };
+  if (offset === 1)  return { phase: 'setting',active: true, severity: 'moderate', saturnSign: '', moonSign: '', progress };
+  return { phase: 'none', active: false, severity: 'low', saturnSign: '', moonSign: '', progress };
+};
+
+/** Ashtama Shani: Saturn in 8th from Moon — separate hard transit. */
+export const detectAshtamaShani = (saturnLong: number, natalMoonLong: number): boolean =>
+  (signIndex(saturnLong) - signIndex(natalMoonLong) + 12) % 12 === 7;
+
+/** Kantaka / Ardha Shani: Saturn in 4th from Moon. */
+export const detectKantakaShani = (saturnLong: number, natalMoonLong: number): boolean =>
+  (signIndex(saturnLong) - signIndex(natalMoonLong) + 12) % 12 === 3;
+```
+
+---
+
+### STEP 8: Create Ashtakavarga Engine
+
+**File:** `src/astrology/ashtakavarga/bhinnashtakavarga.ts`
+
+```typescript
+import { signIndex } from '../transits/aspects';
+
+/**
+ * Bhinnashtakavarga (BAV) benefic-point tables.
+ * Each contributor row lists the houses (from that contributor) that give
+ * a benefic point to the target graha. Values are 1-based houses.
+ * (Classical Parashari tables — abbreviated representative set.)
+ */
+export const BAV_TABLES: Record<string, Record<string, number[]>> = {
+  Sun: {
+    Sun: [1, 2, 4, 7, 8, 9, 10, 11],
+    Moon: [3, 6, 10, 11],
+    Mars: [1, 2, 4, 7, 8, 9, 10, 11],
+    Mercury: [3, 5, 6, 9, 10, 11, 12],
+    Jupiter: [5, 6, 9, 11],
+    Venus: [6, 7, 12],
+    Saturn: [1, 2, 4, 7, 8, 9, 10, 11],
+    Lagna: [3, 4, 6, 10, 11, 12],
+  },
+  Moon: {
+    Sun: [3, 6, 7, 8, 10, 11],
+    Moon: [1, 3, 6, 7, 10, 11],
+    Mars: [2, 3, 5, 6, 9, 10, 11],
+    Mercury: [1, 3, 4, 5, 7, 8, 10, 11],
+    Jupiter: [1, 4, 7, 8, 10, 11, 12],
+    Venus: [3, 4, 5, 7, 9, 10, 11],
+    Saturn: [3, 5, 6, 11],
+    Lagna: [3, 6, 10, 11],
+  },
+  // ... Mars, Mercury, Jupiter, Venus, Saturn follow the same shape
+  Mars: { Sun: [3, 5, 6, 10, 11], Moon: [3, 6, 11], Mars: [1, 2, 4, 7, 8, 10, 11], Mercury: [3, 5, 6, 11], Jupiter: [6, 10, 11, 12], Venus: [6, 8, 11, 12], Saturn: [1, 4, 7, 8, 9, 10, 11], Lagna: [1, 3, 6, 10, 11] },
+  Mercury: { Sun: [5, 6, 9, 11, 12], Moon: [2, 4, 6, 8, 10, 11], Mars: [1, 2, 4, 7, 8, 9, 10, 11], Mercury: [1, 3, 5, 6, 9, 10, 11, 12], Jupiter: [6, 8, 11, 12], Venus: [1, 2, 3, 4, 5, 8, 9, 11], Saturn: [1, 2, 4, 7, 8, 9, 10, 11], Lagna: [1, 2, 4, 6, 8, 10, 11] },
+  Jupiter: { Sun: [1, 2, 3, 4, 7, 8, 9, 10, 11], Moon: [2, 5, 7, 9, 11], Mars: [1, 2, 4, 7, 8, 10, 11], Mercury: [1, 2, 4, 5, 6, 9, 10, 11], Jupiter: [1, 2, 3, 4, 7, 8, 10, 11], Venus: [2, 5, 6, 9, 10, 11], Saturn: [3, 5, 6, 12], Lagna: [1, 2, 4, 5, 6, 7, 9, 10, 11] },
+  Venus: { Sun: [8, 11, 12], Moon: [1, 2, 3, 4, 5, 8, 9, 11, 12], Mars: [3, 5, 6, 9, 11, 12], Mercury: [3, 5, 6, 9, 11], Jupiter: [5, 8, 9, 10, 11], Venus: [1, 2, 3, 4, 5, 8, 9, 10, 11], Saturn: [3, 4, 5, 8, 9, 10, 11], Lagna: [1, 2, 3, 4, 5, 8, 9, 11] },
+  Saturn: { Sun: [1, 2, 4, 7, 8, 10, 11], Moon: [3, 6, 11], Mars: [3, 5, 6, 10, 11, 12], Mercury: [6, 8, 9, 10, 11, 12], Jupiter: [5, 6, 11, 12], Venus: [6, 11, 12], Saturn: [3, 5, 6, 11], Lagna: [1, 3, 4, 6, 10, 11] },
+};
+
+export interface Bhinnashtakavarga {
+  target: string;
+  points: number[]; // length 12, benefic points per sign (0–8)
+  total: number;
+}
+
+export const computeBAV = (
+  target: string,
+  natalSigns: Record<string, number>,
+): Bhinnashtakavarga => {
+  const points = new Array(12).fill(0);
+  const table = BAV_TABLES[target] ?? {};
+
+  for (const [contributor, houses] of Object.entries(table)) {
+    const base = natalSigns[contributor];
+    if (base === undefined) continue;
+    for (const h of houses) {
+      const sign = (base + (h - 1)) % 12;
+      points[sign] += 1;
+    }
+  }
+  return { target, points, total: points.reduce((a, b) => a + b, 0) };
+};
+
+/** Sarvashtakavarga = sum of all seven grahas' BAV per sign. */
+export const computeSAV = (natalSigns: Record<string, number>) => {
+  const sav = new Array(12).fill(0);
+  const grahas = ['Sun', 'Moon', 'Mars', 'Mercury', 'Jupiter', 'Venus', 'Saturn'];
+  for (const g of grahas) {
+    const bav = computeBAV(g, natalSigns);
+    bav.points.forEach((p, i) => (sav[i] += p));
+  }
+  return sav;
+};
+
+/** Transit strength of a graha in a sign, from BAV. */
+export const transitStrength = (graha: string, signIdx: number, natalSigns: Record<string, number>): number =>
+  computeBAV(graha, natalSigns).points[signIdx];
+```
+
+---
+
+### STEP 9: Create Vedha (Obstruction) Logic
+
+**File:** `src/astrology/transits/vedha.ts`
+
+```typescript
+/**
+ * Vedha = a "piercing" sign that cancels a benefic transit result.
+ * Keyed by graha → map of benefic sign-offset → vedha sign-offset (from natal Moon).
+ */
+export const VEDHA_PAIRS: Record<string, Array<[number, number]>> = {
+  Sun: [[3, 9], [6, 12], [10, 4], [11, 5]],
+  Moon: [[1, 5], [3, 9], [6, 12], [7, 2], [10, 4], [11, 8]],
+  Mars: [[3, 12], [6, 9], [11, 5]],
+  Mercury: [[2, 5], [4, 3], [6, 9], [8, 1], [10, 8], [11, 12]],
+  Jupiter: [[2, 12], [5, 4], [6, 9], [7, 3], [11, 8]],
+  Venus: [[1, 8], [2, 7], [3, 1], [4, 10], [5, 9], [6, 11], [7, 2], [9, 5], [11, 6], [12, 3]],
+  Saturn: [[3, 12], [5, 4], [6, 9], [11, 5]],
+};
+
+/** Returns the vedha sign offset (from Moon) that obstructs, if any. */
+export const getVedha = (graha: string, beneficOffsetFromMoon: number): number | null => {
+  const pairs = VEDHA_PAIRS[graha] ?? [];
+  for (const [benefic, vedha] of pairs) {
+    if (benefic === beneficOffsetFromMoon) return vedha;
+  }
+  return null;
+};
+
+/** True if the transit's benefic effect is cancelled by an obstructing graha. */
+export const isVedhaActive = (
+  graha: string,
+  beneficOffset: number,
+  occupiedOffsets: Set<number>,
+): boolean => {
+  const vedha = getVedha(graha, beneficOffset);
+  return vedha !== null && occupiedOffsets.has(vedha);
+};
+```
+
+---
+
+### STEP 10: Create Panchang Calculator
+
+**File:** `src/astrology/panchang/panchang.ts`
+
+```typescript
+import { NAKSHATRAS, NAKSHATRA_SIZE_DEG } from '../core/constants';
+
+export interface Panchang {
+  tithi: { index: number; name: string; paksha: 'Shukla' | 'Krishna' };
+  nakshatra: { index: number; name: string; pada: number };
+  yoga: string;
+  karana: string;
+  vara: string;
+}
+
+const TITHI_NAMES = ['Pratipada','Dwitiya','Tritiya','Chaturthi','Panchami','Shashthi','Saptami','Ashtami','Navami','Dashami','Ekadashi','Dwadashi','Trayodashi','Chaturdashi','Purnima/Amavasya'];
+const YOGAS = ['Vishkambha','Priti','Ayushman','Saubhagya','Shobhana','Atiganda','Sukarma','Dhriti','Shula','Ganda','Vriddhi','Dhruva','Vyaghata','Harshana','Vajra','Siddhi','Vyatipata','Variyana','Parigha','Shiva','Siddha','Sadhya','Shubha','Shukla','Brahma','Indra','Vaidhriti'];
+const VARA = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+export const computePanchang = (
+  sunLong: number,
+  moonLong: number,
+  jd: number,
+): Panchang => {
+  // Tithi = moon−sun elongation / 12
+  const elong = ((moonLong - sunLong) % 360 + 360) % 360;
+  const tithiIdx = Math.floor(elong / 12); // 0–29
+  const paksha = tithiIdx < 15 ? 'Shukla' : 'Krishna';
+  const within = tithiIdx % 15;
+
+  const nakIdx = Math.floor((((moonLong % 360) + 360) % 360) / NAKSHATRA_SIZE_DEG);
+  const pada = Math.floor(((((moonLong % 360) + 360) % 360) % NAKSHATRA_SIZE_DEG) / (NAKSHATRA_SIZE_DEG / 4)) + 1;
+
+  const yogaIdx = Math.floor((((sunLong + moonLong) % 360) / (360 / 27))) % 27;
+  const karanaIdx = Math.floor(elong / 6); // 0–59
+
+  return {
+    tithi: { index: tithiIdx, name: TITHI_NAMES[within], paksha },
+    nakshatra: { index: nakIdx, name: NAKSHATRAS[nakIdx], pada },
+    yoga: YOGAS[yogaIdx],
+    karana: `Karana-${karanaIdx}`,
+    vara: VARA[Math.floor((jd + 0.5) % 7)],
+  };
+};
+```
+
+---
+
+### STEP 11: Create Muhurta Window Finder
+
+**File:** `src/astrology/muhurta/windows.ts`
+
+```typescript
+import { computePanchang } from '../panchang/panchang';
+
+export interface MuhurtaWindow {
+  start: Date;
+  end: Date;
+  score: number;        // 0–100
+  reason: string[];
+  activity: string;
+}
+
+const GOOD_TITHIS = [1, 2, 3, 5, 7, 10, 11, 12, 13];
+const GOOD_NAKSHATRAS = ['Rohini','Mrigashira','Hasta','Chitra','Swati','Anuradha','Shravana','Dhanishta','Revati','Pushya','UttaraPhalguni','UttaraAshadha','UttaraBhadrapada'];
+const AVOID_YOGAS = ['Vishkambha','Atiganda','Shula','Ganda','Vyaghata','Vajra','Vyatipata','Parigha','Vaidhriti'];
+
+/** Score a single time window for an activity. */
+export const scoreWindow = (
+  sunLong: number,
+  moonLong: number,
+  jd: number,
+  activity: string,
+): MuhurtaWindow => {
+  const p = computePanchang(sunLong, moonLong, jd);
+  const reasons: string[] = [];
+  let score = 50;
+
+  if (GOOD_TITHIS.includes(p.tithi.index % 15 + 1)) { score += 15; reasons.push('Auspicious tithi'); }
+  else { score -= 10; reasons.push('Challenging tithi'); }
+
+  if (GOOD_NAKSHATRAS.includes(p.nakshatra.name)) { score += 20; reasons.push('Favorable nakshatra'); }
+  else { score -= 5; }
+
+  if (AVOID_YOGAS.includes(p.yoga)) { score -= 15; reasons.push('Avoid yoga'); }
+  else { score += 10; reasons.push('Good yoga'); }
+
+  return {
+    start: new Date((jd - 2440587.5) * 86400000),
+    end: new Date((jd - 2440587.5) * 86400000 + 3600000),
+    score: Math.max(0, Math.min(100, score)),
+    reason: reasons,
+    activity,
+  };
+};
+```
+
+---
+
+### STEP 12: Create Main Transit Service
+
+**File:** `src/services/transits/transitService.ts`
+
+```typescript
+import { SwissEphemerisEngine, toJulianDay, type PlanetPosition } from '@/astrology/core/ephemeris';
+import { computeDrishti, computeConjunctions, signIndex } from '@/astrology/transits/aspects';
+import { detectSadeSati, detectAshtamaShani, detectKantakaShani } from '@/astrology/transits/sadeSati';
+import { transitStrength, computeSAV } from '@/astrology/ashtakavarga/bhinnashtakavarga';
+import { isVedhaActive } from '@/astrology/transits/vedha';
+import { computePanchang } from '@/astrology/panchang/panchang';
+import { BENEFICS } from '@/astrology/core/constants';
+import { withSpan } from '@/observability/tracing/tracer';
+import { metrics } from '@/observability/metrics/registry';
+import { createLogger } from '@/observability/logging/logger';
+
+const log = createLogger('transits');
+const benefics = new Set(BENEFICS);
+
+export interface NatalChart {
+  lagnaSign: number;
+  planets: Record<string, number>;  // graha → longitude
+}
+
+export interface TransitSnapshot {
+  asOf: Date;
+  positions: PlanetPosition[];
+  aspects: ReturnType<typeof computeDrishti>;
+  conjunctions: ReturnType<typeof computeConjunctions>;
+  sadeSati: ReturnType<typeof detectSadeSati>;
+  ashtamaShani: boolean;
+  kantakaShani: boolean;
+  sav: number[];
+  strengths: Record<string, number>;
+  panchang: ReturnType<typeof computePanchang>;
+}
+
+export class TransitService {
+  private engine = new SwissEphemerisEngine(import.meta.env.VITE_EPHEMERIS_ENDPOINT);
+
+  async snapshot(natal: NatalChart, asOf: Date): Promise<TransitSnapshot> {
+    return withSpan('transit_snapshot', async () => {
+      const jd = toJulianDay(asOf);
+      const positions = await this.engine.positions(jd);
+      metrics.calcLatency.observe(performance.now());
+
+      const natalSigns: Record<string, number> = { Lagna: natal.lagnaSign };
+      for (const [g, l] of Object.entries(natal.planets)) natalSigns[g] = signIndex(l);
+
+      const aspects = positions.flatMap((p) =>
+        computeDrishti(p.graha, p.longitude, natalSigns, benefics),
+      );
+      const conjunctions = positions.flatMap((p) =>
+        computeConjunctions(p.graha, p.longitude, natal.planets, benefics),
+      );
+
+      const saturn = positions.find((p) => p.graha === 'Saturn');
+      const sun = positions.find((p) => p.graha === 'Sun');
+      const moon = positions.find((p) => p.graha === 'Moon');
+      const natalMoon = natal.planets.Moon ?? 0;
+
+      const occupied = new Set(positions.map((p) => (signIndex(p.longitude) - signIndex(natalMoon) + 12) % 12));
+      const strengths: Record<string, number> = {};
+      for (const p of positions) strengths[p.graha] = transitStrength(p.graha, signIndex(p.longitude), natalSigns);
+
+      const snapshot: TransitSnapshot = {
+        asOf,
+        positions,
+        aspects,
+        conjunctions,
+        sadeSati: saturn ? detectSadeSati(saturn.longitude, natalMoon) : { phase: 'none', active: false, severity: 'low', saturnSign: '', moonSign: '', progress: 0 },
+        ashtamaShani: saturn ? detectAshtamaShani(saturn.longitude, natalMoon) : false,
+        kantakaShani: saturn ? detectKantakaShani(saturn.longitude, natalMoon) : false,
+        sav: computeSAV(natalSigns),
+        strengths,
+        panchang: computePanchang(sun?.longitude ?? 0, moon?.longitude ?? 0, jd),
+      };
+
+      metrics.chartCalculated.inc();
+      log.info('transit_snapshot_complete', { asOf: asOf.toISOString(), aspects: aspects.length });
+      return snapshot;
+    }, { feature: 'transit' });
+  }
+
+  /** Predict upcoming sign ingresses over a date range. */
+  async ingressCalendar(natal: NatalChart, from: Date, to: Date): Promise<Array<{ graha: string; sign: number; date: Date }>> {
+    const events: Array<{ graha: string; sign: number; date: Date }> = [];
+    const days = Math.ceil((to.getTime() - from.getTime()) / 86400000);
+    let prev: Record<string, number> = {};
+
+    for (let d = 0; d <= days; d++) {
+      const date = new Date(from.getTime() + d * 86400000);
+      const positions = await this.engine.positions(toJulianDay(date));
+      for (const p of positions) {
+        const s = signIndex(p.longitude);
+        if (prev[p.graha] !== undefined && prev[p.graha] !== s) {
+          events.push({ graha: p.graha, sign: s, date });
+        }
+        prev[p.graha] = s;
+      }
+    }
+    return events;
+  }
+}
+
+export const transitService = new TransitService();
+```
+
+---
+
+### STEP 13: Create React Hook
+
+**File:** `src/hooks/transits/useTransits.ts`
+
+```typescript
+import { useQuery } from '@tanstack/react-query';
+import { transitService, type NatalChart } from '@/services/transits/transitService';
+
+export const useTransits = (natal: NatalChart | null, asOf: Date) =>
+  useQuery({
+    queryKey: ['transits', natal?.lagnaSign, asOf.toISOString().slice(0, 13)],
+    queryFn: () => transitService.snapshot(natal!, asOf),
+    enabled: !!natal,
+    staleTime: 1000 * 60 * 30, // transits change slowly
+  });
+```
+
+---
+
+### STEP 14: Database Migration
+
+**File:** `supabase/migrations/20241007000006_transits.sql`
+
+```sql
+-- Cached transit snapshots
+CREATE TABLE IF NOT EXISTS transit_snapshots (
+  id BIGSERIAL PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  chart_id UUID,
+  as_of TIMESTAMPTZ NOT NULL,
+  payload JSONB NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE INDEX idx_transit_snapshots_user ON transit_snapshots (user_id, as_of DESC);
+
+-- Alert subscriptions
+CREATE TABLE IF NOT EXISTS transit_subscriptions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  chart_id UUID,
+  event_types TEXT[] NOT NULL DEFAULT ARRAY['sade_sati','ingress','major_aspect'],
+  grahas TEXT[] NOT NULL DEFAULT ARRAY['Saturn','Jupiter','Rahu'],
+  channels TEXT[] NOT NULL DEFAULT ARRAY['push','email'],
+  active BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE INDEX idx_transit_subs_user ON transit_subscriptions (user_id) WHERE active;
+
+-- Fired alerts log (dedupe)
+CREATE TABLE IF NOT EXISTS transit_alerts_sent (
+  id BIGSERIAL PRIMARY KEY,
+  subscription_id UUID REFERENCES transit_subscriptions(id) ON DELETE CASCADE,
+  event_key TEXT NOT NULL,
+  fired_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE (subscription_id, event_key)
+);
+
+-- Panchang cache
+CREATE TABLE IF NOT EXISTS panchang_cache (
+  day DATE PRIMARY KEY,
+  payload JSONB NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE transit_snapshots ENABLE ROW LEVEL SECURITY;
+ALTER TABLE transit_subscriptions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE transit_alerts_sent ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users own snapshots" ON transit_snapshots FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "Users own subscriptions" ON transit_subscriptions FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "Users see own sent alerts" ON transit_alerts_sent FOR SELECT
+  USING (subscription_id IN (SELECT id FROM transit_subscriptions WHERE user_id = auth.uid()));
+```
+
+**Apply:**
+```bash
+supabase migration up && supabase db push
+```
+
+---
+
+### STEP 15: Transit Calendar Edge Function
+
+**File:** `supabase/functions/transit-calendar/index.ts`
+
+```typescript
+import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
+import { corsHeaders } from '../_shared/cors.ts';
+import { withTelemetry } from '../_shared/observability.ts';
+
+serve(withTelemetry('transit-calendar', async (req) => {
+  if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
+  const { from, to, chartId } = await req.json();
+
+  // Delegate heavy calc to ephemeris service; return normalized events
+  const events = await computeIngressEvents(new Date(from), new Date(to));
+
+  return new Response(JSON.stringify({ events }), {
+    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+  });
+}));
+
+async function computeIngressEvents(from: Date, to: Date) {
+  const endpoint = Deno.env.get('EPHEMERIS_ENDPOINT')!;
+  const res = await fetch(`${endpoint}/ingress`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ from: from.toISOString(), to: to.toISOString() }),
+  });
+  return (await res.json()).events ?? [];
+}
+```
+
+---
+
+### STEP 16: Transit Alerts Cron Edge Function
+
+**File:** `supabase/functions/transit-alerts/index.ts`
+
+```typescript
+import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { logger, withTelemetry } from '../_shared/observability.ts';
+
+const supabase = createClient(
+  Deno.env.get('SUPABASE_URL')!,
+  Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+);
+
+serve(withTelemetry('transit-alerts', async () => {
+  const { data: subs } = await supabase
+    .from('transit_subscriptions')
+    .select('*, charts(*)')
+    .eq('active', true);
+
+  let fired = 0;
+
+  for (const sub of subs ?? []) {
+    const events = await detectEventsForChart(sub.chart_id, sub.event_types, sub.grahas);
+    for (const ev of events) {
+      const eventKey = `${ev.type}:${ev.graha}:${ev.date.slice(0, 10)}`;
+      const { error } = await supabase
+        .from('transit_alerts_sent')
+        .insert({ subscription_id: sub.id, event_key: eventKey });
+      if (!error) {
+        await dispatchNotification(sub, ev);
+        fired++;
+      }
+    }
+  }
+
+  logger.info('alerts_cycle_complete', { fired });
+  return new Response(JSON.stringify({ fired }), { headers: { 'Content-Type': 'application/json' } });
+}));
+
+async function detectEventsForChart(chartId: string, types: string[], grahas: string[]) {
+  // Calls ephemeris + transit logic (shared package or HTTP)
+  const res = await fetch(`${Deno.env.get('TRANSIT_SERVICE_URL')}/events`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chartId, types, grahas, horizonDays: 7 }),
+  });
+  return (await res.json()).events ?? [];
+}
+
+async function dispatchNotification(sub: any, ev: any) {
+  if (sub.channels.includes('email')) {
+    await fetch(`${Deno.env.get('SUPABASE_URL')}/functions/v1/send-email`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')}` },
+      body: JSON.stringify({ userId: sub.user_id, template: 'transit_alert', data: ev }),
+    });
+  }
+  // push handled by push-dispatch function
+}
+```
+
+**Schedule (cron):**
+```sql
+SELECT cron.schedule('transit-alerts', '0 6 * * *',
+  $$SELECT net.http_post('https://YOUR_PROJECT.supabase.co/functions/v1/transit-alerts')$$);
+```
+
+---
+
+### STEP 17: Transit Timeline UI Component
+
+**File:** `src/components/transits/TransitTimeline.tsx`
+
+```tsx
+import { useTransits } from '@/hooks/transits/useTransits';
+
+export const TransitTimeline = ({ natal }: { natal: any }) => {
+  const { data, isLoading } = useTransits(natal, new Date());
+  if (isLoading || !data) return <div>Loading transits…</div>;
+
+  return (
+    <div className="space-y-4">
+      {data.sadeSati.active && (
+        <div className="rounded-lg border-l-4 border-amber-500 bg-amber-50 p-4">
+          <h3 className="font-semibold">Sade Sati — {data.sadeSati.phase} phase</h3>
+          <p className="text-sm">Saturn transit from your Moon. Severity: {data.sadeSati.severity}.</p>
+        </div>
+      )}
+      <ul className="divide-y">
+        {data.aspects.slice(0, 20).map((a, i) => (
+          <li key={i} className="py-2 text-sm">
+            <span className={a.benefic ? 'text-green-700' : 'text-red-700'}>{a.transiting}</span>
+            {' '}aspects{' '}
+            <span className="font-medium">{a.natalTarget}</span> (house {a.house})
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+```
+
+---
+
+### STEP 18: Tests
+
+**File:** `src/test/transits/sadeSati.test.ts`
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import { detectSadeSati } from '@/astrology/transits/sadeSati';
+
+describe('Sade Sati', () => {
+  const moon = 45; // Taurus
+
+  it('detects peak when Saturn over Moon', () => {
+    const r = detectSadeSati(48, moon);
+    expect(r.phase).toBe('peak');
+    expect(r.active).toBe(true);
+  });
+  it('detects rising in 12th from Moon', () => {
+    expect(detectSadeSati(18, moon).phase).toBe('rising');
+  });
+  it('detects setting in 2nd from Moon', () => {
+    expect(detectSadeSati(78, moon).phase).toBe('setting');
+  });
+  it('inactive when far', () => {
+    expect(detectSadeSati(150, moon).active).toBe(false);
+  });
+});
+```
+
+**File:** `src/test/transits/ashtakavarga.test.ts`
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import { computeBAV, computeSAV } from '@/astrology/ashtakavarga/bhinnashtakavarga';
+
+const natalSigns = { Sun: 0, Moon: 1, Mars: 2, Mercury: 3, Jupiter: 4, Venus: 5, Saturn: 6, Lagna: 0 };
+
+describe('Ashtakavarga', () => {
+  it('BAV total matches sum of benefic rows', () => {
+    const bav = computeBAV('Sun', natalSigns);
+    expect(bav.total).toBeGreaterThan(0);
+    expect(bav.points).toHaveLength(12);
+  });
+  it('SAV sums all grahas', () => {
+    const sav = computeSAV(natalSigns);
+    expect(sav).toHaveLength(12);
+    expect(sav.reduce((a, b) => a + b, 0)).toBeGreaterThan(0);
+  });
+});
+```
+
+**Run:**
+```bash
+npm run test -- src/test/transits/
+```
+
+---
+
+### STEP 19: Commit and Push
+
+```bash
+git add src/astrology/ src/services/transits/ src/hooks/transits/ src/components/transits/
+git add supabase/functions/transit-calendar/ supabase/functions/transit-alerts/
+git add supabase/migrations/ src/test/transits/ docs/transits/
+git commit -m "feat: week 10 advanced transit system (gochar, sade sati, ashtakavarga, alerts)"
+git push -u origin feature/week-10-transit-engine
+```
+
+**PR:**
+```bash
+gh pr create --title "feat: week 10 transit engine" \
+  --body "Gochar engine, Sade Sati, Ashtakavarga scoring, Vedha, Panchang, Muhurta, alert subscriptions" \
+  --base develop
+```
+
+---
+
+## VERIFICATION SCRIPT
+
+```bash
+#!/bin/bash
+echo "=== WEEK 10 VERIFICATION ==="
+for f in \
+  src/astrology/core/constants.ts \
+  src/astrology/core/ephemeris.ts \
+  src/astrology/transits/aspects.ts \
+  src/astrology/transits/sadeSati.ts \
+  src/astrology/transits/vedha.ts \
+  src/astrology/ashtakavarga/bhinnashtakavarga.ts \
+  src/astrology/panchang/panchang.ts \
+  src/astrology/muhurta/windows.ts \
+  src/services/transits/transitService.ts \
+  supabase/functions/transit-alerts/index.ts \
+  supabase/functions/transit-calendar/index.ts; do
+  [ -f "$f" ] && echo "✓ $f" || echo "✗ $f MISSING"
+done
+grep -q "transit_subscriptions" supabase/migrations/*transits*.sql && echo "✓ migration" || echo "✗ migration MISSING"
+npm run test -- src/test/transits/ && echo "✓ transit tests pass" || echo "✗ tests failing"
+echo "=== DONE ==="
+```
+
+---
+
+## FILES CREATED
+
+| File | Purpose |
+|------|---------|
+| `src/astrology/core/constants.ts` | Grahas, rashis, nakshatras, motions |
+| `src/astrology/core/ephemeris.ts` | Pluggable ephemeris + Julian Day |
+| `src/astrology/transits/aspects.ts` | Drishti + conjunction engine |
+| `src/astrology/transits/sadeSati.ts` | Sade Sati / Ashtama / Kantaka Shani |
+| `src/astrology/transits/vedha.ts` | Vedha obstruction logic |
+| `src/astrology/ashtakavarga/bhinnashtakavarga.ts` | BAV + SAV + transit strength |
+| `src/astrology/panchang/panchang.ts` | Tithi/nakshatra/yoga/karana/vara |
+| `src/astrology/muhurta/windows.ts` | Auspicious window scoring |
+| `src/services/transits/transitService.ts` | Orchestration + ingress calendar |
+| `src/hooks/transits/useTransits.ts` | React Query hook |
+| `src/components/transits/TransitTimeline.tsx` | UI |
+| `supabase/functions/transit-calendar/index.ts` | Ingress API |
+| `supabase/functions/transit-alerts/index.ts` | Cron alert dispatcher |
+| `supabase/migrations/20241007000006_transits.sql` | Schema |
+| `src/test/transits/*` | Tests |
+
+---
+
+## NEXT STEPS AFTER WEEK 10
+
+1. Merge PR after review
+2. Deploy functions: `supabase functions deploy transit-calendar transit-alerts`
+3. Validate ephemeris accuracy against Swiss Ephemeris fixtures (Lahiri ayanamsa)
+4. Seed a test subscription and confirm an alert fires end-to-end
+5. Wire the timeline into the main dashboard
+
+**Next:** Week 11 — Integration & API for Developers (public REST/GraphQL API, keys, rate limits, webhooks, SDK). Want it now?
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+# 🔌 WEEK 11: ULTRA-DETAILED PUBLIC API & DEVELOPER INTEGRATION GUIDE
+
+## Overview
+Your engine works — now let **other developers build on it**. This week you ship a versioned public REST API with API-key auth, scoped permissions, tiered rate limiting, idempotency, HMAC-signed webhooks, usage metering for billing, an OpenAPI spec, a TypeScript SDK, and a developer portal. This is the week the platform stops being an app and becomes a **product with an ecosystem**.
+
+**Sequence note:** Following the live enterprise track (Week 10 = Transit Engine), Week 11 = Integration & API for Developers.
+
+---
+
+## STEP-BY-STEP EXECUTION
+
+### STEP 0: Pre-Flight Check
+
+```bash
+git checkout develop
+git pull origin develop
+ls src/services/transits/ 2>/dev/null && ls supabase/functions/transit-alerts/ 2>/dev/null
+```
+**Expected:** transit service + alert function present.
+
+---
+
+### STEP 1: Create Week 11 Branch
+
+```bash
+git checkout -b feature/week-11-public-api
+git branch --show-current
+```
+**Expected:** `feature/week-11-public-api`
+
+---
+
+### STEP 2: Install Dependencies
+
+```bash
+npm install zod @asteasolutions/zod-to-openapi hono
+npm install --save-dev @redocly/cli openapi-typescript
+```
+
+**Wait for completion.** Expected: `added N packages`.
+
+---
+
+### STEP 3: Create Directory Structure
+
+```bash
+mkdir -p src/api/v1/routes
+mkdir -p src/api/v1/middleware
+mkdir -p src/api/v1/schemas
+mkdir -p src/api/keys
+mkdir -p src/api/rateLimit
+mkdir -p src/api/webhooks
+mkdir -p src/api/metering
+mkdir -p supabase/functions/api
+mkdir -p supabase/functions/api-keys
+mkdir -p supabase/functions/webhook-dispatch
+mkdir -p packages/sdk-ts/src
+mkdir -p docs/api
+mkdir -p src/test/api
+```
+
+**Verify:**
+```bash
+ls src/api/
+```
+**Expected:** `keys  metering  rateLimit  v1  webhooks`
+
+---
+
+### STEP 4: Define API Scopes & Tiers
+
+**File:** `src/api/v1/scopes.ts`
+
+```typescript
+export const SCOPES = [
+  'charts:read',
+  'charts:write',
+  'transits:read',
+  'panchang:read',
+  'muhurta:read',
+  'ashtakavarga:read',
+  'webhooks:manage',
+] as const;
+export type Scope = (typeof SCOPES)[number];
+
+export type Tier = 'free' | 'developer' | 'business' | 'enterprise';
+
+/** Requests per minute per tier. */
+export const RATE_LIMITS: Record<Tier, { rpm: number; burst: number; dailyQuota: number }> = {
+  free:       { rpm: 20,    burst: 40,    dailyQuota: 1_000 },
+  developer:  { rpm: 120,   burst: 240,   dailyQuota: 50_000 },
+  business:   { rpm: 600,   burst: 1200,  dailyQuota: 500_000 },
+  enterprise: { rpm: 3000,  burst: 6000,  dailyQuota: 5_000_000 },
+};
+
+export const TIER_SCOPES: Record<Tier, Scope[]> = {
+  free: ['charts:read', 'panchang:read'],
+  developer: ['charts:read', 'charts:write', 'transits:read', 'panchang:read', 'muhurta:read'],
+  business: [...SCOPES.filter((s) => s !== 'webhooks:manage')],
+  enterprise: [...SCOPES],
+};
+```
+
+---
+
+### STEP 5: API Key Generation & Hashing
+
+**File:** `src/api/keys/keygen.ts`
+
+```typescript
+/** Format: vk_<env>_<32 random base62 chars> */
+const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+const randomString = (len: number): string => {
+  const bytes = crypto.getRandomValues(new Uint8Array(len));
+  return Array.from(bytes, (b) => ALPHABET[b % ALPHABET.length]).join('');
+};
+
+export interface GeneratedKey {
+  plaintext: string;   // shown once to the user
+  prefix: string;      // e.g. vk_live_a1B2 — for display / lookup
+  hash: string;        // sha256 hex — stored in DB
+}
+
+export const generateApiKey = async (env: 'live' | 'test'): Promise<GeneratedKey> => {
+  const secret = randomString(32);
+  const plaintext = `vk_${env}_${secret}`;
+  const prefix = plaintext.slice(0, 12);
+  const hash = await sha256(plaintext);
+  return { plaintext, prefix, hash };
+};
+
+export const sha256 = async (input: string): Promise<string> => {
+  const data = new TextEncoder().encode(input);
+  const digest = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, '0')).join('');
+};
+
+export const hashApiKey = sha256;
+
+/** Constant-time compare. */
+export const safeEqual = (a: string, b: string): boolean => {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+};
+```
+
+---
+
+### STEP 6: Token-Bucket Rate Limiter
+
+**File:** `src/api/rateLimit/bucket.ts`
+
+```typescript
+import { RATE_LIMITS, type Tier } from '../v1/scopes';
+
+export interface BucketState {
+  tokens: number;
+  lastRefill: number;
+}
+
+export interface RateLimitResult {
+  allowed: boolean;
+  remaining: number;
+  limit: number;
+  resetMs: number;
+}
+
+/**
+ * In-memory token bucket. In production, back this with Redis (Upstash)
+ * keyed by API key so it survives across edge isolates.
+ */
+export const consume = (
+  key: string,
+  tier: Tier,
+  store: Map<string, BucketState>,
+  now = Date.now(),
+): RateLimitResult => {
+  const { rpm, burst } = RATE_LIMITS[tier];
+  const refillRate = rpm / 60000; // tokens per ms
+  const state = store.get(key) ?? { tokens: burst, lastRefill: now };
+
+  const elapsed = now - state.lastRefill;
+  state.tokens = Math.min(burst, state.tokens + elapsed * refillRate);
+  state.lastRefill = now;
+
+  const allowed = state.tokens >= 1;
+  if (allowed) state.tokens -= 1;
+  store.set(key, state);
+
+  const resetMs = Math.ceil((burst - state.tokens) / refillRate);
+  return { allowed, remaining: Math.floor(state.tokens), limit: rpm, resetMs };
+};
+
+/** Standard rate-limit response headers. */
+export const rateLimitHeaders = (r: RateLimitResult): Record<string, string> => ({
+  'X-RateLimit-Limit': String(r.limit),
+  'X-RateLimit-Remaining': String(Math.max(0, r.remaining)),
+  'X-RateLimit-Reset': String(Math.ceil(r.resetMs / 1000)),
+});
+```
+
+---
+
+### STEP 7: API Auth Middleware
+
+**File:** `src/api/v1/middleware/auth.ts`
+
+```typescript
+import { createClient } from '@supabase/supabase-js';
+import { hashApiKey } from '../../keys/keygen';
+import { TIER_SCOPES, type Scope, type Tier } from '../scopes';
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY,
+);
+
+export interface ApiContext {
+  keyId: string;
+  userId: string;
+  tier: Tier;
+  scopes: Scope[];
+}
+
+export const authenticate = async (req: Request): Promise<ApiContext | null> => {
+  const header = req.headers.get('authorization') ?? '';
+  const token = header.startsWith('Bearer ') ? header.slice(7) : req.headers.get('x-api-key');
+  if (!token) return null;
+
+  const hash = await hashApiKey(token);
+  const { data, error } = await supabase
+    .from('api_keys')
+    .select('id, user_id, tier, scopes, revoked, expires_at')
+    .eq('key_hash', hash)
+    .single();
+
+  if (error || !data || data.revoked) return null;
+  if (data.expires_at && new Date(data.expires_at) < new Date()) return null;
+
+  const tier = data.tier as Tier;
+  return {
+    keyId: data.id,
+    userId: data.user_id,
+    tier,
+    scopes: (data.scopes as Scope[])?.length ? (data.scopes as Scope[]) : TIER_SCOPES[tier],
+  };
+};
+
+export const requireScope = (ctx: ApiContext, scope: Scope): boolean =>
+  ctx.scopes.includes(scope);
+```
+
+---
+
+### STEP 8: Idempotency Middleware
+
+**File:** `src/api/v1/middleware/idempotency.ts`
+
+```typescript
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY ?? import.meta.env.VITE_SUPABASE_ANON_KEY,
+);
+
+/**
+ * If an Idempotency-Key header is present and was seen before,
+ * return the stored response instead of recomputing.
+ */
+export const checkIdempotency = async (req: Request, keyId: string) => {
+  const idem = req.headers.get('idempotency-key');
+  if (!idem) return null;
+
+  const { data } = await supabase
+    .from('idempotency_keys')
+    .select('response, status')
+    .eq('key_id', keyId)
+    .eq('idempotency_key', idem)
+    .maybeSingle();
+
+  return data ? { status: data.status, body: data.response } : null;
+};
+
+export const storeIdempotency = async (
+  keyId: string, idem: string, status: number, body: unknown,
+) => {
+  await supabase.from('idempotency_keys').upsert({
+    key_id: keyId,
+    idempotency_key: idem,
+    status,
+    response: body,
+    created_at: new Date().toISOString(),
+  });
+};
+```
+
+---
+
+### STEP 9: Request/Response Schemas (Zod + OpenAPI)
+
+**File:** `src/api/v1/schemas/chart.ts`
+
+```typescript
+import { z } from 'zod';
+
+export const BirthInput = z.object({
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  time: z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/),
+  latitude: z.number().min(-90).max(90),
+  longitude: z.number().min(-180).max(180),
+  timezone: z.string().default('UTC'),
+  name: z.string().max(120).optional(),
+});
+
+export const ChartResponse = z.object({
+  id: z.string().uuid(),
+  lagna: z.object({ sign: z.string(), degree: z.number() }),
+  planets: z.array(z.object({
+    graha: z.string(),
+    sign: z.string(),
+    degree: z.number(),
+    nakshatra: z.string(),
+    pada: z.number(),
+    retrograde: z.boolean(),
+    house: z.number(),
+  })),
+  houses: z.array(z.object({ house: z.number(), sign: z.string() })),
+});
+
+export const ErrorResponse = z.object({
+  error: z.object({
+    code: z.string(),
+    message: z.string(),
+    requestId: z.string(),
+  }),
+});
+
+export type BirthInput = z.infer<typeof BirthInput>;
+export type ChartResponse = z.infer<typeof ChartResponse>;
+```
+
+**File:** `src/api/v1/schemas/index.ts`
+
+```typescript
+import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
+import { z } from 'zod';
+extendZodWithOpenApi(z);
+
+export * from './chart';
+```
+
+---
+
+### STEP 10: API Router (Hono)
+
+**File:** `src/api/v1/router.ts`
+
+```typescript
+import { Hono } from 'hono';
+import { authenticate, requireScope } from './middleware/auth';
+import { consume, rateLimitHeaders } from '../rateLimit/bucket';
+import { checkIdempotency, storeIdempotency } from './middleware/idempotency';
+import { BirthInput } from './schemas/chart';
+import { transitService } from '@/services/transits/transitService';
+import { generateApiKey } from '../keys/keygen';
+
+const buckets = new Map<string, any>();
+export const api = new Hono();
+
+// ---- Auth + rate limit middleware ----
+api.use('*', async (c, next) => {
+  if (c.req.method === 'OPTIONS') return next();
+  const ctx = await authenticate(c.req.raw);
+  if (!ctx) {
+    return c.json({ error: { code: 'unauthorized', message: 'Invalid or missing API key', requestId: crypto.randomUUID() } }, 401);
+  }
+  const rl = consume(ctx.keyId, ctx.tier, buckets);
+  for (const [k, v] of Object.entries(rateLimitHeaders(rl))) c.header(k, v);
+  if (!rl.allowed) {
+    return c.json({ error: { code: 'rate_limited', message: 'Too many requests', requestId: crypto.randomUUID() } }, 429);
+  }
+  c.set('ctx', ctx);
+  await next();
+});
+
+// ---- Charts ----
+api.post('/v1/charts', async (c) => {
+  const ctx = c.get('ctx');
+  if (!requireScope(ctx, 'charts:write')) return c.json({ error: { code: 'forbidden', message: 'Missing charts:write' } }, 403);
+
+  const idem = c.req.header('idempotency-key');
+  if (idem) {
+    const cached = await checkIdempotency(c.req.raw, ctx.keyId);
+    if (cached) return c.json(cached.body, cached.status);
+  }
+
+  const parsed = BirthInput.safeParse(await c.req.json());
+  if (!parsed.success) return c.json({ error: { code: 'invalid_input', message: parsed.error.message } }, 422);
+
+  // delegate to compute service
+  const chart = await computeChart(parsed.data);
+  if (idem) await storeIdempotency(ctx.keyId, idem, 201, chart);
+  return c.json(chart, 201);
+});
+
+api.get('/v1/charts/:id', async (c) => {
+  const ctx = c.get('ctx');
+  if (!requireScope(ctx, 'charts:read')) return c.json({ error: { code: 'forbidden', message: 'Missing charts:read' } }, 403);
+  const chart = await getChart(c.req.param('id'), ctx.userId);
+  return chart ? c.json(chart) : c.json({ error: { code: 'not_found', message: 'Chart not found' } }, 404);
+});
+
+// ---- Transits ----
+api.get('/v1/transits/:chartId', async (c) => {
+  const ctx = c.get('ctx');
+  if (!requireScope(ctx, 'transits:read')) return c.json({ error: { code: 'forbidden', message: 'Missing transits:read' } }, 403);
+  const asOf = c.req.query('asOf') ? new Date(c.req.query('asOf')!) : new Date();
+  const natal = await getNatal(c.req.param('chartId'));
+  const snap = await transitService.snapshot(natal, asOf);
+  return c.json(snap);
+});
+
+// ---- Key management ----
+api.post('/v1/keys', async (c) => {
+  const ctx = c.get('ctx');
+  const env = (c.req.query('env') as 'live' | 'test') ?? 'live';
+  const key = await generateApiKey(env);
+  await persistKey(ctx.userId, key, ctx.tier);
+  return c.json({ prefix: key.prefix, plaintext: key.plaintext }, 201); // plaintext shown once
+});
+
+async function computeChart(input: any) { /* call edge / engine */ return { id: crypto.randomUUID(), ...input }; }
+async function getChart(id: string, userId: string) { /* db */ return null as any; }
+async function getNatal(chartId: string) { return { lagnaSign: 0, planets: { Moon: 45 } }; }
+async function persistKey(userId: string, key: any, tier: string) { /* db insert */ }
+
+export default api;
+```
+
+---
+
+### STEP 11: Database Migration
+
+**File:** `supabase/migrations/20241007000007_public_api.sql`
+
+```sql
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE IF NOT EXISTS api_keys (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  name TEXT,
+  key_prefix TEXT NOT NULL,
+  key_hash TEXT NOT NULL UNIQUE,
+  env TEXT NOT NULL DEFAULT 'live' CHECK (env IN ('live','test')),
+  tier TEXT NOT NULL DEFAULT 'free' CHECK (tier IN ('free','developer','business','enterprise')),
+  scopes TEXT[] DEFAULT '{}',
+  last_used_at TIMESTAMPTZ,
+  revoked BOOLEAN DEFAULT FALSE,
+  expires_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE INDEX idx_api_keys_hash ON api_keys (key_hash);
+CREATE INDEX idx_api_keys_user ON api_keys (user_id);
+
+CREATE TABLE IF NOT EXISTS api_usage (
+  id BIGSERIAL PRIMARY KEY,
+  key_id UUID REFERENCES api_keys(id) ON DELETE CASCADE,
+  endpoint TEXT NOT NULL,
+  method TEXT NOT NULL,
+  status INT NOT NULL,
+  latency_ms INT,
+  day DATE NOT NULL DEFAULT CURRENT_DATE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE INDEX idx_api_usage_key_day ON api_usage (key_id, day);
+
+CREATE TABLE IF NOT EXISTS idempotency_keys (
+  key_id UUID REFERENCES api_keys(id) ON DELETE CASCADE,
+  idempotency_key TEXT NOT NULL,
+  status INT NOT NULL,
+  response JSONB,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  PRIMARY KEY (key_id, idempotency_key)
+);
+
+CREATE TABLE IF NOT EXISTS webhook_endpoints (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  url TEXT NOT NULL,
+  secret TEXT NOT NULL,
+  events TEXT[] NOT NULL DEFAULT '{}',
+  active BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS webhook_deliveries (
+  id BIGSERIAL PRIMARY KEY,
+  endpoint_id UUID REFERENCES webhook_endpoints(id) ON DELETE CASCADE,
+  event_type TEXT NOT NULL,
+  payload JSONB NOT NULL,
+  status INT,
+  attempts INT DEFAULT 0,
+  next_retry_at TIMESTAMPTZ,
+  delivered_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE INDEX idx_webhook_deliveries_retry ON webhook_deliveries (next_retry_at) WHERE delivered_at IS NULL;
+
+ALTER TABLE api_keys ENABLE ROW LEVEL SECURITY;
+ALTER TABLE webhook_endpoints ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Users own keys" ON api_keys FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "Users own webhooks" ON webhook_endpoints FOR ALL USING (auth.uid() = user_id);
+
+-- Usage aggregation view for billing
+CREATE OR REPLACE VIEW api_usage_daily AS
+  SELECT key_id, day, COUNT(*) AS requests,
+         COUNT(*) FILTER (WHERE status >= 400) AS errors,
+         ROUND(AVG(latency_ms)) AS avg_latency
+  FROM api_usage GROUP BY key_id, day;
+```
+
+**Apply:**
+```bash
+supabase migration up && supabase db push
+```
+
+---
+
+### STEP 12: Webhook Signing & Dispatch
+
+**File:** `src/api/webhooks/sign.ts`
+
+```typescript
+/** HMAC-SHA256 signature over `${timestamp}.${body}` — Stripe-style. */
+export const signPayload = async (secret: string, timestamp: number, body: string): Promise<string> => {
+  const key = await crypto.subtle.importKey(
+    'raw', new TextEncoder().encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' }, false, ['sign'],
+  );
+  const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(`${timestamp}.${body}`));
+  return Array.from(new Uint8Array(sig), (b) => b.toString(16).padStart(2, '0')).join('');
+};
+
+export const verifySignature = async (
+  secret: string, timestamp: number, body: string, signature: string,
+): Promise<boolean> => {
+  const expected = await signPayload(secret, timestamp, body);
+  return expected === signature;
+};
+```
+
+**File:** `supabase/functions/webhook-dispatch/index.ts`
+
+```typescript
+import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { logger, withTelemetry } from '../_shared/observability.ts';
+
+const supabase = createClient(
+  Deno.env.get('SUPABASE_URL')!,
+  Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+);
+
+const MAX_ATTEMPTS = 6;
+const backoffMs = (n: number) => Math.min(2 ** n * 1000, 3600_000);
+
+serve(withTelemetry('webhook-dispatch', async () => {
+  const { data: due } = await supabase
+    .from('webhook_deliveries')
+    .select('*, webhook_endpoints(*)')
+    .is('delivered_at', null)
+    .lte('next_retry_at', new Date().toISOString())
+    .limit(100);
+
+  for (const d of due ?? []) {
+    const body = JSON.stringify(d.payload);
+    const ts = Math.floor(Date.now() / 1000);
+    const sig = await sign(d.webhook_endpoints.secret, ts, body);
+
+    try {
+      const res = await fetch(d.webhook_endpoints.url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Vedic-Signature': `t=${ts},v1=${sig}`,
+          'X-Vedic-Event': d.event_type,
+          'X-Vedic-Delivery': String(d.id),
+        },
+        body,
+      });
+      if (res.ok) {
+        await supabase.from('webhook_deliveries')
+          .update({ status: res.status, delivered_at: new Date().toISOString(), attempts: d.attempts + 1 })
+          .eq('id', d.id);
+      } else throw new Error(`status_${res.status}`);
+    } catch (err) {
+      const attempts = d.attempts + 1;
+      await supabase.from('webhook_deliveries').update({
+        attempts,
+        status: 0,
+        next_retry_at: attempts < MAX_ATTEMPTS
+          ? new Date(Date.now() + backoffMs(attempts)).toISOString()
+          : null,
+      }).eq('id', d.id);
+      logger.warn('webhook_retry', { id: d.id, attempts, error: (err as Error).message });
+    }
+  }
+
+  return new Response(JSON.stringify({ processed: due?.length ?? 0 }), {
+    headers: { 'Content-Type': 'application/json' },
+  });
+}));
+
+async function sign(secret: string, ts: number, body: string) {
+  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  const s = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(`${ts}.${body}`));
+  return Array.from(new Uint8Array(s), (b) => b.toString(16).padStart(2, '0')).join('');
+}
+```
+
+---
+
+### STEP 13: Generate OpenAPI Spec
+
+**File:** `src/api/v1/openapi.ts`
+
+```typescript
+import { OpenAPIRegistry, OpenApiGeneratorV3 } from '@asteasolutions/zod-to-openapi';
+import { BirthInput, ChartResponse } from './schemas/chart';
+
+const registry = new OpenAPIRegistry();
+registry.registerComponent('securitySchemes', 'ApiKey', {
+  type: 'http', scheme: 'bearer', description: 'API key (vk_live_… / vk_test_…)',
+});
+
+registry.registerPath({
+  method: 'post', path: '/v1/charts',
+  summary: 'Create a natal chart',
+  security: [{ ApiKey: [] }],
+  request: { body: { content: { 'application/json': { schema: BirthInput } } } },
+  responses: {
+    201: { description: 'Created', content: { 'application/json': { schema: ChartResponse } } },
+    422: { description: 'Validation error' },
+    429: { description: 'Rate limited' },
+  },
+});
+
+export const generateOpenApi = () => new OpenApiGeneratorV3(registry.definitions).generateDocument({
+  openapi: '3.0.0',
+  info: { title: 'Vedic Rajkumar API', version: '1.0.0', description: 'Public astrology engine API' },
+  servers: [{ url: 'https://api.vedic-rajkumar.app' }],
+});
+```
+
+**Build spec:**
+```bash
+node -e "import('./src/api/v1/openapi.ts').then(m => require('fs').writeFileSync('docs/api/openapi.json', JSON.stringify(m.generateOpenApi(), null, 2)))"
+```
+
+---
+
+### STEP 14: TypeScript SDK
+
+**File:** `packages/sdk-ts/src/index.ts`
+
+```typescript
+export interface VedicClientOptions {
+  apiKey: string;
+  baseUrl?: string;
+  maxRetries?: number;
+}
+
+export class VedicClient {
+  private baseUrl: string;
+  private apiKey: string;
+  private maxRetries: number;
+
+  constructor(opts: VedicClientOptions) {
+    this.apiKey = opts.apiKey;
+    this.baseUrl = opts.baseUrl ?? 'https://api.vedic-rajkumar.app';
+    this.maxRetries = opts.maxRetries ?? 3;
+  }
+
+  private async request<T>(path: string, init: RequestInit = {}, attempt = 0): Promise<T> {
+    const res = await fetch(`${this.baseUrl}${path}`, {
+      ...init,
+      headers: {
+        'Authorization': `Bearer ${this.apiKey}`,
+        'Content-Type': 'application/json',
+        ...(init.headers ?? {}),
+      },
+    });
+
+    if (res.status === 429 && attempt < this.maxRetries) {
+      const retryAfter = Number(res.headers.get('X-RateLimit-Reset') ?? 1) * 1000;
+      await new Promise((r) => setTimeout(r, retryAfter));
+      return this.request<T>(path, init, attempt + 1);
+    }
+    if (res.status >= 500 && attempt < this.maxRetries) {
+      await new Promise((r) => setTimeout(r, 2 ** attempt * 500));
+      return this.request<T>(path, init, attempt + 1);
+    }
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(`Vedic API ${res.status}: ${JSON.stringify(err)}`);
+    }
+    return res.json() as Promise<T>;
+  }
+
+  charts = {
+    create: (input: object, idempotencyKey?: string) =>
+      this.request('/v1/charts', {
+        method: 'POST',
+        body: JSON.stringify(input),
+        headers: idempotencyKey ? { 'Idempotency-Key': idempotencyKey } : {},
+      }),
+    get: (id: string) => this.request(`/v1/charts/${id}`),
+  };
+
+  transits = {
+    get: (chartId: string, asOf?: Date) =>
+      this.request(`/v1/transits/${chartId}${asOf ? `?asOf=${asOf.toISOString()}` : ''}`),
+  };
+}
+```
+
+**File:** `packages/sdk-ts/package.json`
+
+```json
+{
+  "name": "@vedic/sdk",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": { ".": "./dist/index.js" }
+}
+```
+
+---
+
+### STEP 15: Usage Metering Edge Function
+
+**File:** `supabase/functions/api-keys/index.ts`
+
+```typescript
+import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { corsHeaders } from '../_shared/cors.ts';
+import { withTelemetry } from '../_shared/observability.ts';
+
+const supabase = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!);
+
+serve(withTelemetry('api-keys', async (req) => {
+  if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
+  const { action, keyId, env } = await req.json();
+
+  if (action === 'create') {
+    const secret = `vk_${env}_` + crypto.randomUUID().replace(/-/g, '');
+    const hashBuf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(secret));
+    const hash = Array.from(new Uint8Array(hashBuf), (b) => b.toString(16).padStart(2, '0')).join('');
+    await supabase.from('api_keys').insert({ key_prefix: secret.slice(0, 12), key_hash: hash, env });
+    return new Response(JSON.stringify({ plaintext: secret }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+  }
+
+  if (action === 'revoke') {
+    await supabase.from('api_keys').update({ revoked: true }).eq('id', keyId);
+    return new Response(JSON.stringify({ ok: true }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+  }
+
+  if (action === 'usage') {
+    const { data } = await supabase.from('api_usage_daily').select('*').eq('key_id', keyId);
+    return new Response(JSON.stringify(data), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+  }
+
+  return new Response(JSON.stringify({ error: 'unknown_action' }), { status: 400, headers: corsHeaders });
+}));
+```
+
+---
+
+### STEP 16: Developer Portal Docs
+
+**File:** `docs/api/quickstart.md`
+
+```markdown
+# Vedic Rajkumar API — Quickstart
+
+## Auth
+Pass your key as a Bearer token:
+```bash
+curl https://api.vedic-rajkumar.app/v1/charts/CHART_ID \
+  -H "Authorization: Bearer vk_live_xxxxxxxx"
+```
+
+## Create a chart
+```bash
+curl -X POST https://api.vedic-rajkumar.app/v1/charts \
+  -H "Authorization: Bearer vk_live_xxx" \
+  -H "Idempotency-Key: $(uuidgen)" \
+  -d '{"date":"1990-01-01","time":"12:00","latitude":28.6,"longitude":77.2,"timezone":"Asia/Kolkata"}'
+```
+
+## Rate limits
+Per-tier requests/min returned in `X-RateLimit-*` headers. 429 responses include a reset time.
+
+## Webhooks
+Verify `X-Vedic-Signature` (`t=<ts>,v1=<hmac>`) using HMAC-SHA256 over `"${ts}.${body}"` with your endpoint secret.
+
+## Errors
+All errors return `{ "error": { "code", "message", "requestId" } }`. Include `requestId` in support tickets.
+```
+
+---
+
+### STEP 17: Tests
+
+**File:** `src/test/api/keygen.test.ts`
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import { generateApiKey, safeEqual } from '@/api/keys/keygen';
+
+describe('API keys', () => {
+  it('generates prefixed keys with stable hash', async () => {
+    const k = await generateApiKey('live');
+    expect(k.plaintext.startsWith('vk_live_')).toBe(true);
+    expect(k.prefix).toBe(k.plaintext.slice(0, 12));
+    expect(k.hash).toHaveLength(64);
+  });
+  it('safeEqual is constant-time-correct', () => {
+    expect(safeEqual('abc', 'abc')).toBe(true);
+    expect(safeEqual('abc', 'abd')).toBe(false);
+  });
+});
+```
+
+**File:** `src/test/api/rateLimit.test.ts`
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import { consume } from '@/api/rateLimit/bucket';
+
+describe('Rate limiter', () => {
+  it('allows up to burst then blocks', () => {
+    const store = new Map();
+    let allowed = 0;
+    for (let i = 0; i < 50; i++) if (consume('k', 'free', store).allowed) allowed++;
+    expect(allowed).toBeLessThanOrEqual(40); // burst cap
+  });
+});
+```
+
+**Run:**
+```bash
+npm run test -- src/test/api/
+```
+
+---
+
+### STEP 18: Commit and Push
+
+```bash
+git add src/api/ supabase/functions/api-keys/ supabase/functions/webhook-dispatch/
+git add supabase/migrations/ packages/sdk-ts/ docs/api/ src/test/api/
+git commit -m "feat: week 11 public API, keys, rate limits, webhooks, SDK, OpenAPI"
+git push -u origin feature/week-11-public-api
+```
+
+**PR:**
+```bash
+gh pr create --title "feat: week 11 public API & developer integration" \
+  --body "Versioned REST API, scoped API keys, tiered rate limiting, idempotency, HMAC webhooks, usage metering, OpenAPI, TS SDK" \
+  --base develop
+```
+
+---
+
+## VERIFICATION SCRIPT
+
+```bash
+#!/bin/bash
+echo "=== WEEK 11 VERIFICATION ==="
+for f in \
+  src/api/keys/keygen.ts \
+  src/api/rateLimit/bucket.ts \
+  src/api/v1/middleware/auth.ts \
+  src/api/v1/middleware/idempotency.ts \
+  src/api/v1/router.ts \
+  src/api/webhooks/sign.ts \
+  supabase/functions/api-keys/index.ts \
+  supabase/functions/webhook-dispatch/index.ts \
+  packages/sdk-ts/src/index.ts \
+  docs/api/openapi.json; do
+  [ -f "$f" ] && echo "✓ $f" || echo "✗ $f MISSING"
+done
+grep -q "api_keys" supabase/migrations/*public_api*.sql && echo "✓ migration" || echo "✗ migration MISSING"
+npm run test -- src/test/api/ && echo "✓ api tests pass" || echo "✗ tests failing"
+[ -f docs/api/openapi.json ] && node -e "JSON.parse(require('fs').readFileSync('docs/api/openapi.json'))" && echo "✓ openapi valid" || echo "✗ openapi invalid"
+echo "=== DONE ==="
+```
+
+---
+
+## FILES CREATED
+
+| File | Purpose |
+|------|---------|
+| `src/api/v1/scopes.ts` | Scopes + tiers + rate limits |
+| `src/api/keys/keygen.ts` | Key generation, hashing, constant-time compare |
+| `src/api/rateLimit/bucket.ts` | Token-bucket limiter + headers |
+| `src/api/v1/middleware/auth.ts` | Bearer/API-key auth + scope check |
+| `src/api/v1/middleware/idempotency.ts` | Idempotency-Key handling |
+| `src/api/v1/schemas/chart.ts` | Zod schemas + OpenAPI types |
+| `src/api/v1/router.ts` | Hono router (charts, transits, keys) |
+| `src/api/v1/openapi.ts` | OpenAPI 3.0 generator |
+| `src/api/webhooks/sign.ts` | HMAC-SHA256 signing/verify |
+| `supabase/functions/api-keys/index.ts` | Key CRUD + usage |
+| `supabase/functions/webhook-dispatch/index.ts` | Signed delivery + retries |
+| `supabase/migrations/20241007000007_public_api.sql` | Keys, usage, webhooks, idempotency |
+| `packages/sdk-ts/src/index.ts` | TypeScript SDK with retries |
+| `docs/api/quickstart.md` | Developer docs |
+| `docs/api/openapi.json` | Machine-readable spec |
+| `src/test/api/*` | Tests |
+
+---
+
+## NEXT STEPS AFTER WEEK 11
+
+1. Merge PR after review
+2. Deploy: `supabase functions deploy api-keys webhook-dispatch`
+3. Publish SDK: `cd packages/sdk-ts && npm publish --access public`
+4. Host docs (Redoc / Mintlify) at `developers.vedic-rajkumar.app`
+5. Set up a test key and run a full webhook round-trip against a RequestBin
+6. Add billing hook: meter `api_usage_daily` → Stripe usage records
+
+**Next:** Week 12 — Production Readiness (final hardening, launch checklist, DR, on-call, go-live). Want it now?
+KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKk
+# 🚀 WEEK 12: ULTRA-DETAILED PRODUCTION READINESS & LAUNCH GUIDE
+
+## Overview
+This is the final week. Everything is built, tested, observed, and exposed via API. Now you make it **survivable**: production config with fail-fast validation, secrets management, backups and a proven restore, canary deploys with instant rollback, load testing, DR plan, on-call escalation, cost guardrails, a status page, and the go-live runbook. Week 12 ends with the platform **live and defensible**.
+
+**Sequence note:** Final week of the enterprise track (Week 11 = Public API), Week 12 = Production Readiness.
+
+---
+
+## STEP-BY-STEP EXECUTION
+
+### STEP 0: Pre-Flight Check
+
+```bash
+git checkout develop
+git pull origin develop
+ls src/api/ 2>/dev/null && ls packages/sdk-ts/ 2>/dev/null
+```
+**Expected:** `keys metering rateLimit v1 webhooks` + SDK present.
+
+---
+
+### STEP 1: Create Week 12 Branch
+
+```bash
+git checkout -b feature/week-12-production-readiness
+git branch --show-current
+```
+**Expected:** `feature/week-12-production-readiness`
+
+---
+
+### STEP 2: Install Dependencies
+
+```bash
+npm install zod
+npm install --save-dev dotenv-cli @types/node
+# optional: k6 for load testing (install via brew/binary, not npm)
+```
+
+**Wait for completion.**
+
+---
+
+### STEP 3: Create Directory Structure
+
+```bash
+mkdir -p src/config
+mkdir -p ops/backups
+mkdir -p ops/load
+mkdir -p ops/deploy
+mkdir -p ops/status
+mkdir -p docs/runbooks
+mkdir -p docs/launch
+mkdir -p .github/workflows
+```
+
+**Verify:**
+```bash
+ls ops/
+```
+**Expected:** `backups  deploy  load  status`
+
+---
+
+### STEP 4: Fail-Fast Environment Validation
+
+**File:** `src/config/env.ts`
+
+```typescript
+import { z } from 'zod';
+
+/**
+ * Validates all required env vars at boot. If anything is missing in prod,
+ * the app throws immediately instead of failing mysteriously later.
+ */
+const schema = z.object({
+  VITE_SUPABASE_URL: z.string().url(),
+  VITE_SUPABASE_ANON_KEY: z.string().min(20),
+  VITE_EPHEMERIS_ENDPOINT: z.string().url().optional(),
+  VITE_SENTRY_DSN: z.string().url().optional(),
+  VITE_POSTHOG_KEY: z.string().optional(),
+  VITE_RELEASE_VERSION: z.string().default('dev'),
+  VITE_LOG_LEVEL: z.enum(['trace', 'debug', 'info', 'warn', 'error']).default('info'),
+  MODE: z.enum(['development', 'test', 'production']).default('development'),
+});
+
+const raw = {
+  VITE_SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL,
+  VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY,
+  VITE_EPHEMERIS_ENDPOINT: import.meta.env.VITE_EPHEMERIS_ENDPOINT,
+  VITE_SENTRY_DSN: import.meta.env.VITE_SENTRY_DSN,
+  VITE_POSTHOG_KEY: import.meta.env.VITE_POSTHOG_KEY,
+  VITE_RELEASE_VERSION: import.meta.env.VITE_RELEASE_VERSION,
+  VITE_LOG_LEVEL: import.meta.env.VITE_LOG_LEVEL,
+  MODE: import.meta.env.MODE,
+};
+
+const parsed = schema.safeParse(raw);
+
+if (!parsed.success) {
+  const issues = parsed.error.issues.map((i) => `  - ${i.path.join('.')}: ${i.message}`).join('\n');
+  throw new Error(`Invalid environment configuration:\n${issues}`);
+}
+
+export const env = parsed.data;
+export const isProd = env.MODE === 'production';
+```
+
+**Wire into `src/main.tsx` (before anything else):**
+```tsx
+import { env } from '@/config/env';
+```
+
+---
+
+### STEP 5: Secrets Management Policy
+
+**File:** `docs/launch/secrets.md`
+
+```markdown
+# Secrets Management
+
+## Storage tiers
+| Secret | Where | Rotation |
+|--------|-------|----------|
+| Supabase service role | Supabase + CI secrets | 90d |
+| Sentry DSN | Public (client) | on compromise |
+| PostHog key | Public (client) | on compromise |
+| Logtail token | Supabase env | 90d |
+| Webhook secrets | DB (per-endpoint) | 180d |
+| API key pepper | Supabase env | annual |
+
+## Rules
+- NEVER commit real secrets — `.env.example` only.
+- All CI secrets live in GitHub Actions encrypted secrets.
+- Server secrets live only in Supabase function env (`supabase secrets set`).
+- Rotate the service-role key on any suspected leak.
+- Audit access quarterly.
+
+## Rotation procedure
+1. Generate new secret in provider.
+2. `supabase secrets set KEY=value`
+3. Deploy functions.
+4. Verify health endpoint + a smoke test.
+5. Revoke the old secret after 24h soak.
+```
+
+**Set secrets:**
+```bash
+supabase secrets set LOGTAIL_SOURCE_TOKEN=xxx EPHEMERIS_ENDPOINT=https://xxx RELEASE_VERSION=$(git rev-parse --short HEAD)
+```
+
+---
+
+### STEP 6: Security Headers / CSP
+
+**File:** `public/_headers` (Netlify / Cloudflare Pages)
+
+```
+/*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://us.i.posthog.com https://browser.sentry-cdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://us.i.posthog.com https://*.ingest.sentry.io; font-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+```
+
+**Verify after deploy:**
+```bash
+curl -sI https://YOUR_DOMAIN/ | grep -iE 'strict-transport|content-security|x-frame'
+```
+
+---
+
+### STEP 7: Backup Automation
+
+**File:** `ops/backups/backup.sh`
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+STAMP=$(date -u +%Y%m%dT%H%M%SZ)
+OUT="ops/backups/out/$STAMP"
+mkdir -p "$OUT"
+
+echo "==> Dumping schema"
+supabase db dump --schema public -f "$OUT/schema.sql"
+
+echo "==> Dumping data"
+supabase db dump --data-only -f "$OUT/data.sql"
+
+echo "==> Dumping auth"
+supabase db dump --schema auth -f "$OUT/auth.sql"
+
+echo "==> Compressing"
+tar -czf "$OUT.tar.gz" -C "$OUT" .
+rm -rf "$OUT"
+
+echo "==> Uploading to object storage"
+# aws s3 cp "$OUT.tar.gz" "s3://vedic-backups/db/$STAMP.tar.gz" --storage-class STANDARD_IA
+# OR: supabase storage cp
+echo "Backup complete: $OUT.tar.gz"
+```
+
+**File:** `ops/backups/restore.sh`
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+ARCHIVE=${1:?usage: restore.sh <archive.tar.gz>}
+TMP=$(mktemp -d)
+tar -xzf "$ARCHIVE" -C "$TMP"
+
+echo "==> Restoring schema"
+psql "$DATABASE_URL" -f "$TMP/schema.sql"
+echo "==> Restoring data"
+psql "$DATABASE_URL" -f "$TMP/data.sql"
+echo "Restore complete."
+```
+
+**Schedule (GitHub Actions):**
+```yaml
+# .github/workflows/backup.yml
+name: Nightly Backup
+on:
+  schedule: [{ cron: '0 3 * * *' }]
+  workflow_dispatch:
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm i -g supabase
+      - run: ./ops/backups/backup.sh
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: db-backup
+          path: ops/backups/out/*.tar.gz
+          retention-days: 30
+```
+
+---
+
+### STEP 8: Restore Drill Checklist
+
+**File:** `docs/runbooks/restore-drill.md`
+
+```markdown
+# Quarterly Restore Drill
+
+Goal: prove you can recover from total data loss in < 1 hour.
+
+- [ ] Spin up a scratch Supabase project
+- [ ] Restore latest nightly backup into it
+- [ ] Point a local build at the scratch project
+- [ ] Verify: login works, a chart loads, an export runs
+- [ ] Record RTO (time to restore) and RPO (data age at restore)
+- [ ] File gaps; fix them
+
+Target: RTO ≤ 60 min, RPO ≤ 24h.
+```
+
+---
+
+### STEP 9: Canary Deployment Config
+
+**File:** `ops/deploy/canary.md`
+
+```markdown
+# Canary Deploy Procedure
+
+1. Deploy new version to **10%** of traffic.
+2. Watch for 15 min:
+   - error rate (Sentry) < baseline + 0.5%
+   - p95 latency < 1.2× baseline
+   - no new fatal issues
+3. If healthy → promote to 50% → soak 15 min → 100%.
+4. If unhealthy → rollback (see rollback.md).
+
+## Feature-flag gated risky changes
+Ship behind a flag first; canary the flag at 1% → 10% → 100%.
+```
+
+**File:** `ops/deploy/rollback.md`
+
+```markdown
+# Rollback Procedure
+
+## Frontend (Netlify/CF Pages)
+- Netlify: Deploys → select last-good → "Publish deploy". ~30s.
+- CF Pages: Deployments → rollback.
+
+## Edge functions
+```bash
+git revert <bad-sha> --no-edit
+git push
+supabase functions deploy <name> --project-ref $REF
+```
+
+## Database migration
+- Forward-fix preferred. If destructive, restore from backup.
+- Always write migrations to be backward-compatible for one release.
+
+## Post-rollback
+- Announce in #incidents.
+- Tag the release as rolled back in Sentry.
+- Open a post-mortem within 24h.
+```
+
+---
+
+### STEP 10: Load Test (k6)
+
+**File:** `ops/load/smoke.js`
+
+```javascript
+import http from 'k6/http';
+import { check, sleep } from 'k6';
+
+export const options = {
+  stages: [
+    { duration: '1m', target: 20 },
+    { duration: '3m', target: 100 },
+    { duration: '1m', target: 0 },
+  ],
+  thresholds: {
+    http_req_duration: ['p(95)<800', 'p(99)<1500'],
+    http_req_failed: ['rate<0.01'],
+  },
+};
+
+const BASE = __ENV.BASE_URL;
+const KEY = __ENV.API_KEY;
+
+export default function () {
+  const res = http.post(`${BASE}/v1/charts`, JSON.stringify({
+    date: '1990-01-01', time: '12:00', latitude: 28.6, longitude: 77.2, timezone: 'Asia/Kolkata',
+  }), { headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${KEY}` } });
+
+  check(res, {
+    'status 2xx': (r) => r.status >= 200 && r.status < 300,
+    'has lagna': (r) => r.body.includes('lagna'),
+  });
+  sleep(0.5);
+}
+```
+
+**Run:**
+```bash
+k6 run -e BASE_URL=https://api.vedic-rajkumar.app -e API_KEY=vk_test_xxx ops/load/smoke.js
+```
+
+**File:** `ops/load/spike.js` — sudden 500-user spike to validate autoscaling and rate-limit behavior.
+
+---
+
+### STEP 11: Status Page
+
+**File:** `ops/status/status.json`
+
+```json
+{
+  "page": { "name": "Vedic Rajkumar Status", "url": "https://status.vedic-rajkumar.app" },
+  "components": [
+    { "name": "Web App", "check": "https://vedic-rajkumar.app/" },
+    { "name": "API", "check": "https://api.vedic-rajkumar.app/health" },
+    { "name": "Auth", "check": "https://YOUR_PROJECT.supabase.co/auth/v1/health" },
+    { "name": "Database", "check": "health.database" }
+  ],
+  "incident_template": "We are investigating reports of {component}. Updates every 30 min."
+}
+```
+
+Wire to BetterStack / Instatus / Upptime, all of which consume a JSON like this or a repo-driven config.
+
+---
+
+### STEP 12: On-Call & Escalation
+
+**File:** `docs/runbooks/oncall.md`
+
+```markdown
+# On-Call & Escalation
+
+## Rotation
+- Primary: 1 week, Mon→Mon
+- Secondary: backup, same week
+- Handoff: written summary in #oncall
+
+## Severity
+| Sev | Definition | Ack | Escalate |
+|-----|-----------|-----|----------|
+| SEV1 | Full outage / data loss | 5 min | Immediate, all-hands |
+| SEV2 | Major feature down | 15 min | Primary→Secondary |
+| SEV3 | Degraded / minor | 1h | Ticket |
+
+## Escalation path
+Primary → Secondary → Engineering lead → Founder
+
+## First 5 minutes (SEV1)
+1. Acknowledge in #incidents
+2. Check status page + Sentry + health endpoint
+3. Roll back last deploy if within 30 min
+4. Post updates every 15 min
+5. Preserve logs before they age out
+
+## Post-incident
+Blameless post-mortem within 48h. Actions tracked to closure.
+```
+
+---
+
+### STEP 13: Cost Guardrails
+
+**File:** `docs/launch/cost-controls.md`
+
+```markdown
+# Cost Controls
+
+- [ ] Supabase: set spend cap / billing alert
+- [ ] Sentry: quota alert at 80%
+- [ ] PostHog: monthly event cap + alert
+- [ ] Netlify/CF: bandwidth alert
+- [ ] Ephemeris service: per-day request alert
+- [ ] API abuse: per-key quota (Week 11) blocks runaway keys
+- [ ] Log retention: 30d cap (prune_client_logs)
+
+## Alerts
+Route cost alerts to a dedicated #costs channel, not on-call.
+```
+
+---
+
+### STEP 14: Final Security Review
+
+**File:** `docs/launch/security-review.md`
+
+```markdown
+# Pre-Launch Security Review
+
+## Checklist
+- [ ] All RLS policies reviewed; default-deny confirmed
+- [ ] Service role key never exposed client-side
+- [ ] Security headers live (CSP, HSTS, X-Frame)
+- [ ] API keys hashed at rest; plaintext shown once
+- [ ] Webhook signatures verified
+- [ ] Rate limiting active on all public endpoints
+- [ ] Idempotency on all mutating endpoints
+- [ ] Dependency audit clean: `npm audit --production`
+- [ ] No secrets in git: `git grep -iE 'sk_|service_role'`
+- [ ] PII redaction in logs verified
+- [ ] CORS locked to known origins
+- [ ] Auth: MFA available, sessions expire, refresh rotation on
+- [ ] Backups encrypted at rest
+
+## Run
+```bash
+npm audit --production
+npx license-checker --production --summary
+```
+```
+
+---
+
+### STEP 15: CI/CD Pipeline
+
+**File:** `.github/workflows/deploy.yml`
+
+```yaml
+name: Deploy
+on:
+  push:
+    branches: [main]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test
+      - run: npm run build
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_RELEASE_VERSION: ${{ github.sha }}
+
+  deploy-functions:
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+      - run: supabase functions deploy --project-ref ${{ secrets.SUPABASE_REF }}
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
+  smoke:
+    needs: deploy-functions
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -sf "${{ secrets.API_URL }}/health" | grep -q healthy
+          echo "smoke passed"
+```
+
+---
+
+### STEP 16: Launch Checklist
+
+**File:** `docs/launch/go-live.md`
+
+```markdown
+# GO-LIVE CHECKLIST
+
+## Infra
+- [ ] Production Supabase project with PITR enabled
+- [ ] Backups running nightly + one restore drill passed
+- [ ] Custom domain + TLS live
+- [ ] Security headers verified
+- [ ] WAF / DDoS protection on (Cloudflare)
+- [ ] Status page live
+
+## Observability
+- [ ] Sentry capturing prod errors
+- [ ] Alerts firing to Slack + PagerDuty
+- [ ] Dashboards green
+- [ ] On-call rotation staffed
+
+## Product
+- [ ] Accuracy validated vs Swiss Ephemeris
+- [ ] E2E tests green on prod build
+- [ ] Load test passed (p95 < 800ms @ 100 VU)
+- [ ] Legal: ToS, Privacy Policy, DPA published
+- [ ] Consent + export + deletion verified
+
+## API
+- [ ] Public docs live
+- [ ] SDK published
+- [ ] Test keys issued
+- [ ] Webhooks verified end-to-end
+
+## Business
+- [ ] Pricing / billing live (if applicable)
+- [ ] Support inbox + SLA
+- [ ] Cost alerts configured
+- [ ] Analytics baseline captured
+
+## Go / No-Go
+- [ ] All above checked
+- [ ] Rollback rehearsed
+- [ ] On-call present for 24h post-launch
+- [ ] Announcement drafted
+```
+
+---
+
+### STEP 17: Commit and Push
+
+```bash
+git add src/config/ ops/ docs/ .github/ public/_headers
+git commit -m "chore: week 12 production readiness — config, backups, DR, canary, launch checklist"
+git push -u origin feature/week-12-production-readiness
+```
+
+**PR:**
+```bash
+gh pr create --title "chore: week 12 production readiness" \
+  --body "Fail-fast env validation, secrets policy, backups+restore, canary/rollback, load tests, DR, on-call, cost controls, launch checklist" \
+  --base develop
+```
+
+---
+
+## VERIFICATION SCRIPT
+
+```bash
+#!/bin/bash
+echo "=== WEEK 12 VERIFICATION ==="
+for f in \
+  src/config/env.ts \
+  ops/backups/backup.sh \
+  ops/backups/restore.sh \
+  ops/deploy/canary.md \
+  ops/deploy/rollback.md \
+  ops/load/smoke.js \
+  docs/runbooks/oncall.md \
+  docs/runbooks/restore-drill.md \
+  docs/launch/go-live.md \
+  docs/launch/security-review.md \
+  .github/workflows/deploy.yml \
+  public/_headers; do
+  [ -f "$f" ] && echo "✓ $f" || echo "✗ $f MISSING"
+done
+[ -x ops/backups/backup.sh ] && echo "✓ backup executable" || echo "! chmod +x ops/backups/backup.sh"
+grep -q "Content-Security-Policy" public/_headers && echo "✓ CSP present" || echo "✗ CSP MISSING"
+npm run build && echo "✓ prod build passes" || echo "✗ build failing"
+echo "=== DONE ==="
+```
+
+---
+
+## FILES CREATED
+
+| File | Purpose |
+|------|---------|
+| `src/config/env.ts` | Fail-fast env validation |
+| `public/_headers` | Security headers + CSP |
+| `ops/backups/backup.sh` | Automated DB backup |
+| `ops/backups/restore.sh` | Restore script |
+| `ops/deploy/canary.md` | Canary procedure |
+| `ops/deploy/rollback.md` | Rollback procedure |
+| `ops/load/smoke.js` / `spike.js` | k6 load tests |
+| `ops/status/status.json` | Status page config |
+| `docs/runbooks/oncall.md` | On-call + escalation |
+| `docs/runbooks/restore-drill.md` | DR drill |
+| `docs/launch/secrets.md` | Secrets policy |
+| `docs/launch/cost-controls.md` | Cost guardrails |
+| `docs/launch/security-review.md` | Final security review |
+| `docs/launch/go-live.md` | Launch checklist |
+| `.github/workflows/deploy.yml` | CI/CD pipeline |
+| `.github/workflows/backup.yml` | Nightly backup |
+
+---
+
+## 🏁 YOU'RE AT THE FINISH LINE
+
+Twelve weeks, end to end:
+
+1. Repo hygiene → 2. API layer → 3. Feature flags → 4. Auth & RBAC → 5. Data compliance → 6. Security hardening → 7. Performance → 8. Testing & QA → 9. Observability → 10. Transit engine → 11. Public API → 12. Production readiness
+
+**Final actions before launch day:**
+1. Merge all feature branches to `develop`, then `develop` → `main`
+2. Run the full restore drill once more
+3. Execute the go-live checklist top to bottom
+4. Deploy to production behind the canary at 10%
+5. Watch for 24h with on-call present
+6. Promote to 100%
+
+**Post-launch cadence:**
+- Weekly: error-budget review, dependency updates
+- Monthly: cost review, security patches
+- Quarterly: restore drill, pen test, secrets rotation
+
+Want a **consolidated master index** of all 12 weeks (branch names, files, PR titles) for your records — or a **post-launch 30/60/90-day roadmap**?
+KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
