@@ -1,0 +1,19 @@
+name: Nightly Backup
+on:
+  schedule: [{ cron: '0 3 * * *' }]
+  workflow_dispatch:
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm i -g supabase
+      - run: ./ops/backups/backup.sh
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: db-backup
+          path: ops/backups/out/*.tar.gz
+          retention-days: 30

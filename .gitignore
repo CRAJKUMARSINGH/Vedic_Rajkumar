@@ -43,3 +43,27 @@ remote_repo/
 __jataks_raw.txt
 creat.md
 patch.md
+
+# Archives
+/archive/
+*.zip
+test_*.pdf
+tsc-*.txt
+
+# Secrets — never commit these
+*.pem
+*.key
+*.p12
+*.pfx
+*.p8
+id_rsa
+id_ed25519
+id_ecdsa
+*.secret
+.secrets
+secrets.json
+credentials.json
+service-account*.json
+**/serviceAccountKey.json
+.doppler*
+.vault-token

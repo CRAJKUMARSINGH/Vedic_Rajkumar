@@ -1,0 +1,157 @@
+openapi: 3.0.3
+info:
+  title: Vedic Rajkumar Astrological API
+  version: 1.0.0
+  description: Enterprise REST API for sidereal Vedic astrology calculations, Gochar transits, Kundli Milan, and Panchang.
+
+servers:
+  - url: https://api.vedic-rajkumar.com/v1
+    description: Production Edge API
+  - url: http://localhost:5173/api
+    description: Local Development / Fallback
+
+paths:
+  /charts/calculate:
+    post:
+      summary: Calculate birth chart (Kundli)
+      operationId: calculateKundli
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [birthData]
+              properties:
+                birthData:
+                  type: object
+                  required: [date, time, location]
+                  properties:
+                    date: { type: string, format: date, example: "1990-05-15" }
+                    time: { type: string, pattern: "^\\d{2}:\\d{2}$", example: "14:30" }
+                    location: { type: string, example: "New Delhi (28.6139, 77.2090)" }
+                    timezone: { type: number, default: 5.5 }
+                chartStyle:
+                  type: string
+                  enum: [north-indian, south-indian]
+                  default: north-indian
+                ayanamsa:
+                  type: string
+                  enum: [Lahiri, Raman, KP]
+                  default: Lahiri
+      responses:
+        '200':
+          description: Successful Kundli calculation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseKundli'
+
+  /transits/double-transit:
+    post:
+      summary: Calculate Jupiter-Saturn double transit influences
+      operationId: calculateDoubleTransit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                targetDate: { type: string, format: date }
+                natalMoonRashi: { type: integer, minimum: 0, maximum: 11 }
+      responses:
+        '200':
+          description: Double transit analysis results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseTransit'
+
+  /matchmaking/ashtakoota:
+    post:
+      summary: Calculate 36-point Ashta Koota Kundli Milan
+      operationId: calculateMatchmaking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [maleBirthData, femaleBirthData]
+              properties:
+                maleBirthData:
+                  $ref: '#/components/schemas/BirthData'
+                femaleBirthData:
+                  $ref: '#/components/schemas/BirthData'
+      responses:
+        '200':
+          description: Ashta Koota compatibility report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseMatchmaking'
+
+  /panchang/daily:
+    post:
+      summary: Get 5-limb Hindu Panchang for given date and coordinates
+      operationId: getDailyPanchang
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [date]
+              properties:
+                date: { type: string, format: date }
+                coordinates:
+                  type: object
+                  properties:
+                    lat: { type: number }
+                    lon: { type: number }
+      responses:
+        '200':
+          description: Daily Panchang details (Tithi, Nakshatra, Yoga, Karana, Var)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponsePanchang'
+
+components:
+  schemas:
+    BirthData:
+      type: object
+      required: [date, time, location]
+      properties:
+        date: { type: string, format: date }
+        time: { type: string }
+        location: { type: string }
+        timezone: { type: number }
+
+    ApiResponseKundli:
+      type: object
+      properties:
+        status: { type: integer, example: 200 }
+        source: { type: string, enum: [remote, fallback-local] }
+        data: { type: object }
+
+    ApiResponseTransit:
+      type: object
+      properties:
+        status: { type: integer, example: 200 }
+        source: { type: string }
+        data: { type: object }
+
+    ApiResponseMatchmaking:
+      type: object
+      properties:
+        status: { type: integer, example: 200 }
+        source: { type: string }
+        data: { type: object }
+
+    ApiResponsePanchang:
+      type: object
+      properties:
+        status: { type: integer, example: 200 }
+        source: { type: string }
+        data: { type: object }

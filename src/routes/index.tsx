@@ -62,6 +62,7 @@ const SpiritualRemediesPage  = lazy(() => import('@/pages/SpiritualRemediesPage'
 const GemstoneRecommendPage  = lazy(() => import('@/pages/GemstonePage'));
 const NakshatraPrecautionsPage = lazy(() => import('@/pages/NakshatraPrecautionsPage'));
 const DynamicTransitPage     = lazy(() => import('@/pages/DynamicTransitPage'));
+const TransitsPage           = lazy(() => import('@/pages/TransitsPage'));
 const TransitAnalysisPage    = lazy(() => import('@/pages/TransitAnalysisPage'));
 const EventTransitPage       = lazy(() => import('@/pages/EventTransitPage'));
 
@@ -117,6 +118,10 @@ const PrivacySettingsPage = lazy(() => import('@/pages/PrivacySettingsPage'));
 // ─── Internal / Engineering pages ─────────────────────────────────────────────────────────
 const ValidationDashboardPage = lazy(() => import('@/pages/ValidationDashboardPage'));
 const AccuracyDashboardPage   = lazy(() => import('@/pages/AccuracyDashboardPage'));
+
+// ─── Week 11-12: Developer API & Launch Readiness ────────────────────────────
+const ApiKeysPage         = lazy(() => import('@/pages/developer/ApiKeys'));
+const LaunchChecklistPage = lazy(() => import('@/pages/LaunchChecklist'));
 
 // ─── Supplement / Synthesis pages ─────────────────────────────────────────────
 const SupplementsPage             = lazy(() => import('@/pages/SupplementsPage'));
@@ -215,6 +220,8 @@ export const routes: RouteConfig[] = [
   { path: '/privacy',            element: <PrivacyPolicyPage /> },
   { path: '/terms',              element: <TermsOfServicePage /> },
   { path: '/privacy-settings',   element: <PrivacySettingsPage /> },
+  { path: '/settings/data',      element: <PrivacySettingsPage /> },  // Week 5: GDPR/DPDP canonical route
+  { path: '/settings/privacy',   element: <PrivacySettingsPage /> },  // alias
 
   // ── Supplements & Synthesis (active — supplement core features with deep analysis)
   //   These are not the 4 core features but are working end-to-end, so they get
@@ -254,6 +261,8 @@ export const routes: RouteConfig[] = [
   { path: '/gemstones',            element: <GemstoneRecommendPage /> },
   { path: '/nakshatra-precautions', element: <NakshatraPrecautionsPage /> },
   { path: '/dynamic-transit',      element: <DynamicTransitPage /> },
+  { path: '/transits',             element: <TransitsPage /> },
+  { path: '/transit-timeline',     element: <TransitsPage /> },
   { path: '/transit',              element: <Navigate to="/dynamic-transit" replace /> },
   { path: '/transit-analysis',     element: <TransitAnalysisPage /> },
   { path: '/event-transit',        element: <EventTransitPage /> },
@@ -317,6 +326,12 @@ export const routes: RouteConfig[] = [
   { path: '/chinese-astrology',    element: <ChineseAstrologyPage /> },
   { path: '/mobile-app',           element: <MobileAppPage /> },
   { path: '/community',            element: <CommunityPage /> },
+
+  // ── Week 11: Developer API ─────────────────────────────────────────────────
+  { path: '/developer/api-keys',   element: <ApiKeysPage /> },
+
+  // ── Week 12: Launch Readiness ──────────────────────────────────────────────
+  { path: '/launch-checklist',     element: <LaunchChecklistPage /> },
 
   { path: '/features',             element: <AllFeaturesPage /> },
 

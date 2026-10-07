@@ -1,0 +1,11 @@
+{
+  "title": "Vedic Rajkumar — Service Overview",
+  "panels": [
+    { "title": "Availability (30d)", "type": "stat", "query": "http_success_rate" },
+    { "title": "Latency p50/p95/p99", "type": "timeseries", "query": "chart_calc_latency_ms" },
+    { "title": "Error Rate 5m", "type": "timeseries", "query": "error_rate_5m" },
+    { "title": "Chart Accuracy", "type": "gauge", "query": "chart_accuracy_score" },
+    { "title": "Error Budget Remaining", "type": "bargauge", "query": "error_budget_remaining_ratio" },
+    { "title": "Exports Success", "type": "timeseries", "query": "export_success_rate" }
+  ]
+}

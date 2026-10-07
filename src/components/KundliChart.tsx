@@ -6,7 +6,7 @@
  * Supports both North Indian and South Indian chart styles
  */
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -18,6 +18,8 @@ import {
   type ChartStyle,
   type ChartHouse,
 } from '@/services/kundliService';
+import { AccessibleChart } from '@/components/charts/AccessibleChart';
+import { funnelEvent } from '@/analytics/funnels';
 
 interface KundliChartProps {
   date: string;
@@ -136,6 +138,12 @@ const KundliChart: React.FC<KundliChartProps> = ({
     }
   }, [date, time, latitude, longitude, chartStyle]);
 
+  useEffect(() => {
+    if (kundliData) {
+      funnelEvent('chart_created', { style: chartStyle });
+    }
+  }, [kundliData, chartStyle]);
+
   // Get chart layout
   const chartLayout = useMemo(() => {
     if (!kundliData) return null;
@@ -203,11 +211,35 @@ const KundliChart: React.FC<KundliChartProps> = ({
               {/* Chart Visualization */}
               <div className="flex-1">
                 <div className="relative mx-auto" style={{ width: '320px', height: '320px' }}>
+                  <AccessibleChart
+                    planets={kundliData.houses.flatMap((house) => {
+                      const occupants = house.planets as unknown as Array<
+                        string | { name?: string; degrees?: number }
+                      >;
+                      return occupants.map((planet, idx) => {
+                        if (typeof planet === 'string') {
+                          return {
+                            planet,
+                            sign: house.rashiName,
+                            house: house.houseNumber,
+                            degree: 0,
+                          };
+                        }
+                        return {
+                          planet: planet.name ?? `Graha ${idx + 1}`,
+                          sign: house.rashiName,
+                          house: house.houseNumber,
+                          degree: typeof planet.degrees === 'number' ? planet.degrees : 0,
+                        };
+                      });
+                    })}
+                  />
                   <svg
                     width="320"
                     height="320"
                     viewBox="0 0 320 320"
                     className="border border-border rounded-lg bg-card"
+                    aria-hidden="true"
                   >
                     {chartStyle === 'north-indian' ? (
                       // Gorgeous traditional North Indian diamond chart layout using responsive SVG polygons

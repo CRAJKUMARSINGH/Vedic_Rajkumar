@@ -10,6 +10,23 @@ import { DynamicTransitCalculator } from '../components/DynamicTransitCalculator
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { AlertCircle, Info } from 'lucide-react';
+import { TransitTimeline } from '@/components/transits/TransitTimeline';
+import type { NatalChart } from '@/services/transits/transitService';
+
+const SAMPLE_NATAL: NatalChart = {
+  lagnaSign: 0,
+  planets: {
+    Sun: 15,
+    Moon: 45,
+    Mars: 80,
+    Mercury: 20,
+    Jupiter: 210,
+    Venus: 40,
+    Saturn: 300,
+    Rahu: 120,
+    Ketu: 300,
+  },
+};
 
 export function DynamicTransitPage() {
   const [moonRashiIndex, setMoonRashiIndex] = useState<number>(3); // Default: Cancer
@@ -86,6 +103,18 @@ export function DynamicTransitPage() {
           moonRashiIndex={moonRashiIndex}
           userName={userName}
         />
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Gochar timeline</CardTitle>
+            <CardDescription>
+              Sidereal drishti, Sade Sati, and panchang snapshot for the current moment
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <TransitTimeline natal={SAMPLE_NATAL} />
+          </CardContent>
+        </Card>
 
         {/* Additional Info */}
         <Card>

@@ -44,9 +44,11 @@ import { calculateDynamicTransits } from '@/services/dynamicTransitService';
 import { searchLocation } from '@/services/geocodingService';
 import { calculateAshtakavarga, type PlanetName } from '@/services/classicalAshtakavargaService';
 import EnhancedBirthInputForm from '@/components/EnhancedBirthInputForm';
+import { TransitTimeline } from '@/components/transits/TransitTimeline';
 import type { EngineData } from '@/services/engineDataAssembler';
 import type { DynamicTransitOutput } from '@/services/dynamicTransitService';
 import type { TransitResult } from '@/data/transitData';
+import type { NatalChart } from '@/services/transits/transitService';
 
 // ─── Constants ──────────────────────────────────────────────────────────────────
 
@@ -78,6 +80,27 @@ const STRENGTH_BADGE: Record<string, string> = {
 };
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
+
+function natalFromEngine(engineData: EngineData, moonRashiIdx: number): NatalChart {
+  const planets: Record<string, number> = {};
+  for (const p of engineData.planets ?? []) {
+    const name = typeof p?.name === 'string' ? p.name : '';
+    if (!name || name === 'Ascendant' || name === 'Lagna') continue;
+    const fromSign = (Number(p.rashiIndex) || 0) * 30 + (Number(p.degrees) || 15);
+    const longitude = typeof p.longitude === 'number' ? p.longitude : fromSign;
+    planets[name] = ((longitude % 360) + 360) % 360;
+  }
+  if (planets.Moon === undefined) {
+    planets.Moon = moonRashiIdx * 30 + 15;
+  }
+  const lagna = (engineData.planets ?? []).find(
+    (p: { name?: string }) => p.name === 'Ascendant' || p.name === 'Lagna',
+  );
+  return {
+    lagnaSign: Number(lagna?.rashiIndex) || 0,
+    planets,
+  };
+}
 
 function parseBirthDate(date: string, time: string): Date {
   const [y, m, d] = date.split('-').map(Number);
@@ -807,8 +830,8 @@ function PsychologyTab({ engineData }: { engineData: EngineData }) {
 // ─── Tab 6: Transits ───────────────────────────────────────────────────────────
 
 function TransitsTab({
-  moonRashiIdx, initialTransit,
-}: { moonRashiIdx: number; initialTransit: DynamicTransitOutput | null }) {
+  moonRashiIdx, initialTransit, natal,
+}: { moonRashiIdx: number; initialTransit: DynamicTransitOutput | null; natal: NatalChart }) {
   const [result,      setResult]      = useState<DynamicTransitOutput | null>(initialTransit);
   const [dateStr,     setDateStr]     = useState(isoDate(new Date()));
   const [loading,     setLoading]     = useState(false);
@@ -830,6 +853,10 @@ function TransitsTab({
 
   return (
     <div className="space-y-4">
+      <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+        <h3 className="mb-3 text-sm font-semibold text-white">Gochar engine</h3>
+        <TransitTimeline natal={natal} />
+      </div>
       {/* Date picker */}
       <div className="flex items-center gap-2">
         <input
@@ -1179,7 +1206,7 @@ export function DashboardShell() {
         {tab === 'shadbala'   && <ShadabalaYogaTab engineData={engineData} />}
         {tab === 'jaimini'    && <JaiminiTab    engineData={engineData} birthDate={birthDate} />}
         {tab === 'psychology' && <PsychologyTab engineData={engineData} />}
-        {tab === 'transits'   && <TransitsTab   moonRashiIdx={moonRashiIdx} initialTransit={transit} />}
+        {tab === 'transits'   && <TransitsTab   moonRashiIdx={moonRashiIdx} initialTransit={transit} natal={natalFromEngine(engineData, moonRashiIdx)} />}
       </div>
     </div>
   );
