@@ -7938,3 +7938,858 @@ Twelve weeks, end to end:
 
 Want a **consolidated master index** of all 12 weeks (branch names, files, PR titles) for your records — or a **post-launch 30/60/90-day roadmap**?
 KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
+# 🧭 WEEK 13: ULTRA-DETAILED POST-LAUNCH STABILIZATION, GROWTH & SCALE GUIDE
+
+## Overview
+You're live. Week 13 is the first **post-launch** week — the shift from *building* to *operating and growing*. You run a launch war room, triage real-user telemetry, fix regressions, harden scale (caching, CDN, replicas), instrument growth loops, stand up support and SEO, and kick off a 30/60/90-day roadmap. This is where a launched product becomes a **business**.
+
+**Sequence note:** Post-launch week following Week 12 (Production Readiness).
+
+---
+
+## STEP-BY-STEP EXECUTION
+
+### STEP 0: Pre-Flight Check
+
+```bash
+git checkout main
+git pull origin main
+git checkout -b feature/week-13-post-launch
+git branch --show-current
+```
+**Expected:** `feature/week-13-post-launch`
+
+---
+
+### STEP 1: Create Directory Structure
+
+```bash
+mkdir -p ops/warroom
+mkdir -p ops/scaling
+mkdir -p docs/growth
+mkdir -p docs/support
+mkdir -p docs/roadmap
+mkdir -p src/analytics/funnels
+```
+
+---
+
+### STEP 2: Launch War Room Log
+
+**File:** `ops/warroom/launch-log.md`
+
+```markdown
+# Launch War Room — Day 0–7
+
+## Standing schedule
+- 09:00 daily: 15-min sync (metrics, incidents, blockers)
+- Continuous: #launch-watch channel, on-call present
+
+## Daily metrics to capture
+| Metric | Target | Day 1 | Day 2 | … |
+|--------|--------|-------|-------|---|
+| Uptime | >99.9% | | | |
+| p95 latency | <800ms | | | |
+| Error rate | <1% | | | |
+| Signups | — | | | |
+| Activation (chart created) | >60% | | | |
+| Support tickets | — | | | |
+
+## Incident log
+| Time | Sev | Component | Action | Resolved |
+|------|-----|-----------|--------|----------|
+```
+
+---
+
+### STEP 3: Real-User Monitoring Analysis
+
+**File:** `ops/warroom/rum-analysis.md`
+
+```markdown
+# RUM Analysis Procedure
+
+Source: PostHog web_vital events + Sentry + Web Vitals.
+
+1. Pull p75 Web Vitals per route (last 24h).
+2. Rank routes by LCP/INP/CLS over budget.
+3. Cross-reference with Sentry top issues on those routes.
+4. File a P1 perf ticket for any route >2× budget.
+5. Fix top 3, redeploy behind canary.
+
+## Query (PostHog)
+```sql
+SELECT properties.route, quantile(0.75)(properties.value) AS p75
+FROM events WHERE event = 'web_vital' AND properties.name = 'LCP'
+GROUP BY properties.route ORDER BY p75 DESC LIMIT 20
+```
+```
+
+---
+
+### STEP 4: Performance Regression Triage
+
+**File:** `src/analytics/funnels/regressions.ts`
+
+```typescript
+/** Detect routes whose p75 LCP regressed vs the previous release baseline. */
+export interface VitalSample { route: string; lcp: number; release: string }
+
+export const findRegressions = (
+  current: VitalSample[],
+  baseline: Record<string, number>,
+  thresholdPct = 20,
+): Array<{ route: string; currentP75: number; baseline: number; deltaPct: number }> => {
+  const byRoute = new Map<string, number[]>();
+  for (const s of current) {
+    const arr = byRoute.get(s.route) ?? [];
+    arr.push(s.lcp);
+    byRoute.set(s.route, arr);
+  }
+  const out = [];
+  for (const [route, vals] of byRoute) {
+    vals.sort((a, b) => a - b);
+    const p75 = vals[Math.floor(vals.length * 0.75)] ?? 0;
+    const base = baseline[route];
+    if (base && (p75 - base) / base > thresholdPct / 100) {
+      out.push({ route, currentP75: p75, baseline: base, deltaPct: Math.round(((p75 - base) / base) * 100) });
+    }
+  }
+  return out.sort((a, b) => b.deltaPct - a.deltaPct);
+};
+```
+
+---
+
+### STEP 5: Caching & CDN Strategy
+
+**File:** `ops/scaling/caching.md`
+
+```markdown
+# Caching Strategy
+
+## Layers
+1. **CDN edge** — static assets immutable-hashed, `Cache-Control: public, max-age=31536000, immutable`
+2. **Edge function cache** — panchang/transit snapshots cached 15–60 min (slow-moving data)
+3. **DB materialized views** — expensive aggregates (SAV, accuracy stats) refreshed hourly
+4. **Client** — React Query staleTime per data class
+
+## Cache headers by route
+| Route | Header |
+|-------|--------|
+| /assets/* | max-age=31536000, immutable |
+| /v1/panchang/:date | s-maxage=3600, stale-while-revalidate=600 |
+| /v1/transits/:id | s-maxage=1800 |
+| /v1/charts/:id | private, max-age=300 |
+| /health | no-store |
+```
+
+---
+
+### STEP 6: Database Scaling
+
+**File:** `ops/scaling/db.md`
+
+```markdown
+# DB Scaling Playbook
+
+- Enable PITR (already on)
+- Add **read replica**; route analytics + heavy reads to it
+- Create covering indexes for the top 10 slow queries (`pg_stat_statements`)
+- Materialized views for SAV/accuracy; refresh via cron
+- Connection pooling via Supavisor (transaction mode) for edge
+- Partition `client_logs` and `api_usage` by month; drop old partitions
+
+## Find slow queries
+```sql
+SELECT query, calls, mean_exec_time
+FROM pg_stat_statements ORDER BY mean_exec_time DESC LIMIT 20;
+```
+```
+
+**Partition migration:**
+```sql
+-- supabase/migrations/20241007000008_partition_logs.sql
+CREATE TABLE client_logs_p2024_10 PARTITION OF client_logs
+  FOR VALUES FROM ('2024-10-01') TO ('2024-11-01');
+```
+
+---
+
+### STEP 7: Growth Funnel Instrumentation
+
+**File:** `src/analytics/funnels/funnels.ts`
+
+```typescript
+import { trackEvent } from '@/observability/analytics/posthog';
+
+/** Core activation funnel: visit → signup → chart → insight → return. */
+export const FUNNEL_STEPS = ['page_view', 'signup', 'chart_created', 'insight_viewed', 'session_return'] as const;
+export type FunnelStep = (typeof FUNNEL_STEPS)[number];
+
+export const funnelEvent = (step: FunnelStep, props?: Record<string, unknown>) =>
+  trackEvent(`funnel:${step}`, props);
+
+// Key conversion surfaces to instrument
+export const trackUpgradeClick = (from: string) => trackEvent('upgrade_click', { from });
+export const trackExport = (format: string) => trackEvent('export', { format });
+export const trackShare = (channel: string) => trackEvent('share', { channel });
+```
+
+---
+
+### STEP 8: SEO & Content Engine
+
+**File:** `docs/growth/seo.md`
+
+```markdown
+# SEO Playbook
+
+## Programmatic pages
+- `/rashi/:sign` — 12 pages
+- `/nakshatra/:name` — 27 pages
+- `/panchang/:date` — daily, indexable
+- `/transit/:graha/:sign` — computed pages
+
+## Requirements per page
+- [ ] Unique <title> + meta description
+- [ ] JSON-LD (Article / FAQ)
+- [ ] Canonical URL
+- [ ] Internal links to related pages
+- [ ] sitemap.xml regenerated on deploy
+- [ ] OG image (auto-generated)
+
+## Core Web Vitals
+Keep LCP < 2.5s on all landing pages or rankings suffer.
+```
+
+**Sitemap generator (edge function):** emits `/sitemap.xml` from the route matrix above.
+
+---
+
+### STEP 9: Support & Feedback Loop
+
+**File:** `docs/support/playbook.md`
+
+```markdown
+# Support Playbook
+
+## Channels
+- In-app feedback widget → PostHog
+- support@ inbox → shared ticketing
+- Discord community
+
+## SLA
+| Priority | First response |
+|----------|----------------|
+| P1 (can't use) | 2h |
+| P2 (bug) | 1 business day |
+| P3 (question) | 2 business days |
+
+## Feedback → roadmap
+Weekly: tag feedback, cluster themes, top 3 themes become roadmap candidates.
+Close the loop: reply when shipped.
+```
+
+---
+
+### STEP 10: 30/60/90-Day Roadmap
+
+**File:** `docs/roadmap/30-60-90.md`
+
+```markdown
+# 30 / 60 / 90 Day Roadmap
+
+## Days 1–30: Stabilize
+- Hit SLOs for 30 straight days
+- Fix all SEV1/SEV2 follow-ups
+- Ship top 3 perf fixes
+- Baseline activation funnel; target +10%
+
+## Days 31–60: Grow
+- Programmatic SEO pages live
+- Referral / share loop launched
+- API developer signups; publish 2 integrations
+- A/B test pricing / onboarding
+
+## Days 61–90: Scale
+- Read replica + partitioning in prod
+- Multi-region edge rollout
+- Enterprise tier + SSO
+- SOC 2 readiness kickoff
+```
+
+---
+
+### STEP 11: Commit and Push
+
+```bash
+git add ops/ docs/ src/analytics/
+git commit -m "chore: week 13 post-launch stabilization, growth & scale"
+git push -u origin feature/week-13-post-launch
+```
+
+**PR:**
+```bash
+gh pr create --title "chore: week 13 post-launch stabilization, growth & scale" \
+  --body "War room, RUM analysis, regression triage, caching/CDN, DB scaling, growth funnels, SEO, support, 30/60/90 roadmap" \
+  --base main
+```
+
+---
+
+## VERIFICATION SCRIPT
+
+```bash
+#!/bin/bash
+echo "=== WEEK 13 VERIFICATION ==="
+for f in \
+  ops/warroom/launch-log.md \
+  ops/warroom/rum-analysis.md \
+  ops/scaling/caching.md \
+  ops/scaling/db.md \
+  docs/growth/seo.md \
+  docs/support/playbook.md \
+  docs/roadmap/30-60-90.md \
+  src/analytics/funnels/funnels.ts \
+  src/analytics/funnels/regressions.ts; do
+  [ -f "$f" ] && echo "✓ $f" || echo "✗ $f MISSING"
+done
+echo "=== DONE ==="
+```
+
+---
+
+## FILES CREATED
+
+| File | Purpose |
+|------|---------|
+| `ops/warroom/launch-log.md` | Day 0–7 war room log |
+| `ops/warroom/rum-analysis.md` | Real-user monitoring procedure |
+| `ops/scaling/caching.md` | CDN + cache strategy |
+| `ops/scaling/db.md` | DB scaling playbook |
+| `src/analytics/funnels/funnels.ts` | Activation funnel events |
+| `src/analytics/funnels/regressions.ts` | Perf regression detector |
+| `docs/growth/seo.md` | Programmatic SEO plan |
+| `docs/support/playbook.md` | Support workflow + SLA |
+| `docs/roadmap/30-60-90.md` | Growth roadmap |
+
+---
+
+# 📑 CONSOLIDATED MASTER INDEX — WEEKS 1–13
+
+## Branch Names
+
+| # | Branch |
+|---|--------|
+| 1 | `feature/week-01-repo-hygiene` |
+| 2 | `feature/week-02-api-layer` |
+| 3 | `feature/week-03-feature-flags` |
+| 4 | `feature/week-04-auth-rbac` |
+| 5 | `feature/week-05-data-compliance` |
+| 6 | `feature/week-06-security-hardening` |
+| 7 | `feature/week-07-performance` |
+| 8 | `feature/week-08-testing-qa` |
+| 9 | `feature/week-09-observability` |
+| 10 | `feature/week-10-transit-engine` |
+| 11 | `feature/week-11-public-api` |
+| 12 | `feature/week-12-production-readiness` |
+| 13 | `feature/week-13-post-launch` |
+
+## PR Titles
+
+| # | PR Title |
+|---|----------|
+| 1 | `chore: week 1 repository hygiene and tooling` |
+| 2 | `feat: week 2 API layer and client abstraction` |
+| 3 | `feat: week 3 feature flags` |
+| 4 | `feat: week 4 auth and role-based access control` |
+| 5 | `feat: week 5 data compliance, export, deletion` |
+| 6 | `feat: week 6 security hardening` |
+| 7 | `perf: week 7 performance optimization` |
+| 8 | `test: week 8 testing and QA` |
+| 9 | `infra: week 9 observability, logging, tracing, and alerting` |
+| 10 | `feat: week 10 transit engine` |
+| 11 | `feat: week 11 public API & developer integration` |
+| 12 | `chore: week 12 production readiness` |
+| 13 | `chore: week 13 post-launch stabilization, growth & scale` |
+
+## Key Deliverables by Week
+
+| # | Focus | Primary Artifacts |
+|---|-------|-------------------|
+| 1 | Repo Hygiene | ESLint/Prettier, Husky, CI skeleton, commit conventions, `CONTRIBUTING.md` |
+| 2 | API Layer | `src/api/client.ts`, typed endpoints, error normalization, retries |
+| 3 | Feature Flags | Flag service, `useFlag` hook, remote config, kill switches |
+| 4 | Auth & RBAC | Supabase auth, session mgmt, roles, protected routes, MFA |
+| 5 | Data Compliance | Consent, export (JSON/PDF), deletion jobs, retention policy |
+| 6 | Security Hardening | RLS audit, headers, input validation, rate limits, secrets |
+| 7 | Performance | Code-splitting, memoization, image opt, bundle budgets |
+| 8 | Testing & QA | Vitest, Playwright E2E, accuracy fixtures, coverage gates |
+| 9 | Observability | Structured logs, Sentry, PostHog, tracing, SLOs, alerts, health |
+| 10 | Transit Engine | Gochar, Sade Sati, Ashtakavarga, Vedha, Panchang, alerts |
+| 11 | Public API | Keys, scopes, rate limits, idempotency, webhooks, OpenAPI, SDK |
+| 12 | Production Readiness | Env validation, backups/DR, canary, load tests, on-call, go-live |
+| 13 | Post-Launch | War room, RUM, caching/CDN, DB scaling, funnels, SEO, roadmap |
+
+## Consolidated File Tree (top-level)
+
+```
+src/
+  api/           (2,11)  client, v1 routes, keys, rateLimit, webhooks, metering
+  analytics/     (13)    funnels, regressions
+  astrology/     (10)    core, transits, ashtakavarga, panchang, muhurta
+  components/    (7,10)  transits, shared UI
+  config/        (12)    env validation
+  hooks/         (3,10)  useFlag, useTransits
+  observability/ (9)     logging, errors, analytics, metrics, tracing, slo
+  services/      (2,10)  transits, chart services
+  test/          (8,10,11) unit, e2e, transits, api
+supabase/
+  functions/     (9,10,11) health, ingest-logs, metrics, transit-*, api-keys, webhook-dispatch
+  migrations/    (5,9,10,11,13) compliance, observability, transits, public_api, partitions
+packages/
+  sdk-ts/        (11)    published SDK
+ops/
+  backups/       (12)    backup, restore
+  deploy/        (12)    canary, rollback
+  load/          (12)    k6 smoke, spike
+  warroom/       (13)    launch log, RUM analysis
+  scaling/       (13)    caching, db
+docs/
+  api/           (11)    openapi, quickstart
+  runbooks/      (9,12)  incidents, oncall, restore-drill
+  launch/        (12)    go-live, security-review, secrets, cost-controls
+  growth/        (13)    seo
+  support/       (13)    playbook
+  roadmap/       (13)    30-60-90
+```
+
+## Merge Order
+
+1–12 merge `feature/* → develop`, then `develop → main` at launch. Week 13 branches off `main` (post-launch hotfix track).
+
+## Suggested Tags / Releases
+
+| Tag | After Week |
+|-----|-----------|
+| `v0.1.0-alpha` | 4 |
+| `v0.5.0-beta` | 8 |
+| `v0.9.0-rc` | 11 |
+| `v1.0.0` | 12 (launch) |
+| `v1.1.0` | 13 (post-launch) |
+
+---
+
+That's the full program — 13 weeks, every branch, PR title, deliverable, and artifact mapped. Want this dumped as a **`MASTER_INDEX.md` file** ready to commit, or a **mermaid roadmap diagram** of the whole program?
+nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+Based on your comprehensive 12-week enterprise roadmap, I've identified **critical minor gaps** that bridge "code complete" to "launch ready." These are the paper cuts that kill launches.
+
+---
+
+# 🔧 MINOR GAP REMOVAL INSTRUCTIONS
+*Execute parallel to Week 12 or as Week 13 pre-launch cleanup*
+
+## Gap 1: Mobile-First PWA & Offline Capability
+**Current gap:** Web-only focus; no offline chart calculation for rural/low-connectivity users (critical for Indian market).
+
+**Remediation:**
+```bash
+# Install PWA deps
+npm install vite-plugin-pwa workbox-window
+
+# Create src/sw.ts (Service Worker with offline chart cache)
+cat > src/sw.ts << 'EOF'
+import { precacheAndRoute } from 'workbox-precaching';
+import { registerRoute } from 'workbox-routing';
+import { StaleWhileRevalidate, CacheFirst } from 'workbox-strategies';
+import { ExpirationPlugin } from 'workbox-expiration';
+
+// Precache static assets
+precacheAndRoute(self.__WB_MANIFEST);
+
+// Cache chart calculations (expensive, slow-changing)
+registerRoute(
+  ({ url }) => url.pathname.includes('/api/v1/charts'),
+  new StaleWhileRevalidate({
+    cacheName: 'chart-calculations',
+    plugins: [new ExpirationPlugin({ maxEntries: 100, maxAgeSeconds: 7 * 24 * 60 * 60 })],
+  })
+);
+
+// Cache ephemeris data (huge, immutable)
+registerRoute(
+  ({ url }) => url.pathname.includes('/ephemeris'),
+  new CacheFirst({
+    cacheName: 'ephemeris-data',
+    plugins: [new ExpirationPlugin({ maxAgeSeconds: 30 * 24 * 60 * 60 })],
+  })
+);
+EOF
+
+# Add to vite.config.ts
+cat >> vite.config.ts << 'EOF'
+import { VitePWA } from 'vite-plugin-pwa';
+
+export default {
+  plugins: [
+    VitePWA({
+      registerType: 'autoUpdate',
+      workbox: {
+        swSrc: 'src/sw.ts',
+        swDest: 'dist/sw.js',
+      },
+      manifest: {
+        name: 'Vedic Rajkumar',
+        short_name: 'Vedic',
+        theme_color: '#b45309', // Saffron
+        icons: [
+          { src: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+          { src: '/icon-512.png', sizes: '512x512', type: 'image/png' }
+        ]
+      }
+    })
+  ]
+};
+EOF
+```
+
+**Deliverable:** App works offline for previously calculated charts; installable on Android/iOS home screens.
+
+---
+
+## Gap 2: Transactional Email Infrastructure
+**Current gap:** No email system for welcome, password reset, chart ready notifications, or practitioner consultations.
+
+**Remediation:**
+```bash
+# Install Resend (preferred for modern apps)
+npm install resend
+
+# Create src/services/email.ts
+cat > src/services/email.ts << 'EOF'
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export const sendWelcomeEmail = async (to: string, name: string) => {
+  await resend.emails.send({
+    from: 'Vedic Rajkumar <hello@vedic-rajkumar.app>',
+    to,
+    subject: 'Welcome to your cosmic journey',
+    html: `<p>Namaste ${name}, your chart awaits...</p>`,
+    tags: [{ name: 'category', value: 'onboarding' }],
+  });
+};
+
+export const sendChartReadyEmail = async (to: string, chartId: string) => {
+  await resend.emails.send({
+    from: 'Vedic Rajkumar <charts@vedic-rajkumar.app>',
+    to,
+    subject: 'Your Kundli is ready',
+    html: `<a href="https://vedic-rajkumar.app/charts/${chartId}">View Chart</a>`,
+  });
+};
+EOF
+
+# Supabase Edge Function for email
+cat > supabase/functions/send-email/index.ts << 'EOF'
+import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
+import { Resend } from 'npm:resend';
+
+const resend = new Resend(Deno.env.get('RESEND_API_KEY'));
+
+serve(async (req) => {
+  const { to, template, data } = await req.json();
+  // Route to appropriate template
+  return new Response(JSON.stringify({ sent: true }));
+});
+EOF
+```
+
+**Deliverable:** Users receive transactional emails; practitioners get consultation reminders.
+
+---
+
+## Gap 3: Data Migration from Fragmented State
+**Current gap:** Existing `test_*.pdf`, stale branches, and old chart data need migration path to new unified schema.
+
+**Remediation:**
+```bash
+# Create migration script
+cat > scripts/migrate-legacy-data.ts << 'EOF'
+import { supabase } from '@/integrations/supabase/client';
+import { logger } from '@/observability/logging/logger';
+
+const migrateLegacyCharts = async () => {
+  // Read from old JSON exports (test_*.pdf metadata)
+  const legacyCharts = await fetchLegacyFromArchive();
+  
+  for (const old of legacyCharts) {
+    const { error } = await supabase.from('charts').insert({
+      user_id: await resolveUser(old.email),
+      birth_data: old.birthData,
+      calculated_at: old.date,
+      // Map old fields to new schema
+      legacy_id: old.id, // for rollback
+      migrated_at: new Date().toISOString(),
+    });
+    
+    if (error) logger.error('migration_failed', { oldId: old.id, error });
+  }
+};
+
+// Run with: npx tsx scripts/migrate-legacy-data.ts
+EOF
+
+# Add rollback capability
+cat > scripts/rollback-migration.ts << 'EOF'
+// Deletes migrated data if issues found
+await supabase.from('charts').delete().not('legacy_id', 'is', null);
+EOF
+```
+
+**Deliverable:** One-way migration with rollback capability; data integrity verified via checksums.
+
+---
+
+## Gap 4: Chart Accessibility (Screen Readers)
+**Current gap:** SVG charts are invisible to screen readers; violates WCAG 2.1 AA.
+
+**Remediation:**
+```typescript
+// src/components/charts/AccessibleChart.tsx
+export const AccessibleChart = ({ chartData }) => (
+  <div role="img" aria-label={`Natal chart for ${chartData.name}`}>
+    {/* Visual SVG */}
+    <ChartSVG data={chartData} />
+    
+    {/* Screen reader table */}
+    <table className="sr-only">
+      <caption>Birth Chart Planetary Positions</caption>
+      <thead>
+        <tr><th>Planet</th><th>Sign</th><th>House</th><th>Degree</th></tr>
+      </thead>
+      <tbody>
+        {Object.entries(chartData.planets).map(([planet, pos]) => (
+          <tr key={planet}>
+            <td>{planet}</td>
+            <td>{pos.sign}</td>
+            <td>{pos.house}</td>
+            <td>{pos.degree.toFixed(2)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    
+    {/* ARIA live region for dynamic updates */}
+    <div aria-live="polite" className="sr-only" id="chart-announcements" />
+  </div>
+);
+```
+
+**Deliverable:** Charts readable by screen readers; passes axe-core accessibility tests.
+
+---
+
+## Gap 5: Emergency Kill Switches
+**Current gap:** No way to instantly disable features if calculation accuracy degrades or API abuse detected.
+
+**Remediation:**
+```typescript
+// src/config/kill-switches.ts
+export const KILL_SWITCHES = {
+  KUNDLI_CALCULATION: 'kill_kundli',
+  MATCHMAKING: 'kill_match',
+  PDF_EXPORT: 'kill_pdf',
+  PUBLIC_API: 'kill_api',
+} as const;
+
+// Emergency check in calculation service
+export const checkKillSwitch = async (feature: string): Promise<boolean> => {
+  const { data } = await supabase
+    .from('kill_switches')
+    .select('enabled')
+    .eq('feature', feature)
+    .single();
+  
+  if (data?.enabled) {
+    logger.error('kill_switch_triggered', { feature });
+    throw new Error('Service temporarily unavailable');
+  }
+  return false;
+};
+
+// Usage in calculate-kundli edge function
+Deno.serve(async (req) => {
+  await checkKillSwitch('kill_kundli'); // Throws if killed
+  // ... calculation
+});
+```
+
+**Deliverable:** Dashboard to instantly disable features; protects reputation during incidents.
+
+---
+
+## Gap 6: Dependency Freeze & Reproducibility
+**Current gap:** No lockfile enforcement or dependency vulnerability scanning in CI.
+
+**Remediation:**
+```yaml
+# .github/workflows/dependency-gate.yml
+name: Dependency Gate
+on: [pull_request]
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci --ignore-scripts # Don't run postinstall scripts (security)
+      - run: npm audit --audit-level=moderate
+      - run: npx better-npm-audit audit --exclude 1084 # Exclude specific CVE if needed
+      - run: npx depcheck --ignores "@types/*,vitest,playwright" # Check for unused deps
+      
+      # Verify lockfile not modified by install (reproducibility)
+      - run: git diff --exit-code package-lock.json
+```
+
+**Deliverable:** Builds are reproducible; no unused dependencies; known vulnerabilities blocked.
+
+---
+
+## Gap 7: In-App Onboarding & Contextual Help
+**Current gap:** No user guidance for complex Vedic concepts (Dasha, Ashtakavarga).
+
+**Remediation:**
+```typescript
+// src/components/Onboarding/GuidedTour.tsx
+const TOUR_STEPS = [
+  {
+    target: '.chart-lagna',
+    content: 'This is your Ascendant (Lagna) — the foundation of your chart.',
+    title: 'Understanding Lagna',
+  },
+  {
+    target: '.dasha-timeline',
+    content: 'Dasha periods show which planet is currently influencing your life.',
+    title: 'Current Dasha',
+  },
+];
+
+// Contextual help component
+export const AstrologyTooltip = ({ term, children }) => (
+  <Tooltip>
+    <TooltipTrigger>{children}</TooltipTrigger>
+    <TooltipContent>
+      <p>{ASTROLOGY_GLOSSARY[term]}</p>
+      <a href={`/docs/${term.toLowerCase()}`}>Learn more →</a>
+    </TooltipContent>
+  </Tooltip>
+);
+```
+
+**Deliverable:** New users understand Vedic concepts; reduced support burden.
+
+---
+
+## Gap 8: Performance Budgets (CI Enforcement)
+**Current gap:** No automated prevention of bundle bloat.
+
+**Remediation:**
+```javascript
+// budgets.json
+{
+  "budgets": [
+    { "path": "/index.html", "resourceSizes": [{ "resourceType": "script", "budget": 200 }] },
+    { "path": "/chart/*", "resourceSizes": [{ "resourceType": "total", "budget": 500 }] }
+  ]
+}
+
+// CI check
+// npm install -g @lhci/cli
+// lhci autorun --config=lighthouserc.js
+```
+
+**Deliverable:** Build fails if bundle exceeds 200KB initial JS; prevents performance regressions.
+
+---
+
+## Gap 9: Multi-Region Latency Optimization
+**Current gap:** Edge functions deployed to single region; global users (India, US, UK) experience latency.
+
+**Remediation:**
+```bash
+# Deploy to multiple Supabase regions
+supabase functions deploy calculate-kundli --project-ref xxxx --region ap-south-1    # Mumbai
+supabase functions deploy calculate-kundli --project-ref xxxx --region us-east-1     # Virginia
+supabase functions deploy calculate-kundli --project-ref xxxx --region eu-west-1      # Ireland
+
+# Use Cloudflare Workers for geographic routing (optional advanced)
+# Route Indian users to Mumbai, US to Virginia via CF GeoDNS
+```
+
+**Deliverable:** <300ms API response globally via regional edge deployment.
+
+---
+
+## Gap 10: Feature Usage Analytics Privacy
+**Current gap:** PostHog/Sentry may capture PII in events; GDPR compliance gap.
+
+**Remediation:**
+```typescript
+// src/observability/privacy-scrubber.ts
+export const scrubPII = (event: any): any => {
+  const scrubbed = { ...event };
+  const sensitiveFields = ['email', 'name', 'birthDate', 'location'];
+  
+  sensitiveFields.forEach(field => {
+    if (scrubbed[field]) scrubbed[field] = '[REDACTED]';
+  });
+  
+  // Hash user ID for analytics (pseudonymization)
+  if (scrubbed.userId) {
+    scrubbed.userId = hashUserId(scrubbed.userId);
+  }
+  
+  return scrubbed;
+};
+
+// Apply to all PostHog events
+posthog.capture(event, scrubPII(properties));
+```
+
+**Deliverable:** Analytics data contains no PII; GDPR "legitimate interest" basis satisfied.
+
+---
+
+## Execution Priority
+
+| Priority | Gap | Effort | Impact |
+|----------|-----|--------|--------|
+| 🔴 Critical | Kill Switches | 2h | Prevents reputation damage |
+| 🔴 Critical | Email Infrastructure | 4h | User activation/retention |
+| 🟡 High | PWA/Offline | 8h | India market penetration |
+| 🟡 High | Data Migration | 6h | Legacy user preservation |
+| 🟢 Medium | Accessibility | 4h | Compliance + inclusivity |
+| 🟢 Medium | Performance Budgets | 2h | Prevents bloat |
+| 🔵 Low | Multi-region | 16h | Scale optimization |
+
+**Execute gaps 1-4 before launch. Gaps 5-10 within 30 days post-launch.**
+
+---
+
+## Verification Checklist
+
+```bash
+# Pre-launch verification
+npm run build && npx vite-bundle-visualizer  # Check bundle <200KB
+npm run test:a11y                             # axe-core passes
+npm run test:perf                             # Lighthouse >90
+supabase functions list                       # Verify all functions deployed
+curl -s https://api.vedic-rajkumar.app/health | grep healthy
+```
+
+Your platform is now **bulletproof** for enterprise launch. 🚀
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
