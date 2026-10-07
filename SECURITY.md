@@ -270,3 +270,54 @@ For security concerns or vulnerabilities, please follow the project's security d
 - [Supabase RLS Documentation](https://supabase.com/docs/guides/auth/row-level-security)
 - [Clerk Authentication](https://clerk.com/docs)
 - [OWASP Security Guidelines](https://owasp.org/)
+
+---
+
+## Week 6 Security Hardening (October 2026)
+
+### HTTP Security Headers (netlify.toml)
+
+All production responses now include:
+
+| Header | Value | Purpose |
+|--------|-------|---------|
+| `Content-Security-Policy` | `default-src 'self'; script-src 'self' 'unsafe-eval' <Clerk CDNs>; ...` | XSS mitigation |
+| `Strict-Transport-Security` | `max-age=63072000; includeSubDomains; preload` | Force HTTPS (2-year) |
+| `X-Frame-Options` | `DENY` | Clickjacking prevention |
+| `X-Content-Type-Options` | `nosniff` | MIME sniffing prevention |
+| `Referrer-Policy` | `strict-origin-when-cross-origin` | Referrer leakage prevention |
+| `Permissions-Policy` | `camera=(), microphone=(), geolocation=(), payment=()` | Feature restriction |
+| `X-Permitted-Cross-Domain-Policies` | `none` | Flash/PDF embedding prevention |
+
+`'unsafe-eval'` is required in `script-src` for `swisseph-wasm` (WebAssembly instantiation).
+
+### Input Validation (Zod)
+
+All API boundaries now use typed Zod schemas from `src/lib/validation.ts`:
+- `BirthDataSchema` — date/time/lat/lon/timezone/gender
+- `PrashnaInputSchema` — question text (3–500 chars)
+- `PanchangRequestSchema` — date + location
+- `MatchmakingRequestSchema` — two `BirthData` objects
+- `ChartRequestSchema` — birth data + style/ayanamsa options
+- `TransitRequestSchema` — target date + location
+- `CreateOrgSchema` — org name/slug/tier/billing email
+
+### Known Tracked Vulnerabilities (Require Migration Sprints)
+
+The following production CVEs require breaking-change upgrades and are tracked here pending dedicated migration:
+
+| Package | Current | Fix Version | CVEs | Sprint |
+|---------|---------|-------------|------|--------|
+| `jspdf` | 3.x | ≥4.2.1 | GHSA-f8cm-6447-x5h2 (LFI), GHSA-pqxr-3g65-p328 (PDF injection), +8 more | Week 9 PDF sprint |
+| `react-router-dom` | 6.x | ≥7.18.4 | GHSA-wrjc-x8rr-h8h6 (open redirect), GHSA-337j-9hxr-rhxg (constructor injection) | Week 8 routing sprint |
+
+**Mitigation in place:** jsPDF is only invoked server-side in edge functions for PDF generation — no untrusted user input is passed to `addJS()`. React Router open redirect requires a crafted backslash URL — blocked by CSP `form-action 'self'`.
+
+These are **not** exploitable in the current deployment configuration but must be resolved before the Week 12 production launch.
+
+### CI Security Gate (.github/workflows/security.yml)
+
+Three-job pipeline running on every push to `main`/`develop` and weekly:
+1. `dependency-audit` — `npm audit --omit=dev` (production deps only)
+2. `secrets-scan` — TruffleHog full-history scan, verified secrets only
+3. `typecheck` — `tsc --noEmit` strict check

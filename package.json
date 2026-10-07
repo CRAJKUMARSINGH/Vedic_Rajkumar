@@ -78,7 +78,8 @@
     "sonner": "^2.0.7",
     "swisseph-wasm": "^0.1.0",
     "tailwind-merge": "^3.3.1",
-    "vaul": "^1.1.2"
+    "vaul": "^1.1.2",
+    "zod": "4.6.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.2.3",
@@ -111,6 +112,6 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.9.2",
     "vite": "^5.4.19",
-    "vitest": "^3.2.4"
+    "vitest": "4.1.11"
   }
 }
