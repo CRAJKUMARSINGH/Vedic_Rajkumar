@@ -118,6 +118,10 @@ const PrivacySettingsPage = lazy(() => import('@/pages/PrivacySettingsPage'));
 const ValidationDashboardPage = lazy(() => import('@/pages/ValidationDashboardPage'));
 const AccuracyDashboardPage   = lazy(() => import('@/pages/AccuracyDashboardPage'));
 
+// ─── Week 11-12: Developer API & Launch Readiness ────────────────────────────
+const ApiKeysPage         = lazy(() => import('@/pages/developer/ApiKeys'));
+const LaunchChecklistPage = lazy(() => import('@/pages/LaunchChecklist'));
+
 // ─── Supplement / Synthesis pages ─────────────────────────────────────────────
 const SupplementsPage             = lazy(() => import('@/pages/SupplementsPage'));
 const SynthesisPage               = lazy(() => import('@/pages/SynthesisPage'));
@@ -319,6 +323,12 @@ export const routes: RouteConfig[] = [
   { path: '/chinese-astrology',    element: <ChineseAstrologyPage /> },
   { path: '/mobile-app',           element: <MobileAppPage /> },
   { path: '/community',            element: <CommunityPage /> },
+
+  // ── Week 11: Developer API ─────────────────────────────────────────────────
+  { path: '/developer/api-keys',   element: <ApiKeysPage /> },
+
+  // ── Week 12: Launch Readiness ──────────────────────────────────────────────
+  { path: '/launch-checklist',     element: <LaunchChecklistPage /> },
 
   { path: '/features',             element: <AllFeaturesPage /> },
 
