@@ -1,6 +1,7 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { corsHeaders, corsResponse } from '../_shared/cors.ts';
 import { checkRateLimit, rateLimitResponse } from '../_shared/rateLimit.ts';
+import { assertNotKilled } from '../_shared/killSwitch.ts';
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -13,6 +14,7 @@ serve(async (req) => {
   }
 
   try {
+    assertNotKilled('kill_kundli');
     const { birthDate, birthTime, latitude, longitude, timezone = 5.5, ayanamsa = 'Lahiri' } = await req.json();
 
     if (!birthDate || !birthTime || latitude === undefined || longitude === undefined) {

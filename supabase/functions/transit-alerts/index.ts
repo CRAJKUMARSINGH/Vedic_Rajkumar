@@ -1,91 +1,94 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { corsHeaders, corsResponse } from '../_shared/cors.ts';
+import { logger, withTelemetry } from '../_shared/observability.ts';
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-};
+interface TransitSubscriptionRow {
+  id: string;
+  user_id: string;
+  chart_id: string | null;
+  event_types: string[];
+  grahas: string[];
+  channels: string[];
+}
 
-/**
- * Transit Alerts Edge Function — Week 10
- *
- * Scheduled via Supabase Cron at 06:00 IST daily.
- * Queries opted-in users, checks Chandrashtama + double transit,
- * and sends push notifications for critical transits.
- */
-serve(async (req) => {
-  if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders });
-  }
+interface TransitEvent {
+  type: string;
+  graha: string;
+  date: string;
+}
 
-  try {
-    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
-    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-    const supabase = createClient(supabaseUrl, supabaseKey);
+serve(withTelemetry('transit-alerts', async (req) => {
+  if (req.method === 'OPTIONS') return corsResponse();
 
-    // Get all users who opted in to transit alerts
-    const { data: users, error } = await supabase
-      .from('user_preferences')
-      .select('user_id, natal_moon_rashi, notification_settings')
-      .eq('transit_alerts_enabled', true);
-
-    if (error) {
-      return new Response(JSON.stringify({ error: error.message }), {
-        status: 500,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-    }
-
-    const today = new Date();
-    const results: { userId: string; alerted: boolean; reason: string }[] = [];
-
-    for (const user of users ?? []) {
-      const natalMoonRashi: number = user.natal_moon_rashi ?? 0;
-
-      // Approximate transit moon rashi (replace with real ephemeris call if on edge)
-      const transitMoonRashi = Math.floor(
-        (today.getDate() + today.getMonth() * 2.5) % 12
-      );
-      const houseFromNatal = ((transitMoonRashi - natalMoonRashi + 12) % 12) + 1;
-      const isChandrashtama = houseFromNatal === 8;
-
-      if (isChandrashtama) {
-        // Log alert to audit log
-        await supabase.from('audit_logs').insert({
-          user_id: user.user_id,
-          action: 'transit_alert_sent',
-          resource_type: 'transit',
-          changes: {
-            type: 'chandrashtama',
-            natal_moon_rashi: natalMoonRashi,
-            transit_moon_rashi: transitMoonRashi,
-            date: today.toISOString(),
-          },
-        });
-
-        results.push({ userId: user.user_id, alerted: true, reason: 'chandrashtama' });
-      } else {
-        results.push({ userId: user.user_id, alerted: false, reason: 'no_critical_transit' });
-      }
-    }
-
-    return new Response(
-      JSON.stringify({
-        status: 'ok',
-        triggeredAt: today.toISOString(),
-        processedUsers: users?.length ?? 0,
-        alerts: results,
-      }),
-      {
-        status: 200,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      }
-    );
-  } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : 'Alert trigger failed';
-    return new Response(JSON.stringify({ error: message }), {
+  const supabaseUrl = Deno.env.get('SUPABASE_URL');
+  const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+  if (!supabaseUrl || !serviceKey) {
+    return new Response(JSON.stringify({ error: 'missing_supabase_env' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
-});
+
+  const supabase = createClient(supabaseUrl, serviceKey);
+  const { data: subs } = await supabase
+    .from('transit_subscriptions')
+    .select('id, user_id, chart_id, event_types, grahas, channels')
+    .eq('active', true);
+
+  let fired = 0;
+  const rows = (subs ?? []) as TransitSubscriptionRow[];
+
+  for (const sub of rows) {
+    const events = await detectEventsForChart(sub.chart_id, sub.event_types, sub.grahas);
+    for (const ev of events) {
+      const eventKey = `${ev.type}:${ev.graha}:${ev.date.slice(0, 10)}`;
+      const { error } = await supabase
+        .from('transit_alerts_sent')
+        .insert({ subscription_id: sub.id, event_key: eventKey });
+      if (!error) {
+        await dispatchNotification(sub, ev, supabaseUrl, serviceKey);
+        fired++;
+      }
+    }
+  }
+
+  logger.info('alerts_cycle_complete', { fired });
+  return new Response(JSON.stringify({ fired }), {
+    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+  });
+}));
+
+async function detectEventsForChart(
+  chartId: string | null,
+  types: string[],
+  grahas: string[],
+): Promise<TransitEvent[]> {
+  const url = Deno.env.get('TRANSIT_SERVICE_URL');
+  if (!url || !chartId) return [];
+  const res = await fetch(`${url}/events`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chartId, types, grahas, horizonDays: 7 }),
+  });
+  if (!res.ok) return [];
+  const data = (await res.json()) as { events?: TransitEvent[] };
+  return data.events ?? [];
+}
+
+async function dispatchNotification(
+  sub: TransitSubscriptionRow,
+  ev: TransitEvent,
+  supabaseUrl: string,
+  serviceKey: string,
+): Promise<void> {
+  if (!sub.channels.includes('email')) return;
+  await fetch(`${supabaseUrl}/functions/v1/send-email`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${serviceKey}`,
+    },
+    body: JSON.stringify({ userId: sub.user_id, template: 'transit_alert', data: ev }),
+  });
+}

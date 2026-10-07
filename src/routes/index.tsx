@@ -62,6 +62,7 @@ const SpiritualRemediesPage  = lazy(() => import('@/pages/SpiritualRemediesPage'
 const GemstoneRecommendPage  = lazy(() => import('@/pages/GemstonePage'));
 const NakshatraPrecautionsPage = lazy(() => import('@/pages/NakshatraPrecautionsPage'));
 const DynamicTransitPage     = lazy(() => import('@/pages/DynamicTransitPage'));
+const TransitsPage           = lazy(() => import('@/pages/TransitsPage'));
 const TransitAnalysisPage    = lazy(() => import('@/pages/TransitAnalysisPage'));
 const EventTransitPage       = lazy(() => import('@/pages/EventTransitPage'));
 
@@ -260,6 +261,8 @@ export const routes: RouteConfig[] = [
   { path: '/gemstones',            element: <GemstoneRecommendPage /> },
   { path: '/nakshatra-precautions', element: <NakshatraPrecautionsPage /> },
   { path: '/dynamic-transit',      element: <DynamicTransitPage /> },
+  { path: '/transits',             element: <TransitsPage /> },
+  { path: '/transit-timeline',     element: <TransitsPage /> },
   { path: '/transit',              element: <Navigate to="/dynamic-transit" replace /> },
   { path: '/transit-analysis',     element: <TransitAnalysisPage /> },
   { path: '/event-transit',        element: <EventTransitPage /> },

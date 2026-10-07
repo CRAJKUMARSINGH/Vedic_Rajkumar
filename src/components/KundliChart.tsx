@@ -18,6 +18,7 @@ import {
   type ChartStyle,
   type ChartHouse,
 } from '@/services/kundliService';
+import { AccessibleChart } from '@/components/charts/AccessibleChart';
 
 interface KundliChartProps {
   date: string;
@@ -203,11 +204,35 @@ const KundliChart: React.FC<KundliChartProps> = ({
               {/* Chart Visualization */}
               <div className="flex-1">
                 <div className="relative mx-auto" style={{ width: '320px', height: '320px' }}>
+                  <AccessibleChart
+                    planets={kundliData.houses.flatMap((house) => {
+                      const occupants = house.planets as unknown as Array<
+                        string | { name?: string; degrees?: number }
+                      >;
+                      return occupants.map((planet, idx) => {
+                        if (typeof planet === 'string') {
+                          return {
+                            planet,
+                            sign: house.rashiName,
+                            house: house.houseNumber,
+                            degree: 0,
+                          };
+                        }
+                        return {
+                          planet: planet.name ?? `Graha ${idx + 1}`,
+                          sign: house.rashiName,
+                          house: house.houseNumber,
+                          degree: typeof planet.degrees === 'number' ? planet.degrees : 0,
+                        };
+                      });
+                    })}
+                  />
                   <svg
                     width="320"
                     height="320"
                     viewBox="0 0 320 320"
                     className="border border-border rounded-lg bg-card"
+                    aria-hidden="true"
                   >
                     {chartStyle === 'north-indian' ? (
                       // Gorgeous traditional North Indian diamond chart layout using responsive SVG polygons

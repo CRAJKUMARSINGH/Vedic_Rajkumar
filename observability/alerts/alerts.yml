@@ -1,0 +1,44 @@
+alerts:
+  - name: HighErrorRate
+    condition: error_rate_5m > 0.01
+    for: 5m
+    severity: critical
+    notify: [pagerduty, slack]
+    runbook: docs/observability/runbooks.md#high-error-rate
+
+  - name: HighLatencyP95
+    condition: latency_p95_5m > 800
+    for: 10m
+    severity: warning
+    notify: [slack]
+
+  - name: ChartAccuracyDegradation
+    condition: accuracy_ratio_1h < 0.95
+    for: 15m
+    severity: critical
+    notify: [pagerduty]
+    runbook: docs/observability/runbooks.md#chart-accuracy-degradation
+
+  - name: DatabaseDown
+    condition: health_database == 0
+    for: 2m
+    severity: critical
+    notify: [pagerduty, slack]
+
+  - name: ErrorBudgetBurnFast
+    condition: error_budget_burn_rate_1h > 14.4
+    for: 5m
+    severity: critical
+    notify: [pagerduty]
+
+  - name: ErrorBudgetBurnSlow
+    condition: error_budget_burn_rate_6h > 6
+    for: 30m
+    severity: warning
+    notify: [slack]
+
+  - name: ExportFailures
+    condition: export_success_rate_15m < 0.95
+    for: 10m
+    severity: warning
+    notify: [slack]

@@ -14,6 +14,7 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import * as Sentry from '@sentry/react';
 import Providers from '@/Providers';
 import MainLayout from '@/components/MainLayout';
 import ConsentBanner from '@/components/ConsentBanner';
@@ -59,7 +60,7 @@ function AnimatedRoutes() {
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 
-export default function App() {
+function App() {
   useEffect(() => {
     registerServiceWorker();
     setupConnectionListeners();
@@ -77,3 +78,13 @@ export default function App() {
     </Providers>
   );
 }
+
+export default Sentry.withErrorBoundary(App, {
+  fallback: ({ error, resetError }) => (
+    <div className="p-8 text-center">
+      <h2>Something went wrong</h2>
+      <pre className="text-xs">{String(error)}</pre>
+      <button type="button" onClick={resetError}>Try again</button>
+    </div>
+  ),
+});

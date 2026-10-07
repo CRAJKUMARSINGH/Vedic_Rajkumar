@@ -1,5 +1,6 @@
 import { Component, type ReactNode, type ErrorInfo } from "react";
 import { captureException } from "@/lib/errorMonitoring";
+import { captureError } from "@/observability/errors/sentry";
 
 interface Props {
   children: ReactNode;
@@ -32,6 +33,7 @@ export class ErrorBoundary extends Component<Props, State> {
       context: 'ErrorBoundary',
       extra: { componentStack: info.componentStack ?? '' },
     });
+    captureError(error, { componentStack: info.componentStack ?? '' });
     console.error("[ErrorBoundary]", error, info.componentStack);
     this.props.onError?.(error, info);
   }

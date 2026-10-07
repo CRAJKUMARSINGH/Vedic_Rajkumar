@@ -10,6 +10,11 @@ import type {
   ChartCalculationResponse,
 } from '../types';
 import { calculateKundli } from '@/services/kundliService';
+import { withSpan } from '@/observability/tracing/tracer';
+import { metrics } from '@/observability/metrics/registry';
+import { createLogger } from '@/observability/logging/logger';
+
+const log = createLogger('api.kundli');
 
 /**
  * Helper to parse coordinates from BirthData location or defaults
@@ -41,12 +46,19 @@ export async function calculateChart(
   request: ChartCalculationRequest,
   client: ApiClient = apiClient
 ): Promise<ApiResponse<ChartCalculationResponse>> {
+  return withSpan('calculate_kundli', async () => {
   try {
-    return await client.post<ChartCalculationResponse, ChartCalculationRequest>(
+    const start = performance.now();
+    const res = await client.post<ChartCalculationResponse, ChartCalculationRequest>(
       '/api/charts/calculate',
       request
     );
+    metrics.chartCalculated.inc();
+    metrics.calcLatency.observe(performance.now() - start);
+    return res;
   } catch (error) {
+    metrics.chartFailed.inc();
+    log.error('kundli_calc_failed', { error: error instanceof Error ? error.message : String(error) });
     if (!client.enableFallback) {
       throw error;
     }
@@ -75,4 +87,5 @@ export async function calculateChart(
       source: 'fallback-local',
     };
   }
+  }, { feature: 'kundli' });
 }

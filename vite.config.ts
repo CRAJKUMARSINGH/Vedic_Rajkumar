@@ -51,16 +51,7 @@ export default defineConfig({
           if (id.includes('posthog-js')) return 'analytics';
 
           // ── Radix UI primitives ───────────────────────────────────────────
-          // Split into two chunks so the most common primitives load first
-          if (id.includes('@radix-ui/react-dialog')
-            || id.includes('@radix-ui/react-dropdown-menu')
-            || id.includes('@radix-ui/react-popover')
-            || id.includes('@radix-ui/react-select')
-            || id.includes('@radix-ui/react-tabs')
-            || id.includes('@radix-ui/react-tooltip')) {
-            return 'radix-core';
-          }
-          if (id.includes('@radix-ui')) return 'radix-extra';
+          if (id.includes('@radix-ui')) return 'radix';
 
           // ── Supabase client ───────────────────────────────────────────────
           if (id.includes('@supabase')) return 'supabase';
@@ -82,6 +73,10 @@ export default defineConfig({
     globals: true,
     setupFiles: ['./src/tests/setup.ts'],
     css: true,
-    include: ['src/tests/**/*.{test,spec}.{ts,tsx}', 'tests/**/*.{test,spec}.{ts,tsx,js,jsx}'],
+    include: [
+      'src/tests/**/*.{test,spec}.{ts,tsx}',
+      'src/test/**/*.{test,spec}.{ts,tsx}',
+      'tests/**/*.{test,spec}.{ts,tsx,js,jsx}',
+    ],
   },
 });

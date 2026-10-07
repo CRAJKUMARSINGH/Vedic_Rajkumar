@@ -18,6 +18,12 @@ import {
   type RequestInterceptorContext,
   type ResponseInterceptorContext,
 } from './types';
+import { getCorrelationId } from '@/observability/logging/correlation';
+import { withSpan } from '@/observability/tracing/tracer';
+import { metrics } from '@/observability/metrics/registry';
+import { createLogger } from '@/observability/logging/logger';
+
+const apiLog = createLogger('api.client');
 
 export class ApiClient {
   private baseUrl: string;
@@ -52,6 +58,10 @@ export class ApiClient {
           };
         }
       }
+      ctx.options.headers = {
+        ...ctx.options.headers,
+        'x-correlation-id': getCorrelationId(),
+      };
       return ctx;
     });
   }
@@ -87,7 +97,14 @@ export class ApiClient {
   }
 
   public async request<T>(path: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
+    return withSpan(`api.request ${path}`, () => this.executeRequest<T>(path, options), {
+      feature: 'api',
+    });
+  }
+
+  private async executeRequest<T>(path: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
     const url = this.resolveUrl(path);
+    const started = performance.now();
 
     let context: RequestInterceptorContext = {
       url,
@@ -145,6 +162,8 @@ export class ApiClient {
         )) as ResponseInterceptorContext<T>;
       }
 
+      metrics.calcLatency.observe(performance.now() - started);
+
       return {
         data: resContext.data,
         status: response.status,
@@ -153,6 +172,7 @@ export class ApiClient {
       };
     } catch (err: unknown) {
       clearTimeout(timeoutId);
+      apiLog.error('api_request_failed', { path, error: err instanceof Error ? err.message : String(err) });
 
       let apiError: ApiError;
       if (err instanceof ApiError) {

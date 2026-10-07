@@ -1,0 +1,13 @@
+{
+  "page": {
+    "name": "Vedic Rajkumar Status",
+    "url": "https://status.vedic-rajkumar.app"
+  },
+  "components": [
+    { "name": "Web App", "check": "https://vedic-rajkumar.app/" },
+    { "name": "API", "check": "https://api.vedic-rajkumar.app/health" },
+    { "name": "Auth", "check": "https://YOUR_PROJECT.supabase.co/auth/v1/health" },
+    { "name": "Database", "check": "health.database" }
+  ],
+  "incident_template": "We are investigating reports of {component}. Updates every 30 min."
+}

@@ -1,0 +1,20 @@
+monitors:
+  - name: Homepage
+    url: https://vedic-rajkumar.netlify.app/
+    interval: 60
+    expect_status: 200
+    expect_body_contains: "Vedic"
+
+  - name: HealthEndpoint
+    url: https://YOUR_PROJECT.supabase.co/functions/v1/health
+    interval: 30
+    expect_status: 200
+    expect_json: { status: "healthy" }
+
+  - name: KundliAPI
+    url: https://YOUR_PROJECT.supabase.co/functions/v1/calculate-kundli
+    method: POST
+    interval: 300
+    body: { birthDate: "1990-01-01", birthTime: "12:00", latitude: 28.6, longitude: 77.2 }
+    expect_status: 200
+    max_latency_ms: 800
