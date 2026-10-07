@@ -24,13 +24,14 @@ export const ApiKeysPage = () => {
   const [generatedKey, setGeneratedKey] = useState<string | null>(null);
 
   const loadKeys = useCallback(async () => {
-    const { data, error } = await supabase
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data, error } = await (supabase as any)
       .from('api_keys')
       .select('id, name, key_prefix, tier, rate_limit_per_day, usage_count, last_used_at, is_active, created_at')
       .order('created_at', { ascending: false });
 
     if (!error && data) {
-      setKeys(data);
+      setKeys(data as ApiKey[]);
     }
   }, []);
 
@@ -54,7 +55,8 @@ export const ApiKeysPage = () => {
         .map((b) => b.toString(16).padStart(2, '0'))
         .join('');
 
-      const { error } = await supabase.from('api_keys').insert({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { error } = await (supabase as any).from('api_keys').insert({
         name: newKeyName.trim(),
         key_hash: keyHash,
         key_prefix: prefix,
@@ -73,7 +75,8 @@ export const ApiKeysPage = () => {
   };
 
   const revokeKey = async (id: string) => {
-    await supabase.from('api_keys').update({ is_active: false }).eq('id', id);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await (supabase as any).from('api_keys').update({ is_active: false }).eq('id', id);
     await loadKeys();
   };
 
