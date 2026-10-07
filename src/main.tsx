@@ -5,6 +5,7 @@
  * Boot order:
  *  1. validateEnv()           — warn about missing integrations without blocking the shell
  *  2. initErrorMonitoring()   — wire Sentry (or console fallback) before React mounts
+ *  2b. initTelemetry()        — initialise PostHog analytics (no-op without VITE_POSTHOG_KEY)
  *  3. createRoot / render     — mount the React tree
  */
 
@@ -14,6 +15,7 @@ import App from './App.tsx';
 import './index.css';
 import { validateEnv } from '@/lib/envConfig';
 import { initErrorMonitoring, captureException } from '@/lib/errorMonitoring';
+import { initTelemetry } from '@/lib/telemetry';
 
 // ─── Step 1: Validate environment variables ───────────────────────────────────
 // Warns about missing integration variables; the shell can run in demo/offline mode.
@@ -24,6 +26,10 @@ validateEnv();
 initErrorMonitoring().catch((err) => {
   console.warn('[main.tsx] Error monitoring failed to initialize:', err);
 });
+
+// ─── Step 2b: Start PostHog analytics ────────────────────────────────────────
+// Synchronous — no-op when VITE_POSTHOG_KEY is absent.
+initTelemetry();
 
 // ─── Global error handler (before React mounts) ───────────────────────────────
 // Forward to captureException so Sentry (or console fallback) captures these.
