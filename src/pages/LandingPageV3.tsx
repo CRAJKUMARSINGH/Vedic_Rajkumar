@@ -37,7 +37,7 @@ const FEATURES = [
     titleHi: 'कुंडली — जन्म कुंडली',
     href: '/horoscope',
     badge: null,
-    desc: 'Accurate Vedic birth chart with Lahiri ayanamsa, 9-planet positions, 12-house analysis, Vimshottari Dasha sequence, and Ascendant-based whole-sign houses.',
+    desc: 'Sidereal Vedic birth chart using Lahiri ayanamsa — 9-planet positions, 12-house analysis, Vimshottari Dasha sequence, and Ascendant-based whole-sign houses. Calculation accuracy validated against reference charts.',
     status: 'active',
   },
   {

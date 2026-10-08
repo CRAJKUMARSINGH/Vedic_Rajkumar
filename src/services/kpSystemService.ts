@@ -1,10 +1,21 @@
 // @ts-nocheck
 /**
  * KP System Service - Krishnamurti Paddhati
- * Week 12: AstroSage Feature Integration - Part 2
- * 
- * Implements KP System calculations with sub-lords and significators
- * Based on Krishnamurti Paddhati principles
+ *
+ * ⚠️  STATUS: DEFERRED — Do not promote to users or use in production flows.
+ *
+ * Decision rationale (Antigravity Week 7/8 Decision Synthesis):
+ *   - KP requires ±1-minute birth-time precision for Sub-Lord accuracy.
+ *   - Current engine cannot guarantee this without a birth-time rectifier.
+ *   - Trust risk is HIGH: incorrect Sub-Lords produce wrong event predictions.
+ *   - Action: DEFER until a birth-time rectification tool is implemented.
+ *   - See: attached-assets/week_08_decision_synthesis.md §3 (KP = DEFER)
+ *
+ * When this is promoted:
+ *   1. Remove this notice and the @ts-nocheck pragma.
+ *   2. Implement true Placidus house cusps (not equal 30° divisions).
+ *   3. Validate Sub-Lord boundaries against the 249-division KP table.
+ *   4. Add a birth-time uncertainty warning in the UI.
  */
 
 import { calculateCompletePlanetaryPositions, type PlanetPosition } from './ephemerisService';
