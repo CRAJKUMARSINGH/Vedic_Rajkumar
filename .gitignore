@@ -46,9 +46,7 @@ __jataks_raw.txt
 creat.md
 patch.md
 
-# Archives
-/archive/
-*.zip
+# Stale build artifacts (deleted, not archived)
 test_*.pdf
 tsc-*.txt
 
