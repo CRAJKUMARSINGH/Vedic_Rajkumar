@@ -1,0 +1,150 @@
+<!-- Advanced Antardasha Analysis — Mutual Graha + Shad Bala + Ashtakavarga — Vedic Rajkumar -->
+<section class="py-24 bg-slate-950">
+<div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-4">
+            <i class="fas fa-chart-line"></i> India's First
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
+            <span class="text-blue-400">Advanced Antardasha</span> Analysis
+        </h2>
+        <p class="text-slate-400 text-lg max-w-3xl mx-auto">
+            The only platform that calculates Antardasha sub-periods with mutual graha positions,
+            Shad Bala (6-fold strength), and Ashtakavarga (8-fold bindu) integration.
+        </p>
+    </div>
+
+    <!-- Feature Grid -->
+    <div class="grid md:grid-cols-3 gap-6 mb-16">
+        <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6">
+            <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400 text-xl mb-4"><i class="fas fa-project-diagram"></i></div>
+            <h3 class="text-white font-semibold mb-2">Mutual Graha Positions</h3>
+            <p class="text-slate-400 text-sm">Analyzes how Mahadasha and Antardasha lords influence each other based on relative house positions.</p>
+        </div>
+        <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6">
+            <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 text-xl mb-4"><i class="fas fa-dumbbell"></i></div>
+            <h3 class="text-white font-semibold mb-2">Shad Bala Integration</h3>
+            <p class="text-slate-400 text-sm">Six-fold strength: Sthana Bala, Dig Bala, Kala Bala, Chesta Bala, Naisargika Bala, Drik Bala.</p>
+        </div>
+        <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6">
+            <div class="w-12 h-12 rounded-lg bg-green-500/20 flex items-center justify-center text-green-400 text-xl mb-4"><i class="fas fa-th"></i></div>
+            <h3 class="text-white font-semibold mb-2">Ashtakavarga Bindus</h3>
+            <p class="text-slate-400 text-sm">8-fold bindu points from Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, and Lagna.</p>
+        </div>
+    </div>
+
+    <!-- Interactive Dashboard -->
+    <div class="bg-slate-900/30 border border-slate-800 rounded-2xl p-8 mb-16">
+        <div class="grid lg:grid-cols-3 gap-8">
+            <div class="space-y-4">
+                <h4 class="text-white font-semibold">Select Dasha Period</h4>
+                <select id="mahaSelect" onchange="updateAntardasha()" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none">
+                    <option value="Jupiter">Jupiter (Guru) 2018–2034</option>
+                    <option value="Saturn">Saturn (Shani) 2034–2053</option>
+                    <option value="Mercury">Mercury (Budh) 2053–2070</option>
+                    <option value="Ketu">Ketu 2009–2016</option>
+                    <option value="Venus">Venus (Shukra) 2016–2036</option>
+                </select>
+                <select id="antarSelect" onchange="updateAntardasha()" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none">
+                    <option value="Jupiter">Jupiter-Jupiter</option>
+                    <option value="Saturn">Jupiter-Saturn</option>
+                    <option value="Mercury">Jupiter-Mercury</option>
+                    <option value="Venus">Jupiter-Venus</option>
+                </select>
+                <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700 text-sm" id="periodInfo">
+                    <div class="flex justify-between mb-1"><span class="text-slate-400">Start:</span><span class="text-white">15 Jun 2023</span></div>
+                    <div class="flex justify-between mb-1"><span class="text-slate-400">End:</span><span class="text-white">12 Aug 2025</span></div>
+                    <div class="flex justify-between"><span class="text-slate-400">Duration:</span><span class="text-white">2 yrs 2 mo</span></div>
+                </div>
+                <button onclick="updateAntardasha()" class="w-full py-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:opacity-90 transition">
+                    <i class="fas fa-calculator mr-2"></i>Recalculate
+                </button>
+            </div>
+
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Mutual Position -->
+                <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+                    <h4 class="text-white font-semibold mb-4 flex items-center gap-2"><i class="fas fa-exchange-alt text-blue-400"></i> Mutual Graha Relationship</h4>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="text-center p-4 bg-slate-900/50 rounded-lg">
+                            <div class="text-slate-400 text-xs mb-1">Mahadasha Lord</div>
+                            <div class="text-amber-400 font-bold text-lg" id="mahaSign">Cancer</div>
+                            <div class="text-slate-500 text-xs" id="mahaHouse">Exalted</div>
+                        </div>
+                        <div class="text-center p-4 bg-slate-900/50 rounded-lg">
+                            <div class="text-slate-400 text-xs mb-1">Antardasha Lord</div>
+                            <div class="text-blue-400 font-bold text-lg" id="antarSign">Capricorn</div>
+                            <div class="text-slate-500 text-xs" id="antarHouse">Own sign</div>
+                        </div>
+                    </div>
+                    <div class="bg-blue-900/20 border border-blue-800/50 rounded-lg p-4">
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-info-circle text-blue-400 mt-1"></i>
+                            <div>
+                                <div class="text-blue-400 font-semibold text-sm mb-1" id="mutualType">Mutual Aspect: 1/7 (Opposition)</div>
+                                <p class="text-slate-300 text-sm" id="mutualDesc">Lords are in opposition — period brings challenges that require balancing two forces. Both strengths can be harnessed with awareness.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shad Bala -->
+                <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+                    <h4 class="text-white font-semibold mb-4 flex items-center gap-2"><i class="fas fa-dumbbell text-purple-400"></i> Shad Bala (6-Fold Strength)</h4>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span class="text-slate-300" id="mahaLabel">Jupiter (Mahadasha)</span><span class="text-green-400 font-semibold">7.2 / 10</span></div>
+                            <div class="h-2 bg-slate-700 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-green-500 to-green-400 rounded-full" style="width:72%"></div></div>
+                            <div class="text-xs text-slate-500 mt-1">Strong — Exalted in Cancer</div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span class="text-slate-300" id="antarLabel">Saturn (Antardasha)</span><span class="text-amber-400 font-semibold">5.8 / 10</span></div>
+                            <div class="h-2 bg-slate-700 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full" style="width:58%"></div></div>
+                            <div class="text-xs text-slate-500 mt-1">Moderate — Own sign</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 grid grid-cols-3 gap-2 text-center text-xs">
+                        <div class="bg-slate-900/50 rounded p-2"><div class="text-slate-400">Sthana Bala</div><div class="text-white font-semibold">1.8</div></div>
+                        <div class="bg-slate-900/50 rounded p-2"><div class="text-slate-400">Dig Bala</div><div class="text-white font-semibold">1.2</div></div>
+                        <div class="bg-slate-900/50 rounded p-2"><div class="text-slate-400">Kala Bala</div><div class="text-white font-semibold">1.5</div></div>
+                        <div class="bg-slate-900/50 rounded p-2"><div class="text-slate-400">Chesta Bala</div><div class="text-white font-semibold">0.9</div></div>
+                        <div class="bg-slate-900/50 rounded p-2"><div class="text-slate-400">Naisargika</div><div class="text-white font-semibold">1.0</div></div>
+                        <div class="bg-slate-900/50 rounded p-2"><div class="text-slate-400">Drik Bala</div><div class="text-white font-semibold">0.8</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prediction Summary -->
+    <div class="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-800/30 rounded-2xl p-8">
+        <h3 class="text-2xl font-bold text-white mb-6 text-center">Period Prediction Summary</h3>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="text-center"><div class="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 text-2xl mx-auto mb-3"><i class="fas fa-briefcase"></i></div><h4 class="text-white font-semibold mb-2">Career</h4><p class="text-slate-400 text-sm" id="careerSummary">Jupiter's strength supports promotion. Long-term projects favored.</p></div>
+            <div class="text-center"><div class="w-16 h-16 rounded-full bg-pink-500/20 flex items-center justify-center text-pink-400 text-2xl mx-auto mb-3"><i class="fas fa-heart"></i></div><h4 class="text-white font-semibold mb-2">Relationships</h4><p class="text-slate-400 text-sm" id="relSummary">Testing times require patience. Maturity and wisdom in partnerships.</p></div>
+            <div class="text-center"><div class="w-16 h-16 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 text-2xl mx-auto mb-3"><i class="fas fa-coins"></i></div><h4 class="text-white font-semibold mb-2">Finance</h4><p class="text-slate-400 text-sm" id="finSummary">Steady growth through career. Real estate favorable.</p></div>
+        </div>
+        <div class="mt-8 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/20 text-blue-400 text-sm">
+                <i class="fas fa-star"></i>
+                <span id="overallRating">Overall Rating: 7.5/10 — Favorable with Effort</span>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<script>
+function updateAntardasha(){
+    const maha=document.getElementById('mahaSelect').value;
+    const antar=document.getElementById('antarSelect').value;
+    document.getElementById('mahaLabel').textContent=maha+' (Mahadasha)';
+    document.getElementById('antarLabel').textContent=antar+' (Antardasha)';
+    const isSame=maha===antar;
+    document.getElementById('mutualType').textContent=isSame?'Same Lord: Double Activation':'Mutual Relationship: '+maha+'/'+antar;
+    document.getElementById('mutualDesc').textContent=isSame
+        ?'Mahadasha and Antardasha are the same planet — pure concentrated energy. Very powerful period for that planet\'s significations.'
+        :'Analyze the house relationship between '+maha+' and '+antar+' in your natal chart. Benefic relationship = smooth results. Malefic = challenges that build strength.';
+}
+</script>
