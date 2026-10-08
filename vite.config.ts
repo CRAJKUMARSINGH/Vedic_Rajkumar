@@ -8,9 +8,32 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      strategies: 'injectManifest',
-      srcDir: 'src',
-      filename: 'sw.ts',
+      // generateSW: Vite-plugin-pwa auto-generates the service worker.
+      // No workbox imports needed in sw.ts with this strategy.
+      strategies: 'generateSW',
+      workbox: {
+        // Cache chart API responses
+        runtimeCaching: [
+          {
+            urlPattern: /\/api\/v1\/charts/,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'chart-calculations',
+              expiration: { maxEntries: 100, maxAgeSeconds: 7 * 24 * 60 * 60 },
+            },
+          },
+          {
+            urlPattern: /\/ephemeris/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'ephemeris-data',
+              expiration: { maxAgeSeconds: 30 * 24 * 60 * 60 },
+            },
+          },
+        ],
+        // Exclude swisseph-wasm WASM from precache (too large)
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
+      },
       manifest: {
         name: 'Vedic Rajkumar',
         short_name: 'Vedic',
@@ -28,14 +51,23 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      // When edge ephemeris is enabled, swap swisseph-wasm with a browser stub
       'swisseph-wasm': process.env.VITE_USE_EDGE_EPHEMERIS
         ? fileURLToPath(new URL('./src/stubs/swisseph-stub.ts', import.meta.url))
         : 'swisseph-wasm',
+      // Browser stubs for Node built-ins required by swisseph-wasm
+      'node:module': fileURLToPath(new URL('./src/stubs/node-module.ts', import.meta.url)),
+      'node:path': fileURLToPath(new URL('./src/stubs/node-path.ts', import.meta.url)),
+      'node:url': fileURLToPath(new URL('./src/stubs/node-url.ts', import.meta.url)),
     },
   },
   server: {
     host: '0.0.0.0',
     port: 5173,
+  },
+  optimizeDeps: {
+    // swisseph-wasm uses WASM + Node APIs — exclude from pre-bundling
+    exclude: ['swisseph-wasm'],
   },
   build: {
     // Warn at 400 KB — Lighthouse penalises > 500 KB first-load JS
