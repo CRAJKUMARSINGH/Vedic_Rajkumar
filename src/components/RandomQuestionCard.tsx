@@ -42,7 +42,6 @@ export default function RandomQuestionCard({ lang }: RandomQuestionCardProps) {
 
   const handleSaveQuestion = useCallback(() => {
     if (saved) return;
-    setSaved(true);
     const key = "vedic_saved_questions";
     try {
       const stored = JSON.parse(localStorage.getItem(key) ?? "[]") as AstrologyQuestion[];
@@ -50,7 +49,14 @@ export default function RandomQuestionCard({ lang }: RandomQuestionCardProps) {
         stored.unshift(question);
         localStorage.setItem(key, JSON.stringify(stored.slice(0, 50)));
       }
-    } catch {}
+      setSaved(true);
+    } catch {
+      toast({
+        title: isHi ? "प्रश्न सहेजा नहीं जा सका" : "Question could not be saved",
+        description: isHi ? "ब्राउज़र स्टोरेज उपलब्ध नहीं है" : "Browser storage is unavailable",
+      });
+      return;
+    }
     toast({
       title: isHi ? "✓ प्रश्न सहेजा गया" : "✓ Question bookmarked",
       description: isHi ? "आपकी स्थानीय ब्राउज़र मेमोरी में सहेजा गया" : "Saved to your local browser storage",

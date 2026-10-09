@@ -704,12 +704,12 @@ function JaiminiTab({ engineData, birthDate }: { engineData: EngineData; birthDa
 
 function PsychologyTab({ engineData }: { engineData: EngineData }) {
   const p = engineData.psychologicalProfile as any;
+  const [open, setOpen] = useState<string | null>(null);
+  const toggle = (k: string) => setOpen(o => o === k ? null : k);
+
   if (!p) return <p className="text-slate-500 text-sm text-center py-8">Psychological profile unavailable.</p>;
 
   const { nakshatra_fear: nf, rahu_ketu_karmic_statement: rk, saturn_wound_statement: sw, synthesis_narrative } = p;
-
-  const [open, setOpen] = useState<string | null>(null);
-  const toggle = (k: string) => setOpen(o => o === k ? null : k);
 
   const sections = [
     {

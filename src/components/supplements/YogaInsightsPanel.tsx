@@ -187,44 +187,12 @@ export function YogaInsightsPanel() {
     }
   }
 
-  // ── Birth input gate ─────────────────────────────────────────────────────────
-
-  if (!yogaAnalysis) {
-    return (
-      <div className="glow-card overflow-hidden shadow-lg border border-white/10 bg-[#090b0f]">
-        <div className="px-5 pt-5 pb-4 border-b border-white/10 bg-[#111722]">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-xl">🧘</span>
-            <h2 className="text-base font-bold text-white">Yoga Insights — 100+ Vedic Yogas</h2>
-          </div>
-          <p className="text-xs text-slate-400">
-            Rajayoga · Dhana · Mahapurusha · Dosha · Spiritual · Special —
-            with lifecycle status and dasha activation windows.
-          </p>
-        </div>
-        <div className="p-5 bg-[#0d1118]">
-          {error && (
-            <div className="mb-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-300 p-3 text-xs">
-              <span className="font-bold">Error: </span>{error}
-            </div>
-          )}
-          {isComputing ? (
-            <div className="flex flex-col items-center py-16 gap-3 text-slate-400">
-              <div className="animate-spin h-10 w-10 border-t-2 border-amber-500 border-solid rounded-full" />
-              <p className="text-sm">Detecting Yogas…</p>
-              <p className="text-xs text-slate-500">Scanning 100+ combinations · Rajayoga · Dhana · Mahapurusha · Dosha</p>
-            </div>
-          ) : (
-            <EnhancedBirthInputForm lang="en" onSubmit={handleSubmit} showAutoSave={false} showProgress={true} />
-          )}
-        </div>
-      </div>
-    );
-  }
-
   // ── Derived data ─────────────────────────────────────────────────────────────
 
-  const { yogas, presentYogas, doshaYogas, summary } = yogaAnalysis;
+  const yogas = yogaAnalysis?.yogas ?? [];
+  const presentYogas = yogaAnalysis?.presentYogas ?? [];
+  const doshaYogas = yogaAnalysis?.doshaYogas ?? [];
+  const summary = yogaAnalysis?.summary;
 
   // Group present (non-dosha) by category for the Active tab
   const byCategory = useMemo(() => {
@@ -258,6 +226,41 @@ export function YogaInsightsPanel() {
   const withLifecycle = useMemo(() =>
     presentYogas.filter(y => y.lifecycle),
   [presentYogas]);
+
+  // Keep hooks unconditional so switching between the input and results views
+  // never changes the order of hooks between renders.
+  if (!yogaAnalysis) {
+    return (
+      <div className="glow-card overflow-hidden shadow-lg border border-white/10 bg-[#090b0f]">
+        <div className="px-5 pt-5 pb-4 border-b border-white/10 bg-[#111722]">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-xl">🧘</span>
+            <h2 className="text-base font-bold text-white">Yoga Insights — 100+ Vedic Yogas</h2>
+          </div>
+          <p className="text-xs text-slate-400">
+            Rajayoga · Dhana · Mahapurusha · Dosha · Spiritual · Special —
+            with lifecycle status and dasha activation windows.
+          </p>
+        </div>
+        <div className="p-5 bg-[#0d1118]">
+          {error && (
+            <div className="mb-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-300 p-3 text-xs">
+              <span className="font-bold">Error: </span>{error}
+            </div>
+          )}
+          {isComputing ? (
+            <div className="flex flex-col items-center py-16 gap-3 text-slate-400">
+              <div className="animate-spin h-10 w-10 border-t-2 border-amber-500 border-solid rounded-full" />
+              <p className="text-sm">Detecting Yogas…</p>
+              <p className="text-xs text-slate-500">Scanning 100+ combinations · Rajayoga · Dhana · Mahapurusha · Dosha</p>
+            </div>
+          ) : (
+            <EnhancedBirthInputForm lang="en" onSubmit={handleSubmit} showAutoSave={false} showProgress={true} />
+          )}
+        </div>
+      </div>
+    );
+  }
 
   // Overall grade: count of strong + moderate yogas (excluding doshas)
   const positiveYogas = presentYogas.filter(y => y.category !== 'dosha');
@@ -329,7 +332,7 @@ export function YogaInsightsPanel() {
               </div>
               <div className="border-l border-white/10 pl-4">
                 <p className="text-xs text-slate-300 leading-relaxed">{grade.sub}</p>
-                <p className="text-xs text-slate-300 leading-relaxed mt-1">{summary.en}</p>
+                <p className="text-xs text-slate-300 leading-relaxed mt-1">{summary?.en}</p>
               </div>
             </div>
 

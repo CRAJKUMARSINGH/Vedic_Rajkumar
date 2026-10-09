@@ -106,10 +106,10 @@ const EnterpriseDashboard = () => {
           astrologySystem: 'all',
           calculationMethod: 'swiss-ephemeris'
         },
-        apiKeys: {
-          publicKey: 'pk_live_1234567890',
-          privateKey: 'sk_live_1234567890',
-          webhookSecret: 'whsec_1234567890',
+        apiKeyMetadata: {
+          publicKeyConfigured: false,
+          privateKeyConfigured: false,
+          webhookSecretConfigured: false,
           rateLimit: 10000
         },
         security: {

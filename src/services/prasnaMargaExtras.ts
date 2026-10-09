@@ -324,6 +324,7 @@ export function saveReadingHistory(reading: Omit<PrasnaReading, 'id'>): void {
     const updated = [newReading, ...existing].slice(0, MAX_READINGS);
     localStorage.setItem(HISTORY_KEY, JSON.stringify(updated));
   } catch {
+    // Storage may be disabled or full; reading-history persistence is optional.
   }
 }
 
@@ -338,5 +339,9 @@ export function getReadingHistory(): PrasnaReading[] {
 }
 
 export function clearReadingHistory(): void {
-  try { localStorage.removeItem(HISTORY_KEY); } catch { }
+  try {
+    localStorage.removeItem(HISTORY_KEY);
+  } catch {
+    // Storage may be disabled; there is no persisted history to clear.
+  }
 }

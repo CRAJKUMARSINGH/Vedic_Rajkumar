@@ -38,10 +38,10 @@ export interface EnterpriseTenant {
     astrologySystem: 'vedic' | 'western' | 'chinese' | 'all';
     calculationMethod: 'swiss-ephemeris' | 'lahiri' | 'rama' | 'custom';
   };
-  apiKeys: {
-    publicKey: string;
-    privateKey: string;
-    webhookSecret: string;
+  apiKeyMetadata: {
+    publicKeyConfigured: boolean;
+    privateKeyConfigured: boolean;
+    webhookSecretConfigured: boolean;
     rateLimit: number;
   };
   security: {

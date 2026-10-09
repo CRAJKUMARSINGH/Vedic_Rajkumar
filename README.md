@@ -11,7 +11,7 @@
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5~-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Node](https://img.shields.io/badge/Node-%E2%89%A520-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Build](https://img.shields.io/badge/build-passing-brightgreen)](#)
@@ -71,7 +71,7 @@ Built for **real users** — astrology-curious households, practicing astrologer
 ## ⚡ Quick Start — Under 90 Seconds
 
 ### Prerequisites
-- **Node.js ≥ 20** (check with `node -v`; get it from [nodejs.org](https://nodejs.org/))
+- **Node.js ≥ 22.22.1** (check with `node -v`; get it from [nodejs.org](https://nodejs.org/))
 - A terminal and a browser — that's *it*. No database, no API keys required for demo mode.
 
 ### Step-by-step
@@ -132,12 +132,13 @@ npm run dev              # Dev server (Vite hot-reload)
 npm run build            # Production build to ./dist
 npm run preview          # Serve the production build locally
 npm run typecheck        # TypeScript strict check (no emit)
-npm run lint             # ESLint across all .ts/.tsx/.js/.jsx
+npm run lint             # ESLint across app, Supabase functions, and test sources
 npm run test:run         # All Vitest tests — CI mode
 npm run test:core        # Core gate tests (ephemeris + vedic engine + nav)
 npm run validate:accuracy  # 15-reference-chart Swiss Ephemeris comparison
 npm run ci:core          # Core tests + production build (CI pipeline)
-npm run test:e2e         # Playwright end-to-end tests
+npx playwright install chromium # One-time browser install for E2E tests
+npm run test:e2e         # Starts Vite and runs Playwright E2E tests
 ```
 
 ---
@@ -162,7 +163,7 @@ All vars are **optional**. The app ships with sensible demo-mode defaults so you
 |---|---|
 | **Language** | TypeScript 5 (strict mode — zero `any`) |
 | **Frontend Framework** | React 18 + React Router v6 |
-| **Build Tool** | Vite 6 (HMR, rollup production bundle) |
+| **Build Tool** | Vite 7 (HMR, production bundle) |
 | **Styling** | Tailwind CSS 3 + class-variance-authority + tailwind-merge |
 | **UI Components** | shadcn/ui patterns on Radix UI primitives |
 | **Icons** | lucide-react |
@@ -170,7 +171,7 @@ All vars are **optional**. The app ships with sensible demo-mode defaults so you
 | **Forms** | React Hook Form 7 |
 | **Devanagari Font** | @fontsource/noto-sans-devanagari (proper shaping, no tofu) |
 | **Astrology Engines** | Local `src/services/*` + `src/lib/vedic/*` (Lahiri ayanamsa) + optional `swisseph-wasm` |
-| **PDF Export** | jsPDF 3 + jsPDF-autotable 5 |
+| **PDF Export** | jsPDF 4 + jsPDF-autotable 5 |
 | **Auth** | Clerk (@clerk/react 6) |
 | **Persistence (optional)** | Supabase (auth, DB, vector store, edge functions) |
 | **Motion** | Framer Motion 12 |

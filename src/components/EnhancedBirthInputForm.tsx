@@ -38,7 +38,7 @@ function toISO(dmy: string): string {
   if (!dmy) return "";
   // Already ISO?
   if (/^\d{4}-\d{2}-\d{2}$/.test(dmy)) return dmy;
-  const parts = dmy.replace(/[.\-]/g, "/").split("/");
+  const parts = dmy.replace(/[.-]/g, "/").split("/");
   if (parts.length === 3 && parts[2].length === 4) {
     return `${parts[2]}-${parts[1].padStart(2,"0")}-${parts[0].padStart(2,"0")}`;
   }

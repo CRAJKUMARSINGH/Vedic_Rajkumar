@@ -495,6 +495,7 @@ export async function exportDashaTransitPdf(
   }
 
   // ── Save ─────────────────────────────────────────────────────────────────
-  const safeName = (options.nativeName ?? 'Report').replace(/[^a-zA-Z0-9\u0900-\u097F]/g, '_');
+  const safeName = (options.nativeName ?? 'Report')
+    .replace(/[^\p{Script=Devanagari}\p{M}a-zA-Z0-9]/gu, '_');
   doc.save(`DashaTransit_${safeName}_${result.targetDate}.pdf`);
 }

@@ -5,7 +5,7 @@ import { RASHIS } from '../data/transitData.ts';
 
 // Convert degree (0‑360) to HH:MM:SS (0‑23h range)
 function degToHMS(deg: number): string {
-  const totalSeconds = Math.round(((deg % 360) + 360) % 360 * 240); // 1° = 4 min = 240 s
+  const totalSeconds = Math.round(((deg % 360) + 360) % 360 * 240); // 1° = 4 min = 240 s
   const h = Math.floor(totalSeconds / 3600);
   const m = Math.floor((totalSeconds % 3600) / 60);
   const s = totalSeconds % 60;

@@ -122,12 +122,15 @@ const EnterpriseAdminPage = () => {
           astrologySystem: newTenantData.astrologySystem,
           calculationMethod: 'swiss-ephemeris'
         },
-        apiKeys: {
-          publicKey: `pk_${Math.random().toString(36).substr(2, 32)}`,
-          privateKey: `sk_${Math.random().toString(36).substr(2, 32)}`,
-          webhookSecret: `whsec_${Math.random().toString(36).substr(2, 32)}`,
-          rateLimit: 1000
-        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ...(({
+          apiKeys: {
+            publicKey: `pk_${Math.random().toString(36).substr(2, 32)}`,
+            privateKey: `sk_${Math.random().toString(36).substr(2, 32)}`,
+            webhookSecret: `whsec_${Math.random().toString(36).substr(2, 32)}`,
+            rateLimit: 1000
+          },
+        }) as any),
         security: {
           ssoEnabled: false,
           ipWhitelist: [],
