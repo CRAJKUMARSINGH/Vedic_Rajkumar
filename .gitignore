@@ -35,6 +35,11 @@ Thumbs.db
 playwright-report/
 test-results/
 
+# Netlify CLI cache — extension build hooks auto-downloaded here; never commit
+.netlify/plugins/
+.netlify/functions-internal/
+.netlify/v1/
+
 # AI agent temp folders
 .agents/
 .gemini/
