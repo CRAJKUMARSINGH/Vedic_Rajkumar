@@ -3,42 +3,31 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Badge } from '@/components/ui/badge';
-import { Menu } from 'lucide-react';
+import { Menu, FlaskConical } from 'lucide-react';
 import UserProfileDialog from './UserProfileDialog';
 import DarkModeToggle from './DarkModeToggle';
 
 /**
- * NAV_LINKS — Week 3 scope reduction.
+ * NAV_LINKS — Week 3 scope reduction + Labs dropdown.
  *
- * ACTIVE (4 core features + supporting pages):
- *   Kundli, Prashna, Matchmaking, Panchang, Dasha, My Readings, Pricing
+ * ACTIVE (4 core features + shell):
+ *   Kundli, Prashna, Matchmaking, Panchang
  *
- * COMING SOON: all other items removed from the nav bar to reduce noise.
- *   They still exist as routes (ComingSoon page) but are not promoted here.
+ * LABS: all other features are accessible via the "⚗ Labs" dropdown →
+ *   renders as a link to /features (the All Features roadmap page).
+ *   Routes still exist and work — they're just not promoted in the main nav.
  *
- * To restore an item when it graduates: add it back to NAV_LINKS with its
- *   real href and remove the Coming Soon route entry in src/routes/index.tsx.
+ * To graduate a feature: add it to CORE_NAV_LINKS and remove from Labs.
  */
-const NAV_LINKS = [
-  // ── Shell / workspace ────────────────────────────────────────────────────────
-  { href: '/',           label: 'Home',         labelHi: 'होम',         badge: null,    group: 'shell' },
-  { href: '/app',        label: '⚡ Workspace', labelHi: '⚡ वर्कस्पेस', badge: 'App',   group: 'shell' },
-
-  // ── Core Feature 1: Kundli ───────────────────────────────────────────────────
-  { href: '/horoscope',         label: 'Kundli',          labelHi: 'कुंडली',              badge: null,    group: 'core' },
-
-  // ── Core Feature 2: Prashna ──────────────────────────────────────────────────
-  { href: '/prashna',           label: 'Prashna',         labelHi: 'प्रश्न',              badge: 'AI',    group: 'core' },
-
-  // ── Core Feature 3: Matchmaking ──────────────────────────────────────────────
-  { href: '/matchmaking',         label: 'Kundli Milan',         labelHi: 'कुंडली मिलान',    badge: null,  group: 'core' },
-
-  // ── Core Feature 4: Panchang ─────────────────────────────────────────────────
-  { href: '/panchang',          label: 'Panchang',        labelHi: 'पंचांग',              badge: null,    group: 'core' },
-
-  // ── Roadmap ─────────────────────────────────────────────────────────────────
-  { href: '/features',          label: 'Roadmap',         labelHi: 'रोडमैप',               badge: null,    group: 'user' },
+const CORE_NAV_LINKS = [
+  { href: '/horoscope',   label: 'Kundli',       labelHi: 'कुंडली',       badge: null,  group: 'core' },
+  { href: '/prashna',     label: 'Prashna',       labelHi: 'प्रश्न',       badge: 'AI',  group: 'core' },
+  { href: '/matchmaking', label: 'Kundli Milan',  labelHi: 'कुंडली मिलान', badge: null,  group: 'core' },
+  { href: '/panchang',    label: 'Panchang',      labelHi: 'पंचांग',       badge: null,  group: 'core' },
 ];
+
+// Keep the old constant name so any file that imports NAV_LINKS still works
+const NAV_LINKS = CORE_NAV_LINKS;
 
 interface NavigationProps {
   lang: 'en' | 'hi';
@@ -66,11 +55,11 @@ export default function Navigation({ lang, onLangToggle }: NavigationProps) {
           <span className="text-xs text-[hsl(var(--auspicious-accent))] opacity-70" aria-hidden="true">✦</span>
         </Link>
 
-        {/* Desktop nav — scrollable */}
+        {/* Desktop nav */}
         <div className="flex-1 overflow-x-auto hidden md:flex">
           <div className="flex gap-1 min-w-max items-center" role="menubar">
-            {NAV_LINKS.map((l, idx) => {
-              const prevGroup = idx > 0 ? NAV_LINKS[idx - 1].group : l.group;
+            {CORE_NAV_LINKS.map((l, idx) => {
+              const prevGroup = idx > 0 ? CORE_NAV_LINKS[idx - 1].group : l.group;
               const showDivider = idx > 0 && l.group !== prevGroup;
               const isCurrent = location.pathname === l.href;
               return (
@@ -95,6 +84,22 @@ export default function Navigation({ lang, onLangToggle }: NavigationProps) {
                 </React.Fragment>
               );
             })}
+
+            {/* Labs → /features (all preview modules) */}
+            <span className="h-4 w-px bg-white/20 mx-1 shrink-0" aria-hidden="true" />
+            <Link to="/features" aria-label={isHi ? 'प्रयोगशाला — सभी प्रीव्यू मॉड्यूल' : 'Labs — all preview modules'}>
+              <Button
+                variant="ghost"
+                size="sm"
+                className={`relative text-xs px-2.5 text-white/70 hover:text-white hover:bg-white/10 ${location.pathname === '/features' ? 'bg-white/20 text-white font-bold' : ''}`}
+              >
+                <FlaskConical className="h-3 w-3 mr-1 opacity-80" aria-hidden="true" />
+                {isHi ? 'लैब्स' : 'Labs'}
+                <Badge className="ml-1 px-1 py-0 text-[9px] bg-white/20 text-white/90 border-none">
+                  {isHi ? 'प्रीव्यू' : 'Preview'}
+                </Badge>
+              </Button>
+            </Link>
           </div>
         </div>
 
@@ -133,35 +138,35 @@ export default function Navigation({ lang, onLangToggle }: NavigationProps) {
                 <span className="font-serif font-bold tracking-wide">Vedic Rajkumar</span>
               </div>
               <div className="flex flex-col gap-1 p-3 overflow-y-auto max-h-[calc(100vh-80px)]">
-                {NAV_LINKS.map((l, idx) => {
-                  const prevGroup = idx > 0 ? NAV_LINKS[idx - 1].group : l.group;
-                  const showDivider = idx > 0 && l.group !== prevGroup;
-                  return (
-                    <React.Fragment key={l.href}>
-                      {showDivider && (
-                        <hr className="border-[#8B0000]/10 my-1" />
+                {/* Core 4 */}
+                <p className={`text-[10px] uppercase tracking-wider text-[#8B0000]/50 font-semibold px-2 pt-1 ${isHi ? 'font-hindi' : ''}`}>
+                  {isHi ? 'मुख्य टूल्स' : 'Core tools'}
+                </p>
+                {CORE_NAV_LINKS.map((l) => (
+                  <Link key={l.href} to={l.href} onClick={() => setMobileOpen(false)}>
+                    <Button
+                      variant={location.pathname === l.href ? 'secondary' : 'ghost'}
+                      className={`w-full justify-start text-sm ${location.pathname === l.href ? 'bg-[#8B0000]/10 text-[#8B0000]' : 'text-[#5D4037]'} ${isHi ? 'font-hindi' : ''}`}
+                    >
+                      {isHi ? l.labelHi : l.label}
+                      {l.badge && (
+                        <Badge className="ml-auto px-1.5 py-0 text-[9px] bg-[#C05000] text-white">
+                          {l.badge}
+                        </Badge>
                       )}
-                      <Link to={l.href} onClick={() => setMobileOpen(false)}>
-                        <Button
-                          variant={location.pathname === l.href ? 'secondary' : 'ghost'}
-                          className={`w-full justify-start text-sm ${location.pathname === l.href ? 'bg-[#8B0000]/10 text-[#8B0000]' : 'text-[#5D4037]'} ${isHi ? 'font-hindi' : ''}`}
-                        >
-                          {isHi ? l.labelHi : l.label}
-                          {l.badge && (
-                            <Badge className="ml-auto px-1.5 py-0 text-[9px] bg-[#C05000] text-white">
-                              {l.badge}
-                            </Badge>
-                          )}
-                        </Button>
-                      </Link>
-                    </React.Fragment>
-                  );
-                })}
-                {/* Coming Soon hint */}
+                    </Button>
+                  </Link>
+                ))}
+
+                {/* Labs link */}
                 <hr className="border-[#8B0000]/10 my-1" />
                 <Link to="/features" onClick={() => setMobileOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start text-xs text-slate-400 italic">
-                    + More features coming soon →
+                  <Button variant="ghost" className={`w-full justify-start text-sm text-[#5D4037] ${isHi ? 'font-hindi' : ''}`}>
+                    <FlaskConical className="h-3.5 w-3.5 mr-2 opacity-60" aria-hidden="true" />
+                    {isHi ? 'लैब्स — प्रीव्यू मॉड्यूल' : 'Labs — preview modules'}
+                    <Badge className="ml-auto px-1.5 py-0 text-[9px] bg-slate-200 text-slate-600">
+                      {isHi ? 'प्रीव्यू' : 'Preview'}
+                    </Badge>
                   </Button>
                 </Link>
               </div>

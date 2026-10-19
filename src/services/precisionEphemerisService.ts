@@ -15,6 +15,8 @@
  *   Rahu/K   ±0.1°    (mean node, Meeus)
  */
 
+import { jdTTFromUT } from '@/lib/timeScales';
+
 // ─── Type definitions ─────────────────────────────────────────────────────────
 
 export interface PrecisePlanetPosition {
@@ -38,6 +40,7 @@ export interface PreciseAscendant {
   rashiName: string;
   degrees: number;
   minutes: number;
+  seconds: number;
 }
 
 export interface PreciseChart {
@@ -445,10 +448,12 @@ function calcAscendant(jd: number, lat: number, lon: number, ayanamsa: number): 
   const ascSid  = tropToSid(ascTrop, ayanamsa);
   const ri  = degToRashi(ascSid);
   const deg = degInRashi(ascSid);
+  const fracMin = (deg % 1) * 60;
   return {
     tropicalLongitude: ascTrop, siderealLongitude: ascSid,
     rashiIndex: ri, rashiName: RASHI_NAMES_EN[ri],
-    degrees: Math.floor(deg), minutes: Math.floor((deg % 1) * 60),
+    degrees: Math.floor(deg), minutes: Math.floor(fracMin),
+    seconds: Math.floor((fracMin % 1) * 60),
   };
 }
 
@@ -472,29 +477,33 @@ export function calculatePreciseChart(
   lon: number,
   tzOffsetHours = 5.5
 ): PreciseChart {
-  const jd       = dateTimeToJD(dateStr, timeStr, tzOffsetHours);
-  const ayanamsa = getLahiriAyanamsa(jd);
-  const ascendant = calcAscendant(jd, lat, lon, ayanamsa);
+  // UT / TT split (see src/lib/timeScales.ts):
+  //   BODIES (planets, nodes) and the ayanamsa are dynamical-time quantities → TT.
+  //   ANGLES (ascendant, house cusps, GMST) are Earth-rotation quantities → UT.
+  const jdUT     = dateTimeToJD(dateStr, timeStr, tzOffsetHours);
+  const jdTT     = jdTTFromUT(jdUT);
+  const ayanamsa = getLahiriAyanamsa(jdTT);
+  const ascendant = calcAscendant(jdUT, lat, lon, ayanamsa);
   const ascSid   = ascendant.siderealLongitude;
 
-  const sunTrop  = getSunLongitude(jd);
-  const moonTrop = getMoonLongitude(jd);
-  const mercTrop = getMercuryLongitude(jd);
-  const venTrop  = getVenusLongitude(jd);
-  const marsTrop = getMarsLongitude(jd);
-  const jupTrop  = getJupiterLongitude(jd);
-  const satTrop  = getSaturnLongitude(jd);
-  const rahuTrop = getMeanNode(jd);
+  const sunTrop  = getSunLongitude(jdTT);
+  const moonTrop = getMoonLongitude(jdTT);
+  const mercTrop = getMercuryLongitude(jdTT);
+  const venTrop  = getVenusLongitude(jdTT);
+  const marsTrop = getMarsLongitude(jdTT);
+  const jupTrop  = getJupiterLongitude(jdTT);
+  const satTrop  = getSaturnLongitude(jdTT);
+  const rahuTrop = getMeanNode(jdTT);
   const ketuTrop = norm(rahuTrop + 180);
 
   const planets: PrecisePlanetPosition[] = [
     formatPlanet('Sun',     sunTrop,  ayanamsa, ascSid, false),
     formatPlanet('Moon',    moonTrop, ayanamsa, ascSid, false),
-    formatPlanet('Mercury', mercTrop, ayanamsa, ascSid, isRetrograde(jd, getMercuryLongitude)),
-    formatPlanet('Venus',   venTrop,  ayanamsa, ascSid, isRetrograde(jd, getVenusLongitude)),
-    formatPlanet('Mars',    marsTrop, ayanamsa, ascSid, isRetrograde(jd, getMarsLongitude)),
-    formatPlanet('Jupiter', jupTrop,  ayanamsa, ascSid, isRetrograde(jd, getJupiterLongitude)),
-    formatPlanet('Saturn',  satTrop,  ayanamsa, ascSid, isRetrograde(jd, getSaturnLongitude)),
+    formatPlanet('Mercury', mercTrop, ayanamsa, ascSid, isRetrograde(jdTT, getMercuryLongitude)),
+    formatPlanet('Venus',   venTrop,  ayanamsa, ascSid, isRetrograde(jdTT, getVenusLongitude)),
+    formatPlanet('Mars',    marsTrop, ayanamsa, ascSid, isRetrograde(jdTT, getMarsLongitude)),
+    formatPlanet('Jupiter', jupTrop,  ayanamsa, ascSid, isRetrograde(jdTT, getJupiterLongitude)),
+    formatPlanet('Saturn',  satTrop,  ayanamsa, ascSid, isRetrograde(jdTT, getSaturnLongitude)),
     formatPlanet('Rahu',    rahuTrop, ayanamsa, ascSid, true),
     formatPlanet('Ketu',    ketuTrop, ayanamsa, ascSid, true),
   ];
@@ -509,20 +518,22 @@ export function calculatePreciseChart(
   const nakshatra  = getNakshatra(moonSid);
   const moonRashiIndex = degToRashi(moonSid);
 
-  return { julianDay: jd, ayanamsa, ascendant, planets, houses, nakshatra, moonRashiIndex };
+  return { julianDay: jdUT, ayanamsa, ascendant, planets, houses, nakshatra, moonRashiIndex };
 }
 
 // ─── Legacy compatibility function ───────────────────────────────────────────
 // Used by dashaService / verify_accuracy_fix etc. without lat/lon.
 
-export function calculatePrecisePlanetaryPositions(dateStr: string, timeStr: string) {
-  const jd       = dateTimeToJD(dateStr, timeStr, 5.5);
-  const ayanamsa = getLahiriAyanamsa(jd);
-  const ascendantRaw = calcAscendant(jd, 0, 0, ayanamsa);
+export function calculatePrecisePlanetaryPositions(dateStr: string, timeStr: string, tzOffsetHours = 5.5) {
+  // UT / TT split — bodies & ayanamsa → TT, angles → UT (see src/lib/timeScales.ts).
+  const jdUT     = dateTimeToJD(dateStr, timeStr, tzOffsetHours);
+  const jdTT     = jdTTFromUT(jdUT);
+  const ayanamsa = getLahiriAyanamsa(jdTT);
+  const ascendantRaw = calcAscendant(jdUT, 0, 0, ayanamsa);
   const ascendant = { ...ascendantRaw, sidereal: ascendantRaw.siderealLongitude };
 
-  const sunTrop  = getSunLongitude(jd);
-  const moonTrop = getMoonLongitude(jd);
+  const sunTrop  = getSunLongitude(jdTT);
+  const moonTrop = getMoonLongitude(jdTT);
   const moonSid  = tropToSid(moonTrop, ayanamsa);
   const moonRashi = degToRashi(moonSid);
   const toHouse = (sid: number) => Math.floor(norm(sid - moonSid) / 30) + 1;
@@ -537,23 +548,23 @@ export function calculatePrecisePlanetaryPositions(dateStr: string, timeStr: str
     };
   };
 
-  const rahuTrop = getMeanNode(jd);
+  const rahuTrop = getMeanNode(jdTT);
   const ketuTrop = norm(rahuTrop + 180);
 
   return {
     planets: [
       makePlanet('Sun',     sunTrop),
       makePlanet('Moon',    moonTrop),
-      makePlanet('Mercury', getMercuryLongitude(jd), isRetrograde(jd, getMercuryLongitude)),
-      makePlanet('Venus',   getVenusLongitude(jd),   isRetrograde(jd, getVenusLongitude)),
-      makePlanet('Mars',    getMarsLongitude(jd),     isRetrograde(jd, getMarsLongitude)),
-      makePlanet('Jupiter', getJupiterLongitude(jd),  isRetrograde(jd, getJupiterLongitude)),
-      makePlanet('Saturn',  getSaturnLongitude(jd),   isRetrograde(jd, getSaturnLongitude)),
+      makePlanet('Mercury', getMercuryLongitude(jdTT), isRetrograde(jdTT, getMercuryLongitude)),
+      makePlanet('Venus',   getVenusLongitude(jdTT),   isRetrograde(jdTT, getVenusLongitude)),
+      makePlanet('Mars',    getMarsLongitude(jdTT),     isRetrograde(jdTT, getMarsLongitude)),
+      makePlanet('Jupiter', getJupiterLongitude(jdTT),  isRetrograde(jdTT, getJupiterLongitude)),
+      makePlanet('Saturn',  getSaturnLongitude(jdTT),   isRetrograde(jdTT, getSaturnLongitude)),
       makePlanet('Rahu',    rahuTrop, true),
       makePlanet('Ketu',    ketuTrop, true),
     ],
     ayanamsa,
-    julianDay: jd,
+    julianDay: jdUT,
     ascendant,
     sun:  { sidereal: tropToSid(sunTrop,  ayanamsa), rashi: degToRashi(tropToSid(sunTrop,  ayanamsa)), degrees: degInRashi(tropToSid(sunTrop,  ayanamsa)) },
     moon: { sidereal: moonSid, rashi: moonRashi, degrees: degInRashi(moonSid) },

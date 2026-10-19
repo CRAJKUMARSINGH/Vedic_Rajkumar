@@ -2,7 +2,16 @@
  * Varshaphal (Annual Solar Return) Service
  * Source: BV Raman Magazine Enhancement Plan
  * Implements annual solar return calculations per B.V. Raman's methods
+ *
+ * NOTE (DEF-009): this module is only partially implemented. The solar-return
+ * *instant*, the Varshesh seed (`birthSunLongitude`) and the Muntha/ascendant are
+ * still classical simplifications (see the logbook disposition). The planetary
+ * positions are now real (shared Lahiri ephemeris) and deterministic — they are
+ * no longer Math.random() placeholders.
  */
+
+import { calculatePreciseChart } from './precisionEphemerisService';
+import { calculateChartForBirth } from '@/services/chartWithTimezone';
 
 export interface VarshaphalChart {
   year: number;
@@ -228,30 +237,40 @@ export function calculateVarshaphal(
 }
 
 /**
- * Calculate planetary positions for solar return
+ * Calculate planetary positions for the solar-return instant.
+ *
+ * Uses the shared sidereal (Lahiri) ephemeris so the result is real and
+ * deterministic — previously these were Math.random() placeholders (DEF-009).
  */
 function calculateSolarReturnPositions(
   date: Date,
   latitude: number,
   longitude: number
 ): PlanetaryPosition[] {
-  // Simplified calculation - should use Swiss Ephemeris
+  // The instant is an absolute moment → format in UTC and treat the offset as 0
+  // so the output does not depend on the host machine's timezone.
+  const dateStr = date.toISOString().slice(0, 10); // YYYY-MM-DD
+  const timeStr = date.toISOString().slice(11, 16); // HH:mm
+  const chart = calculateChartForBirth(dateStr, timeStr, latitude, longitude, 0);
+  const byName = new Map(chart.planets.map((p) => [p.name, p]));
+
   const planets = ['Sun', 'Moon', 'Mars', 'Mercury', 'Jupiter', 'Venus', 'Saturn'];
   const positions: PlanetaryPosition[] = [];
 
   for (const planet of planets) {
-    const longitude = Math.random() * 360; // Simplified
-    const house = Math.floor(longitude / 30) + 1;
-    const sign = getSignFromLongitude(longitude);
-    
+    const p = byName.get(planet);
+    if (!p) continue;
+    const sid = p.siderealLongitude;
+    const sign = getSignFromLongitude(sid);
+
     positions.push({
       planet,
-      longitude,
-      house,
+      longitude: sid,
+      house: p.house,
       sign,
-      nakshatra: getNakshatraFromLongitude(longitude),
+      nakshatra: getNakshatraFromLongitude(sid),
       dignity: getDignity(planet, sign),
-      aspects: calculateAspects(longitude)
+      aspects: calculateAspects(sid)
     });
   }
 

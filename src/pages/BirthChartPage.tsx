@@ -36,6 +36,9 @@ import FamilyProfileSelector from '@/components/FamilyProfileSelector';
 import { getProfileById } from '@/lib/familyProfiles';
 import type { FamilyProfile } from '@/lib/familyProfiles';
 import { cn } from '@/lib/utils';
+import { resolveBirthTimezone } from '@/lib/birthTimezone';
+import { setBirthTimezone } from '@/hooks/use-birth-timezone';
+import { BirthTimezoneChip } from '@/components/BirthTimezoneChip';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -184,6 +187,12 @@ export default function BirthChartPage() {
     setError(null);
     setResult(null);
     setIsLoading(true);
+    // Resolve the historical birth timezone before calculating.
+    // This updates the module store so any service reading currentOffsetHours()
+    // (e.g. useChartCalculation, calculateChartForBirth) uses the correct offset.
+    // The kundli engine handles modern dates via IANA tz, but pre-1947 India
+    // dates need the wartime corrections that Intl.DateTimeFormat does not carry.
+    setBirthTimezone(resolveBirthTimezone({ date: form.date, location: form.place }));
     // Yield via a microtask so React can flush the loading state to the DOM
     // before the synchronous calculateChart() call. This keeps the loading
     // state observable for tests and for actual renders on slower devices.
@@ -530,11 +539,12 @@ export default function BirthChartPage() {
                 aria-labelledby="result-heading"
                 className="space-y-5"
               >
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <Star className="h-5 w-5 text-amber-500" aria-hidden="true" />
                   <h2 id="result-heading" className="text-lg font-bold text-foreground">
                     Chart for {result.birthData.name}
                   </h2>
+                  <BirthTimezoneChip lang={isHi ? 'hi' : 'en'} />
                   <span className="text-xs text-muted-foreground ml-auto">
                     Ayanamsa: {result.ayanamsaValue.toFixed(3)}°
                   </span>
