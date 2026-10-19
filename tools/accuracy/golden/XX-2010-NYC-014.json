@@ -1,0 +1,85 @@
+{
+  "id": "XX-2010-NYC-014",
+  "label": "Western reference — New York",
+  "date": "2010-03-14",
+  "time": "09:00:00",
+  "tz": "America/New_York",
+  "resolvedOffsetHours": -4,
+  "lat": 40.7128,
+  "lon": -74.006,
+  "julianDay": 2455270.0416666665,
+  "ayanamsa": 23.999558677546815,
+  "ayanamsaMode": "Lahiri",
+  "source": "swisseph-wasm",
+  "ascendant": {
+    "sidereal": 13.931083884911573,
+    "rashi": "Aries",
+    "nakshatra": "Bharani",
+    "pada": 1
+  },
+  "grahas": [
+    {
+      "name": "Sun",
+      "sidereal": 329.83404497891183,
+      "rashi": "Aquarius",
+      "nakshatra": "Purva Bhadrapada",
+      "pada": 3
+    },
+    {
+      "name": "Moon",
+      "sidereal": 315.07432007152295,
+      "rashi": "Aquarius",
+      "nakshatra": "Shatabhisha",
+      "pada": 3
+    },
+    {
+      "name": "Mercury",
+      "sidereal": 329.82324417530344,
+      "rashi": "Aquarius",
+      "nakshatra": "Purva Bhadrapada",
+      "pada": 3
+    },
+    {
+      "name": "Venus",
+      "sidereal": 344.72240562624825,
+      "rashi": "Pisces",
+      "nakshatra": "Uttara Bhadrapada",
+      "pada": 4
+    },
+    {
+      "name": "Mars",
+      "sidereal": 96.37926578306445,
+      "rashi": "Cancer",
+      "nakshatra": "Pushya",
+      "pada": 1
+    },
+    {
+      "name": "Jupiter",
+      "sidereal": 319.12647938761177,
+      "rashi": "Aquarius",
+      "nakshatra": "Shatabhisha",
+      "pada": 4
+    },
+    {
+      "name": "Saturn",
+      "sidereal": 157.86920527700136,
+      "rashi": "Virgo",
+      "nakshatra": "Uttara Phalguni",
+      "pada": 4
+    },
+    {
+      "name": "Rahu",
+      "sidereal": 263.7899913609888,
+      "rashi": "Sagittarius",
+      "nakshatra": "Purva Ashadha",
+      "pada": 4
+    },
+    {
+      "name": "Ketu",
+      "sidereal": 83.78999136098878,
+      "rashi": "Gemini",
+      "nakshatra": "Punarvasu",
+      "pada": 2
+    }
+  ]
+}

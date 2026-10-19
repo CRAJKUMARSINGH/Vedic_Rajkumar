@@ -1,0 +1,85 @@
+{
+  "id": "IN-1942-GAP-005",
+  "label": "IST gap between wartime periods",
+  "date": "1942-06-01",
+  "time": "10:00:00",
+  "tz": "Asia/Kolkata",
+  "resolvedOffsetHours": 5.5,
+  "lat": 22.5726,
+  "lon": 88.3639,
+  "julianDay": 2430511.6875,
+  "ayanamsa": 23.052781292798205,
+  "ayanamsaMode": "Lahiri",
+  "source": "swisseph-wasm",
+  "ascendant": {
+    "sidereal": 115.87873884451818,
+    "rashi": "Cancer",
+    "nakshatra": "Ashlesha",
+    "pada": 3
+  },
+  "grahas": [
+    {
+      "name": "Sun",
+      "sidereal": 47.00068822885777,
+      "rashi": "Taurus",
+      "nakshatra": "Rohini",
+      "pada": 3
+    },
+    {
+      "name": "Moon",
+      "sidereal": 255.01797624322444,
+      "rashi": "Sagittarius",
+      "nakshatra": "Purva Ashadha",
+      "pada": 1
+    },
+    {
+      "name": "Mercury",
+      "sidereal": 62.579461459247284,
+      "rashi": "Gemini",
+      "nakshatra": "Mrigashira",
+      "pada": 3
+    },
+    {
+      "name": "Venus",
+      "sidereal": 6.002341017869867,
+      "rashi": "Aries",
+      "nakshatra": "Ashwini",
+      "pada": 2
+    },
+    {
+      "name": "Mars",
+      "sidereal": 88.95118634018422,
+      "rashi": "Gemini",
+      "nakshatra": "Punarvasu",
+      "pada": 3
+    },
+    {
+      "name": "Jupiter",
+      "sidereal": 64.86666145489971,
+      "rashi": "Gemini",
+      "nakshatra": "Mrigashira",
+      "pada": 4
+    },
+    {
+      "name": "Saturn",
+      "sidereal": 39.963651752027374,
+      "rashi": "Taurus",
+      "nakshatra": "Krittika",
+      "pada": 4
+    },
+    {
+      "name": "Rahu",
+      "sidereal": 135.78556014556244,
+      "rashi": "Leo",
+      "nakshatra": "Purva Phalguni",
+      "pada": 1
+    },
+    {
+      "name": "Ketu",
+      "sidereal": 315.7855601455624,
+      "rashi": "Aquarius",
+      "nakshatra": "Shatabhisha",
+      "pada": 3
+    }
+  ]
+}

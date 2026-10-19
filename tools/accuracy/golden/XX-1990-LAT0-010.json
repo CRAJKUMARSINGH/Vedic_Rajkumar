@@ -1,0 +1,85 @@
+{
+  "id": "XX-1990-LAT0-010",
+  "label": "Equatorial chart — Nairobi",
+  "date": "1990-01-01",
+  "time": "06:00:00",
+  "tz": "Africa/Nairobi",
+  "resolvedOffsetHours": 3,
+  "lat": 0,
+  "lon": 36.8,
+  "julianDay": 2447892.625,
+  "ayanamsa": 23.71741140822246,
+  "ayanamsaMode": "Lahiri",
+  "source": "swisseph-wasm",
+  "ascendant": {
+    "sidereal": 248.39867931725848,
+    "rashi": "Sagittarius",
+    "nakshatra": "Mula",
+    "pada": 3
+  },
+  "grahas": [
+    {
+      "name": "Sun",
+      "sidereal": 256.7112523971191,
+      "rashi": "Sagittarius",
+      "nakshatra": "Purva Ashadha",
+      "pada": 2
+    },
+    {
+      "name": "Moon",
+      "sidereal": 304.5095928183878,
+      "rashi": "Aquarius",
+      "nakshatra": "Dhanishtha",
+      "pada": 4
+    },
+    {
+      "name": "Mercury",
+      "sidereal": 272.0487053315751,
+      "rashi": "Capricorn",
+      "nakshatra": "Uttara Ashadha",
+      "pada": 2
+    },
+    {
+      "name": "Venus",
+      "sidereal": 282.54715963322565,
+      "rashi": "Capricorn",
+      "nakshatra": "Shravana",
+      "pada": 1
+    },
+    {
+      "name": "Mars",
+      "sidereal": 226.01551366537672,
+      "rashi": "Scorpio",
+      "nakshatra": "Anuradha",
+      "pada": 4
+    },
+    {
+      "name": "Jupiter",
+      "sidereal": 71.47856087527293,
+      "rashi": "Gemini",
+      "nakshatra": "Ardra",
+      "pada": 2
+    },
+    {
+      "name": "Saturn",
+      "sidereal": 261.89245223012176,
+      "rashi": "Sagittarius",
+      "nakshatra": "Purva Ashadha",
+      "pada": 3
+    },
+    {
+      "name": "Rahu",
+      "sidereal": 294.73414184136755,
+      "rashi": "Capricorn",
+      "nakshatra": "Dhanishtha",
+      "pada": 1
+    },
+    {
+      "name": "Ketu",
+      "sidereal": 114.73414184136755,
+      "rashi": "Cancer",
+      "nakshatra": "Ashlesha",
+      "pada": 3
+    }
+  ]
+}

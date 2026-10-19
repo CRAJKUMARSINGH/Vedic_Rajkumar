@@ -1,0 +1,85 @@
+{
+  "id": "IN-1945-END-006",
+  "label": "Last day of wartime offset",
+  "date": "1945-10-14",
+  "time": "23:59:00",
+  "tz": "Asia/Kolkata",
+  "resolvedOffsetHours": 6.5,
+  "lat": 19.076,
+  "lon": 72.8777,
+  "julianDay": 2431743.228472222,
+  "ayanamsa": 23.09986964132953,
+  "ayanamsaMode": "Lahiri",
+  "source": "swisseph-wasm",
+  "ascendant": {
+    "sidereal": 72.95358600791525,
+    "rashi": "Gemini",
+    "nakshatra": "Ardra",
+    "pada": 2
+  },
+  "grahas": [
+    {
+      "name": "Sun",
+      "sidereal": 177.91224587819897,
+      "rashi": "Virgo",
+      "nakshatra": "Chitra",
+      "pada": 2
+    },
+    {
+      "name": "Moon",
+      "sidereal": 271.7464896896463,
+      "rashi": "Capricorn",
+      "nakshatra": "Uttara Ashadha",
+      "pada": 2
+    },
+    {
+      "name": "Mercury",
+      "sidereal": 186.45456576274046,
+      "rashi": "Libra",
+      "nakshatra": "Chitra",
+      "pada": 4
+    },
+    {
+      "name": "Venus",
+      "sidereal": 151.4219868248017,
+      "rashi": "Virgo",
+      "nakshatra": "Uttara Phalguni",
+      "pada": 2
+    },
+    {
+      "name": "Mars",
+      "sidereal": 86.52091482915517,
+      "rashi": "Gemini",
+      "nakshatra": "Punarvasu",
+      "pada": 2
+    },
+    {
+      "name": "Jupiter",
+      "sidereal": 167.63362090781072,
+      "rashi": "Virgo",
+      "nakshatra": "Hasta",
+      "pada": 3
+    },
+    {
+      "name": "Saturn",
+      "sidereal": 91.32503013022011,
+      "rashi": "Cancer",
+      "nakshatra": "Punarvasu",
+      "pada": 4
+    },
+    {
+      "name": "Rahu",
+      "sidereal": 70.52365976464802,
+      "rashi": "Gemini",
+      "nakshatra": "Ardra",
+      "pada": 2
+    },
+    {
+      "name": "Ketu",
+      "sidereal": 250.52365976464807,
+      "rashi": "Sagittarius",
+      "nakshatra": "Mula",
+      "pada": 4
+    }
+  ]
+}

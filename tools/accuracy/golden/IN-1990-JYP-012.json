@@ -1,0 +1,85 @@
+{
+  "id": "IN-1990-JYP-012",
+  "label": "Nakshatra boundary — Jaipur",
+  "date": "1990-09-23",
+  "time": "18:32:00",
+  "tz": "Asia/Kolkata",
+  "resolvedOffsetHours": 5.5,
+  "lat": 26.9124,
+  "lon": 75.7873,
+  "julianDay": 2448158.043055556,
+  "ayanamsa": 23.727561814227897,
+  "ayanamsaMode": "Lahiri",
+  "source": "swisseph-wasm",
+  "ascendant": {
+    "sidereal": 341.02610685183913,
+    "rashi": "Pisces",
+    "nakshatra": "Uttara Bhadrapada",
+    "pada": 3
+  },
+  "grahas": [
+    {
+      "name": "Sun",
+      "sidereal": 156.51783824058248,
+      "rashi": "Virgo",
+      "nakshatra": "Uttara Phalguni",
+      "pada": 3
+    },
+    {
+      "name": "Moon",
+      "sidereal": 207.91020238282476,
+      "rashi": "Libra",
+      "nakshatra": "Vishakha",
+      "pada": 3
+    },
+    {
+      "name": "Mercury",
+      "sidereal": 138.700016796576,
+      "rashi": "Leo",
+      "nakshatra": "Purva Phalguni",
+      "pada": 2
+    },
+    {
+      "name": "Venus",
+      "sidereal": 146.34938998175107,
+      "rashi": "Leo",
+      "nakshatra": "Purva Phalguni",
+      "pada": 4
+    },
+    {
+      "name": "Mars",
+      "sidereal": 45.981514655834815,
+      "rashi": "Taurus",
+      "nakshatra": "Rohini",
+      "pada": 2
+    },
+    {
+      "name": "Jupiter",
+      "sidereal": 103.33424138766685,
+      "rashi": "Cancer",
+      "nakshatra": "Pushya",
+      "pada": 4
+    },
+    {
+      "name": "Saturn",
+      "sidereal": 264.9729149581301,
+      "rashi": "Sagittarius",
+      "nakshatra": "Purva Ashadha",
+      "pada": 4
+    },
+    {
+      "name": "Rahu",
+      "sidereal": 280.66910252715934,
+      "rashi": "Capricorn",
+      "nakshatra": "Shravana",
+      "pada": 1
+    },
+    {
+      "name": "Ketu",
+      "sidereal": 100.66910252715934,
+      "rashi": "Cancer",
+      "nakshatra": "Pushya",
+      "pada": 3
+    }
+  ]
+}

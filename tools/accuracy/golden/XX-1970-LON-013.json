@@ -1,0 +1,85 @@
+{
+  "id": "XX-1970-LON-013",
+  "label": "Western reference — London",
+  "date": "1970-06-21",
+  "time": "12:00:00",
+  "tz": "Europe/London",
+  "resolvedOffsetHours": 1,
+  "lat": 51.5074,
+  "lon": -0.1278,
+  "julianDay": 2440758.9583333335,
+  "ayanamsa": 23.444610116666695,
+  "ayanamsaMode": "Lahiri",
+  "source": "swisseph-wasm",
+  "ascendant": {
+    "sidereal": 145.34689792656252,
+    "rashi": "Leo",
+    "nakshatra": "Purva Phalguni",
+    "pada": 4
+  },
+  "grahas": [
+    {
+      "name": "Sun",
+      "sidereal": 66.20726349569964,
+      "rashi": "Gemini",
+      "nakshatra": "Mrigashira",
+      "pada": 4
+    },
+    {
+      "name": "Moon",
+      "sidereal": 272.8593220680689,
+      "rashi": "Capricorn",
+      "nakshatra": "Uttara Ashadha",
+      "pada": 2
+    },
+    {
+      "name": "Mercury",
+      "sidereal": 49.20781410592474,
+      "rashi": "Taurus",
+      "nakshatra": "Rohini",
+      "pada": 3
+    },
+    {
+      "name": "Venus",
+      "sidereal": 102.10864124774173,
+      "rashi": "Cancer",
+      "nakshatra": "Pushya",
+      "pada": 3
+    },
+    {
+      "name": "Mars",
+      "sidereal": 79.16031313095431,
+      "rashi": "Gemini",
+      "nakshatra": "Ardra",
+      "pada": 4
+    },
+    {
+      "name": "Jupiter",
+      "sidereal": 182.62990565759537,
+      "rashi": "Libra",
+      "nakshatra": "Chitra",
+      "pada": 3
+    },
+    {
+      "name": "Saturn",
+      "sidereal": 24.683453924668243,
+      "rashi": "Aries",
+      "nakshatra": "Bharani",
+      "pada": 4
+    },
+    {
+      "name": "Rahu",
+      "sidereal": 312.7616307764283,
+      "rashi": "Aquarius",
+      "nakshatra": "Shatabhisha",
+      "pada": 2
+    },
+    {
+      "name": "Ketu",
+      "sidereal": 132.76163077642832,
+      "rashi": "Leo",
+      "nakshatra": "Magha",
+      "pada": 4
+    }
+  ]
+}

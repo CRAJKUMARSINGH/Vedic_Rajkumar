@@ -1,0 +1,85 @@
+{
+  "id": "IN-1936-LEP-015",
+  "label": "Leap year edge — 1936-02-29 Mumbai",
+  "date": "1936-02-29",
+  "time": "12:00:00",
+  "tz": "Asia/Kolkata",
+  "resolvedOffsetHours": 5.5,
+  "lat": 19.076,
+  "lon": 72.8777,
+  "julianDay": 2428227.7708333335,
+  "ayanamsa": 22.965456884318993,
+  "ayanamsaMode": "Lahiri",
+  "source": "swisseph-wasm",
+  "ascendant": {
+    "sidereal": 44.9652066209087,
+    "rashi": "Taurus",
+    "nakshatra": "Rohini",
+    "pada": 2
+  },
+  "grahas": [
+    {
+      "name": "Sun",
+      "sidereal": 316.54570863133824,
+      "rashi": "Aquarius",
+      "nakshatra": "Shatabhisha",
+      "pada": 3
+    },
+    {
+      "name": "Moon",
+      "sidereal": 45.000528701481414,
+      "rashi": "Taurus",
+      "nakshatra": "Rohini",
+      "pada": 2
+    },
+    {
+      "name": "Mercury",
+      "sidereal": 289.8878666767041,
+      "rashi": "Capricorn",
+      "nakshatra": "Shravana",
+      "pada": 3
+    },
+    {
+      "name": "Venus",
+      "sidereal": 285.7265724356489,
+      "rashi": "Capricorn",
+      "nakshatra": "Shravana",
+      "pada": 2
+    },
+    {
+      "name": "Mars",
+      "sidereal": 342.471887447801,
+      "rashi": "Pisces",
+      "nakshatra": "Uttara Bhadrapada",
+      "pada": 3
+    },
+    {
+      "name": "Jupiter",
+      "sidereal": 238.9027560223028,
+      "rashi": "Scorpio",
+      "nakshatra": "Jyeshtha",
+      "pada": 4
+    },
+    {
+      "name": "Saturn",
+      "sidereal": 319.44321824896656,
+      "rashi": "Aquarius",
+      "nakshatra": "Shatabhisha",
+      "pada": 4
+    },
+    {
+      "name": "Rahu",
+      "sidereal": 256.81503213654446,
+      "rashi": "Sagittarius",
+      "nakshatra": "Purva Ashadha",
+      "pada": 2
+    },
+    {
+      "name": "Ketu",
+      "sidereal": 76.81503213654446,
+      "rashi": "Gemini",
+      "nakshatra": "Ardra",
+      "pada": 4
+    }
+  ]
+}

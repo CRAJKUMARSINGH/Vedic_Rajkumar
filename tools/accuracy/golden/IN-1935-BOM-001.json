@@ -1,0 +1,85 @@
+{
+  "id": "IN-1935-BOM-001",
+  "label": "Bombay Time era — pre-IST",
+  "date": "1935-06-12",
+  "time": "04:27:00",
+  "tz": "Asia/Kolkata",
+  "resolvedOffsetHours": 5.5,
+  "lat": 19.076,
+  "lon": 72.8777,
+  "julianDay": 2427965.45625,
+  "ayanamsa": 22.955427571604822,
+  "ayanamsaMode": "Lahiri",
+  "source": "swisseph-wasm",
+  "ascendant": {
+    "sidereal": 32.765406954264336,
+    "rashi": "Taurus",
+    "nakshatra": "Krittika",
+    "pada": 2
+  },
+  "grahas": [
+    {
+      "name": "Sun",
+      "sidereal": 57.11059913894309,
+      "rashi": "Taurus",
+      "nakshatra": "Mrigashira",
+      "pada": 2
+    },
+    {
+      "name": "Moon",
+      "sidereal": 177.3306804575668,
+      "rashi": "Virgo",
+      "nakshatra": "Chitra",
+      "pada": 2
+    },
+    {
+      "name": "Mercury",
+      "sidereal": 70.85438768711981,
+      "rashi": "Gemini",
+      "nakshatra": "Ardra",
+      "pada": 2
+    },
+    {
+      "name": "Venus",
+      "sidereal": 101.47576946446475,
+      "rashi": "Cancer",
+      "nakshatra": "Pushya",
+      "pada": 3
+    },
+    {
+      "name": "Mars",
+      "sidereal": 166.70309246779493,
+      "rashi": "Virgo",
+      "nakshatra": "Hasta",
+      "pada": 3
+    },
+    {
+      "name": "Jupiter",
+      "sidereal": 201.76081844528312,
+      "rashi": "Libra",
+      "nakshatra": "Vishakha",
+      "pada": 1
+    },
+    {
+      "name": "Saturn",
+      "sidereal": 317.18709618129606,
+      "rashi": "Aquarius",
+      "nakshatra": "Shatabhisha",
+      "pada": 4
+    },
+    {
+      "name": "Rahu",
+      "sidereal": 270.7156256549997,
+      "rashi": "Capricorn",
+      "nakshatra": "Uttara Ashadha",
+      "pada": 2
+    },
+    {
+      "name": "Ketu",
+      "sidereal": 90.71562565499971,
+      "rashi": "Cancer",
+      "nakshatra": "Punarvasu",
+      "pada": 4
+    }
+  ]
+}

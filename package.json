@@ -19,7 +19,15 @@
     "test:a11y": "vitest run src/tests/week5/accessibilityGaps.test.tsx",
     "test:perf": "lhci autorun --config=.lighthouserc.json",
     "ci:core": "npm run test:core && npm run build",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "shots": "playwright test --config playwright.screenshots.config.ts",
+    "migrate:chart-tz": "node scripts/migrate-chart-tz.mjs",
+    "migrate:chart-tz:write": "node scripts/migrate-chart-tz.mjs --write",
+    "test:accuracy:fast": "vitest run src/tests/timeScales.test.ts src/tests/chartCacheKey.test.ts src/tests/vimshottari.test.ts src/tests/birthTimezone.test.ts",
+    "accuracy:golden": "node scripts/accuracy-golden.mjs",
+    "test:accuracy:full": "vitest run src/tests/accuracy/corpusPhase1.test.ts --reporter=verbose",
+    "test:accuracy:corpus": "vitest run src/tests/accuracy/corpusPhase1.test.ts --reporter=verbose",
+    "test:tz-wiring": "vitest run src/tests/chartTimezoneWiring.test.ts"
   },
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "9.1.0",
