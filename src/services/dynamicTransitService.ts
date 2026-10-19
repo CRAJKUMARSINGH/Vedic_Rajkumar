@@ -12,11 +12,58 @@
 
 import { calcPlanetsAccurate, initSwissEphemeris } from './swissEphemerisService';
 import { PLANETS, RASHIS, VEDHA_PAIRS, TransitResult, PLANET_REMEDIES } from '../data/transitData';
+import { calculateAshtakavarga } from './ashtakavargaService';
+import {
+  detectSadeSati,
+  detectAshtamaShani,
+  detectKantakaShani,
+  type SadeSatiPhase,
+} from '../astrology/transits/sadeSati';
 
 export interface DynamicTransitInput {
   moonRashiIndex: number;
+  /** Optional ascendant (Lagna) rashi 0–11. When given, transit houses are also
+   *  computed from the Lagna frame (`transitsFromLagna`). */
+  lagnaRashiIndex?: number;
+  /** Optional natal planet rashis (planet → 0–11). When supplied together with
+   *  `natalAscendantRashi`, the natal Bhinnashtakavarga/Sarvashtakavarga is
+   *  computed and each planet's transiting sign is scored (`ashtakavargaTransit`). */
+  natalPlanetRashis?: Record<string, number>;
+  /** Optional natal ascendant rashi (0–11), required for Ashtakavarga transit points. */
+  natalAscendantRashi?: number;
   date: Date;
   time?: string; // HH:mm format, defaults to 00:00 UTC
+}
+
+/** One planet's Ashtakavarga strength (BAV/SAV) in its transiting sign. */
+export interface AshtakavargaTransitPoint {
+  planet: string;
+  transitRashi: number;
+  /** Bhinnashtakavarga points (0–8) of the transiting sign. Undefined for
+   *  Rahu/Ketu, which have no classical BAV row (7-planet Ashtakavarga). */
+  bavPoints?: number;
+  /** Sarvashtakavarga points (0–56) of the transiting sign. */
+  savPoints: number;
+  strength: 'Strong' | 'Moderate' | 'Weak';
+}
+
+/** One planet's transit verdict relative to a chosen reference frame (Moon or Lagna). */
+export interface TransitFrameRow {
+  planet: typeof PLANETS[number];
+  currentRashi: number;
+  house: number;
+  baseFavorable: boolean;
+  vedhaActive: boolean;
+  vedhaNote: string;
+  effectiveStatus: 'favorable' | 'unfavorable' | 'mixed';
+  scoreContribution: number;
+}
+
+/** Saturn (Shani) transit status relative to the natal Moon. */
+export interface ShaniStatus {
+  sadeSati: SadeSatiPhase;
+  ashtamaShani: boolean;
+  kantakaShani: boolean;
 }
 
 export interface DynamicTransitOutput {
@@ -26,7 +73,232 @@ export interface DynamicTransitOutput {
   totalScore: number;
   overallStatus: 'favorable' | 'unfavorable' | 'mixed';
   moonRashiIndex: number;
+  /** Present only when `lagnaRashiIndex` was supplied. */
+  lagnaRashiIndex?: number;
+  /** Transit verdicts computed from the Lagna frame (whole-sign from ascendant). */
+  transitsFromLagna?: TransitFrameRow[];
+  /** Sade Sati phase + Ashtama/Kantaka Shani flags vs. natal Moon. */
+  shaniStatus?: ShaniStatus;
+  /** Per-planet BAV/SAV strength at the transiting sign. Present only when the
+   *  natal chart (`natalPlanetRashis` + `natalAscendantRashi`) was supplied. */
+  ashtakavargaTransit?: AshtakavargaTransitPoint[];
   planetPositions: Record<string, number>; // planet name -> rashi index
+}
+
+/**
+ * Compute per-planet transit verdicts against an arbitrary reference frame.
+ * The same logic drives both the Moon frame and the Lagna frame, so a planet's
+ * "favorable / vedha-blocked / unfavorable" status is never computed twice.
+ */
+export function computeTransitFrame(
+  planetRashiMap: Record<string, number>,
+  referenceRashiIndex: number
+): TransitFrameRow[] {
+  const rows: TransitFrameRow[] = [];
+  for (const planet of PLANETS) {
+    const currentRashi = planetRashiMap[planet.en] ?? 0;
+    const house = ((currentRashi - referenceRashiIndex + 12) % 12) + 1;
+    const baseFavorable = planet.favorableHouses.includes(house);
+
+    let vedhaActive = false;
+    let vedhaNote = '';
+    if (baseFavorable) {
+      const vedhaHouse = VEDHA_PAIRS[planet.en]?.[house];
+      if (vedhaHouse !== undefined && vedhaHouse !== null) {
+        for (const otherPlanet of PLANETS) {
+          if (otherPlanet.en === planet.en) continue;
+          const otherRashi = planetRashiMap[otherPlanet.en];
+          if (otherRashi === undefined) continue;
+          const otherHouse = ((otherRashi - referenceRashiIndex + 12) % 12) + 1;
+          if (otherHouse === vedhaHouse) {
+            vedhaActive = true;
+            vedhaNote = `${otherPlanet.en} in ${vedhaHouse}th`;
+            break;
+          }
+        }
+      }
+    }
+
+    const effectiveStatus: TransitFrameRow['effectiveStatus'] = baseFavorable
+      ? vedhaActive ? 'mixed' : 'favorable'
+      : 'unfavorable';
+
+    rows.push({
+      planet,
+      currentRashi,
+      house,
+      baseFavorable,
+      vedhaActive,
+      vedhaNote: vedhaNote || 'None',
+      effectiveStatus,
+      scoreContribution: effectiveStatus === 'favorable' ? 1 : 0,
+    });
+  }
+  return rows;
+}
+
+/**
+ * Saturn (Shani) status vs. the natal Moon sign.
+ * Sade Sati = Saturn in 12th/1st/2nd from Moon; Ashtama Shani = 8th; Kantaka = 4th.
+ * Detection is sign-based, so a representative degree (mid-sign) is sufficient.
+ */
+export function computeShaniStatus(saturnSiderealLong: number, moonRashiIndex: number): ShaniStatus {
+  const natalMoonLong = moonRashiIndex * 30 + 15;
+  return {
+    sadeSati: detectSadeSati(saturnSiderealLong, natalMoonLong),
+    ashtamaShani: detectAshtamaShani(saturnSiderealLong, natalMoonLong),
+    kantakaShani: detectKantakaShani(saturnSiderealLong, natalMoonLong),
+  };
+}
+
+/**
+ * Ashtakavarga transit points — N3 Gochar.
+ * Builds the natal BAV/SAV from the real classical tables (ashtakavargaService)
+ * and scores each planet's *transiting* sign. This is the B.V. Raman / BPHS
+ * "how many bindus does the transiting sign hold for this graha" reading.
+ */
+export function computeAshtakavargaTransitPoints(
+  natalPlanetRashis: Record<string, number>,
+  natalAscendantRashi: number,
+  transitPlanetRashis: Record<string, number>,
+): AshtakavargaTransitPoint[] {
+  const av = calculateAshtakavarga(natalPlanetRashis, natalAscendantRashi);
+  const bavByPlanet = new Map(av.tables.map((t) => [t.planet, t.bavPoints] as const));
+
+  const points: AshtakavargaTransitPoint[] = [];
+  for (const planet of PLANETS) {
+    const transitRashi = transitPlanetRashis[planet.en];
+    if (transitRashi === undefined) continue;
+
+    const bav = bavByPlanet.get(planet.en);
+    const bavPoints = bav ? bav[transitRashi] : undefined;
+    const savPoints = av.savPoints[transitRashi] ?? 0;
+
+    points.push({
+      planet: planet.en,
+      transitRashi,
+      bavPoints,
+      savPoints,
+      // BAV (0–8) when available; otherwise fall back to SAV (0–56).
+      strength: bavPoints !== undefined
+        ? (bavPoints >= 5 ? 'Strong' : bavPoints >= 4 ? 'Moderate' : 'Weak')
+        : (savPoints >= 30 ? 'Strong' : savPoints >= 25 ? 'Moderate' : 'Weak'),
+    });
+  }
+  return points;
+}
+
+// ─── N3: per-planet ingress / egress dates ───────────────────────────────────
+
+/** A planet's current sign occupancy window. */
+export interface SignWindow {
+  planet: string;
+  rashi: number;
+  /** When the planet entered `rashi` (ms since epoch), or null if not found. */
+  ingressMs: number | null;
+  /** When the planet leaves `rashi` (ms since epoch), or null if not found. */
+  egressMs: number | null;
+}
+
+const MS_PER_DAY = 86_400_000;
+
+/**
+ * Find the instant a sign boundary is crossed, starting at `startMs` and moving
+ * in `direction` (−1 backward, +1 forward). The sampler may be sync or async.
+ *
+ * Strategy: exponential back-off to bracket the change (works for the ~2.3-day
+ * Moon sign as well as the ~2.5-year Saturn sign without a fixed step size),
+ * then bisection to `precisionMs`.
+ */
+export async function findSignBoundary(
+  sampleRashi: (ms: number) => number | Promise<number>,
+  startMs: number,
+  direction: -1 | 1,
+  maxDays = 1200,
+  precisionMs = 60_000,
+): Promise<number | null> {
+  const startRashi = await sampleRashi(startMs);
+  let stepDays = 1;
+  let prevMs = startMs;
+
+  while (stepDays <= maxDays) {
+    const nextMs = startMs + direction * stepDays * MS_PER_DAY;
+    const rashi = await sampleRashi(nextMs);
+    if (rashi !== startRashi) {
+      // Bracket [prevMs, nextMs] holds exactly one crossing of a 30° boundary
+      // as long as its width stays below one sign's duration — the doubling
+      // schedule guarantees this because the first over-shoot is detected.
+      let lo = prevMs;   // still startRashi
+      let hi = nextMs;   // already changed
+      while (Math.abs(hi - lo) > precisionMs) {
+        const mid = Math.floor((lo + hi) / 2);
+        if ((await sampleRashi(mid)) === startRashi) lo = mid;
+        else hi = mid;
+      }
+      return hi;
+    }
+    prevMs = nextMs;
+    stepDays *= 2;
+  }
+  return null;
+}
+
+/**
+ * Per-planet ingress/egress for the sign each planet occupies at `atMs`.
+ * `samplerFor(planet)` must return a rashi sampler (sync or async).
+ */
+export async function computeSignWindows(
+  planetNames: string[],
+  samplerFor: (planet: string) => (ms: number) => number | Promise<number>,
+  atMs: number,
+): Promise<SignWindow[]> {
+  const windows: SignWindow[] = [];
+  for (const planet of planetNames) {
+    const sample = samplerFor(planet);
+    const rashi = await sample(atMs);
+    windows.push({
+      planet,
+      rashi,
+      ingressMs: await findSignBoundary(sample, atMs, -1),
+      egressMs: await findSignBoundary(sample, atMs, 1),
+    });
+  }
+  return windows;
+}
+
+/**
+ * Production wrapper: real per-planet ingress/egress dates from the ephemeris.
+ * One ephemeris call yields all planets, so the sky is sampled once per instant
+ * and reused across planets.
+ */
+export async function getTransitSignWindows(
+  date: Date,
+  time = '00:00',
+  planetNames: string[] = PLANETS.map((p) => p.en),
+): Promise<SignWindow[]> {
+  await initSwissEphemeris();
+
+  const skyAt = async (ms: number): Promise<Record<string, number>> => {
+    const iso = new Date(ms).toISOString();
+    const data = await calcPlanetsAccurate(iso.slice(0, 10), iso.slice(11, 16));
+    const map: Record<string, number> = {};
+    for (const p of data.planets ?? []) {
+      const rashi = p.rashiIndex ?? Math.floor(p.sidereal / 30);
+      map[p.name] = ((rashi % 12) + 12) % 12;
+    }
+    return map;
+  };
+
+  const atMs = Date.UTC(
+    date.getUTCFullYear(),
+    date.getUTCMonth(),
+    date.getUTCDate(),
+    Number(time.slice(0, 2)) || 0,
+    Number(time.slice(3, 5)) || 0,
+  );
+
+  const samplerFor = (planet: string) => async (ms: number) => (await skyAt(ms))[planet] ?? 0;
+  return computeSignWindows(planetNames, samplerFor, atMs);
 }
 
 /**
@@ -120,35 +392,22 @@ export async function calculateDynamicTransits(
   const results: TransitResult[] = [];
   let totalScore = 0;
 
-  for (const planet of PLANETS) {
-    const currentRashi = planetRashiMap[planet.en] ?? 0;
-    const houseFromMoon = ((currentRashi - moonRashiIndex + 12) % 12) + 1;
-    const baseFavorable = planet.favorableHouses.includes(houseFromMoon);
+  // Per-planet verdicts — one source of truth, reused for the Moon frame (below)
+  // and the Lagna frame (attached to the output).
+  const moonFrameRows = computeTransitFrame(planetRashiMap, moonRashiIndex);
 
-    // Check vedha
-    let vedhaActive = false;
-    let vedhaNote = '';
-    if (baseFavorable) {
-      const vedhaHouse = VEDHA_PAIRS[planet.en]?.[houseFromMoon];
-      if (vedhaHouse !== undefined && vedhaHouse !== null) {
-        for (const otherPlanet of PLANETS) {
-          if (otherPlanet.en === planet.en) continue;
-          const otherRashi = planetRashiMap[otherPlanet.en];
-          if (otherRashi === undefined) continue;
-          const otherHouse = ((otherRashi - moonRashiIndex + 12) % 12) + 1;
-          if (otherHouse === vedhaHouse) {
-            vedhaActive = true;
-            vedhaNote = `${otherPlanet.en} in ${vedhaHouse}th`;
-            break;
-          }
-        }
-      }
-    }
-
-    const effectiveStatus = baseFavorable
-      ? vedhaActive ? 'mixed' : 'favorable'
-      : 'unfavorable';
-    const scoreContribution = effectiveStatus === 'favorable' ? 1 : 0;
+  for (let idx = 0; idx < PLANETS.length; idx++) {
+    const planet = PLANETS[idx];
+    const row = moonFrameRows[idx];
+    const {
+      currentRashi,
+      house: houseFromMoon,
+      baseFavorable,
+      vedhaActive,
+      vedhaNote,
+      effectiveStatus,
+      scoreContribution,
+    } = row;
     totalScore += scoreContribution;
 
     // Get house-specific effect
@@ -329,6 +588,25 @@ export async function calculateDynamicTransits(
 
   const overallStatus = totalScore >= 6 ? 'favorable' : totalScore >= 3 ? 'mixed' : 'unfavorable';
 
+  // Second reference frame: transit houses computed from the Lagna (ascendant).
+  const lagnaRashiIndex = typeof input.lagnaRashiIndex === 'number' ? input.lagnaRashiIndex : undefined;
+  const transitsFromLagna = lagnaRashiIndex !== undefined
+    ? computeTransitFrame(planetRashiMap, lagnaRashiIndex)
+    : undefined;
+
+  // Saturn (Shani) status relative to the natal Moon (Sade Sati / Ashtama / Kantaka).
+  const shaniStatus = computeShaniStatus(ephemerisData.saturn.sidereal, moonRashiIndex);
+
+  // Ashtakavarga transit points (only when the natal chart was supplied).
+  const ashtakavargaTransit =
+    input.natalPlanetRashis && typeof input.natalAscendantRashi === 'number'
+      ? computeAshtakavargaTransitPoints(
+          input.natalPlanetRashis,
+          input.natalAscendantRashi,
+          planetRashiMap,
+        )
+      : undefined;
+
   const result = {
     date,
     time,
@@ -336,6 +614,10 @@ export async function calculateDynamicTransits(
     totalScore,
     overallStatus,
     moonRashiIndex,
+    lagnaRashiIndex,
+    transitsFromLagna,
+    shaniStatus,
+    ashtakavargaTransit,
     planetPositions,
   };
 

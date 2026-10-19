@@ -41,6 +41,8 @@ import {
 import { calculateDynamicTransits } from "@/services/dynamicTransitService";
 import { saveReading, getReadings, type SavedReading } from '@/services/readingService';
 import { addBirthDetails, getLastUsedProfile, shouldAutoLoad } from '@/services/userProfileService';
+import { resolveBirthTimezone } from '@/lib/birthTimezone';
+import { setBirthTimezone } from '@/hooks/use-birth-timezone';
 import { hasSeenWelcome, isPro, getSubscription } from "@/services/subscriptionService";
 import {
   getMoonSign,
@@ -239,6 +241,9 @@ const Index = () => {
 
   const handleSubmit = useCallback(async (data: { date: string; time: string; location: string; name?: string }) => {
     const coords = parseCoordinates(data.location);
+    // Publish the resolved historical birth UTC offset (covers the auto-load
+    // path too, which bypasses the form component).
+    setBirthTimezone(resolveBirthTimezone({ date: data.date, location: data.location }));
     setRawBirthData(data);
     addBirthDetails(data);
 

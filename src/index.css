@@ -4,15 +4,15 @@
  */
 
 /* ─── Font Loading ─────────────────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap");
 
 /* ─── Style Imports ────────────────────────────────────────────────────────── */
-@import './styles/enterprise.css';
+@import "./styles/enterprise.css";
 
 /* ─── Tailwind Layers ──────────────────────────────────────────────────────── */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+@config "../tailwind.config.ts";
 
 /* ─── Base Layer: Design Tokens ────────────────────────────────────────────── */
 @layer base {
@@ -206,7 +206,7 @@
   h4,
   h5,
   h6 {
-    font-family: 'Crimson Pro', Georgia, serif;
+    font-family: "Crimson Pro", Georgia, serif;
     font-weight: 600;
     line-height: 1.2;
   }
@@ -255,7 +255,7 @@
   }
 
   .auspicious-card::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 6px;
     left: 6px;
@@ -279,13 +279,18 @@
   }
 
   .auspicious-header::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -2px;
     left: 10%;
     right: 10%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, hsl(var(--auspicious-accent)), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--auspicious-accent)),
+      transparent
+    );
   }
 
   /* Favorable/Unfavorable/Mixed indicators */
@@ -410,7 +415,10 @@
 
   /* Planet glow cards (neon per planet) */
   .planet-card-sun {
-    @apply neon-glow-gold border-[hsl(var(--planet-sun)/0.4)];
+    border: 1px solid hsl(var(--planet-sun) / 0.4);
+    box-shadow:
+      0 0 12px hsl(var(--neon-gold) / 0.5),
+      0 0 24px hsl(var(--neon-gold) / 0.25);
   }
   .planet-card-moon {
     box-shadow: 0 0 12px hsl(220 60% 70% / 0.4);
@@ -419,7 +427,9 @@
     box-shadow: 0 0 12px hsl(var(--planet-mars) / 0.4);
   }
   .planet-card-rahu {
-    @apply neon-glow-violet;
+    box-shadow:
+      0 0 12px hsl(var(--neon-violet) / 0.5),
+      0 0 24px hsl(var(--neon-violet) / 0.25);
   }
   .planet-card-ketu {
     box-shadow: 0 0 12px hsl(var(--neon-magenta) / 0.35);
@@ -430,19 +440,19 @@
 @layer utilities {
   /* Font utilities */
   .font-heading {
-    font-family: 'Crimson Pro', Georgia, serif;
+    font-family: "Crimson Pro", Georgia, serif;
   }
   .font-body {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: "Inter", system-ui, sans-serif;
   }
   .font-hindi {
-    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-family: "Noto Sans Devanagari", sans-serif;
   }
   .font-mono-astro {
-    font-family: 'Courier New', monospace;
+    font-family: "Courier New", monospace;
   }
   .font-cinzel {
-    font-family: 'Cinzel', Georgia, serif;
+    font-family: "Cinzel", Georgia, serif;
   }
 
   /* Vedic color utilities */
@@ -536,13 +546,21 @@
     background-clip: text;
   }
   .gradient-text-vedic {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)),
+      hsl(var(--accent))
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   .gradient-text-neon {
-    background: linear-gradient(135deg, hsl(var(--neon-magenta)), hsl(var(--neon-cyan)));
+    background: linear-gradient(
+      135deg,
+      hsl(var(--neon-magenta)),
+      hsl(var(--neon-cyan))
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -556,10 +574,21 @@
   .bg-auspicious-pattern {
     background-color: hsl(var(--auspicious-bg));
     background-image:
-      radial-gradient(hsl(var(--auspicious-accent) / 0.15) 1px, transparent 1px),
-      linear-gradient(to right, hsl(var(--auspicious-accent) / 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--auspicious-accent) / 0.05) 1px, transparent 1px),
-      url('https://www.transparenttextures.com/patterns/p6.png');
+      radial-gradient(
+        hsl(var(--auspicious-accent) / 0.15) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to right,
+        hsl(var(--auspicious-accent) / 0.05) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        hsl(var(--auspicious-accent) / 0.05) 1px,
+        transparent 1px
+      ),
+      url("https://www.transparenttextures.com/patterns/p6.png");
     background-size:
       40px 40px,
       100px 100px,
@@ -573,7 +602,7 @@
 
   .sacred-divider::before,
   .sacred-divider::after {
-    content: '';
+    content: "";
     @apply h-[1px] w-32 bg-gradient-to-r from-transparent via-[hsl(var(--auspicious-accent))] to-transparent;
   }
 
@@ -649,9 +678,21 @@
   .bg-sacred-mandala {
     background-color: hsl(var(--auspicious-pearl));
     background-image:
-      radial-gradient(circle at 20% 80%, hsl(var(--auspicious-gold) / 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, hsl(var(--auspicious-divine) / 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, hsl(var(--auspicious-emerald) / 0.05) 0%, transparent 30%);
+      radial-gradient(
+        circle at 20% 80%,
+        hsl(var(--auspicious-gold) / 0.1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 20%,
+        hsl(var(--auspicious-divine) / 0.1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 40% 40%,
+        hsl(var(--auspicious-emerald) / 0.05) 0%,
+        transparent 30%
+      );
   }
 
   .bg-wealth-pattern {
@@ -727,7 +768,12 @@
 
   /* Shimmer effect for auspicious elements */
   .auspicious-shimmer {
-    background: linear-gradient(90deg, transparent, hsl(var(--auspicious-gold) / 0.3), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--auspicious-gold) / 0.3),
+      transparent
+    );
     background-size: 200% 100%;
     animation: shimmer 2s infinite;
   }

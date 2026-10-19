@@ -15,6 +15,8 @@ import {
   TajikaYoga,
   MuddaDasha
 } from '@/services/varshaphalService';
+import { calculateChartForBirth } from '@/services/chartWithTimezone';
+import { buildAnnualDashaContext } from '@/services/dashaTimelineCorrelationService';
 import { Calendar, TrendingUp, Heart, Briefcase, Award, Users } from 'lucide-react';
 
 interface Props {
@@ -51,6 +53,28 @@ export default function VarshaphalCard({
   const [activeTab, setActiveTab] = useState<'summary' | 'yogas' | 'dasha' | 'predictions'>('summary');
   
   const varshaphalData = calculateVarshaphal(birthDate, birthLatitude, birthLongitude, targetYear);
+
+  // N4 Kaal: hook the Varshaphal year onto the unified Vimshottari timeline.
+  // The year runs from this solar return to the next; the chain at the opening
+  // instant and the Pratyantar windows inside the year are returned as data.
+  const natalIso = birthDate.toISOString();
+  const natalChart = calculateChartForBirth(
+    natalIso.slice(0, 10),
+    natalIso.slice(11, 16),
+    birthLatitude,
+    birthLongitude,
+    0,
+  );
+  const moonSiderealLongitude = natalChart.planets.find((p) => p.name === 'Moon')?.siderealLongitude ?? 0;
+  const nextYearReturn = new Date(
+    calculateVarshaphal(birthDate, birthLatitude, birthLongitude, targetYear + 1).solarReturnDate,
+  );
+  const annualKaal = buildAnnualDashaContext(
+    { moonSiderealLongitude, birth: birthDate, latitude: birthLatitude, longitude: birthLongitude },
+    new Date(varshaphalData.solarReturnDate),
+    nextYearReturn,
+    3,
+  );
 
   const getCategoryColor = (category: string) => {
     const colors = {
@@ -275,6 +299,49 @@ export default function VarshaphalCard({
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* N4 Kaal: unified Vimshottari timeline for this annual year */}
+            <div className="mt-6 pt-4 border-t">
+              <h4 className={`font-medium mb-1 ${isHi ? 'font-hindi' : ''}`}>
+                {isHi ? 'वर्ष की विंशोत्तरी दशा (N4 काल)' : 'Vimshottari Timeline for the Year (N4 Kaal)'}
+              </h4>
+              <p className={`text-xs text-muted-foreground mb-3 ${isHi ? 'font-hindi' : ''}`}>
+                {isHi ? 'सूर्य प्रत्यागमन से अगले तक' : 'Solar return to the next solar return'}
+              </p>
+
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xs text-muted-foreground">
+                  {isHi ? 'वर्षारंभ पर:' : 'At year opening:'}
+                </span>
+                <Badge variant="outline">{annualKaal.chainAtStartLabel || '—'}</Badge>
+              </div>
+
+              <div className="space-y-2">
+                {annualKaal.windows.map((window, index) => (
+                  <div key={index} className="flex items-center justify-between p-2 border rounded-lg">
+                    <div>
+                      <div className="text-sm font-medium">{window.chainLabel}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {window.start.toLocaleDateString()} - {window.end.toLocaleDateString()}
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <Badge
+                        className={
+                          window.activationLevel === 'High'
+                            ? 'bg-green-600 text-white'
+                            : window.activationLevel === 'Medium'
+                              ? 'bg-yellow-600 text-white'
+                              : 'bg-red-600 text-white'
+                        }
+                      >
+                        {window.activationLevel} · {window.activationScore}
+                      </Badge>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </CardContent>
         </Card>

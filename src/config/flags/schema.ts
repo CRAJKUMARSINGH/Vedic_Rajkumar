@@ -1,16 +1,16 @@
-ï»¿/**
+/**
  * Feature Flag Schema
- * TRI-HYBRID MERGE v4.0 â€” Vedic_Rajkumar
+ * TRI-HYBRID MERGE v4.0 — Vedic_Rajkumar
  *
  * Every merged or new feature is toggleable here.
- * Default = BASE behaviour (safe fallback â€” "No Nuksan").
+ * Default = BASE behaviour (safe fallback — "No Nuksan").
  *
  * Sources:
- *   BASE  â€” production system (Vedic_Rajkumar)
- *   APP00 â€” REFERENCE-APP00 (innovation set A)
- *   APP01 â€” REFERENCE-APP01 (innovation set B)
- *   NEW   â€” Vedic-Transit-Analysis (new features)
- *   HYBRID â€” best-of-all synthesis
+ *   BASE  — production system (Vedic_Rajkumar)
+ *   APP00 — REFERENCE-APP00 (innovation set A)
+ *   APP01 — REFERENCE-APP01 (innovation set B)
+ *   NEW   — Vedic-Transit-Analysis (new features)
+ *   HYBRID — best-of-all synthesis
  */
 
 export type FlagType = 'boolean' | 'enum' | 'number';

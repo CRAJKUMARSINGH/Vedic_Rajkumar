@@ -3,10 +3,10 @@ import { TransitsPanel } from '@/components/TransitsPanel';
 import { TransitTimeline } from '@/components/transits/TransitTimeline';
 import MainLayout from '@/components/MainLayout';
 import { SEO } from '@/components/SEO';
-import type { NatalChart } from '@/services/transits/transitService';
+import type { TransitNatalChart } from '@/services/transits/transitService';
 
 /** Demo natal longitudes so the Gochar timeline can render without a saved chart. */
-const SAMPLE_NATAL: NatalChart = {
+const SAMPLE_NATAL: TransitNatalChart = {
   lagnaSign: 0,
   planets: {
     Sun: 15,

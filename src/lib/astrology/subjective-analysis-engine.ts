@@ -832,6 +832,21 @@ export class SubjectiveAnalysisEngine {
     return { type: 'NO_TRANSIT_IGNITION', label: 'NO_TRANSIT_IGNITION' };
   }
 
+  // Maps the detected query context to the house that governs the matter.
+  // Career/fame are read from the 10th bhava, marriage from the 7th,
+  // and every other (general) query defaults to the 1st (Lagna).
+  private getTargetHouse(): HouseNumber {
+    switch (this.queryContext) {
+      case 'career':
+      case 'fame':
+        return 10;
+      case 'marriage':
+        return 7;
+      default:
+        return 1;
+    }
+  }
+
   private calculateDashaLevel(targetHouse: HouseNumber): {
     level: 1 | 2 | 3 | 4 | 5;
     label: string;

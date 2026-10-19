@@ -11,9 +11,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../co
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { AlertCircle, Info } from 'lucide-react';
 import { TransitTimeline } from '@/components/transits/TransitTimeline';
-import type { NatalChart } from '@/services/transits/transitService';
+import type { TransitNatalChart } from '@/services/transits/transitService';
 
-const SAMPLE_NATAL: NatalChart = {
+const SAMPLE_NATAL: TransitNatalChart = {
   lagnaSign: 0,
   planets: {
     Sun: 15,

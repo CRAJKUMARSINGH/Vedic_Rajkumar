@@ -258,7 +258,7 @@ export const KaalSarpForm: React.FC<KaalSarpFormProps> = ({ isHindi }) => {
                       <ul className="space-y-2">
                         {(isHindi ? report.positiveEffectsHi : report.positiveEffects).map((effect, index) => (
                           <li key={index} className="flex items-start gap-2">
-                            <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
                             <span className="text-sm">{effect}</span>
                           </li>
                         ))}
@@ -276,7 +276,7 @@ export const KaalSarpForm: React.FC<KaalSarpFormProps> = ({ isHindi }) => {
                       <ul className="space-y-2">
                         {(isHindi ? report.negativeEffectsHi : report.negativeEffects).map((effect, index) => (
                           <li key={index} className="flex items-start gap-2">
-                            <AlertTriangle className="h-4 w-4 text-red-600 mt-0.5 flex-shrink-0" />
+                            <AlertTriangle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" />
                             <span className="text-sm">{effect}</span>
                           </li>
                         ))}
@@ -317,7 +317,7 @@ export const KaalSarpForm: React.FC<KaalSarpFormProps> = ({ isHindi }) => {
                     <ul className="space-y-2">
                       {(isHindi ? report.peakPeriodsHi : report.peakPeriods).map((period, index) => (
                         <li key={index} className="flex items-start gap-2">
-                          <Clock className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                          <Clock className="h-4 w-4 text-blue-600 mt-0.5 shrink-0" />
                           <span className="text-sm">{period}</span>
                         </li>
                       ))}
@@ -338,7 +338,7 @@ export const KaalSarpForm: React.FC<KaalSarpFormProps> = ({ isHindi }) => {
                       <ul className="space-y-2">
                         {(isHindi ? report.generalRemediesHi : report.generalRemedies).map((remedy, index) => (
                           <li key={index} className="flex items-start gap-2">
-                            <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                            <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 shrink-0"></div>
                             <span className="text-sm">{remedy}</span>
                           </li>
                         ))}
@@ -356,7 +356,7 @@ export const KaalSarpForm: React.FC<KaalSarpFormProps> = ({ isHindi }) => {
                       <ul className="space-y-2">
                         {(isHindi ? report.specificRemediesHi : report.specificRemedies).map((remedy, index) => (
                           <li key={index} className="flex items-start gap-2">
-                            <div className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                            <div className="w-2 h-2 bg-purple-600 rounded-full mt-2 shrink-0"></div>
                             <span className="text-sm">{remedy}</span>
                           </li>
                         ))}
@@ -439,7 +439,7 @@ export const KaalSarpForm: React.FC<KaalSarpFormProps> = ({ isHindi }) => {
                       <ul className="space-y-2">
                         {(isHindi ? report.templesHi : report.temples).map((temple, index) => (
                           <li key={index} className="flex items-start gap-2">
-                            <Building className="h-4 w-4 text-red-600 mt-0.5 flex-shrink-0" />
+                            <Building className="h-4 w-4 text-red-600 mt-0.5 shrink-0" />
                             <span className="text-sm">{temple}</span>
                           </li>
                         ))}
@@ -457,7 +457,7 @@ export const KaalSarpForm: React.FC<KaalSarpFormProps> = ({ isHindi }) => {
                       <ul className="space-y-2">
                         {(isHindi ? report.poojaRecommendationsHi : report.poojaRecommendations).map((pooja, index) => (
                           <li key={index} className="flex items-start gap-2">
-                            <Home className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <Home className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
                             <span className="text-sm">{pooja}</span>
                           </li>
                         ))}

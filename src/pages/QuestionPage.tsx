@@ -1053,7 +1053,7 @@ const QuestionPage = () => {
                       <p className="text-sm text-slate-500 mb-1">
                         {isHi ? 'प्रश्न का विषय' : 'Question topic'}
                       </p>
-                      <p className={`text-lg font-semibold ${isHi ? 'font-hindi' : ''}`}>
+                      <div className={`text-lg font-semibold ${isHi ? 'font-hindi' : ''}`}>
                         {isHi ? result.category.label.hi : result.category.label.en}{' '}
                         <Badge variant="secondary" className="ml-2">
                           {isHi ? 'भाव' : 'House'} {result.category.house}
@@ -1061,7 +1061,7 @@ const QuestionPage = () => {
                         <Badge variant="outline" className="ml-1">
                           {isHi ? 'कारक' : 'Karaka'}: {result.category.karaka}
                         </Badge>
-                      </p>
+                      </div>
                     </div>
 
                     {/* Pancha Sutra from prasnaPayload */}

@@ -232,3 +232,48 @@ export function calculateHouseSystem(
       return calculateWholeSignHouses(ascSid, ayanamsaValue);
   }
 }
+
+// ─── Bhava Chalit (cusp-based house placement) ────────────────────────────────
+
+/**
+ * Return the Bhava Chalit house number [1–12] for a sidereal longitude, given
+ * the 12 ordered house cusps.
+ *
+ * Bhava Chalit differs from the Rashi (whole-sign) chart: a planet's *sign* may
+ * stay the same while its *house* shifts, because houses are bounded by the
+ * actual cusps rather than by sign boundaries. A planet is placed in the house
+ * whose cusp-to-next-cusp arc contains it. Works for any cusp scheme
+ * (whole-sign, equal, Placidus).
+ */
+export function getBhavaChalitHouse(
+  planetSiderealDeg: number,
+  cusps: HouseCusp[],
+): number {
+  if (cusps.length !== 12) {
+    throw new Error('getBhavaChalitHouse: expected exactly 12 cusps');
+  }
+  const lon = normalize360(planetSiderealDeg);
+
+  for (let i = 0; i < 12; i++) {
+    const start = normalize360(cusps[i].longitude);
+    const end = normalize360(cusps[(i + 1) % 12].longitude);
+    const arc = normalize360(end - start);
+    const offset = normalize360(lon - start);
+    if (offset < arc) return cusps[i].house;
+  }
+
+  // Numerically unreachable for a well-formed cusp set (arcs sum to 360°),
+  // but keeps the contract total if a degenerate cusp set is passed.
+  return cusps[0].house;
+}
+
+/**
+ * Map an array of planet sidereal longitudes to their Bhava Chalit houses.
+ * Index order of the result matches the input order.
+ */
+export function calculateBhavaChalit(
+  planetSiderealDeg: number[],
+  cusps: HouseCusp[],
+): number[] {
+  return planetSiderealDeg.map(lon => getBhavaChalitHouse(lon, cusps));
+}

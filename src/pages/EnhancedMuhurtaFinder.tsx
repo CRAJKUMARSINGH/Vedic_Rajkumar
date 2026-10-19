@@ -30,7 +30,7 @@ function ScoreRing({ score }: { score: number }) {
   const r = 22, circ = 2*Math.PI*r;
   const fill = circ * (score/100);
   return (
-    <div className="relative w-14 h-14 flex-shrink-0">
+    <div className="relative w-14 h-14 shrink-0">
       <svg className="w-14 h-14 -rotate-90" viewBox="0 0 56 56">
         <circle cx="28" cy="28" r={r} fill="none" stroke="currentColor" strokeWidth="4" className="text-white/10" />
         <circle cx="28" cy="28" r={r} fill="none" strokeWidth="4"
@@ -71,7 +71,7 @@ function DayCard({ day, expanded, onToggle }: { day:MuhurtaDay; expanded:boolean
               </span>
             </div>
           </div>
-          <div className="flex flex-col items-end gap-1 flex-shrink-0">
+          <div className="flex flex-col items-end gap-1 shrink-0">
             <span className={`text-xs px-2 py-0.5 rounded-lg border font-bold ${gc.bg} ${gc.text} ${gc.border}`}>
               {day.grade} · {gc.label}
             </span>
@@ -126,7 +126,7 @@ function DayCard({ day, expanded, onToggle }: { day:MuhurtaDay; expanded:boolean
 
           {/* Rahu Kaal */}
           <div className="rounded-lg bg-red-950/20 border border-red-500/20 p-3 flex items-start gap-2">
-            <span className="text-red-400 flex-shrink-0 mt-0.5">⚠</span>
+            <span className="text-red-400 shrink-0 mt-0.5">⚠</span>
             <div>
               <p className="text-xs font-semibold text-red-300">Rahu Kaal — Avoid for ceremonies</p>
               <p className="text-[11px] text-red-200/60 mt-0.5">{day.rahuKaalHours} IST (approx.)</p>
@@ -149,7 +149,7 @@ function DayCard({ day, expanded, onToggle }: { day:MuhurtaDay; expanded:boolean
               {day.notes.map((n,i)=>(
                 <p key={i} className={`text-xs flex gap-1.5 leading-relaxed
                   ${n.startsWith("⭐")?"text-amber-300":n.startsWith("✓")?"text-emerald-300":"text-red-300"}`}>
-                  <span className="flex-shrink-0 mt-0.5">{n.slice(0,1)}</span>
+                  <span className="shrink-0 mt-0.5">{n.slice(0,1)}</span>
                   <span>{n.slice(2)}</span>
                 </p>
               ))}

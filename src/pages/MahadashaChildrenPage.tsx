@@ -72,7 +72,7 @@ const MahadashaChildrenPage = () => {
                     aria-expanded={isOpen}
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <span className="text-2xl flex-shrink-0">{d.emoji}</span>
+                      <span className="text-2xl shrink-0">{d.emoji}</span>
                       <div className="min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
                           <span className={`font-semibold text-foreground ${isHi ? 'font-hindi' : ''}`}>
@@ -87,7 +87,7 @@ const MahadashaChildrenPage = () => {
                         </p>
                       </div>
                     </div>
-                    <span className="text-muted-foreground text-lg flex-shrink-0">{isOpen ? '▲' : '▼'}</span>
+                    <span className="text-muted-foreground text-lg shrink-0">{isOpen ? '▲' : '▼'}</span>
                   </button>
 
                   {/* Expanded content */}
@@ -121,7 +121,7 @@ const MahadashaChildrenPage = () => {
                         <ul className="space-y-1">
                           {(isHi ? d.doNotHi : d.doNot).map((item, idx) => (
                             <li key={idx} className="text-sm text-foreground flex gap-2">
-                              <span className="text-red-500 flex-shrink-0">•</span>
+                              <span className="text-red-500 shrink-0">•</span>
                               <span>{item}</span>
                             </li>
                           ))}
@@ -136,7 +136,7 @@ const MahadashaChildrenPage = () => {
                         <ul className="space-y-1">
                           {(isHi ? d.doThisHi : d.doThis).map((item, idx) => (
                             <li key={idx} className="text-sm text-foreground flex gap-2">
-                              <span className="text-green-600 flex-shrink-0">•</span>
+                              <span className="text-green-600 shrink-0">•</span>
                               <span>{item}</span>
                             </li>
                           ))}

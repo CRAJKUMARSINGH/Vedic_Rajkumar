@@ -5,6 +5,13 @@
  * Core Panchang calculations: Tithi, Nakshatra, Yoga, Karana, Var
  */
 
+import { calculateCompletePlanetaryPositionsAtUTC } from './ephemerisService';
+import {
+  calculateSunriseSunset,
+  calculateMoonriseMoonset,
+  getTimezoneOffsetMinutes,
+} from '../utils/panchangAstronomy';
+
 export type TithiPaksha = 'Shukla' | 'Krishna';
 export type TithiName = 'Pratipada' | 'Dwitiya' | 'Tritiya' | 'Chaturthi' | 'Panchami' | 
   'Shashthi' | 'Saptami' | 'Ashtami' | 'Navami' | 'Dashami' | 'Ekadashi' | 'Dwadashi' | 
@@ -217,6 +224,53 @@ export function calculatePanchang(
   };
 }
 
+/**
+ * Calculate complete Panchang for a specific date, latitude/longitude, and IANA timezone.
+ * Uses real astronomical ephemeris (no fake approximation), real sunrise/sunset,
+ * and real moonrise/moonset. This is the preferred function for UI rendering.
+ *
+ * Does NOT change the signature of calculatePanchang (preserved for API endpoint compatibility).
+ */
+export function calculatePanchangForDate(
+  dateStr: string,
+  lat: number,
+  lon: number,
+  timezone: string
+): Panchang {
+  const tzOffsetMinutes = getTimezoneOffsetMinutes(dateStr, timezone);
+  const { sunrise, sunset, solarNoon } = calculateSunriseSunset(dateStr, lat, lon, tzOffsetMinutes);
+
+  // Compute planetary positions at sunrise (or solar noon for polar locations)
+  const positionInstant: Date = sunrise ?? solarNoon;
+  const positions = calculateCompletePlanetaryPositionsAtUTC(positionInstant);
+  const sunLon = positions.sun.sidereal;
+  const moonLon = positions.moon.sidereal;
+
+  const tithi = calculateTithi(moonLon, sunLon);
+  const nakshatra = calculateNakshatra(moonLon);
+  const yoga = calculateYoga(sunLon, moonLon);
+  const karana = calculateKarana(tithi.number, true); // Simplified: using first half of tithi
+
+  // Weekday from local date (not UTC midnight) to get the correct Var
+  const [year, month, day] = dateStr.split('-').map(Number);
+  const localDate = new Date(year, month - 1, day);
+  const varDay = getVarDetails(localDate);
+
+  const { moonrise, moonset } = calculateMoonriseMoonset(dateStr, lat, lon, tzOffsetMinutes);
+
+  return {
+    date: localDate,
+    tithi,
+    nakshatra,
+    yoga,
+    karana,
+    var: varDay,
+    sunrise: sunrise ?? solarNoon,
+    sunset:  sunset  ?? solarNoon,
+    moonrise: moonrise ?? undefined,
+    moonset:  moonset  ?? undefined,
+  };
+}
 
 /**
  * Get Tithi details by number and paksha
@@ -259,15 +313,18 @@ function getNakshatraDetails(number: number, pada: number): Nakshatra {
   ];
   
   const name = nakshatraNames[number - 1];
-  return NAKSHATRA_DATABASE[name] || {
-    number,
-    name,
+  // Always spread `pada` onto the returned object so "Pada undefined" can never occur.
+  return {
+    ...(NAKSHATRA_DATABASE[name] ?? {
+      number,
+      name,
+      lord: 'Unknown',
+      deity: 'Unknown',
+      symbol: 'Unknown',
+      quality: 'neutral',
+      description: { en: name, hi: name }
+    }),
     pada,
-    lord: 'Unknown',
-    deity: 'Unknown',
-    symbol: 'Unknown',
-    quality: 'neutral',
-    description: { en: name, hi: name }
   };
 }
 

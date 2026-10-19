@@ -4,7 +4,7 @@
  * India Independence chart + major nations
  */
 
-export interface NatalChart {
+export interface MundaneNatalChart {
   country: string;
   label: { en: string; hi: string };
   date: string;
@@ -18,7 +18,7 @@ export interface NatalChart {
   flag: string;
 }
 
-export const INDIA_NATAL_CHART: NatalChart = {
+export const INDIA_NATAL_CHART: MundaneNatalChart = {
   country: 'India',
   label: { en: 'Republic of India', hi: 'भारत गणराज्य' },
   date: '1947-08-15',
@@ -32,7 +32,7 @@ export const INDIA_NATAL_CHART: NatalChart = {
   flag: '',
 };
 
-export const USA_NATAL_CHART: NatalChart = {
+export const USA_NATAL_CHART: MundaneNatalChart = {
   country: 'USA',
   label: { en: 'United States of America', hi: 'संयुक्त राज्य अमेरिका' },
   date: '1776-07-04',
@@ -46,7 +46,7 @@ export const USA_NATAL_CHART: NatalChart = {
   flag: '',
 };
 
-export const UK_NATAL_CHART: NatalChart = {
+export const UK_NATAL_CHART: MundaneNatalChart = {
   country: 'UK',
   label: { en: 'United Kingdom', hi: 'यूनाइटेड किंगडम' },
   date: '1801-01-01',
@@ -60,7 +60,7 @@ export const UK_NATAL_CHART: NatalChart = {
   flag: '',
 };
 
-export const ALL_NATIONAL_CHARTS: NatalChart[] = [
+export const ALL_NATIONAL_CHARTS: MundaneNatalChart[] = [
   INDIA_NATAL_CHART,
   USA_NATAL_CHART,
   UK_NATAL_CHART,

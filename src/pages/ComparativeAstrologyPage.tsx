@@ -147,7 +147,7 @@ const ComparativeAstrologyPage = () => {
                     { vedic: 'Rahu/Ketu (nodes)', western: 'Outer planets (Uranus/Neptune/Pluto)', label: 'Planets' },
                   ].map(d => (
                     <div key={d.label} className="flex gap-3 p-3 bg-muted/30 rounded-lg">
-                      <div className="text-xs font-bold text-muted-foreground w-16 flex-shrink-0">{d.label}</div>
+                      <div className="text-xs font-bold text-muted-foreground w-16 shrink-0">{d.label}</div>
                       <div className="flex-1 space-y-1">
                         <div className="flex items-center gap-1"><span className="text-orange-600 text-xs">🕉️</span><span className="text-xs">{d.vedic}</span></div>
                         <div className="flex items-center gap-1"><span className="text-blue-600 text-xs">⭐</span><span className="text-xs">{d.western}</span></div>

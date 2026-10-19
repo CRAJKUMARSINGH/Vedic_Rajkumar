@@ -29,6 +29,7 @@ import ChartEmptyState from '@/components/ChartEmptyState';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { calculateChart } from '@/features/kundli/engine';
 import type { ChartResult } from '@/features/kundli/types';
+import { calculateEqualHouses, getBhavaChalitHouse } from '@/services/houseSystemService';
 import { ValidationInProgressNotice } from '@/components/PrototypeStatusBanner';
 import EnhancedLanguageToggle from '@/components/EnhancedLanguageToggle';
 import { type SupportedLanguage } from '@/services/multiLanguageService';
@@ -65,6 +66,12 @@ const DEFAULT_FORM: BirthFormValues = {
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 function PlanetTable({ result, isHi }: { result: ChartResult; isHi: boolean }) {
+  // Bhava-Chalit: houses bounded by the equal-bhava cusps anchored on the exact
+  // Lagna degree — this differs from the whole-sign (rashi) house whenever a
+  // planet sits near a sign boundary.
+  const ascSid = result.planets.find((p) => p.planet === 'Ascendant')?.siderealLongitude ?? 0;
+  const chalitCusps = calculateEqualHouses(ascSid, result.ayanamsaValue);
+
   return (
     <div className="overflow-x-auto rounded-xl border border-border">
       <table className="w-full text-sm" aria-label="Planetary positions">
@@ -80,6 +87,9 @@ function PlanetTable({ result, isHi }: { result: ChartResult; isHi: boolean }) {
               {isHi ? 'भाव' : 'House'}
             </th>
             <th className={`px-4 py-2 font-semibold text-foreground ${isHi ? 'font-hindi' : ''}`}>
+              {isHi ? 'चलित भाव' : 'Chalit'}
+            </th>
+            <th className={`px-4 py-2 font-semibold text-foreground ${isHi ? 'font-hindi' : ''}`}>
               {isHi ? 'नक्षत्र' : 'Nakshatra'}
             </th>
             <th className={`px-4 py-2 font-semibold text-foreground ${isHi ? 'font-hindi' : ''}`}>
@@ -91,20 +101,31 @@ function PlanetTable({ result, isHi }: { result: ChartResult; isHi: boolean }) {
           </tr>
         </thead>
         <tbody>
-          {result.planets.map((p) => (
-            <tr key={p.planet} className="border-t border-border/60 hover:bg-muted/20 transition-colors">
-              <td className="px-4 py-2 font-medium text-amber-700 dark:text-amber-400">{p.planet}</td>
-              <td className="px-4 py-2 text-foreground">{p.sign}</td>
-              <td className="px-4 py-2 text-foreground">{p.house}</td>
-              <td className="px-4 py-2 text-muted-foreground">{p.nakshatra}</td>
-              <td className="px-4 py-2 text-muted-foreground">{p.pada}</td>
-              <td className="px-4 py-2">
-                {p.isRetrograde
-                  ? <span className="text-xs text-orange-500 font-medium">R</span>
-                  : <span className="text-xs text-muted-foreground/50">—</span>}
-              </td>
-            </tr>
-          ))}
+          {result.planets.map((p) => {
+            const chalitHouse = p.planet === 'Ascendant'
+              ? 1
+              : getBhavaChalitHouse(p.siderealLongitude, chalitCusps);
+            const shifted = chalitHouse !== p.house;
+            return (
+              <tr key={p.planet} className="border-t border-border/60 hover:bg-muted/20 transition-colors">
+                <td className="px-4 py-2 font-medium text-amber-700 dark:text-amber-400">{p.planet}</td>
+                <td className="px-4 py-2 text-foreground">{p.sign}</td>
+                <td className="px-4 py-2 text-foreground">{p.house}</td>
+                <td className="px-4 py-2">
+                  <span className={shifted ? 'font-semibold text-amber-600 dark:text-amber-400' : 'text-muted-foreground'}>
+                    {chalitHouse}
+                  </span>
+                </td>
+                <td className="px-4 py-2 text-muted-foreground">{p.nakshatra}</td>
+                <td className="px-4 py-2 text-muted-foreground">{p.pada}</td>
+                <td className="px-4 py-2">
+                  {p.isRetrograde
+                    ? <span className="text-xs text-orange-500 font-medium">R</span>
+                    : <span className="text-xs text-muted-foreground/50">—</span>}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

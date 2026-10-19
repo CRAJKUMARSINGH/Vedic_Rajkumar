@@ -10,7 +10,7 @@
  * Current: Initialisation + basic planet position wrapper ready.
  */
 
-import { calculateCompletePlanetaryPositions, type CompletePlanetaryPositions } from './ephemerisService.ts';
+import { calculateCompletePlanetaryPositions, getPlanetDignity, type CompletePlanetaryPositions } from './ephemerisService.ts';
 
 // ── Swiss Ephemeris planet IDs ────────────────────────────────────────────────
 
@@ -171,12 +171,14 @@ export async function calcPlanetsAccurate(
       : (23.85 + (y - 2000) * 0.0139);
 
     const toPos = (lon: number, retrograde = false) => {
-      // Sidereal longitude = tropical longitude - ayanamsa
-      const sidereal = ((lon - ayanamsaVal) % 360 + 360) % 360;
+      // calc_ut() above is called with SEFLG_SIDEREAL, so `lon` is ALREADY sidereal.
+      // Do NOT subtract the ayanamsa again (that produced a ~1-sign error in every planet).
+      const sidereal = ((lon % 360) + 360) % 360;
+      const tropical = ((sidereal + ayanamsaVal) % 360 + 360) % 360;
       const rashiIdx = Math.floor(sidereal / 30);
       return {
-        tropical: lon,
-        sidereal: sidereal,
+        tropical,
+        sidereal,
         rashi: rashiIdx,
         rashiName: RASHI_EN[rashiIdx],
         degrees: sidereal % 30,
@@ -187,16 +189,29 @@ export async function calcPlanetsAccurate(
     const moonRashi = Math.floor(moonLon / 30);
     const toHouse = (rashi: number) => ((rashi - moonRashi + 12) % 12) + 1;
 
+    // Build a normalized planet entry with the true classical dignity
+    // (exalted / debilitated / own / moolatrikona / friend / neutral), not a placeholder.
+    const mkPlanet = (name: string, lon: number, retro = false) => {
+      const rashiIdx = Math.floor(lon / 30);
+      return {
+        name,
+        ...toPos(lon, retro),
+        house: toHouse(rashiIdx),
+        dignity: getPlanetDignity(name, rashiIdx),
+        rashiIndex: rashiIdx,
+      };
+    };
+
     const planets = [
-      { name: 'Sun',     ...toPos(sunLon),     house: toHouse(Math.floor(sunLon / 30)),     dignity: 'Neutral' },
-      { name: 'Moon',    ...toPos(moonLon),    house: toHouse(Math.floor(moonLon / 30)),    dignity: 'Neutral' },
-      { name: 'Mercury', ...toPos(mercuryLon), house: toHouse(Math.floor(mercuryLon / 30)), dignity: 'Neutral' },
-      { name: 'Venus',   ...toPos(venusLon),   house: toHouse(Math.floor(venusLon / 30)),   dignity: 'Neutral' },
-      { name: 'Mars',    ...toPos(marsLon),    house: toHouse(Math.floor(marsLon / 30)),    dignity: 'Neutral' },
-      { name: 'Jupiter', ...toPos(jupiterLon), house: toHouse(Math.floor(jupiterLon / 30)), dignity: 'Neutral' },
-      { name: 'Saturn',  ...toPos(saturnLon),  house: toHouse(Math.floor(saturnLon / 30)),  dignity: 'Neutral' },
-      { name: 'Rahu',    ...toPos(rahuLon, true),  house: toHouse(Math.floor(rahuLon / 30)),  dignity: 'Neutral', rashiIndex: Math.floor(rahuLon / 30) },
-      { name: 'Ketu',    ...toPos(ketuLon, true),  house: toHouse(Math.floor(ketuLon / 30)),  dignity: 'Neutral', rashiIndex: Math.floor(ketuLon / 30) },
+      mkPlanet('Sun', sunLon),
+      mkPlanet('Moon', moonLon),
+      mkPlanet('Mercury', mercuryLon),
+      mkPlanet('Venus', venusLon),
+      mkPlanet('Mars', marsLon),
+      mkPlanet('Jupiter', jupiterLon),
+      mkPlanet('Saturn', saturnLon),
+      mkPlanet('Rahu', rahuLon, true),
+      mkPlanet('Ketu', ketuLon, true),
     ].map(p => ({ ...p, rashiIndex: p.rashiIndex ?? Math.floor(p.sidereal / 30) }));
 
     return {
@@ -212,6 +227,7 @@ export async function calcPlanetsAccurate(
       ayanamsa: ayanamsaVal,
       julianDay: jd,
       planets: planets as CompletePlanetaryPositions['planets'],
+      ephemerisSource: 'swiss-wasm',
     };
 
   } catch (err) {

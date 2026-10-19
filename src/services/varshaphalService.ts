@@ -3,15 +3,21 @@
  * Source: BV Raman Magazine Enhancement Plan
  * Implements annual solar return calculations per B.V. Raman's methods
  *
- * NOTE (DEF-009): this module is only partially implemented. The solar-return
- * *instant*, the Varshesh seed (`birthSunLongitude`) and the Muntha/ascendant are
- * still classical simplifications (see the logbook disposition). The planetary
- * positions are now real (shared Lahiri ephemeris) and deterministic — they are
- * no longer Math.random() placeholders.
+ * NOTE (DEF-009 follow-up): the placeholders are now gone. The solar-return
+ * *instant* is solved from the shared Lahiri ephemeris (the moment the Sun returns
+ * to its natal sidereal longitude), the Varshesh seed uses that real solar-return
+ * Sun, and Muntha is anchored on the real natal ascendant. The planetary positions
+ * were already real and deterministic (no Math.random()).
  */
 
-import { calculatePreciseChart } from './precisionEphemerisService';
 import { calculateChartForBirth } from '@/services/chartWithTimezone';
+import { getPlanetDignity } from '@/services/ephemerisService';
+import type { PreciseChart } from '@/services/precisionEphemerisService';
+
+const SIGNS = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
+               'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
+
+const MS_PER_DAY = 24 * 60 * 60 * 1000;
 
 export interface VarshaphalChart {
   year: number;
@@ -142,14 +148,14 @@ const TAJIKA_YOGAS = {
 } as const;
 
 // Varshesh (Year Lord) determination
-const getVarshesh = (solarReturnLongitude: number): {
+const getVarshesh = (solarReturnLongitude: number, sunHouse: number): {
   planet: string;
   strength: number;
   dignity: string;
   house: number;
 } => {
-  // Simplified Varshesh calculation based on solar return degree
-  const degree = solarReturnLongitude % 30;
+  // Varshesh from the degree of the Sun at the solar return, within its sign.
+  const degree = ((solarReturnLongitude % 30) + 30) % 30;
   const planetAssignments = [
     { planet: 'Sun', range: [0, 5], strength: 10 },
     { planet: 'Mars', range: [5, 10], strength: 8 },
@@ -165,28 +171,82 @@ const getVarshesh = (solarReturnLongitude: number): {
     planet: varshesh?.planet || 'Sun',
     strength: varshesh?.strength || 5,
     dignity: 'Own',
-    house: 1 // Solar return house
+    house: sunHouse // house occupied by the Sun in the solar-return chart
   };
 };
 
-// Muntha calculation
-const getMuntha = (birthAscendant: number, age: number): {
+/**
+ * Muntha — the "annual ascendant". It starts in the natal Lagna and advances one
+ * sign per completed year of age, retaining the natal Lagna degree. Its house is
+ * counted from the annual (solar-return) ascendant.
+ */
+const getMuntha = (
+  natalAscRashiIndex: number,
+  natalAscDegreeInSign: number,
+  age: number,
+  returnAscRashiIndex: number,
+): {
   house: number;
   planet?: string;
   sign: string;
   degree: number;
 } => {
-  // Muntha moves one house per year of age
-  const munthaHouse = ((birthAscendant - 1 + age) % 12) + 1;
-  const signs = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 
-                 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
-  
+  const munthaRashiIndex = (((natalAscRashiIndex + age) % 12) + 12) % 12;
+  const munthaHouse = ((((munthaRashiIndex - returnAscRashiIndex) % 12) + 12) % 12) + 1;
+
   return {
     house: munthaHouse,
-    sign: signs[munthaHouse - 1],
-    degree: (age * 30) % 360 // Simplified calculation
+    sign: SIGNS[munthaRashiIndex],
+    degree: natalAscDegreeInSign,
   };
 };
+
+/** Build the sidereal chart for an absolute instant (treated as UTC, offset 0). */
+function utcChart(instant: Date, latitude: number, longitude: number): PreciseChart {
+  const iso = instant.toISOString();
+  return calculateChartForBirth(iso.slice(0, 10), iso.slice(11, 16), latitude, longitude, 0);
+}
+
+/** Wrap a longitude difference into (-180, 180]. */
+function normalize180(deg: number): number {
+  return ((((deg % 360) + 540) % 360) - 180);
+}
+
+function sunSiderealLongitude(instant: Date, latitude: number, longitude: number): number {
+  const sun = utcChart(instant, latitude, longitude).planets.find((p) => p.name === 'Sun');
+  return sun ? sun.siderealLongitude : 0;
+}
+
+/**
+ * Solve the true solar-return instant: the moment the Sun returns to its natal
+ * sidereal longitude. Bisection on the (monotonic) angular difference, bracketed
+ * around the calendar anniversary.
+ */
+function findSolarReturnInstant(
+  natalSunLongitude: number,
+  anniversary: Date,
+  latitude: number,
+  longitude: number,
+): Date {
+  const diff = (t: number) =>
+    normalize180(sunSiderealLongitude(new Date(t), latitude, longitude) - natalSunLongitude);
+
+  let lo = anniversary.getTime() - 3 * MS_PER_DAY;
+  let hi = anniversary.getTime() + 3 * MS_PER_DAY;
+  // Defensive widening: the Sun always returns within a few days of the anniversary.
+  for (let i = 0; i < 5 && !(diff(lo) < 0 && diff(hi) > 0); i++) {
+    lo -= 3 * MS_PER_DAY;
+    hi += 3 * MS_PER_DAY;
+  }
+  if (!(diff(lo) < 0 && diff(hi) > 0)) return anniversary;
+
+  for (let i = 0; i < 24; i++) {
+    const mid = (lo + hi) / 2;
+    if (diff(mid) < 0) lo = mid;
+    else hi = mid;
+  }
+  return new Date((lo + hi) / 2);
+}
 
 /**
  * Calculate Varshaphal (Annual Solar Return) chart
@@ -197,25 +257,49 @@ export function calculateVarshaphal(
   birthLongitude: number,
   targetYear: number
 ): VarshaphalChart {
-  // Calculate solar return date (when Sun returns to same degree)
-  const birthSunLongitude = 200; // Simplified - should calculate actual position
-  const solarReturnDate = new Date(targetYear, birthDate.getMonth(), birthDate.getDate());
-  
-  // Calculate planetary positions for solar return
-  const planetaryPositions = calculateSolarReturnPositions(solarReturnDate, birthLatitude, birthLongitude);
-  
-  // Determine Varshesh (Year Lord)
-  const varshesh = getVarshesh(birthSunLongitude);
-  
-  // Calculate Muntha
-  const age = targetYear - birthDate.getFullYear();
-  const muntha = getMuntha(1, age); // Simplified ascendant
-  
+  // Natal chart at the birth instant (absolute → UTC fields, offset 0).
+  const natalChart = utcChart(birthDate, birthLatitude, birthLongitude);
+  const natalSun = natalChart.planets.find((p) => p.name === 'Sun');
+  const natalSunLongitude = natalSun ? natalSun.siderealLongitude : 0;
+
+  // True solar return: the instant the Sun returns to its natal longitude.
+  const anniversary = new Date(Date.UTC(
+    targetYear,
+    birthDate.getUTCMonth(),
+    birthDate.getUTCDate(),
+    birthDate.getUTCHours(),
+    birthDate.getUTCMinutes(),
+  ));
+  const solarReturnInstant = findSolarReturnInstant(
+    natalSunLongitude,
+    anniversary,
+    birthLatitude,
+    birthLongitude,
+  );
+
+  // Planetary positions for the solar-return chart.
+  const returnChart = utcChart(solarReturnInstant, birthLatitude, birthLongitude);
+  const planetaryPositions = calculateSolarReturnPositions(returnChart);
+
+  // Determine Varshesh (Year Lord) from the Sun at the solar return.
+  const returnSun = planetaryPositions.find((p) => p.planet === 'Sun');
+  const varshesh = getVarshesh(returnSun ? returnSun.longitude : natalSunLongitude, returnSun ? returnSun.house : 1);
+
+  // Calculate Muntha from the real natal ascendant and the annual ascendant.
+  const age = targetYear - birthDate.getUTCFullYear();
+  const natalAscDegreeInSign = ((natalChart.ascendant.siderealLongitude % 30) + 30) % 30;
+  const muntha = getMuntha(
+    natalChart.ascendant.rashiIndex,
+    natalAscDegreeInSign,
+    age,
+    returnChart.ascendant.rashiIndex,
+  );
+
   // Calculate Tajika Yogas
   const tajikaYogas = calculateTajikaYogas(planetaryPositions);
   
   // Calculate Mudda Dasha
-  const muddaDasha = calculateMuddaDasha(varshesh.planet, solarReturnDate);
+  const muddaDasha = calculateMuddaDasha(varshesh.planet, solarReturnInstant);
   
   // Generate predictions
   const predictions = generateVarshaphalPredictions(varshesh, muntha, tajikaYogas, planetaryPositions);
@@ -223,7 +307,7 @@ export function calculateVarshaphal(
   return {
     year: targetYear,
     birthDate: birthDate.toISOString(),
-    solarReturnDate: solarReturnDate.toISOString(),
+    solarReturnDate: solarReturnInstant.toISOString(),
     varshesh,
     muntha,
     tajikaYogas,
@@ -237,21 +321,12 @@ export function calculateVarshaphal(
 }
 
 /**
- * Calculate planetary positions for the solar-return instant.
+ * Map an already-computed solar-return chart to real sidereal positions.
  *
  * Uses the shared sidereal (Lahiri) ephemeris so the result is real and
  * deterministic — previously these were Math.random() placeholders (DEF-009).
  */
-function calculateSolarReturnPositions(
-  date: Date,
-  latitude: number,
-  longitude: number
-): PlanetaryPosition[] {
-  // The instant is an absolute moment → format in UTC and treat the offset as 0
-  // so the output does not depend on the host machine's timezone.
-  const dateStr = date.toISOString().slice(0, 10); // YYYY-MM-DD
-  const timeStr = date.toISOString().slice(11, 16); // HH:mm
-  const chart = calculateChartForBirth(dateStr, timeStr, latitude, longitude, 0);
+function calculateSolarReturnPositions(chart: PreciseChart): PlanetaryPosition[] {
   const byName = new Map(chart.planets.map((p) => [p.name, p]));
 
   const planets = ['Sun', 'Moon', 'Mars', 'Mercury', 'Jupiter', 'Venus', 'Saturn'];
@@ -269,7 +344,7 @@ function calculateSolarReturnPositions(
       house: p.house,
       sign,
       nakshatra: getNakshatraFromLongitude(sid),
-      dignity: getDignity(planet, sign),
+      dignity: toPlanetaryDignity(getPlanetDignity(planet, p.rashiIndex)),
       aspects: calculateAspects(sid)
     });
   }
@@ -417,21 +492,20 @@ function getNakshatraFromLongitude(longitude: number): string {
   return nakshatras[Math.floor((longitude * 27) / 360)];
 }
 
-function getDignity(planet: string, sign: string): 'Exalted' | 'Moolatrikona' | 'Own' | 'Friend' | 'Neutral' | 'Enemy' | 'Debilitated' {
-  // Simplified dignity calculation
-  const exaltations: Record<string, string> = {
-    Sun: 'Aries', Moon: 'Taurus', Mars: 'Capricorn', Mercury: 'Virgo',
-    Jupiter: 'Cancer', Venus: 'Pisces', Saturn: 'Libra'
-  };
-  
-  const debilitations: Record<string, string> = {
-    Sun: 'Libra', Moon: 'Scorpio', Mars: 'Cancer', Mercury: 'Pisces',
-    Jupiter: 'Capricorn', Venus: 'Virgo', Saturn: 'Aries'
-  };
-
-  if (exaltations[planet] === sign) return 'Exalted';
-  if (debilitations[planet] === sign) return 'Debilitated';
-  return 'Own'; // Simplified
+/**
+ * Normalize the shared classical dignity labels to the Varshaphal union.
+ * (getPlanetDignity returns 'Own Sign' / 'Friend Sign'; the local type uses
+ * 'Own' / 'Friend'.)
+ */
+function toPlanetaryDignity(dignity: string): PlanetaryPosition['dignity'] {
+  switch (dignity) {
+    case 'Own Sign': return 'Own';
+    case 'Friend Sign': return 'Friend';
+    case 'Exalted': return 'Exalted';
+    case 'Moolatrikona': return 'Moolatrikona';
+    case 'Debilitated': return 'Debilitated';
+    default: return 'Neutral';
+  }
 }
 
 function calculateAspects(longitude: number): string[] {

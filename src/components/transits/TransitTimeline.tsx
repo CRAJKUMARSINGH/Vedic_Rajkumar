@@ -1,7 +1,7 @@
 import { useTransits } from '@/hooks/transits/useTransits';
-import type { NatalChart } from '@/services/transits/transitService';
+import type { TransitNatalChart } from '@/services/transits/transitService';
 
-export const TransitTimeline = ({ natal }: { natal: NatalChart }) => {
+export const TransitTimeline = ({ natal }: { natal: TransitNatalChart }) => {
   const { data, isLoading, isError } = useTransits(natal, new Date());
   if (isError) {
     return <div className="rounded-lg border border-red-800 bg-red-950/40 p-4 text-sm text-red-200">Unable to load transits.</div>;

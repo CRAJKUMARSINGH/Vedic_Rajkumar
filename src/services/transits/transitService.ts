@@ -13,7 +13,13 @@ import { checkKillSwitch, KILL_SWITCHES } from '@/config/kill-switches';
 const log = createLogger('transits');
 const benefics = new Set<string>(BENEFICS);
 
-export interface NatalChart {
+/**
+ * Minimal natal adapter consumed by the transit layer: the Lagna sign plus each
+ * signifying planet's sidereal longitude. This is NOT the canonical natal
+ * façade — see `NatalChart` in `@/services/natalChartService` for the unified
+ * typed birth chart.
+ */
+export interface TransitNatalChart {
   lagnaSign: number;
   planets: Record<string, number>;
 }
@@ -35,7 +41,7 @@ export interface TransitSnapshot {
 export class TransitService {
   private engine = new SwissEphemerisEngine(import.meta.env.VITE_EPHEMERIS_ENDPOINT);
 
-  async snapshot(natal: NatalChart, asOf: Date): Promise<TransitSnapshot> {
+  async snapshot(natal: TransitNatalChart, asOf: Date): Promise<TransitSnapshot> {
     await checkKillSwitch(KILL_SWITCHES.TRANSITS);
     return withSpan('transit_snapshot', async () => {
       const started = performance.now();
@@ -93,7 +99,7 @@ export class TransitService {
   }
 
   async ingressCalendar(
-    _natal: NatalChart,
+    _natal: TransitNatalChart,
     from: Date,
     to: Date,
   ): Promise<Array<{ graha: string; sign: number; date: Date }>> {

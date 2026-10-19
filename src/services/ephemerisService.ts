@@ -335,7 +335,7 @@ const FRIEND_SIGNS: Record<string, number[]> = {
   Saturn: [2, 5, 6, 7],
 };
 
-function getPlanetDignity(planetName: string, rashiIndex: number): string {
+export function getPlanetDignity(planetName: string, rashiIndex: number): string {
   if (EXALTATION[planetName] === rashiIndex) return 'Exalted';
   if (DEBILITATION[planetName] === rashiIndex) return 'Debilitated';
   if (OWN_SIGNS[planetName]?.includes(rashiIndex)) {
@@ -344,6 +344,41 @@ function getPlanetDignity(planetName: string, rashiIndex: number): string {
   if (FRIEND_SIGNS[planetName]?.includes(rashiIndex)) return 'Friend Sign';
   // Enemy signs are the opposite of friend signs (simplified)
   return 'Neutral';
+}
+
+/**
+ * Classical combustion (asta) orbs — the maximum elongation from the Sun
+ * (in degrees) at which a planet is considered combust. The Sun itself never
+ * combusts; Rahu/Ketu (nodes) carry no combustion in classical Jyotish.
+ * Orbs follow the widely used Parashari values.
+ */
+export const COMBUSTION_ORBS: Record<string, number> = {
+  Moon: 12, Mars: 17, Mercury: 14, Jupiter: 11, Venus: 10, Saturn: 15,
+};
+
+export interface CombustionStatus {
+  /** True when the circular elongation from the Sun is below the planet's orb. */
+  isCombust: boolean;
+  /** Orb (degrees) applied for this planet; 0 when the body can never combust. */
+  orb: number;
+  /** Circular elongation from the Sun in degrees [0, 180]. */
+  sunDistance: number;
+}
+
+/**
+ * Determine whether a planet is combust (within its classical orb of the Sun).
+ * Uses the shortest circular arc between the two sidereal longitudes so the
+ * result is correct across the 0°/360° wrap.
+ */
+export function getCombustionStatus(
+  planetName: string,
+  planetSiderealLon: number,
+  sunSiderealLon: number,
+): CombustionStatus {
+  const orb = COMBUSTION_ORBS[planetName] ?? 0;
+  const raw = ((planetSiderealLon - sunSiderealLon) % 360 + 360) % 360;
+  const sunDistance = Math.min(raw, 360 - raw);
+  return { isCombust: orb > 0 && sunDistance < orb, orb, sunDistance };
 }
 
 /**
@@ -363,6 +398,13 @@ export interface CompletePlanetaryPositions {
   julianDay: number;
   /** Normalized array for test compatibility and manglikService */
   planets: NormalizedPlanet[];
+  /**
+   * Which ephemeris engine produced this result.
+   * - 'swiss-wasm': Swiss Ephemeris WASM (arc-second accuracy) — preferred.
+   * - 'fallback':   Simplified Schlyter-series engine (±2–3°).
+   * Lets callers and tests verify the true data source rather than assuming it.
+   */
+  ephemerisSource?: 'swiss-wasm' | 'fallback';
 }
 
 /**
@@ -547,6 +589,90 @@ export function calculateCompletePlanetaryPositions(
       dignity: 'Neutral',
       retrograde: true,
     },
+  ];
+
+  return {
+    sun: sunPos,
+    moon: moonPos,
+    mercury: mercuryPos,
+    venus: venusPos,
+    mars: marsPos,
+    jupiter: jupiterPos,
+    saturn: saturnPos,
+    rahu: rahuPos,
+    ketu: ketuPos,
+    ayanamsa,
+    julianDay: jd,
+    planets,
+    ephemerisSource: 'fallback',
+  };
+}
+
+/**
+ * Calculate complete planetary positions from a UTC Date directly.
+ * Identical math to calculateCompletePlanetaryPositions but accepts a UTC Date
+ * instead of a (dateStr, timeStr) pair, so callers can pass an exact UTC instant
+ * (e.g. the astronomical sunrise) without the IST-only localToUTC assumption.
+ */
+export function calculateCompletePlanetaryPositionsAtUTC(
+  utcDate: Date
+): CompletePlanetaryPositions {
+  if (isNaN(utcDate.getTime())) {
+    throw new Error('calculateCompletePlanetaryPositionsAtUTC: invalid UTC date');
+  }
+
+  // Calculate Julian Day directly from UTC Date
+  const jd = calculateJulianDay(utcDate);
+
+  // Calculate Ayanamsa
+  const ayanamsa = calculateAyanamsa(utcDate);
+
+  // Helper to create a PlanetPosition
+  const createPosition = (tropical: number): PlanetPosition => {
+    const sidereal = tropicalToSidereal(tropical, ayanamsa);
+    const rashi = longitudeToRashi(sidereal);
+    return {
+      tropical,
+      sidereal,
+      rashi,
+      rashiName: RASHI_NAMES.en[rashi],
+      degrees: degreesInRashi(sidereal),
+    };
+  };
+
+  const sunTropical     = calculateSunPositionFromJD(jd);
+  const moonTropical    = calculateMoonPositionFromJD(jd);
+  const mercuryTropical = calculateMercuryPosition(jd);
+  const venusTropical   = calculateVenusPosition(jd);
+  const marsTropical    = calculateMarsPosition(jd);
+  const jupiterTropical = calculateJupiterPosition(jd);
+  const saturnTropical  = calculateSaturnPosition(jd);
+  const rahuTropical    = calculateRahuPosition(jd);
+  const ketuTropical    = calculateKetuPosition(rahuTropical);
+
+  const sunPos     = createPosition(sunTropical);
+  const moonPos    = createPosition(moonTropical);
+  const mercuryPos = createPosition(mercuryTropical);
+  const venusPos   = createPosition(venusTropical);
+  const marsPos    = createPosition(marsTropical);
+  const jupiterPos = createPosition(jupiterTropical);
+  const saturnPos  = createPosition(saturnTropical);
+  const rahuPos    = { ...createPosition(rahuTropical), retrograde: true };
+  const ketuPos    = { ...createPosition(ketuTropical), retrograde: true };
+
+  const moonRashi = moonPos.rashi;
+  const toHouse = (rashi: number) => ((rashi - moonRashi + 12) % 12) + 1;
+
+  const planets: NormalizedPlanet[] = [
+    { name: 'Sun',     rashiIndex: sunPos.rashi,     rashiName: sunPos.rashiName,     degrees: sunPos.degrees,     house: toHouse(sunPos.rashi),     dignity: getPlanetDignity('Sun',     sunPos.rashi) },
+    { name: 'Moon',    rashiIndex: moonPos.rashi,    rashiName: moonPos.rashiName,    degrees: moonPos.degrees,    house: toHouse(moonPos.rashi),    dignity: getPlanetDignity('Moon',    moonPos.rashi) },
+    { name: 'Mercury', rashiIndex: mercuryPos.rashi, rashiName: mercuryPos.rashiName, degrees: mercuryPos.degrees, house: toHouse(mercuryPos.rashi), dignity: getPlanetDignity('Mercury', mercuryPos.rashi) },
+    { name: 'Venus',   rashiIndex: venusPos.rashi,   rashiName: venusPos.rashiName,   degrees: venusPos.degrees,   house: toHouse(venusPos.rashi),   dignity: getPlanetDignity('Venus',   venusPos.rashi) },
+    { name: 'Mars',    rashiIndex: marsPos.rashi,    rashiName: marsPos.rashiName,    degrees: marsPos.degrees,    house: toHouse(marsPos.rashi),    dignity: getPlanetDignity('Mars',    marsPos.rashi) },
+    { name: 'Jupiter', rashiIndex: jupiterPos.rashi, rashiName: jupiterPos.rashiName, degrees: jupiterPos.degrees, house: toHouse(jupiterPos.rashi), dignity: getPlanetDignity('Jupiter', jupiterPos.rashi) },
+    { name: 'Saturn',  rashiIndex: saturnPos.rashi,  rashiName: saturnPos.rashiName,  degrees: saturnPos.degrees,  house: toHouse(saturnPos.rashi),  dignity: getPlanetDignity('Saturn',  saturnPos.rashi) },
+    { name: 'Rahu',    rashiIndex: rahuPos.rashi,    rashiName: rahuPos.rashiName,    degrees: rahuPos.degrees,    house: toHouse(rahuPos.rashi),    dignity: 'Neutral', retrograde: true },
+    { name: 'Ketu',    rashiIndex: ketuPos.rashi,    rashiName: ketuPos.rashiName,    degrees: ketuPos.degrees,    house: toHouse(ketuPos.rashi),    dignity: 'Neutral', retrograde: true },
   ];
 
   return {

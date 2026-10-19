@@ -25,25 +25,26 @@ import { Button } from '@/components/ui/button';
 import { type SupportedLanguage } from '@/services/multiLanguageService';
 import { SEO } from '@/components/SEO';
 import { ValidationInProgressNotice } from '@/components/PrototypeStatusBanner';
+import { localTodayISO } from '@/utils/panchangAstronomy';
 
 const PanchangCard = lazy(() => import('@/components/PanchangCard'));
 
-const CITIES: Record<string, { lat: number; lon: number }> = {
-  Delhi:     { lat: 28.61, lon: 77.23 },
-  Mumbai:    { lat: 19.08, lon: 72.88 },
-  Bangalore: { lat: 12.97, lon: 77.59 },
-  Kolkata:   { lat: 22.57, lon: 88.36 },
-  Chennai:   { lat: 13.08, lon: 80.27 },
-  Hyderabad: { lat: 17.39, lon: 78.49 },
-  Ahmedabad: { lat: 23.03, lon: 72.58 },
-  Pune:      { lat: 18.52, lon: 73.86 },
-  Jaipur:    { lat: 26.91, lon: 75.79 },
-  Varanasi:  { lat: 25.32, lon: 83.01 },
+const CITIES: Record<string, { lat: number; lon: number; tz: string }> = {
+  Delhi:     { lat: 28.61, lon: 77.23, tz: 'Asia/Kolkata' },
+  Mumbai:    { lat: 19.08, lon: 72.88, tz: 'Asia/Kolkata' },
+  Bangalore: { lat: 12.97, lon: 77.59, tz: 'Asia/Kolkata' },
+  Kolkata:   { lat: 22.57, lon: 88.36, tz: 'Asia/Kolkata' },
+  Chennai:   { lat: 13.08, lon: 80.27, tz: 'Asia/Kolkata' },
+  Hyderabad: { lat: 17.39, lon: 78.49, tz: 'Asia/Kolkata' },
+  Ahmedabad: { lat: 23.03, lon: 72.58, tz: 'Asia/Kolkata' },
+  Pune:      { lat: 18.52, lon: 73.86, tz: 'Asia/Kolkata' },
+  Jaipur:    { lat: 26.91, lon: 75.79, tz: 'Asia/Kolkata' },
+  Varanasi:  { lat: 25.32, lon: 83.01, tz: 'Asia/Kolkata' },
 };
 
 const PanchangPage = () => {
   const [lang, setLang] = useState<SupportedLanguage>('en');
-  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const [date, setDate] = useState(localTodayISO());
   const [city, setCity] = useState('Delhi');
   const [coords, setCoords] = useState(CITIES['Delhi']);
   const isHi = lang === 'hi';
@@ -122,7 +123,7 @@ const PanchangPage = () => {
                     type="button"
                     variant="outline"
                     size="sm"
-                    onClick={() => setDate(new Date().toISOString().split('T')[0])}
+                    onClick={() => setDate(localTodayISO())}
                     className="h-7 text-[11px] gap-1.5"
                     aria-label={isHi ? 'आज की तिथि पर वापस जाएँ' : 'Reset date to today'}
                   >
@@ -255,6 +256,7 @@ const PanchangPage = () => {
                   date={date}
                   latitude={coords.lat}
                   longitude={coords.lon}
+                  timezone={coords.tz}
                   lang={hiLang}
                 />
               </Suspense>

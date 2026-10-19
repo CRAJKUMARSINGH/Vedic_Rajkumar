@@ -4,6 +4,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook, act, waitFor } from '@testing-library/react';
 import { useChartCalculation, type BirthInput } from '@/hooks/useChartCalculation';
+import { setBirthTimezone } from '@/hooks/use-birth-timezone';
 
 // ── Mock all heavy services ──────────────────────────────────────────────────
 vi.mock('@/services/precisionEphemerisService', () => ({
@@ -116,7 +117,10 @@ const SAMPLE_INPUT: BirthInput = {
 };
 
 describe('useChartCalculation', () => {
-  beforeEach(() => vi.clearAllMocks());
+  beforeEach(() => {
+    vi.clearAllMocks();
+    setBirthTimezone(null);
+  });
 
   it('starts with empty data and not calculating', () => {
     const { result } = renderHook(() => useChartCalculation(null));
@@ -199,6 +203,22 @@ describe('useChartCalculation', () => {
     }, { timeout: 1000 });
 
     expect(result.current.isCalculating).toBe(false);
+  });
+
+  it('forwards the resolved birth timezone into the planets and ascendant engines', async () => {
+    // 1943 Mumbai: India ran IST+1h (UTC+6:30) — the resolved store offset
+    // must reach BOTH engine entry points, not the modern IST 5.5 default.
+    setBirthTimezone({ offsetHours: 6.5, label: 'test', isHistorical: true });
+
+    const { result } = renderHook(() => useChartCalculation(SAMPLE_INPUT));
+
+    await waitFor(() => expect(result.current.data.planetaryPositions).not.toBeNull(), { timeout: 1000 });
+
+    const { calculatePrecisePlanetaryPositions } = await import('@/services/precisionEphemerisService');
+    const { calculateCompleteAscendant } = await import('@/services/ascendantService');
+
+    expect(calculatePrecisePlanetaryPositions).toHaveBeenCalledWith('1990-06-15', '10:30', 6.5);
+    expect(calculateCompleteAscendant).toHaveBeenCalledWith('1990-06-15', '10:30', 28.61, 77.23, 6.5);
   });
 });
 

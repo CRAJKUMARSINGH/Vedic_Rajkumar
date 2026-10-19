@@ -191,7 +191,7 @@ export default function FestivalCalendarPage() {
             <div className="space-y-3">
               {reminders.slice(0, 3).map((reminder, i) => (
                 <div key={i} className="flex items-start gap-3 p-3 bg-white rounded-lg">
-                  <div className="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                  <div className="shrink-0 w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
                     <span className="text-lg font-bold text-orange-600">{reminder.daysUntil}</span>
                   </div>
                   <div className="flex-1">

@@ -94,7 +94,7 @@ function ProfileCard({
       {/* Avatar */}
       <div
         className={cn(
-          'flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center',
+          'shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center',
           'text-lg font-bold select-none',
           avatarColour(profile.id),
         )}
@@ -141,7 +141,7 @@ function ProfileCard({
       </div>
 
       {/* Actions */}
-      <div className="flex-shrink-0 flex flex-col gap-1.5">
+      <div className="shrink-0 flex flex-col gap-1.5">
         {confirming ? (
           <div className="flex flex-col gap-2 min-w-[140px]">
             <p className={cn('text-[11px] text-foreground/70 leading-tight', isHi && 'font-hindi')}>

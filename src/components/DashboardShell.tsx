@@ -48,7 +48,7 @@ import { TransitTimeline } from '@/components/transits/TransitTimeline';
 import type { EngineData } from '@/services/engineDataAssembler';
 import type { DynamicTransitOutput } from '@/services/dynamicTransitService';
 import type { TransitResult } from '@/data/transitData';
-import type { NatalChart } from '@/services/transits/transitService';
+import type { TransitNatalChart } from '@/services/transits/transitService';
 
 // ─── Constants ──────────────────────────────────────────────────────────────────
 
@@ -81,7 +81,7 @@ const STRENGTH_BADGE: Record<string, string> = {
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
-function natalFromEngine(engineData: EngineData, moonRashiIdx: number): NatalChart {
+function natalFromEngine(engineData: EngineData, moonRashiIdx: number): TransitNatalChart {
   const planets: Record<string, number> = {};
   for (const p of engineData.planets ?? []) {
     const name = typeof p?.name === 'string' ? p.name : '';
@@ -831,7 +831,7 @@ function PsychologyTab({ engineData }: { engineData: EngineData }) {
 
 function TransitsTab({
   moonRashiIdx, initialTransit, natal,
-}: { moonRashiIdx: number; initialTransit: DynamicTransitOutput | null; natal: NatalChart }) {
+}: { moonRashiIdx: number; initialTransit: DynamicTransitOutput | null; natal: TransitNatalChart }) {
   const [result,      setResult]      = useState<DynamicTransitOutput | null>(initialTransit);
   const [dateStr,     setDateStr]     = useState(isoDate(new Date()));
   const [loading,     setLoading]     = useState(false);

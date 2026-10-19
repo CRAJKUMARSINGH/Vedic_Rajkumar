@@ -697,7 +697,7 @@ export default function DashaTransitCorrelationPage() {
                     aria-live="assertive"
                     className="rounded-2xl border-2 border-red-400 bg-red-50 dark:bg-red-950/30 dark:border-red-700 p-4 flex gap-3 items-start"
                   >
-                    <span className="text-2xl flex-shrink-0" aria-hidden="true">⚠️</span>
+                    <span className="text-2xl shrink-0" aria-hidden="true">⚠️</span>
                     <div>
                       <p className={`font-bold text-red-800 dark:text-red-300 text-sm mb-1 ${isHi ? 'font-hindi' : ''}`}>
                         {isHi ? 'चंद्राष्टम — Moon in 8th House' : 'Chandrashtama — Moon in 8th from Natal Moon'}

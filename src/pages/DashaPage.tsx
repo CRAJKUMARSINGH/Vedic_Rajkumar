@@ -17,6 +17,8 @@ import { Users } from 'lucide-react';
 import FamilyProfileSelector from '@/components/FamilyProfileSelector';
 import { getProfileById } from '@/lib/familyProfiles';
 import type { FamilyProfile } from '@/lib/familyProfiles';
+import { resolveBirthTimezone } from '@/lib/birthTimezone';
+import { setBirthTimezone } from '@/hooks/use-birth-timezone';
 
 const DashaCard = lazy(() => import('@/components/DashaCard'));
 const YogaCard = lazy(() => import('@/components/YogaCard'));
@@ -57,6 +59,10 @@ const DashaPage = () => {
 
   const handleSubmit = (data: { date: string; time: string; location: string }) => {
     const coords = parseCoords(data.location);
+    // Publish the resolved historical birth UTC offset at the page funnel so
+    // non-form entry points (family profile select, example chart) are covered
+    // too — not just the shared form.
+    setBirthTimezone(resolveBirthTimezone({ date: data.date, location: data.location }));
     setReferenceType('natal');
     setRawBirth(data);
     setBirthInput({ date: data.date, time: data.time, lat: coords.lat, lon: coords.lon });
@@ -83,6 +89,9 @@ const DashaPage = () => {
     const pad = (value: number) => value.toString().padStart(2, '0');
     const date = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
     const time = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+    // Clear any previously-resolved birth timezone so a stale historical
+    // offset cannot leak into this "now" question-time chart.
+    setBirthTimezone(null);
     setReferenceType('prashna');
     setRawBirth({ date, time, location: 'Question-time chart, default location (23.0, 72.0)' });
     setBirthInput({ date, time, lat: 23.0, lon: 72.0 });

@@ -12,14 +12,14 @@
  *
  * Uses:
  *   - REFERENCE_CHARTS from src/tests/validation/referenceCharts.ts
- *   - calculatePreciseChart from src/services/precisionEphemerisService.ts
+ *   - calculateChartForBirth (chartWithTimezone) for the precision engine
  *
  * Usage:
  *   const result = runAccuracyCheck();
  *   // result.passCount, result.fieldAccuracyPercent, result.charts[0].status
  */
 
-import { calculatePreciseChart } from '@/services/precisionEphemerisService';
+import { calculateChartForBirth } from '@/services/chartWithTimezone';
 import {
   REFERENCE_CHARTS,
   type ReferenceChart,
@@ -109,7 +109,7 @@ function validateChart(ref: ReferenceChart): ChartAccuracyResult {
   const fields: FieldResult[] = [];
 
   try {
-    const chart = calculatePreciseChart(
+    const chart = calculateChartForBirth(
       ref.date,
       ref.time,
       ref.lat,
