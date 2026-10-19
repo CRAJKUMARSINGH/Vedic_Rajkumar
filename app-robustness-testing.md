@@ -6,7 +6,7 @@
 - **File:** `app-robustness-testing.md` (repo root)
 - **Owner:** Vedic Rajkumar — Quality / Pre-Launch
 - **Cadence:** every **15 minutes** during any active testing/enrichment session
-- **Last updated:** 2026-10-19T18:30:00+05:30 (session `6ad3b905caa5e9a8578a7a5e`)
+- **Last updated:** 2026-10-20T01:15:00+05:30 (session `6ad3b905caa5e9a8578a7a5e`)
 - **Next update due:** +15 minutes from the last entry
 
 ---
@@ -487,10 +487,45 @@ GLOBAL ROBUSTNESS LOGBOOK INSTRUCTION (PERMANENT — applies to every session, p
 
 ---
 
+### [2026-10-20T00:05:00+05:30] — Slice 1 (item 4 of 4): real Playwright README screenshots captured
+- Session: `6ad3b905caa5e9a8578a7a5e` (continued)
+- Agents: main agent (run + env unblock)
+- Trigger: user command **"slice 2"** — resolved as already-green (Swiss cross-check; `npm run test:accuracy:full` re-confirmed **12/12**, DEF-008 holds). Continued the standing **"all"** directive's final item = **slice 1 · real README screenshots**.
+- Blocker + fix:
+  - `npm run shots` failed **before running any test** with `Error: ENOTEMPTY: directory not empty, rmdir '…\test-results'` — the default Playwright output dir was locked by stale artifacts; a 2-day-old orphan Vite dev server (`PID 5520`, `vite.js --host 127.0.0.1`) was still alive.
+  - Worked around it by running Playwright with an explicit output dir: `npx playwright test --config playwright.screenshots.config.ts --output .pw-shots-output` → **12/12 tests passed** (01-landing and 05-prashna retried once after the dev-server cold start, then pass). Real browser ran (system Chrome channel).
+- Result: all **18 README PNGs regenerated** in `docs/assets/screenshots/` (written 23:58–00:00; 94–448 KB each). `README.md` §screenshots references the current `01-landing … 10-mobile-panchang` set.
+- Cleanup: freed the default `test-results/` path (rename-aside → deleted) and removed the temp `.pw-shots-output/`, so plain `npm run shots` is unblocked again.
+- Findings: two **stale, unreferenced** legacy PNGs remain (`07-mobile-kundli.png`; `08-mobile-nav.png` = 2.7 KB, likely blank) — superseded by `08-mobile-kundli.png` / `09-mobile-nav.png`; not referenced by README. Recommend removing (left in place pending decision).
+- Next: all four **"all"**-directive deliverables are complete — N4 Kaal · N3 Gochar · N2 Kundli · slice 1 screenshots. Standing 15-min cadence continues.
+
+---
+
+### [2026-10-20T00:10:00+05:30] — Slice 1 follow-up: stale legacy README PNGs removed
+- Session: `6ad3b905caa5e9a8578a7a5e` (continued)
+- Trigger: user decision on the two stale orphans flagged in the prior entry.
+- Action: deleted `docs/assets/screenshots/07-mobile-kundli.png` and `docs/assets/screenshots/08-mobile-nav.png` (superseded by `08-mobile-kundli.png` / `09-mobile-nav.png`; unreferenced by README).
+- Result: `docs/assets/screenshots/` now holds exactly the **18** PNGs produced by the current spec, matching `README.md` §screenshots. Both deletions staged as `D` in git.
+
+---
+
+### [2026-10-20T01:15:00+05:30] — Post-change verification run (user: "test run")
+- Session: `6ad3b905caa5e9a8578a7a5e` (continued)
+- Trigger: user command **"test run"** after the N2 + screenshot/cleanup work.
+- Executed:
+  - `npm run test:accuracy:full` → **12/12 PASS** (Tier B 0 failures; Tier A drift warn-only as before; DEF-008 holds).
+  - `npm run test:run` → **84/84 files · 1476/1476 tests PASS** (exit 0). The previously load-flaky `chartTimezoneWiring.test.ts` passed with **no timeout** this run.
+- Result: entire tree green — no regressions from the N2 façade, combustion flags, Bhava-Chalit UI, or the screenshot/asset cleanup.
+
+---
+
 ## 5. Reverse-Chronological Index
 
 | When (local)     | Entry                                                                                                                                                              | Result                                                          |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------- |
+| 2026-10-20 01:15 | **Verification run** — post N2 + screenshot/cleanup; full tree green | accuracy 12/12 · suite 84 files · 1476/1476 PASS |
+| 2026-10-20 00:10 | **Slice 1 follow-up** — stale legacy README PNGs removed (`07-mobile-kundli.png`, `08-mobile-nav.png`) | 18 assets remain · deletions staged |
+| 2026-10-20 00:05 | **Slice 1** — real Playwright README screenshots regenerated (18 assets); `shots` blocker fixed (locked `test-results` → `--output`) | 12/12 · 18 PNGs |
 | 2026-10-19 18:30 | **N2 Kundli** — combustion flags (`getCombustionStatus`) + unified typed `NatalChart` façade (`buildNatalChart`) + Bhava-Chalit UI                                 | 18/18 · suite 1475/1476 (1 flaky-timeout) · accuracy 12/12 PASS |
 | 2026-10-19 18:15 | **N3 Gochar** — classical AV transit points (BAV/SAV) + per-planet ingress/egress dates (API + UI)                                                                 | 20/20 · suite 1468/1468 · accuracy 12/12 PASS                   |
 | 2026-10-19 17:45 | **N4 Kaal** — unified-timeline Dasha–Transit correlation service + Varshaphal annual hookup (UI)                                                                   | 9/9 + 7/7 · suite 1460/1460 · accuracy 12/12 PASS               |
