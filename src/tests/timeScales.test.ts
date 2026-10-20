@@ -71,3 +71,24 @@ describe('the ascendant trap', () => {
     expect(ascendantTrapArcsec(jd)).toBeLessThan(100); // ~45 arcsec at 1900
   });
 });
+
+describe('the patch reached the bodies and only the bodies', () => {
+  it('records which functions now take TT, and never an angle', async () => {
+    const service = await import('@/services/precisionEphemerisService');
+    const bodies = (service as Record<string, unknown>).TT_BODIES as string[] | undefined;
+
+    expect(bodies, 'TT_BODIES manifest missing — did the slice-9 patch run?').toBeDefined();
+    expect(bodies!.length).toBeGreaterThanOrEqual(4);
+    expect(bodies!.some((n) => /sun/i.test(n))).toBe(true);
+    expect(
+      bodies!.some((n) => /asc|ascendant|midheaven|house|cusp/i.test(n)),
+      'an angle function is on the TT path — this is the 960 arcsec trap',
+    ).toBe(false);
+
+    console.log('bodies on TT: ' + bodies!.join(', '));
+  });
+
+  it('rotation is 15 arcsec per second, which is why this slice exists', () => {
+    expect(ARCSEC_PER_SECOND_OF_ROTATION).toBe(15);
+  });
+});

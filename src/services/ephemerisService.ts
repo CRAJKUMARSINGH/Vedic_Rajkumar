@@ -6,6 +6,8 @@
  * For production, consider integrating Swiss Ephemeris or a professional API.
  */
 
+import { jdTTFromUT } from '@/lib/timeScales';
+
 // Ayanamsa (Lahiri) - Precession correction for sidereal zodiac
 // As of 2000-01-01: approximately 23.85° (Lahiri standard)
 const AYANAMSA_2000 = 23.85;
@@ -470,9 +472,11 @@ export function calculateCompletePlanetaryPositions(
 
   // Calculate Julian Day
   const jd = calculateJulianDay(utcDate);
+  // Bodies and ayanamsa are evaluated in TT; angles stay in UT (docs/TIME_SCALES.md).
+  const jdTT = jdTTFromUT(jd);
 
-  // Calculate Ayanamsa
-  const ayanamsa = calculateAyanamsa(utcDate);
+  // Calculate Ayanamsa (TT frame, matching the bodies)
+  const ayanamsa = calculateAyanamsa(jdTT);
 
   // Helper function to create planet position
   const createPosition = (tropical: number): PlanetPosition => {
@@ -488,14 +492,14 @@ export function calculateCompletePlanetaryPositions(
   };
 
   // Calculate all planetary positions
-  const sunTropical = calculateSunPositionFromJD(jd);
-  const moonTropical = calculateMoonPositionFromJD(jd);
-  const mercuryTropical = calculateMercuryPosition(jd);
-  const venusTropical = calculateVenusPosition(jd);
-  const marsTropical = calculateMarsPosition(jd);
-  const jupiterTropical = calculateJupiterPosition(jd);
-  const saturnTropical = calculateSaturnPosition(jd);
-  const rahuTropical = calculateRahuPosition(jd);
+  const sunTropical = calculateSunPositionFromJD(jdTT);
+  const moonTropical = calculateMoonPositionFromJD(jdTT);
+  const mercuryTropical = calculateMercuryPosition(jdTT);
+  const venusTropical = calculateVenusPosition(jdTT);
+  const marsTropical = calculateMarsPosition(jdTT);
+  const jupiterTropical = calculateJupiterPosition(jdTT);
+  const saturnTropical = calculateSaturnPosition(jdTT);
+  const rahuTropical = calculateRahuPosition(jdTT);
   const ketuTropical = calculateKetuPosition(rahuTropical);
 
   const sunPos = createPosition(sunTropical);
@@ -623,9 +627,11 @@ export function calculateCompletePlanetaryPositionsAtUTC(
 
   // Calculate Julian Day directly from UTC Date
   const jd = calculateJulianDay(utcDate);
+  // Bodies and ayanamsa are evaluated in TT; angles stay in UT (docs/TIME_SCALES.md).
+  const jdTT = jdTTFromUT(jd);
 
-  // Calculate Ayanamsa
-  const ayanamsa = calculateAyanamsa(utcDate);
+  // Calculate Ayanamsa (TT frame, matching the bodies)
+  const ayanamsa = calculateAyanamsa(jdTT);
 
   // Helper to create a PlanetPosition
   const createPosition = (tropical: number): PlanetPosition => {
@@ -640,14 +646,14 @@ export function calculateCompletePlanetaryPositionsAtUTC(
     };
   };
 
-  const sunTropical     = calculateSunPositionFromJD(jd);
-  const moonTropical    = calculateMoonPositionFromJD(jd);
-  const mercuryTropical = calculateMercuryPosition(jd);
-  const venusTropical   = calculateVenusPosition(jd);
-  const marsTropical    = calculateMarsPosition(jd);
-  const jupiterTropical = calculateJupiterPosition(jd);
-  const saturnTropical  = calculateSaturnPosition(jd);
-  const rahuTropical    = calculateRahuPosition(jd);
+  const sunTropical     = calculateSunPositionFromJD(jdTT);
+  const moonTropical    = calculateMoonPositionFromJD(jdTT);
+  const mercuryTropical = calculateMercuryPosition(jdTT);
+  const venusTropical   = calculateVenusPosition(jdTT);
+  const marsTropical    = calculateMarsPosition(jdTT);
+  const jupiterTropical = calculateJupiterPosition(jdTT);
+  const saturnTropical  = calculateSaturnPosition(jdTT);
+  const rahuTropical    = calculateRahuPosition(jdTT);
   const ketuTropical    = calculateKetuPosition(rahuTropical);
 
   const sunPos     = createPosition(sunTropical);

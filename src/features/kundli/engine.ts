@@ -13,6 +13,7 @@ import type {
   HouseSystem,
 } from './types';
 import { getLahiriAyanamsa } from '@/services/precisionEphemerisService';
+import { jdTTFromUT } from '@/lib/timeScales';
 
 const R2D = 180 / Math.PI;
 const D2R = Math.PI / 180;
@@ -141,12 +142,14 @@ function calcAscendantTropical(jd: number, lat: number, lon: number): number {
   const lst = normalize360(gmst + lon);
   const T = (jd - 2451545.0) / 36525.0;
   const eps = (23.439291111 - 0.013004167 * T - 0.000000164 * T * T + 0.000000504 * T * T * T) * D2R;
-  const lstR = lst * D2R;
+  const ramc = lst * D2R;
   const latR = lat * D2R;
-  const y = -Math.cos(lstR);
-  const x = Math.sin(lstR) * Math.cos(eps) + Math.tan(latR) * Math.sin(eps);
-  const ascTrop = Math.atan2(y, x) * R2D;
-  return normalize360(ascTrop);
+  // Meeus Ch.13: tan(Asc) = cos(RAMC) / -(sin(RAMC)·cos ε + tan φ·sin ε).
+  // Same convention as ascendantService.calculateAscendantFromJD. The negated
+  // form returns the descendant — 180° off — for every latitude.
+  const y = Math.cos(ramc);
+  const x = -(Math.sin(ramc) * Math.cos(eps) + Math.tan(latR) * Math.sin(eps));
+  return normalize360(Math.atan2(y, x) * R2D);
 }
 
 function getMeanNode(jd: number): number {
@@ -468,17 +471,20 @@ export function calculateChart(
   houseSystem: HouseSystem = 'whole-sign',
 ): ChartResult {
   const tzOffsetHours = getTimezoneOffsetHours(birthData.timezone, birthData.date, birthData.time);
+  // UT for angles (ascendant, houses, GMST); TT for bodies and the ayanamsa.
+  // See docs/TIME_SCALES.md — handing TT to the ascendant costs 0.27°.
   const julianDay = dateTimeToJD(birthData.date, birthData.time, tzOffsetHours);
-  const ayanamsaValue = getAyanamsaValue(julianDay, ayanamsa);
+  const jdTT = jdTTFromUT(julianDay);
+  const ayanamsaValue = getAyanamsaValue(jdTT, ayanamsa);
 
-  const sunTrop = getSunLongitude(julianDay);
-  const moonTrop = getMoonLongitude(julianDay);
-  const marsTrop = getMarsLongitude(julianDay);
-  const mercuryTrop = getMercuryLongitude(julianDay);
-  const jupiterTrop = getJupiterLongitude(julianDay);
-  const venusTrop = getVenusLongitude(julianDay);
-  const saturnTrop = getSaturnLongitude(julianDay);
-  const rahuTrop = getMeanNode(julianDay);
+  const sunTrop = getSunLongitude(jdTT);
+  const moonTrop = getMoonLongitude(jdTT);
+  const marsTrop = getMarsLongitude(jdTT);
+  const mercuryTrop = getMercuryLongitude(jdTT);
+  const jupiterTrop = getJupiterLongitude(jdTT);
+  const venusTrop = getVenusLongitude(jdTT);
+  const saturnTrop = getSaturnLongitude(jdTT);
+  const rahuTrop = getMeanNode(jdTT);
   const ketuTrop = normalize360(rahuTrop + 180);
   const ascendantTrop = calcAscendantTropical(julianDay, birthData.latitude, birthData.longitude);
 
@@ -528,7 +534,7 @@ export function calculateChart(
         Venus: getVenusLongitude,
         Saturn: getSaturnLongitude,
       };
-      isRetro = isRetrograde(julianDay, getters[planet]);
+      isRetro = isRetrograde(jdTT, getters[planet]);
     }
 
     return {

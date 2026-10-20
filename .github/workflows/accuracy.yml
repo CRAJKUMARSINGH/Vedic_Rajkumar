@@ -50,6 +50,8 @@ jobs:
       - run: npm ci
       - name: Run accuracy unit tests
         run: npm run test:accuracy:fast
+      - name: Run time-scale gate (UT/TT split)
+        run: npm run test:time
 
   # ── Full suite (nightly + main push) ─────────────────────────────────────
   full-suite:

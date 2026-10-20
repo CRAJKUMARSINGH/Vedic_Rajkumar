@@ -135,8 +135,10 @@ export function calcAscendant(jde:number,lat:number,lon:number): number {
   const lstRad=toRad(lst);
   const latRad=toRad(lat);
   const epsRad=toRad(eps);
-  const y=-(Math.cos(lstRad));
-  const x=Math.sin(lstRad)*Math.cos(epsRad)+Math.tan(latRad)*Math.sin(epsRad);
+  // Meeus Ch.13 ascendant convention (see houseSystemService.calculateAscendant).
+  // The negated form returns the descendant — 180° off.
+  const y=Math.cos(lstRad);
+  const x=-(Math.sin(lstRad)*Math.cos(epsRad)+Math.tan(latRad)*Math.sin(epsRad));
   let asc=normalize(toDeg(Math.atan2(y,x)));
   return asc;
 }

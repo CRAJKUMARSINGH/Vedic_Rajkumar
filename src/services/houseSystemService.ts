@@ -58,8 +58,11 @@ export function calculateAscendant(
   const lstRad = toRad(lstDeg);
   const latRad = toRad(lat);
 
-  const numerator = -Math.cos(lstRad);
-  const denominator = Math.sin(lstRad) * Math.cos(epsRad) + Math.tan(latRad) * Math.sin(epsRad);
+  // Meeus Ch.13: tan(Asc) = cos(RAMC) / -(sin(RAMC)·cos ε + tan φ·sin ε).
+  // The negated form returns the descendant (180° off) — verified against
+  // Swiss Ephemeris houses_ex; see src/tests/ascendantProof.test.ts.
+  const numerator = Math.cos(lstRad);
+  const denominator = -(Math.sin(lstRad) * Math.cos(epsRad) + Math.tan(latRad) * Math.sin(epsRad));
   let ascTrop = toDeg(Math.atan2(numerator, denominator));
   ascTrop = normalize360(ascTrop);
 

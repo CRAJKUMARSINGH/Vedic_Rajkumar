@@ -1,11 +1,10 @@
-# 🌟 Vedic Rajkumar
+# Vedic Rajkumar
 
-### ▶ **[Live demo → vedic-rajkumar.netlify.app](https://vedic-rajkumar.netlify.app)**
+Open-source Vedic astrology (Jyotish) platform built with React, TypeScript, and modern web tooling.
 
-## ✨ Trustworthy Vedic Astrology (Jyotish) Web App — Kundli · Prashna · Matchmaking · Panchang
+**Live demo:** [vedic-rajkumar.netlify.app](https://vedic-rajkumar.netlify.app)
 
-> **Beautiful, transparent, offline-capable Jyotish tools built with modern React + TypeScript.**
-> Cast accurate sidereal Lahiri charts, ask grounded horary questions, run 36-point Kundli Milan, and find auspicious Muhurat windows — all in English or Hindi, with zero hidden assumptions.
+Casts sidereal (Lahiri ayanamsa) birth charts, prashna (horary) readings, 36-point Kundli Milan matchmaking, and Panchang/Muhurat windows — bilingual (English/Hindi), offline-capable, with optional Swiss Ephemeris precision.
 
 ---
 
@@ -17,8 +16,9 @@
 [![Tailwind](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Node](https://img.shields.io/badge/Node-%E2%89%A520-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Build](https://img.shields.io/badge/build-passing-brightgreen)](#)
-[![Tests](https://img.shields.io/badge/tests-1438%20passing-brightgreen)](#accuracy--testing)
+[![Tests](https://img.shields.io/badge/tests-1476%20passing-brightgreen)](#accuracy--testing)
 [![Accuracy](https://img.shields.io/badge/engine%20accuracy-15%2F15%20charts%20%E2%89%A42%E2%80%B3-brightgreen)](docs/accuracy/METHODOLOGY.md)
+[![Accuracy CI](https://github.com/CRAJKUMARSINGH/Vedic_Rajkumar/actions/workflows/accuracy.yml/badge.svg)](https://github.com/CRAJKUMARSINGH/Vedic_Rajkumar/actions/workflows/accuracy.yml)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a0e292ac-3201-4b0c-8186-53a29d83d069/deploy-status)](https://app.netlify.com/sites/vedic-rajkumar/deploys)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](#license)
 [![Open Issues](https://img.shields.io/github/issues/CRAJKUMARSINGH/Vedic_Rajkumar?color=orange&logo=github)](https://github.com/CRAJKUMARSINGH/Vedic_Rajkumar/issues)
@@ -30,11 +30,15 @@
 
 ---
 
-## 🤔 What Makes This Brilliant?
+## Key Differentiators
 
-Most astrology apps are either **opaque paywalls** (trust our black box, pay ₹₹₹) or **ugly 90s-style Java applets** that crash when you need them most. Vedic Rajkumar is the first open-source, developer-friendly Jyotish app that does four jobs **brilliantly well** — with full **transparency**: every calculation shows its inputs, ayanamsa, and intermediate steps so you never have to "just trust it."
+Vedic Rajkumar focuses on transparency, offline capability, bilingual support, and modern web technologies:
 
-Built for **real users** — astrology-curious households, practicing astrologers, and diaspora communities — the UI is clean, bilingual (English + Hindi with proper Devanagari rendering), mobile-first, and runs entirely offline once loaded. Optional Swiss Ephemeris integration unlocks astronomically precise planetary positions for users who need research-grade accuracy. No ads, no upsells, no account required to cast your first chart.
+- **Transparent calculations** — every chart exposes its inputs (graha longitudes, house cusps, ayanamsa value, nakshatra padas). Intermediate data is shown rather than hidden.
+- **Offline-capable** — a service worker plus local calculation engines keep the app working without a network connection after first load.
+- **Bilingual** — full English and Hindi UI with correct Devanagari shaping (Noto Sans Devanagari).
+- **Optional Swiss Ephemeris precision** — a build flag swaps in `swisseph-wasm` for research-grade planetary positions.
+- **No account required** — demo mode runs entirely in the browser; authentication and persistence are optional.
 
 ---
 
@@ -57,26 +61,9 @@ Built for **real users** — astrology-curious households, practicing astrologer
 
 ---
 
-## 📸 Demo / Screenshots
+## Screenshots
 
-> 🎥 **Pro Tip:** A 20–40 second screen-capture GIF or Loom video placed here will double engagement. Try showing: _Landing → Kundli form → rendered chart → Prashna verdict → Matchmaking score → Panchang tiles → Print to PDF_ in one smooth clip.
-
-### Screenshots
-
-> **Generate real screenshots directly from the live app** — deterministic, never stale:
->
-> ```powershell
-> # PowerShell — against the deployed site (fastest, no build needed):
-> npm run shots:live
->
-> # Against localhost (starts dev server automatically):
-> npm run shots
->
-> # Custom URL:
-> node scripts/shots-live.mjs https://your-preview-url.netlify.app
-> ```
->
-> Outputs to `docs/assets/screenshots/01-landing.png` … `10-mobile-panchang.png`
+Captured from the live app: run `npm run shots` (against localhost) or `npm run shots:live` (against the deployed site). Output is written to `docs/assets/screenshots/`.
 
 | Landing Page                                       | Kundli Birth Chart                               | Kundli Milan (Matchmaking)                                 |
 | -------------------------------------------------- | ------------------------------------------------ | ---------------------------------------------------------- |
@@ -162,7 +149,7 @@ npm run build            # Production build to ./dist
 npm run preview          # Serve the production build locally
 npm run typecheck        # TypeScript strict check (no emit)
 npm run lint             # ESLint across app, Supabase functions, and test sources
-npm run test:run         # All Vitest tests — CI mode (1438 tests)
+npm run test:run         # All Vitest tests — CI mode (1476 tests)
 npm run test:core        # Core gate tests (ephemeris + vedic engine + nav)
 npm run validate:accuracy  # 15-reference-chart Swiss Ephemeris comparison
 npm run test:accuracy:corpus  # 15-chart adversarial corpus gate
@@ -215,6 +202,37 @@ All vars are **optional**. The app ships with sensible demo-mode defaults so you
 
 ---
 
+## Architecture
+
+```
+User (browser)
+      │
+      ▼
+React UI  ── Vite + TypeScript + Tailwind · routing · bilingual i18n
+      │
+      ▼
+Astrology Engine  ── src/services/* · src/lib/vedic/* (sidereal Lahiri ayanamsa)
+      │                Kundli · Prashna · Ashta Koota · Panchang · Dasha
+      ▼
+Swiss Ephemeris  ── optional swisseph-wasm precision layer
+      │                planetary longitudes · house cusps
+      ▼
+PDF Generator  ── jsPDF (kundli, matchmaking, prashna, event reports)
+      │
+      ▼
+Supabase  ── optional: auth, database, storage, vector store
+```
+
+| Layer              | Responsibility                                                                  |
+| ------------------ | ------------------------------------------------------------------------------- |
+| **UI**             | Form input, routing, language switch, chart rendering, PNG/PDF export triggers   |
+| **Astrology core** | Deterministic Vedic calculations on sidereal (Lahiri) coordinates               |
+| **Ephemeris**      | Planetary positions and house cusps — local engine by default, Swiss optional   |
+| **Reporting**      | A4 PDF generation via jsPDF                                                     |
+| **Persistence**    | Optional Supabase-backed profiles, saved readings, and knowledge vectors        |
+
+---
+
 ## 🗺 Roadmap / Planned Features
 
 ### ✅ Shipped & Production-Ready
@@ -252,16 +270,9 @@ All vars are **optional**. The app ships with sensible demo-mode defaults so you
 
 ---
 
-## 🤝 How to Contribute
-
-**Contributors welcome!** 🙏 Whether you're a Jyotish scholar wanting to check the rules, a developer wanting to fix TypeScript, a designer wanting to polish the UI, or a user wanting to add your city to the world presets — every contribution is valuable.
-
-For the full contributor guide including:
----
-
 ## 🎯 Accuracy & Testing
 
-Vedic Rajkumar is the only open-source Jyotish app with a **published, reproducible accuracy corpus**.
+Vedic Rajkumar ships a published, reproducible accuracy corpus.
 
 ### What makes it trustworthy
 
@@ -288,6 +299,16 @@ npm run test:accuracy:fast     # Unit tests: delta-T, cache keys, Vimshottari
 npm run test:tz-wiring         # Guard: all production code routes through timezone-aware wrapper
 npm run validate:accuracy      # Original 15-reference-chart Swiss Ephemeris suite
 ```
+
+### Published report
+
+`npm run accuracy:publish` re-derives the numbers from the corpus and the Swiss
+Ephemeris golden data and writes `src/generated/summary.json`, which the
+[/accuracy](src/pages/AccuracyDashboardPage.tsx) page renders verbatim — every
+body's observed arcsecond error next to its advertised claim, the nakshatra
+boundary exposure, the delta-T floor, and an explicit list of **what is not
+verified**. `npm run ship` publishes then builds; `netlify.toml` does the same so
+production never ships a stale snapshot. See [`docs/ACCURACY_PAGE.md`](docs/ACCURACY_PAGE.md).
 
 The **critical bug found and fixed** in this codebase: `calculatePreciseChart` defaulted to IST (+5:30) for all historical charts. For a 1943 Mumbai birth at 04:27, the wartime offset was +6:30 — **1 hour different, ~16.5° of ascendant error, wrong rashi entirely**. Every Jyotish app that hardcodes IST has this bug. Ours doesn't.
 
@@ -371,58 +392,9 @@ See [LICENSE](./LICENSE) (or the OSI [MIT summary](https://opensource.org/licens
 
 ---
 
-## ⭐ Call to Action
+## Supporting the Project
 
-**If this app saves you time, helps your family, teaches you something, or you simply appreciate the transparency of an open-source Jyotish app that doesn't hide its math — please:**
-
-1. 🌟 **Star this repository on GitHub** — it helps other users find it!
-2. 🍴 **Fork it** and adapt to your region, language, or Jyotish tradition
-3. 🐦 **Share it** with one friend or family member who would actually use this
-4. 🐛 **Open an issue** if something breaks or if a rule isn't quite right
-5. 🛠 **Submit a PR** per [CONTRIBUTING.md](./CONTRIBUTING.md) — even a single city added to the presets helps!
-
-> _"Jyotish is the eye of the Vedas."_ — May this tool serve clarity, not fear. 🙏
-
----
-
----
-
-# ✨ Appendix A: Kiro Title & Tagline Suggestions
-
-## 🏆 #1 Recommended Hero Title (Top Pick)
-
-> ### 🌟 Vedic Rajkumar — Transparent, Beautiful Jyotish: Kundli · Prashna · Matchmaking · Panchang
-
-**Why this wins:**
-
-- Covers _all four_ core features so visitors scan and understand scope instantly
-- Words "Transparent" and "Beautiful" signal the two differentiators (no black box + not ugly 90s UI)
-- "Jyotish" keyword is high-search for Indian diaspora while also being the canonical scholarly term
-- Word count <20 — fits GitHub README hero, mobile screens, and link previews perfectly
-
----
-
-## 🏷 GitHub Repo Description (125 chars max for search/cards)
-
-> **Open-source Vedic astrology web app (React + TS + Lahiri sidereal). Kundli birth charts, Prashna horary, 36-point Kundli Milan matchmaking, Panchang & Muhurat finder. EN/HI bilingual, offline-capable, with Swiss Ephemeris accuracy mode.**
-
----
-
-## 💫 8 Alternative Taglines & One-Liners
-
-### Mix of benefit-first · curiosity-driven · punchy · humorous:
-
-1. 🌀 **No black boxes. Just Jyotish.** — Kundli, Prashna, Milan, Panchang — transparent, offline, beautiful.
-2. 💍 **Kundli Milan that shows its math.** 36-point Ashta Koota, no hidden weights, no ₹₹₹. Open-source.
-3. 🔮 **Ask a Prashna, get an honest answer.** Vedic Horary with confidence score, significators, and remedies.
-4. 🌅 **Your pocket panchang, always accurate.** Sunrise, Tithi, Nakshatra, Rahu Kalam — offline.
-5. 🇮🇳 **Kundli in English or Hindi.** Devanagari that actually renders. No tofu boxes, no fake precision.
-6. ⚖️ **Astrology you can audit.** Every planet longitude, ayanamsa value, and nakshatra pada is visible.
-7. 🚀 **Caste a chart in 90 seconds.** Dev-friendly Vedic Jyotish — React, TypeScript, Tailwind, MIT.
-8. 🔬 **Swiss Ephemeris mode, for when it matters.** Toggle research-grade precision for marriage muhurats & job starts.
-
----
-
-## 🎙 Subtitle / Elevator Pitch (2–4 Sentence Version)
-
-**Vedic Rajkumar is a free, open-source Jyotish (Vedic astrology) web app for Indian households, practitioners, and the global diaspora — built because every other app either hides its calculations or charges a fortune for a manglik check.** Cast sidereal Lahiri Kundlis, ask grounded Prashna questions, run full 36-point Kundli Milan, and find auspicious Muhurat windows using a clean bilingual (English + Hindi) UI that renders Devanagari perfectly on every device. Everything works offline, calculation steps are shown in plain sight, and a 15-reference-chart accuracy suite validates results against the Swiss Ephemeris gold standard. **No ads, no upsells, no account required — just trustworthy Jyotish.**
+- **Star the repository** if you find it useful.
+- **Fork it** to adapt it to your region, language, or Jyotish tradition.
+- **Open an issue** for bugs or rules that look incorrect.
+- **Submit a PR** per [CONTRIBUTING.md](./CONTRIBUTING.md).

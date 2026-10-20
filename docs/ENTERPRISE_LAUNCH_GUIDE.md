@@ -350,7 +350,7 @@ Launch is successful when:
 
 **Related Documents:**
 - [MASTER_INDEX.md](./MASTER_INDEX.md)
-- [SECURITY.md](./SECURITY.md)
-- [docs/launch/go-live.md](./docs/launch/go-live.md)
+- [SECURITY.md](../SECURITY.md)
+- [docs/launch/go-live.md](./launch/go-live.md)
 - [API_MONETIZATION_STRATEGY.md](./API_MONETIZATION_STRATEGY.md)
 - [SOC2_PREPARATION_CHECKLIST.md](./SOC2_PREPARATION_CHECKLIST.md)

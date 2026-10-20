@@ -1,5 +1,8 @@
 [build]
-  command = "npm run build"
+  # Regenerate the public accuracy snapshot from the corpus + golden data, then
+  # build. The snapshot is imported at build time (src/generated/summary.json),
+  # so it must be rewritten before Vite bundles it.
+  command = "npm run accuracy:publish && npm run build"
   publish = "dist"
 
 [build.environment]

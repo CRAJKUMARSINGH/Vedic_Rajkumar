@@ -11,16 +11,7 @@
  * Ashwini (index 0) → Ketu, Bharani (1) → Venus, … repeats every 9.
  */
 
-const NAKSHATRA_SPAN_DEG = 360 / 27;
-
-function norm360(deg: number): number {
-  return ((deg % 360) + 360) % 360;
-}
-
-/** 0-based nakshatra index from a sidereal longitude in degrees. */
-function nakshatraIndex(siderealLongitude: number): number {
-  return Math.min(26, Math.floor(norm360(siderealLongitude) / NAKSHATRA_SPAN_DEG));
-}
+import { NAKSHATRA_SPAN_DEG, nakshatraIndex, norm360 } from './nakshatraEdge';
 
 export const VIMSHOTTARI_LORDS = [
   'Ketu', 'Venus', 'Sun', 'Moon', 'Mars', 'Rahu', 'Jupiter', 'Saturn', 'Mercury',

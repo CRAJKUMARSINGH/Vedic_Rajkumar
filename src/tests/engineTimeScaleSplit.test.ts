@@ -8,8 +8,10 @@
  * The engine previously evaluated *everything* at one UT Julian Day. This suite
  * proves the split is now real:
  *   - a ΔT=0 mock must leave the ascendant untouched (angles are UT-fed), while
- *     the Sun/Moon move by exactly ΔT of their own motion (bodies are TT-fed);
- *   - the source feeds jdTT to the bodies and jdUT to the angles.
+ *     the Sun moves by exactly ΔT of its own motion (bodies derive TT internally);
+ *   - the Moon is the exception: moonSeries applies ΔT itself, so the mock moves
+ *     it not at all;
+ *   - the source feeds jdUT to the bodies and jdUT to the angles.
  */
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { readFileSync } from 'node:fs';
@@ -50,18 +52,26 @@ describe('precision engine UT/TT split', () => {
     expect(deltaTSeconds(2000)).toBeGreaterThan(60);
   });
 
-  it('feeds TT to bodies: Sun & Moon shift by exactly delta-T of their motion', async () => {
+  it('feeds TT to the planets: the Sun shifts by exactly delta-T of its motion', async () => {
     const withDT = await loadChart(true);
     const noDT   = await loadChart(false);
 
-    const sunShift  = Math.abs(sidOf(withDT, 'Sun')  - sidOf(noDT, 'Sun'));
-    const moonShift = Math.abs(sidOf(withDT, 'Moon') - sidOf(noDT, 'Moon'));
+    const sunShift = Math.abs(sidOf(withDT, 'Sun') - sidOf(noDT, 'Sun'));
 
-    // Sun ~0.986°/day → ~7e-4°; Moon ~13°/day → ~1e-2°. Sign is irrelevant.
+    // Sun ~0.986°/day → ~7e-4°. Sign is irrelevant.
     expect(sunShift).toBeGreaterThan(0.0003);
     expect(sunShift).toBeLessThan(0.002);
-    expect(moonShift).toBeGreaterThan(0.005);
-    expect(moonShift).toBeLessThan(0.02);
+  });
+
+  it('leaves the Moon untouched by the engine-side split — moonSeries owns its delta-T', async () => {
+    const withDT = await loadChart(true);
+    const noDT   = await loadChart(false);
+
+    // The Moon does not route through jdTTFromUT: moonSeries.moonPosition converts
+    // UT→TT itself, so neutralising the engine's helper must change nothing.
+    // Deriving TT in the engine as well would double-count ~35 arcsec of motion.
+    const moonShift = Math.abs(sidOf(withDT, 'Moon') - sidOf(noDT, 'Moon'));
+    expect(moonShift).toBeLessThan(1e-6);
   });
 
   it('feeds UT to angles: the ascendant is unchanged by delta-T', async () => {
@@ -91,11 +101,11 @@ describe('precision engine wiring (source)', () => {
     expect(src).toMatch(/import\s*\{[^}]*\bjdTTFromUT\b[^}]*\}\s*from\s*'@\/lib\/timeScales'/);
   });
 
-  it('evaluates bodies and the ayanamsa at jdTT', () => {
+  it('evaluates bodies at jdUT (they derive TT internally) and the ayanamsa at jdTT', () => {
     expect(src).toMatch(/getLahiriAyanamsa\(jdTT\)/);
-    expect(src).toMatch(/getSunLongitude\(jdTT\)/);
-    expect(src).toMatch(/getMoonLongitude\(jdTT\)/);
-    expect(src).toMatch(/getMeanNode\(jdTT\)/);
+    expect(src).toMatch(/getSunLongitude\(jdUT\)/);
+    expect(src).toMatch(/getMoonLongitude\(jdUT\)/);
+    expect(src).toMatch(/getMeanNode\(jdUT\)/);
   });
 
   it('evaluates the ascendant at jdUT', () => {

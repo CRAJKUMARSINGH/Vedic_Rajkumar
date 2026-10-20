@@ -24,11 +24,18 @@
     "shots:live": "node scripts/shots-live.mjs",
     "migrate:chart-tz": "node scripts/migrate-chart-tz.mjs",
     "migrate:chart-tz:write": "node scripts/migrate-chart-tz.mjs --write",
-    "test:accuracy:fast": "vitest run src/tests/timeScales.test.ts src/tests/chartCacheKey.test.ts src/tests/vimshottari.test.ts src/tests/birthTimezone.test.ts",
+    "test:accuracy:fast": "vitest run src/tests/timeScales.test.ts src/tests/nakshatraEdge.test.ts src/tests/chartCacheKey.test.ts src/tests/vimshottari.test.ts src/tests/birthTimezone.test.ts",
+    "test:time": "vitest run src/tests/timeScales.test.ts src/tests/bodyFrame.test.ts --reporter=verbose",
+    "time:verify": "npm run test:time",
+    "test:accuracy:moon": "vitest run src/tests/accuracy/moonFlipAudit.test.ts --reporter=verbose",
+    "moon:audit": "npm run test:accuracy:moon",
+    "moon:verify": "vitest run src/tests/moonSeries.test.ts src/tests/moonWiring.test.ts",
     "accuracy:golden": "node scripts/accuracy-golden.mjs",
     "test:accuracy:full": "vitest run src/tests/accuracy/corpusPhase1.test.ts --reporter=verbose",
     "test:accuracy:corpus": "vitest run src/tests/accuracy/corpusPhase1.test.ts --reporter=verbose",
-    "test:tz-wiring": "vitest run src/tests/chartTimezoneWiring.test.ts"
+    "test:tz-wiring": "vitest run src/tests/chartTimezoneWiring.test.ts",
+    "accuracy:publish": "node scripts/publish-accuracy.mjs",
+    "ship": "npm run accuracy:publish && npm run build"
   },
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "9.1.0",
