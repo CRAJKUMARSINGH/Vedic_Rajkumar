@@ -1,0 +1,85 @@
+{
+  "id": "IN-1906-IST-008",
+  "label": "IST adoption year 1906",
+  "date": "1906-03-15",
+  "time": "12:00:00",
+  "tz": "Asia/Kolkata",
+  "resolvedOffsetHours": 5.5,
+  "lat": 13.0827,
+  "lon": 80.2707,
+  "julianDay": 2417284.7708333335,
+  "ayanamsa": 22.547090078505196,
+  "ayanamsaMode": "Lahiri",
+  "source": "swisseph-wasm",
+  "ascendant": {
+    "sidereal": 63.31870417793289,
+    "rashi": "Gemini",
+    "nakshatra": "Mrigashira",
+    "pada": 3
+  },
+  "grahas": [
+    {
+      "name": "Sun",
+      "sidereal": 331.2258882370087,
+      "rashi": "Pisces",
+      "nakshatra": "Purva Bhadrapada",
+      "pada": 4
+    },
+    {
+      "name": "Moon",
+      "sidereal": 211.71837290890335,
+      "rashi": "Scorpio",
+      "nakshatra": "Vishakha",
+      "pada": 4
+    },
+    {
+      "name": "Mercury",
+      "sidereal": 349.0256245817516,
+      "rashi": "Pisces",
+      "nakshatra": "Revati",
+      "pada": 1
+    },
+    {
+      "name": "Venus",
+      "sidereal": 338.3278732204617,
+      "rashi": "Pisces",
+      "nakshatra": "Uttara Bhadrapada",
+      "pada": 2
+    },
+    {
+      "name": "Mars",
+      "sidereal": 5.83774096985411,
+      "rashi": "Aries",
+      "nakshatra": "Ashwini",
+      "pada": 2
+    },
+    {
+      "name": "Jupiter",
+      "sidereal": 38.23594334682224,
+      "rashi": "Taurus",
+      "nakshatra": "Krittika",
+      "pada": 4
+    },
+    {
+      "name": "Saturn",
+      "sidereal": 315.1012162293446,
+      "rashi": "Aquarius",
+      "nakshatra": "Shatabhisha",
+      "pada": 3
+    },
+    {
+      "name": "Rahu",
+      "sidereal": 116.70745203830654,
+      "rashi": "Cancer",
+      "nakshatra": "Ashlesha",
+      "pada": 4
+    },
+    {
+      "name": "Ketu",
+      "sidereal": 296.70745203830654,
+      "rashi": "Capricorn",
+      "nakshatra": "Dhanishtha",
+      "pada": 2
+    }
+  ]
+}

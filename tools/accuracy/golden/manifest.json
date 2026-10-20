@@ -1,0 +1,28 @@
+{
+  "generatedAt": "2026-10-18T20:14:01.330Z",
+  "engine": "swisseph-wasm (Swiss Ephemeris)",
+  "swissephWasmVersion": "0.1.0",
+  "ayanamsaMode": "Lahiri",
+  "sidMode": 1,
+  "houseSystem": "E (Equal)",
+  "corpusFile": "tools/accuracy/corpus/charts.jsonl",
+  "corpusHash": "sha256:2fad515f99afa89686e521b22bf8042c6147c6ccfe4fcc12e7a2dcae8f55f9cf",
+  "chartCount": 15,
+  "charts": [
+    "IN-1935-BOM-001",
+    "IN-1943-BOM-002",
+    "IN-1941-DEL-004",
+    "IN-1942-GAP-005",
+    "IN-1945-END-006",
+    "IN-1945-IST-007",
+    "IN-1906-IST-008",
+    "IN-1960-MID-009",
+    "XX-1990-LAT64-003",
+    "XX-1990-LAT0-010",
+    "IN-2000-IND-011",
+    "IN-1990-JYP-012",
+    "XX-1970-LON-013",
+    "XX-2010-NYC-014",
+    "IN-1936-LEP-015"
+  ]
+}

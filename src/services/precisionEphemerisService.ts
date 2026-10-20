@@ -15,6 +15,9 @@
  *   Rahu/K   ±0.1°    (mean node, Meeus)
  */
 
+import { jdTTFromUT, timeScalesFromJD, type TimeScales } from '@/lib/timeScales';
+import { moonLongitudeTrue } from '@/services/moonSeries';
+
 // ─── Type definitions ─────────────────────────────────────────────────────────
 
 export interface PrecisePlanetPosition {
@@ -38,6 +41,7 @@ export interface PreciseAscendant {
   rashiName: string;
   degrees: number;
   minutes: number;
+  seconds: number;
 }
 
 export interface PreciseChart {
@@ -231,112 +235,39 @@ function geoLon(
 
 // ─── Planet longitude functions ───────────────────────────────────────────────
 
-function getSunLongitude(jd: number): number {
+function getSunLongitude(jdUT: number): number {
+  // slice 9: bodies take UT and derive TT here. The ascendant does not.
+  const jd = jdTTFromUT(jdUT);
   return getSunGeocentric(jd).lon;
 }
 
-function getMoonLongitude(jd: number): number {
-  // Meeus Chapter 47 — truncated ELP2000 series (±0.05° accuracy)
-  const T = (jd - 2451545.0) / 36525.0;
-  const L1 = 218.3164477 + 481267.88123421 * T - 0.0015786 * T * T
-    + T * T * T / 538841 - T * T * T * T / 65194000;
-  const D  = (297.8501921 + 445267.1114034 * T - 0.0018819 * T * T
-    + T * T * T / 545868 - T * T * T * T / 113065000) * D2R;
-  const M  = (357.5291092 + 35999.0502909 * T - 0.0001536 * T * T
-    + T * T * T / 24490000) * D2R;
-  const Mp = (134.9633964 + 477198.8675055 * T + 0.0087414 * T * T
-    + T * T * T / 69699 - T * T * T * T / 14712000) * D2R;
-  const F  = (93.2720950 + 483202.0175233 * T - 0.0036539 * T * T
-    - T * T * T / 3526000 + T * T * T * T / 863310000) * D2R;
-  const A1 = (119.75 + 131.849  * T) * D2R;
-  const A2 = ( 53.09 + 479264.290 * T) * D2R;
-  const E  = 1 - 0.002516 * T - 0.0000074 * T * T;
-
-  let sumL =
-      6288774 * Math.sin(Mp)
-    + 1274027 * Math.sin(2 * D - Mp)
-    +  658314 * Math.sin(2 * D)
-    +  213618 * Math.sin(2 * Mp)
-    -  185116 * E * Math.sin(M)
-    -  114332 * Math.sin(2 * F)
-    +   58793 * Math.sin(2 * D - 2 * Mp)
-    +   57066 * E * Math.sin(2 * D - M - Mp)
-    +   53322 * Math.sin(2 * D + Mp)
-    +   45758 * E * Math.sin(2 * D - M)
-    -   40923 * E * Math.sin(M - Mp)
-    -   34720 * Math.sin(D)
-    -   30383 * E * Math.sin(M + Mp)
-    +   15327 * Math.sin(2 * D - 2 * F)
-    -   12528 * Math.sin(Mp + 2 * F)
-    +   10980 * Math.sin(Mp - 2 * F)
-    +   10675 * Math.sin(4 * D - Mp)
-    +   10034 * Math.sin(3 * Mp)
-    +    8548 * Math.sin(4 * D - 2 * Mp)
-    -    7888 * E * Math.sin(2 * D + M - Mp)
-    -    6766 * E * Math.sin(2 * D + M)
-    -    5163 * Math.sin(D - Mp)
-    +    4987 * E * Math.sin(D + M)
-    +    4036 * E * Math.sin(2 * D - M + Mp)
-    +    3994 * Math.sin(2 * D + 2 * Mp)
-    +    3861 * Math.sin(4 * D)
-    +    3665 * Math.sin(2 * D - 3 * Mp)
-    -    2689 * E * Math.sin(M - 2 * Mp)
-    -    2602 * Math.sin(2 * D - Mp + 2 * F)
-    +    2390 * E * Math.sin(2 * D - M - 2 * Mp)
-    -    2348 * Math.sin(D + Mp)
-    +    2236 * E * E * Math.sin(2 * D - 2 * M)
-    -    2120 * E * Math.sin(M + 2 * Mp)
-    -    2069 * E * E * Math.sin(2 * M)
-    +    2048 * E * E * Math.sin(2 * D - 2 * M - Mp)
-    -    1773 * Math.sin(2 * D + Mp - 2 * F)
-    -    1595 * Math.sin(2 * D + 2 * F)
-    +    1215 * E * Math.sin(4 * D - M - Mp)
-    -    1110 * Math.sin(2 * Mp + 2 * F)
-    -     892 * Math.sin(3 * D - Mp)
-    -     810 * E * Math.sin(2 * D + M + Mp)
-    +     759 * E * Math.sin(4 * D - M - 2 * Mp)
-    -     713 * E * E * Math.sin(2 * M - Mp)
-    -     700 * E * Math.sin(2 * D + 2 * M - Mp)
-    +     691 * E * Math.sin(2 * D + M - 2 * Mp)
-    +     596 * E * Math.sin(2 * D - M - 2 * F)
-    +     549 * Math.sin(4 * D + Mp)
-    +     537 * Math.sin(4 * Mp)
-    +     520 * E * Math.sin(4 * D - M)
-    -     487 * Math.sin(D - 2 * Mp)
-    -     399 * E * Math.sin(2 * D + M - 2 * F)
-    -     381 * Math.sin(2 * Mp - 2 * F)
-    +     351 * E * Math.sin(D + M + Mp)
-    -     340 * Math.sin(3 * D - 2 * Mp)
-    +     330 * Math.sin(4 * D - 3 * Mp)
-    +     327 * E * Math.sin(2 * D - M + 2 * Mp)
-    -     323 * E * E * Math.sin(2 * M + Mp)
-    +     299 * E * Math.sin(D + M - Mp)
-    +     294 * Math.sin(2 * D + 3 * Mp);
-
-  // Additional terms: L1 must be in radians (normalise first)
-  const L1r = norm(L1) * D2R;
-  sumL += 3958 * Math.sin(A1) + 1962 * Math.sin(L1r - F) + 318 * Math.sin(A2);
-
-  const moonLon = L1 + sumL / 1000000;
-  return norm(moonLon);
+function getMoonLongitude(jdUT: number): number {
+  // slice 9: bodies take UT and derive TT here. The Moon is the exception —
+  // moonSeries applies delta-T itself, so it is handed UT directly. Deriving TT
+  // here as well would double-count ~35 arcsec of lunar motion.
+  return moonLongitudeTrue(jdUT);
 }
 
-function getMercuryLongitude(jd: number): number {
+function getMercuryLongitude(jdUT: number): number {
+  const jd = jdTTFromUT(jdUT);
   return geoLon(jd, 48.3313, 3.24587e-5, 7.0047, 29.1241, 1.01444e-5,
     0.387098, 0.205635, 5.59e-10, 168.6562, 4.0923344368);
 }
 
-function getVenusLongitude(jd: number): number {
+function getVenusLongitude(jdUT: number): number {
+  const jd = jdTTFromUT(jdUT);
   return geoLon(jd, 76.6799, 2.4659e-5, 3.3946, 54.8910, 1.38374e-5,
     0.723330, 0.006773, -1.302e-9, 48.0052, 1.6021302244);
 }
 
-function getMarsLongitude(jd: number): number {
+function getMarsLongitude(jdUT: number): number {
+  const jd = jdTTFromUT(jdUT);
   return geoLon(jd, 49.5574, 2.11081e-5, 1.8497, 286.5016, 2.92961e-5,
     1.523688, 0.093405, 2.516e-9, 18.6021, 0.5240207766);
 }
 
-function getJupiterLongitude(jd: number): number {
+function getJupiterLongitude(jdUT: number): number {
+  const jd = jdTTFromUT(jdUT);
   const d  = jd - 2451543.5;
   const Mj = norm(19.8950  + 0.0830853001 * d);
   const Ms = norm(316.9670 + 0.0334442282 * d);
@@ -356,7 +287,8 @@ function getJupiterLongitude(jd: number): number {
   return norm(Math.atan2(yh + sun.r * Math.sin(sun.lon * D2R), xh + sun.r * Math.cos(sun.lon * D2R)) * R2D);
 }
 
-function getSaturnLongitude(jd: number): number {
+function getSaturnLongitude(jdUT: number): number {
+  const jd = jdTTFromUT(jdUT);
   const d  = jd - 2451543.5;
   const Mj = norm(19.8950  + 0.0830853001 * d);
   const Ms = norm(316.9670 + 0.0334442282 * d);
@@ -376,7 +308,8 @@ function getSaturnLongitude(jd: number): number {
 }
 
 /** Mean lunar node (Rahu) — Meeus, retrograde */
-function getMeanNode(jd: number): number {
+function getMeanNode(jdUT: number): number {
+  const jd = jdTTFromUT(jdUT);
   const T = (jd - 2451545.0) / 36525.0;
   const omega = 125.04452 - 1934.136261 * T + 0.0020708 * T * T + T * T * T / 450000.0;
   return norm(omega);
@@ -402,53 +335,103 @@ function getGMST(jd: number): number {
   return norm(gmst);
 }
 
+// ─── Obliquity and nutation ───────────────────────────────────────────────────
+
+/** Mean obliquity of the ecliptic, radians. Meeus ch. 22. */
+function meanObliquity(T: number): number {
+  return (23.439291111 - 0.0130041667 * T - 1.6389e-7 * T * T + 5.0361e-7 * T * T * T) * D2R;
+}
+
+/**
+ * Nutation in obliquity, radians. Meeus ch. 22, four largest terms.
+ *
+ * Bounded by about 9 arcsec, so 0.0025 deg. Small, but it is the difference
+ * between mean and true obliquity, and Swiss Ephemeris uses true. Including it
+ * keeps the cross-check clean instead of leaving a systematic offset in it.
+ *
+ * Residual after this: nutation in LONGITUDE, up to 17 arcsec, because the
+ * ayanamsa is mean. Not modelled.
+ */
+function nutationInObliquity(T: number): number {
+  const omega = (125.04452 - 1934.136261 * T) * D2R;
+  const sunMean = (280.4665 + 36000.7698 * T) * D2R;
+  const moonMean = (218.3165 + 481267.8813 * T) * D2R;
+  return (
+    9.20 * Math.cos(omega) +
+    0.57 * Math.cos(2 * sunMean) +
+    0.10 * Math.cos(2 * moonMean) -
+    0.09 * Math.cos(2 * omega)
+  ) / 3600 * D2R;
+}
+
+function trueObliquity(T: number): number {
+  return meanObliquity(T) + nutationInObliquity(T);
+}
+
+// ─── Ecliptic / equatorial / horizon ──────────────────────────────────────────
+
+/** Ecliptic longitude (degrees) -> right ascension and declination (degrees). */
+function eclipticToEquatorial(lambdaDeg: number, eps: number): { ra: number; dec: number } {
+  const lambda = lambdaDeg * D2R;
+  return {
+    ra: norm(Math.atan2(Math.sin(lambda) * Math.cos(eps), Math.cos(lambda)) * R2D),
+    dec: Math.asin(Math.sin(eps) * Math.sin(lambda)) * R2D,
+  };
+}
+
+/**
+ * Hour angle of an ecliptic longitude, degrees, in (-180, 180].
+ * Negative means east of the meridian, which means rising.
+ */
+function hourAngleOf(lambdaDeg: number, eps: number, lst: number): number {
+  const { ra } = eclipticToEquatorial(lambdaDeg, eps);
+  return ((norm(lst - ra) + 180) % 360) - 180;
+}
+
+// ─── Ascendant ────────────────────────────────────────────────────────────────
+
+/**
+ * Ascendant: the ecliptic point crossing the eastern horizon.
+ *
+ * The tangent equation has two roots 180 degrees apart - ascendant and
+ * descendant. This previously resolved the pair with a rough "MC" of lst + 90
+ * and a 90 degree proximity test. That approximation is really a rough
+ * ASCENDANT, not an MC, and its margin collapses toward the poles where the
+ * ecliptic approaches tangency with the horizon.
+ *
+ * This version resolves it geometrically: of the two horizon intersections, the
+ * ascendant is the one with a negative hour angle, because a rising body sits
+ * east of the meridian. Exact at every latitude, no discriminator, no margin to
+ * erode.
+ */
 function calcAscendant(jd: number, lat: number, lon: number, ayanamsa: number): PreciseAscendant {
-  const gmst = getGMST(jd);
-  const lst  = norm(gmst + lon);
-  const T    = (jd - 2451545.0) / 36525.0;
-  const eps  = (23.439291111 - 0.013004167 * T) * D2R;
+  const T = (jd - 2451545.0) / 36525.0;
+  const eps = trueObliquity(T);
+  const lst = norm(getGMST(jd) + lon);
   const lstR = lst * D2R;
   const latR = lat * D2R;
-  // Ascendant formula (Meeus Ch.14 — ecliptic longitude on the eastern horizon)
-  // The sign of atan2 arguments places the result in the correct quadrant.
-  const y = -Math.cos(lstR);
-  const x =  Math.sin(lstR) * Math.cos(eps) + Math.tan(latR) * Math.sin(eps);
-  let ascTrop = Math.atan2(y, x) * R2D;
-  // atan2 returns [-180,+180]; normalise to [0,360]
-  // Then ensure the ascendant is on the EASTERN horizon:
-  // If ascendant is in the same semicircle as the LST the formula is correct;
-  // otherwise add 180°. A simpler robust check: ascendant must be within
-  // ±90° of the 6th-house cusp (LST + 90° sidereal).
-  ascTrop = ((ascTrop % 360) + 360) % 360;
-  // Validate quadrant: the tropical ascendant should be within 90° of where
-  // the ecliptic crosses the eastern horizon. If off by ~180°, correct it.
-  // We test by checking that the ascendant falls "near" the expected range
-  // derived from RAMC (Right Ascension of MC). MC longitude ≈ LST converted
-  // to ecliptic. A simpler robust fix: recompute using the tangent form.
-  // The fully reliable form from "Astronomical Algorithms" eq 14.3:
-  //   tan(Asc) = -cos(RAMC) / (sin(RAMC)*cos(ε) + tan(lat)*sin(ε))
-  // where RAMC = LST. This is equivalent but MUST be in the correct quadrant.
-  // atan2(numerator, denominator):
-  //   num = -cos(RAMC)
-  //   den = sin(RAMC)*cos(ε) + tan(lat)*sin(ε)
-  // The quadrant is correct when num/den gives the eastern horizon.
-  // The ascendant is on the ASCENDING side — if the result points west, add 180°.
-  // Check: the ascending node should have positive altitude rate. A simpler
-  // quadrant correction: ensure ascTrop is in the correct 180° half vs RAMC.
-  // The MC is approx norm(lst + 90) in tropical, so Asc should be 90° ahead of MC.
-  // Practical fix: if |ascTrop - (lst + 90)| > 90 (mod 360), add 180°.
-  const mcApprox = norm(lst + 90); // rough MC
-  let diff = Math.abs(ascTrop - mcApprox);
-  if (diff > 180) diff = 360 - diff;
-  if (diff > 90) ascTrop = norm(ascTrop + 180);
+
+  // One horizon intersection (Meeus ch. 14, eq. 14.3). The other is exactly
+  // 180 degrees away, and which one this is depends on the sign convention.
+  const candidate = norm(
+    Math.atan2(
+      -Math.cos(lstR),
+      Math.sin(lstR) * Math.cos(eps) + Math.tan(latR) * Math.sin(eps),
+    ) * R2D,
+  );
+
+  // Rising means east of the meridian, so a negative hour angle.
+  const ascTrop = hourAngleOf(candidate, eps, lst) < 0 ? candidate : norm(candidate + 180);
 
   const ascSid  = tropToSid(ascTrop, ayanamsa);
   const ri  = degToRashi(ascSid);
   const deg = degInRashi(ascSid);
+  const fracMin = (deg % 1) * 60;
   return {
     tropicalLongitude: ascTrop, siderealLongitude: ascSid,
     rashiIndex: ri, rashiName: RASHI_NAMES_EN[ri],
-    degrees: Math.floor(deg), minutes: Math.floor((deg % 1) * 60),
+    degrees: Math.floor(deg), minutes: Math.floor(fracMin),
+    seconds: Math.floor((fracMin % 1) * 60),
   };
 }
 
@@ -472,29 +455,35 @@ export function calculatePreciseChart(
   lon: number,
   tzOffsetHours = 5.5
 ): PreciseChart {
-  const jd       = dateTimeToJD(dateStr, timeStr, tzOffsetHours);
-  const ayanamsa = getLahiriAyanamsa(jd);
-  const ascendant = calcAscendant(jd, lat, lon, ayanamsa);
+  // UT / TT split (see src/lib/timeScales.ts):
+  //   BODIES (planets, nodes) and the ayanamsa are dynamical-time quantities → TT.
+  //   ANGLES (ascendant, house cusps, GMST) are Earth-rotation quantities → UT.
+  const jdUT     = dateTimeToJD(dateStr, timeStr, tzOffsetHours);
+  const jdTT     = jdTTFromUT(jdUT);
+  const ayanamsa = getLahiriAyanamsa(jdTT);
+  const ascendant = calcAscendant(jdUT, lat, lon, ayanamsa);
   const ascSid   = ascendant.siderealLongitude;
 
-  const sunTrop  = getSunLongitude(jd);
-  const moonTrop = getMoonLongitude(jd);
-  const mercTrop = getMercuryLongitude(jd);
-  const venTrop  = getVenusLongitude(jd);
-  const marsTrop = getMarsLongitude(jd);
-  const jupTrop  = getJupiterLongitude(jd);
-  const satTrop  = getSaturnLongitude(jd);
-  const rahuTrop = getMeanNode(jd);
+  // Body functions take jdUT and derive TT internally (slice 9).
+  // The ascendant and ayanamsa use the scales above directly.
+  const sunTrop  = getSunLongitude(jdUT);
+  const moonTrop = getMoonLongitude(jdUT);
+  const mercTrop = getMercuryLongitude(jdUT);
+  const venTrop  = getVenusLongitude(jdUT);
+  const marsTrop = getMarsLongitude(jdUT);
+  const jupTrop  = getJupiterLongitude(jdUT);
+  const satTrop  = getSaturnLongitude(jdUT);
+  const rahuTrop = getMeanNode(jdUT);
   const ketuTrop = norm(rahuTrop + 180);
 
   const planets: PrecisePlanetPosition[] = [
     formatPlanet('Sun',     sunTrop,  ayanamsa, ascSid, false),
     formatPlanet('Moon',    moonTrop, ayanamsa, ascSid, false),
-    formatPlanet('Mercury', mercTrop, ayanamsa, ascSid, isRetrograde(jd, getMercuryLongitude)),
-    formatPlanet('Venus',   venTrop,  ayanamsa, ascSid, isRetrograde(jd, getVenusLongitude)),
-    formatPlanet('Mars',    marsTrop, ayanamsa, ascSid, isRetrograde(jd, getMarsLongitude)),
-    formatPlanet('Jupiter', jupTrop,  ayanamsa, ascSid, isRetrograde(jd, getJupiterLongitude)),
-    formatPlanet('Saturn',  satTrop,  ayanamsa, ascSid, isRetrograde(jd, getSaturnLongitude)),
+    formatPlanet('Mercury', mercTrop, ayanamsa, ascSid, isRetrograde(jdUT, getMercuryLongitude)),
+    formatPlanet('Venus',   venTrop,  ayanamsa, ascSid, isRetrograde(jdUT, getVenusLongitude)),
+    formatPlanet('Mars',    marsTrop, ayanamsa, ascSid, isRetrograde(jdUT, getMarsLongitude)),
+    formatPlanet('Jupiter', jupTrop,  ayanamsa, ascSid, isRetrograde(jdUT, getJupiterLongitude)),
+    formatPlanet('Saturn',  satTrop,  ayanamsa, ascSid, isRetrograde(jdUT, getSaturnLongitude)),
     formatPlanet('Rahu',    rahuTrop, ayanamsa, ascSid, true),
     formatPlanet('Ketu',    ketuTrop, ayanamsa, ascSid, true),
   ];
@@ -509,20 +498,23 @@ export function calculatePreciseChart(
   const nakshatra  = getNakshatra(moonSid);
   const moonRashiIndex = degToRashi(moonSid);
 
-  return { julianDay: jd, ayanamsa, ascendant, planets, houses, nakshatra, moonRashiIndex };
+  return { julianDay: jdUT, ayanamsa, ascendant, planets, houses, nakshatra, moonRashiIndex };
 }
 
 // ─── Legacy compatibility function ───────────────────────────────────────────
 // Used by dashaService / verify_accuracy_fix etc. without lat/lon.
 
-export function calculatePrecisePlanetaryPositions(dateStr: string, timeStr: string) {
-  const jd       = dateTimeToJD(dateStr, timeStr, 5.5);
-  const ayanamsa = getLahiriAyanamsa(jd);
-  const ascendantRaw = calcAscendant(jd, 0, 0, ayanamsa);
+export function calculatePrecisePlanetaryPositions(dateStr: string, timeStr: string, tzOffsetHours = 5.5) {
+  // UT / TT split — bodies & ayanamsa → TT, angles → UT (see src/lib/timeScales.ts).
+  const jdUT     = dateTimeToJD(dateStr, timeStr, tzOffsetHours);
+  const jdTT     = jdTTFromUT(jdUT);
+  const ayanamsa = getLahiriAyanamsa(jdTT);
+  const ascendantRaw = calcAscendant(jdUT, 0, 0, ayanamsa);
   const ascendant = { ...ascendantRaw, sidereal: ascendantRaw.siderealLongitude };
 
-  const sunTrop  = getSunLongitude(jd);
-  const moonTrop = getMoonLongitude(jd);
+  // Body functions take jdUT and derive TT internally (slice 9).
+  const sunTrop  = getSunLongitude(jdUT);
+  const moonTrop = getMoonLongitude(jdUT);
   const moonSid  = tropToSid(moonTrop, ayanamsa);
   const moonRashi = degToRashi(moonSid);
   const toHouse = (sid: number) => Math.floor(norm(sid - moonSid) / 30) + 1;
@@ -537,25 +529,57 @@ export function calculatePrecisePlanetaryPositions(dateStr: string, timeStr: str
     };
   };
 
-  const rahuTrop = getMeanNode(jd);
+  const rahuTrop = getMeanNode(jdUT);
   const ketuTrop = norm(rahuTrop + 180);
 
   return {
     planets: [
       makePlanet('Sun',     sunTrop),
       makePlanet('Moon',    moonTrop),
-      makePlanet('Mercury', getMercuryLongitude(jd), isRetrograde(jd, getMercuryLongitude)),
-      makePlanet('Venus',   getVenusLongitude(jd),   isRetrograde(jd, getVenusLongitude)),
-      makePlanet('Mars',    getMarsLongitude(jd),     isRetrograde(jd, getMarsLongitude)),
-      makePlanet('Jupiter', getJupiterLongitude(jd),  isRetrograde(jd, getJupiterLongitude)),
-      makePlanet('Saturn',  getSaturnLongitude(jd),   isRetrograde(jd, getSaturnLongitude)),
+      makePlanet('Mercury', getMercuryLongitude(jdUT), isRetrograde(jdUT, getMercuryLongitude)),
+      makePlanet('Venus',   getVenusLongitude(jdUT),   isRetrograde(jdUT, getVenusLongitude)),
+      makePlanet('Mars',    getMarsLongitude(jdUT),     isRetrograde(jdUT, getMarsLongitude)),
+      makePlanet('Jupiter', getJupiterLongitude(jdUT),  isRetrograde(jdUT, getJupiterLongitude)),
+      makePlanet('Saturn',  getSaturnLongitude(jdUT),   isRetrograde(jdUT, getSaturnLongitude)),
       makePlanet('Rahu',    rahuTrop, true),
       makePlanet('Ketu',    ketuTrop, true),
     ],
     ayanamsa,
-    julianDay: jd,
+    julianDay: jdUT,
     ascendant,
     sun:  { sidereal: tropToSid(sunTrop,  ayanamsa), rashi: degToRashi(tropToSid(sunTrop,  ayanamsa)), degrees: degInRashi(tropToSid(sunTrop,  ayanamsa)) },
     moon: { sidereal: moonSid, rashi: moonRashi, degrees: degInRashi(moonSid) },
   };
+}
+
+// ─── Frame manifest ───────────────────────────────────────────────────────────
+//
+// The UT/TT rule (see src/lib/timeScales.ts and docs/TIME_SCALES.md): bodies and
+// the ayanamsa are dynamical-time quantities → TT; the ascendant, house cusps and
+// panchang are Earth-rotation quantities → UT. `calculatePreciseChart` derives
+// jdTT once and passes it to exactly these functions and no others. The ascendant
+// is handed jdUT.
+//
+// Asserted structurally in src/tests/timeScales.test.ts, so re-introducing an
+// angle into the TT path (the ~960 arcsec trap) fails there rather than on a
+// user's Lagna.
+export const TT_BODIES = [
+  'getSunLongitude',
+  'getMoonLongitude',
+  'getMercuryLongitude',
+  'getVenusLongitude',
+  'getMarsLongitude',
+  'getJupiterLongitude',
+  'getSaturnLongitude',
+  'getMeanNode',
+] as const;
+
+/**
+ * Both time scales for one chart instant, derived in a single place so a caller
+ * never has to remember which of `jdUT` / `jdTT` goes where.
+ */
+export function timeScalesFor(
+  date: string, time: string, tzOffsetHours: number, dut1Seconds = 0,
+): TimeScales {
+  return timeScalesFromJD(dateTimeToJD(date, time, tzOffsetHours), dut1Seconds);
 }

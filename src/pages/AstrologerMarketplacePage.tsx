@@ -231,7 +231,7 @@ const AstrologerMarketplacePage = () => {
                           {astrologer.specialization.slice(0, 2).map(s => <span key={s} className="text-xs bg-muted px-1.5 py-0.5 rounded">{s}</span>)}
                         </div>
                       </div>
-                      <div className="text-right flex-shrink-0">
+                      <div className="text-right shrink-0">
                         <div className="font-bold text-primary">₹{astrologer.pricePerMin}</div>
                         <div className="text-xs text-muted-foreground">/min</div>
                       </div>

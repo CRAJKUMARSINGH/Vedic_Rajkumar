@@ -364,7 +364,7 @@ function GemCard({ gem, labels, isHi, isPrimary, expanded, onToggle, formatPrice
           </div>
           {gem.contraindications && (
             <div className="flex items-start gap-1 text-amber-600 dark:text-amber-400">
-              <AlertTriangle className="h-3.5 w-3.5 mt-0.5 flex-shrink-0" />
+              <AlertTriangle className="h-3.5 w-3.5 mt-0.5 shrink-0" />
               <span className="text-xs">{(isHi ? gem.contraindications.hi : gem.contraindications.en).join('; ')}</span>
             </div>
           )}

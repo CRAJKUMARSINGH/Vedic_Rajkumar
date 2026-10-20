@@ -302,22 +302,21 @@ All API boundaries now use typed Zod schemas from `src/lib/validation.ts`:
 - `TransitRequestSchema` — target date + location
 - `CreateOrgSchema` — org name/slug/tier/billing email
 
-### Known Tracked Vulnerabilities (Require Migration Sprints)
+### Dependency Audit Status
 
-The following production CVEs require breaking-change upgrades and are tracked here pending dedicated migration:
+The direct dependencies were updated to patched versions for the previously tracked advisories:
 
-| Package | Current | Fix Version | CVEs | Sprint |
-|---------|---------|-------------|------|--------|
-| `jspdf` | 3.x | ≥4.2.1 | GHSA-f8cm-6447-x5h2 (LFI), GHSA-pqxr-3g65-p328 (PDF injection), +8 more | Week 9 PDF sprint |
-| `react-router-dom` | 6.x | ≥7.18.4 | GHSA-wrjc-x8rr-h8h6 (open redirect), GHSA-337j-9hxr-rhxg (constructor injection) | Week 8 routing sprint |
+| Package | Patched baseline |
+|---------|-----------------|
+| `jspdf` | `4.2.1` |
+| `react-router-dom` | `7.18.4` |
+| `vite` | `7.3.7` |
 
-**Mitigation in place:** jsPDF is only invoked server-side in edge functions for PDF generation — no untrusted user input is passed to `addJS()`. React Router open redirect requires a crafted backslash URL — blocked by CSP `form-action 'self'`.
-
-These are **not** exploitable in the current deployment configuration but must be resolved before the Week 12 production launch.
+PDF generation runs in browser-side code as well as in utilities, so it must not be treated as server-only or protected by CSP as a substitute for dependency updates. The security workflow now blocks on moderate-or-higher advisories in production dependencies; a separate full-tree audit remains informational while development-tool advisories are triaged.
 
 ### CI Security Gate (.github/workflows/security.yml)
 
 Three-job pipeline running on every push to `main`/`develop` and weekly:
-1. `dependency-audit` — `npm audit --omit=dev` (production deps only)
+1. `dependency-audit` — blocking `npm audit --omit=dev --audit-level=moderate`, plus a non-blocking full-tree audit
 2. `secrets-scan` — TruffleHog full-history scan, verified secrets only
 3. `typecheck` — `tsc --noEmit` strict check

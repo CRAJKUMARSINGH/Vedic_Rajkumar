@@ -1,4 +1,5 @@
-# Week 9: Dasha–Transit PDF Report Spec
+﻿# Week 9: Dasha–Transit PDF Report Spec
+
 Status: Implementation Complete
 Last updated: 2026-09-04
 Owner: Kiro (spec-driven)
@@ -16,6 +17,7 @@ professional PDF report.
 ## 2. Goals
 
 Deliver a production-quality PDF export service for the Dasha+Transit correlation result that:
+
 - Generates a structured 2-4 page PDF from a DashaTransitCorrelationResult
 - Includes: active dasha banner, transit table (9 planets), 12-month outlook, disclaimer
 - Supports English + Hindi language toggle
@@ -29,6 +31,7 @@ Deliver a production-quality PDF export service for the Dasha+Transit correlatio
 ## 3. Requirements
 
 ### R1 — dashaTransitPdfService.ts
+
 - `src/services/dashaTransitPdfService.ts`
 - `exportDashaTransitPdf(result, options)` — main entry point
   - Input: `DashaTransitCorrelationResult` + `{ lang, nativeName }`
@@ -38,15 +41,18 @@ Deliver a production-quality PDF export service for the Dasha+Transit correlatio
   - Output: `PdfContent` interface with sections array
 
 ### R2 — PdfContent types
+
 - `PdfSection` union: `PdfTextSection | PdfTableSection | PdfDividerSection | PdfScoreSection`
 - All types fully typed — no `any` without explicit justification
 
 ### R3 — DashaTransitCorrelationPage integration
+
 - Add "Export PDF" button after result appears
 - Shows loading state while PDF generates
 - Error handled gracefully (toast on failure)
 
 ### R4 — Week 9 tests
+
 - `src/tests/week9/dashaTransitPdf.test.ts`
 - Tests for `buildPdfContent()` — pure function, no browser required:
   - Returns correct section count
@@ -60,22 +66,31 @@ Deliver a production-quality PDF export service for the Dasha+Transit correlatio
 ## 4. Design
 
 ### buildPdfContent return shape
+
 ```ts
 interface PdfContent {
   title: string;
   subtitle: string;
-  metadata: { nativeName: string; targetDate: string; moonSign: string; generatedAt: string }
+  metadata: {
+    nativeName: string;
+    targetDate: string;
+    moonSign: string;
+    generatedAt: string;
+  };
   sections: PdfSection[];
 }
 
 type PdfSection =
-  | { type: 'heading';   text: string }
-  | { type: 'text';      text: string }
-  | { type: 'divider' }
-  | { type: 'kv';        rows: { label: string; value: string }[] }
-  | { type: 'table';     headers: string[]; rows: string[][] }
-  | { type: 'score';     score: number; level: string; label: string }
-  | { type: 'outlook';   items: { month: string; level: string; score: number }[] }
+  | { type: "heading"; text: string }
+  | { type: "text"; text: string }
+  | { type: "divider" }
+  | { type: "kv"; rows: { label: string; value: string }[] }
+  | { type: "table"; headers: string[]; rows: string[][] }
+  | { type: "score"; score: number; level: string; label: string }
+  | {
+      type: "outlook";
+      items: { month: string; level: string; score: number }[];
+    };
 ```
 
 ---

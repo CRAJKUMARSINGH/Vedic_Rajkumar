@@ -56,7 +56,7 @@ import {
   type DashaAnalysis,
   type DashaPeriod,
 } from '@/services/vimshottariDashaService';
-import { calculatePrecisePlanetaryPositions } from '@/services/precisionEphemerisService';
+import { calculatePlanetsForBirth } from '@/services/chartWithTimezone';
 import { getNakshatraInfo } from '@/services/nakshatraService';
 import { MARS_ANTARDASHA_GUIDE, type AntardashaGuideItem } from '@/services/dashaService';
 
@@ -116,7 +116,7 @@ const VimshottariDashaDashboard = ({
       if (birthDate && birthTime && latitude !== undefined && longitude !== undefined) {
         let moonLon = accurateMoonLongitude;
         let ayanamsa = 24.0;
-        const precise = calculatePrecisePlanetaryPositions(birthDate, birthTime);
+        const precise = calculatePlanetsForBirth(birthDate, birthTime);
         ayanamsa = precise.ayanamsa;
         if (moonLon === undefined || isNaN(moonLon)) {
           moonLon = precise.moon.sidereal;

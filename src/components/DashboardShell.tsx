@@ -48,7 +48,7 @@ import { TransitTimeline } from '@/components/transits/TransitTimeline';
 import type { EngineData } from '@/services/engineDataAssembler';
 import type { DynamicTransitOutput } from '@/services/dynamicTransitService';
 import type { TransitResult } from '@/data/transitData';
-import type { NatalChart } from '@/services/transits/transitService';
+import type { TransitNatalChart } from '@/services/transits/transitService';
 
 // ─── Constants ──────────────────────────────────────────────────────────────────
 
@@ -81,7 +81,7 @@ const STRENGTH_BADGE: Record<string, string> = {
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
-function natalFromEngine(engineData: EngineData, moonRashiIdx: number): NatalChart {
+function natalFromEngine(engineData: EngineData, moonRashiIdx: number): TransitNatalChart {
   const planets: Record<string, number> = {};
   for (const p of engineData.planets ?? []) {
     const name = typeof p?.name === 'string' ? p.name : '';
@@ -704,12 +704,12 @@ function JaiminiTab({ engineData, birthDate }: { engineData: EngineData; birthDa
 
 function PsychologyTab({ engineData }: { engineData: EngineData }) {
   const p = engineData.psychologicalProfile as any;
+  const [open, setOpen] = useState<string | null>(null);
+  const toggle = (k: string) => setOpen(o => o === k ? null : k);
+
   if (!p) return <p className="text-slate-500 text-sm text-center py-8">Psychological profile unavailable.</p>;
 
   const { nakshatra_fear: nf, rahu_ketu_karmic_statement: rk, saturn_wound_statement: sw, synthesis_narrative } = p;
-
-  const [open, setOpen] = useState<string | null>(null);
-  const toggle = (k: string) => setOpen(o => o === k ? null : k);
 
   const sections = [
     {
@@ -831,7 +831,7 @@ function PsychologyTab({ engineData }: { engineData: EngineData }) {
 
 function TransitsTab({
   moonRashiIdx, initialTransit, natal,
-}: { moonRashiIdx: number; initialTransit: DynamicTransitOutput | null; natal: NatalChart }) {
+}: { moonRashiIdx: number; initialTransit: DynamicTransitOutput | null; natal: TransitNatalChart }) {
   const [result,      setResult]      = useState<DynamicTransitOutput | null>(initialTransit);
   const [dateStr,     setDateStr]     = useState(isoDate(new Date()));
   const [loading,     setLoading]     = useState(false);
@@ -841,15 +841,29 @@ function TransitsTab({
     setLoading(true);
     setError(null);
     try {
-      const out = await calculateDynamicTransits({ moonRashiIndex: moonRashiIdx, date: new Date(d) });
+      // N3 Gochar: pass the natal chart so the transit carries Ashtakavarga points.
+      const natalPlanetRashis = Object.fromEntries(
+        Object.entries(natal.planets).map(([g, l]) => [g, ((Math.floor(l / 30) % 12) + 12) % 12]),
+      );
+      const out = await calculateDynamicTransits({
+        moonRashiIndex: moonRashiIdx,
+        lagnaRashiIndex: natal.lagnaSign,
+        natalPlanetRashis,
+        natalAscendantRashi: natal.lagnaSign,
+        date: new Date(d),
+      });
       setResult(out);
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Transit error');
     } finally { setLoading(false); }
-  }, [moonRashiIdx]);
+  }, [moonRashiIdx, natal]);
 
   const norm  = result ? normaliseScore(result.totalScore) : null;
   const tMeta = result ? (TRANSIT_STATUS[result.overallStatus] ?? TRANSIT_STATUS.mixed) : null;
+  // N3 Gochar: BAV/SAV of each planet's transiting sign, keyed by planet.
+  const avByPlanet = new Map(
+    (result?.ashtakavargaTransit ?? []).map((p) => [p.planet, p] as const),
+  );
 
   return (
     <div className="space-y-4">
@@ -924,6 +938,11 @@ function TransitsTab({
                         {' · '}{ORDINAL[t.houseFromMoon]} from Moon
                       </span>
                       {t.vedhaActive && <span className="text-[9px] text-orange-400">⚡ Vedha</span>}
+                      {avByPlanet.get(t.planet.en) && (
+                        <span className="text-[9px] text-cyan-300/80">
+                          BAV {avByPlanet.get(t.planet.en)!.bavPoints ?? '—'}/8 · SAV {avByPlanet.get(t.planet.en)!.savPoints}
+                        </span>
+                      )}
                     </div>
                     {t.effectEn && <p className="text-[10px] text-slate-500 mt-0.5 leading-snug">{t.effectEn}</p>}
                   </div>
@@ -1078,9 +1097,20 @@ export function DashboardShell() {
       const moonIdx    = moonPlanet?.rashiIndex ?? 0;
       setMoonRashiIdx(moonIdx);
 
+      // N3 Gochar: natal planet rashis feed the Ashtakavarga transit points.
+      const natalPlanetRashis = Object.fromEntries(
+        ed.planets.map((p: any) => [p.name, p.rashiIndex]),
+      );
+
       const [_, transitOut] = await Promise.all([
         Promise.resolve(ed),
-        calculateDynamicTransits({ moonRashiIndex: moonIdx, date: new Date() }).catch(() => null),
+        calculateDynamicTransits({
+          moonRashiIndex: moonIdx,
+          lagnaRashiIndex: ed.lagnaRashiIdx,
+          natalPlanetRashis,
+          natalAscendantRashi: ed.lagnaRashiIdx,
+          date: new Date(),
+        }).catch(() => null),
       ]);
 
       setEngineData(ed);

@@ -75,7 +75,9 @@ class PerformanceMonitoringService {
       });
       observer.observe({ type: 'largest-contentful-paint', buffered: true });
       this.observers.push(observer);
-    } catch (_) {}
+    } catch {
+      // PerformanceObserver may not support this entry type in every browser.
+    }
   }
 
   private observeFID(): void {
@@ -87,7 +89,9 @@ class PerformanceMonitoringService {
       });
       observer.observe({ type: 'first-input', buffered: true });
       this.observers.push(observer);
-    } catch (_) {}
+    } catch {
+      // PerformanceObserver may not support first-input entries in every browser.
+    }
   }
 
   private observeCLS(): void {
@@ -103,7 +107,9 @@ class PerformanceMonitoringService {
       });
       observer.observe({ type: 'layout-shift', buffered: true });
       this.observers.push(observer);
-    } catch (_) {}
+    } catch {
+      // PerformanceObserver may not support layout-shift entries in every browser.
+    }
   }
 
   private observeFCP(): void {
@@ -117,7 +123,9 @@ class PerformanceMonitoringService {
       });
       observer.observe({ type: 'paint', buffered: true });
       this.observers.push(observer);
-    } catch (_) {}
+    } catch {
+      // PerformanceObserver may not support paint entries in every browser.
+    }
   }
 
   private observeTTFB(): void {
@@ -126,7 +134,9 @@ class PerformanceMonitoringService {
       if (nav) {
         this.recordMetric('TTFB', nav.responseStart - nav.requestStart);
       }
-    } catch (_) {}
+    } catch {
+      // Navigation timing is not available in all test and embedded contexts.
+    }
   }
 
   private observeINP(): void {
@@ -138,7 +148,9 @@ class PerformanceMonitoringService {
       });
       observer.observe({ type: 'event', buffered: true, durationThreshold: 16 } as any);
       this.observers.push(observer);
-    } catch (_) {}
+    } catch {
+      // PerformanceObserver may not support event entries in every browser.
+    }
   }
 
   private recordMetric(name: WebVitalsMetric['name'], value: number): void {

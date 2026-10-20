@@ -13,6 +13,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Calendar, Clock, MapPin, Save, History, CheckCircle, AlertCircle } from "lucide-react";
 import { getUserProfile, addBirthDetails, getLastUsedProfile } from "@/services/userProfileService";
 import { searchLocation, formatCoordinates, type LocationResult } from "@/services/geocodingService";
+import { resolveBirthTimezone } from "@/lib/birthTimezone";
+import { setBirthTimezone } from "@/hooks/use-birth-timezone";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 
@@ -38,7 +40,7 @@ function toISO(dmy: string): string {
   if (!dmy) return "";
   // Already ISO?
   if (/^\d{4}-\d{2}-\d{2}$/.test(dmy)) return dmy;
-  const parts = dmy.replace(/[.\-]/g, "/").split("/");
+  const parts = dmy.replace(/[.-]/g, "/").split("/");
   if (parts.length === 3 && parts[2].length === 4) {
     return `${parts[2]}-${parts[1].padStart(2,"0")}-${parts[0].padStart(2,"0")}`;
   }
@@ -280,6 +282,9 @@ export default function EnhancedBirthInputForm({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (date && time && location) {
+      // Publish the resolved historical birth UTC offset so the calculation
+      // engine uses the correct timezone (e.g. India +6:30 in 1942–45).
+      setBirthTimezone(resolveBirthTimezone({ date, location }));
       onSubmit({ date, time, location });
       addBirthDetails({ date, time, location });
     }

@@ -166,24 +166,24 @@ export default function EventHoraTimeline({ horaTimeline, eventLabel, lang = 'en
                     border: isActive ? `1px solid ${s.border}` : '1px solid transparent',
                   }}
                 >
-                  <span className="w-5 text-center flex-shrink-0 text-sm" style={{ color: s.text }}>
+                  <span className="w-5 text-center shrink-0 text-sm" style={{ color: s.text }}>
                     {s.glyph}
                   </span>
-                  <span className="font-semibold w-14 flex-shrink-0" style={{ color: s.text }}>
+                  <span className="font-semibold w-14 shrink-0" style={{ color: s.text }}>
                     {slot.planet}
                   </span>
                   <span className="text-muted-foreground flex-1 text-[10px]">
                     {formatLocal(slot.startsAt)} – {formatLocal(slot.endsAt)}
                   </span>
                   <span
-                    className="text-[9px] font-bold px-1.5 py-0.5 rounded-full flex-shrink-0"
+                    className="text-[9px] font-bold px-1.5 py-0.5 rounded-full shrink-0"
                     style={{ background: s.bg, color: s.text, border: `1px solid ${s.border}` }}
                   >
                     {slot.quality === 'excellent' ? '✦' : slot.quality === 'good' ? '✓' : '○'}
                     {' '}{slot.quality}
                   </span>
                   {isActive && (
-                    <span className="text-[9px] font-bold text-indigo-600 dark:text-indigo-400 flex-shrink-0">
+                    <span className="text-[9px] font-bold text-indigo-600 dark:text-indigo-400 shrink-0">
                       ← {isHi ? 'अभी' : 'Now'}
                     </span>
                   )}

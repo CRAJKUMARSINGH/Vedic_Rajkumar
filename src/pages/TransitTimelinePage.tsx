@@ -430,7 +430,7 @@ function TimelineGrid({
           return (
             <div key={planet} className="flex items-stretch gap-3">
               {/* Planet label */}
-              <div className="w-24 flex-shrink-0 flex items-center justify-end pr-2">
+              <div className="w-24 shrink-0 flex items-center justify-end pr-2">
                 <span className="text-sm font-medium text-foreground truncate">
                   <span className="mr-1" aria-hidden="true">{PLANET_SYMBOL[planet]}</span>
                   {pName}

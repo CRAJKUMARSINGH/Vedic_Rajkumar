@@ -1,0 +1,11 @@
+{
+  "note": "Files allowed to call calculatePreciseChart / calculatePrecisePlanetaryPositions directly. Anything in src/ not listed here and not matching a pattern must go through calculateChartForBirth or calculatePlanetsForBirth so the resolved birth timezone is honoured.",
+  "files": {
+    "src/services/precisionEphemerisService.ts": "definition of the functions themselves",
+    "src/services/chartWithTimezone.ts": "the wrappers — the ONE place allowed to call through"
+  },
+  "patterns": [
+    "src/tests/**",
+    "src/test/**"
+  ]
+}

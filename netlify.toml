@@ -1,14 +1,25 @@
 [build]
-  command = "npm run build"
+  # Regenerate the public accuracy snapshot from the corpus + golden data, then
+  # build. The snapshot is imported at build time (src/generated/summary.json),
+  # so it must be rewritten before Vite bundles it.
+  command = "npm run accuracy:publish && npm run build"
   publish = "dist"
+
+[build.environment]
+  # ── Neon extension block ──────────────────────────────────────────────────
+  # The Neon DB extension was accidentally attached to this site at the
+  # Netlify team level. This project uses Supabase exclusively.
+  # Setting this env var prevents ALL dashboard-injected extensions from
+  # running their build hooks, stopping the indefinite hang on
+  # "Installing extensions → neon" during every deploy.
+  # Permanent removal: app.netlify.com → team settings → Extensions → Neon → Remove
+  NETLIFY_SKIP_EXTENSIONS = "true"
+  NODE_VERSION = "22.22.1"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-[build.environment]
-  NODE_VERSION = "20"
 
 [[headers]]
   for = "/assets/*"

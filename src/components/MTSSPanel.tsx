@@ -152,7 +152,7 @@ export function MTSSPanel(props: MTSSPanelProps) {
           <div className="space-y-4">
             {currentAD?.isMarriageFavorable && (
             <div className="rounded-xl border border-amber-500/30 bg-amber-900/20 p-4 flex gap-3 shadow-sm">
-              <span className="text-xl flex-shrink-0 mt-0.5">⚡</span>
+              <span className="text-xl shrink-0 mt-0.5">⚡</span>
               <div>
                 <p className="text-sm font-bold text-amber-300">Active Window — {currentMD?.lord}–{currentAD.lord}</p>
                 <p className="text-xs text-amber-100/70 mt-1 leading-relaxed">
@@ -365,7 +365,7 @@ export function MTSSPanel(props: MTSSPanelProps) {
                  },
                ].map(({ icon, title, desc }) => (
                  <div key={title} className="flex gap-3">
-                   <span className="text-xl flex-shrink-0 mt-0.5">{icon}</span>
+                   <span className="text-xl shrink-0 mt-0.5">{icon}</span>
                    <div>
                      <p className="text-sm font-bold text-white">{title}</p>
                      <p className="text-xs text-slate-300 mt-1 leading-relaxed">{desc}</p>
@@ -424,7 +424,7 @@ export function MTSSPanel(props: MTSSPanelProps) {
                  <div className="space-y-3">
                    {items.map(({ title, desc }, i) => (
                      <div key={i} className="flex gap-2">
-                       <span className="font-bold text-xs mt-0.5 flex-shrink-0 text-white opacity-50">•</span>
+                       <span className="font-bold text-xs mt-0.5 shrink-0 text-white opacity-50">•</span>
                        <div>
                          <p className="text-xs font-bold text-white">{title}</p>
                          <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">{desc}</p>
@@ -465,7 +465,7 @@ export function MTSSPanel(props: MTSSPanelProps) {
                        {res.notes}
                      </p>
                    </div>
-                   <div className="flex-shrink-0">
+                   <div className="shrink-0">
                      <span className={`px-3 py-1 text-xs font-bold rounded-full ${
                        res.status === 'PASS' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
                        res.status === 'WARN' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :

@@ -9,6 +9,7 @@ import { getProfileById } from '@/lib/familyProfiles';
 import type { FamilyProfile } from '@/lib/familyProfiles';
 import { Button } from '@/components/ui/button';
 import { Printer, Copy, Check } from 'lucide-react';
+import { BirthTimezoneChip } from '@/components/BirthTimezoneChip';
 
 const HoroscopeCard = lazy(() => import('@/components/HoroscopeCard'));
 
@@ -92,7 +93,10 @@ const HoroscopePage = () => {
           ) : (
             <div className="space-y-4">
               <div className="flex items-center justify-between flex-wrap gap-2">
-                <span className="px-2 py-1 rounded bg-muted text-xs">{rawBirth.date}</span>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="px-2 py-1 rounded bg-muted text-xs">{rawBirth.date}</span>
+                  <BirthTimezoneChip lang={hiLang} />
+                </div>
                 <div className="flex flex-wrap items-center gap-2">
                   <Button variant="outline" size="sm" onClick={handlePrint}>
                     <Printer className="h-4 w-4 mr-1.5" />

@@ -9,7 +9,7 @@
  */
 
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
@@ -58,7 +58,9 @@ describe('AccuracyDashboardPage — initial render', () => {
 
   it('does NOT show chart table before running', () => {
     renderPage();
-    expect(screen.queryByRole('table')).not.toBeInTheDocument();
+    // The published-report panel always renders its own summary table; the live
+    // per-chart table is the one that must not exist until the suite runs.
+    expect(screen.queryByRole('table', { name: /per-chart/i })).not.toBeInTheDocument();
   });
 });
 
@@ -68,11 +70,11 @@ describe('AccuracyDashboardPage — after running suite', () => {
   it('shows per-chart table with 15 rows after run', async () => {
     renderPage();
     clickRunButton();
-    await waitFor(
-      () => expect(screen.getByRole('table')).toBeInTheDocument(),
+    const table = await waitFor(
+      () => screen.getByRole('table', { name: /per-chart/i }),
       { timeout: 5000 },
     );
-    const rows = screen.getAllByRole('row');
+    const rows = within(table).getAllByRole('row');
     // 1 header row + 15 data rows = 16
     expect(rows.length).toBe(16);
   }, 10000);

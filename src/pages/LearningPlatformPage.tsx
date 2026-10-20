@@ -339,7 +339,7 @@ const LearningPlatformPage = () => {
                         </div>
                         <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{course.description}</p>
                       </div>
-                      <span className="text-muted-foreground flex-shrink-0">→</span>
+                      <span className="text-muted-foreground shrink-0">→</span>
                     </div>
                   </button>
                 ))}

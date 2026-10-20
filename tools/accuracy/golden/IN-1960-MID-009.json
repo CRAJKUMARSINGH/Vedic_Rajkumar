@@ -1,0 +1,85 @@
+{
+  "id": "IN-1960-MID-009",
+  "label": "Midnight boundary chart",
+  "date": "1960-01-01",
+  "time": "00:00:00",
+  "tz": "Asia/Kolkata",
+  "resolvedOffsetHours": 5.5,
+  "lat": 22.72,
+  "lon": 75.86,
+  "julianDay": 2436934.2708333335,
+  "ayanamsa": 23.298358418976534,
+  "ayanamsaMode": "Lahiri",
+  "source": "swisseph-wasm",
+  "ascendant": {
+    "sidereal": 159.27885554900024,
+    "rashi": "Virgo",
+    "nakshatra": "Uttara Phalguni",
+    "pada": 4
+  },
+  "grahas": [
+    {
+      "name": "Sun",
+      "sidereal": 256.04268840774716,
+      "rashi": "Sagittarius",
+      "nakshatra": "Purva Ashadha",
+      "pada": 1
+    },
+    {
+      "name": "Moon",
+      "sidereal": 283.62001808378454,
+      "rashi": "Capricorn",
+      "nakshatra": "Shravana",
+      "pada": 2
+    },
+    {
+      "name": "Mercury",
+      "sidereal": 241.3187970986976,
+      "rashi": "Sagittarius",
+      "nakshatra": "Mula",
+      "pada": 1
+    },
+    {
+      "name": "Venus",
+      "sidereal": 214.80236447450034,
+      "rashi": "Scorpio",
+      "nakshatra": "Anuradha",
+      "pada": 1
+    },
+    {
+      "name": "Mars",
+      "sidereal": 236.84110185931218,
+      "rashi": "Scorpio",
+      "nakshatra": "Jyeshtha",
+      "pada": 4
+    },
+    {
+      "name": "Jupiter",
+      "sidereal": 235.3899376473313,
+      "rashi": "Scorpio",
+      "nakshatra": "Jyeshtha",
+      "pada": 3
+    },
+    {
+      "name": "Saturn",
+      "sidereal": 256.1308857716467,
+      "rashi": "Sagittarius",
+      "nakshatra": "Purva Ashadha",
+      "pada": 1
+    },
+    {
+      "name": "Rahu",
+      "sidereal": 155.43964602080894,
+      "rashi": "Virgo",
+      "nakshatra": "Uttara Phalguni",
+      "pada": 3
+    },
+    {
+      "name": "Ketu",
+      "sidereal": 335.43964602080894,
+      "rashi": "Pisces",
+      "nakshatra": "Uttara Bhadrapada",
+      "pada": 1
+    }
+  ]
+}

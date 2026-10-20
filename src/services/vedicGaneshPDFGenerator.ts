@@ -685,7 +685,6 @@ function drawWatermark(doc: jsPDF, pageW: number, pageH: number, theme?: 'classi
 // ────────────────────────────────────────────────────────────────────────
 // 6. SUBJECT INFO BOX
 // ────────────────────────────────────────────────────────────────────────
-const LATIN1_SAFE_RE = /[\x00-\xFF]/;
 function sanitizeForHelveticLatin1(text: string, fallback = '', hasDevanagariFont = false): string {
   if (!text) return fallback;
   

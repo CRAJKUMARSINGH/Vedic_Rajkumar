@@ -149,7 +149,7 @@ export const CompatibilityReportComponent = ({
       {/* Overall Score with Circular Visualizer */}
       <div className="bg-muted/30 rounded-xl p-6 border border-primary/5 flex flex-col md:flex-row items-center justify-around gap-6">
         {/* SVG Circular Indicator */}
-        <div className="relative flex-shrink-0 animate-in zoom-in-50 duration-500">
+        <div className="relative shrink-0 animate-in zoom-in-50 duration-500">
           {(() => {
             const radius = 54;
             const circ = 2 * Math.PI * radius;

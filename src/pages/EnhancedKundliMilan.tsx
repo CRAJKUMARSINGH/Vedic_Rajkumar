@@ -573,17 +573,17 @@ export default function EnhancedKundliMilan() {
                       className="w-full text-left px-4 py-3 hover:bg-muted/30 transition-colors">
                       <div className="flex items-center gap-3">
                         <span className="text-[10px] text-muted-foreground w-4 tabular-nums">{i+1}</span>
-                        <div className="w-28 flex-shrink-0">
+                        <div className="w-28 shrink-0">
                           <p className="text-sm font-semibold text-foreground">{k.name}</p>
                           <p className="text-[10px] text-muted-foreground">{k.description}</p>
                         </div>
                         <div className="flex-1 min-w-0">
                           <ScoreBar scored={k.scored} max={k.maxPoints} />
                         </div>
-                        <span className={cn("text-[10px] font-bold w-16 text-right flex-shrink-0", verdictColor(k.verdict))}>
+                        <span className={cn("text-[10px] font-bold w-16 text-right shrink-0", verdictColor(k.verdict))}>
                           {k.verdict}
                         </span>
-                        <span className="text-muted-foreground text-xs w-4 flex-shrink-0">{isOpen ? "▲":"▼"}</span>
+                        <span className="text-muted-foreground text-xs w-4 shrink-0">{isOpen ? "▲":"▼"}</span>
                       </div>
                     </button>
                     {isOpen && (
@@ -656,7 +656,7 @@ export default function EnhancedKundliMilan() {
               {result.d9Compatibility.details.map((d,i) => (
                 <p key={i} className={cn("text-xs flex gap-2 leading-relaxed",
                   d.startsWith("✓")?"text-emerald-700":d.startsWith("⚠")?"text-amber-700":"text-muted-foreground", isHi && "font-hindi")}>
-                  <span className="flex-shrink-0 mt-0.5">
+                  <span className="shrink-0 mt-0.5">
                     {d.startsWith("✓")?"✓":d.startsWith("⚠")?"⚠":"→"}
                   </span>
                   <span>{d.replace(/^[✓⚠→]\s*/,"")}</span>
@@ -674,7 +674,7 @@ export default function EnhancedKundliMilan() {
                 <ul className="space-y-2">
                   {result.warnings.map((w,i) => (
                     <li key={i} className={cn("text-xs text-red-700/90 flex gap-2 leading-relaxed", isHi && "font-hindi")}>
-                      <span className="flex-shrink-0 mt-0.5">•</span><span>{w}</span>
+                      <span className="shrink-0 mt-0.5">•</span><span>{w}</span>
                     </li>
                   ))}
                 </ul>
@@ -687,7 +687,7 @@ export default function EnhancedKundliMilan() {
               <ul className="space-y-2">
                 {result.recommendations.map((r,i) => (
                   <li key={i} className={cn("text-xs text-emerald-700/90 flex gap-2 leading-relaxed", isHi && "font-hindi")}>
-                    <span className="flex-shrink-0 mt-0.5">•</span><span>{r}</span>
+                    <span className="shrink-0 mt-0.5">•</span><span>{r}</span>
                   </li>
                 ))}
               </ul>

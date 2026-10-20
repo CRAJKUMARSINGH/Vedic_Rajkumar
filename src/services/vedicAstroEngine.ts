@@ -1,7 +1,7 @@
-﻿/**
+/**
  * src/services/vedicAstroEngine.ts
  * Paul Schlyter orbital mechanics engine ported to root app.
- * Accurate ±1-2° for 1900-2100. No external deps.
+ * Accurate �1-2� for 1900-2100. No external deps.
  * Exports: JD, Ayanamsa, Planetary positions, Ascendant,
  *          Nakshatra, Dignity, Houses, Dasha, Tara Bala,
  *          Ashtakavarga, Panchanga, D9, Remedies, Hora.
@@ -86,7 +86,7 @@ export function calcAscendant(jd:number,lat:number,lon:number):number{
 
 export function lahiriAyanamsa(jd:number):number{return 23.854816+1.397267*(jd-2451545)/36525;}
 
-// ─── Rashi / Nakshatra ─────────────────────────────────────────────────────────
+// --- Rashi / Nakshatra ---------------------------------------------------------
 export const RASHIS=['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'] as const;
 export type VRashi=typeof RASHIS[number];
 export const NAKSHATRAS=['Ashwini','Bharani','Krittika','Rohini','Mrigashira','Ardra','Punarvasu','Pushya','Ashlesha','Magha','Purva Phalguni','Uttara Phalguni','Hasta','Chitra','Swati','Vishakha','Anuradha','Jyeshtha','Mula','Purva Ashadha','Uttara Ashadha','Shravana','Dhanishtha','Shatabhisha','Purva Bhadrapada','Uttara Bhadrapada','Revati'] as const;
@@ -109,7 +109,7 @@ export function vDignity(planet:string,rashi:VRashi):string{
   return 'Neutral';
 }
 
-// ─── Vimshottari Dasha ────────────────────────────────────────────────────────
+// --- Vimshottari Dasha --------------------------------------------------------
 export const DASHA_YEARS:Record<string,number>={Ketu:7,Venus:20,Sun:6,Moon:10,Mars:7,Rahu:18,Jupiter:16,Saturn:19,Mercury:17};
 export const DASHA_ORDER=['Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury'];
 
@@ -141,23 +141,23 @@ export function computeVimshottariDasha(moonSidLon:number,birthJD:number):VDasha
   for(let j=0;j<9;j++){const pi=(aIdx+j)%9,pp=DASHA_ORDER[pi],py=(aYrs*DASHA_YEARS[pp])/120;const pe=new Date(pc.getTime()+py*365.25*86400000);if(now>=pc&&now<pe){pratya=pp;break;}pc=pe;}
   return{periods,current:{mahadasha:maha.planet,antardasha:antar.planet,pratyantardasha:pratya,mahaEnd:maha.end,antarEnd:antar.end}};
 }
-// ─── Tara Bala ─────────────────────────────────────────────────────────────────
+// --- Tara Bala -----------------------------------------------------------------
 const TARA_NAMES=['Janma','Sampat','Vipat','Kshema','Pratyak','Sadhana','Naidhana','Mitra','Parama Mitra'];
 const TARA_AUS=[false,true,false,true,false,true,false,true,true];
-const TARA_DESCS:Record<string,string>={'Janma':'Birth star — introspective, mixed for events.','Sampat':'Prosperity star — excellent for gains & career. ✓','Vipat':'Danger star — obstacles likely. ✗','Kshema':'Well-being star — comfort & success. ✓','Pratyak':'Obstruction star — delays & blocks. ✗','Sadhana':'Achievement star — effort rewards. ✓','Naidhana':'Death star — most inauspicious. ✗','Mitra':'Friend star — harmonious support. ✓','Parama Mitra':'Best friend star — highly auspicious. ✓✓'};
+const TARA_DESCS:Record<string,string>={'Janma':'Birth star � introspective, mixed for events.','Sampat':'Prosperity star � excellent for gains & career. ?','Vipat':'Danger star � obstacles likely. ?','Kshema':'Well-being star � comfort & success. ?','Pratyak':'Obstruction star � delays & blocks. ?','Sadhana':'Achievement star � effort rewards. ?','Naidhana':'Death star � most inauspicious. ?','Mitra':'Friend star � harmonious support. ?','Parama Mitra':'Best friend star � highly auspicious. ??'};
 export interface TaraBala{taraName:string;taraNumber:number;isAuspicious:boolean;transitNakshatra:string;birthNakshatra:string;description:string;}
 export function computeTaraBala(birthMoonLon:number,transitMoonLon:number):TaraBala{
   const b=vNakIdx(birthMoonLon),t=vNakIdx(transitMoonLon),diff=(t-b+27)%27,pos=diff%9;
   return{taraName:TARA_NAMES[pos],taraNumber:pos+1,isAuspicious:TARA_AUS[pos],transitNakshatra:NAKSHATRAS[t],birthNakshatra:NAKSHATRAS[b],description:TARA_DESCS[TARA_NAMES[pos]]??'Neutral.'};
 }
 
-// ─── Ashtakavarga ──────────────────────────────────────────────────────────────
+// --- Ashtakavarga --------------------------------------------------------------
 const MOON_AV=[0,6,3,5,3,5,6,3,4,5,6,7,4];
 export function moonAVBindu(h:number):number{return h>=1&&h<=12?MOON_AV[h]:4;}
 const SARVA_AV:Record<number,number>={1:25,2:22,3:29,4:24,5:25,6:34,7:19,8:24,9:29,10:36,11:54,12:16};
 export function sarvaAVBindu(h:number):number{return SARVA_AV[h]??25;}
 
-// ─── Panchanga ─────────────────────────────────────────────────────────────────
+// --- Panchanga -----------------------------------------------------------------
 const TITHI_NAMES=['Pratipada','Dwitiya','Tritiya','Chaturthi','Panchami','Shashthi','Saptami','Ashtami','Navami','Dashami','Ekadashi','Dwadashi','Trayodashi','Chaturdashi','Purnima','Pratipada','Dwitiya','Tritiya','Chaturthi','Panchami','Shashthi','Saptami','Ashtami','Navami','Dashami','Ekadashi','Dwadashi','Trayodashi','Chaturdashi','Amavasya'];
 const YOGA_NAMES=['Vishkambha','Priti','Ayushman','Saubhagya','Shobhana','Atiganda','Sukarma','Dhriti','Shula','Ganda','Vriddhi','Dhruva','Vyaghata','Harshana','Vajra','Siddhi','Vyatipata','Variyan','Parigha','Shiva','Siddha','Sadhya','Shubha','Shukla','Brahma','Indra','Vaidhriti'];
 const BAD_T=new Set([4,8,9,12,14,19,23,24,25,30]),BAD_Y=new Set([1,6,9,10,13,15,17,19,27]),BAD_N=new Set([2,6,9,10,13,15,17,19,26]);
@@ -179,7 +179,7 @@ export function computePanchanga(jd:number):Panchanga{
   return{tithi:{number:tn,name:TITHI_NAMES[(tn-1)%30],paksha,auspicious:tA},nakshatra:{index:ni,name:NAKSHATRAS[ni],lord:NAKSHATRA_LORDS[ni],auspicious:nA},yoga:{index:yi,name:YOGA_NAMES[yi],auspicious:yA},karana:{name:kn,auspicious:kA},vara:{dayName:VARA_DAYS[dow],lord:VARA_LORDS[dow],auspicious:vA},auspiciousCount:[tA,nA,yA,kA,vA].filter(Boolean).length};
 }
 
-// ─── D9 Navamsa ────────────────────────────────────────────────────────────────
+// --- D9 Navamsa ----------------------------------------------------------------
 const D9S:Record<number,number>={0:0,4:0,8:0,1:9,5:9,9:9,2:6,6:6,10:6,3:3,7:3,11:3};
 export function d9Sign(sidLon:number):VRashi{
   const l=((sidLon%360)+360)%360,ri=Math.floor(l/30),d9i=Math.floor((l%30)/(30/9));
@@ -191,10 +191,10 @@ export function computeD9(birthJD:number):Record<string,VRashi>{
   return out;
 }
 
-// ─── Hora timeline ─────────────────────────────────────────────────────────────
+// --- Hora timeline -------------------------------------------------------------
 const HORA_P=['Sun','Moon','Mars','Mercury','Jupiter','Venus','Saturn'];
 export interface HoraSlot{planet:string;symbol:string;startsAt:number;endsAt:number;isNow:boolean;quality:'excellent'|'good'|'neutral';}
-const HORA_SYM:Record<string,string>={Sun:'☉',Moon:'☽',Mars:'♂',Mercury:'☿',Jupiter:'♃',Venus:'♀',Saturn:'♄'};
+const HORA_SYM:Record<string,string>={Sun:'?',Moon:'?',Mars:'?',Mercury:'?',Jupiter:'?',Venus:'?',Saturn:'?'};
 const HORA_Q:Record<string,HoraSlot['quality']>={Jupiter:'excellent',Venus:'excellent',Mercury:'good',Moon:'good',Sun:'good',Mars:'neutral',Saturn:'neutral'};
 export function getHoraTimeline(targetDate:Date,hoursAhead=12):HoraSlot[]{
   const start=new Date(targetDate);start.setMinutes(0,0,0);const now=Date.now();
@@ -202,7 +202,7 @@ export function getHoraTimeline(targetDate:Date,hoursAhead=12):HoraSlot[]{
   for(let i=0;i<hoursAhead;i++){
     const t=start.getTime()+i*3600000,d=new Date(t),dow=d.getDay(),h=d.getHours();
     const dayLordIdx=[0,2,4,6,5,3,1][dow],pIdx=(dayLordIdx+h)%7,planet=HORA_P[pIdx];
-    slots.push({planet,symbol:HORA_SYM[planet]??'★',startsAt:t,endsAt:t+3600000,isNow:now>=t&&now<t+3600000,quality:HORA_Q[planet]??'neutral'});
+    slots.push({planet,symbol:HORA_SYM[planet]??'?',startsAt:t,endsAt:t+3600000,isNow:now>=t&&now<t+3600000,quality:HORA_Q[planet]??'neutral'});
   }
   return slots;
 }
@@ -210,9 +210,9 @@ export function getCurrentHora(d:Date=new Date()):string{
   return HORA_P[([0,2,4,6,5,3,1][d.getDay()]+d.getHours())%7];
 }
 
-// ─── Dynamic Remedies ──────────────────────────────────────────────────────────
+// --- Dynamic Remedies ----------------------------------------------------------
 export interface RemedyItem{category:'mantra'|'gemstone'|'color'|'ritual'|'donation';planet:string;title:string;detail:string;urgency:'PRIMARY'|'SECONDARY'|'PRACTICAL'|'OPTIONAL';}
-const MANTRAS:Record<string,string>={Sun:'Om Suryaya Namaha (108x) — daily at sunrise facing East',Moon:'Om Chandraya Namaha (108x) — Monday mornings',Mars:'Om Angarakaya Namaha (108x) — Tuesday',Mercury:'Om Budhaya Namaha (108x) — Wednesday mornings',Jupiter:'Om Brihaspataye Namaha (108x) — Thursday',Venus:'Om Shukraya Namaha (108x) — Friday',Saturn:'Om Shanaischaraya Namaha (108x) — Saturday',Rahu:'Om Rahave Namaha (108x) — Saturday',Ketu:'Om Ketave Namaha (108x) — Tuesday'};
+const MANTRAS:Record<string,string>={Sun:'Om Suryaya Namaha (108x) � daily at sunrise facing East',Moon:'Om Chandraya Namaha (108x) � Monday mornings',Mars:'Om Angarakaya Namaha (108x) � Tuesday',Mercury:'Om Budhaya Namaha (108x) � Wednesday mornings',Jupiter:'Om Brihaspataye Namaha (108x) � Thursday',Venus:'Om Shukraya Namaha (108x) � Friday',Saturn:'Om Shanaischaraya Namaha (108x) � Saturday',Rahu:'Om Rahave Namaha (108x) � Saturday',Ketu:'Om Ketave Namaha (108x) � Tuesday'};
 const GEMS:Record<string,string>={Sun:'Ruby (Manik)',Moon:'Pearl (Moti)',Mars:'Red Coral (Moonga)',Mercury:'Emerald (Panna)',Jupiter:'Yellow Sapphire (Pukhraj)',Venus:'Diamond or White Sapphire',Saturn:'Blue Sapphire (Neelam)',Rahu:'Hessonite Garnet (Gomed)',Ketu:"Cat's Eye (Lahsuniya)"};
 const COLORS:Record<string,string>={Sun:'deep orange or gold',Moon:'white or cream',Mars:'red or coral',Mercury:'green or emerald',Jupiter:'yellow or saffron',Venus:'white or light pink',Saturn:'dark blue or black',Rahu:'smoky grey or dark blue',Ketu:'multi-color or grey-brown'};
 const DONATIONS:Record<string,string>={Sun:'wheat, jaggery on Sundays',Moon:'rice, milk, white cloth on Mondays',Mars:'red lentils, red cloth on Tuesdays',Mercury:'green moong, green cloth on Wednesdays',Jupiter:'yellow chana dal, turmeric on Thursdays',Venus:'white rice, white sugar, white cloth on Fridays',Saturn:'black sesame, mustard oil on Saturdays',Rahu:'black items, coconut on Saturdays',Ketu:'multi-colored cloth, blankets on Tuesdays'};
@@ -221,7 +221,7 @@ export function generateRemedies(mahadasha:string,antardasha:string,debilitatedP
   items.push({category:'mantra',planet:mahadasha,urgency:'PRIMARY',title:`${mahadasha} Mantra (Mahadasha Lord)`,detail:MANTRAS[mahadasha]??`Recite ${mahadasha} mantra 108x daily.`});
   items.push({category:'gemstone',planet:mahadasha,urgency:'PRIMARY',title:`${GEMS[mahadasha]??mahadasha+' gem'} (Mahadasha Lord)`,detail:'Wear only after astrological consultation. Energize on correct weekday with mantra.'});
   if(antardasha!==mahadasha)items.push({category:'mantra',planet:antardasha,urgency:'SECONDARY',title:`${antardasha} Mantra (Antardasha Lord)`,detail:MANTRAS[antardasha]??`Recite ${antardasha} mantra 108x daily.`});
-  items.push({category:'color',planet:mahadasha,urgency:'PRACTICAL',title:`Lucky Colors — ${mahadasha} Dasha`,detail:`Wear ${COLORS[mahadasha]??'neutral colors'} (primary); ${COLORS[antardasha]??'mixed'} (secondary) during ${mahadasha}–${antardasha} period.`});
+  items.push({category:'color',planet:mahadasha,urgency:'PRACTICAL',title:`Lucky Colors � ${mahadasha} Dasha`,detail:`Wear ${COLORS[mahadasha]??'neutral colors'} (primary); ${COLORS[antardasha]??'mixed'} (secondary) during ${mahadasha}�${antardasha} period.`});
   for(const p of debilitatedPlanets)items.push({category:'ritual',planet:p,urgency:'SECONDARY',title:`${p} Debilitation Remedy`,detail:`${MANTRAS[p]??''} + Donate ${DONATIONS[p]??'appropriate items'}.`});
   for(const {planet,house} of afflictedHouses)if(!['Rahu','Ketu'].includes(planet))items.push({category:'donation',planet,urgency:'PRACTICAL',title:`${planet} Donation (${house}th house)`,detail:`Donate ${DONATIONS[planet]??'appropriate items'} on the correct weekday.`});
   items.push({category:'mantra',planet:'Ganesha',urgency:'OPTIONAL',title:'Ganesha Obstacle-Remover',detail:'Om Gam Ganapataye Namaha (21x) before any important event.'});

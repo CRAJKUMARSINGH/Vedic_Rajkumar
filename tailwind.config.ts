@@ -1,9 +1,7 @@
 import type { Config } from 'tailwindcss';
 import typography from '@tailwindcss/typography';
-import tailwindcssAnimate from 'tailwindcss-animate';
-
 const config: Config = {
-  darkMode: ['class'],
+  darkMode: ['class', '[data-theme="dark"]'] as ['class', string],
   content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}'],
   theme: {
     container: {
@@ -48,6 +46,11 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        favorable: 'hsl(var(--favorable))',
+        unfavorable: 'hsl(var(--unfavorable))',
+        mixed: 'hsl(var(--mixed))',
+        gold: 'hsl(var(--gold))',
+        saffron: 'hsl(var(--saffron))',
         sidebar: {
           DEFAULT: 'hsl(var(--sidebar-background))',
           foreground: 'hsl(var(--sidebar-foreground))',
@@ -90,7 +93,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [typography, tailwindcssAnimate],
+  plugins: [typography],
 };
 
 export default config;

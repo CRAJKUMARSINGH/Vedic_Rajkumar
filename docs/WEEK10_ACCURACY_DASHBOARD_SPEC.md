@@ -1,4 +1,5 @@
-# Week 10: Accuracy Dashboard Spec
+﻿# Week 10: Accuracy Dashboard Spec
+
 Status: Implementation Complete
 Last updated: 2026-09-04
 Owner: Kiro (spec-driven)
@@ -18,6 +19,7 @@ The dashboard makes that quality visible — to the team, for QA, and for intern
 ## 2. Goals
 
 Build a live Accuracy Dashboard page that:
+
 - Runs the 15-chart validation suite in-browser using the live engine
 - Shows pass/warn/fail counts and overall field accuracy %
 - Shows a per-chart status table (PASS/WARN/FAIL)
@@ -31,6 +33,7 @@ Build a live Accuracy Dashboard page that:
 ## 3. Requirements
 
 ### R1 — accuracyDashboardService.ts
+
 - `src/services/accuracyDashboardService.ts`
 - `runAccuracyCheck()` — pure function; runs all 15 reference charts against the engine
   - Uses existing `referenceCharts` data from `src/tests/validation/referenceCharts.ts`
@@ -40,6 +43,7 @@ Build a live Accuracy Dashboard page that:
 - `ChartAccuracyResult` interface: `{ name, date, status, passFields, failFields, warnFields }`
 
 ### R2 — AccuracyDashboardPage
+
 - `src/pages/AccuracyDashboardPage.tsx`
 - Route: `/accuracy`
 - Shows: overall score bar, counts (Pass/Warn/Fail), field accuracy %, per-chart table
@@ -49,10 +53,12 @@ Build a live Accuracy Dashboard page that:
 - Accessible: aria-live on result section
 
 ### R3 — Route registration
+
 - `/accuracy` in `appRoutes.tsx`
 - In `featureRegistry.ts` under `platform` category
 
 ### R4 — Week 10 tests
+
 - `src/tests/week10/accuracyDashboard.test.ts` — service unit tests
 - `src/tests/week10/accuracyDashboardPage.test.tsx` — page render tests
 

@@ -18,7 +18,8 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
 import ChartEmptyState from '@/components/ChartEmptyState';
-import { calculatePanchang } from '@/services/panchangService';
+import { calculatePanchangForDate } from '@/services/panchangService';
+import { formatCalendarDate } from '@/utils/panchangAstronomy';
 import {
   Calendar,
   Sun,
@@ -39,16 +40,19 @@ interface PanchangCardProps {
   date: string;
   latitude: number;
   longitude: number;
+  timezone: string;
   lang: 'en' | 'hi';
   className?: string;
 }
 
 /** Build a rich display-compatible panchang object from whatever the service returns */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function buildDisplayData(raw: any, dateStr: string): any {
+function buildDisplayData(raw: any, dateStr: string, timezone: string): any {
   if (!raw) return null;
   const fmt = (d: Date | string | undefined) =>
-    d instanceof Date ? d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }) : (d ?? '—');
+    d instanceof Date
+      ? d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', timeZone: timezone })
+      : (d ?? '—');
 
   // Normalise tithi
   const t = raw.tithi ?? {};
@@ -125,6 +129,7 @@ const PanchangCard: React.FC<PanchangCardProps> = ({
   date,
   latitude,
   longitude,
+  timezone,
   lang,
   className = '',
 }) => {
@@ -134,20 +139,13 @@ const PanchangCard: React.FC<PanchangCardProps> = ({
 
   const panchangData = useMemo(() => {
     try {
-      // calculatePanchang requires 5 args; we pass approximate moon/sun longitudes
-      // (will be overridden by real data when Swiss Eph is available)
-      const d = new Date(date);
-      const dayOfYear = Math.floor((d.getTime() - new Date(d.getFullYear(), 0, 0).getTime()) / 86400000);
-      const approxSun  = (dayOfYear / 365.25) * 360;
-      const approxMoon = (approxSun * 13.37) % 360;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const raw = (calculatePanchang as any)(d, latitude, longitude, approxMoon, approxSun);
-      return buildDisplayData(raw, date);
+      const raw = calculatePanchangForDate(date, latitude, longitude, timezone);
+      return buildDisplayData(raw, date, timezone);
     } catch (err) {
       console.error('PanchangCard: calculation error', err);
       return null;
     }
-  }, [date, latitude, longitude]);
+  }, [date, latitude, longitude, timezone]);
 
   if (!panchangData) {
     return (
@@ -172,9 +170,7 @@ const PanchangCard: React.FC<PanchangCardProps> = ({
     setDownloading(true);
     try {
       const { generateVedicGaneshPDF } = await import('@/services/vedicGaneshPDFGenerator');
-      const dateLabel = new Date(date).toLocaleDateString(isHi ? 'hi-IN' : 'en-IN', {
-        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-      });
+      const dateLabel = formatCalendarDate(date, timezone, isHi ? 'hi-IN' : 'en-IN');
       generateVedicGaneshPDF({
         reportTitle: isHi ? 'दैनिक पंचांग रिपोर्ट' : 'Daily Panchang Report',
         subtitle: dateLabel,
@@ -205,16 +201,14 @@ const PanchangCard: React.FC<PanchangCardProps> = ({
               {isHi ? "आज का पंचांग" : "Today's Panchang"}
             </CardTitle>
             <div className="text-sm text-muted-foreground mt-1">
-              <p>{new Date(date).toLocaleDateString(isHi ? 'hi-IN' : 'en-IN', {
-                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-              })}</p>
+              <p>{formatCalendarDate(date, timezone, isHi ? 'hi-IN' : 'en-IN')}</p>
             </div>
           </div>
           <Button
             onClick={handleDownloadPDF}
             disabled={downloading}
             size="sm"
-            className="flex-shrink-0 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-medium shadow-sm"
+            className="shrink-0 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-medium shadow-sm"
           >
             <Download className="mr-2 h-4 w-4" />
             {downloading ? (isHi ? 'PDF बन रहा है…' : 'Generating PDF…') : (isHi ? 'PDF डाउनलोड करें' : 'Download PDF')}

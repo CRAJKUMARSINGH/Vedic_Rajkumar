@@ -1,0 +1,85 @@
+{
+  "id": "IN-1941-DEL-004",
+  "label": "Wartime period 1 — Delhi",
+  "date": "1941-12-01",
+  "time": "06:15:00",
+  "tz": "Asia/Kolkata",
+  "resolvedOffsetHours": 6.5,
+  "lat": 28.7041,
+  "lon": 77.1025,
+  "julianDay": 2430329.4895833335,
+  "ayanamsa": 23.045814958602413,
+  "ayanamsaMode": "Lahiri",
+  "source": "swisseph-wasm",
+  "ascendant": {
+    "sidereal": 202.83136240394094,
+    "rashi": "Libra",
+    "nakshatra": "Vishakha",
+    "pada": 1
+  },
+  "grahas": [
+    {
+      "name": "Sun",
+      "sidereal": 225.35388128254363,
+      "rashi": "Scorpio",
+      "nakshatra": "Anuradha",
+      "pada": 4
+    },
+    {
+      "name": "Moon",
+      "sidereal": 14.104571278851154,
+      "rashi": "Aries",
+      "nakshatra": "Bharani",
+      "pada": 1
+    },
+    {
+      "name": "Mercury",
+      "sidereal": 213.821892736143,
+      "rashi": "Scorpio",
+      "nakshatra": "Anuradha",
+      "pada": 1
+    },
+    {
+      "name": "Venus",
+      "sidereal": 272.3267013059706,
+      "rashi": "Capricorn",
+      "nakshatra": "Uttara Ashadha",
+      "pada": 2
+    },
+    {
+      "name": "Mars",
+      "sidereal": 350.6550933263329,
+      "rashi": "Pisces",
+      "nakshatra": "Revati",
+      "pada": 2
+    },
+    {
+      "name": "Jupiter",
+      "sidereal": 54.38335153419632,
+      "rashi": "Taurus",
+      "nakshatra": "Mrigashira",
+      "pada": 1
+    },
+    {
+      "name": "Saturn",
+      "sidereal": 30.960772904387056,
+      "rashi": "Taurus",
+      "nakshatra": "Krittika",
+      "pada": 2
+    },
+    {
+      "name": "Rahu",
+      "sidereal": 145.44060450244717,
+      "rashi": "Leo",
+      "nakshatra": "Purva Phalguni",
+      "pada": 4
+    },
+    {
+      "name": "Ketu",
+      "sidereal": 325.4406045024472,
+      "rashi": "Aquarius",
+      "nakshatra": "Purva Bhadrapada",
+      "pada": 2
+    }
+  ]
+}

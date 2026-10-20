@@ -1,0 +1,85 @@
+{
+  "id": "IN-2000-IND-011",
+  "label": "Modern IST reference — Indore",
+  "date": "2000-10-26",
+  "time": "00:50:00",
+  "tz": "Asia/Kolkata",
+  "resolvedOffsetHours": 5.5,
+  "lat": 22.72,
+  "lon": 75.86,
+  "julianDay": 2451843.3055555555,
+  "ayanamsa": 23.868500982979356,
+  "ayanamsaMode": "Lahiri",
+  "source": "swisseph-wasm",
+  "ascendant": {
+    "sidereal": 111.07054960785717,
+    "rashi": "Cancer",
+    "nakshatra": "Ashlesha",
+    "pada": 2
+  },
+  "grahas": [
+    {
+      "name": "Sun",
+      "sidereal": 188.81701410388496,
+      "rashi": "Libra",
+      "nakshatra": "Swati",
+      "pada": 1
+    },
+    {
+      "name": "Moon",
+      "sidereal": 169.78320660194572,
+      "rashi": "Virgo",
+      "nakshatra": "Hasta",
+      "pada": 3
+    },
+    {
+      "name": "Mercury",
+      "sidereal": 198.2446811560203,
+      "rashi": "Libra",
+      "nakshatra": "Swati",
+      "pada": 4
+    },
+    {
+      "name": "Venus",
+      "sidereal": 224.07229300173196,
+      "rashi": "Scorpio",
+      "nakshatra": "Anuradha",
+      "pada": 4
+    },
+    {
+      "name": "Mars",
+      "sidereal": 150.4006599408183,
+      "rashi": "Virgo",
+      "nakshatra": "Uttara Phalguni",
+      "pada": 2
+    },
+    {
+      "name": "Jupiter",
+      "sidereal": 46.23334332832326,
+      "rashi": "Taurus",
+      "nakshatra": "Rohini",
+      "pada": 2
+    },
+    {
+      "name": "Saturn",
+      "sidereal": 35.52899258039548,
+      "rashi": "Taurus",
+      "nakshatra": "Krittika",
+      "pada": 3
+    },
+    {
+      "name": "Rahu",
+      "sidereal": 85.3796122578974,
+      "rashi": "Gemini",
+      "nakshatra": "Punarvasu",
+      "pada": 2
+    },
+    {
+      "name": "Ketu",
+      "sidereal": 265.3796122578974,
+      "rashi": "Sagittarius",
+      "nakshatra": "Purva Ashadha",
+      "pada": 4
+    }
+  ]
+}

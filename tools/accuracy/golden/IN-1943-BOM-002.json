@@ -1,0 +1,85 @@
+{
+  "id": "IN-1943-BOM-002",
+  "label": "India wartime UTC+6:30 (second period)",
+  "date": "1943-06-15",
+  "time": "04:27:00",
+  "tz": "Asia/Kolkata",
+  "resolvedOffsetHours": 6.5,
+  "lat": 19.076,
+  "lon": 72.8777,
+  "julianDay": 2430890.4145833333,
+  "ayanamsa": 23.067261965195957,
+  "ayanamsaMode": "Lahiri",
+  "source": "swisseph-wasm",
+  "ascendant": {
+    "sidereal": 19.358679062321983,
+    "rashi": "Aries",
+    "nakshatra": "Bharani",
+    "pada": 2
+  },
+  "grahas": [
+    {
+      "name": "Sun",
+      "sidereal": 59.88817654639212,
+      "rashi": "Taurus",
+      "nakshatra": "Mrigashira",
+      "pada": 2
+    },
+    {
+      "name": "Moon",
+      "sidereal": 195.42045047614454,
+      "rashi": "Libra",
+      "nakshatra": "Swati",
+      "pada": 3
+    },
+    {
+      "name": "Mercury",
+      "sidereal": 37.54270313801072,
+      "rashi": "Taurus",
+      "nakshatra": "Krittika",
+      "pada": 4
+    },
+    {
+      "name": "Venus",
+      "sidereal": 104.72832381072931,
+      "rashi": "Cancer",
+      "nakshatra": "Pushya",
+      "pada": 4
+    },
+    {
+      "name": "Mars",
+      "sidereal": 350.5456805149687,
+      "rashi": "Pisces",
+      "nakshatra": "Revati",
+      "pada": 2
+    },
+    {
+      "name": "Jupiter",
+      "sidereal": 93.60755853824264,
+      "rashi": "Cancer",
+      "nakshatra": "Pushya",
+      "pada": 1
+    },
+    {
+      "name": "Saturn",
+      "sidereal": 53.88008477860234,
+      "rashi": "Taurus",
+      "nakshatra": "Mrigashira",
+      "pada": 1
+    },
+    {
+      "name": "Rahu",
+      "sidereal": 115.71602912615845,
+      "rashi": "Cancer",
+      "nakshatra": "Ashlesha",
+      "pada": 3
+    },
+    {
+      "name": "Ketu",
+      "sidereal": 295.71602912615845,
+      "rashi": "Capricorn",
+      "nakshatra": "Dhanishtha",
+      "pada": 1
+    }
+  ]
+}

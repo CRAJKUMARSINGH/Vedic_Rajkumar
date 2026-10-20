@@ -269,7 +269,7 @@ ReportShell.Header = function ReportShellHeader({
           {icon && (
             <div
               className={cn(
-                'flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center text-3xl',
+                'shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center text-3xl',
                 ACCENT_MAP[accentColor],
               )}
               aria-hidden="true"
@@ -294,7 +294,7 @@ ReportShell.Header = function ReportShellHeader({
           </div>
         </div>
 
-        <div className="flex-shrink-0 flex flex-col gap-1 text-right">
+        <div className="shrink-0 flex flex-col gap-1 text-right">
           <Badge
             variant="outline"
             className={cn('self-end gap-1.5 font-mono text-[11px] tracking-tight', isHi && 'font-hindi')}
@@ -383,8 +383,8 @@ ReportShell.SubjectCard = function SubjectCard({
               key={item.label}
               className="flex items-center gap-2 text-xs text-muted-foreground min-w-0"
             >
-              <span className="flex-shrink-0 text-muted-foreground/60" aria-hidden="true">{item.icon}</span>
-              <dt className={cn('flex-shrink-0 opacity-80', isHi && 'font-hindi')}>{item.label}:</dt>
+              <span className="shrink-0 text-muted-foreground/60" aria-hidden="true">{item.icon}</span>
+              <dt className={cn('shrink-0 opacity-80', isHi && 'font-hindi')}>{item.label}:</dt>
               <dd className={cn('truncate font-medium text-foreground/80', isHi && 'font-hindi')}>{item.value}</dd>
             </div>
           ))}
@@ -456,7 +456,7 @@ ReportShell.Section = function ReportShellSection({
         <div className="flex flex-wrap items-center gap-3 justify-between">
           <div className="flex items-center gap-2.5 min-w-0">
             {icon && (
-              <span className="flex-shrink-0 text-muted-foreground" aria-hidden="true">
+              <span className="shrink-0 text-muted-foreground" aria-hidden="true">
                 {icon}
               </span>
             )}
@@ -600,7 +600,7 @@ ReportShell.Footer = function ReportShellFooter({
     >
       {showValidationNotice && (
         <div className="flex items-start gap-2.5 rounded-lg border border-amber-300 bg-amber-50 dark:bg-amber-950/20 px-3.5 py-2.5">
-          <Sparkles className="h-4 w-4 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+          <Sparkles className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" aria-hidden="true" />
           <p className={cn('text-xs text-amber-800 dark:text-amber-300', isHi && 'font-hindi')}>
             {t.validationNote}
           </p>
@@ -610,7 +610,7 @@ ReportShell.Footer = function ReportShellFooter({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {engine && (
           <div className="flex items-start gap-2">
-            <FileText className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" aria-hidden="true" />
+            <FileText className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" aria-hidden="true" />
             <div>
               <p className={cn('text-xs font-semibold text-foreground/80', isHi && 'font-hindi')}>
                 {t.poweredBy}
@@ -622,7 +622,7 @@ ReportShell.Footer = function ReportShellFooter({
           </div>
         )}
         <div className="flex items-start gap-2">
-          <ShieldAlert className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" aria-hidden="true" />
+          <ShieldAlert className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" aria-hidden="true" />
           <div>
             <p className={cn('text-xs font-semibold text-foreground/80', isHi && 'font-hindi')}>
               <Info className="inline h-3 w-3 mr-1" aria-hidden="true" />

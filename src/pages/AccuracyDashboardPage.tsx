@@ -15,8 +15,10 @@
  * Accessible: aria-live on result region.
  */
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { RefreshCw, CheckCircle2, AlertTriangle, XCircle, Activity } from 'lucide-react';
+import rawSummary from '@/generated/summary.json';
+import { loadAccuracyReport } from '@/lib/accuracyReport';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { SEO } from '@/components/SEO';
@@ -109,6 +111,8 @@ export default function AccuracyDashboardPage() {
       <main className="container max-w-5xl mx-auto px-4 py-8 space-y-6">
 
         <ValidationInProgressNotice compact={false} />
+
+        <AccuracyReportPanel />
 
         {/* Loading */}
         {isLoading && (
@@ -290,6 +294,196 @@ export default function AccuracyDashboardPage() {
           </div>
         )}
       </main>
+    </div>
+  );
+}
+
+// ─── Published accuracy report ────────────────────────────────────────────────
+
+const VERDICT_CLASS: Record<string, string> = {
+  pass: 'text-green-700 border-green-200 bg-green-50 dark:bg-green-950/20',
+  fail: 'text-red-700 border-red-200 bg-red-50 dark:bg-red-950/20',
+  unmeasured: 'text-amber-700 border-amber-200 bg-amber-50 dark:bg-amber-950/20',
+};
+
+const VERDICT_LABEL: Record<string, string> = {
+  pass: 'within claim',
+  fail: 'OVER CLAIM',
+  unmeasured: 'not measured',
+};
+
+/**
+ * The committed accuracy snapshot, rendered verbatim.
+ *
+ * Unlike the live runner above (which re-derives numbers in the browser), this
+ * panel reads a snapshot the gate wrote, so it survives a cold load and states
+ * plainly what the engine has and has not verified.
+ */
+function AccuracyReportPanel() {
+  const report = useMemo(() => loadAccuracyReport(rawSummary), []);
+
+  const failing = report.bodies.filter((b) => b.verdict === 'fail').length;
+  const boundaryDrop = report.exposure.moonBoundaryBefore - report.exposure.moonBoundaryNow;
+
+  return (
+    <div className="space-y-6 rounded-2xl border border-border bg-card p-5">
+      <header>
+        <h2 className="text-base font-semibold text-foreground">Published accuracy report</h2>
+        <p className="mt-1 max-w-2xl text-xs leading-relaxed text-muted-foreground">
+          Written by the accuracy gate and rendered verbatim. Where the engine is not verified, the
+          last section says so.
+        </p>
+        <p className="mt-2 text-xs text-muted-foreground">
+          Generated: {report.generatedAt} · Frame: {report.engineFrame} · Swiss Ephemeris:{' '}
+          {report.swissVersion}
+        </p>
+        {report.isPlaceholder && (
+          <p
+            data-testid="placeholder-warning"
+            className="mt-3 rounded border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/20 dark:text-amber-400"
+          >
+            This is a placeholder snapshot. Run <code>npm run accuracy:publish</code> after a gate
+            run to replace it with real numbers.
+          </p>
+        )}
+      </header>
+
+      <section>
+        <h3 className="mb-3 text-sm font-semibold text-foreground">Corpus</h3>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+          <ReportStat label="Charts compared" value={String(report.corpus.charts)} />
+          <ReportStat label="Pre-1906 charts" value={String(report.corpus.pre1906)} />
+          <ReportStat
+            label="Bodies over claim"
+            value={String(failing)}
+            tone={failing ? 'bad' : 'good'}
+          />
+        </div>
+      </section>
+
+      <section>
+        <h3 className="mb-1 text-sm font-semibold text-foreground">
+          Position error vs Swiss Ephemeris
+        </h3>
+        <p className="mb-3 text-xs text-muted-foreground">
+          Arcseconds of ecliptic longitude. Claim is the engine's own advertised accuracy; max is the
+          ceiling that fails the gate.
+        </p>
+        <div className="overflow-x-auto rounded-xl border border-border">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-muted/50 text-left">
+                <th className="px-4 py-2 font-semibold text-foreground">Body</th>
+                <th className="px-4 py-2 text-right font-semibold text-foreground">Observed</th>
+                <th className="px-4 py-2 text-right font-semibold text-foreground">Claim</th>
+                <th className="px-4 py-2 text-right font-semibold text-foreground">Max</th>
+                <th className="px-4 py-2 font-semibold text-foreground">Verdict</th>
+              </tr>
+            </thead>
+            <tbody data-testid="body-rows">
+              {report.bodies.length === 0 && (
+                <tr>
+                  <td className="px-4 py-3 text-muted-foreground" colSpan={5}>
+                    No body rows in this snapshot.
+                  </td>
+                </tr>
+              )}
+              {report.bodies.map((row) => (
+                <tr key={row.body} className="border-t border-border/60">
+                  <td className="px-4 py-2 font-medium text-foreground">{row.body}</td>
+                  <td className="px-4 py-2 text-right tabular-nums text-foreground">
+                    {row.observedArcsec === null ? '—' : row.observedArcsec.toFixed(1)}
+                  </td>
+                  <td className="px-4 py-2 text-right tabular-nums text-muted-foreground">
+                    {row.claimArcsec.toFixed(0)}
+                  </td>
+                  <td className="px-4 py-2 text-right tabular-nums text-muted-foreground">
+                    {row.maxArcsec.toFixed(0)}
+                  </td>
+                  <td className="px-4 py-2">
+                    <span
+                      className={cn(
+                        'rounded border px-2 py-0.5 text-xs',
+                        VERDICT_CLASS[row.verdict] ?? VERDICT_CLASS.unmeasured,
+                      )}
+                    >
+                      {VERDICT_LABEL[row.verdict] ?? row.verdict}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h3 className="mb-3 text-sm font-semibold text-foreground">Nakshatra boundary exposure</h3>
+        <p className="mb-3 text-xs text-muted-foreground">
+          Charts whose Moon sits inside the engine's own error bar of a nakshatra edge, so the
+          arithmetic rather than the birth record decides the nakshatra.
+        </p>
+        <div className="grid grid-cols-3 gap-4">
+          <ReportStat label="Before (180 arcsec)" value={String(report.exposure.moonBoundaryBefore)} />
+          <ReportStat
+            label={`After (${report.exposure.moonClaimArcsec} arcsec)`}
+            value={String(report.exposure.moonBoundaryNow)}
+            tone="good"
+          />
+          <ReportStat label="Charts removed from the band" value={String(boundaryDrop)} tone="good" />
+        </div>
+      </section>
+
+      <section>
+        <h3 className="mb-3 text-sm font-semibold text-foreground">Time scale caveat</h3>
+        <div
+          data-testid="deltat-caveat"
+          className="rounded-xl border border-border bg-muted/30 px-4 py-3 text-sm leading-relaxed text-foreground"
+        >
+          {report.deltaT.note}
+        </div>
+        <p className="mt-2 text-xs text-muted-foreground">
+          Bodies are evaluated on TT. Angles - ascendant, MC, house cusps - stay on UT, because
+          rising is Earth's rotation. Getting that backwards moves the ascendant by 0.267 degrees.
+        </p>
+      </section>
+
+      <section>
+        <h3 className="mb-1 text-sm font-semibold text-foreground">What is not verified</h3>
+        <p className="mb-3 text-xs text-muted-foreground">{report.unverifiedNote}</p>
+        <ul
+          data-testid="unverified-list"
+          className="divide-y divide-border rounded-xl border border-border"
+        >
+          {report.unverified.map((u) => (
+            <li key={u.area} className="px-4 py-3">
+              <p className="text-sm font-medium text-amber-700 dark:text-amber-400">{u.area}</p>
+              <p className="mt-0.5 text-xs text-muted-foreground">{u.why}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  );
+}
+
+function ReportStat({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: string;
+  tone?: 'good' | 'bad';
+}) {
+  const colour =
+    tone === 'good' ? 'text-green-600 dark:text-green-400'
+    : tone === 'bad' ? 'text-red-600 dark:text-red-400'
+    : 'text-foreground';
+  return (
+    <div className="rounded-xl border border-border bg-muted/30 px-4 py-3">
+      <p className="text-xs text-muted-foreground">{label}</p>
+      <p className={cn('mt-1 text-2xl font-semibold tabular-nums', colour)}>{value}</p>
     </div>
   );
 }

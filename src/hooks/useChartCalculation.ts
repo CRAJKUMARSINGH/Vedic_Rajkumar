@@ -9,7 +9,8 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { calculateCompletePlanetaryPositions, type CompletePlanetaryPositions } from '@/services/ephemerisService';
-import { calculatePrecisePlanetaryPositions } from '@/services/precisionEphemerisService';
+import { calculatePlanetsForBirth } from '@/services/chartWithTimezone';
+import { currentOffsetHours } from '@/hooks/use-birth-timezone';
 import { calcPlanetsAccurate } from '@/services/swissEphemerisService';
 import { calculateCompleteAscendant, type AscendantData } from '@/services/ascendantService';
 import { getNakshatraInfo, type NakshatraInfo } from '@/services/nakshatraService';
@@ -83,8 +84,10 @@ export function useChartCalculation(
         // Week 31: Swiss Ephemeris — 99.99% accuracy
         result.planetaryPositions = await calcPlanetsAccurate(inp.date, inp.time);
       } else {
-        // Default: precision VSOP87 service
-        const precise = calculatePrecisePlanetaryPositions(inp.date, inp.time);
+        // Default: precision VSOP87 service — resolved birth timezone honoured
+        // (routed through chartWithTimezone so historical offsets like the
+        //  1942–45 India wartime +6:30 reach the engine).
+        const precise = calculatePlanetsForBirth(inp.date, inp.time);
         result.planetaryPositions = {
           ...precise,
           sun: { tropical: 0, sidereal: precise.sun.sidereal, rashi: precise.sun.rashi, rashiName: precise.planets[0].rashiName, degrees: precise.sun.degrees },
@@ -107,10 +110,10 @@ export function useChartCalculation(
       }
     }
 
-    // 2. Ascendant — derive timezone from longitude for correct Lagna
+    // 2. Ascendant — use the resolved birth timezone; fall back to a
+    //    longitude estimate only when none has been resolved (e.g. non-India).
     try {
-      // IST = 5.5; derive from lon for non-IST births (lon/15 rounded to nearest 0.5h)
-      const tzOffset = Math.round((inp.lon / 15) * 2) / 2;
+      const tzOffset = currentOffsetHours() ?? Math.round((inp.lon / 15) * 2) / 2;
       result.ascendant = calculateCompleteAscendant(inp.date, inp.time, inp.lat, inp.lon, tzOffset);
     } catch (e) {
       errs.ascendant = String(e);

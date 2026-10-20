@@ -6,8 +6,6 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-test.use({ baseURL: 'http://localhost:5173' });
-
 const routes = [
   '/',
   '/career-astrology',

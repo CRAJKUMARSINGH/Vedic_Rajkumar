@@ -1,0 +1,206 @@
+{
+  "generatedAt": "2026-10-17T18:35:01.368Z",
+  "births": [
+    {
+      "name": "Isha Sharma",
+      "dateISO": "1946-05-01",
+      "dateDMY": "01/05/1946",
+      "time": "14:22",
+      "place": {
+        "label": "Chennai, Tamil Nadu",
+        "lat": 13.08,
+        "lon": 80.27
+      },
+      "pageErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "name": "Saanvi Rao",
+      "dateISO": "1935-01-12",
+      "dateDMY": "12/01/1935",
+      "time": "18:20",
+      "place": {
+        "label": "Udaipur, Rajasthan",
+        "lat": 24.58,
+        "lon": 73.68
+      },
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "name": "Arjun Reddy",
+      "dateISO": "1998-04-21",
+      "dateDMY": "21/04/1998",
+      "time": "22:52",
+      "place": {
+        "label": "Bengaluru, Karnataka",
+        "lat": 12.97,
+        "lon": 77.59
+      },
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "name": "Rohan Iyer",
+      "dateISO": "2007-11-17",
+      "dateDMY": "17/11/2007",
+      "time": "12:05",
+      "place": {
+        "label": "Jaipur, Rajasthan",
+        "lat": 26.91,
+        "lon": 75.78
+      },
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "name": "Saanvi Joshi",
+      "dateISO": "1988-11-05",
+      "dateDMY": "05/11/1988",
+      "time": "08:32",
+      "place": {
+        "label": "Bengaluru, Karnataka",
+        "lat": 12.97,
+        "lon": 77.59
+      },
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "name": "Ananya Joshi",
+      "dateISO": "1994-02-07",
+      "dateDMY": "07/02/1994",
+      "time": "15:51",
+      "place": {
+        "label": "Varanasi, Uttar Pradesh",
+        "lat": 25.31,
+        "lon": 82.97
+      },
+      "pageErrors": [],
+      "consoleErrors": []
+    }
+  ],
+  "questions": [
+    {
+      "dimension": "career",
+      "question": "Will I get a promotion or job elevation in my current organization this year?",
+      "verdictExcerpt": "Mixed — proceed cautiously\nScore: 2\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: W → Aquarius\nPrasna Marga Part II\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nCareer, status, profession, fame House 10Karaka: Saturn\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Arudha\n3. 10th lord\n4. 11th lord\n5. Dasha\n\nKarma",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "business",
+      "question": "Is starting a new business venture or independent consulting favorable for me?",
+      "verdictExcerpt": "Mixed — proceed cautiously\nScore: 2\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: I → Sagittarius\nPrasna Marga Part II\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nCareer, status, profession, fame House 10Karaka: Saturn\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Arudha\n3. 10th lord\n4. 11th lord\n5. Dasha\n\nKa",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "marriage",
+      "question": "Will my marriage be harmonious, stable and long-lasting?",
+      "verdictExcerpt": "Favorable — proceed\nScore: 3\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: W → Aquarius\nPrasna Marga Part II\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nMarriage, partnership, spouse House 7Karaka: Venus\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Arudha\n3. 7th lord\n4. Venus\n5. Timing\n\nVivaha Prasna — 7th h",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "partner-timing",
+      "question": "When will I meet a compatible life partner and settle down?",
+      "verdictExcerpt": "Favorable — proceed\nScore: 3\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: W → Aquarius\nPrasna Marga Part II\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nMarriage, partnership, spouse House 7Karaka: Venus\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Arudha\n3. 7th lord\n4. Venus\n5. Timing\n\nVivaha Prasna — 7th h",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "education",
+      "question": "Will I clear my competitive examination and higher education goal?",
+      "verdictExcerpt": "Favorable — proceed\nScore: 3\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: W → Aquarius\nPrasna Marga Part I\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nChildren, education, intellect, mantra House 5Karaka: Jupiter\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Arudha\n3. Hora Lord\n4. Moon\n5. Pranakshara\n\nGenera",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "foreign-study",
+      "question": "Is foreign education or an overseas relocation favorable for me?",
+      "verdictExcerpt": "Favorable — proceed\nScore: 3\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: I → Sagittarius\nPrasna Marga Part II\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nChildren, education, intellect, mantra House 5Karaka: Jupiter\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Arudha\n3. 9th/12th lord\n4. Direction\n5. Timing",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "finance",
+      "question": "Will my financial condition improve and my wealth accumulate over the next two years?",
+      "verdictExcerpt": "Mixed — proceed cautiously\nScore: 1\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: W → Aquarius\nPrasna Marga Part II\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nWealth, family, speech, food House 2Karaka: Jupiter\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Arudha\n3. 10th lord\n4. 11th lord\n5. Dasha\n\nKarma/Bha",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "property",
+      "question": "Is this a good period to buy real estate, land, or a new home?",
+      "verdictExcerpt": "Favorable — proceed\nScore: 3\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: I → Sagittarius\nPrasna Marga Part I\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nMother, home, property, vehicles House 4Karaka: Moon\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Arudha\n3. 4th lord\n4. Moon\n5. Direction\n\n4th house Prasn",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "health",
+      "question": "How can I improve my health, immunity and overall vitality right now?",
+      "verdictExcerpt": "Mixed — proceed cautiously\nScore: 2\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: H → Scorpio\nPrasna Marga Part I\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nSelf, body, health, personality House 1Karaka: Sun\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Arudha\n3. Gulika\n4. Pranakshara\n5. Parihara\n\nRogi Prasn",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "legal",
+      "question": "Will I overcome a legal dispute, court case, or competitive rival?",
+      "verdictExcerpt": "Mixed — proceed cautiously\nScore: -2\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: W → Aquarius\nPrasna Marga Part I\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nEnemies, disease, debt, service House 6Karaka: Mars\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Arudha\n3. 6th lord\n4. Mars\n5. Verdict\n\n6th house Pra",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "children",
+      "question": "Is there a prospect of progeny and what does the chart show about children?",
+      "verdictExcerpt": "Favorable — proceed\nScore: 3\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: I → Sagittarius\nPrasna Marga Part II\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nChildren, education, intellect, mantra House 5Karaka: Jupiter\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Beeja/Kshetra\n3. Gulika\n4. Rahu\n5. Timing\n\nSan",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "spiritual",
+      "question": "Which spiritual practice or deity worship will be most beneficial for my growth?",
+      "verdictExcerpt": "Mixed — proceed cautiously\nScore: 2\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: W → Aquarius\nPrasna Marga Part I\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nSelf, body, health, personality House 1Karaka: Sun\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Pranakshara\n3. Jupiter\n4. 9th lord\n5. Muhurta\n\n9th/12t",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "travel",
+      "question": "Will I undertake long-distance travel or relocation in the coming months?",
+      "verdictExcerpt": "Favorable — proceed\nScore: 3\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: W → Aquarius\nPrasna Marga Part II\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nFortune, dharma, father, long journey House 9Karaka: Jupiter\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Arudha\n3. 9th/12th lord\n4. Direction\n5. Timing\n\nPr",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "hindi",
+      "question": "क्या मेरी नौकरी में पदोन्नति होगी और आर्थिक स्थिति सुधरेगी?",
+      "verdictExcerpt": "Mixed — proceed cautiously\nScore: 2\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: क → Aries\nPrasna Marga Part II\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nCareer, status, profession, fame House 10Karaka: Saturn\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Arudha\n3. 10th lord\n4. 11th lord\n5. Dasha\n\nKarma/Bh",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "edge-emoji",
+      "question": "💍 Will I marry soon? 🙏 Is my partner compatible with me? 🏡",
+      "verdictExcerpt": "Favorable — proceed\nScore: 3\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: \ud83d → Aries\nPrasna Marga Part II\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nMarriage, partnership, spouse House 7Karaka: Venus\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Arudha\n3. 7th lord\n4. Venus\n5. Timing\n\nVivaha Prasna — 7th hous",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "edge-long",
+      "question": "Considering my current professional, financial, familial and health circumstances, please tell me whether the coming twelve months favour a major relocation abroad for work, along with the purchase of a new home, and whether my relationship will remain stable through these transitions? stable through these transitions? stable through these transitions? ",
+      "verdictExcerpt": "Mixed — proceed cautiously\nScore: 2\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: C → Gemini\nPrasna Marga Part II\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nCareer, status, profession, fame House 10Karaka: Saturn\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Arudha\n3. 10th lord\n4. 11th lord\n5. Dasha\n\nKarma/B",
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "dimension": "edge-numeric",
+      "question": "   ??? 12345 %%%  ",
+      "verdictExcerpt": "Mixed — proceed cautiously\nScore: 2\nDirection: East\nArudha: Lagna or 1st house\nPranakshara: ? → Aries\nPrasna Marga Part I\n\nJatak: Pankaj Jain · mode: natal + transit\n\nSummary\nClassical Reading\nIndicators\nPrashna Chart\n\nQuestion topic\n\nSelf, body, health, personality House 1Karaka: Sun\n\nPancha Sutra Method (Prasna Marga)\n\n1. Tatkalakshana\n2. Arudha\n3. Hora Lord\n4. Moon\n5. Pranakshara\n\nGeneral Prasn",
+      "pageErrors": [],
+      "consoleErrors": []
+    }
+  ]
+}

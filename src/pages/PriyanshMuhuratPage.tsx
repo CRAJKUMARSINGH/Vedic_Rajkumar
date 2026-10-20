@@ -26,7 +26,7 @@ const ScoreRing = memo(function ScoreRing({ score, size = 56 }: { score: number;
   const circ = 2 * Math.PI * r;
   const fill = circ * (score / 100);
   return (
-    <div className="relative flex-shrink-0" style={{ width: size, height: size }}>
+    <div className="relative shrink-0" style={{ width: size, height: size }}>
       <svg className={`-rotate-90`} width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="currentColor" strokeWidth="4" className="text-white/10" />
         <circle cx={size/2} cy={size/2} r={r} fill="none" strokeWidth="4" className={color} strokeLinecap="round" strokeDasharray={circ} strokeDashoffset={circ - fill} />
@@ -504,7 +504,7 @@ export default function PriyanshMuhuratPage() {
                 ].map((r, i) => (
                   <div key={i} className="rounded-xl border border-white/10 bg-white/[0.02] p-5 hover:border-white/20 transition-all">
                     <div className="flex items-start gap-3">
-                      <div className="text-3xl leading-none flex-shrink-0">{r.icon}</div>
+                      <div className="text-3xl leading-none shrink-0">{r.icon}</div>
                       <div>
                         <h3 className="text-white font-bold mb-1">{r.title}</h3>
                         <p className="text-sm text-slate-300 leading-relaxed">{r.body}</p>
@@ -625,7 +625,7 @@ export default function PriyanshMuhuratPage() {
                     {FIVE_RULES.map(r => (
                       <div key={r.n} className="rounded-lg border border-white/5 bg-black/20 p-3.5">
                         <div className="flex items-start gap-3">
-                          <span className="flex-shrink-0 flex items-center justify-center h-7 w-7 rounded-full bg-fuchsia-500/20 border border-fuchsia-500/40 text-fuchsia-300 font-black text-sm">{r.n}</span>
+                          <span className="shrink-0 flex items-center justify-center h-7 w-7 rounded-full bg-fuchsia-500/20 border border-fuchsia-500/40 text-fuchsia-300 font-black text-sm">{r.n}</span>
                           <div className="min-w-0">
                             <p className="text-white font-bold text-sm">{r.rule}</p>
                             <p className="text-slate-300 text-sm mt-0.5 leading-relaxed">{r.why}</p>

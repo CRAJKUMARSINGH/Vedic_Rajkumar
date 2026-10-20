@@ -1,0 +1,80 @@
+{
+  "isPlaceholder": false,
+  "generatedAt": "2026-10-20T18:16:45.824Z",
+  "engineFrame": "sidereal (Lahiri) - bodies on TT, angles on UT",
+  "swissVersion": "swisseph-wasm v0.1.0 (Lahiri)",
+  "corpus": {
+    "charts": 15,
+    "pre1906": 0,
+    "sources": [
+      "swisseph-wasm (Lahiri sidereal, houses_ex house system E)"
+    ]
+  },
+  "bodies": [
+    {
+      "body": "Sun",
+      "claimArcsec": 36,
+      "maxArcsec": 1800,
+      "observedArcsec": 49.92
+    },
+    {
+      "body": "Moon",
+      "claimArcsec": 15,
+      "maxArcsec": 1800,
+      "observedArcsec": 10.41
+    },
+    {
+      "body": "Mercury",
+      "claimArcsec": 7200,
+      "maxArcsec": 1800,
+      "observedArcsec": 70.39
+    },
+    {
+      "body": "Venus",
+      "claimArcsec": 1800,
+      "maxArcsec": 1800,
+      "observedArcsec": 68.44
+    },
+    {
+      "body": "Mars",
+      "claimArcsec": 3600,
+      "maxArcsec": 1800,
+      "observedArcsec": 67.42
+    },
+    {
+      "body": "Jupiter",
+      "claimArcsec": 1800,
+      "maxArcsec": 1800,
+      "observedArcsec": 332.14
+    },
+    {
+      "body": "Saturn",
+      "claimArcsec": 1800,
+      "maxArcsec": 1800,
+      "observedArcsec": 696.25
+    },
+    {
+      "body": "Rahu",
+      "claimArcsec": 360,
+      "maxArcsec": 1800,
+      "observedArcsec": 8.78
+    },
+    {
+      "body": "Ketu",
+      "claimArcsec": 360,
+      "maxArcsec": 1800,
+      "observedArcsec": 8.78
+    },
+    {
+      "body": "Ascendant",
+      "claimArcsec": 30,
+      "maxArcsec": 1800,
+      "observedArcsec": 14.97
+    }
+  ],
+  "exposure": {
+    "moonBoundaryNow": 0,
+    "moonBoundaryBefore": 0,
+    "moonClaimArcsec": 15
+  }
+}
