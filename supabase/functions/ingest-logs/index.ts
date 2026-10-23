@@ -6,16 +6,56 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { corsHeaders, corsResponse } from '../_shared/cors.ts';
 import { logger } from '../_shared/observability.ts';
+import { checkRateLimit, rateLimitResponse } from '../_shared/rateLimit.ts';
+
+const MAX_PAYLOAD_BYTES = 128 * 1024; // 128 KB max batch size
 
 serve(async (req) => {
-  if (req.method === 'OPTIONS') return corsResponse();
+  if (req.method === 'OPTIONS') return corsResponse(req);
+
+  if (req.method !== 'POST') {
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
+      status: 405,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  }
+
+  // Rate limit client logs to prevent flood / DOS
+  const allowed = await checkRateLimit(req, {
+    endpoint: 'ingest-logs',
+    maxRequestsAnon: 60,
+    maxRequestsAuth: 300,
+    windowSeconds: 60,
+  });
+  if (!allowed) return rateLimitResponse();
+
+  // Guard against giant payloads
+  const contentLength = req.headers.get('content-length');
+  if (contentLength && parseInt(contentLength, 10) > MAX_PAYLOAD_BYTES) {
+    return new Response(JSON.stringify({ error: 'Payload too large' }), {
+      status: 413,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  }
 
   try {
-    const body = await req.json();
+    let body: unknown;
+    try {
+      body = await req.json();
+    } catch {
+      return new Response(JSON.stringify({ error: 'Invalid JSON body' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     const token = Deno.env.get('LOGTAIL_SOURCE_TOKEN');
 
     if (token) {
-      // Forward to BetterStack / Logtail
+      // Forward to BetterStack / Logtail with timeout
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 5000);
+
       await fetch('https://in.logtail.com', {
         method: 'POST',
         headers: {
@@ -23,12 +63,14 @@ serve(async (req) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(Array.isArray(body) ? body : [body]),
-      });
+        signal: controller.signal,
+      }).finally(() => clearTimeout(timer));
     }
 
+    const eventRecord = (Array.isArray(body) ? body[0] : body) as Record<string, unknown> | null;
     logger.debug('log_ingested', {
-      level: body.level,
-      correlationId: body.correlationId,
+      level: eventRecord?.level as string,
+      correlationId: eventRecord?.correlationId as string,
     });
 
     return new Response(JSON.stringify({ ok: true }), {

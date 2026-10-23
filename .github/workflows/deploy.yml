@@ -1,26 +1,53 @@
 name: Deploy
+
 on:
   push:
     branches: [main]
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 22.22.1, cache: npm }
+        with:
+          node-version-file: .nvmrc
+          cache: npm
       - run: npm ci
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run test:run
-      - run: npm run build
+      - run: npm run accuracy:publish && npm run build
         env:
+          VITE_RELEASE_VERSION: ${{ github.sha }}
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-          VITE_RELEASE_VERSION: ${{ github.sha }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+  migrate:
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+      - run: supabase link --project-ref ${{ secrets.SUPABASE_REF }}
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      - run: supabase db push
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
 
   deploy-functions:
-    needs: verify
+    needs: migrate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -29,8 +56,22 @@ jobs:
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
 
-  smoke:
+  deploy-frontend:
     needs: deploy-functions
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+      - run: npx netlify deploy --prod --dir=dist
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+  smoke:
+    needs: deploy-frontend
     runs-on: ubuntu-latest
     steps:
       - run: |

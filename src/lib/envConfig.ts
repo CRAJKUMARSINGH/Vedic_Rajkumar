@@ -19,7 +19,10 @@ export interface AppEnv {
   VITE_SUPABASE_ANON_KEY: string;
   VITE_CLERK_PUBLISHABLE_KEY: string;
   VITE_SENTRY_DSN: string;
+  VITE_POSTHOG_KEY: string;
+  VITE_FLAGSMITH_KEY: string;
   VITE_GA_MEASUREMENT_ID: string;
+  VITE_RELEASE_VERSION: string;
   MODE: string;
 }
 
@@ -57,12 +60,15 @@ export function isDevelopment(): boolean {
  * Falls back to an empty string so TypeScript callers don't need to null-check.
  */
 export const env: AppEnv = {
-  VITE_SUPABASE_URL:        import.meta.env.VITE_SUPABASE_URL        ?? '',
-  VITE_SUPABASE_ANON_KEY:   import.meta.env.VITE_SUPABASE_ANON_KEY   ?? '',
-  VITE_CLERK_PUBLISHABLE_KEY: import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ?? '',
-  VITE_SENTRY_DSN:          import.meta.env.VITE_SENTRY_DSN          ?? '',
-  VITE_GA_MEASUREMENT_ID:   import.meta.env.VITE_GA_MEASUREMENT_ID   ?? '',
-  MODE:                     import.meta.env.MODE                     ?? 'development',
+  VITE_SUPABASE_URL:            import.meta.env.VITE_SUPABASE_URL            ?? '',
+  VITE_SUPABASE_ANON_KEY:       import.meta.env.VITE_SUPABASE_ANON_KEY       ?? '',
+  VITE_CLERK_PUBLISHABLE_KEY:   import.meta.env.VITE_CLERK_PUBLISHABLE_KEY  ?? '',
+  VITE_SENTRY_DSN:              import.meta.env.VITE_SENTRY_DSN             ?? '',
+  VITE_POSTHOG_KEY:             import.meta.env.VITE_POSTHOG_KEY            ?? '',
+  VITE_FLAGSMITH_KEY:           import.meta.env.VITE_FLAGSMITH_KEY          ?? '',
+  VITE_GA_MEASUREMENT_ID:       import.meta.env.VITE_GA_MEASUREMENT_ID      ?? '',
+  VITE_RELEASE_VERSION:         import.meta.env.VITE_RELEASE_VERSION        ?? 'dev',
+  MODE:                         import.meta.env.MODE                         ?? 'development',
 };
 
 // ─── Validation ───────────────────────────────────────────────────────────────

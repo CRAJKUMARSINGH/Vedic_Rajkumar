@@ -35,7 +35,17 @@
     "test:accuracy:corpus": "vitest run src/tests/accuracy/corpusPhase1.test.ts --reporter=verbose",
     "test:tz-wiring": "vitest run src/tests/chartTimezoneWiring.test.ts",
     "accuracy:publish": "node scripts/publish-accuracy.mjs",
+    "deploy:edge:production": "supabase functions deploy",
+    "deploy:production": "npm run ship && npx netlify deploy --prod --dir=dist",
+    "typecheck:edge": "deno check supabase/functions/**/index.ts",
+    "typecheck:tests": "tsc --project tsconfig.tests.json --noEmit",
     "ship": "npm run accuracy:publish && npm run build"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "overrides": {
+    "dompurify": "^3.4.17"
   },
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "9.1.0",
@@ -77,7 +87,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
-    "dompurify": "^3.2.6",
+    "dompurify": "^3.4.17",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.12",
     "hono": "4.13.13",

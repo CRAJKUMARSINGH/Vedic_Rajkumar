@@ -2,6 +2,8 @@ import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { corsHeaders, corsResponse } from '../_shared/cors.ts';
 import { logger, withTelemetry } from '../_shared/observability.ts';
+import { requireServiceRole } from '../_shared/auth.ts';
+import { validateUrl } from '../_shared/ssrf.ts';
 
 interface TransitSubscriptionRow {
   id: string;
@@ -20,6 +22,17 @@ interface TransitEvent {
 
 serve(withTelemetry('transit-alerts', async (req) => {
   if (req.method === 'OPTIONS') return corsResponse();
+
+  // Internal cron-only endpoint — require service role authorization
+  try {
+    await requireServiceRole(req);
+  } catch (authErr) {
+    if (authErr instanceof Response) return authErr;
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+      status: 401,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  }
 
   const supabaseUrl = Deno.env.get('SUPABASE_URL');
   const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
@@ -64,16 +77,32 @@ async function detectEventsForChart(
   types: string[],
   grahas: string[],
 ): Promise<TransitEvent[]> {
-  const url = Deno.env.get('TRANSIT_SERVICE_URL');
-  if (!url || !chartId) return [];
-  const res = await fetch(`${url}/events`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chartId, types, grahas, horizonDays: 7 }),
-  });
-  if (!res.ok) return [];
-  const data = (await res.json()) as { events?: TransitEvent[] };
-  return data.events ?? [];
+  const rawUrl = Deno.env.get('TRANSIT_SERVICE_URL');
+  if (!rawUrl || !chartId) return [];
+
+  // SSRF Guard: validate the transit service URL is a safe HTTPS target
+  try {
+    validateUrl(`${rawUrl}/events`);
+  } catch {
+    logger.error('transit_service_url_blocked', { url: rawUrl });
+    return [];
+  }
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 10_000);
+  try {
+    const res = await fetch(`${rawUrl}/events`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chartId, types, grahas, horizonDays: 7 }),
+      signal: controller.signal,
+    });
+    if (!res.ok) return [];
+    const data = (await res.json()) as { events?: TransitEvent[] };
+    return data.events ?? [];
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 async function dispatchNotification(
@@ -83,12 +112,19 @@ async function dispatchNotification(
   serviceKey: string,
 ): Promise<void> {
   if (!sub.channels.includes('email')) return;
-  await fetch(`${supabaseUrl}/functions/v1/send-email`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${serviceKey}`,
-    },
-    body: JSON.stringify({ userId: sub.user_id, template: 'transit_alert', data: ev }),
-  });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 10_000);
+  try {
+    await fetch(`${supabaseUrl}/functions/v1/send-email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${serviceKey}`,
+      },
+      body: JSON.stringify({ userId: sub.user_id, template: 'transit_alert', data: ev }),
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timer);
+  }
 }

@@ -5,7 +5,7 @@ import { assertNotKilled } from '../_shared/killSwitch.ts';
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
-    return corsResponse();
+    return corsResponse(req);
   }
 
   const allowed = await checkRateLimit(req, { endpoint: 'calculate-kundli' });
@@ -15,12 +15,40 @@ serve(async (req) => {
 
   try {
     assertNotKilled('kill_kundli');
-    const { birthDate, birthTime, latitude, longitude, timezone = 5.5, ayanamsa = 'Lahiri' } = await req.json();
+
+    let body: {
+      birthDate?: string;
+      birthTime?: string;
+      latitude?: number;
+      longitude?: number;
+      timezone?: number;
+      ayanamsa?: string;
+    } = {};
+
+    try {
+      body = await req.json();
+    } catch {
+      return new Response(JSON.stringify({ error: 'Invalid JSON body' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    const {
+      birthDate,
+      birthTime,
+      latitude,
+      longitude,
+      timezone = 5.5,
+      ayanamsa = 'Lahiri',
+    } = body;
 
     if (!birthDate || !birthTime || latitude === undefined || longitude === undefined) {
       return new Response(
-        JSON.stringify({ error: 'Missing required fields (birthDate, birthTime, latitude, longitude)' }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({
+          error: 'Missing required fields (birthDate, birthTime, latitude, longitude)',
+        }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
       );
     }
 
@@ -41,8 +69,8 @@ serve(async (req) => {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : 'Internal edge error';
-    return new Response(JSON.stringify({ error: message }), {
+    console.error('Kundli edge error:', error);
+    return new Response(JSON.stringify({ error: 'Internal edge error' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
