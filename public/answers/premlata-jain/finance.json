@@ -1,0 +1,96 @@
+{
+  "card_version": "1.0",
+  "subject": {
+    "name": "Premlata Jain",
+    "slug": "premlata-jain",
+    "aliases": [
+      "Premlata",
+      "Premlataji",
+      "Mummy Jain"
+    ],
+    "jatak_id": "jatak_021",
+    "birth_hash": "d97be52b28a5a929"
+  },
+  "query": {
+    "asked": "Forecast prospects",
+    "topics": [
+      "finance"
+    ],
+    "language": "hi",
+    "as_of": "2026-10-24",
+    "reference_type": "natal"
+  },
+  "direct_answer": {
+    "en": "Finance: average (56%) (average, 56%)",
+    "hi": "आर्थिक सामान्य (56%) (सामान्य, 56%)"
+  },
+  "verdicts": [
+    {
+      "topic": "finance",
+      "headline": {
+        "en": "Finance: average (56%)",
+        "hi": "आर्थिक सामान्य (56%)"
+      },
+      "score_0_100": 66,
+      "band": "average",
+      "engine_verdict": "CONDITIONAL",
+      "confidence_0_1": 0.56,
+      "window": null,
+      "rationale": {
+        "en": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 60/100, house promise scores 78/100, Dasha scores 75/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 66/100.",
+        "hi": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 60/100, house promise scores 78/100, Dasha scores 75/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 66/100."
+      },
+      "conflicts": [
+        "House promise is real, but transit has not opened the timing gate; do not call immediate fruition.",
+        "Chatussagara Yoga must be treated as a failure warning, not as decorative praise."
+      ],
+      "evidence": [
+        {
+          "layer": "Rajyoga gate",
+          "score": 60,
+          "finding": "Rajyoga gate is open through Gajakesari Yoga, Raj Yoga; status can rise because the forming planets are in the active Dasha field."
+        },
+        {
+          "layer": "House promise",
+          "score": 78,
+          "finding": "wealth houses average 78/100 by SAV; strongest is house 11 at 33 points and weakest is house 9 at 22 points."
+        },
+        {
+          "layer": "Dasha activation",
+          "score": 75,
+          "finding": "Rahu MD with Jupiter AD gives 75/100 Dasha clearance for wealth; delivery class is standard."
+        },
+        {
+          "layer": "Transit timing",
+          "score": 32,
+          "finding": "Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
+        }
+      ],
+      "remedies": [],
+      "caveats": [
+        {
+          "en": "Windows are approximate.",
+          "hi": "समय-सीमाएँ अनुमानित हैं।"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "engine_version": "0.1.0",
+    "ayanamsa": "Lahiri (Chitrapaksha)",
+    "house_system": "Whole-sign",
+    "dasha_system": "Vimshottari",
+    "ephemeris": "local",
+    "computed_at": "2026-10-24T00:00:00.000Z",
+    "as_of": "2026-10-24",
+    "input_hash": "e3fca7695fcd0aec",
+    "card_hash": "e88e33092f08bbed",
+    "source_files": [
+      "src/services/conclusiveJatakJudgmentService.ts",
+      "src/services/dashaForecastService.ts",
+      "src/services/ashtakavargaService.ts",
+      "src/services/chartBuilderService.ts",
+      "src/services/answerCard/chartAdapter.ts"
+    ]
+  }
+}

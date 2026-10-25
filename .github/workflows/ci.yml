@@ -31,10 +31,19 @@ jobs:
         run: npm ci
 
       - name: Quality gates
+        # docs:verify runs the full Vitest suite (pretty + JSON reporters) and
+        # fails if any test fails OR any tracked doc states a stale metric, so
+        # it replaces a standalone `npm run test:run` here.
+        #
+        # answers:check re-emits the Answer Layer with the pinned `as_of` and
+        # fails on drift. docs:verify only covers `_all.md` via the parity test;
+        # this gates the topic-level cards and index.json too.
         run: |
           npm run lint
           npm run typecheck
-          npm run test:run
+          npm run typecheck:tests
+          npm run docs:verify
+          npm run answers:check
           npm run build
         env:
           CI: true

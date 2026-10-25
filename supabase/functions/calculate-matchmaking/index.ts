@@ -1,18 +1,34 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { corsHeaders, corsResponse } from '../_shared/cors.ts';
+import { checkRateLimit, rateLimitResponse } from '../_shared/rateLimit.ts';
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
-    return corsResponse();
+    return corsResponse(req);
+  }
+
+  const allowed = await checkRateLimit(req, { endpoint: 'calculate-matchmaking' });
+  if (!allowed) {
+    return rateLimitResponse();
   }
 
   try {
-    const { maleBirthData, femaleBirthData } = await req.json();
+    let body: { maleBirthData?: unknown; femaleBirthData?: unknown } = {};
+    try {
+      body = await req.json();
+    } catch {
+      return new Response(JSON.stringify({ error: 'Invalid JSON body' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    const { maleBirthData, femaleBirthData } = body;
 
     if (!maleBirthData || !femaleBirthData) {
       return new Response(
         JSON.stringify({ error: 'Missing maleBirthData or femaleBirthData' }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
       );
     }
 
@@ -29,8 +45,8 @@ serve(async (req) => {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : 'Internal edge error';
-    return new Response(JSON.stringify({ error: message }), {
+    console.error('Matchmaking edge error:', error);
+    return new Response(JSON.stringify({ error: 'Internal edge error' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });

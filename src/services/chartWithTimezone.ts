@@ -62,7 +62,9 @@ export function calculateChartForBirth(
  * UTC offset.  Route every planets-only caller here instead of calling
  * calculatePrecisePlanetaryPositions directly, so the resolved birth timezone
  * from the store is always honoured.
+ *
+ * @param explicitOffset    override the store (optional, for tests / API calls)
  */
-export function calculatePlanetsForBirth(date: string, time: string) {
-  return calculatePrecisePlanetaryPositions(date, time, offsetForChart());
+export function calculatePlanetsForBirth(date: string, time: string, explicitOffset?: number) {
+  return calculatePrecisePlanetaryPositions(date, time, offsetForChart(explicitOffset));
 }

@@ -349,6 +349,23 @@
       "moonRashiIndex": 2,
       "inExcel": false,
       "notes": "Match prospect for Arpit – expected ~27/36"
+    },
+    {
+      "id": "jatak_021",
+      "name": "Premlata Jain",
+      "aliases": ["Premlata", "Premlataji", "Mummy Jain"],
+      "dateOfBirth": "1974-11-08",
+      "timeOfBirth": "04:35",
+      "placeOfBirth": "Aspur",
+      "state": "Rajasthan",
+      "country": "India",
+      "coordinates": {
+        "latitude": "23.84°N",
+        "longitude": "73.71°E"
+      },
+      "relationship": "Mother",
+      "inExcel": false,
+      "notes": "Added for answer-card coverage — CONFIRM dob/time against family record"
     }
   ],
   "metadata": {
@@ -357,7 +374,13 @@
     "coordinateSystem": "Decimal degrees",
     "ayanamsa": "Lahiri (Chitrapaksha)",
     "calculationMethod": "Vedic/Sidereal",
-    "excelColumns": ["NAME", "DATE OF BIRTH", "TIME", "PLACE", "HOW U RECALL THIS PERSON?"],
+    "excelColumns": [
+      "NAME",
+      "DATE OF BIRTH",
+      "TIME",
+      "PLACE",
+      "HOW U RECALL THIS PERSON?"
+    ],
     "excelDateNote": "Serial dates converted: epoch Jan 1 1900, leap-year bug corrected"
   }
 }

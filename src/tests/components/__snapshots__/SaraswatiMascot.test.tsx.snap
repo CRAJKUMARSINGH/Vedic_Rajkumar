@@ -1,0 +1,18 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SARASWATI component > matches snapshot 1`] = `
+<div
+  class="flex items-center gap-3"
+>
+  <img
+    alt="Saraswati — goddess of knowledge"
+    class="shrink-0 rounded-full border-2 border-[hsl(var(--auspicious-gold)/0.6)] object-cover shadow-lg shadow-black/20"
+    decoding="async"
+    height="64"
+    loading="lazy"
+    src="/saraswati.jpg"
+    style="width: 64px; height: 64px;"
+    width="64"
+  />
+</div>
+`;

@@ -215,6 +215,18 @@ export function formatDate(dateStr: string, lang: 'en' | 'hi' = 'en'): string {
   });
 }
 
+/**
+ * Month (1-12) from a `YYYY-MM-DD` string — timezone-independent.
+ *
+ * Do NOT use `new Date(iso).getMonth()`: a date-only ISO string parses as
+ * **UTC** midnight, so `.getMonth()` returns the month in the *runtime's* local
+ * zone. For the 1st of any month west of UTC that is the previous month, which
+ * silently corrupts callers such as the Shadbala Paksha-Bala month.
+ */
+export function isoMonth(dateStr: string): number {
+  return new Date(dateStr + 'T00:00:00Z').getUTCMonth() + 1;
+}
+
 /** Get age from birth date */
 export function getAge(birthDate: string): number {
   const birth = new Date(birthDate + 'T00:00:00Z');

@@ -1,9 +1,29 @@
 /** Format: vk_<env>_<32 random base62 chars> */
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
+/**
+ * Largest multiple of the alphabet length that fits in a byte. Bytes at or above
+ * this are rejected: mapping the whole 0–255 range with `% 62` would give the
+ * first eight symbols (A–H) ~25 % more draws than the rest (modulo bias).
+ */
+const BYTE_LIMIT = 256 - (256 % ALPHABET.length); // 248
+
+/** Map one random byte onto an alphabet index, or `null` if it must be rejected. */
+export const uniformIndex = (byte: number): number | null =>
+  byte < BYTE_LIMIT ? byte % ALPHABET.length : null;
+
 const randomString = (len: number): string => {
-  const bytes = crypto.getRandomValues(new Uint8Array(len));
-  return Array.from(bytes, (b) => ALPHABET[b % ALPHABET.length]).join('');
+  let out = '';
+  while (out.length < len) {
+    // Draw 2× per round so a rejection rarely forces another round.
+    for (const b of crypto.getRandomValues(new Uint8Array(len * 2))) {
+      const i = uniformIndex(b);
+      if (i === null) continue;
+      out += ALPHABET[i];
+      if (out.length === len) break;
+    }
+  }
+  return out;
 };
 
 export interface GeneratedKey {

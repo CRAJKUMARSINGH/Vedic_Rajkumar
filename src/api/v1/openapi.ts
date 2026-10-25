@@ -1,5 +1,6 @@
 import { OpenAPIRegistry, OpenApiGeneratorV3 } from '@asteasolutions/zod-to-openapi';
 import { BirthInput, ChartResponse } from './schemas/chart';
+import { AnswerCardSchema, AnswerQuery } from './schemas/answer';
 
 const registry = new OpenAPIRegistry();
 registry.registerComponent('securitySchemes', 'ApiKey', {
@@ -13,6 +14,20 @@ registry.registerPath({
   request: { body: { content: { 'application/json': { schema: BirthInput } } } },
   responses: {
     201: { description: 'Created', content: { 'application/json': { schema: ChartResponse } } },
+    422: { description: 'Validation error' },
+    429: { description: 'Rate limited' },
+  },
+});
+
+registry.registerPath({
+  method: 'get', path: '/v1/answer',
+  summary: 'Get a precomputed answer card (verdict-first)',
+  description: 'Returns the deterministic verdict for a person in the seed bank. Reply from direct_answer; do not recompute.',
+  security: [{ ApiKey: [] }],
+  request: { query: AnswerQuery },
+  responses: {
+    200: { description: 'Answer card', content: { 'application/json': { schema: AnswerCardSchema } } },
+    403: { description: 'Missing answers:read scope' },
     422: { description: 'Validation error' },
     429: { description: 'Rate limited' },
   },

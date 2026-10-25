@@ -91,7 +91,19 @@ export default [
     },
   },
   {
-    // Ignore generated and third-party files
-    ignores: ['dist/**', 'node_modules/**', 'public/**', 'supabase/functions/_shared/**'],
+    // Ignore generated, bundled, and third-party files
+    ignores: [
+      'dist/**',
+      'node_modules/**',
+      'public/**',
+      // Playwright test artifacts (contain minified/bundled JS)
+      'test-results/**',
+      'test-results-rb/**',
+      'tr-rb2/**',
+      'playwright-report/**',
+      // Local working files
+      'apply-patch-*.mjs',
+      'vedic-vijay/**',
+    ],
   },
 ];

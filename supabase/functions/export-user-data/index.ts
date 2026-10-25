@@ -15,6 +15,7 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { corsHeaders, corsResponse } from '../_shared/cors.ts';
+import { authenticateRequest } from '../_shared/auth.ts';
 
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
@@ -30,22 +31,17 @@ serve(async (req) => {
   }
 
   // ── Authenticate ───────────────────────────────────────────────────────────
-  const authHeader = req.headers.get('Authorization');
-  if (!authHeader?.startsWith('Bearer ')) {
-    return new Response(JSON.stringify({ error: 'Missing Authorization header' }), {
-      status: 401,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
-  }
-
-  const token = authHeader.replace('Bearer ', '');
   let userId: string;
+  let token: string;
   try {
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    userId = payload.sub;
-    if (!userId) throw new Error('No sub claim');
-  } catch {
-    return new Response(JSON.stringify({ error: 'Invalid JWT' }), {
+    const auth = await authenticateRequest(req);
+    userId = auth.userId;
+    token = (req.headers.get('Authorization') ?? req.headers.get('authorization'))!
+      .replace(/^Bearer\s+/i, '')
+      .trim();
+  } catch (authErr) {
+    if (authErr instanceof Response) return authErr;
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });

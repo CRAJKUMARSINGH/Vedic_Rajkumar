@@ -34,11 +34,17 @@ Thumbs.db
 # Test reports
 playwright-report/
 test-results/
+test-results-rb/
+tr-rb2/
+.vitest-report.json
+
+# Audit output files
+audit-all.txt
+audit-prod.txt
+build-out.txt
 
 # Netlify CLI cache — extension build hooks auto-downloaded here; never commit
-.netlify/plugins/
-.netlify/functions-internal/
-.netlify/v1/
+.netlify/
 
 # AI agent temp folders
 .agents/
@@ -50,6 +56,10 @@ remote_repo/
 __jataks_raw.txt
 creat.md
 patch.md
+apply-patch-*.mjs
+scripts/do-commit-push.ps1
+scripts/patch-util.mjs
+vedic-vijay/
 
 # Stale build artifacts (deleted, not archived)
 test_*.pdf

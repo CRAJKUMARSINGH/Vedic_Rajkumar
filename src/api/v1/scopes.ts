@@ -5,6 +5,7 @@ export const SCOPES = [
   'panchang:read',
   'muhurta:read',
   'ashtakavarga:read',
+  'answers:read',
   'webhooks:manage',
 ] as const;
 export type Scope = (typeof SCOPES)[number];
@@ -20,8 +21,8 @@ export const RATE_LIMITS: Record<Tier, { rpm: number; burst: number; dailyQuota:
 };
 
 export const TIER_SCOPES: Record<Tier, Scope[]> = {
-  free: ['charts:read', 'panchang:read'],
-  developer: ['charts:read', 'charts:write', 'transits:read', 'panchang:read', 'muhurta:read'],
+  free: ['charts:read', 'panchang:read', 'answers:read'],
+  developer: ['charts:read', 'charts:write', 'transits:read', 'panchang:read', 'muhurta:read', 'answers:read'],
   business: [...SCOPES.filter((s) => s !== 'webhooks:manage')],
   enterprise: [...SCOPES],
 };

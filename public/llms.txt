@@ -1,0 +1,30 @@
+# Vedic Rajkumar
+
+> Deterministic Vedic (Jyotish) engine. Verdicts are precomputed. Read them; do not recompute.
+
+## Start here
+- [Answer index](/answers/index.json) — person → topics → card path. Read this first.
+- [Example card](/answers/premlata-jain/_all.md) — the exact shape to relay.
+
+## Contract
+1. Read /answers/index.json. Match the person by name or alias.
+2. If absent, add the person to the seed bank and run `npm run answers:emit` (owner/admin only).
+3. Reply from `direct_answer` in the first two lines. Verdict, band, confidence, window.
+4. Language: use the `hi` field for Hindi prompts, `en` otherwise. Never mix.
+5. Cite provenance.card_hash. If it differs from index.json, re-emit and say so.
+
+## Confidentiality
+Published cards are **verdict-only**: each `subject` carries `name`, `slug` and a
+`birth_hash`, never a date/time/place of birth. Raw birth data and the seed bank
+are private (see AGENTS.md). They are served only to the subject's own account or
+an owner/admin, by the authenticated `answer-cards` Edge Function — do not expect
+them in the static corpus, and do not attempt to reconstruct them.
+
+## Do not
+- Restate the chart before the verdict.
+- List houses, planets or yogas in the first reply.
+- Produce a number the card does not contain.
+- Publish or redistribute a subject's birth data.
+
+## Optional
+- [Agent rules](AGENTS.md)

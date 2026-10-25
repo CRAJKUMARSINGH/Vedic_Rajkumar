@@ -220,5 +220,16 @@ describe('useChartCalculation', () => {
     expect(calculatePrecisePlanetaryPositions).toHaveBeenCalledWith('1990-06-15', '10:30', 6.5);
     expect(calculateCompleteAscendant).toHaveBeenCalledWith('1990-06-15', '10:30', 28.61, 77.23, 6.5);
   });
+
+  it('passes the birth month (not a local-zone-shifted one) to Shadbala', async () => {
+    const { result } = renderHook(() => useChartCalculation(SAMPLE_INPUT));
+
+    await waitFor(() => expect(result.current.data.shadbala).not.toBeNull(), { timeout: 1000 });
+
+    const { calculateShadbala } = await import('@/services/shadabalaService');
+    // 1990-06-15 → month 6. `new Date('1990-06-15').getMonth()` drifts to the
+    // previous month in any zone west of UTC.
+    expect(calculateShadbala).toHaveBeenCalledWith(expect.any(Array), expect.any(Boolean), 6);
+  });
 });
 

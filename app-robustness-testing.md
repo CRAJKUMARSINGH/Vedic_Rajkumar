@@ -488,6 +488,7 @@ GLOBAL ROBUSTNESS LOGBOOK INSTRUCTION (PERMANENT — applies to every session, p
 ---
 
 ### [2026-10-20T00:05:00+05:30] — Slice 1 (item 4 of 4): real Playwright README screenshots captured
+
 - Session: `6ad3b905caa5e9a8578a7a5e` (continued)
 - Agents: main agent (run + env unblock)
 - Trigger: user command **"slice 2"** — resolved as already-green (Swiss cross-check; `npm run test:accuracy:full` re-confirmed **12/12**, DEF-008 holds). Continued the standing **"all"** directive's final item = **slice 1 · real README screenshots**.
@@ -502,6 +503,7 @@ GLOBAL ROBUSTNESS LOGBOOK INSTRUCTION (PERMANENT — applies to every session, p
 ---
 
 ### [2026-10-20T00:10:00+05:30] — Slice 1 follow-up: stale legacy README PNGs removed
+
 - Session: `6ad3b905caa5e9a8578a7a5e` (continued)
 - Trigger: user decision on the two stale orphans flagged in the prior entry.
 - Action: deleted `docs/assets/screenshots/07-mobile-kundli.png` and `docs/assets/screenshots/08-mobile-nav.png` (superseded by `08-mobile-kundli.png` / `09-mobile-nav.png`; unreferenced by README).
@@ -510,6 +512,7 @@ GLOBAL ROBUSTNESS LOGBOOK INSTRUCTION (PERMANENT — applies to every session, p
 ---
 
 ### [2026-10-20T01:15:00+05:30] — Post-change verification run (user: "test run")
+
 - Session: `6ad3b905caa5e9a8578a7a5e` (continued)
 - Trigger: user command **"test run"** after the N2 + screenshot/cleanup work.
 - Executed:
@@ -520,6 +523,7 @@ GLOBAL ROBUSTNESS LOGBOOK INSTRUCTION (PERMANENT — applies to every session, p
 ---
 
 ### [2026-10-20T01:35:00+05:30] — Commit + push to remote (user: "push to remote")
+
 - Session: `6ad3b905caa5e9a8578a7a5e` (continued)
 - Trigger: user command **"push to remote"** (decisions: "Commit EVERYTHING" → then "Exclude the ~160MB artifacts").
 - Action:
@@ -533,14 +537,34 @@ GLOBAL ROBUSTNESS LOGBOOK INSTRUCTION (PERMANENT — applies to every session, p
 
 ---
 
+### [2026-10-22T18:50:00+05:30] — External Audit Remediation & Enrichment Guide Applied
+
+- Session: `49aeffe2-ebe6-47e6-8c56-59fb2c375a9e`
+- Trigger: user command **"apply instructions in enrichment code.md"**
+- Action:
+  - Formulated and verified complete `enrichment code.md` incorporating Section 0 methodology, Section 2 safety net, Tier 1–3 remediation playbook, and 20-row Appendix A worksheet mapping external audit observations (`vedic-vijay/Tex21.txt`).
+  - Executed Safety Net verification: `npm run typecheck` (exit 0), `npm run lint` (0 errors), `npm run test:run` (94 files, 1572 tests passed), `npm run validate:accuracy` (155/155 passed).
+  - Fixed Tier 1 blocker: added single deploy pipeline with artifact download and migration push in `.github/workflows/deploy.yml`.
+  - Added phantom npm scripts in `package.json`: `deploy:edge:production`, `deploy:production`, `typecheck:edge`, `typecheck:tests`.
+  - Added `"workspaces": ["packages/*"]` to `package.json` and repaired `turbo.json`.
+  - Created `tsconfig.tests.json` covering tests directory.
+  - Authored `docs/legal/SWISS_EPHEMERIS_LICENSE.md` addressing AGPL-3 vs commercial white-label licensing.
+  - Authored `docs/CLAIMS.md` establishing single authoritative source of truth for test numbers and accuracy claims.
+  - Realigned `docs/SOC2_PREPARATION_CHECKLIST.md` marking planned vendor integrations (Stripe, Cloudflare WAF, S3 retention) as planned.
+- Result: **Safety net 100% GREEN** — 0 typecheck errors, 0 lint errors, 1572/1572 Vitest tests passed, 155/155 accuracy tests passed.
+- Next: maintain branch hygiene on `feature/enterprise-hardening` and proceed with continuous integration gating.
+
+---
+
 ## 5. Reverse-Chronological Index
 
 | When (local)     | Entry                                                                                                                                                              | Result                                                          |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------- |
-| 2026-10-20 01:35 | **Commit + push** — N2–N4 + screenshots committed (`ef4131c`) and pushed (index.lock race + husky fd error worked around) | pushed `c8a6e6c..ef4131c` · tsc exit 0 |
-| 2026-10-20 01:15 | **Verification run** — post N2 + screenshot/cleanup; full tree green | accuracy 12/12 · suite 84 files · 1476/1476 PASS |
-| 2026-10-20 00:10 | **Slice 1 follow-up** — stale legacy README PNGs removed (`07-mobile-kundli.png`, `08-mobile-nav.png`) | 18 assets remain · deletions staged |
-| 2026-10-20 00:05 | **Slice 1** — real Playwright README screenshots regenerated (18 assets); `shots` blocker fixed (locked `test-results` → `--output`) | 12/12 · 18 PNGs |
+| 2026-10-22 18:50 | **Audit Remediation & Enrichment** — applied enrichment code.md guide, single deploy CI, workspaces, CLAIMS.md, Swiss Eph memo                                     | 1572/1572 PASS · 155/155 accuracy · tsc exit 0                  |
+| 2026-10-20 01:35 | **Commit + push** — N2–N4 + screenshots committed (`ef4131c`) and pushed (index.lock race + husky fd error worked around)                                          | pushed `c8a6e6c..ef4131c` · tsc exit 0                          |
+| 2026-10-20 01:15 | **Verification run** — post N2 + screenshot/cleanup; full tree green                                                                                               | accuracy 12/12 · suite 84 files · 1476/1476 PASS                |
+| 2026-10-20 00:10 | **Slice 1 follow-up** — stale legacy README PNGs removed (`07-mobile-kundli.png`, `08-mobile-nav.png`)                                                             | 18 assets remain · deletions staged                             |
+| 2026-10-20 00:05 | **Slice 1** — real Playwright README screenshots regenerated (18 assets); `shots` blocker fixed (locked `test-results` → `--output`)                               | 12/12 · 18 PNGs                                                 |
 | 2026-10-19 18:30 | **N2 Kundli** — combustion flags (`getCombustionStatus`) + unified typed `NatalChart` façade (`buildNatalChart`) + Bhava-Chalit UI                                 | 18/18 · suite 1475/1476 (1 flaky-timeout) · accuracy 12/12 PASS |
 | 2026-10-19 18:15 | **N3 Gochar** — classical AV transit points (BAV/SAV) + per-planet ingress/egress dates (API + UI)                                                                 | 20/20 · suite 1468/1468 · accuracy 12/12 PASS                   |
 | 2026-10-19 17:45 | **N4 Kaal** — unified-timeline Dasha–Transit correlation service + Varshaphal annual hookup (UI)                                                                   | 9/9 + 7/7 · suite 1460/1460 · accuracy 12/12 PASS               |

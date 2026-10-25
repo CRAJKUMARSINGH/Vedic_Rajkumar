@@ -1,0 +1,6 @@
+# Generated answer-layer artifacts. These are written verbatim by
+# scripts/emitAnswerCards.mjs via renderAnswerMarkdown()/renderIndex() and are
+# asserted byte-for-byte by src/tests/answerCard/parity.test.ts. Reformatting
+# them (e.g. prettier aligning the verdict table or collapsing blank lines)
+# breaks that parity contract, so keep prettier away.
+public/answers/
