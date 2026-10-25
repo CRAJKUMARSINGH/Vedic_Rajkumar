@@ -17,6 +17,11 @@ export default defineConfig({
     // overwrite the independent Swiss Ephemeris golden and make the accuracy
     // gate circular. It is a manual tool — see its own header.
     exclude: [...configDefaults.exclude, '**/src/tests/accuracy/generateGolden.test.ts'],
-    testTimeout: 10000,
+    // Explicit, not the framework default. A couple of suites walk `src/` and
+    // read the emitted answer corpus, so on a saturated CI filesystem a short
+    // budget can be spent on I/O alone and the test fails on wall-clock rather
+    // than on an assertion (DEF-010). Those files carry their own larger
+    // timeout; this is the floor for everything else.
+    testTimeout: 20000,
   },
 });

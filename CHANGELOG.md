@@ -26,7 +26,9 @@ from [Conventional Commits](https://www.conventionalcommits.org/).
 
 ### Changed
 
-- **BREAKING — `/v1/answer` v1.1**: the `subject` object no longer carries `dob`, `tob`, `place`, `lat`, `lon` or `tz`; it now carries `birth_hash`. Consumers that read raw birth fields must move to the authenticated `answer-cards` Edge Function. Discovery docs (`public/llms.txt`, `public/.well-known/vedic-rajkumar.json`) published as v1.1
+- **BREAKING — `/v1/answer` v1.1**: the `subject` object no longer carries `dob`, `tob`, `place`, `lat`, `lon` or `tz`; it now carries `birth_hash`. Consumers that read raw birth fields must move to the authenticated `answer-cards` Edge Function.
+- Discovery docs (`public/llms.txt`, `public/.well-known/vedic-rajkumar.json`) published as v1.1
+- `.well-known/vedic-rajkumar.json`: the `/functions/v1/answer-cards` surface is marked `"fetchable": false`, so a crawler reads its 401 as intentional rather than as a broken surface
 - Answer Layer `as_of` is now a single pinned constant (`src/services/answerCard/answerCardAsOf.ts`), shared by the emitter default and the parity guard — never wall-clock, so `answers:check` cannot drift just because a day passed
 - Navigation collapsed to 4 core features + Labs link
 - calculatePrecisePlanetaryPositions accepts tzOffsetHours (was hardcoded IST)
@@ -39,3 +41,5 @@ from [Conventional Commits](https://www.conventionalcommits.org/).
 - 1943 Mumbai wartime chart: 16.5° ascendant correction (one full rashi)
 - Pre-existing typecheck errors: auth/roles barrel file, tailwind darkMode type
 - Cache key collision: IST vs wartime charts no longer share the same key
+- Load-sensitive test suites de-flaked (DEF-010): `schema.test.ts` and `chartTimezoneWiring.test.ts` now read the answer corpus and walk `src/` once at module load instead of per assertion, and carry an explicit 30 s timeout; `testTimeout` raised 10 s → 20 s so a saturated CI filesystem cannot fail a gate on wall-clock
+- `public/llms.txt`: the deploy-drift paragraph documented a bug already fixed — with `as_of` pinned end-to-end, public artifacts are byte-reproducible from a checkout and `generated_at` / `provenance.computed_at` do not move from one deploy to the next

@@ -27,6 +27,40 @@ const SEED = JSON.parse(
   jataks: Array<{ name: string; dateOfBirth: string; timeOfBirth: string; placeOfBirth: string }>;
 };
 
+/**
+ * Read-once artifacts. The emitted corpus is immutable for the duration of a
+ * run, so each file is parsed at most once no matter how many assertions touch
+ * it — a saturated CI filesystem cannot fail this suite on redundant I/O
+ * (DEF-010).
+ */
+function memo<T>(load: (key: string) => T): (key: string) => T {
+  const cache = new Map<string, T>();
+  return (key) => {
+    const cached = cache.get(key);
+    if (cached !== undefined) return cached;
+    const value = load(key);
+    cache.set(key, value);
+    return value;
+  };
+}
+
+const readCard = memo(
+  (rel: string) => JSON.parse(readFileSync(join(ANSWERS, rel), 'utf8')) as AnswerCard
+);
+const readText = memo((rel: string) => readFileSync(join(ANSWERS, rel), 'utf8'));
+
+/**
+ * Every per-topic card actually on disk, resolved ONCE at module load so the
+ * assertion below is a pure in-memory loop. Stat-ing and parsing the corpus
+ * inside the test body is what pushed it past the timeout under load (DEF-010).
+ */
+const TOPIC_CARDS = index.people.flatMap((person) =>
+  person.topics
+    .map((topic) => `${person.slug}/${topic}.json`)
+    .filter((rel) => existsSync(join(ANSWERS, rel)))
+    .map((rel) => ({ rel, card: readCard(rel) }))
+);
+
 const slugify = (s: string): string =>
   s
     .normalize('NFKD')
@@ -53,19 +87,17 @@ describe('answers/index.json', () => {
   });
 });
 
-describe('answer card schema', () => {
+describe('answer card schema', { timeout: 30_000 }, () => {
   const slugs = index.people.map(p => p.slug);
 
   it.each(slugs)('%s/_all.json matches AnswerCardSchema', (slug) => {
-    const card = JSON.parse(readFileSync(join(ANSWERS, slug, '_all.json'), 'utf8')) as AnswerCard;
+    const card = readCard(`${slug}/_all.json`);
     const parsed = AnswerCardSchema.safeParse(card);
     expect(parsed.success, parsed.success ? '' : JSON.stringify(parsed.error.issues)).toBe(true);
   });
 
   it('puts the verdict first and never invents a band', () => {
-    const card = JSON.parse(
-      readFileSync(join(ANSWERS, index.people[0].slug, '_all.json'), 'utf8')
-    ) as AnswerCard;
+    const card = readCard(`${index.people[0].slug}/_all.json`);
     expect(card.direct_answer.en.length).toBeGreaterThan(0);
     expect(card.direct_answer.hi.length).toBeGreaterThan(0);
     for (const v of card.verdicts) {
@@ -78,9 +110,7 @@ describe('answer card schema', () => {
   });
 
   it('carries provenance an agent can quote', () => {
-    const card = JSON.parse(
-      readFileSync(join(ANSWERS, index.people[0].slug, '_all.json'), 'utf8')
-    ) as AnswerCard;
+    const card = readCard(`${index.people[0].slug}/_all.json`);
     expect(card.provenance.card_hash).toMatch(/^[0-9a-f]{16}$/);
     expect(card.provenance.input_hash).toMatch(/^[0-9a-f]{16}$/);
     expect(card.provenance.ayanamsa).toMatch(/Lahiri/);
@@ -93,12 +123,12 @@ describe('answer card schema', () => {
  * by definition, so the emitted corpus must be verdict-only. If a raw birth
  * field ever reaches `public/answers/**`, this test fails the build.
  */
-describe('public/answers/** carries no birth data', () => {
+describe('public/answers/** carries no birth data', { timeout: 30_000 }, () => {
   /** Every field `redactAnswerCard` is required to strip. */
   const PII_KEYS = ['dob', 'tob', 'place', 'lat', 'lon', 'tz', 'tz_defaulted'];
 
   it.each(index.people.map(p => p.slug))('%s/_all.json is verdict-only', (slug) => {
-    const card = JSON.parse(readFileSync(join(ANSWERS, slug, '_all.json'), 'utf8')) as AnswerCard;
+    const card = readCard(`${slug}/_all.json`);
     for (const key of PII_KEYS) {
       expect(card.subject, `${slug} leaks subject.${key}`).not.toHaveProperty(key);
     }
@@ -108,7 +138,7 @@ describe('public/answers/** carries no birth data', () => {
   it.each(index.people.map(p => p.slug))('%s/_all.md quotes no birth detail', (slug) => {
     const seed = SEED.jataks.find(j => slugify(j.name) === slug);
     expect(seed, `no seed-bank record for ${slug}`).toBeTruthy();
-    const md = readFileSync(join(ANSWERS, slug, '_all.md'), 'utf8');
+    const md = readText(`${slug}/_all.md`);
     for (const [field, value] of [
       ['dateOfBirth', seed!.dateOfBirth],
       ['timeOfBirth', seed!.timeOfBirth],
@@ -119,14 +149,9 @@ describe('public/answers/** carries no birth data', () => {
   });
 
   it('publishes no per-topic json/md file with a raw birth field', () => {
-    for (const person of index.people) {
-      for (const topic of person.topics) {
-        const jsonPath = join(ANSWERS, person.slug, `${topic}.json`);
-        if (!existsSync(jsonPath)) continue;
-        const card = JSON.parse(readFileSync(jsonPath, 'utf8')) as AnswerCard;
-        for (const key of PII_KEYS) {
-          expect(card.subject, `${person.slug}/${topic}.json leaks subject.${key}`).not.toHaveProperty(key);
-        }
+    for (const { rel, card } of TOPIC_CARDS) {
+      for (const key of PII_KEYS) {
+        expect(card.subject, `${rel} leaks subject.${key}`).not.toHaveProperty(key);
       }
     }
   });
