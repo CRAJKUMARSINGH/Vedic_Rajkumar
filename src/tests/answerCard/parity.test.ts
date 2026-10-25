@@ -13,9 +13,15 @@ import { describe, expect, it } from 'vitest';
 import { buildAnswerCard, DEFAULT_ASK } from '@/services/answerCard/answerCardBuilder';
 import { renderAnswerMarkdown } from '@/services/answerCard/answerCardRender';
 import { ALL_TOPICS } from '@/services/answerCard/AnswerCard.types';
+import { ANSWER_CARD_AS_OF } from '@/services/answerCard/answerCardAsOf';
 import { resolveJatak } from '@/lib/jataks/resolveJatak';
 
-const AS_OF = '2026-10-24';
+/**
+ * The SAME pinned constant `scripts/emitAnswerCards.mjs` defaults to. Neither
+ * side reads the wall clock, so this guard can never fail merely because a day
+ * passed — and re-dating the cards is one deliberate edit to that one constant.
+ */
+const AS_OF = ANSWER_CARD_AS_OF;
 const ANSWERS = join(import.meta.dirname, '..', '..', '..', 'public', 'answers');
 
 /**

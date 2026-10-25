@@ -20,9 +20,14 @@ from [Conventional Commits](https://www.conventionalcommits.org/).
 - CI accuracy gate workflow (.github/workflows/accuracy.yml)
 - CODEOWNERS, .nvmrc, Dependabot config
 - Single deploy pipeline (verify → migrate → deploy-functions → deploy-frontend → smoke)
+- Answer Layer: deterministic, redacted verdict-only cards under `public/answers/**`, with full (unredacted) cards served only to an owner/admin via the RLS-locked `answer-cards` Edge Function
+- `birth_hash` on the public answer-card `subject` — stable provenance/parity without exposing raw birth data
+- `.gitattributes` normalising all text to LF, plus an `answers:check` drift gate in CI
 
 ### Changed
 
+- **BREAKING — `/v1/answer` v1.1**: the `subject` object no longer carries `dob`, `tob`, `place`, `lat`, `lon` or `tz`; it now carries `birth_hash`. Consumers that read raw birth fields must move to the authenticated `answer-cards` Edge Function. Discovery docs (`public/llms.txt`, `public/.well-known/vedic-rajkumar.json`) published as v1.1
+- Answer Layer `as_of` is now a single pinned constant (`src/services/answerCard/answerCardAsOf.ts`), shared by the emitter default and the parity guard — never wall-clock, so `answers:check` cannot drift just because a day passed
 - Navigation collapsed to 4 core features + Labs link
 - calculatePrecisePlanetaryPositions accepts tzOffsetHours (was hardcoded IST)
 - PreciseAscendant interface gains `seconds` field

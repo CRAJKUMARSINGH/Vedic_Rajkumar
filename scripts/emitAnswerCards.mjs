@@ -23,9 +23,11 @@
  *
  * `public/answers/**` is mandatory: Vite only copies `publicDir` into `dist`.
  *
- * Determinism: with `--as-of` pinned, the card, its hash and the transit layers
- * are byte-stable, which is what makes `--check` a real gate. `generated_at`
- * and `provenance.computed_at` are derived from `as-of`, never wall-clock.
+ * Determinism: `as-of` defaults to the pinned `ANSWER_CARD_AS_OF` constant
+ * (`src/services/answerCard/answerCardAsOf.ts`), never the wall clock, so the
+ * card, its hash and the transit layers are byte-stable with or without
+ * `--as-of` — which is what makes `--check` a real gate on any day.
+ * `generated_at` and `provenance.computed_at` are derived from `as-of`.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve as resolvePath } from 'node:path';
@@ -38,32 +40,18 @@ const OUT = join(ROOT, 'public', 'answers');
 
 const CHECK = process.argv.includes('--check');
 const asOfArg = process.argv.find(a => a.startsWith('--as-of='))?.split('=')[1];
-const AS_OF = asOfArg ?? new Date().toISOString().slice(0, 10);
 
 let drifted = 0;
 
-/** Raw birth keys that must never appear in a public artifact. */
-const PII_KEYS = ['dob', 'tob', 'place', 'lat', 'lon', 'tz', 'tz_defaulted'];
-
 /**
- * Hard guard — throw rather than publish. `rel` ends in `.json` or `.md`.
+ * Pinned `as_of` — resolved from `src/services/answerCard/answerCardAsOf.ts`,
+ * the same constant `parity.test.ts` reads, so the emitter, the parity guard and
+ * Netlify's `npm run answers:emit` can never disagree. `--as-of` overrides it.
+ * Never the wall clock (see the header comment).
  */
-function assertNoPii(rel, content, subject) {
-  if (rel.endsWith('.json')) {
-    const parsed = JSON.parse(content);
-    const leaked = PII_KEYS.filter(k => parsed?.subject?.[k] !== undefined);
-    if (leaked.length) {
-      throw new Error(`REFUSING to publish ${rel}: subject carries ${leaked.join(', ')}`);
-    }
-    return;
-  }
-  for (const key of ['dob', 'tob', 'place']) {
-    const value = subject[key];
-    if (value && content.includes(value)) {
-      throw new Error(`REFUSING to publish ${rel}: markdown contains the subject's ${key}`);
-    }
-  }
-}
+let AS_OF = asOfArg;
+/** Hard write-boundary guard, loaded from the shared, unit-tested module. */
+let assertNoPii;
 
 function write(rel, content, subject) {
   assertNoPii(rel, content, subject);
@@ -139,6 +127,14 @@ try {
   );
   const { redactAnswerCard } = await server.ssrLoadModule('/src/services/answerCard/redact.ts');
   const { ALL_TOPICS } = await server.ssrLoadModule('/src/services/answerCard/AnswerCard.types.ts');
+
+  // Resolve the two shared contracts the emitter must not own a copy of.
+  // `--as-of` still wins, so an explicit re-date is possible.
+  const { ANSWER_CARD_AS_OF } = await server.ssrLoadModule(
+    '/src/services/answerCard/answerCardAsOf.ts'
+  );
+  AS_OF = asOfArg ?? ANSWER_CARD_AS_OF;
+  ({ assertNoPii } = await server.ssrLoadModule('/src/services/answerCard/publishGuard.ts'));
 
   for (const jatak of allJataks()) {
     const card = buildAnswerCard(jatak, DEFAULT_ASK, [...ALL_TOPICS], 'hi', AS_OF);
