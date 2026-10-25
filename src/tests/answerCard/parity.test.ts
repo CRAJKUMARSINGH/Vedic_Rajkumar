@@ -18,6 +18,13 @@ import { resolveJatak } from '@/lib/jataks/resolveJatak';
 const AS_OF = '2026-10-24';
 const ANSWERS = join(import.meta.dirname, '..', '..', '..', 'public', 'answers');
 
+/**
+ * Line endings are a checkout artifact (Git on Windows rewrites LF -> CRLF via
+ * `core.autocrlf`), not renderer output. Normalise before comparing so the
+ * parity guard checks content, not the platform's EOL convention.
+ */
+const lf = (s: string) => s.replace(/\r\n/g, '\n');
+
 describe('answer card parity', () => {
   it('_all.md is exactly renderAnswerMarkdown(_all.json)', { timeout: 60000 }, () => {
     const jatak = resolveJatak('Premlata Jain');
@@ -26,7 +33,7 @@ describe('answer card parity', () => {
     const card = buildAnswerCard(jatak!, DEFAULT_ASK, [...ALL_TOPICS], 'hi', AS_OF);
     const emitted = readFileSync(join(ANSWERS, card.subject.slug, '_all.md'), 'utf8');
 
-    expect(renderAnswerMarkdown(card).trim()).toBe(emitted.trim());
+    expect(lf(renderAnswerMarkdown(card)).trim()).toBe(lf(emitted).trim());
   });
 
   it('hash and provenance are stable across runs at the same as_of', { timeout: 60000 }, () => {

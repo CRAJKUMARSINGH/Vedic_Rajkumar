@@ -3,13 +3,19 @@
   "subject": {
     "name": "Premlata Jain",
     "slug": "premlata-jain",
-    "aliases": ["Premlata", "Premlataji", "Mummy Jain"],
+    "aliases": [
+      "Premlata",
+      "Premlataji",
+      "Mummy Jain"
+    ],
     "jatak_id": "jatak_021",
     "birth_hash": "d97be52b28a5a929"
   },
   "query": {
     "asked": "Forecast prospects",
-    "topics": ["career"],
+    "topics": [
+      "career"
+    ],
     "language": "hi",
     "as_of": "2026-10-24",
     "reference_type": "natal"

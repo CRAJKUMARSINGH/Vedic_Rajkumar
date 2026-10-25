@@ -285,7 +285,11 @@
     },
     {
       "name": "Premlata Jain",
-      "aliases": ["Premlata", "Premlataji", "Mummy Jain"],
+      "aliases": [
+        "Premlata",
+        "Premlataji",
+        "Mummy Jain"
+      ],
       "slug": "premlata-jain",
       "topics": [
         "health",

@@ -98,7 +98,7 @@ const rules = [
   { file: 'README.md', pattern: /engine%20accuracy-(\d+)%2F(\d+)/, join: '%2F', expected: '15%2F15', label: 'README accuracy badge (charts)' },
   { file: 'docs/ENTERPRISE_LAUNCH_GUIDE.md', pattern: /# (\d+) tests/, expected: String(tests), label: 'ENTERPRISE test count' },
   { file: 'docs/SOC2_PREPARATION_CHECKLIST.md', pattern: /(\d+) charts · \d+ assertions/, expected: String(corpusCharts), label: 'SOC2 accuracy corpus size' },
-  { file: 'docs/CLAIMS.md', pattern: /\| \*\*Reference Golden Corpus\*\* \| \*\*(\d+) charts\*\*/, expected: String(corpusCharts), label: 'CLAIMS golden corpus' },
+  { file: 'docs/CLAIMS.md', pattern: /\|\s+\*\*Reference Golden Corpus\*\*\s+\|\s+\*\*(\d+) charts\*\*/, expected: String(corpusCharts), label: 'CLAIMS golden corpus' },
   { file: 'docs/CLAIMS.md', pattern: /\*\*(\d+) tests\*\* across \*\*(\d+) test files\*\*/, join: ' tests across ', expected: `${tests} tests across ${testFiles}`, label: 'CLAIMS total test suite' },
 ];
 

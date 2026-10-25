@@ -9,7 +9,13 @@
   },
   "query": {
     "asked": "Forecast prospects",
-    "topics": ["health", "house_construction", "career", "marriage", "finance"],
+    "topics": [
+      "health",
+      "house_construction",
+      "career",
+      "marriage",
+      "finance"
+    ],
     "language": "hi",
     "as_of": "2026-10-24",
     "reference_type": "natal"

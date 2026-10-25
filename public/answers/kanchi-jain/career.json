@@ -9,7 +9,9 @@
   },
   "query": {
     "asked": "Forecast prospects",
-    "topics": ["career"],
+    "topics": [
+      "career"
+    ],
     "language": "hi",
     "as_of": "2026-10-24",
     "reference_type": "natal"
