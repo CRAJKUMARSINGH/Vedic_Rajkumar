@@ -13,6 +13,64 @@
 4. Language: use the `hi` field for Hindi prompts, `en` otherwise. Never mix.
 5. Cite provenance.card_hash. If it differs from index.json, re-emit and say so.
 
+## Answer Layer contract
+
+contract_version: 1.1
+updated: 2026-10-25
+stability: additive within a minor; any removal or rename bumps the major.
+
+### Surfaces
+
+| Surface | Method | Auth | Viewer | Birth data |
+|---|---|---|---|---|
+| /answers/index.json | GET | none | public | redacted |
+| /answers/{slug}/{topic}.md · .json | GET | none | public | redacted |
+| /api/v1/answer | GET | API key | public | redacted, always |
+| /functions/v1/answer-cards | GET | Supabase JWT | owner · admin | full |
+
+Always link answer cards *with* a file extension — the `/*` SPA rewrite swallows
+extensionless paths.
+
+Redacted `subject` keys: `name`, `slug`, `aliases`, `jatak_id`, `birth_hash`.
+Full subject adds: `dob`, `tob`, `place`, `lat`, `lon`, `tz`, `tz_defaulted`.
+`/api/v1/answer` never returns birth data even to the owner; use
+`/functions/v1/answer-cards`, which requires the subject's own JWT (or owner/admin).
+
+### Topics
+
+`_all.md` covers a multi-topic ask. Single-topic files: health, house_construction,
+career, marriage, finance.
+
+### Provenance
+
+- `provenance.card_hash` — stable per (subject, topics, lang, as_of).
+- `provenance.computed_at` — always `<as_of>T00:00:00.000Z`, never wall-clock.
+- `subject.birth_hash` — an equality token, so two cards can be confirmed to
+  describe the same birth without exposing it. A change-detector, not a security
+  hash: the input space is low-entropy enough to brute-force a guess.
+
+Compare cards by `card_hash`, not `computed_at`: deploys re-emit at the deploy
+date, while the committed artifacts stay pinned to a snapshot date.
+
+### PII guarantee
+
+Public artifacts are PII-free *by construction* — `assertNoPii()` hard-fails the
+emit rather than publish a leaked field. A raw birth field appearing under
+`public/answers/**` is a bug, not a feature.
+
+### Errors
+
+- `/api/v1/answer` — 403 missing `answers:read` scope · 422 invalid_input · 429 with `Retry-After`.
+- `/functions/v1/answer-cards` — 401 unauthenticated · 404 absent *or* not-yours
+  (deliberately indistinguishable, so a non-owner cannot enumerate the seed bank)
+  · 422 invalid_input · 429 with `Retry-After`.
+
+### What is not verified
+
+Yogas · Shadbala · Ashtakavarga · Divisional charts (Varga) · Interpretation prose.
+Verified: Lahiri ayanamsa ≤ 0.1″, Ascendant ≤ 2.0″ including lat 64°, zero Tier B
+rashi/nakshatra failures in the corpus gate, historical India timezone handling.
+
 ## Confidentiality
 Published cards are **verdict-only**: each `subject` carries `name`, `slug` and a
 `birth_hash`, never a date/time/place of birth. Raw birth data and the seed bank

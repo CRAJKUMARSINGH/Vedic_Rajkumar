@@ -20,6 +20,14 @@ export const ALL_TOPICS: readonly Topic[] = [
   'finance',
 ] as const;
 
+/**
+ * Version of the agent-facing contract — `public/llms.txt` and
+ * `public/.well-known/vedic-rajkumar.json` both advertise it. Bumping the
+ * contract means bumping this constant in the same change; `guideContract.test.ts`
+ * fails if the three disagree.
+ */
+export const ANSWER_CONTRACT_VERSION = '1.1';
+
 /** 1:1 from the engine's VerdictType — no meaning invented. */
 export const BAND_FROM_VERDICT: Record<VerdictType, Band> = {
   DELIVERING: 'good',
