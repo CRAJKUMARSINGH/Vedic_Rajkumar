@@ -39,6 +39,12 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+# Serve the agent guide as markdown so agent fetchers don't sniff it as HTML.
+[[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    Content-Type = "text/markdown; charset=utf-8"
+
 # ── Security headers (all routes) ─────────────────────────────────────────────
 # Target: A+ on https://securityheaders.com
 [[headers]]

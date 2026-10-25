@@ -2,6 +2,7 @@
   "name": "Vedic Rajkumar",
   "kind": "deterministic-answer-service",
   "contract_version": "1.1",
+  "updated": "2026-10-25",
   "instructions": "Read answer cards; reply from direct_answer; do not recompute.",
   "endpoints": {
     "answer_index": "/answers/index.json",
@@ -9,6 +10,71 @@
     "answer_text": "/answers/{slug}/{topic}.md",
     "query": "/api/v1/answer?person={name}&topics={csv}&lang={hi|en}",
     "full_card": "/functions/v1/answer-cards?person={name}&topics={csv}&lang={hi|en}"
+  },
+  "surfaces": [
+    {
+      "path": "/answers/index.json",
+      "method": "GET",
+      "auth": "none",
+      "viewer": "public",
+      "birth_data": "redacted"
+    },
+    {
+      "path": "/answers/{slug}/{topic}.md",
+      "method": "GET",
+      "auth": "none",
+      "viewer": "public",
+      "birth_data": "redacted"
+    },
+    {
+      "path": "/api/v1/answer",
+      "method": "GET",
+      "auth": "api_key",
+      "viewer": "public",
+      "birth_data": "redacted"
+    },
+    {
+      "path": "/functions/v1/answer-cards",
+      "method": "GET",
+      "auth": "jwt",
+      "viewer": "owner|admin",
+      "birth_data": "full",
+      "not_found_semantics": "404 for non-owner, indistinguishable from absent"
+    }
+  ],
+  "redacted_subject_keys": [
+    "name",
+    "slug",
+    "aliases",
+    "jatak_id",
+    "birth_hash"
+  ],
+  "full_subject_extra_keys": [
+    "dob",
+    "tob",
+    "place",
+    "lat",
+    "lon",
+    "tz",
+    "tz_defaulted"
+  ],
+  "provenance": {
+    "card_hash": "stable per subject+topics+lang+as_of",
+    "computed_at": "<as_of>T00:00:00.000Z",
+    "birth_hash": "equality token / change-detector, not a security hash"
+  },
+  "errors": {
+    "/api/v1/answer": {
+      "403": "missing answers:read scope",
+      "422": "invalid_input",
+      "429": "rate_limited"
+    },
+    "/functions/v1/answer-cards": {
+      "401": "unauthenticated",
+      "404": "absent-or-not-yours",
+      "422": "invalid_input",
+      "429": "rate_limited"
+    }
   },
   "confidentiality": {
     "published_cards": "verdict-only",
