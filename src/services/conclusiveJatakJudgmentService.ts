@@ -13,11 +13,14 @@ import {
   type MoonDoubleTransitResult,
 } from './doubleTransitService';
 
-type VerdictType = 'DELIVERING' | 'CONDITIONAL' | 'DELAYED' | 'BLOCKED';
-type LifeArea = DashaLifeAreaForecast['area'];
+export type VerdictType = 'DELIVERING' | 'CONDITIONAL' | 'DELAYED' | 'BLOCKED';
+export type LifeArea = DashaLifeAreaForecast['area'];
 
 export interface ConclusiveJatakJudgment {
   referenceType: ReferenceType;
+  /** Which life area this judgment is for. Required so callers can verify they
+   *  got the area they asked for rather than the chart's strongest one. */
+  area: LifeArea;
   headline: string;
   verdictType: VerdictType;
   score: number;
@@ -30,7 +33,7 @@ export interface ConclusiveJatakJudgment {
   evidence: Array<{ layer: string; score: number; finding: string }>;
 }
 
-const DOMAIN_HOUSES: Record<LifeArea, number[]> = {
+export const DOMAIN_HOUSES: Record<LifeArea, number[]> = {
   career: [10, 1, 6],
   wealth: [2, 11, 9],
   marriage: [7, 2, 5],
@@ -38,7 +41,7 @@ const DOMAIN_HOUSES: Record<LifeArea, number[]> = {
   spirituality: [9, 12, 5],
 };
 
-const HOUSE_STRENGTH_SCORE = {
+export const HOUSE_STRENGTH_SCORE = {
   excellent: 100,
   good: 78,
   average: 55,
@@ -170,7 +173,8 @@ function getMoonRashi(chart: ChartData): number | null {
 
 function scoreTransit(
   chart: ChartData,
-  area: LifeArea
+  area: LifeArea,
+  asOf: Date
 ): {
   score: number;
   verdict: string;
@@ -187,7 +191,7 @@ function scoreTransit(
 
   const input = buildApproxMoonDoubleTransitInput(
     moonRashi,
-    new Date(),
+    asOf,
     chart.ascendant?.ascendant.rashiIndex
   );
   const result =
@@ -260,20 +264,28 @@ function buildConflicts(params: {
   return conflicts;
 }
 
-export function buildConclusiveJatakJudgment(
+/**
+ * Build a conclusive judgment for ONE specific life area.
+ *
+ * `asOf` defaults to `new Date()` so existing callers keep working unchanged —
+ * the live UI still gets live transits, while the emit script passes a pinned
+ * date so precomputed answer cards are deterministic.
+ */
+export function buildJudgmentForArea(
   chart: ChartData,
   forecast: DashaForecastResult,
-  referenceType: ReferenceType
+  area: LifeArea,
+  referenceType: ReferenceType,
+  asOf: Date = new Date()
 ): ConclusiveJatakJudgment | null {
-  const areaForecast = strongestLifeArea(forecast);
+  const areaForecast = forecast.lifeAreaForecasts.find(item => item.area === area);
   if (!areaForecast) return null;
 
-  const area = areaForecast.area;
   const enhancedYogas = buildEnhancedYogas(chart, forecast);
   const raj = scoreRajyoga(enhancedYogas);
   const house = scoreHousePromise(chart, area);
   const dasha = scoreDasha(forecast, area);
-  const transit = scoreTransit(chart, area);
+  const transit = scoreTransit(chart, area, asOf);
 
   const score = clamp(
     raj.score * 0.24 + house.score * 0.26 + dasha.score * 0.36 + transit.score * 0.14
@@ -298,6 +310,7 @@ export function buildConclusiveJatakJudgment(
 
   return {
     referenceType,
+    area,
     headline,
     verdictType,
     score,
@@ -314,4 +327,15 @@ export function buildConclusiveJatakJudgment(
       { layer: 'Transit timing', score: transit.score, finding: transit.verdict },
     ],
   };
+}
+
+export function buildConclusiveJatakJudgment(
+  chart: ChartData,
+  forecast: DashaForecastResult,
+  referenceType: ReferenceType,
+  asOf: Date = new Date()
+): ConclusiveJatakJudgment | null {
+  const areaForecast = strongestLifeArea(forecast);
+  if (!areaForecast) return null;
+  return buildJudgmentForArea(chart, forecast, areaForecast.area, referenceType, asOf);
 }

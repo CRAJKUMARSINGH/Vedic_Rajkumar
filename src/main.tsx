@@ -22,6 +22,7 @@ import { initErrorMonitoring, captureException } from '@/lib/errorMonitoring';
 import { initTelemetry } from '@/lib/telemetry';
 import { initObservability } from '@/observability';
 import { logger } from '@/observability/logging/logger';
+import { serveAgentText } from '@/lib/agentMode';
 
 // ─── Step 1: Validate environment variables ───────────────────────────────────
 // Warns about missing integration variables; the shell can run in demo/offline mode.
@@ -66,14 +67,21 @@ if (!rootElement) {
 
 const root = createRoot(rootElement);
 
-root.render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+// ─── Agent mode (verdict-first contract) ──────────────────────────────────────
+// When the URL asks for the machine answer (?agent=1 / ?format=markdown), print
+// the precomputed answer card instead of mounting the app shell.
+void serveAgentText().then((served) => {
+  if (served) return;
 
-// ─── Post-mount performance ───────────────────────────────────────────────────
-if (typeof performance !== 'undefined') {
-  performance.mark('app-init-end');
-  performance.measure('app-init', 'app-init-start', 'app-init-end');
-}
+  root.render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  );
+
+  // ─── Post-mount performance ─────────────────────────────────────────────────
+  if (typeof performance !== 'undefined') {
+    performance.mark('app-init-end');
+    performance.measure('app-init', 'app-init-start', 'app-init-end');
+  }
+});

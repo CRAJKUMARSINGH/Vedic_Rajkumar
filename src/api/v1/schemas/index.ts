@@ -4,3 +4,4 @@ import { z } from 'zod';
 extendZodWithOpenApi(z);
 
 export * from './chart';
+export * from './answer';

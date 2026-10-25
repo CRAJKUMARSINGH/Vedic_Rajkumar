@@ -1,0 +1,27 @@
+{
+  "name": "Vedic Rajkumar",
+  "kind": "deterministic-answer-service",
+  "contract_version": "1.1",
+  "instructions": "Read answer cards; reply from direct_answer; do not recompute.",
+  "endpoints": {
+    "answer_index": "/answers/index.json",
+    "answer_card": "/answers/{slug}/{topic}.json",
+    "answer_text": "/answers/{slug}/{topic}.md",
+    "query": "/api/v1/answer?person={name}&topics={csv}&lang={hi|en}",
+    "full_card": "/functions/v1/answer-cards?person={name}&topics={csv}&lang={hi|en}"
+  },
+  "confidentiality": {
+    "published_cards": "verdict-only",
+    "subject_fields": ["name", "slug", "aliases", "jatak_id", "birth_hash"],
+    "raw_birth_data": "private",
+    "full_card_access": "subject's own account or owner/admin, via the authenticated `full_card` endpoint only"
+  },
+  "languages": ["hi", "en"],
+  "topic_values": [
+    "health",
+    "house_construction",
+    "career",
+    "marriage",
+    "finance"
+  ]
+}

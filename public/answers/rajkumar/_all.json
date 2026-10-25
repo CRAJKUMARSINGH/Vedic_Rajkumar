@@ -1,0 +1,281 @@
+{
+  "card_version": "1.0",
+  "subject": {
+    "name": "Rajkumar",
+    "slug": "rajkumar",
+    "aliases": [],
+    "jatak_id": "jatak_005",
+    "birth_hash": "be5c231bb0a297a2"
+  },
+  "query": {
+    "asked": "Forecast prospects",
+    "topics": ["health", "house_construction", "career", "marriage", "finance"],
+    "language": "hi",
+    "as_of": "2026-10-24",
+    "reference_type": "natal"
+  },
+  "direct_answer": {
+    "en": "Health & wellbeing: average (51%) (average, 51%) · New house construction: average (60%) (average, 60%) · Career: average (50%) (average, 50%) · Marriage: caution (53%) (caution, 53%) · Finance: average (52%) (average, 52%)",
+    "hi": "स्वास्थ्य सामान्य (51%) (सामान्य, 51%) · नया घर निर्माण सामान्य (60%) (सामान्य, 60%) · करियर सामान्य (50%) (सामान्य, 50%) · विवाह सावधानी (53%) (सावधानी, 53%) · आर्थिक सामान्य (52%) (सामान्य, 52%)"
+  },
+  "verdicts": [
+    {
+      "topic": "health",
+      "headline": {
+        "en": "Health & wellbeing: average (51%)",
+        "hi": "स्वास्थ्य सामान्य (51%)"
+      },
+      "score_0_100": 64,
+      "band": "average",
+      "engine_verdict": "CONDITIONAL",
+      "confidence_0_1": 0.51,
+      "window": null,
+      "rationale": {
+        "en": "Therefore: for this Jatak's birth promise, health is conditional now because Rajyoga scores 34/100, house promise scores 85/100, Dasha scores 75/100, and transit timing scores 48/100. The final call is CONDITIONAL: health is the leading field at 64/100.",
+        "hi": "Therefore: for this Jatak's birth promise, health is conditional now because Rajyoga scores 34/100, house promise scores 85/100, Dasha scores 75/100, and transit timing scores 48/100. The final call is CONDITIONAL: health is the leading field at 64/100."
+      },
+      "conflicts": [
+        "All major layers are coherent enough to issue a direct health judgment without hiding behind general stanzas."
+      ],
+      "evidence": [
+        {
+          "layer": "Rajyoga gate",
+          "score": 34,
+          "finding": "Rajyoga gate is open through Viparita Raj Yoga; status can rise because the forming planets are in the active Dasha field."
+        },
+        {
+          "layer": "House promise",
+          "score": 85,
+          "finding": "health houses average 85/100 by SAV; strongest is house 6 at 36 points and weakest is house 8 at 21 points."
+        },
+        {
+          "layer": "Dasha activation",
+          "score": 75,
+          "finding": "Rahu MD with Saturn AD gives 75/100 Dasha clearance for health; delivery class is standard."
+        },
+        {
+          "layer": "Transit timing",
+          "score": 48,
+          "finding": "health has no dedicated Moon double-transit gate here; transit is treated as secondary and cannot overturn Dasha plus house promise."
+        }
+      ],
+      "remedies": [],
+      "caveats": [
+        {
+          "en": "Windows are approximate.",
+          "hi": "समय-सीमाएँ अनुमानित हैं।"
+        }
+      ]
+    },
+    {
+      "topic": "house_construction",
+      "headline": {
+        "en": "New house construction: average (60%)",
+        "hi": "नया घर निर्माण सामान्य (60%)"
+      },
+      "score_0_100": 66,
+      "band": "average",
+      "engine_verdict": "CONDITIONAL",
+      "confidence_0_1": 0.6,
+      "window": null,
+      "rationale": {
+        "en": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 34/100, house promise scores 70/100, Dasha scores 73/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 57/100.",
+        "hi": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 34/100, house promise scores 70/100, Dasha scores 73/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 57/100."
+      },
+      "conflicts": [
+        "House promise is real, but transit has not opened the timing gate; do not call immediate fruition."
+      ],
+      "evidence": [
+        {
+          "layer": "Rajyoga gate",
+          "score": 34,
+          "finding": "Rajyoga gate is open through Viparita Raj Yoga; status can rise because the forming planets are in the active Dasha field."
+        },
+        {
+          "layer": "House promise",
+          "score": 70,
+          "finding": "wealth houses average 70/100 by SAV; strongest is house 11 at 32 points and weakest is house 9 at 22 points."
+        },
+        {
+          "layer": "Dasha activation",
+          "score": 73,
+          "finding": "Rahu MD with Saturn AD gives 73/100 Dasha clearance for wealth; delivery class is standard."
+        },
+        {
+          "layer": "Transit timing",
+          "score": 32,
+          "finding": "Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
+        }
+      ],
+      "remedies": [],
+      "caveats": [
+        {
+          "en": "Windows are approximate.",
+          "hi": "समय-सीमाएँ अनुमानित हैं।"
+        }
+      ]
+    },
+    {
+      "topic": "career",
+      "headline": {
+        "en": "Career: average (50%)",
+        "hi": "करियर सामान्य (50%)"
+      },
+      "score_0_100": 66,
+      "band": "average",
+      "engine_verdict": "CONDITIONAL",
+      "confidence_0_1": 0.5,
+      "window": null,
+      "rationale": {
+        "en": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 34/100, house promise scores 100/100, Dasha scores 75/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 66/100.",
+        "hi": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 34/100, house promise scores 100/100, Dasha scores 75/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 66/100."
+      },
+      "conflicts": [
+        "House promise is real, but transit has not opened the timing gate; do not call immediate fruition."
+      ],
+      "evidence": [
+        {
+          "layer": "Rajyoga gate",
+          "score": 34,
+          "finding": "Rajyoga gate is open through Viparita Raj Yoga; status can rise because the forming planets are in the active Dasha field."
+        },
+        {
+          "layer": "House promise",
+          "score": 100,
+          "finding": "career houses average 100/100 by SAV; strongest is house 10 at 36 points and weakest is house 1 at 32 points."
+        },
+        {
+          "layer": "Dasha activation",
+          "score": 75,
+          "finding": "Rahu MD with Saturn AD gives 75/100 Dasha clearance for career; delivery class is standard."
+        },
+        {
+          "layer": "Transit timing",
+          "score": 32,
+          "finding": "Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
+        }
+      ],
+      "remedies": [],
+      "caveats": [
+        {
+          "en": "Windows are approximate.",
+          "hi": "समय-सीमाएँ अनुमानित हैं।"
+        }
+      ]
+    },
+    {
+      "topic": "marriage",
+      "headline": {
+        "en": "Marriage: caution (53%)",
+        "hi": "विवाह सावधानी (53%)"
+      },
+      "score_0_100": 54,
+      "band": "caution",
+      "engine_verdict": "DELAYED",
+      "confidence_0_1": 0.53,
+      "window": null,
+      "rationale": {
+        "en": "Therefore: for this Jatak's birth promise, marriage is delayed now because Rajyoga scores 34/100, house promise scores 63/100, Dasha scores 68/100, and transit timing scores 32/100. The final call is DELAYED: marriage is the leading field at 54/100.",
+        "hi": "Therefore: for this Jatak's birth promise, marriage is delayed now because Rajyoga scores 34/100, house promise scores 63/100, Dasha scores 68/100, and transit timing scores 32/100. The final call is DELAYED: marriage is the leading field at 54/100."
+      },
+      "conflicts": [
+        "All major layers are coherent enough to issue a direct marriage judgment without hiding behind general stanzas."
+      ],
+      "evidence": [
+        {
+          "layer": "Rajyoga gate",
+          "score": 34,
+          "finding": "Rajyoga gate is open through Viparita Raj Yoga; status can rise because the forming planets are in the active Dasha field."
+        },
+        {
+          "layer": "House promise",
+          "score": 63,
+          "finding": "marriage houses average 63/100 by SAV; strongest is house 7 at 25 points and weakest is house 5 at 22 points."
+        },
+        {
+          "layer": "Dasha activation",
+          "score": 68,
+          "finding": "Rahu MD with Saturn AD gives 68/100 Dasha clearance for marriage; delivery class is standard."
+        },
+        {
+          "layer": "Transit timing",
+          "score": 32,
+          "finding": "Therefore: Marriage timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
+        }
+      ],
+      "remedies": [],
+      "caveats": [
+        {
+          "en": "Windows are approximate.",
+          "hi": "समय-सीमाएँ अनुमानित हैं।"
+        }
+      ]
+    },
+    {
+      "topic": "finance",
+      "headline": {
+        "en": "Finance: average (52%)",
+        "hi": "आर्थिक सामान्य (52%)"
+      },
+      "score_0_100": 57,
+      "band": "average",
+      "engine_verdict": "CONDITIONAL",
+      "confidence_0_1": 0.52,
+      "window": null,
+      "rationale": {
+        "en": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 34/100, house promise scores 70/100, Dasha scores 73/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 57/100.",
+        "hi": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 34/100, house promise scores 70/100, Dasha scores 73/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 57/100."
+      },
+      "conflicts": [
+        "House promise is real, but transit has not opened the timing gate; do not call immediate fruition."
+      ],
+      "evidence": [
+        {
+          "layer": "Rajyoga gate",
+          "score": 34,
+          "finding": "Rajyoga gate is open through Viparita Raj Yoga; status can rise because the forming planets are in the active Dasha field."
+        },
+        {
+          "layer": "House promise",
+          "score": 70,
+          "finding": "wealth houses average 70/100 by SAV; strongest is house 11 at 32 points and weakest is house 9 at 22 points."
+        },
+        {
+          "layer": "Dasha activation",
+          "score": 73,
+          "finding": "Rahu MD with Saturn AD gives 73/100 Dasha clearance for wealth; delivery class is standard."
+        },
+        {
+          "layer": "Transit timing",
+          "score": 32,
+          "finding": "Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
+        }
+      ],
+      "remedies": [],
+      "caveats": [
+        {
+          "en": "Windows are approximate.",
+          "hi": "समय-सीमाएँ अनुमानित हैं।"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "engine_version": "0.1.0",
+    "ayanamsa": "Lahiri (Chitrapaksha)",
+    "house_system": "Whole-sign",
+    "dasha_system": "Vimshottari",
+    "ephemeris": "local",
+    "computed_at": "2026-10-24T00:00:00.000Z",
+    "as_of": "2026-10-24",
+    "input_hash": "73f6a93e4f25da6f",
+    "card_hash": "1fbb10344cee1142",
+    "source_files": [
+      "src/services/conclusiveJatakJudgmentService.ts",
+      "src/services/dashaForecastService.ts",
+      "src/services/ashtakavargaService.ts",
+      "src/services/chartBuilderService.ts",
+      "src/services/answerCard/chartAdapter.ts"
+    ]
+  }
+}

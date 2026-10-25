@@ -1,0 +1,11 @@
+# Code owners — GitHub auto-requests review on PRs touching these paths
+# Replace @CRAJKUMARSINGH with the team or maintainer handle when more people join
+
+*                           @CRAJKUMARSINGH
+
+/.github/workflows/         @CRAJKUMARSINGH
+/supabase/migrations/        @CRAJKUMARSINGH
+/docs/                      @CRAJKUMARSINGH
+/netlify.toml               @CRAJKUMARSINGH
+/tsconfig.json              @CRAJKUMARSINGH
+/package.json               @CRAJKUMARSINGH

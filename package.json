@@ -35,11 +35,14 @@
     "test:accuracy:corpus": "vitest run src/tests/accuracy/corpusPhase1.test.ts --reporter=verbose",
     "test:tz-wiring": "vitest run src/tests/chartTimezoneWiring.test.ts",
     "accuracy:publish": "node scripts/publish-accuracy.mjs",
+    "answers:emit": "node scripts/emitAnswerCards.mjs",
+    "answers:check": "node scripts/emitAnswerCards.mjs --check",
+    "docs:verify": "node scripts/verify-claims.mjs",
     "deploy:edge:production": "supabase functions deploy",
     "deploy:production": "npm run ship && npx netlify deploy --prod --dir=dist",
     "typecheck:edge": "deno check supabase/functions/**/index.ts",
     "typecheck:tests": "tsc --project tsconfig.tests.json --noEmit",
-    "ship": "npm run accuracy:publish && npm run build"
+    "ship": "npm run accuracy:publish && npm run answers:emit && npm run build"
   },
   "workspaces": [
     "packages/*"

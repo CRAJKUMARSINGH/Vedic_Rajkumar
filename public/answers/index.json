@@ -1,0 +1,301 @@
+{
+  "card_version": "1.0",
+  "generated_at": "2026-10-24T00:00:00.000Z",
+  "contract": "Read the card, reply from direct_answer, do not recompute.",
+  "people": [
+    {
+      "name": "Pankaj Jain",
+      "aliases": [],
+      "slug": "pankaj-jain",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "pankaj-jain/_all.json",
+      "text": "pankaj-jain/_all.md"
+    },
+    {
+      "name": "Priyansh Singh Chauhan",
+      "aliases": [],
+      "slug": "priyansh-singh-chauhan",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "priyansh-singh-chauhan/_all.json",
+      "text": "priyansh-singh-chauhan/_all.md"
+    },
+    {
+      "name": "Vishwaraj Singh Chauhan",
+      "aliases": [],
+      "slug": "vishwaraj-singh-chauhan",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "vishwaraj-singh-chauhan/_all.json",
+      "text": "vishwaraj-singh-chauhan/_all.md"
+    },
+    {
+      "name": "Mummy",
+      "aliases": [],
+      "slug": "mummy",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "mummy/_all.json",
+      "text": "mummy/_all.md"
+    },
+    {
+      "name": "Rajkumar",
+      "aliases": [],
+      "slug": "rajkumar",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "rajkumar/_all.json",
+      "text": "rajkumar/_all.md"
+    },
+    {
+      "name": "Kanchi Jain",
+      "aliases": [],
+      "slug": "kanchi-jain",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "kanchi-jain/_all.json",
+      "text": "kanchi-jain/_all.md"
+    },
+    {
+      "name": "Kiwangi Jain",
+      "aliases": [],
+      "slug": "kiwangi-jain",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "kiwangi-jain/_all.json",
+      "text": "kiwangi-jain/_all.md"
+    },
+    {
+      "name": "Priyanka Jain",
+      "aliases": [],
+      "slug": "priyanka-jain",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "priyanka-jain/_all.json",
+      "text": "priyanka-jain/_all.md"
+    },
+    {
+      "name": "Ajit Singh Chauhan",
+      "aliases": [],
+      "slug": "ajit-singh-chauhan",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "ajit-singh-chauhan/_all.json",
+      "text": "ajit-singh-chauhan/_all.md"
+    },
+    {
+      "name": "Hunar Jain",
+      "aliases": [],
+      "slug": "hunar-jain",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "hunar-jain/_all.json",
+      "text": "hunar-jain/_all.md"
+    },
+    {
+      "name": "Dhairya Bittu Arthuna",
+      "aliases": [],
+      "slug": "dhairya-bittu-arthuna",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "dhairya-bittu-arthuna/_all.json",
+      "text": "dhairya-bittu-arthuna/_all.md"
+    },
+    {
+      "name": "Naman Shah",
+      "aliases": [],
+      "slug": "naman-shah",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "naman-shah/_all.json",
+      "text": "naman-shah/_all.md"
+    },
+    {
+      "name": "Jaya Sisodia",
+      "aliases": [],
+      "slug": "jaya-sisodia",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "jaya-sisodia/_all.json",
+      "text": "jaya-sisodia/_all.md"
+    },
+    {
+      "name": "Jyoti Chauhan",
+      "aliases": [],
+      "slug": "jyoti-chauhan",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "jyoti-chauhan/_all.json",
+      "text": "jyoti-chauhan/_all.md"
+    },
+    {
+      "name": "Priyraj Singh Ranawat",
+      "aliases": [],
+      "slug": "priyraj-singh-ranawat",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "priyraj-singh-ranawat/_all.json",
+      "text": "priyraj-singh-ranawat/_all.md"
+    },
+    {
+      "name": "Priyawrit Singh Ranawat",
+      "aliases": [],
+      "slug": "priyawrit-singh-ranawat",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "priyawrit-singh-ranawat/_all.json",
+      "text": "priyawrit-singh-ranawat/_all.md"
+    },
+    {
+      "name": "Swami Rajeev Anand",
+      "aliases": [],
+      "slug": "swami-rajeev-anand",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "swami-rajeev-anand/_all.json",
+      "text": "swami-rajeev-anand/_all.md"
+    },
+    {
+      "name": "Arpit",
+      "aliases": [],
+      "slug": "arpit",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "arpit/_all.json",
+      "text": "arpit/_all.md"
+    },
+    {
+      "name": "Anukrati Sharma",
+      "aliases": [],
+      "slug": "anukrati-sharma",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "anukrati-sharma/_all.json",
+      "text": "anukrati-sharma/_all.md"
+    },
+    {
+      "name": "Parshvi Sharma",
+      "aliases": [],
+      "slug": "parshvi-sharma",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "parshvi-sharma/_all.json",
+      "text": "parshvi-sharma/_all.md"
+    },
+    {
+      "name": "Premlata Jain",
+      "aliases": ["Premlata", "Premlataji", "Mummy Jain"],
+      "slug": "premlata-jain",
+      "topics": [
+        "health",
+        "house_construction",
+        "career",
+        "marriage",
+        "finance"
+      ],
+      "card": "premlata-jain/_all.json",
+      "text": "premlata-jain/_all.md"
+    }
+  ]
+}

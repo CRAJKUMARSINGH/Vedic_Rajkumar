@@ -36,6 +36,7 @@ playwright-report/
 test-results/
 test-results-rb/
 tr-rb2/
+.vitest-report.json
 
 # Audit output files
 audit-all.txt
@@ -59,11 +60,6 @@ apply-patch-*.mjs
 scripts/do-commit-push.ps1
 scripts/patch-util.mjs
 vedic-vijay/
-CHANGELOG.md
-CODEOWNERS
-.nvmrc
-docs/CLAIMS.md
-docs/legal/
 
 # Stale build artifacts (deleted, not archived)
 test_*.pdf

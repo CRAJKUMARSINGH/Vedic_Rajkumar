@@ -31,10 +31,14 @@ jobs:
         run: npm ci
 
       - name: Quality gates
+        # docs:verify runs the full Vitest suite (pretty + JSON reporters) and
+        # fails if any test fails OR any tracked doc states a stale metric, so
+        # it replaces a standalone `npm run test:run` here.
         run: |
           npm run lint
           npm run typecheck
-          npm run test:run
+          npm run typecheck:tests
+          npm run docs:verify
           npm run build
         env:
           CI: true

@@ -1,0 +1,36 @@
+# Arpit — Direct Answer
+
+<!-- card_hash: 53ff3663d947bcd6 | generated: 2026-10-24T00:00:00.000Z -->
+
+आर्थिक सामान्य (58%) (सामान्य, 58%)
+
+Finance: average (58%) (average, 58%)
+
+## Verdicts
+
+| Topic   | Band    | Score | Confidence | Window |
+| ------- | ------- | ----- | ---------- | ------ |
+| Finance | average | 63    | 0.58       | —      |
+
+## Why (how the app arrived here)
+
+### Finance
+
+Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 34/100, house promise scores 78/100, Dasha scores 83/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 63/100.
+
+- Rajyoga gate (34/100): Rajyoga gate is open through Raj Yoga; status can rise because the forming planets are in the active Dasha field.
+- House promise (78/100): wealth houses average 78/100 by SAV; strongest is house 11 at 32 points and weakest is house 2 at 21 points.
+- Dasha activation (83/100): Venus MD with Rahu AD gives 83/100 Dasha clearance for wealth; delivery class is full.
+- Transit timing (32/100): Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
+
+## Remedies
+
+- none specified
+
+## Caveats
+
+- समय-सीमाएँ अनुमानित हैं। / Windows are approximate.
+
+## Provenance
+
+Lahiri (Chitrapaksha) · Vimshottari · Whole-sign · engine 0.1.0 · as_of 2026-10-24 · input 87309c17dc1bb6f0

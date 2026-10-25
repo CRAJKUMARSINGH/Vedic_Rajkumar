@@ -77,13 +77,13 @@ Enterprise: 99.99% (50% credit if breached)
 
 ## 3. Processing Integrity (PI1.3) — High
 
-| Control             | Implementation                      | Status |
-| ------------------- | ----------------------------------- | ------ |
-| Input validation    | Zod schemas `src/lib/validation.ts` | ✅     |
-| Error handling      | try/catch + Sentry everywhere       | ✅     |
-| Accuracy test suite | 155/155 charts vs Swiss Ephemeris   | ✅     |
-| SHA-256 checksums   | Export data + API responses         | ✅     |
-| Accuracy alerts     | Sentry warning if score < 95%       | ✅     |
+| Control             | Implementation                                | Status |
+| ------------------- | --------------------------------------------- | ------ |
+| Input validation    | Zod schemas `src/lib/validation.ts`           | ✅     |
+| Error handling      | try/catch + Sentry everywhere                 | ✅     |
+| Accuracy test suite | 15 charts · 155 assertions vs Swiss Ephemeris | ✅     |
+| SHA-256 checksums   | Export data + API responses                   | ✅     |
+| Accuracy alerts     | Sentry warning if score < 95%                 | ✅     |
 
 **Validation Evidence:** `src/tests/validation/accuracySuite.test.ts` — run via `npm run validate:accuracy`.
 

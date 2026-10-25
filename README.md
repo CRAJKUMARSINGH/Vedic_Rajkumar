@@ -13,10 +13,10 @@ Casts sidereal (Lahiri ayanamsa) birth charts, prashna (horary) readings, 36-poi
 [![TypeScript](https://img.shields.io/badge/TypeScript-5~-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tailwind](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Tailwind](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Node](https://img.shields.io/badge/Node-%E2%89%A520-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Build](https://img.shields.io/badge/build-passing-brightgreen)](#)
-[![Tests](https://img.shields.io/badge/tests-1476%20passing-brightgreen)](#accuracy--testing)
+[![Tests](https://img.shields.io/badge/tests-1686%20passing-brightgreen)](#accuracy--testing)
 [![Accuracy](https://img.shields.io/badge/engine%20accuracy-15%2F15%20charts%20%E2%89%A42%E2%80%B3-brightgreen)](docs/accuracy/METHODOLOGY.md)
 [![Accuracy CI](https://github.com/CRAJKUMARSINGH/Vedic_Rajkumar/actions/workflows/accuracy.yml/badge.svg)](https://github.com/CRAJKUMARSINGH/Vedic_Rajkumar/actions/workflows/accuracy.yml)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a0e292ac-3201-4b0c-8186-53a29d83d069/deploy-status)](https://app.netlify.com/sites/vedic-rajkumar/deploys)
@@ -149,7 +149,8 @@ npm run build            # Production build to ./dist
 npm run preview          # Serve the production build locally
 npm run typecheck        # TypeScript strict check (no emit)
 npm run lint             # ESLint across app, Supabase functions, and test sources
-npm run test:run         # All Vitest tests — CI mode (1476 tests)
+npm run test:run         # All Vitest tests — CI mode (1686 tests)
+npm run docs:verify      # Fail if README/docs state a stale metric
 npm run test:core        # Core gate tests (ephemeris + vedic engine + nav)
 npm run validate:accuracy  # 15-reference-chart Swiss Ephemeris comparison
 npm run test:accuracy:corpus  # 15-chart adversarial corpus gate
@@ -223,13 +224,13 @@ PDF Generator  ── jsPDF (kundli, matchmaking, prashna, event reports)
 Supabase  ── optional: auth, database, storage, vector store
 ```
 
-| Layer              | Responsibility                                                                  |
-| ------------------ | ------------------------------------------------------------------------------- |
-| **UI**             | Form input, routing, language switch, chart rendering, PNG/PDF export triggers   |
-| **Astrology core** | Deterministic Vedic calculations on sidereal (Lahiri) coordinates               |
-| **Ephemeris**      | Planetary positions and house cusps — local engine by default, Swiss optional   |
-| **Reporting**      | A4 PDF generation via jsPDF                                                     |
-| **Persistence**    | Optional Supabase-backed profiles, saved readings, and knowledge vectors        |
+| Layer              | Responsibility                                                                 |
+| ------------------ | ------------------------------------------------------------------------------ |
+| **UI**             | Form input, routing, language switch, chart rendering, PNG/PDF export triggers |
+| **Astrology core** | Deterministic Vedic calculations on sidereal (Lahiri) coordinates              |
+| **Ephemeris**      | Planetary positions and house cusps — local engine by default, Swiss optional  |
+| **Reporting**      | A4 PDF generation via jsPDF                                                    |
+| **Persistence**    | Optional Supabase-backed profiles, saved readings, and knowledge vectors       |
 
 ---
 
@@ -311,6 +312,41 @@ verified**. `npm run ship` publishes then builds; `netlify.toml` does the same s
 production never ships a stale snapshot. See [`docs/ACCURACY_PAGE.md`](docs/ACCURACY_PAGE.md).
 
 The **critical bug found and fixed** in this codebase: `calculatePreciseChart` defaulted to IST (+5:30) for all historical charts. For a 1943 Mumbai birth at 04:27, the wartime offset was +6:30 — **1 hour different, ~16.5° of ascendant error, wrong rashi entirely**. Every Jyotish app that hardcodes IST has this bug. Ours doesn't.
+
+---
+
+## 📌 Standing Instructions — Continuity Log (`CREAT.MD`)
+
+These are **standing instructions** for every human engineer and every AI tool
+working on this repository. They apply to all sessions until explicitly revoked.
+
+1. **Source of work items.** Apply the instructions contained in
+   [`vedic-vijay/`](vedic-vijay) — every `*.TXT` and `*.MD` file in that folder
+   (e.g. [`Vedic24.txt`](vedic-vijay/Vedic24.txt), [`Tex21.txt`](vedic-vijay/Tex21.txt),
+   [`Vedic22oct.md.txt`](vedic-vijay/Vedic22oct.md.txt),
+   [`NO-BEATING-ABOUT-THE-BUSH.TXT`](vedic-vijay/NO-BEATING-ABOUT-THE-BUSH.TXT),
+   [`enrichment code.md`](vedic-vijay/enrichment%20code.md)). Treat them as the
+   authoritative brief for the current work.
+2. **Maintain [`CREAT.MD`](CREAT.MD)** at the repository root as the shared
+   **chat log** so that tools and software engineers work in harmony and
+   continuity is never lost. Append a new entry at the **top** of the log for
+   each session: date/time, what was done, which files changed, what is next.
+3. **Retention = last 24 hours only.** `CREAT.MD` keeps only the _immediate /
+   last 24 hours_ of work. Any **lengthy earlier / old record must be deleted**
+   from `CREAT.MD` when a new entry is written. The file stays short by design —
+   it is a rolling window, not an archive.
+4. **Never let `CREAT.MD` go stale.** If you did work, log it before you stop.
+5. **CONFIDENTIALITY — hard constraint.** Seed-bank birth data and everything
+   derived from it is **private**. The code must not reveal seed-bank details
+   (name, date/time of birth, place, coordinates, or any chart/verdict derived
+   from them) to any random user — **only the authenticated admin** (a
+   `ROLE_DEFINITIONS[role].isAdmin === true` role — `owner`/`admin` — from
+   `src/auth/roles/config.ts`). **One user's birth data must never be shared with
+   another user.** Therefore: never place seed data in `public/` (world-readable);
+   deny by default for new endpoints, artifacts, bundles and logs; redact raw
+   birth fields for non-admin callers; and remember that a client-side check is
+   UX, not authorization — enforcement belongs on a server or it does not exist.
+   These rules apply to every feature, including the Answer Layer.
 
 ---
 

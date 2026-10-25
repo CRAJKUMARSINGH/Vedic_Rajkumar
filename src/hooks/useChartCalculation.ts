@@ -20,6 +20,7 @@ import { analyzeYogas, type YogaAnalysis } from '@/services/yogaService';
 import { calculateShodashVarga, type ShodashVargaResult } from '@/services/divisionalChartsService';
 import { calculateShadbala, type ShadabalaAnalysis } from '@/services/shadabalaService';
 import { calculateAshtakavarga, type SarvashtakavargaResult } from '@/services/ashtakavargaService';
+import { isoMonth } from '@/lib/astroUtils';
 
 export interface BirthInput {
   date: string;       // YYYY-MM-DD
@@ -189,7 +190,7 @@ export function useChartCalculation(
 
       // 8. Shadbala
       try {
-        const birthMonth = new Date(inp.date).getMonth() + 1;
+        const birthMonth = isoMonth(inp.date);
         const daytime = isDaytime ?? (parseInt(inp.time.split(':')[0]) >= 6 && parseInt(inp.time.split(':')[0]) < 18);
         result.shadbala = calculateShadbala(
           planets.map(p => ({

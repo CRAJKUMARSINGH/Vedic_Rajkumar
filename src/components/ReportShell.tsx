@@ -119,6 +119,9 @@ export interface ReportShellActionsProps {
   isCopied?: boolean;
   lang?: 'en' | 'hi';
   className?: string;
+  /** Exact markdown of this report's precomputed answer card. When set, a
+   *  "Copy answer for AI" button is rendered beside Print/PDF. */
+  agentAnswerText?: string;
   /** Extra custom actions to render */
   children?: React.ReactNode;
 }
@@ -159,6 +162,8 @@ const LABELS = {
     exportingPdf: 'Preparing PDF…',
     copy: 'Copy Summary',
     copied: 'Copied!',
+    copyForAi: 'Copy answer for AI',
+    copyForAiDone: 'AI answer copied!',
     generated: 'Generated on',
     reference: 'Report ID',
     birthDetails: 'Birth Details',
@@ -183,6 +188,8 @@ const LABELS = {
     exportingPdf: 'PDF तैयार हो रहा है…',
     copy: 'सारांश कॉपी करें',
     copied: 'कॉपी हो गया!',
+    copyForAi: 'AI के लिए उत्तर कॉपी करें',
+    copyForAiDone: 'AI उत्तर कॉपी हो गया!',
     generated: 'जेनरेट किया गया',
     reference: 'रिपोर्ट ID',
     birthDetails: 'जन्म विवरण',
@@ -514,10 +521,12 @@ ReportShell.Actions = function ReportShellActions({
   isCopied,
   lang = 'en',
   className,
+  agentAnswerText,
   children,
 }: ReportShellActionsProps) {
   const t = LABELS[lang];
   const isHi = lang === 'hi';
+  const [aiCopied, setAiCopied] = useState(false);
   return (
     <div
       className={cn(
@@ -567,6 +576,30 @@ ReportShell.Actions = function ReportShellActions({
             <>
               <Copy className="h-4 w-4" aria-hidden="true" />
               <span className={cn(isHi && 'font-hindi')}>{t.copy}</span>
+            </>
+          )}
+        </Button>
+      )}
+      {agentAnswerText && (
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => {
+            void navigator.clipboard.writeText(agentAnswerText).then(() => setAiCopied(true));
+          }}
+          className="gap-2"
+        >
+          {aiCopied ? (
+            <>
+              <Check className="h-4 w-4 text-green-500" aria-hidden="true" />
+              <span className={cn('text-green-600 dark:text-green-400', isHi && 'font-hindi')}>
+                {t.copyForAiDone}
+              </span>
+            </>
+          ) : (
+            <>
+              <Copy className="h-4 w-4" aria-hidden="true" />
+              <span className={cn(isHi && 'font-hindi')}>{t.copyForAi}</span>
             </>
           )}
         </Button>

@@ -1,60 +1,73 @@
-export interface CompanyProfile {
+/**
+ * src/data/companyPresets.ts
+ *
+ * Canonical company-research data consumed by `CompanyResearchCard`.
+ *
+ * The card previously carried a private copy of this interface, the preset map
+ * and the lookup function; the file below was a second, divergent copy that no
+ * module imported. There is now a single source of truth: this module.
+ *
+ * Preset: RIB U.S. COST — management team, services, offices.
+ */
+
+export interface ManagementMember {
   name: string;
-  industry: string;
-  description: string;
-  services: string[];
-  headquarters: string;
-  offices: string[];
-  management: { name: string; role: string; note?: string }[];
-  website?: string;
+  role: string;
 }
 
-const PRESETS: Record<string, CompanyProfile> = {
-  'rib': {
-    name: 'RIB U.S. Cost, Inc.',
-    industry: 'Construction Technology / BIM Software',
+export interface CompanyProfile {
+  name: string;
+  url?: string;
+  founded?: number;
+  hq?: string;
+  description: string;
+  services?: string[];
+  managementTeam?: ManagementMember[];
+  offices?: string[];
+}
+
+const COMPANY_PRESETS: Record<string, CompanyProfile> = {
+  'rib u.s. cost': {
+    name: 'RIB U.S. COST',
+    url: 'https://rib-uscost.com',
+    founded: 1983,
+    hq: 'Alpharetta, GA (HQ) — Miami, FL office',
     description:
-      'RIB U.S. Cost (formerly U.S. Cost) provides construction estimating, takeoff, and BIM-integrated cost management software for contractors and owners across North America.',
+      'A major subsidiary of RIB Software GmbH (Germany), providing professional construction cost estimating, scheduling, value engineering, project controls, BIM Services (iTWO), and claims analysis for large-scale private and public sector projects across the USA.',
     services: [
-      'Construction estimating & takeoff',
-      'BIM-integrated cost management',
-      'Enterprise project controls',
-      'Cloud-based collaboration for AEC firms',
+      'Cost Estimating & Lifecycle Cost Analysis',
+      'Market Condition Studies',
+      'Master Schedule Development & Updates',
+      'Program Validation & Project Controls',
+      'Risk Assessment & Risk Management',
+      'Value Engineering Studies',
+      'Claims Management & Analysis',
+      'BIM Services (iTWO 5D platform)',
+      'Constructability Review',
+      'Change Order Management',
+      'Reality Capture',
+      'Data Dashboard Development',
     ],
-    headquarters: 'Atlanta, Georgia, USA',
-    offices: ['Atlanta GA', 'Miami FL', 'Chicago IL', 'Los Angeles CA'],
-    management: [
-      { name: 'Thomas Wolf', role: 'CEO, RIB Group', note: 'Global construction software leader' },
-      { name: 'Regional Leadership', role: 'VP Sales — Americas', note: 'Enterprise AEC accounts' },
+    managementTeam: [
+      { name: 'Suzanne Moltzen, MBA', role: 'CEO, RIB North America' },
+      { name: 'Fabianne Arias', role: 'Vice President' },
+      { name: 'Andreas Kristanto, CCP', role: 'Executive Vice President' },
+      { name: 'Russell McElreath, CCP', role: 'Vice President' },
     ],
-    website: 'https://www.rib-software.com',
-  },
-  'rib miami': {
-    name: 'RIB U.S. Cost — Miami Office',
-    industry: 'Construction Technology',
-    description: 'Miami regional office serving Florida and Latin America AEC clients.',
-    services: ['Regional sales & support', 'Implementation consulting', 'Training'],
-    headquarters: 'Miami, Florida, USA',
-    offices: ['Miami FL'],
-    management: [{ name: 'Regional Director', role: 'Office Lead' }],
+    offices: ['Atlanta, GA (HQ)', 'Washington, D.C.', 'Miami, FL', 'Dallas, TX', 'Memphis, TN'],
   },
 };
 
-export function lookupCompanyProfile(query?: string): CompanyProfile | null {
-  if (!query?.trim()) return null;
-  const key = query.toLowerCase().trim();
-  if (PRESETS[key]) return PRESETS[key];
-  for (const [k, v] of Object.entries(PRESETS)) {
-    if (key.includes(k) || k.includes(key) || v.name.toLowerCase().includes(key)) return v;
+/**
+ * Match a free-text query against the preset keys (case-insensitive, partial in
+ * either direction). Returns `null` when nothing matches so callers can decide
+ * whether to render a placeholder.
+ */
+export function findCompanyProfile(query?: string): CompanyProfile | null {
+  if (!query) return null;
+  const q = query.toLowerCase();
+  for (const [key, profile] of Object.entries(COMPANY_PRESETS)) {
+    if (q.includes(key) || key.includes(q)) return profile;
   }
-  if (/rib|u\.s\. cost|us cost/i.test(query)) return PRESETS['rib'];
-  return {
-    name: query.trim(),
-    industry: '—',
-    description: `Research ${query.trim()} before your event: review their website, recent news, leadership, and role requirements.`,
-    services: [],
-    headquarters: '—',
-    offices: [],
-    management: [],
-  };
+  return null;
 }

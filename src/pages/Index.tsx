@@ -62,6 +62,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useChartCalculation, type BirthInput } from '@/hooks/useChartCalculation';
 import { SEO, webAppSchema } from '@/components/SEO';
 import RandomQuestionCard from '@/components/RandomQuestionCard';
+import SaraswatiMascot from '@/components/SaraswatiMascot';
 import { generateEnhancedClassicalAnswer, type EnhancedClassicalAnswer } from '@/services/classicalAnswerEngine';
 import EnhancedAnalysisPanel from '@/components/EnhancedAnalysisPanel';
 
@@ -334,6 +335,9 @@ const Index = () => {
             
             <div className="max-w-5xl mx-auto px-4 text-center space-y-12 relative z-10">
               <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
+                <div className="mb-8 flex justify-center">
+                  <SaraswatiMascot isHi={isHi} size={110} />
+                </div>
                 <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white text-xs font-bold uppercase tracking-widest mb-6">
                   <Sparkles className="w-3 h-3" /> {isHi ? "शुभ ज्योतिष" : "Auspicious Astrology"}
                 </div>
