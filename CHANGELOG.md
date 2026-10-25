@@ -41,5 +41,5 @@ from [Conventional Commits](https://www.conventionalcommits.org/).
 - 1943 Mumbai wartime chart: 16.5° ascendant correction (one full rashi)
 - Pre-existing typecheck errors: auth/roles barrel file, tailwind darkMode type
 - Cache key collision: IST vs wartime charts no longer share the same key
-- Load-sensitive test suites de-flaked (DEF-010): `schema.test.ts` and `chartTimezoneWiring.test.ts` now read the answer corpus and walk `src/` once at module load instead of per assertion, and carry an explicit 30 s timeout; `testTimeout` raised 10 s → 20 s so a saturated CI filesystem cannot fail a gate on wall-clock
+- Load-sensitive test suites de-flaked (DEF-010): `schema.test.ts` and `chartTimezoneWiring.test.ts` now read the answer corpus and walk `src/` once at module load instead of per assertion, and carry an explicit 30 s timeout; `testTimeout` raised 10 s → 20 s and `hookTimeout` set to 30 s (insurance for the Swiss Ephemeris `beforeAll`), so a saturated CI filesystem cannot fail a gate on wall-clock
 - `public/llms.txt`: the deploy-drift paragraph documented a bug already fixed — with `as_of` pinned end-to-end, public artifacts are byte-reproducible from a checkout and `generated_at` / `provenance.computed_at` do not move from one deploy to the next
