@@ -1,0 +1,10 @@
+# Normalise every text file to LF in the repository. This is what makes
+# lint-staged's "restore unstaged changes" step reliable on Windows: without it,
+# `core.autocrlf` rewrites line endings under its stash and the restore aborts
+# ("Failed to restore unstaged changes!"), which tempts everyone onto
+# `--no-verify` and quietly kills the pre-commit gate.
+* text=auto eol=lf
+
+# Generated answer-layer artifacts are content-hashed and compared byte-for-byte
+# by src/tests/answerCard/parity.test.ts. Keep Git from touching their bytes.
+public/answers/** -text
