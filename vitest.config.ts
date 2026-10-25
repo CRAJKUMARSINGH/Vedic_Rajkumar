@@ -22,6 +22,16 @@ export default defineConfig({
     // budget can be spent on I/O alone and the test fails on wall-clock rather
     // than on an assertion (DEF-010). Those files carry their own larger
     // timeout; this is the floor for everything else.
+    //
+    // This was THE knob for DEF-010: the timed work ran inside `it()` bodies
+    // (chartTimezoneWiring.test.ts walked `src/` in two tests; schema.test.ts
+    // read the answer corpus per topic). Neither file had hooks, so the stock
+    // 10s hookTimeout was never in play — note the old explicit 10000 here
+    // simply happened to equal the 10s hook default.
     testTimeout: 20000,
+    // Insurance, not the DEF-010 fix. `wasmPathAccuracy.test.ts` loads the
+    // Swiss Ephemeris WASM inside `beforeAll`, so a saturated disk could blow
+    // the stock 10s hook budget on the same "passes on retry" pattern.
+    hookTimeout: 30000,
   },
 });
