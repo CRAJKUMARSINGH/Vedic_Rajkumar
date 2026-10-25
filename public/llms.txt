@@ -29,7 +29,9 @@ stability: additive within a minor; any removal or rename bumps the major.
 | /functions/v1/answer-cards | GET | Supabase JWT | owner · admin | full |
 
 Always link answer cards *with* a file extension — the `/*` SPA rewrite swallows
-extensionless paths.
+extensionless paths. `/functions/v1/answer-cards` is listed for completeness but
+is **not** a link target (`fetchable: false`): it is JWT-gated by design and
+answers `401` to an anonymous fetch, which is intended, not broken.
 
 Redacted `subject` keys: `name`, `slug`, `aliases`, `jatak_id`, `birth_hash`.
 Full subject adds: `dob`, `tob`, `place`, `lat`, `lon`, `tz`, `tz_defaulted`.
@@ -49,8 +51,10 @@ career, marriage, finance.
   describe the same birth without exposing it. A change-detector, not a security
   hash: the input space is low-entropy enough to brute-force a guess.
 
-Compare cards by `card_hash`, not `computed_at`: deploys re-emit at the deploy
-date, while the committed artifacts stay pinned to a snapshot date.
+Compare cards by `card_hash`. `as_of` is a pinned constant, never wall-clock: the
+emitter default, the Netlify build and the CI drift check all read it, so public
+artifacts are byte-reproducible from a checkout and `generated_at` /
+`provenance.computed_at` do not move from one deploy to the next.
 
 ### PII guarantee
 
