@@ -264,7 +264,7 @@ Example: vk_live_a1B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6
 
 ```bash
 # Final pre-launch checks
-npm run test:run        # 1700 tests
+npm run test:run        # 1777 tests
 npm run typecheck       # Zero TS errors
 npm run build           # Production build
 curl -sf https://YOUR_DOMAIN.supabase.co/functions/v1/health | grep healthy
