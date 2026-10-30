@@ -1,0 +1,20 @@
+{
+  "kill_checkout": {
+    "failsafe": false
+  },
+  "kill_funnel": {
+    "failsafe": false
+  },
+  "kill_pdf_export": {
+    "failsafe": false
+  },
+  "new_landing": {
+    "failsafe": true
+  },
+  "new_dasha_timeline": {
+    "failsafe": false
+  },
+  "strict_erasure_copy": {
+    "failsafe": true
+  }
+}

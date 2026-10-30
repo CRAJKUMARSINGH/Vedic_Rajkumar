@@ -1,0 +1,31 @@
+name: dco
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  dco:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version-file: .nvmrc }
+      - run: node scripts/check-dco.mjs "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}"
+      - name: Comment on failure
+        if: failure()
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          message: |
+            **DCO check failed.** Every commit needs a sign-off.
+
+            `git rebase --signoff main && git push --force-with-lease`
+
+            Why: `swisseph-wasm` is AGPL (ADR-007). Your sign-off is the record that
+            lets us relicense or exercise the commercial licence without chasing you later.

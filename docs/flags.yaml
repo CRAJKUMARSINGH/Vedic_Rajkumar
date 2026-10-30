@@ -1,0 +1,46 @@
+# Feature flags — the kill switches.
+#
+# `failsafe` is the value used when the flag server is UNREACHABLE. Choose it per
+# flag, deliberately:
+#   failsafe: true  → keep the feature alive if we cannot ask (new, working)
+#   failsafe: false → kill the feature if we cannot ask (risky, new)
+#
+# A flag with no owner expires. An expired flag is a permanent conditional.
+
+flags:
+  kill_checkout:
+    default: false
+    failsafe: false
+    owner: billing
+    note: "Flip on to hide every pay button and stop new checkouts."
+
+  kill_funnel:
+    default: false
+    failsafe: false
+    owner: growth
+    note: "Analytics only — killing it must never affect the product."
+
+  kill_pdf_export:
+    default: false
+    failsafe: false
+    owner: growth
+    note: "Export is the Pro hook; if it breaks, hide it rather than 500."
+
+  new_landing:
+    default: true
+    failsafe: true
+    owner: founder
+    expires: 2027-01-31
+
+  new_dasha_timeline:
+    default: false
+    failsafe: false
+    owner: core
+    note: "Risky render path. Ship off, enable for 10%."
+    rollout: 0
+
+  strict_erasure_copy:
+    default: true
+    failsafe: true
+    owner: security
+    note: "Explicit 'this deletes your charts too' before the erase click."
