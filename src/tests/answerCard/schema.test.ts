@@ -2,14 +2,15 @@
  * schema.test.ts — the emitted artifacts must satisfy the published contract.
  *
  * Reads what was actually written to `public/answers/**` (not a rebuild), so a
- * hand-edited or half-emitted card fails here.
+ * hand-edited or half-emitted card fails here. Every language artifact is
+ * checked, plus the un-suffixed default-locale copy.
  */
 
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { AnswerCardSchema } from '@/api/v1/schemas/answer';
-import type { AnswerCard } from '@/services/answerCard/AnswerCard.types';
+import { ANSWER_CONTRACT_VERSION, type AnswerCard, type Lang } from '@/services/answerCard/AnswerCard.types';
 
 const ROOT = join(import.meta.dirname, '..', '..', '..');
 const ANSWERS = join(ROOT, 'public', 'answers');
@@ -17,8 +18,23 @@ const index = JSON.parse(readFileSync(join(ANSWERS, 'index.json'), 'utf8')) as {
   card_version: string;
   generated_at: string;
   contract: string;
-  people: Array<{ name: string; aliases: string[]; slug: string; topics: string[]; card: string; text: string }>;
+  contract_version: string;
+  languages: Lang[];
+  default_language: Lang;
+  people: Array<{
+    name: string;
+    aliases: string[];
+    slug: string;
+    topics: string[];
+    card: string;
+    text: string;
+    cards: Record<Lang, string>;
+    texts: Record<Lang, string>;
+  }>;
 };
+
+const LOCALES = index.languages;
+const DEFAULT_LANG = index.default_language;
 
 /** The seed bank — the only place raw birth data is allowed to live (it is NOT in `public/`). */
 const SEED = JSON.parse(
@@ -50,15 +66,25 @@ const readCard = memo(
 const readText = memo((rel: string) => readFileSync(join(ANSWERS, rel), 'utf8'));
 
 /**
- * Every per-topic card actually on disk, resolved ONCE at module load so the
+ * Every `_all` card actually on disk, resolved ONCE at module load so the
  * assertion below is a pure in-memory loop. Stat-ing and parsing the corpus
  * inside the test body is what pushed it past the timeout under load (DEF-010).
+ * Covers each language's suffixed artifact and the un-suffixed default copy.
  */
+const ALL_CARDS = index.people.flatMap((person) =>
+  [`${person.slug}/_all.json`, ...LOCALES.map(l => `${person.slug}/_all.${l}.json`)]
+    .filter(rel => existsSync(join(ANSWERS, rel)))
+    .map(rel => ({ rel, card: readCard(rel) }))
+);
+
 const TOPIC_CARDS = index.people.flatMap((person) =>
   person.topics
-    .map((topic) => `${person.slug}/${topic}.json`)
-    .filter((rel) => existsSync(join(ANSWERS, rel)))
-    .map((rel) => ({ rel, card: readCard(rel) }))
+    .flatMap(topic => [
+      `${person.slug}/${topic}.json`,
+      ...LOCALES.map(l => `${person.slug}/${topic}.${l}.json`),
+    ])
+    .filter(rel => existsSync(join(ANSWERS, rel)))
+    .map(rel => ({ rel, card: readCard(rel) }))
 );
 
 const slugify = (s: string): string =>
@@ -76,28 +102,41 @@ describe('answers/index.json', () => {
     expect(index.people.length).toBeGreaterThan(0);
   });
 
-  it('lists every person with slug, topics and card paths', () => {
+  it('advertises the contract version and the published languages', () => {
+    expect(index.contract_version).toBe(ANSWER_CONTRACT_VERSION);
+    expect(index.languages).toEqual(['hi', 'en']);
+    expect(LOCALES).toContain(DEFAULT_LANG);
+  });
+
+  it('lists every person with slug, topics and per-language card paths', () => {
     for (const person of index.people) {
       expect(person.slug).toMatch(/^[a-z0-9-]+$/);
       expect(person.topics.length).toBeGreaterThan(0);
+      // Un-suffixed paths stay valid = the default locale (no 1.1 link breaks).
       expect(person.card).toBe(`${person.slug}/_all.json`);
       expect(person.text).toBe(`${person.slug}/_all.md`);
       expect(existsSync(join(ANSWERS, person.text))).toBe(true);
+      for (const lang of LOCALES) {
+        expect(person.cards[lang]).toBe(`${person.slug}/_all.${lang}.json`);
+        expect(person.texts[lang]).toBe(`${person.slug}/_all.${lang}.md`);
+        expect(existsSync(join(ANSWERS, person.cards[lang]))).toBe(true);
+        expect(existsSync(join(ANSWERS, person.texts[lang]))).toBe(true);
+      }
+      // The default locale's entry points at the copy served at the bare path.
+      expect(person.cards[DEFAULT_LANG]).toBe(`${person.slug}/_all.${DEFAULT_LANG}.json`);
     }
   });
 });
 
 describe('answer card schema', { timeout: 30_000 }, () => {
-  const slugs = index.people.map(p => p.slug);
-
-  it.each(slugs)('%s/_all.json matches AnswerCardSchema', (slug) => {
-    const card = readCard(`${slug}/_all.json`);
-    const parsed = AnswerCardSchema.safeParse(card);
+  it.each(ALL_CARDS.map(c => c.rel))('%s matches AnswerCardSchema', (rel) => {
+    const parsed = AnswerCardSchema.safeParse(readCard(rel));
     expect(parsed.success, parsed.success ? '' : JSON.stringify(parsed.error.issues)).toBe(true);
   });
 
-  it('puts the verdict first and never invents a band', () => {
-    const card = readCard(`${index.people[0].slug}/_all.json`);
+  it.each(LOCALES)('the %s artifact declares its own language and keeps both prose fields', (lang) => {
+    const card = readCard(`${index.people[0].slug}/_all.${lang}.json`);
+    expect(card.query.language).toBe(lang);
     expect(card.direct_answer.en.length).toBeGreaterThan(0);
     expect(card.direct_answer.hi.length).toBeGreaterThan(0);
     for (const v of card.verdicts) {
@@ -121,34 +160,37 @@ describe('answer card schema', { timeout: 30_000 }, () => {
 /**
  * Confidentiality gate (AGENTS.md §CONFIDENTIALITY). `public/` is world-readable
  * by definition, so the emitted corpus must be verdict-only. If a raw birth
- * field ever reaches `public/answers/**`, this test fails the build.
+ * field ever reaches `public/answers/**`, this test fails the build. The check
+ * runs over every language — redaction is locale-independent.
  */
 describe('public/answers/** carries no birth data', { timeout: 30_000 }, () => {
   /** Every field `redactAnswerCard` is required to strip. */
   const PII_KEYS = ['dob', 'tob', 'place', 'lat', 'lon', 'tz', 'tz_defaulted'];
 
-  it.each(index.people.map(p => p.slug))('%s/_all.json is verdict-only', (slug) => {
-    const card = readCard(`${slug}/_all.json`);
+  it.each(ALL_CARDS.map(c => c.rel))('%s is verdict-only', (rel) => {
+    const card = readCard(rel);
     for (const key of PII_KEYS) {
-      expect(card.subject, `${slug} leaks subject.${key}`).not.toHaveProperty(key);
+      expect(card.subject, `${rel} leaks subject.${key}`).not.toHaveProperty(key);
     }
     expect(card.subject.birth_hash).toMatch(/^[0-9a-f]{16}$/);
   });
 
-  it.each(index.people.map(p => p.slug))('%s/_all.md quotes no birth detail', (slug) => {
+  it.each(index.people.map(p => p.slug))('%s quotes no birth detail in any language', (slug) => {
     const seed = SEED.jataks.find(j => slugify(j.name) === slug);
     expect(seed, `no seed-bank record for ${slug}`).toBeTruthy();
-    const md = readText(`${slug}/_all.md`);
-    for (const [field, value] of [
-      ['dateOfBirth', seed!.dateOfBirth],
-      ['timeOfBirth', seed!.timeOfBirth],
-      ['placeOfBirth', seed!.placeOfBirth],
-    ] as const) {
-      expect(md, `${slug} leaks ${field} into markdown`).not.toContain(value);
+    for (const rel of [`${slug}/_all.md`, ...LOCALES.map(l => `${slug}/_all.${l}.md`)]) {
+      const md = readText(rel);
+      for (const [field, value] of [
+        ['dateOfBirth', seed!.dateOfBirth],
+        ['timeOfBirth', seed!.timeOfBirth],
+        ['placeOfBirth', seed!.placeOfBirth],
+      ] as const) {
+        expect(md, `${rel} leaks ${field} into markdown`).not.toContain(value);
+      }
     }
   });
 
-  it('publishes no per-topic json/md file with a raw birth field', () => {
+  it('publishes no per-topic json file with a raw birth field', () => {
     for (const { rel, card } of TOPIC_CARDS) {
       for (const key of PII_KEYS) {
         expect(card.subject, `${rel} leaks subject.${key}`).not.toHaveProperty(key);

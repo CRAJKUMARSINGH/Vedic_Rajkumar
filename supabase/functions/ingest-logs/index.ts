@@ -7,6 +7,7 @@ import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { corsHeaders, corsResponse } from '../_shared/cors.ts';
 import { logger } from '../_shared/observability.ts';
 import { checkRateLimit, rateLimitResponse } from '../_shared/rateLimit.ts';
+import { KILL_SWITCH_FLAGS, guardKillSwitch } from '../_shared/killSwitch.ts';
 
 const MAX_PAYLOAD_BYTES = 128 * 1024; // 128 KB max batch size
 
@@ -19,6 +20,10 @@ serve(async (req) => {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
+
+  // Telemetry kill switch: stop forwarding client logs so the drain quota can refill.
+  const killed = await guardKillSwitch(KILL_SWITCH_FLAGS.telemetry, KILL_SWITCH_FLAGS.edge);
+  if (killed) return killed;
 
   // Rate limit client logs to prevent flood / DOS
   const allowed = await checkRateLimit(req, {

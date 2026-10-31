@@ -3,6 +3,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { corsHeaders, corsResponse } from '../_shared/cors.ts';
 import { withTelemetry } from '../_shared/observability.ts';
 import { authenticateRequest } from '../_shared/auth.ts';
+import { KILL_SWITCH_FLAGS, guardKillSwitch } from '../_shared/killSwitch.ts';
 
 const supabase = createClient(
   Deno.env.get('SUPABASE_URL')!,
@@ -11,6 +12,10 @@ const supabase = createClient(
 
 serve(withTelemetry('api-keys', async (req) => {
   if (req.method === 'OPTIONS') return corsResponse(req);
+
+  // Short-circuit before any work.
+  const killed = await guardKillSwitch(KILL_SWITCH_FLAGS.edge, KILL_SWITCH_FLAGS.api);
+  if (killed) return killed;
 
   try {
     const auth = await authenticateRequest(req);

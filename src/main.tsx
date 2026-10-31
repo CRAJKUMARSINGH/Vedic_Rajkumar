@@ -3,7 +3,7 @@
  * Initializes the React app with all required providers and global setup.
  *
  * Boot order:
- *  1. validateEnv()           — warn about missing integrations without blocking the shell
+ *  1. assertProdEnv()/warnMissingObservability() — fail fast in prod, warn in dev
  *  2. initObservability()     — Sentry error tracking + PostHog analytics + Web Vitals
  *                               + structured pino logger + correlation IDs (Week 9)
  *  2b. initErrorMonitoring()  — legacy Sentry adapter (kept for existing call sites)
@@ -16,17 +16,35 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
-import '@/config/env';
-import { validateEnv } from '@/lib/envConfig';
+import { assertProdEnv, warnMissingObservability } from '@/config/env';
 import { initErrorMonitoring, captureException } from '@/lib/errorMonitoring';
 import { initTelemetry } from '@/lib/telemetry';
 import { initObservability } from '@/observability';
 import { logger } from '@/observability/logging/logger';
 import { serveAgentText } from '@/lib/agentMode';
+import { hydrateFlags, installKillOverrides } from '@/flags';
+import { installFunnelFlush } from '@/lib/funnel';
+import { detectLocale, setLocale } from '@/i18n';
+import { warmWorker } from '@/workers/client';
 
 // ─── Step 1: Validate environment variables ───────────────────────────────────
-// Warns about missing integration variables; the shell can run in demo/offline mode.
-validateEnv();
+// Prod throws when Supabase/Clerk keys are missing; dev warns and runs in
+// demo/offline mode. Observability stays non-fatal in every mode.
+assertProdEnv();
+warnMissingObservability();
+
+// ─── Step 1b: kill switches + analytics queue (must exist before first render)
+// A `?kill=checkout` URL override has to be installed before anything reads a
+// flag, and the funnel queue needs its unload path wired once, here.
+installKillOverrides();
+hydrateFlags();
+installFunnelFlush();
+
+// ─── Step 1c: locale + worker warm-up (cheap, keeps both bootstrap paths live)
+// Locale is resolved from the browser once; the ephemeris worker is constructed
+// eagerly so the first chart does not pay worker start-up cost.
+setLocale(detectLocale());
+warmWorker();
 
 // ─── Step 2: Week 9 observability (Sentry + PostHog + Web Vitals + correlation)
 initObservability();

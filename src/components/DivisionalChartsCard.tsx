@@ -12,6 +12,7 @@ import {
   type DivisionalChart,
 } from '@/services/divisionalChartsService';
 import type { SupportedLanguage } from '@/services/multiLanguageService';
+import { VerificationBadge } from '@/components/VerificationBadge';
 
 const RASHI_SYMBOLS = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
 const RASHI_NAMES = [
@@ -148,6 +149,7 @@ const DivisionalChartsCard = ({ planetLongitudes, ascendantLongitude, lang }: Pr
         <CardTitle className={`flex items-center gap-2 ${isHi ? 'font-hindi' : ''}`}>
           <span className="text-2xl">🗂️</span>
           {isHi ? 'षोडशवर्ग (विभागीय कुंडलियां)' : 'ShodashVarga (Divisional Charts)'}
+          <VerificationBadge topic="divisional" lang={lang} className="ml-auto" />
         </CardTitle>
         <p className={`text-sm text-muted-foreground ${isHi ? 'font-hindi' : ''}`}>
           {isHi ? '16 विभागीय कुंडलियां • D1 से D60' : '16 divisional charts • D1 to D60'}

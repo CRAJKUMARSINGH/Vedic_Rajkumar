@@ -1,9 +1,7 @@
 import { RATE_LIMITS, type Tier } from '../v1/scopes';
+import { consume as consumeAlgo, rateLimitHeaders as headersAlgo, type BucketState } from './algorithm';
 
-export interface BucketState {
-  tokens: number;
-  lastRefill: number;
-}
+export type { BucketState };
 
 export interface RateLimitResult {
   allowed: boolean;
@@ -13,8 +11,11 @@ export interface RateLimitResult {
 }
 
 /**
- * In-memory token bucket. In production, back this with Redis (Upstash)
- * keyed by API key so it survives across edge isolates.
+ * In-memory token bucket — the LOCAL PREVIEW path only.
+ *
+ * Kept for the browser (instant UI feedback) and for local dev. The authority is
+ * the shared store; see supabase/functions/_shared/ratelimit.ts and
+ * docs/api/RATE_LIMITS.md.
  */
 export const consume = (
   key: string,
@@ -23,24 +24,25 @@ export const consume = (
   now = Date.now(),
 ): RateLimitResult => {
   const { rpm, burst } = RATE_LIMITS[tier] ?? RATE_LIMITS.free;
-  const refillRate = rpm / 60000; // tokens per ms
-  const state = store.get(key) ?? { tokens: burst, lastRefill: now };
-
-  const elapsed = now - state.lastRefill;
-  state.tokens = Math.min(burst, state.tokens + elapsed * refillRate);
-  state.lastRefill = now;
-
-  const allowed = state.tokens >= 1;
-  if (allowed) state.tokens -= 1;
-  store.set(key, state);
-
-  const resetMs = Math.ceil((burst - state.tokens) / refillRate);
-  return { allowed, remaining: Math.floor(state.tokens), limit: rpm, resetMs };
+  const decision = consumeAlgo(store.get(key) ?? null, now, { rpm, burst });
+  store.set(key, decision.next);
+  return {
+    allowed: decision.allowed,
+    remaining: decision.remaining,
+    limit: decision.limit,
+    resetMs: decision.retryAfterMs,
+  };
 };
 
-/** Standard rate-limit response headers. */
-export const rateLimitHeaders = (r: RateLimitResult): Record<string, string> => ({
-  'X-RateLimit-Limit': String(r.limit),
-  'X-RateLimit-Remaining': String(Math.max(0, r.remaining)),
-  'X-RateLimit-Reset': String(Math.ceil(r.resetMs / 1000)),
-});
+/** Human-readable description of the policy, for the X-RateLimit-Policy header. */
+export const policyFor = (tier: Tier): string => {
+  const { rpm, burst, dailyQuota } = RATE_LIMITS[tier] ?? RATE_LIMITS.free;
+  return `${rpm};w=60;burst=${burst};quota=${dailyQuota}/day`;
+};
+
+/** Strip local-only state when reporting headers. */
+export const rateLimitHeaders = (
+  r: RateLimitResult,
+  policy?: string,
+): Record<string, string> => headersAlgo({ limit: r.limit, remaining: r.remaining, retryAfterMs: r.resetMs }, policy);
+

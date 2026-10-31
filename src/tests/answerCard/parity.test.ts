@@ -3,8 +3,9 @@
  * must come from the same renderer. If this fails, either the engine changed
  * without a re-emit, or the renderer grew a condition on content.
  *
- * Rebuilds ONE card (the cheapest way to prove equivalence) at the same
- * `--as-of` the artifacts were emitted with.
+ * Rebuilds ONE card per language (the cheapest way to prove equivalence) at the
+ * same `--as-of` the artifacts were emitted with, and checks both the
+ * language-suffixed artifact and the un-suffixed default-locale copy.
  */
 
 import { readFileSync } from 'node:fs';
@@ -12,7 +13,7 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { buildAnswerCard, DEFAULT_ASK } from '@/services/answerCard/answerCardBuilder';
 import { renderAnswerMarkdown } from '@/services/answerCard/answerCardRender';
-import { ALL_TOPICS } from '@/services/answerCard/AnswerCard.types';
+import { ALL_TOPICS, DEFAULT_LANG, LANGUAGES, type Lang } from '@/services/answerCard/AnswerCard.types';
 import { ANSWER_CARD_AS_OF } from '@/services/answerCard/answerCardAsOf';
 import { resolveJatak } from '@/lib/jataks/resolveJatak';
 
@@ -31,22 +32,42 @@ const ANSWERS = join(import.meta.dirname, '..', '..', '..', 'public', 'answers')
  */
 const lf = (s: string) => s.replace(/\r\n/g, '\n');
 
+const rebuild = (lang: Lang) =>
+  buildAnswerCard(resolveJatak('Premlata Jain')!, DEFAULT_ASK, [...ALL_TOPICS], lang, AS_OF);
+
 describe('answer card parity', () => {
-  it('_all.md is exactly renderAnswerMarkdown(_all.json)', { timeout: 60000 }, () => {
-    const jatak = resolveJatak('Premlata Jain');
-    expect(jatak).not.toBeNull();
+  for (const lang of LANGUAGES) {
+    it(
+      `_all.${lang}.md is exactly renderAnswerMarkdown(build('${lang}'))`,
+      { timeout: 60000 },
+      () => {
+        const card = rebuild(lang);
+        const emitted = readFileSync(join(ANSWERS, card.subject.slug, `_all.${lang}.md`), 'utf8');
+        expect(lf(renderAnswerMarkdown(card)).trim()).toBe(lf(emitted).trim());
+      }
+    );
+  }
 
-    const card = buildAnswerCard(jatak!, DEFAULT_ASK, [...ALL_TOPICS], 'hi', AS_OF);
+  it('the un-suffixed _all.md is the default-locale render', { timeout: 60000 }, () => {
+    const card = rebuild(DEFAULT_LANG);
     const emitted = readFileSync(join(ANSWERS, card.subject.slug, '_all.md'), 'utf8');
-
     expect(lf(renderAnswerMarkdown(card)).trim()).toBe(lf(emitted).trim());
   });
 
   it('hash and provenance are stable across runs at the same as_of', { timeout: 60000 }, () => {
-    const jatak = resolveJatak('Premlata Jain')!;
-    const a = buildAnswerCard(jatak, DEFAULT_ASK, [...ALL_TOPICS], 'hi', AS_OF);
-    const b = buildAnswerCard(jatak, DEFAULT_ASK, [...ALL_TOPICS], 'hi', AS_OF);
+    const a = rebuild('hi');
+    const b = rebuild('hi');
     expect(b.provenance.card_hash).toBe(a.provenance.card_hash);
     expect(b.provenance.computed_at).toBe(`${AS_OF}T00:00:00.000Z`);
+  });
+
+  /**
+   * Locale-independent redaction: the same birth must hash the same no matter
+   * which language the prose is rendered in — otherwise a reader could tell two
+   * "different" people apart by hash alone.
+   */
+  it('birth_hash is identical across languages', { timeout: 60000 }, () => {
+    const byLang = LANGUAGES.map(l => rebuild(l).subject.birth_hash);
+    expect(new Set(byLang).size).toBe(1);
   });
 });

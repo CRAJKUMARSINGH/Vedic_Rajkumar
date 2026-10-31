@@ -1,7 +1,8 @@
 /**
  * PricingPage — /pricing
- * Beautiful Free vs Pro comparison with bilingual support,
- * warm Vedic aesthetic, and inline activation (demo mode).
+ * Beautiful Free vs Pro comparison with bilingual support and a warm Vedic
+ * aesthetic. Upgrades go through the Stripe-backed billing service; the grade
+ * itself comes from the single tier resolver, never from a tamperable plan value.
  */
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
@@ -14,12 +15,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  activateFreePlan, activateProPlan, getCurrentPlan,
+  activateFreePlan,
   PLANS, PRO_FEATURES, getSubscription,
 } from "@/services/subscriptionService";
+import { startCheckout, openBillingPortal, inferRegion } from "@/services/billingService";
+import { currentTier } from "@/features/tier/resolveTier";
 
 const HIGHLIGHTS = [
   {
@@ -53,10 +55,10 @@ const FAQS = [
     aHi: "हाँ — हमेशा। कोई छुपा शुल्क नहीं, कोई समाप्ति तिथि नहीं।",
   },
   {
-    q: "How is Pro activated in demo mode?",
-    a: "Enter your name and click Activate — Pro unlocks instantly. Payment gateway integration is coming soon.",
-    qHi: "डेमो में प्रो कैसे सक्रिय होता है?",
-    aHi: "नाम दर्ज करें और सक्रिय करें — प्रो तुरंत खुल जाता है। असली भुगतान जल्द आएगा।",
+    q: "How do I activate Pro?",
+    a: "Click Upgrade to Pro — you'll be taken to our secure Stripe checkout, with prices shown in your local currency.",
+    qHi: "प्रो कैसे सक्रिय करें?",
+    aHi: "‘प्रो में अपग्रेड करें’ पर क्लिक करें — सुरक्षित Stripe चेकआउट पर ले जाया जाएगा।",
   },
   {
     q: "What is the refund policy once billing goes live?",
@@ -74,19 +76,43 @@ const FAQS = [
 
 export default function PricingPage() {
   const [isHi, setIsHi] = useState(false);
-  const [activating, setActivating] = useState<"free" | "pro" | null>(null);
+  const [activating, setActivating] = useState<"free" | null>(null);
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [success, setSuccess] = useState<"free" | "pro" | null>(null);
-  const currentPlan = getCurrentPlan();
+  const [success, setSuccess] = useState<"free" | null>(null);
+  const [billingBusy, setBillingBusy] = useState(false);
+  const [billingError, setBillingError] = useState<string | null>(null);
+  // Grade comes from the single tier resolver (server → seeded vr_tier → legacy
+  // plan → free), never from a client-tamperable plan value on its own.
+  const isPaid = currentTier() !== "free";
   const sub = getSubscription();
 
-  const handleActivate = (plan: "free" | "pro") => {
+  const handleActivate = () => {
     if (!name.trim()) return;
-    if (plan === "pro") activateProPlan(name.trim(), email.trim(), "pricing_page");
-    else activateFreePlan(name.trim(), email.trim());
+    activateFreePlan(name.trim(), "");
     setActivating(null);
-    setSuccess(plan);
+    setSuccess("free");
+  };
+
+  const handleCheckout = async () => {
+    setBillingBusy(true);
+    setBillingError(null);
+    try {
+      await startCheckout("pro", inferRegion()); // server owns the price id
+    } catch (err) {
+      setBillingError(err instanceof Error ? err.message : "checkout_failed");
+      setBillingBusy(false);
+    }
+  };
+
+  const handlePortal = async () => {
+    setBillingBusy(true);
+    setBillingError(null);
+    try {
+      await openBillingPortal();
+    } catch (err) {
+      setBillingError(err instanceof Error ? err.message : "portal_failed");
+      setBillingBusy(false);
+    }
   };
 
   const icons: Record<string, React.ReactNode> = {
@@ -140,7 +166,7 @@ export default function PricingPage() {
               : "Classical Vedic astrology meets modern technology. Start free, upgrade when you're ready."}
           </p>
 
-          {currentPlan === "pro" && sub && (
+          {isPaid && sub && (
             <div className="inline-flex items-center gap-2 bg-amber-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
               <Star className="w-4 h-4 fill-white" />
               {isHi ? `⚡ ${sub.name}, आपका प्रो प्लान सक्रिय है!` : `⚡ Pro Active — Welcome, ${sub.name}!`}
@@ -153,13 +179,13 @@ export default function PricingPage() {
 
           {/* Free */}
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}>
-            <Card className={`border-2 h-full ${currentPlan === "free" ? "border-slate-400" : "border-slate-200"}`}>
+            <Card className={`border-2 h-full ${!isPaid ? "border-slate-400" : "border-slate-200"}`}>
               <CardHeader className="bg-slate-50 rounded-t-xl pb-4">
                 <div className="flex items-center justify-between">
                   <CardTitle className={`text-slate-800 ${isHi ? "font-hindi" : ""}`}>
                     {isHi ? PLANS.free.nameHi : PLANS.free.name}
                   </CardTitle>
-                  {currentPlan === "free" && (
+                  {!isPaid && (
                     <Badge className="bg-slate-600 text-white text-xs">
                       {isHi ? "वर्तमान" : "Current"}
                     </Badge>
@@ -188,7 +214,7 @@ export default function PricingPage() {
                 {activating === "free" ? (
                   <div className="space-y-2">
                     <Input placeholder={isHi ? "आपका नाम" : "Your name"} value={name} onChange={e => setName(e.target.value)} />
-                    <Button onClick={() => handleActivate("free")} disabled={!name.trim()} className="w-full">
+                    <Button onClick={handleActivate} disabled={!name.trim()} className="w-full">
                       {isHi ? "सक्रिय करें" : "Activate"}
                     </Button>
                   </div>
@@ -198,8 +224,8 @@ export default function PricingPage() {
                     {isHi ? "सक्रिय!" : "Activated!"}
                   </div>
                 ) : (
-                  <Button variant="outline" className="w-full" onClick={() => setActivating("free")} disabled={currentPlan !== "free" ? false : true}>
-                    {currentPlan === "free" ? (isHi ? "सक्रिय प्लान" : "Current Plan") : (isHi ? "निःशुल्क पर जाएं" : "Switch to Free")}
+                  <Button variant="outline" className="w-full" onClick={() => setActivating("free")} disabled={!isPaid}>
+                    {!isPaid ? (isHi ? "सक्रिय प्लान" : "Current Plan") : (isHi ? "निःशुल्क पर जाएं" : "Switch to Free")}
                   </Button>
                 )}
               </CardContent>
@@ -208,7 +234,7 @@ export default function PricingPage() {
 
           {/* Pro */}
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.15 }}>
-            <Card className={`border-2 h-full relative ${currentPlan === "pro" ? "border-amber-500" : "border-amber-400"}`}>
+            <Card className={`border-2 h-full relative ${isPaid ? "border-amber-500" : "border-amber-400"}`}>
               <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
                 <Badge className="bg-amber-500 text-white border-0 px-4 py-1">
                   <Sparkles className="w-3 h-3 mr-1" />
@@ -221,7 +247,7 @@ export default function PricingPage() {
                     <Zap className="w-5 h-5 text-amber-500" />
                     {isHi ? PLANS.pro.nameHi : PLANS.pro.name}
                   </CardTitle>
-                  {currentPlan === "pro" && (
+                  {isPaid && (
                     <Badge className="bg-amber-500 text-white text-xs">
                       {isHi ? "सक्रिय" : "Active"}
                     </Badge>
@@ -233,7 +259,7 @@ export default function PricingPage() {
                     {isHi ? "/ माह (लक्ष्य)" : "/ month (target)"}
                   </span>
                   <span className="ml-2 text-xs text-amber-700 font-medium bg-amber-100 px-2 py-0.5 rounded">
-                    {isHi ? "डेमो मोड — जल्द बिलिंग" : "Demo mode — billing soon"}
+                    {isHi ? "सुरक्षित Stripe चेकआउट" : "Secure Stripe checkout"}
                   </span>
                 </div>
               </CardHeader>
@@ -251,43 +277,32 @@ export default function PricingPage() {
                   ))}
                 </ul>
 
-                {activating === "pro" ? (
-                  <div className="space-y-2">
-                    <div className="grid grid-cols-2 gap-2">
-                      <div>
-                        <Label className={`text-xs ${isHi ? "font-hindi" : ""}`}>{isHi ? "नाम *" : "Name *"}</Label>
-                        <Input className="mt-1 h-8 text-sm" placeholder={isHi ? "नाम" : "Name"} value={name} onChange={e => setName(e.target.value)} />
-                      </div>
-                      <div>
-                        <Label className={`text-xs ${isHi ? "font-hindi" : ""}`}>{isHi ? "ईमेल" : "Email"}</Label>
-                        <Input className="mt-1 h-8 text-sm" type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-                      </div>
-                    </div>
-                    <div className="bg-amber-50 border border-amber-200 rounded p-2 text-xs text-amber-700">
-                      {isHi
-                        ? "डेमो: प्रो तुरंत सक्रिय। असली UPI/Netbanking जल्द।"
-                        : "Demo mode: Pro unlocks instantly. Real UPI/Netbanking coming soon."}
-                    </div>
-                    <Button onClick={() => handleActivate("pro")} disabled={!name.trim()} className="w-full bg-amber-500 hover:bg-amber-600 text-white">
-                      <Zap className="w-4 h-4 mr-1" />
-                      {isHi ? "⚡ प्रो सक्रिय करें" : "⚡ Activate Pro"}
-                    </Button>
-                  </div>
-                ) : success === "pro" ? (
-                  <div className="text-center text-emerald-600 font-semibold flex items-center justify-center gap-2">
-                    <CheckCircle2 className="w-4 h-4" />
-                    {isHi ? "प्रो सक्रिय! 🎉" : "Pro Activated! 🎉"}
-                  </div>
+                {isPaid ? (
+                  <Button
+                    data-testid="manage-subscription"
+                    variant="outline"
+                    className="w-full border-amber-300 text-amber-800 hover:bg-amber-50"
+                    onClick={handlePortal}
+                    disabled={billingBusy}
+                  >
+                    <Shield className="w-4 h-4 mr-1" />
+                    {isHi ? "सदस्यता प्रबंधित करें" : "Manage subscription"}
+                  </Button>
                 ) : (
                   <Button
+                    data-testid="plan-cta-pro"
                     className="w-full bg-amber-500 hover:bg-amber-600 text-white"
-                    onClick={() => setActivating("pro")}
+                    onClick={handleCheckout}
+                    disabled={billingBusy}
                   >
                     <Sparkles className="w-4 h-4 mr-1" />
-                    {currentPlan === "pro"
-                      ? (isHi ? "प्रो सक्रिय है ✓" : "Pro Active ✓")
-                      : (isHi ? "प्रो में अपग्रेड करें" : "Upgrade to Pro")}
+                    {isHi ? "प्रो में अपग्रेड करें" : "Upgrade to Pro"}
                   </Button>
+                )}
+                {billingError && (
+                  <p className="text-xs text-red-600 text-center" role="alert">
+                    {isHi ? "भुगतान शुरू नहीं हो सका। पुनः प्रयास करें।" : "Could not start billing. Please try again."}
+                  </p>
                 )}
               </CardContent>
             </Card>
@@ -419,10 +434,13 @@ export default function PricingPage() {
             <Button
               size="lg"
               className="bg-amber-500 hover:bg-amber-600 text-white"
-              onClick={() => { setActivating("pro"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              onClick={() => (isPaid ? handlePortal() : handleCheckout())}
+              disabled={billingBusy}
             >
               <Zap className="w-4 h-4 mr-1" />
-              {isHi ? "प्रो में अपग्रेड करें" : "Upgrade to Pro"}
+              {isPaid
+                ? (isHi ? "सदस्यता प्रबंधित करें" : "Manage subscription")
+                : (isHi ? "प्रो में अपग्रेड करें" : "Upgrade to Pro")}
             </Button>
           </div>
         </motion.div>

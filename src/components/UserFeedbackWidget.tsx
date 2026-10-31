@@ -15,6 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { track } from '@/lib/funnel';
 import { 
   Star, 
   MessageSquare, 
@@ -114,6 +115,10 @@ export default function UserFeedbackWidget({ lang = 'en', compact = false, showA
       });
 
       mirrorUserFeedbackToLegacy(submitted);
+
+      // GTM funnel step. Deliberately fires only the classification, never the
+      // free text — feedback bodies are user prose and may carry PII.
+      track('feedback_submitted', { type: submitted.type, category: submitted.category });
 
       setSubmittedFeedback(submitted);
       setFeedback({});

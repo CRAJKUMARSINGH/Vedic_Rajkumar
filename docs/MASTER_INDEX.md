@@ -138,6 +138,18 @@ observability/
 
 ---
 
+## Compliance & Legal Documents
+
+| Document                                                        | Covers                             |
+| --------------------------------------------------------------- | ---------------------------------- |
+| [docs/legal/DCO.md](./legal/DCO.md)                             | Contributor sign-off (DCO 1.1)     |
+| [docs/legal/DSR.md](./legal/DSR.md)                             | Data Subject Request runbook       |
+| [docs/legal/DPA_REGISTER.md](./legal/DPA_REGISTER.md)           | Data Processing Agreement register |
+| [docs/policies/DATA_RETENTION.md](./policies/DATA_RETENTION.md) | Retention schedule                 |
+| [docs/security/PENTEST_SCOPE.md](./security/PENTEST_SCOPE.md)   | Pen-test scope                     |
+
+---
+
 ## Release Tags
 
 | Tag            | After Week | Milestone             |

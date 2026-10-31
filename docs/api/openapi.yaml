@@ -1,157 +1,632 @@
-openapi: 3.0.3
-info:
-  title: Vedic Rajkumar Astrological API
-  version: 1.0.0
-  description: Enterprise REST API for sidereal Vedic astrology calculations, Gochar transits, Kundli Milan, and Panchang.
-
-servers:
-  - url: https://api.vedic-rajkumar.com/v1
-    description: Production Edge API
-  - url: http://localhost:5173/api
-    description: Local Development / Fallback
-
-paths:
-  /charts/calculate:
-    post:
-      summary: Calculate birth chart (Kundli)
-      operationId: calculateKundli
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [birthData]
-              properties:
-                birthData:
-                  type: object
-                  required: [date, time, location]
-                  properties:
-                    date: { type: string, format: date, example: "1990-05-15" }
-                    time: { type: string, pattern: "^\\d{2}:\\d{2}$", example: "14:30" }
-                    location: { type: string, example: "New Delhi (28.6139, 77.2090)" }
-                    timezone: { type: number, default: 5.5 }
-                chartStyle:
-                  type: string
-                  enum: [north-indian, south-indian]
-                  default: north-indian
-                ayanamsa:
-                  type: string
-                  enum: [Lahiri, Raman, KP]
-                  default: Lahiri
-      responses:
-        '200':
-          description: Successful Kundli calculation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResponseKundli'
-
-  /transits/double-transit:
-    post:
-      summary: Calculate Jupiter-Saturn double transit influences
-      operationId: calculateDoubleTransit
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                targetDate: { type: string, format: date }
-                natalMoonRashi: { type: integer, minimum: 0, maximum: 11 }
-      responses:
-        '200':
-          description: Double transit analysis results
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResponseTransit'
-
-  /matchmaking/ashtakoota:
-    post:
-      summary: Calculate 36-point Ashta Koota Kundli Milan
-      operationId: calculateMatchmaking
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [maleBirthData, femaleBirthData]
-              properties:
-                maleBirthData:
-                  $ref: '#/components/schemas/BirthData'
-                femaleBirthData:
-                  $ref: '#/components/schemas/BirthData'
-      responses:
-        '200':
-          description: Ashta Koota compatibility report
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResponseMatchmaking'
-
-  /panchang/daily:
-    post:
-      summary: Get 5-limb Hindu Panchang for given date and coordinates
-      operationId: getDailyPanchang
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [date]
-              properties:
-                date: { type: string, format: date }
-                coordinates:
-                  type: object
-                  properties:
-                    lat: { type: number }
-                    lon: { type: number }
-      responses:
-        '200':
-          description: Daily Panchang details (Tithi, Nakshatra, Yoga, Karana, Var)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResponsePanchang'
-
-components:
-  schemas:
-    BirthData:
-      type: object
-      required: [date, time, location]
-      properties:
-        date: { type: string, format: date }
-        time: { type: string }
-        location: { type: string }
-        timezone: { type: number }
-
-    ApiResponseKundli:
-      type: object
-      properties:
-        status: { type: integer, example: 200 }
-        source: { type: string, enum: [remote, fallback-local] }
-        data: { type: object }
-
-    ApiResponseTransit:
-      type: object
-      properties:
-        status: { type: integer, example: 200 }
-        source: { type: string }
-        data: { type: object }
-
-    ApiResponseMatchmaking:
-      type: object
-      properties:
-        status: { type: integer, example: 200 }
-        source: { type: string }
-        data: { type: object }
-
-    ApiResponsePanchang:
-      type: object
-      properties:
-        status: { type: integer, example: 200 }
-        source: { type: string }
-        data: { type: object }
+# @generated by scripts/emit-openapi.ts — do not hand-edit
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Vedic Rajkumar API",
+    "version": "1.0.0",
+    "description": "Public astrology engine API"
+  },
+  "servers": [
+    {
+      "url": "https://api.vedic-rajkumar.app"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ApiKey": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "API key (vk_live_… / vk_test_…)"
+      }
+    },
+    "schemas": {},
+    "parameters": {}
+  },
+  "paths": {
+    "/v1/charts": {
+      "post": {
+        "summary": "Create a natal chart",
+        "security": [
+          {
+            "ApiKey": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "date": {
+                    "type": "string",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                  },
+                  "time": {
+                    "type": "string",
+                    "pattern": "^\\d{2}:\\d{2}(:\\d{2})?$"
+                  },
+                  "latitude": {
+                    "type": "number",
+                    "minimum": -90,
+                    "maximum": 90
+                  },
+                  "longitude": {
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180
+                  },
+                  "timezone": {
+                    "type": "string",
+                    "default": "UTC"
+                  },
+                  "name": {
+                    "type": "string",
+                    "maxLength": 120
+                  }
+                },
+                "required": [
+                  "date",
+                  "time",
+                  "latitude",
+                  "longitude"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "lagna": {
+                      "type": "object",
+                      "properties": {
+                        "sign": {
+                          "type": "string"
+                        },
+                        "degree": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "sign",
+                        "degree"
+                      ]
+                    },
+                    "planets": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "graha": {
+                            "type": "string"
+                          },
+                          "sign": {
+                            "type": "string"
+                          },
+                          "degree": {
+                            "type": "number"
+                          },
+                          "nakshatra": {
+                            "type": "string"
+                          },
+                          "pada": {
+                            "type": "number"
+                          },
+                          "retrograde": {
+                            "type": "boolean"
+                          },
+                          "house": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "graha",
+                          "sign",
+                          "degree",
+                          "nakshatra",
+                          "pada",
+                          "retrograde",
+                          "house"
+                        ]
+                      }
+                    },
+                    "houses": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "house": {
+                            "type": "number"
+                          },
+                          "sign": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "house",
+                          "sign"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "lagna",
+                    "planets",
+                    "houses"
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        }
+      }
+    },
+    "/v1/answer": {
+      "get": {
+        "summary": "Get a precomputed answer card (verdict-first)",
+        "description": "Returns the deterministic verdict for a person in the seed bank. Reply from direct_answer; do not recompute.",
+        "security": [
+          {
+            "ApiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "required": true,
+            "name": "person",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "name": "topics",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "hi",
+                "en"
+              ],
+              "default": "en"
+            },
+            "required": false,
+            "name": "lang",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "required": false,
+            "name": "asOf",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "maxLength": 240
+            },
+            "required": false,
+            "name": "asked",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Answer card",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "card_version": {
+                      "type": "string",
+                      "enum": [
+                        "1.0"
+                      ]
+                    },
+                    "subject": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "slug": {
+                          "type": "string"
+                        },
+                        "aliases": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "jatak_id": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "dob": {
+                          "type": "string"
+                        },
+                        "tob": {
+                          "type": "string"
+                        },
+                        "place": {
+                          "type": "string"
+                        },
+                        "lat": {
+                          "type": "number"
+                        },
+                        "lon": {
+                          "type": "number"
+                        },
+                        "tz": {
+                          "type": "string"
+                        },
+                        "tz_defaulted": {
+                          "type": "boolean"
+                        },
+                        "birth_hash": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "slug",
+                        "aliases",
+                        "jatak_id"
+                      ]
+                    },
+                    "query": {
+                      "type": "object",
+                      "properties": {
+                        "asked": {
+                          "type": "string"
+                        },
+                        "topics": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "health",
+                              "house_construction",
+                              "career",
+                              "marriage",
+                              "finance"
+                            ]
+                          }
+                        },
+                        "language": {
+                          "type": "string",
+                          "enum": [
+                            "hi",
+                            "en"
+                          ]
+                        },
+                        "as_of": {
+                          "type": "string"
+                        },
+                        "reference_type": {
+                          "type": "string",
+                          "enum": [
+                            "natal",
+                            "prashna"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "asked",
+                        "topics",
+                        "language",
+                        "as_of",
+                        "reference_type"
+                      ]
+                    },
+                    "direct_answer": {
+                      "type": "object",
+                      "properties": {
+                        "en": {
+                          "type": "string"
+                        },
+                        "hi": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "en",
+                        "hi"
+                      ]
+                    },
+                    "verdicts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "topic": {
+                            "type": "string",
+                            "enum": [
+                              "health",
+                              "house_construction",
+                              "career",
+                              "marriage",
+                              "finance"
+                            ]
+                          },
+                          "headline": {
+                            "type": "object",
+                            "properties": {
+                              "en": {
+                                "type": "string"
+                              },
+                              "hi": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "en",
+                              "hi"
+                            ]
+                          },
+                          "score_0_100": {
+                            "type": "number"
+                          },
+                          "band": {
+                            "type": "string",
+                            "enum": [
+                              "excellent",
+                              "good",
+                              "average",
+                              "caution",
+                              "avoid"
+                            ]
+                          },
+                          "engine_verdict": {
+                            "type": "string",
+                            "enum": [
+                              "DELIVERING",
+                              "CONDITIONAL",
+                              "DELAYED",
+                              "BLOCKED"
+                            ]
+                          },
+                          "confidence_0_1": {
+                            "type": "number"
+                          },
+                          "window": {
+                            "type": "object",
+                            "nullable": true,
+                            "properties": {
+                              "from": {
+                                "type": "string"
+                              },
+                              "to": {
+                                "type": "string"
+                              },
+                              "label": {
+                                "type": "object",
+                                "properties": {
+                                  "en": {
+                                    "type": "string"
+                                  },
+                                  "hi": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "en",
+                                  "hi"
+                                ]
+                              },
+                              "approximate": {
+                                "type": "boolean"
+                              }
+                            },
+                            "required": [
+                              "from",
+                              "to",
+                              "label",
+                              "approximate"
+                            ]
+                          },
+                          "rationale": {
+                            "type": "object",
+                            "properties": {
+                              "en": {
+                                "type": "string"
+                              },
+                              "hi": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "en",
+                              "hi"
+                            ]
+                          },
+                          "conflicts": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "evidence": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "layer": {
+                                  "type": "string"
+                                },
+                                "score": {
+                                  "type": "number"
+                                },
+                                "finding": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "layer",
+                                "score",
+                                "finding"
+                              ]
+                            }
+                          },
+                          "remedies": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "en": {
+                                  "type": "string"
+                                },
+                                "hi": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "en",
+                                "hi"
+                              ]
+                            }
+                          },
+                          "caveats": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "en": {
+                                  "type": "string"
+                                },
+                                "hi": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "en",
+                                "hi"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "topic",
+                          "headline",
+                          "score_0_100",
+                          "band",
+                          "engine_verdict",
+                          "confidence_0_1",
+                          "window",
+                          "rationale",
+                          "conflicts",
+                          "evidence",
+                          "remedies",
+                          "caveats"
+                        ]
+                      }
+                    },
+                    "provenance": {
+                      "type": "object",
+                      "properties": {
+                        "engine_version": {
+                          "type": "string"
+                        },
+                        "ayanamsa": {
+                          "type": "string"
+                        },
+                        "house_system": {
+                          "type": "string"
+                        },
+                        "dasha_system": {
+                          "type": "string"
+                        },
+                        "ephemeris": {
+                          "type": "string",
+                          "enum": [
+                            "local",
+                            "swisseph"
+                          ]
+                        },
+                        "computed_at": {
+                          "type": "string"
+                        },
+                        "as_of": {
+                          "type": "string"
+                        },
+                        "input_hash": {
+                          "type": "string"
+                        },
+                        "card_hash": {
+                          "type": "string"
+                        },
+                        "source_files": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "required": [
+                        "engine_version",
+                        "ayanamsa",
+                        "house_system",
+                        "dasha_system",
+                        "ephemeris",
+                        "computed_at",
+                        "as_of",
+                        "input_hash",
+                        "card_hash",
+                        "source_files"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "card_version",
+                    "subject",
+                    "query",
+                    "direct_answer",
+                    "verdicts",
+                    "provenance"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Missing answers:read scope"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        }
+      }
+    }
+  }
+}

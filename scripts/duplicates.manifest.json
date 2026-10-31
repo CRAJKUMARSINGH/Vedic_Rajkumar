@@ -36,6 +36,18 @@
       "reason": "duplicate of export-user-data",
       "replacedBy": "supabase/functions/export-user-data",
       "adr": "ADR-004"
+    },
+    {
+      "path": "src/pages/Pricing.tsx",
+      "reason": "second, unrouted pricing page posting a checkout shape that contradicts the billing contract",
+      "replacedBy": "src/pages/PricingPage.tsx (routed; uses src/services/billingService.ts)",
+      "adr": "ADR-004"
+    },
+    {
+      "path": "src/workers/ephemerisWorkerClient.ts",
+      "reason": "duplicate main-thread worker client (ts-nocheck, no timeout)",
+      "replacedBy": "src/workers/client.ts",
+      "adr": "ADR-004"
     }
   ],
   "generated": [
