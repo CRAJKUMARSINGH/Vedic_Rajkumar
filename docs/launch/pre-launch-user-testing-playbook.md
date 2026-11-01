@@ -95,16 +95,16 @@ questions of the answer layer.
 
 The robot is defined by the gate matrix; run it **in order** and keep the artifacts.
 
-| Gate                | Command                                                        | Blocking      | Result on 2026-10-31 (**MEASURED**)                                                             |
-| ------------------- | -------------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------- |
-| G0 static           | `npm run typecheck` · `npm run lint`                           | typecheck yes | typecheck **exit 0**; lint **0 errors / 1258 warnings**                                         |
-| G1 unit/integration | `npm run test:run`                                             | yes           | **2092 passed** (126 files, 0 failed tests); 1 suite red (`festivals.golden.test.ts`, env-only) |
-| G2 accuracy         | `npm run validate:accuracy`                                    | yes           | **155/155 PASS**, exit 0                                                                        |
-| G3 a11y             | `npm run test:a11y`                                            | yes           | **17/17 PASS**, exit 0                                                                          |
-| G4 build            | `npm run build`                                                | yes           | **built in 38.76 s**, `dist/` emitted                                                           |
-| G5 robustness       | `npx playwright test --config=playwright.robustness.config.ts` | yes           | **24/24 PASS**                                                                                  |
-| G5b tier robot      | `npx playwright test --config=playwright.tiers.config.ts`      | yes           | **15 passed / 0 failed / 9 fixme-skipped**                                                      |
-| G6 perf (periodic)  | `npm run test:perf`                                            | weekly        | not run                                                                                         |
+| Gate                | Command                                                        | Blocking      | Result on 2026-10-31 (**MEASURED**)                                                                                                     |
+| ------------------- | -------------------------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| G0 static           | `npm run typecheck` · `npm run lint`                           | typecheck yes | typecheck **exit 0**; lint **0 errors / 1258 warnings**                                                                                 |
+| G1 unit/integration | `npm run test:run`                                             | yes           | **2092 passed** (126 files, 0 failed tests); fixture-dependent festival suite skipped when `festivals.golden.json` is absent (env-only) |
+| G2 accuracy         | `npm run validate:accuracy`                                    | yes           | **155/155 PASS**, exit 0                                                                                                                |
+| G3 a11y             | `npm run test:a11y`                                            | yes           | **17/17 PASS**, exit 0                                                                                                                  |
+| G4 build            | `npm run build`                                                | yes           | **built in 38.76 s**, `dist/` emitted                                                                                                   |
+| G5 robustness       | `npx playwright test --config=playwright.robustness.config.ts` | yes           | **24/24 PASS**                                                                                                                          |
+| G5b tier robot      | `npx playwright test --config=playwright.tiers.config.ts`      | yes           | **15 passed / 0 failed / 9 fixme-skipped**                                                                                              |
+| G6 perf (periodic)  | `npm run test:perf`                                            | weekly        | not run                                                                                                                                 |
 
 **Start the dev server in a separate terminal first** (`npm run dev -- --host 127.0.0.1`), and clear CI
 so Playwright reuses it: `$env:CI=$null`. Evidence lives in `reports/robustness/*.log`,

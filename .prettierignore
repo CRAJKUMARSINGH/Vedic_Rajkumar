@@ -10,7 +10,8 @@ public/answers/
 # `npm run answers:html:check` in CI.
 public/a/
 
-# Frozen handoff archive (reports/handoff/...). MANIFEST.md and the archived
-# copies are byte-reproducible evidence of a past build — reformatting them via
-# the pre-commit `prettier --write` would falsify the frozen snapshot.
-reports/handoff/
+# Measurement / evidence archive (reports/...): frozen handoff snapshots, tier
+# robot storage state and robustness reports. These are byte-reproducible
+# evidence of a past run — reformatting them via the pre-commit `prettier --write`
+# would falsify the record.
+reports/

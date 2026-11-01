@@ -74,15 +74,25 @@ if (runTests) {
 }
 
 const report = JSON.parse(readFileSync(REPORT, 'utf8'));
-const tests = report.numTotalTests;
+// The claim docs — and the README badge — state "<n> passing", so the canonical
+// is the *passing* count, not `numTotalTests`. The two diverge as soon as a suite
+// is legitimately skipped (e.g. the festivals golden fixture, which is absent on a
+// fresh clone), because vitest counts skipped tests in `numTotalTests`. Failures
+// are still caught explicitly via `numFailedTests` below, so this cannot mask a
+// red suite — it only stops a skip from masquerading as a new passing test.
+const tests = report.numPassedTests ?? report.numTotalTests;
 const testFiles = report.testResults.length;
 const failedTests = report.numFailedTests ?? 0;
+const skippedTests = report.numPendingTests ?? 0;
 
 console.log('Canonical (derived from the repository):');
 console.log(`  version       : ${version}`);
 console.log(`  corpus charts : ${corpusCharts}`);
 console.log(`  golden charts : ${goldenCharts}`);
-console.log(`  tests         : ${tests} across ${testFiles} files`);
+console.log(
+  `  tests         : ${tests} passed across ${testFiles} files` +
+    (skippedTests ? ` (${skippedTests} skipped)` : ''),
+);
 console.log('');
 
 // ─── Assertions: a captured doc value must equal the canonical value ─────────
