@@ -1,0 +1,44 @@
+# CODEOWNERS — who must review what.
+#
+# Default owner catches everything; the rest exist because a mistake in these
+# paths is expensive and silent. Order matters: last match wins.
+
+*                                   @vedic-rajkumar/core
+
+# ── the four paths where a bad merge is expensive ───────────────────────────
+
+# Migrations are forward-only and touch other people's birth data.
+/supabase/migrations/               @vedic-rajkumar/data @vedic-rajkumar/core
+/supabase/tests/                    @vedic-rajkumar/data
+
+# RLS policies are the actual authorisation boundary.
+/supabase/functions/_shared/        @vedic-rajkumar/security @vedic-rajkumar/core
+
+# CI gates: loosening one silently disables a guarantee.
+/.github/workflows/                 @vedic-rajkumar/security @vedic-rajkumar/core
+/.github/CODEOWNERS                 @vedic-rajkumar/core
+
+# Compliance artefacts: an auditor reads these, not the code.
+/docs/legal/                        @vedic-rajkumar/security
+/docs/policies/                     @vedic-rajkumar/security
+/docs/adr/                          @vedic-rajkumar/core
+/docs/CLAIMS.md                     @vedic-rajkumar/core
+
+# Licence gate — this is what makes ADR-007 binding.
+/scripts/license-allowlist.json     @vedic-rajkumar/core @vedic-rajkumar/security
+/package-lock.json                  @vedic-rajkumar/security
+
+# The claim guard itself.
+/scripts/verify-claims.mjs          @vedic-rajkumar/core
+
+# Accuracy is the product's only real trust asset.
+/src/features/ephemeris/            @vedic-rajkumar/accuracy
+/src/tests/accuracy/                @vedic-rajkumar/accuracy
+
+# Release mechanics.
+/release.config.js                  @vedic-rajkumar/core
+/CHANGELOG.md                       @vedic-rajkumar/core
+
+# Governance.
+/GOVERNANCE.md                      @vedic-rajkumar/core
+/docs/adr/ADR-*.md                  @vedic-rajkumar/core

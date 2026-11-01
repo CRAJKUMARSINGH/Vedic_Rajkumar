@@ -271,6 +271,8 @@ ReportShell.Header = function ReportShellHeader({
         className,
       )}
     >
+      {/* festival rule — gold hairline above the report motif */}
+      <div style={{ height: 2, background: 'linear-gradient(90deg,#d99a2b,#c0392b 50%,#d99a2b)', marginBottom: 8 }} />
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="flex items-start gap-4 min-w-0">
           {icon && (

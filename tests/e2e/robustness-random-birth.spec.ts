@@ -194,6 +194,37 @@ test.describe('Robustness — random birth data', () => {
       report.births.push({ ...birth, pageErrors: errors.pageErrors, consoleErrors: errors.consoleErrors });
     });
   });
+
+  /**
+   * Regression (2026-10-31): the location suggestion list used to be an
+   * absolutely-positioned overlay sitting on top of the submit button, so the
+   * primary action was not reachable while suggestions were visible. The random
+   * births above only tripped it by a timing race (the 500 ms search debounce vs.
+   * the click), which is why this case is deterministic.
+   */
+  test('location suggestions do not block the primary submit action', async ({ page }) => {
+    const errors = collectErrors(page);
+    await seedStorage(page);
+
+    await page.goto('/horoscope', { waitUntil: 'domcontentloaded', timeout: 60_000 });
+    await expect(page.locator('#dob')).toBeVisible({ timeout: 30_000 });
+
+    await page.locator('#dob').fill('12/01/1935');
+    await page.locator('#tob').fill('18:20');
+    // Deliberately never pick a suggestion: coordinates are optional.
+    await page.locator('#pob').fill('Udaipur, Rajasthan');
+
+    // Reach the exact state that used to swallow the click.
+    await expect(page.getByTestId('location-suggestions')).toBeVisible({ timeout: 30_000 });
+
+    const submit = page.getByRole('button', { name: /Get Transit Reading|गोचर फल देखें/ });
+    // Tight budget: the CTA must be clickable on the first attempt.
+    await submit.click({ timeout: 10_000 });
+    await expect(page.getByText(/Overall Score|समग्र स्कोर/).first()).toBeVisible({ timeout: 45_000 });
+
+    await assertNoCrash(page, 'location-suggestions');
+    expect(errors.pageErrors, 'uncaught page error while suggestions were open').toEqual([]);
+  });
 });
 
 test.describe('Robustness — multidimensional Prashna questions', () => {

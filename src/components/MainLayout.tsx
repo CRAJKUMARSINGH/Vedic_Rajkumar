@@ -4,7 +4,9 @@ import Navigation from './Navigation';
 import { BreadcrumbNavigation } from './BreadcrumbNavigation';
 import MobileNavigation from './MobileNavigation';
 import UpgradeBanner from './UpgradeBanner';
+import TrialBanner from './TrialBanner';
 import { PrototypeStatusBanner } from './PrototypeStatusBanner';
+import { KillSwitchBanner } from './KillSwitchBanner';
 import { darkModeService } from '@/services/darkModeService';
 import { type SupportedLanguage } from '@/services/multiLanguageService';
 
@@ -50,8 +52,10 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-auspicious-pattern text-foreground transition-colors duration-300">
+      <KillSwitchBanner isHi={lang === 'hi'} />
       <PrototypeStatusBanner isHi={lang === 'hi'} />
       <UpgradeBanner isHi={lang === 'hi'} />
+      <TrialBanner isHi={lang === 'hi'} />
       <Navigation lang={lang === 'hi' ? 'hi' : 'en'} onLangToggle={handleLangToggle} />
 
       <main className="flex-1">

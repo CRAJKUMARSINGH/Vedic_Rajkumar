@@ -11,7 +11,7 @@ on:
 jobs:
   # ── Fast gate (every PR) ──────────────────────────────────────────────────
   corpus-gate:
-    name: Corpus gate (15 charts)
+    name: Corpus · Shadbala · hook budget
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,8 +27,17 @@ jobs:
       - name: Run accuracy corpus gate
         run: npm run test:accuracy:corpus
 
-      - name: Run timezone wiring guard
-        run: npm run test:tz-wiring
+      - name: Run Shadbala accuracy tests (independent oracle)
+        # Week 15: analytic closed forms, Saptavarga/D4/D20/D60 mapping, the
+        # 15-chart engine coherence sweep, and the birth-offset wiring effect.
+        # The npm script pins --hookTimeout=2000 itself.
+        run: npm run test:accuracy:shadbala
+
+      - name: Timezone wiring + hook budget (DEF-010)
+        # The suites that flaked (DEF-010) are hookless, so an explicit 2s hook
+        # budget proves they fail on an assertion — never on wall-clock. A
+        # silent revert to a wall-clock timeout would show up here.
+        run: npx vitest run src/tests/chartTimezoneWiring.test.ts src/tests/answerCard/schema.test.ts --hookTimeout=2000
 
       - name: Upload accuracy results
         if: always()

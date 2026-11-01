@@ -27,3 +27,41 @@ export const computeErrorBudget = (slo: SLO, currentAvailability: number) => {
     healthy: currentAvailability >= slo.target,
   };
 };
+
+/**
+ * PURE SLO math. Shared by the client and the edge (ADR-003 import map).
+ *
+ * The AUTHORITY is public.evaluate_slos() on the server; this module exists so the
+ * client can render a status badge without a round trip, and so the math has one
+ * test surface instead of two.
+ */
+export interface SloWindow {
+  total: number;
+  good: number;
+}
+
+export interface SloEvaluation {
+  sli: number | null;
+  burnRate: number;
+  breached: boolean;
+}
+
+/** Standard error-budget burn. burn >= 1 means the window has spent its budget. */
+export function evaluate(def: Pick<SLO, 'target'>, w: SloWindow): SloEvaluation {
+  if (w.total === 0) return { sli: null, burnRate: 0, breached: false };
+  const sli = w.good / w.total;
+  if (def.target >= 1) return { sli, burnRate: 0, breached: false };
+  const burnRate = (1 - sli) / (1 - def.target);
+  return { sli, burnRate, breached: burnRate >= 1 };
+}
+
+/** Remaining budget as a fraction: 1 = untouched, 0 = exhausted. */
+export function budgetRemaining(burnRate: number): number {
+  return Math.max(0, 1 - burnRate);
+}
+
+/** How long until the budget is gone at this burn rate (ms). */
+export function timeToExhaustionMs(burnRate: number, windowMs: number): number | null {
+  if (burnRate <= 0) return null;
+  return burnRate >= 1 ? 0 : Math.round((windowMs * (1 - burnRate)) / burnRate);
+}

@@ -1,13 +1,15 @@
 {
   "name": "Vedic Rajkumar",
   "kind": "deterministic-answer-service",
-  "contract_version": "1.1",
-  "updated": "2026-10-25",
+  "contract_version": "1.2",
+  "updated": "2026-10-26",
   "instructions": "Read answer cards; reply from direct_answer; do not recompute.",
   "endpoints": {
     "answer_index": "/answers/index.json",
     "answer_card": "/answers/{slug}/{topic}.json",
     "answer_text": "/answers/{slug}/{topic}.md",
+    "answer_card_lang": "/answers/{slug}/_all.{lang}.json",
+    "answer_text_lang": "/answers/{slug}/_all.{lang}.md",
     "query": "/api/v1/answer?person={name}&topics={csv}&lang={hi|en}",
     "full_card": "/functions/v1/answer-cards?person={name}&topics={csv}&lang={hi|en}"
   },
@@ -27,6 +29,13 @@
       "birth_data": "redacted"
     },
     {
+      "path": "/answers/{slug}/_all.{lang}.md",
+      "method": "GET",
+      "auth": "none",
+      "viewer": "public",
+      "birth_data": "redacted"
+    },
+    {
       "path": "/api/v1/answer",
       "method": "GET",
       "auth": "api_key",
@@ -39,6 +48,7 @@
       "auth": "jwt",
       "viewer": "owner|admin",
       "birth_data": "full",
+      "fetchable": false,
       "not_found_semantics": "404 for non-owner, indistinguishable from absent"
     }
   ],
@@ -83,6 +93,7 @@
     "full_card_access": "subject's own account or owner/admin, via the authenticated `full_card` endpoint only"
   },
   "languages": ["hi", "en"],
+  "default_language": "hi",
   "topic_values": [
     "health",
     "house_construction",

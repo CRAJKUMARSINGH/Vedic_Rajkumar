@@ -1,0 +1,55 @@
+# Landing copy as data, not JSX. Read by src/pages/Landing.tsx and audited by
+# scripts/gtm-audit.mjs — every `claim` below must exist in docs/CLAIMS.md.
+#
+# WHY YAML: marketing copy rots faster than code. In JSX it drifts silently; here
+# a stale claim is a build failure.
+
+hero:
+  eyebrow: "Jyotish, computed properly"
+  headline: "Your chart, calculated to the arcsecond — and explained in plain Hindi."
+  sub: "Swiss Ephemeris under the hood. No login wall, no 40-second spinner, works on the phone you already have."
+  cta_primary:
+    label: "Free chart"
+    href: "/chart/new"
+  cta_secondary:
+    label: "See pricing"
+    href: "/pricing"
+
+# Each item: a claim a stranger can verify in 30 seconds. Nothing aspirational.
+proof:
+  - text: "Lahiri ayanamsa, sidereal by default — not tropical bolted on"
+    claim: ephemeris.ayanamsa
+  - text: "Accuracy pinned by a golden corpus, re-run on every commit"
+    claim: ephemeris.corpus
+  - text: "Runs on a 4-year-old Android without freezing the page"
+    claim: perf.mobile_mainthread
+  - text: "Your birth data never needs an account to be computed"
+    claim: privacy.no_account_needed
+
+how:
+  - title: "Enter birth details"
+    body: "Date, time, place. Time zone and coordinates resolved from the place name."
+  - title: "Read the chart"
+    body: "Rashi, nakshatra, dasha timeline, current transits — in Hindi or English."
+  - title: "Ask, then export"
+    body: "Free tier gets questions every week. Pro removes the limit and unlocks PDF export."
+
+# Honest limits. A landing page that admits limits converts better than one that
+# implies magic, and it pre-empts the support ticket.
+limits:
+  title: "What this is not"
+  items:
+    - "Not a pandit. It computes and explains; it does not bless."
+    - "Not a nadi/leaf reading. Those need a lineage, not an ephemeris."
+    - "Not a 10-second answer. A full dasha timeline takes ~200ms of real computation."
+    - "Not free forever. Three questions a week on the free tier, honestly enforced."
+
+faq:
+  - q: "Do I need an account?"
+    a: "No. Enter birth details and get a chart. An account only saves it and syncs devices."
+  - q: "How accurate is it?"
+    a: "Swiss Ephemeris with Lahiri ayanamsa — the same engine professional software uses. Our corpus pins it and re-runs on every commit."
+  - q: "Hindi and English?"
+    a: "Both, at parity. A missing Hindi string is a build failure here."
+  - q: "What does Pro cost?"
+    a: "₹{pro_inr}/month or ${pro_usd}/month. Cancel any time from the portal."

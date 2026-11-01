@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-10-26T02:31:36.028Z",
+  "source": "tools/accuracy/shadbalaReference.mjs",
+  "caseCount": 3,
+  "written": 3,
+  "unchanged": 0,
+  "cases": [
+    {
+      "id": "exaltation-noon",
+      "written": true
+    },
+    {
+      "id": "debilitation-midnight",
+      "written": true
+    },
+    {
+      "id": "conjunction-aries",
+      "written": true
+    }
+  ]
+}

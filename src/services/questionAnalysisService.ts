@@ -21,6 +21,7 @@
 
 import { calculateCompletePlanetaryPositions, type PlanetaryPositions } from './ephemerisService';
 import { calculateDynamicTransits, type DynamicTransitInput } from './dynamicTransitService';
+import { normalizeQuestion } from '@/lib/hinglish';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Constants — classical Vedic Astrology
@@ -171,6 +172,7 @@ const CATEGORY_KEYWORDS: { house: number; words: string[] }[] = [
   {
     house: 2,
     words: [
+      'paisa', 'paise', 'dhan', 'kamai', 'tankha',
       'family finances',
       'fixed deposit',
       'invest',
@@ -278,6 +280,7 @@ const CATEGORY_KEYWORDS: { house: number; words: string[] }[] = [
   {
     house: 7,
     words: [
+      'shaadi', 'shadi', 'vivah', 'byah', 'sagai', 'life partner',
       'married life',
       'get married',
       'start a business with this partner',
@@ -341,6 +344,7 @@ const CATEGORY_KEYWORDS: { house: number; words: string[] }[] = [
   {
     house: 10,
     words: [
+      'naukri', 'nokri', 'padonnati', 'tarakki', 'interview',
       'promotion at work',
       'switch job',
       'switch jobs',
@@ -406,7 +410,10 @@ const CATEGORY_KEYWORDS: { house: number; words: string[] }[] = [
 ];
 
 export function classifyQuestion(question: string): QuestionCategory {
-  const q = question.toLowerCase();
+  // Roman Hindi is folded onto the English keyword table so "kya meri naukri
+  // lagegi" scores house 10 exactly like "will I get a job". Devanagari and
+  // English pass through untouched.
+  const q = normalizeQuestion(question).toLowerCase();
   let best = { house: 1, score: 0 };
   for (const entry of CATEGORY_KEYWORDS) {
     let score = 0;

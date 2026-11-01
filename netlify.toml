@@ -2,7 +2,7 @@
   # Regenerate the public accuracy snapshot from the corpus + golden data, then
   # build. The snapshot is imported at build time (src/generated/summary.json),
   # so it must be rewritten before Vite bundles it.
-  command = "npm run accuracy:publish && npm run answers:emit && npm run build"
+  command = "npm run accuracy:publish && npm run answers:emit && npm run answers:html && npm run build"
   publish = "dist"
 
 [build.environment]
@@ -19,6 +19,16 @@
 # NOTE: /answers/** is served as static files (no redirect needed).
 # Always link answer cards WITH a file extension — the /* SPA rewrite
 # below will swallow extensionless paths.
+#
+# Prerendered crawler pages (public/a/**). `/a/:slug` resolves to
+# `/a/<slug>.html`; `:slug` captures the whole segment, so the bilingual
+# form `/a/<slug>.<lang>` resolves to `/a/<slug>.<lang>.html` with the same
+# rule. Ordered ABOVE the /* catch-all or the SPA rewrite wins.
+[[redirects]]
+  from = "/a/:slug"
+  to = "/a/:slug.html"
+  status = 200
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -35,7 +45,7 @@
     Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
-  for = "/service-worker.js"
+  for = "/sw.js"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 

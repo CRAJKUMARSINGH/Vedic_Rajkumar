@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, beta]
   pull_request:
-    branches: [main]
+  workflow_call: # release.yml reuses this as its gate
 
 permissions:
   contents: read
@@ -20,6 +20,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # commitlint needs the commits on both sides of the range, so the
+          # default depth-1 clone is not enough.
+          fetch-depth: 0
 
       - name: Setup Node ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -29,6 +33,23 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Setup Deno
+        # `npm run typecheck:edge` (a quality gate below) needs it. Same pin as
+        # deploy-edge.yml so CI and the deploy gate agree.
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Lint commit messages (pull request range)
+        if: github.event_name == 'pull_request'
+        run: npx commitlint --from "${{ github.event.pull_request.base.sha }}" --to "${{ github.event.pull_request.head.sha }}" --verbose
+
+      - name: Lint commit messages (pushed range)
+        # Skipped when `before` is the zero SHA (first push of a branch), which
+        # has no range to walk.
+        if: github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
+        run: npx commitlint --from "${{ github.event.before }}" --to "${{ github.event.after }}" --verbose
 
       - name: Quality gates
         # docs:verify runs the full Vitest suite (pretty + JSON reporters) and
@@ -42,8 +63,82 @@ jobs:
           npm run lint
           npm run typecheck
           npm run typecheck:tests
+          npm run typecheck:edge
+          npm run duplicates:check
+          npm run licenses:check
+          npm run test:a11y:axe
+          npm run protection:check
+          npm run audit:routes
+          npm run i18n:check
+          npm run budget:check
+          npm run dr:readiness
           npm run docs:verify
           npm run answers:check
           npm run build
         env:
           CI: true
+
+  tier-robot:
+    name: Tier robot (free · pro · enterprise)
+    # Proves the Free / Pro / Enterprise gate contract on the real app. The
+    # harness seeds one storage state per grade and asserts the `data-testid`
+    # contract (docs/testing/TIER_MATRIX.md). Checks whose surface does not exist
+    # yet are `test.fixme` — visible in the run, never silently passed.
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run tier robot
+        # PW_CHANNEL="" -> bundled Chromium (the local default is system Edge).
+        run: npm run test:tiers
+        env:
+          PW_CHANNEL: ''
+
+      - name: Aggregate verdict (GO / NO-GO)
+        if: always()
+        run: npm run test:tiers:report
+
+      - name: Upload tier evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tier-robot-evidence
+          path: reports/tiers
+          retention-days: 30
+          if-no-files-found: ignore
+
+  db-test:
+    name: DB invariants (RLS · RPC)
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+
+      - name: Start database
+        run: supabase start
+
+      - name: Apply migrations
+        run: supabase db reset
+
+      - name: Run pgTAP suite
+        run: supabase test db

@@ -1,12 +1,17 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { corsHeaders, corsResponse } from '../_shared/cors.ts';
 import { checkRateLimit, rateLimitResponse } from '../_shared/rateLimit.ts';
-import { assertNotKilled } from '../_shared/killSwitch.ts';
+import { KILL_SWITCH_FLAGS, guardKillSwitch } from '../_shared/killSwitch.ts';
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return corsResponse(req);
   }
+
+  // Short-circuit before any work; `kill_kundli` is the per-feature switch,
+  // `killswitch.edge` the coarse one.
+  const killed = await guardKillSwitch(KILL_SWITCH_FLAGS.edge, 'kill_kundli');
+  if (killed) return killed;
 
   const allowed = await checkRateLimit(req, { endpoint: 'calculate-kundli' });
   if (!allowed) {
@@ -14,8 +19,6 @@ serve(async (req) => {
   }
 
   try {
-    assertNotKilled('kill_kundli');
-
     let body: {
       birthDate?: string;
       birthTime?: string;

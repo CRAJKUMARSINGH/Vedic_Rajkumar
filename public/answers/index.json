@@ -2,6 +2,17 @@
   "card_version": "1.0",
   "generated_at": "2026-10-24T00:00:00.000Z",
   "contract": "Read the card, reply from direct_answer, do not recompute.",
+  "contract_version": "1.2",
+  "languages": [
+    "hi",
+    "en"
+  ],
+  "default_language": "hi",
+  "template": {
+    "card": "{slug}/_all.{lang}.json",
+    "text": "{slug}/_all.{lang}.md",
+    "redirect": "none"
+  },
   "people": [
     {
       "name": "Pankaj Jain",
@@ -15,7 +26,15 @@
         "finance"
       ],
       "card": "pankaj-jain/_all.json",
-      "text": "pankaj-jain/_all.md"
+      "text": "pankaj-jain/_all.md",
+      "cards": {
+        "hi": "pankaj-jain/_all.hi.json",
+        "en": "pankaj-jain/_all.en.json"
+      },
+      "texts": {
+        "hi": "pankaj-jain/_all.hi.md",
+        "en": "pankaj-jain/_all.en.md"
+      }
     },
     {
       "name": "Priyansh Singh Chauhan",
@@ -29,7 +48,15 @@
         "finance"
       ],
       "card": "priyansh-singh-chauhan/_all.json",
-      "text": "priyansh-singh-chauhan/_all.md"
+      "text": "priyansh-singh-chauhan/_all.md",
+      "cards": {
+        "hi": "priyansh-singh-chauhan/_all.hi.json",
+        "en": "priyansh-singh-chauhan/_all.en.json"
+      },
+      "texts": {
+        "hi": "priyansh-singh-chauhan/_all.hi.md",
+        "en": "priyansh-singh-chauhan/_all.en.md"
+      }
     },
     {
       "name": "Vishwaraj Singh Chauhan",
@@ -43,7 +70,15 @@
         "finance"
       ],
       "card": "vishwaraj-singh-chauhan/_all.json",
-      "text": "vishwaraj-singh-chauhan/_all.md"
+      "text": "vishwaraj-singh-chauhan/_all.md",
+      "cards": {
+        "hi": "vishwaraj-singh-chauhan/_all.hi.json",
+        "en": "vishwaraj-singh-chauhan/_all.en.json"
+      },
+      "texts": {
+        "hi": "vishwaraj-singh-chauhan/_all.hi.md",
+        "en": "vishwaraj-singh-chauhan/_all.en.md"
+      }
     },
     {
       "name": "Mummy",
@@ -57,7 +92,15 @@
         "finance"
       ],
       "card": "mummy/_all.json",
-      "text": "mummy/_all.md"
+      "text": "mummy/_all.md",
+      "cards": {
+        "hi": "mummy/_all.hi.json",
+        "en": "mummy/_all.en.json"
+      },
+      "texts": {
+        "hi": "mummy/_all.hi.md",
+        "en": "mummy/_all.en.md"
+      }
     },
     {
       "name": "Rajkumar",
@@ -71,7 +114,15 @@
         "finance"
       ],
       "card": "rajkumar/_all.json",
-      "text": "rajkumar/_all.md"
+      "text": "rajkumar/_all.md",
+      "cards": {
+        "hi": "rajkumar/_all.hi.json",
+        "en": "rajkumar/_all.en.json"
+      },
+      "texts": {
+        "hi": "rajkumar/_all.hi.md",
+        "en": "rajkumar/_all.en.md"
+      }
     },
     {
       "name": "Kanchi Jain",
@@ -85,7 +136,15 @@
         "finance"
       ],
       "card": "kanchi-jain/_all.json",
-      "text": "kanchi-jain/_all.md"
+      "text": "kanchi-jain/_all.md",
+      "cards": {
+        "hi": "kanchi-jain/_all.hi.json",
+        "en": "kanchi-jain/_all.en.json"
+      },
+      "texts": {
+        "hi": "kanchi-jain/_all.hi.md",
+        "en": "kanchi-jain/_all.en.md"
+      }
     },
     {
       "name": "Kiwangi Jain",
@@ -99,7 +158,15 @@
         "finance"
       ],
       "card": "kiwangi-jain/_all.json",
-      "text": "kiwangi-jain/_all.md"
+      "text": "kiwangi-jain/_all.md",
+      "cards": {
+        "hi": "kiwangi-jain/_all.hi.json",
+        "en": "kiwangi-jain/_all.en.json"
+      },
+      "texts": {
+        "hi": "kiwangi-jain/_all.hi.md",
+        "en": "kiwangi-jain/_all.en.md"
+      }
     },
     {
       "name": "Priyanka Jain",
@@ -113,7 +180,15 @@
         "finance"
       ],
       "card": "priyanka-jain/_all.json",
-      "text": "priyanka-jain/_all.md"
+      "text": "priyanka-jain/_all.md",
+      "cards": {
+        "hi": "priyanka-jain/_all.hi.json",
+        "en": "priyanka-jain/_all.en.json"
+      },
+      "texts": {
+        "hi": "priyanka-jain/_all.hi.md",
+        "en": "priyanka-jain/_all.en.md"
+      }
     },
     {
       "name": "Ajit Singh Chauhan",
@@ -127,7 +202,15 @@
         "finance"
       ],
       "card": "ajit-singh-chauhan/_all.json",
-      "text": "ajit-singh-chauhan/_all.md"
+      "text": "ajit-singh-chauhan/_all.md",
+      "cards": {
+        "hi": "ajit-singh-chauhan/_all.hi.json",
+        "en": "ajit-singh-chauhan/_all.en.json"
+      },
+      "texts": {
+        "hi": "ajit-singh-chauhan/_all.hi.md",
+        "en": "ajit-singh-chauhan/_all.en.md"
+      }
     },
     {
       "name": "Hunar Jain",
@@ -141,7 +224,15 @@
         "finance"
       ],
       "card": "hunar-jain/_all.json",
-      "text": "hunar-jain/_all.md"
+      "text": "hunar-jain/_all.md",
+      "cards": {
+        "hi": "hunar-jain/_all.hi.json",
+        "en": "hunar-jain/_all.en.json"
+      },
+      "texts": {
+        "hi": "hunar-jain/_all.hi.md",
+        "en": "hunar-jain/_all.en.md"
+      }
     },
     {
       "name": "Dhairya Bittu Arthuna",
@@ -155,7 +246,15 @@
         "finance"
       ],
       "card": "dhairya-bittu-arthuna/_all.json",
-      "text": "dhairya-bittu-arthuna/_all.md"
+      "text": "dhairya-bittu-arthuna/_all.md",
+      "cards": {
+        "hi": "dhairya-bittu-arthuna/_all.hi.json",
+        "en": "dhairya-bittu-arthuna/_all.en.json"
+      },
+      "texts": {
+        "hi": "dhairya-bittu-arthuna/_all.hi.md",
+        "en": "dhairya-bittu-arthuna/_all.en.md"
+      }
     },
     {
       "name": "Naman Shah",
@@ -169,7 +268,15 @@
         "finance"
       ],
       "card": "naman-shah/_all.json",
-      "text": "naman-shah/_all.md"
+      "text": "naman-shah/_all.md",
+      "cards": {
+        "hi": "naman-shah/_all.hi.json",
+        "en": "naman-shah/_all.en.json"
+      },
+      "texts": {
+        "hi": "naman-shah/_all.hi.md",
+        "en": "naman-shah/_all.en.md"
+      }
     },
     {
       "name": "Jaya Sisodia",
@@ -183,7 +290,15 @@
         "finance"
       ],
       "card": "jaya-sisodia/_all.json",
-      "text": "jaya-sisodia/_all.md"
+      "text": "jaya-sisodia/_all.md",
+      "cards": {
+        "hi": "jaya-sisodia/_all.hi.json",
+        "en": "jaya-sisodia/_all.en.json"
+      },
+      "texts": {
+        "hi": "jaya-sisodia/_all.hi.md",
+        "en": "jaya-sisodia/_all.en.md"
+      }
     },
     {
       "name": "Jyoti Chauhan",
@@ -197,7 +312,15 @@
         "finance"
       ],
       "card": "jyoti-chauhan/_all.json",
-      "text": "jyoti-chauhan/_all.md"
+      "text": "jyoti-chauhan/_all.md",
+      "cards": {
+        "hi": "jyoti-chauhan/_all.hi.json",
+        "en": "jyoti-chauhan/_all.en.json"
+      },
+      "texts": {
+        "hi": "jyoti-chauhan/_all.hi.md",
+        "en": "jyoti-chauhan/_all.en.md"
+      }
     },
     {
       "name": "Priyraj Singh Ranawat",
@@ -211,7 +334,15 @@
         "finance"
       ],
       "card": "priyraj-singh-ranawat/_all.json",
-      "text": "priyraj-singh-ranawat/_all.md"
+      "text": "priyraj-singh-ranawat/_all.md",
+      "cards": {
+        "hi": "priyraj-singh-ranawat/_all.hi.json",
+        "en": "priyraj-singh-ranawat/_all.en.json"
+      },
+      "texts": {
+        "hi": "priyraj-singh-ranawat/_all.hi.md",
+        "en": "priyraj-singh-ranawat/_all.en.md"
+      }
     },
     {
       "name": "Priyawrit Singh Ranawat",
@@ -225,7 +356,15 @@
         "finance"
       ],
       "card": "priyawrit-singh-ranawat/_all.json",
-      "text": "priyawrit-singh-ranawat/_all.md"
+      "text": "priyawrit-singh-ranawat/_all.md",
+      "cards": {
+        "hi": "priyawrit-singh-ranawat/_all.hi.json",
+        "en": "priyawrit-singh-ranawat/_all.en.json"
+      },
+      "texts": {
+        "hi": "priyawrit-singh-ranawat/_all.hi.md",
+        "en": "priyawrit-singh-ranawat/_all.en.md"
+      }
     },
     {
       "name": "Swami Rajeev Anand",
@@ -239,7 +378,15 @@
         "finance"
       ],
       "card": "swami-rajeev-anand/_all.json",
-      "text": "swami-rajeev-anand/_all.md"
+      "text": "swami-rajeev-anand/_all.md",
+      "cards": {
+        "hi": "swami-rajeev-anand/_all.hi.json",
+        "en": "swami-rajeev-anand/_all.en.json"
+      },
+      "texts": {
+        "hi": "swami-rajeev-anand/_all.hi.md",
+        "en": "swami-rajeev-anand/_all.en.md"
+      }
     },
     {
       "name": "Arpit",
@@ -253,7 +400,15 @@
         "finance"
       ],
       "card": "arpit/_all.json",
-      "text": "arpit/_all.md"
+      "text": "arpit/_all.md",
+      "cards": {
+        "hi": "arpit/_all.hi.json",
+        "en": "arpit/_all.en.json"
+      },
+      "texts": {
+        "hi": "arpit/_all.hi.md",
+        "en": "arpit/_all.en.md"
+      }
     },
     {
       "name": "Anukrati Sharma",
@@ -267,7 +422,15 @@
         "finance"
       ],
       "card": "anukrati-sharma/_all.json",
-      "text": "anukrati-sharma/_all.md"
+      "text": "anukrati-sharma/_all.md",
+      "cards": {
+        "hi": "anukrati-sharma/_all.hi.json",
+        "en": "anukrati-sharma/_all.en.json"
+      },
+      "texts": {
+        "hi": "anukrati-sharma/_all.hi.md",
+        "en": "anukrati-sharma/_all.en.md"
+      }
     },
     {
       "name": "Parshvi Sharma",
@@ -281,7 +444,15 @@
         "finance"
       ],
       "card": "parshvi-sharma/_all.json",
-      "text": "parshvi-sharma/_all.md"
+      "text": "parshvi-sharma/_all.md",
+      "cards": {
+        "hi": "parshvi-sharma/_all.hi.json",
+        "en": "parshvi-sharma/_all.en.json"
+      },
+      "texts": {
+        "hi": "parshvi-sharma/_all.hi.md",
+        "en": "parshvi-sharma/_all.en.md"
+      }
     },
     {
       "name": "Premlata Jain",
@@ -299,7 +470,15 @@
         "finance"
       ],
       "card": "premlata-jain/_all.json",
-      "text": "premlata-jain/_all.md"
+      "text": "premlata-jain/_all.md",
+      "cards": {
+        "hi": "premlata-jain/_all.hi.json",
+        "en": "premlata-jain/_all.en.json"
+      },
+      "texts": {
+        "hi": "premlata-jain/_all.hi.md",
+        "en": "premlata-jain/_all.en.md"
+      }
     }
   ]
 }

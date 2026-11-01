@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { VerificationBadge } from '@/components/VerificationBadge';
 import { 
   calculateAshtakavargaTransitAnalysis, 
   getAshtakavargaSummary,
@@ -96,6 +97,7 @@ export default function AshtakavargaTransitOverlay({
           <CardTitle className={`flex items-center gap-2 text-indigo-800 dark:text-indigo-300 ${isHi ? 'font-hindi' : ''}`}>
             <span className="text-2xl">📊</span>
             {isHi ? 'अष्टकवर्ग गोचर शक्ति' : 'Ashtakavarga Transit Strength'}
+            <VerificationBadge topic="ashtakavarga" lang={lang} className="ml-auto" />
           </CardTitle>
           <p className={`text-xs text-muted-foreground ${isHi ? 'font-hindi' : ''}`}>
             {isHi ? 'सार्वाष्टकवर्ग स्कोर विश्लेषण • बी.वी. रमण परंपरा' : 'Sarvashtakavarga Score Analysis • B.V. Raman Tradition'}

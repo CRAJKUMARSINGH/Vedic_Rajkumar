@@ -21,12 +21,26 @@ export const ALL_TOPICS: readonly Topic[] = [
 ] as const;
 
 /**
+ * Every language a card is emitted in. Locale standing rule (AGENTS.md): every
+ * generated artifact exists in both, named `<name>.<lang>.<ext>`, with the
+ * default locale also reachable at the un-suffixed path.
+ */
+export const LANGUAGES: readonly Lang[] = ['hi', 'en'] as const;
+
+/** The locale served at the un-suffixed path. */
+export const DEFAULT_LANG: Lang = 'hi';
+
+/**
  * Version of the agent-facing contract — `public/llms.txt` and
  * `public/.well-known/vedic-rajkumar.json` both advertise it. Bumping the
  * contract means bumping this constant in the same change; `guideContract.test.ts`
  * fails if the three disagree.
+ *
+ * 1.2 — additive: bilingual artifacts (`languages`, `default_language`,
+ * per-language path templates). No field removed or renamed, so a 1.1 reader
+ * still parses every card.
  */
-export const ANSWER_CONTRACT_VERSION = '1.1';
+export const ANSWER_CONTRACT_VERSION = '1.2';
 
 /** 1:1 from the engine's VerdictType — no meaning invented. */
 export const BAND_FROM_VERDICT: Record<VerdictType, Band> = {
