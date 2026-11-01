@@ -401,3 +401,39 @@ named is lost; every instruction is applied or reproducible.
 3. Reference check: the only remaining mentions of `CODE-JUNCTION` are historical
    narrative in `app-robustness-testing.md`, `CREAT.MD`, a migration comment, a 2026-07
    audit report, and two source-file provenance comments — none is a code dependency.
+
+---
+
+## Redundant files — declared 2026-11-01, **deleted 2026-11-01** (round 3)
+
+Standing order from the user, repeated: **"APPLY ALL FROM \*.TXT AND \*.MD (repository root
+and subfolders) … USED UP FILES NEED DECLARED AS REDUNDANT AND DELETED AT SUITABLE TIME."** —
+extended this round with **">>> keep empty folder"**: when a consumed bundle is deleted, the
+folder that held it must be **kept as an empty folder**. Round 2 had removed `CODE-JUNCTION/`
+outright; this round restores the folder and leaves it empty.
+
+Both files were fully applied (see `CREAT.MD` 2026-11-01 (8a-0)/(8a)/(8b)/(9)). Bundle 2 did not
+merely add — it **reviewed bundle 1 line-by-line and found nine defects in bundle 1's own tests**.
+Where the two disagreed, bundle 2's corrected version was applied and bundle 1's test was replaced,
+never merged.
+
+| File                                    | Why redundant                                                                                                                                                                                                                                                                                                                                                                                           | Where the content lives now                                                                                                                                                                                                                      |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Vedic november.txt`                    | Four sections: §A Hinglish, §B ROBOTIC-5000 plan, §C Diwali dressing, §D seasonal skins + Lakshmi Puja. All applied. Two of its own test blocks (`hinglish.test.ts`, `festival.test.tsx`) were **superseded** by bundle 2.                                                                                                                                                                              | `src/lib/hinglish.ts` · `src/lib/festivals.ts` · `src/lib/festival.ts` · `src/styles/festival.css` · `src/components/FestivalGreeting.tsx` · `src/components/LakshmiPujaCard.tsx` · `docs/testing/ROBOTIC-5000.md` · `CREAT.MD` (8a-0)/(8a)/(8b) |
+| `web_scrape hit its limit mid-turn.txt` | Review/patch set (Patch A–D + robotic-plan amendments). Applied **instead of** the parts of bundle 1 it corrects: lexicon-first transliteration + cluster-schwa, unconditional particle filter, `ENGLISH_COLLISIONS` guard, `resolveFestival()` replacing `isFestivalEnabled()`, IST day key, `--festival-ink`, `-webkit-mask-image`, injectable `loadWindows`; RB-001 closed, oracles T1-f/T2-g added. | The code above · `docs/testing/ROBOTIC-5000.md` · `CREAT.MD` (9)                                                                                                                                                                                 |
+
+**Deletion performed 2026-11-01:**
+
+1. Deleted both files above, so `CODE-JUNCTION/` is now **empty**.
+2. `CODE-JUNCTION/` itself is **kept as an empty folder** (per ">>>keep empty folder"). It is
+   untracked, so git does not record it; **no `.gitkeep` was added** — the folder is genuinely
+   empty, which corrects round 2's removal of it.
+3. `navratri-implement.md` in the repository root was checked: it is a **tracked project plan**
+   (present in `git ls-files`), not a dropped instruction bundle, so it is **retained**.
+4. Reference check: the only remaining mentions of `CODE-JUNCTION` are historical narrative in
+   `app-robustness-testing.md`, `CREAT.MD`, a migration comment, a 2026-07 audit report, and two
+   source-file provenance comments — none is a code dependency.
+
+**Gates after deletion:** `npm run typecheck` **0** · `npm run lint` **0 errors** ·
+`npx vitest run src/tests/hinglish.test.ts src/tests/festival.test.tsx` **26/26** ·
+`npm run docs:verify` **exit 0 (2118 / 128)**.

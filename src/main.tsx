@@ -16,6 +16,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
+import '@/styles/festival.css';
 import { assertProdEnv, warnMissingObservability } from '@/config/env';
 import { initErrorMonitoring, captureException } from '@/lib/errorMonitoring';
 import { initTelemetry } from '@/lib/telemetry';

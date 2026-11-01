@@ -66,6 +66,7 @@ import { useChartCalculation, type BirthInput } from '@/hooks/useChartCalculatio
 import { SEO, webAppSchema } from '@/components/SEO';
 import RandomQuestionCard from '@/components/RandomQuestionCard';
 import SaraswatiMascot from '@/components/SaraswatiMascot';
+import FestivalGreeting from '@/components/FestivalGreeting';
 import { generateEnhancedClassicalAnswer, type EnhancedClassicalAnswer } from '@/services/classicalAnswerEngine';
 import EnhancedAnalysisPanel from '@/components/EnhancedAnalysisPanel';
 
@@ -342,6 +343,7 @@ const Index = () => {
             <div className="absolute top-60 right-10 text-5xl opacity-10 animate-[float-auspicious_9s_ease-in-out_infinite_3s]">🌟</div>
             
             <div className="max-w-5xl mx-auto px-4 text-center space-y-12 relative z-10">
+              <FestivalGreeting lang={isHi ? 'hi' : 'en'} className="mb-6" />
               <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
                 <div className="mb-8 flex justify-center">
                   <SaraswatiMascot isHi={isHi} size={110} />

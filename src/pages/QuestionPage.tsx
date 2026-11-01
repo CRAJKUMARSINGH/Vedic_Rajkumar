@@ -95,6 +95,8 @@ import EnhancedAnalysisPanel from '@/components/EnhancedAnalysisPanel';
 import { ValidationInProgressNotice } from '@/components/PrototypeStatusBanner';
 import EnhancedLanguageToggle from '@/components/EnhancedLanguageToggle';
 import { type SupportedLanguage } from '@/services/multiLanguageService';
+import { toRomanHindi, deepTransliterate, detectLanguage } from '@/lib/hinglish';
+import { resolveFestival } from '@/lib/festival';
 import ChartLoadingState from '@/components/ChartLoadingState';
 import ChartEmptyState from '@/components/ChartEmptyState';
 import ChartErrorState from '@/components/ChartErrorState';
@@ -154,8 +156,17 @@ const QuestionPage = () => {
   useEffect(() => {
     const urlLang = new URLSearchParams(window.location.search).get('lang');
     if (urlLang === 'hi') setLang('hi');
+    else if (urlLang === 'hi-Latn' || urlLang === 'roman' || urlLang === 'hinglish') {
+      setLang('hi-Latn');
+    }
   }, []);
   const isHi = lang === 'hi';
+  const isRoman = lang === 'hi-Latn';
+  const hindiLike = isHi || isRoman;
+  /** Devanagari for `hi`, Latin transliteration for `hi-Latn`, English for `en`. */
+  const L = (en: string, hi: string) => (isHi ? hi : isRoman ? toRomanHindi(hi) : en);
+  const festival = resolveFestival(window.location.search) !== null;
+  const [langLocked, setLangLocked] = useState(false);
 
   // Mode: jatak vs anonymous
   const [mode, setMode] = useState<'jatak' | 'anonymous'>(
@@ -200,6 +211,14 @@ const QuestionPage = () => {
 
   // Question fields
   const [question, setQuestion] = useState('');
+
+  // Typing Roman Hindi flips the answer language automatically, until the user
+  // picks a language by hand (langLocked).
+  useEffect(() => {
+    if (langLocked || question.trim().length < 6) return;
+    if (detectLanguage(question) === 'hi-Latn') setLang('hi-Latn');
+  }, [question, langLocked]);
+
   const nowDefault = useMemo(() => {
     const d = new Date();
     const pad = (n: number) => n.toString().padStart(2, '0');
@@ -280,7 +299,7 @@ const QuestionPage = () => {
     setGulikaKala(null);
     setPranaksharaDetail(null);
     if (!question.trim()) {
-      setError(isHi ? 'कृपया अपना प्रश्न लिखें।' : 'Please type your question.');
+      setError(L('Please type your question.', 'कृपया अपना प्रश्न लिखें।'));
       return;
     }
 
@@ -338,7 +357,7 @@ const QuestionPage = () => {
         questionLocation: { lat: qLatNum, lon: qLonNum, label: qPlace },
         natal,
       });
-      setResult(analysis);
+      setResult(isRoman ? deepTransliterate(analysis) : analysis);
 
       const classicalAns = await generateEnhancedClassicalAnswer({
         question: question.trim(),
@@ -350,12 +369,12 @@ const QuestionPage = () => {
         moonRashi: analysis.moonRashi,
         prashnaLagna: analysis.prashnaLagnaRashi,
         direction,
-        isHi,
+        isHi: hindiLike,
         questionTime: questionTime,
         lat: qLatNum,
         lon: qLonNum,
       });
-      setClassicalAnswer(classicalAns);
+      setClassicalAnswer(isRoman ? deepTransliterate(classicalAns) : classicalAns);
 
       // ── Compute the five Prasna Marga Extra indicators ──
       const prasnaMoonRashi = analysis.moonRashi;
@@ -465,7 +484,8 @@ const QuestionPage = () => {
     }
   };
 
-  const rashiName = (i: number) => (isHi ? RASHIS_HI[i] : RASHIS_EN[i]);
+  const rashiName = (i: number) =>
+    isHi ? RASHIS_HI[i] : isRoman ? toRomanHindi(RASHIS_HI[i]) : RASHIS_EN[i];
   const faqs = [
     {
       q: isHi
@@ -473,7 +493,7 @@ const QuestionPage = () => {
         : 'Does this question page answer in Hindi?',
       a: isHi
         ? 'हाँ, enrolled-user foreign-travel questions के लिए bilingual जवाब मिलता है।'
-        : 'Yes, enrolled-user foreign-travel questions return bilingual English/Hindi replies.',
+        : 'Yes — English, Devanagari Hindi and Roman Hindi (Hinglish) input are all accepted, and answers can be returned in Roman Hindi.',
     },
     {
       q: isHi ? 'क्या यहाँ जन्म डेटा सेव होता है?' : 'Is birth data saved here?',
@@ -483,7 +503,7 @@ const QuestionPage = () => {
     },
   ];
   const shareText = result
-    ? `${isHi ? 'प्रश्न शास्त्र' : 'Question / Prashna'}: ${question.trim()}\n${isHi ? 'उत्तर' : 'Answer'}: ${isHi ? result.answer.hi : result.answer.en}\n${typeof window !== 'undefined' ? window.location.href : ''}`
+    ? `${L('Question / Prashna', 'प्रश्न शास्त्र')}: ${question.trim()}\n${L('Answer', 'उत्तर')}: ${hindiLike ? result.answer.hi : result.answer.en}\n${typeof window !== 'undefined' ? window.location.href : ''}`
     : '';
   const copyShare = async () => {
     if (!result) return;
@@ -557,7 +577,10 @@ const QuestionPage = () => {
             />
             <EnhancedLanguageToggle
               currentLang={lang}
-              onChange={setLang}
+              onChange={next => {
+                setLang(next);
+                setLangLocked(true);
+              }}
               showRegion={false}
             />
           </div>
@@ -751,7 +774,9 @@ const QuestionPage = () => {
                 placeholder={
                   isHi
                     ? 'उदा. क्या मेरी नौकरी में पदोन्नति होगी? / क्या यह विवाह सफल होगा?'
-                    : 'e.g. Will I get the promotion at work? / Is this the right time to buy a house?'
+                    : isRoman
+                      ? 'e.g. Kya meri naukri mein promotion hogi? / Kya yah shaadi safal hogi?'
+                      : 'e.g. Will I get the promotion at work? / Is this the right time to buy a house?'
                 }
                 rows={3}
                 className="mt-1"
@@ -759,8 +784,13 @@ const QuestionPage = () => {
               <p className="text-xs text-slate-500 mt-1">
                 {isHi
                   ? 'अपनी भाषा में (हिं/अंग्रेजी) प्रश्न पूछें — विषय स्वतः वर्गीकृत होगा।'
-                  : 'Ask in your own words — the topic is auto-classified into a Bhava (house).'}
+                  : 'Ask in your own words — English, हिन्दी or Roman Hindi (Hinglish). The topic is auto-classified into a Bhava (house).'}
               </p>
+              {isRoman && (
+                <p className="text-xs text-amber-700 mt-1">
+                  Roman Hindi detected — verdict, timing and remedies will be shown in Roman Hindi.
+                </p>
+              )}
             </div>
 
             {/* Date + Time + Direction */}
@@ -972,7 +1002,9 @@ const QuestionPage = () => {
             aria-atomic="false"
             aria-label={isHi ? 'प्रश्न विश्लेषण परिणाम' : 'Prashna analysis result'}
           >
-            <Card className="border-amber-300 shadow-xl">
+            <Card
+              className={`border-amber-300 shadow-xl ${festival ? 'festival-accent' : ''}`}
+            >
               <CardHeader
                 className={
                   result.verdict.outcome === 'favorable'
@@ -984,7 +1016,7 @@ const QuestionPage = () => {
               >
                 <div className="flex items-center justify-between flex-wrap gap-2">
                   <CardTitle className={`text-2xl ${isHi ? 'font-hindi' : ''}`}>
-                    {isHi ? result.verdict.outcomeLabel.hi : result.verdict.outcomeLabel.en}
+                    {hindiLike ? result.verdict.outcomeLabel.hi : result.verdict.outcomeLabel.en}
                   </CardTitle>
                   <Badge variant="outline" className="text-base">
                     {isHi ? 'अंक' : 'Score'}: {result.verdict.score}
@@ -1054,7 +1086,7 @@ const QuestionPage = () => {
                         {isHi ? 'प्रश्न का विषय' : 'Question topic'}
                       </p>
                       <div className={`text-lg font-semibold ${isHi ? 'font-hindi' : ''}`}>
-                        {isHi ? result.category.label.hi : result.category.label.en}{' '}
+                        {hindiLike ? result.category.label.hi : result.category.label.en}{' '}
                         <Badge variant="secondary" className="ml-2">
                           {isHi ? 'भाव' : 'House'} {result.category.house}
                         </Badge>
@@ -1255,7 +1287,7 @@ const QuestionPage = () => {
                               : '1. Direct Answer (Probability Frame)'}
                           </h4>
                           <p className="text-slate-800 leading-relaxed font-semibold">
-                            {isHi
+                            {hindiLike
                               ? classicalAnswer.directAnswer.hi
                               : classicalAnswer.directAnswer.en}
                           </p>
@@ -1269,7 +1301,7 @@ const QuestionPage = () => {
                               className="border-amber-500 text-amber-700 bg-amber-50"
                             >
                               {isHi ? 'संभाव्यता: ' : 'Probability: '}
-                              {isHi
+                              {hindiLike
                                 ? classicalAnswer.directAnswer.probabilityLabel.hi
                                 : classicalAnswer.directAnswer.probabilityLabel.en}
                             </Badge>
@@ -1285,7 +1317,7 @@ const QuestionPage = () => {
                               : '2. Astrological Reasoning & Classical Sources'}
                           </h4>
                           <p className="text-slate-700 leading-relaxed mb-4">
-                            {isHi ? classicalAnswer.reasoning.hi : classicalAnswer.reasoning.en}
+                            {hindiLike ? classicalAnswer.reasoning.hi : classicalAnswer.reasoning.en}
                           </p>
                           <div className="space-y-3">
                             <p className="text-sm font-semibold text-slate-800">
@@ -1439,7 +1471,7 @@ const QuestionPage = () => {
                             {ind.name}
                           </p>
                           <p className={`text-sm ${isHi ? 'font-hindi' : ''}`}>
-                            {isHi ? ind.detail.hi : ind.detail.en}
+                            {hindiLike ? ind.detail.hi : ind.detail.en}
                           </p>
                         </div>
                         <Badge
