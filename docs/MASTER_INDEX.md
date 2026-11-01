@@ -124,6 +124,7 @@ docs/
   observability/ (W9)
   runbooks/      (W9,W12)
   launch/        (W12)
+  beta/          (pre-launch) beta bug ledger
   growth/        (W13)
   support/       (W13)
   roadmap/       (W13)

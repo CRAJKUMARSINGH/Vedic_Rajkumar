@@ -24,6 +24,10 @@ export interface ResolvedEntitlement {
   tier: Tier;
   features: readonly string[];
   limits: Record<string, number | boolean>;
+  /** Provenance of the grant (e.g. 'beta_trial'); 'default' when unset. */
+  source: string;
+  /** ISO expiry of a time-boxed grant (beta trial); null = perpetual. */
+  expiresAt: string | null;
 }
 
 /** Reads tier from the DB. Never trusts a client-supplied value. */
@@ -35,5 +39,14 @@ export async function resolveEntitlement(
   const { data } = await client.rpc('resolve_entitlement', { p_user: userId });
   const tier: Tier = ((data?.tier ?? 'free') as Tier);
   const row = ENTITLEMENTS[tier] ?? ENTITLEMENTS.free;
-  return { tier, features: row.features, limits: { ...row } };
+  // `source`/`expires_at` come from resolve_entitlement() (20261128). They are
+  // display-only: the tier itself is still the sole gate, and expiry is honoured
+  // in SQL, so a stale/absent pair can never widen access.
+  return {
+    tier,
+    features: row.features,
+    limits: { ...row },
+    source: (data?.source ?? 'default') as string,
+    expiresAt: (data?.expires_at ?? null) as string | null,
+  };
 }

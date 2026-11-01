@@ -368,3 +368,36 @@ files in group C. Re-verified after deletion: `typecheck` 0 errors · `lint` 0 e
 4. Re-ran `typecheck` (0 errors), `lint` (0 errors / 1258 pre-existing warnings) and
    `build` (exit 0, 1m 52s) to prove nothing depended on them. All deleted paths were
    untracked/ignored, so no tracked file was removed.
+
+---
+
+## Redundant files — declared 2026-10-31, **deleted 2026-10-31** (round 2)
+
+Standing order from the user, repeated: **"APPLY ALL FROM \*.TXT AND \*.MD (repository
+root and subfolders) … USED UP FILES NEED DECLARED AS REDUNDANT AND DELETED AT SUITABLE
+TIME."** Round 1 (2026-10-30, above) consumed 6 bundles and **retained** `Grok28.txt` +
+`Budget.txt` as forward-plan references. This round consumes those two as well — their
+still-open parts are captured in the **Operational (non-code)** checklist above — plus the
+two drops added since, so **`CODE-JUNCTION/` is now empty and removed**. No artifact it
+named is lost; every instruction is applied or reproducible.
+
+**How each was judged consumed (verified against the on-disk tree, not self-report):**
+
+| File                                             | Status                                    | Why it is consumed / redundant                                                                                                                                                                                                                                                                                                                                                          | Where the content lives now                                                                                  |
+| ------------------------------------------------ | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `Grok28.txt`                                     | **Applied** (tracked)                     | 12-week Enterprise/Play-Store roadmap. Every artifact it names exists: `content/landing.yaml`, `scripts/gtm-audit.mjs`, `src/lib/funnel.ts`, `docs/gtm/{FIRST_10,PRICING}.md`, `docs/adr/ADR-011-landing-copy-is-verified.md`, `supabase/migrations/20261110_gtm.sql`, `supabase/functions/v1/funnel/`, `src/features/tier/tiers.ts`, `PricingPage.tsx`. Weeks 1–3 + Dose 1–11 applied. | This file (Dose checklists + Operational) · `ADR-011` · `docs/gtm/**`                                        |
+| `Vedic vence.txt`                                | **Applied** (untracked)                   | Repo-grounded beta plan. Phase 3 already applied and cited verbatim: `supabase/migrations/20261126_beta_trials.sql` headers `-- source: CODE-JUNCTION/Vedic vence.txt, Phase 3`. `beta_bug.yml`, `docs/beta/BUG_LOG.md`, `/beta` route, `betaTrialService.ts` all exist.                                                                                                                | `CREAT.MD` 2026-10-31 (2) · `app-robustness-testing.md` §6 · migration comment                               |
+| `Budget.txt`                                     | **Consumed** (tracked)                    | Hinglish cost/GTM planning note (no code). Its actionable lines — Play Console, Supabase Pro, GST/CA, Stripe, TWA/assetlinks, testers, subscription count — are the **Operational (non-code)** checklist above.                                                                                                                                                                         | This file → Operational (non-code, from `Antidose.txt` + `Budget.txt`)                                       |
+| `Lov ved.txt`                                    | **Rejected — not applicable** (untracked) | Foreign `bun.lock` (a `tanstack_start_ts` / React-19 workspace). This repo uses npm + React 18 + Vite; nothing in it maps here. Recorded as rejected in `CREAT.MD` 2026-10-31 (2).                                                                                                                                                                                                      | — (n/a)                                                                                                      |
+| `Vedic_Rajkumar_PreLaunch_User_Testing_Guide.md` | **Redundant duplicate** (untracked)       | Same playbook as the repo-verified `docs/launch/pre-launch-user-testing-playbook.md`, but without the MEASURED/PROPOSED split and the `file:///` evidence links.                                                                                                                                                                                                                        | `docs/launch/pre-launch-user-testing-playbook.md` (superset: §0 reality table, §2 robots, §8 residual risks) |
+
+**Deletion executed 2026-10-31:**
+
+1. Deleted all five files above. `Grok28.txt` + `Budget.txt` were **tracked**, so their
+   removal lands as a tracked `deleted:` change (team-visible), unlike round 1 which was
+   all untracked/ignored.
+2. `CODE-JUNCTION/` is now empty and removed. `.gitignore:62` still lists the old name
+   `vedic-vijay/` — harmless, left as-is (it is not `CODE-JUNCTION`).
+3. Reference check: the only remaining mentions of `CODE-JUNCTION` are historical
+   narrative in `app-robustness-testing.md`, `CREAT.MD`, a migration comment, a 2026-07
+   audit report, and two source-file provenance comments — none is a code dependency.

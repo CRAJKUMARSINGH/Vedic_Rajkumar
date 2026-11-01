@@ -39,6 +39,12 @@ import {
   type FeedbackResponse 
 } from '@/services/userFeedbackService';
 import { mirrorUserFeedbackToLegacy } from '@/services/unifiedFeedbackSubmit';
+import {
+  classifyScreenshot,
+  SCREENSHOT_ACCEPT,
+  SCREENSHOT_MAX_BYTES,
+  SCREENSHOT_RETENTION_DAYS,
+} from '@/features/feedback/screenshot';
 
 interface Props {
   lang?: 'en' | 'hi';
@@ -85,8 +91,31 @@ export default function UserFeedbackWidget({ lang = 'en', compact = false, showA
     status: '',
     priority: ''
   });
+  const [screenshot, setScreenshot] = useState<File | null>(null);
+  const [screenshotConsent, setScreenshotConsent] = useState(false);
+  const [screenshotError, setScreenshotError] = useState<string | null>(null);
 
   const isHi = lang === 'hi';
+
+  const handlePickScreenshot = (file: File | null) => {
+    if (!file) {
+      setScreenshot(null);
+      setScreenshotError(null);
+      return;
+    }
+    const check = classifyScreenshot(file);
+    if (!check.ok) {
+      setScreenshot(null);
+      setScreenshotError(
+        check.reason === 'too_large'
+          ? `Image is too large (max ${Math.round(SCREENSHOT_MAX_BYTES / (1024 * 1024))} MB).`
+          : 'Only PNG, JPEG or WebP images are supported.',
+      );
+      return;
+    }
+    setScreenshot(file);
+    setScreenshotError(null);
+  };
 
   useEffect(() => {
     if (showAnalytics) {
@@ -112,7 +141,7 @@ export default function UserFeedbackWidget({ lang = 'en', compact = false, showA
         userAgent: navigator.userAgent,
         sessionId: sessionStorage.getItem('sessionId') || 'anonymous',
         tags: []
-      });
+      }, screenshotConsent ? screenshot : null);
 
       mirrorUserFeedbackToLegacy(submitted);
 
@@ -123,6 +152,9 @@ export default function UserFeedbackWidget({ lang = 'en', compact = false, showA
       setSubmittedFeedback(submitted);
       setFeedback({});
       setRating(0);
+      setScreenshot(null);
+      setScreenshotConsent(false);
+      setScreenshotError(null);
       setActiveTab('history');
       
       // Refresh analytics
@@ -225,6 +257,35 @@ export default function UserFeedbackWidget({ lang = 'en', compact = false, showA
           rows={4}
           required
         />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="screenshot">Screenshot (optional)</Label>
+        <Input
+          id="screenshot"
+          type="file"
+          accept={SCREENSHOT_ACCEPT}
+          onChange={(e) => handlePickScreenshot(e.target.files?.[0] ?? null)}
+        />
+        <p className="text-xs text-muted-foreground">
+          PNG, JPEG or WebP, up to {Math.round(SCREENSHOT_MAX_BYTES / (1024 * 1024))} MB. Stored
+          privately and deleted after {SCREENSHOT_RETENTION_DAYS} days. Use synthetic test data.
+        </p>
+        {screenshotError && <p className="text-xs text-red-600">{screenshotError}</p>}
+        {screenshot && (
+          <label className="flex items-start gap-2 text-xs">
+            <input
+              type="checkbox"
+              checked={screenshotConsent}
+              onChange={(e) => setScreenshotConsent(e.target.checked)}
+              className="mt-0.5"
+            />
+            <span>
+              I consent to this image being uploaded and stored privately for triage, and confirm it
+              contains no one else&apos;s personal data.
+            </span>
+          </label>
+        )}
       </div>
 
       {feedback.type === 'rating' && (

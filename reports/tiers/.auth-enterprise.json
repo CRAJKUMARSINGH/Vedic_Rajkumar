@@ -21,12 +21,8 @@
           "value": "\"enterprise\""
         },
         {
-          "name": "vedic_surveys",
-          "value": "[{\"id\":\"satisfaction_2026_q1\",\"title\":\"User Satisfaction Survey - Q1 2026\",\"description\":\"Help us improve by sharing your experience\",\"active\":true,\"startDate\":1793087732313,\"endDate\":1795679732313,\"responses\":0,\"questions\":[{\"id\":\"q1\",\"type\":\"rating\",\"question\":\"How satisfied are you with Vedic Rajkumar overall?\",\"required\":true},{\"id\":\"q2\",\"type\":\"rating\",\"question\":\"How accurate do you find the predictions?\",\"required\":true},{\"id\":\"q3\",\"type\":\"rating\",\"question\":\"How easy is the app to use?\",\"required\":true},{\"id\":\"q4\",\"type\":\"multiple_choice\",\"question\":\"Which feature do you use most?\",\"options\":[\"Transit Analysis\",\"Kundli Milan (Compatibility)\",\"Career Astrology\",\"Muhurat Calculator\",\"Baby Names\",\"Vaastu Assessment\"],\"required\":true},{\"id\":\"q5\",\"type\":\"text\",\"question\":\"What feature would you like to see added?\",\"required\":false},{\"id\":\"q6\",\"type\":\"yes_no\",\"question\":\"Would you recommend this app to others?\",\"required\":true}]},{\"id\":\"feature_priorities_2026\",\"title\":\"Feature Priorities Survey\",\"description\":\"Help us prioritize upcoming features\",\"active\":true,\"startDate\":1793087732313,\"endDate\":1798271732313,\"responses\":0,\"questions\":[{\"id\":\"q1\",\"type\":\"multiple_choice\",\"question\":\"Which advanced feature interests you most?\",\"options\":[\"Dasha System (Mahadasha/Antardasha)\",\"Divisional Charts (D9, D10)\",\"Yogas Identification\",\"Ashtakavarga System\",\"Lal Kitab Predictions\",\"KP System\"],\"required\":true},{\"id\":\"q2\",\"type\":\"rating\",\"question\":\"How important is mobile app to you?\",\"required\":true},{\"id\":\"q3\",\"type\":\"rating\",\"question\":\"How important is AI-powered predictions?\",\"required\":true},{\"id\":\"q4\",\"type\":\"yes_no\",\"question\":\"Would you pay for premium features?\",\"required\":true}]}]"
-        },
-        {
           "name": "vr-consent",
-          "value": "{\"given\":true,\"timestamp\":\"2026-10-27T07:55:31.702Z\",\"version\":1}"
+          "value": "{\"given\":true,\"timestamp\":\"2026-10-31T10:03:21.299Z\",\"version\":1}"
         },
         {
           "name": "vedic_subscription",

@@ -37,6 +37,12 @@ test.beforeEach(async ({ page }) => {
   page.on('pageerror', (e) => pageErrors.push(e.message));
   await page.goto('/app');
   await expect(page.locator('body')).not.toContainText('Application Error');
+  // `/app` is a LAZY route and MainLayout deliberately renders no banner shell on
+  // `/app` (see MainLayout.isLandingPage), so every tier surface — including
+  // UpgradeBanner — only exists once the Index chunk has mounted. Without this
+  // anchor, assertions run against the Suspense "Loading…" fallback: the free
+  // case reads as a false-red and the paid "banner absent" cases pass vacuously.
+  await expect(page.getByTestId('tier-badge').first()).toBeVisible({ timeout: 30_000 });
 });
 
 test('grade identity is visible and correct', async ({ page }) => {
@@ -49,9 +55,13 @@ test('grade identity is visible and correct', async ({ page }) => {
 
 test('upgrade banner visibility matches grade', async ({ page }) => {
   const persona = p();
-  const count = await page.getByTestId('upgrade-banner').count();
-  record('upgrade-banner', persona.expect.upgradeBannerVisible ? count > 0 : count === 0,
-    `expected banner ${persona.expect.upgradeBannerVisible ? 'present' : 'absent'}, found ${count}`);
+  // Retrying assertions (not a bare count()) so the presence check waits for the
+  // banner to paint and the absence check only runs once the app has mounted.
+  const expected = persona.expect.upgradeBannerVisible ? 1 : 0;
+  await expect(page.getByTestId('upgrade-banner')).toHaveCount(expected);
+  const observed = await page.getByTestId('upgrade-banner').count();
+  record('upgrade-banner', observed === expected,
+    `expected banner ${persona.expect.upgradeBannerVisible ? 'present' : 'absent'}, found ${observed}`);
 });
 
 test.fixme('PDF export gate matches grade', async ({ page }) => {

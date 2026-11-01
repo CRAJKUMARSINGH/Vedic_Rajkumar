@@ -22,6 +22,7 @@ import EnhancedLanguageToggle from '@/components/EnhancedLanguageToggle';
 import UserProfileDialog from '@/components/UserProfileDialog';
 import WelcomeModal from '@/components/WelcomeModal';
 import UpgradeBanner from '@/components/UpgradeBanner';
+import TrialBanner from '@/components/TrialBanner';
 import TierBadge from '@/components/TierBadge';
 import WeeklyDriveCard from '@/components/WeeklyDriveCard';
 import { MuhurtaFinderPanel } from '@/components/MuhurtaFinderPanel';
@@ -312,6 +313,7 @@ const Index = () => {
     <div className="min-h-screen bg-auspicious-pattern text-foreground font-body antialiased selection:bg-primary/20">
         <WelcomeModal open={showWelcomeModal} onClose={() => setShowWelcomeModal(false)} isHi={isHi} />
         <UpgradeBanner isHi={isHi} />
+        <TrialBanner isHi={isHi} />
         <div className="flex flex-wrap items-center gap-3 px-4 py-2">
           <TierBadge isHi={isHi} />
           <WeeklyDriveCard isHi={isHi} />

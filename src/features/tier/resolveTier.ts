@@ -62,17 +62,64 @@ export function resolveTier(): UserTier {
 // (`data-tier`). The canonical `Tier` (`free|pro|enterprise`) is the single
 // taxonomy for entitlements. Both read the same sources, so they never disagree.
 
+/** Provenance + window of the server entitlement (drives the TrialBanner). */
+export interface ServerEntitlementMeta {
+  source: string;
+  /** ISO expiry of a time-boxed grant (beta trial); null = perpetual. */
+  expiresAt: string | null;
+}
+
 /** Server entitlement, set by `useEntitlement()` after `/tier-entitlement`. */
 let serverTier: Tier | null = null;
+let serverMeta: ServerEntitlementMeta | null = null;
 
-export function setServerTier(tier: Tier | null): void {
+/**
+ * Stable snapshot for `useSyncExternalStore` — a NEW object only when the server
+ * speaks. React compares by identity, so returning a fresh object per call would
+ * re-render forever.
+ */
+let serverSnapshot: { tier: Tier | null; meta: ServerEntitlementMeta | null } = {
+  tier: null,
+  meta: null,
+};
+
+const serverListeners = new Set<() => void>();
+
+export function setServerTier(tier: Tier | null, meta: ServerEntitlementMeta | null = null): void {
   serverTier = tier;
+  serverMeta = tier ? meta : null;
+  serverSnapshot = { tier: serverTier, meta: serverMeta };
   try {
-    if (tier) localStorage.setItem(CACHE_KEY, JSON.stringify({ tier, at: Date.now() }));
-    else localStorage.removeItem(CACHE_KEY);
+    if (tier) {
+      // The cache is a mirror, never an authority: `currentTier()` still prefers
+      // module state, and the server re-derives the truth on every privileged call.
+      localStorage.setItem(
+        CACHE_KEY,
+        JSON.stringify({ tier, at: Date.now(), ...(serverMeta ?? {}) }),
+      );
+    } else {
+      localStorage.removeItem(CACHE_KEY);
+    }
   } catch {
     /* ignore */
   }
+  for (const listener of serverListeners) listener();
+}
+
+/** Subscribe to server-entitlement changes (for `useSyncExternalStore`). */
+export function subscribeServerEntitlement(listener: () => void): () => void {
+  serverListeners.add(listener);
+  return () => {
+    serverListeners.delete(listener);
+  };
+}
+
+/** Latest server-entitlement snapshot; `tier` is null until the server speaks. */
+export function getServerEntitlementSnapshot(): {
+  tier: Tier | null;
+  meta: ServerEntitlementMeta | null;
+} {
+  return serverSnapshot;
 }
 
 /** Canonical tier from the seeded `vr_tier` key (harness / demo), or null. */

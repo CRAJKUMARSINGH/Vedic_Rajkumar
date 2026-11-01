@@ -100,6 +100,8 @@ const rules = [
   { file: 'docs/SOC2_PREPARATION_CHECKLIST.md', pattern: /(\d+) charts · \d+ assertions/, expected: String(corpusCharts), label: 'SOC2 accuracy corpus size' },
   { file: 'docs/CLAIMS.md', pattern: /\|\s+\*\*Reference Golden Corpus\*\*\s+\|\s+\*\*(\d+) charts\*\*/, expected: String(corpusCharts), label: 'CLAIMS golden corpus' },
   { file: 'docs/CLAIMS.md', pattern: /\*\*(\d+) tests\*\* across \*\*(\d+) test files\*\*/, join: ' tests across ', expected: `${tests} tests across ${testFiles}`, label: 'CLAIMS total test suite' },
+  { file: 'docs/launch/pre-launch-user-testing-playbook.md', pattern: /G1 unit\/integration[^\n]*?\*\*(\d+) passed\*\*/, expected: String(tests), label: 'playbook G1 unit test count' },
+  { file: 'app-robustness-testing.md', pattern: /Current canonical suite \(derived\):\*\* (\d+) tests \/ (\d+) files/, join: ' tests / ', expected: `${tests} tests / ${testFiles}`, label: 'robustness registry header pin' },
 ];
 
 // ─── Stale-token guard ───────────────────────────────────────────────────────
@@ -111,6 +113,18 @@ const staleGuardFiles = [
   'README.md',
   'docs/ENTERPRISE_LAUNCH_GUIDE.md',
   'docs/SOC2_PREPARATION_CHECKLIST.md',
+];
+
+// Retired test counts must not reappear in the *live* claim docs. The registry
+// (`app-robustness-testing.md`) is deliberately exempt: as an append-only log it is
+// allowed to cite the superseded figures it explains; only its header pin is gated.
+// Each retired count was the derived canonical at the time it was superseded, and
+// the pin only ever moves forward — so a doc that still says it is stale.
+const retiredCounts = ['2063', '2065', '2071', '2081'];
+const retiredCountFiles = [
+  'docs/launch/pre-launch-user-testing-playbook.md',
+  'README.md',
+  'docs/ENTERPRISE_LAUNCH_GUIDE.md',
 ];
 
 // ─── Evaluate ────────────────────────────────────────────────────────────────
@@ -142,6 +156,17 @@ for (const file of staleGuardFiles) {
   for (const token of staleTokens) {
     if (src.includes(token)) {
       problems.push(`${file}: stale token "${token}" present — superseded figure`);
+    }
+  }
+}
+
+for (const file of retiredCountFiles) {
+  const full = join(ROOT, file);
+  if (!existsSync(full)) continue;
+  const src = readFileSync(full, 'utf8');
+  for (const token of retiredCounts) {
+    if (src.includes(token)) {
+      problems.push(`${file}: retired test count "${token}" present — superseded by the derived canonical`);
     }
   }
 }

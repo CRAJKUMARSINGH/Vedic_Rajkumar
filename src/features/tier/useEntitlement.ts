@@ -9,8 +9,14 @@
  *
  * See docs/testing/TIER_PARITY.md.
  */
-import { useEffect, useState } from 'react';
-import { setServerTier, currentTier } from './resolveTier';
+import { useEffect, useState, useSyncExternalStore } from 'react';
+import {
+  setServerTier,
+  currentTier,
+  subscribeServerEntitlement,
+  getServerEntitlementSnapshot,
+  type ServerEntitlementMeta,
+} from './resolveTier';
 import { entitlementFor, toTier, type Tier, type Entitlement } from './tiers';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined;
@@ -44,10 +50,20 @@ export function useEntitlement(): EntitlementState {
             : {},
         });
         if (!res.ok) return;
-        const body = (await res.json()) as { tier?: string };
+        const body = (await res.json()) as {
+          tier?: string;
+          source?: string;
+          expires_at?: string | null;
+        };
         if (cancelled || !body?.tier) return;
         const resolved = toTier(body.tier);
-        setServerTier(resolved);
+        // `source`/`expires_at` are display-only (they feed the TrialBanner); the
+        // server still honours expiry itself, so a stale pair cannot widen access.
+        const meta: ServerEntitlementMeta = {
+          source: body.source ?? 'default',
+          expiresAt: body.expires_at ?? null,
+        };
+        setServerTier(resolved, meta);
         setTier(resolved);
         setServerBacked(true);
       } catch {
@@ -69,6 +85,48 @@ export function useEntitlement(): EntitlementState {
 export function EntitlementBootstrap() {
   useEntitlement();
   return null;
+}
+
+// ─── Trial window ────────────────────────────────────────────────────────────
+
+export interface TrialWindow {
+  /** True only for a live, time-boxed beta-trial grant. */
+  active: boolean;
+  /** Whole days remaining (ceil); null when not a trial. */
+  daysLeft: number | null;
+  /** The server's ISO expiry, verbatim. */
+  expiresAt: string | null;
+  /** The server's provenance string ('beta_trial', 'default', …). */
+  source: string;
+}
+
+/**
+ * Pure: whole days from `now` to `expiresAt`, rounded UP (a part-day is still a
+ * day of access), or null when there is no window / it is unparseable.
+ */
+export function daysUntil(expiresAt: string | null, now: number = Date.now()): number | null {
+  if (!expiresAt) return null;
+  const t = Date.parse(expiresAt);
+  if (Number.isNaN(t)) return null;
+  return Math.ceil((t - now) / 86_400_000);
+}
+
+/**
+ * The live beta-trial window, or an inert one. Reads the server-entitlement store
+ * so it updates the moment `useEntitlement()` hears from the server — rendered via
+ * `useSyncExternalStore`, so there is no effect and no first-paint race.
+ */
+export function useTrialWindow(now: number = Date.now()): TrialWindow {
+  const snapshot = useSyncExternalStore(
+    subscribeServerEntitlement,
+    getServerEntitlementSnapshot,
+    getServerEntitlementSnapshot,
+  );
+  const source = snapshot.meta?.source ?? 'default';
+  const expiresAt = snapshot.meta?.expiresAt ?? null;
+  const days = daysUntil(expiresAt, now);
+  const active = source === 'beta_trial' && days !== null && days >= 0;
+  return { active, daysLeft: active ? days : null, expiresAt, source };
 }
 
 export default useEntitlement;

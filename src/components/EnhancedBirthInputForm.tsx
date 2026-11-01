@@ -193,14 +193,20 @@ export default function EnhancedBirthInputForm({
     return () => clearTimeout(timer);
   }, [location]);
 
-  // Close dropdown on outside click
+  // Close dropdown on outside click.
+  // MUST be `click`, not `mousedown`: the suggestion list now sits in normal
+  // flow, so closing it on mousedown collapses ~200px and moves the submit
+  // button *between* mousedown and mouseup. The browser then attributes the
+  // gesture to the form ancestor, not the button, and the form never submits —
+  // the first click is silently swallowed. Closing on `click` lets the submit
+  // complete first, then the list is removed (or unmounted with the form).
   useEffect(() => {
     const h = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node))
         setShowDropdown(false);
     };
-    document.addEventListener("mousedown", h);
-    return () => document.removeEventListener("mousedown", h);
+    document.addEventListener("click", h);
+    return () => document.removeEventListener("click", h);
   }, []);
 
   // Auto-save
@@ -459,8 +465,15 @@ export default function EnhancedBirthInputForm({
             required
             autoComplete="off"
           />
+          {/* The suggestion list is rendered in normal flow, NOT absolutely
+              positioned: as an overlay it sat on top of the submit button and
+              swallowed the first click (Playwright retried for 120s; a real
+              user's click silently selected a suggestion instead of
+              submitting). Coordinates are optional — validation is
+              `location.length >= 2` — so typing a city and submitting must
+              always be possible. */}
           {showDropdown && locationResults.length > 0 && (
-            <div className="absolute z-50 w-full mt-1 bg-background border border-border rounded-md shadow-lg max-h-60 overflow-y-auto">
+            <div data-testid="location-suggestions" className="w-full mt-1 bg-background border border-border rounded-md shadow-lg max-h-60 overflow-y-auto">
               {locationResults.map((result, idx) => (
                 <button key={idx} type="button" onClick={() => handleLocationSelect(result)}
                   className="w-full px-3 py-2 text-left hover:bg-muted transition-colors border-b border-border last:border-b-0">

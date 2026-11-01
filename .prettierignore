@@ -9,3 +9,8 @@ public/answers/
 # public/answers/: written verbatim and asserted byte-for-byte by
 # `npm run answers:html:check` in CI.
 public/a/
+
+# Frozen handoff archive (reports/handoff/...). MANIFEST.md and the archived
+# copies are byte-reproducible evidence of a past build — reformatting them via
+# the pre-commit `prettier --write` would falsify the frozen snapshot.
+reports/handoff/
