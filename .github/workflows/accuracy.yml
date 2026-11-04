@@ -62,6 +62,22 @@ jobs:
       - name: Run time-scale gate (UT/TT split)
         run: npm run test:time
 
+  # ── Varga golden corpus (every PR) ──────────────────────────────────────
+  varga:
+    name: Varga · golden corpus
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Varga gate (engine vs independent oracle, Tier B exact)
+        run: npm run test:accuracy:varga
+      - name: Anti-tautology guard (oracles must not import the engine)
+        run: npx vitest run src/tests/accuracy/noEngineImports.test.ts
+
   # ── Full suite (nightly + main push) ─────────────────────────────────────
   full-suite:
     name: Full test suite

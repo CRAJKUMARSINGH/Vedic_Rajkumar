@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 /**
  * Ephemeris Service
  * Planetary position calculations for Vedic astrology

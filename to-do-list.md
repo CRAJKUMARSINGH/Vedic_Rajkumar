@@ -437,3 +437,48 @@ never merged.
 **Gates after deletion:** `npm run typecheck` **0** · `npm run lint` **0 errors** ·
 `npx vitest run src/tests/hinglish.test.ts src/tests/festival.test.tsx` **26/26** ·
 `npm run docs:verify` **exit 0 (2118 / 128)**.
+
+---
+
+## Redundant files — declared 2026-11-04, **deleted 2026-11-04** (round 4)
+
+Standing order from the user, repeated: **"APPLY UPDATIONS AND TESTS FROM FILES IN FOLDER AND
+SUBFOLDER OF `CODE-JUNCTION`"** — and **">>> keep empty folder"** when consumed bundles are
+deleted. Round 3 restored `CODE-JUNCTION/` as an empty folder; two new bundles were dropped in
+since, and this round consumes them. The bundles were first _declared_ redundant, then — on the
+follow-up command **"CLEAN DELETE REDUNDANT FILES AND FOLDERS"** — **deleted in the same session**,
+leaving `CODE-JUNCTION/` empty and **kept**.
+
+| File / folder                  | Status                         | Why redundant / where the content lives now                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ------------------------------ | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Vedic-acc4.txt`               | **Applied** (untracked)        | "Patch guide: 6.5 → 9.99". Part A standing contract delivered as `LICENSING.md`, `MAINTAINERS.md`, `CITATION.cff`, `docs/RELEASE.md`, `docs/THREAT-MODEL.md`, `docs/DEFINITION-OF-DONE.md`, SPDX headers, PR-template DoD/DCO boxes, numeric-claims gate + `.github/workflows/dod.yml`. Its **ACC-01** PR is delivered: `docs/accuracy/VARGA-CONVENTIONS.md`, `tools/accuracy/lib/varga.mjs`, `tools/accuracy/gen-varga-golden.mjs`, `tools/accuracy/golden/varga/`, `src/tests/accuracy/varga.test.ts`, `src/tests/accuracy/noEngineImports.test.ts`, `accuracy.yml` `varga` job. DEF-016 raised. |
+| `Vedic if due.txt`             | **Applied** (untracked)        | **ACC-08** — Panchanga acceptance delivered as `src/tests/accuracy/panchangAcceptance.test.ts` (25 tests, five limbs, boundary + transition cases). Documented finding: Kimstughna karana 11 is unreachable.                                                                                                                                                                                                                                                                                                                                                                                       |
+| `Vedic november.txt`           | **Applied** (untracked)        | Consumed in round 3 (Hinglish + festival + robotic-5000). Re-dropped; its content is live in `src/lib/hinglish.ts`, `src/lib/festivals.ts`, `docs/testing/ROBOTIC-5000.md`.                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `Vedguide2nv.txt`              | **Applied** (untracked)        | Brief for the `vedic-robotic-patches` package below (bolt.dev port). Same three fixes were applied to `feature/prashna-daily-quota` (Clerk `useOptionalSession`, place-autocomplete close, edge-date validation).                                                                                                                                                                                                                                                                                                                                                                                  |
+| `vedic-robotic-patches/`       | **Applied** (untracked)        | The bolt.dev patch package itself (`patches/01-03`, `docs/ROBOTIC_TEST_GUIDE.md`, `tests/persona-tiers.spec.ts`) plus a redundant nested duplicate of the same tree. Ported in a prior session.                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `Vedvenis.txt`, `Package.json` | **Not applicable** (untracked) | Foreign-project inputs — a Python/Streamlit BridgeCAD harness and a TanStack Start manifest. Neither maps to this repo (npm + React 18 + Vite); removed as clutter on the explicit "clean delete" command.                                                                                                                                                                                                                                                                                                                                                                                         |
+
+**Deletion performed 2026-11-04 (on command "CLEAN DELETE REDUNDANT FILES AND FOLDERS"):**
+
+1. Emptied `CODE-JUNCTION/` of **all** contents — the four consumed bundles, the applied
+   `vedic-robotic-patches/` package (incl. its nested duplicate), and the two foreign-project files.
+   The folder is **kept, empty** (no `.gitkeep`) — consistent with round 3.
+2. Removed the gitignored, regenerable test-output trees (`test-results/`, `test-results-rb/`,
+   `tr-rb2/`) and the stray `.tmp-verify.log`.
+3. Second wave (user-confirmed): removed the stale `reports/robustness/*.log` transcripts (8 files;
+   `report.json` retained as evidence), the `dist/` build output, the `.vitest-report.json` report
+   and the `.agents/` IDE task folder. **Note:** `dist/` and `.vitest-report.json` are _regenerated_
+   by any test run — `docs:verify` recreated both (`dist/accuracy-report.txt` +
+   `dist/accuracy-summary.json` from the accuracy suite; the JSON report from the Vitest reporter) —
+   so they legitimately re-appear and are gitignored.
+4. **Retained** (not redundant / needed): `reports/` (frozen handoff archive + `report.json` +
+   screenshots), `node_modules/`, `.netlify/`, `.husky/_/`, `supabase/.temp/`, `output/` (generated
+   PDFs), `packages/`, `ops/`, `observability/`, `content/`.
+5. Every deleted path was **untracked or gitignored**, so `git status` shows no removed tracked file —
+   only the pre-existing modification/untracked set from this branch's work. Post-cleanup gates:
+   `npm run docs:verify` **exit 0** (2203 / 134).
+
+**Gates at declaration (MEASURED):** `npm run lint` **0 errors** (1258 warnings) ·
+`npm run typecheck` **exit 0** · `npm run typecheck:tests` **exit 0** ·
+`npm run test:run` **2203 passed / 134 files** (4 skipped) · `npm run docs:verify`
+**exit 0 (2203 / 134)**.

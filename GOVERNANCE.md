@@ -47,6 +47,12 @@ The target is **2**, not 1, on: `main` push, Supabase dashboard, Stripe dashboar
 domain registrar, and the Sentry/PostHog projects. `docs/ops/ACCESS_INVENTORY.md`
 lists who holds what and how to recover it.
 
+## Continuity
+
+If the maintainer is unreachable for 30 days, the most recent committer gains
+merge rights on `main`. Documented here so a handover is a plan, not a scramble.
+[MAINTAINERS.md](MAINTAINERS.md) records who currently holds each role.
+
 ## Amending this file
 
 PR + Core review. A governance change that nobody notices is worse than no rule.

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 /**
  * Karma-Vidhya Sanhita (कर्म-विद्या संहिता)
  * "The Compendium of Career & Learning"

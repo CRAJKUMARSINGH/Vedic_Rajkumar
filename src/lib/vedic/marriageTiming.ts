@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 /**
  * Vedic Marriage Timing Analysis
  * Methods: Dasha, Jaimini, Transits, UL/A7 analysis
