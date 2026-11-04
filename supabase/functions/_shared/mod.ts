@@ -10,8 +10,8 @@
  * counter is not a limit. See ADR-005.
  */
 import { createClient } from 'jsr:@supabase/supabase-js@2';
-import { RATE_LIMITS, type Tier } from '@/api/v1/scopes';
-import { rateLimitHeaders } from '@/api/rateLimit/algorithm';
+import { RATE_LIMITS, type Tier } from '../../../src/api/v1/scopes.ts';
+import { rateLimitHeaders } from '../../../src/api/rateLimit/algorithm.ts';
 import { getCorsHeaders } from './cors.ts';
 
 /** JSON response with CORS headers. Caller-supplied headers win. */
