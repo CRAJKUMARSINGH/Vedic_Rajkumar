@@ -143,3 +143,68 @@ export function markWelcomeSeen(): void {
 export function hasSeenWelcome(): boolean {
   return localStorage.getItem("vedic_welcome_seen") === "1";
 }
+
+// ─── Prashna daily quota (Free plan) ─────────────────────────────────────────
+/**
+ * UI-level enforcement of FREE_LIMITS.questionsPerDay — the number the
+ * UpgradeBanner already advertises. Per AGENTS.md §5 an in-app check is UX, not
+ * authorization: the real boundary stays server-side (src/api/metering/usage.ts
+ * + RLS). This only keeps the Free tier honest in the browser and points the
+ * user at Pro once the limit is reached.
+ *
+ * Usage is keyed to the *local calendar day* — the same "today" the user sees —
+ * so it rolls over on its own; no cron or reset job is required.
+ */
+const PRASHNA_USAGE_KEY = "vedic_prashna_usage";
+
+interface PrashnaUsage {
+  /** Local calendar day, YYYY-MM-DD. */
+  date: string;
+  /** Questions analysed on that day. */
+  count: number;
+}
+
+function localDayKey(now: Date): string {
+  const pad = (n: number) => n.toString().padStart(2, "0");
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+}
+
+function readPrashnaUsage(now: Date = new Date()): PrashnaUsage {
+  const today = localDayKey(now);
+  try {
+    const raw = localStorage.getItem(PRASHNA_USAGE_KEY);
+    if (!raw) return { date: today, count: 0 };
+    const parsed = JSON.parse(raw) as Partial<PrashnaUsage>;
+    // A stale date means a new day: the previous count no longer applies.
+    if (parsed.date !== today || typeof parsed.count !== "number") {
+      return { date: today, count: 0 };
+    }
+    return { date: today, count: Math.max(0, Math.floor(parsed.count)) };
+  } catch {
+    return { date: today, count: 0 };
+  }
+}
+
+/** Free questions the caller has analysed today. */
+export function getPrashnaUsedToday(now: Date = new Date()): number {
+  return readPrashnaUsage(now).count;
+}
+
+/** Whether another Prashna question may be analysed right now. Pro is never limited. */
+export function canAskPrashna(now: Date = new Date()): boolean {
+  return isPro() || getPrashnaUsedToday(now) < FREE_LIMITS.questionsPerDay;
+}
+
+/** Record one analysed question and return the new daily total. */
+export function recordPrashnaQuestion(now: Date = new Date()): number {
+  const next = readPrashnaUsage(now).count + 1;
+  try {
+    localStorage.setItem(
+      PRASHNA_USAGE_KEY,
+      JSON.stringify({ date: localDayKey(now), count: next }),
+    );
+  } catch {
+    /* storage unavailable — gating stays permissive rather than blocking */
+  }
+  return next;
+}

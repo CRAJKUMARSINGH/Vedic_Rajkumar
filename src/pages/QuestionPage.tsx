@@ -104,6 +104,13 @@ import { LoadingSkeleton } from '@/components/ui/loading-skeleton';
 import FamilyProfileSelector from '@/components/FamilyProfileSelector';
 import { getProfileById } from '@/lib/familyProfiles';
 import type { FamilyProfile } from '@/lib/familyProfiles';
+import {
+  canAskPrashna,
+  getPrashnaUsedToday,
+  recordPrashnaQuestion,
+  isPro,
+  FREE_LIMITS,
+} from '@/services/subscriptionService';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -253,6 +260,13 @@ const QuestionPage = () => {
   const [historyKey, setHistoryKey] = useState(0);
   const [copied, setCopied] = useState(false);
 
+  // Free-plan Prashna quota — the same "3 questions/day" the UpgradeBanner
+  // advertises, now actually enforced for the UI. Pro is never limited.
+  const [prashnaUsed, setPrashnaUsed] = useState(() => getPrashnaUsedToday());
+  const proActive = isPro();
+  const remainingFree = Math.max(0, FREE_LIMITS.questionsPerDay - prashnaUsed);
+  const quotaExhausted = !proActive && remainingFree === 0;
+
   const selectedJatak = JATAKS.find(j => j.id === selectedJatakId);
 
   // Hook for 13-layer subjective analysis engine
@@ -300,6 +314,17 @@ const QuestionPage = () => {
     setPranaksharaDetail(null);
     if (!question.trim()) {
       setError(L('Please type your question.', 'कृपया अपना प्रश्न लिखें।'));
+      return;
+    }
+
+    if (!canAskPrashna()) {
+      setError(
+        L(
+          `You've used all ${FREE_LIMITS.questionsPerDay} free Prashna questions today. Upgrade to Pro for unlimited questions.`,
+          `आपने आज के सभी ${FREE_LIMITS.questionsPerDay} निःशुल्क प्रश्न उपयोग कर लिए। असीमित प्रश्नों के लिए प्रो में अपग्रेड करें।`
+        )
+      );
+      setPrashnaUsed(getPrashnaUsedToday());
       return;
     }
 
@@ -358,6 +383,8 @@ const QuestionPage = () => {
         natal,
       });
       setResult(isRoman ? deepTransliterate(analysis) : analysis);
+      // The question has been answered — spend one of today's free questions.
+      setPrashnaUsed(recordPrashnaQuestion());
 
       const classicalAns = await generateEnhancedClassicalAnswer({
         question: question.trim(),
@@ -937,7 +964,7 @@ const QuestionPage = () => {
               </motion.div>
             )}
 
-            <div className="flex justify-center pt-2">
+            <div className="flex flex-col items-center gap-2 pt-2">
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white shadow-md hover:shadow-lg transition-all"
@@ -956,6 +983,24 @@ const QuestionPage = () => {
                   </>
                 )}
               </Button>
+              {!proActive && (
+                <p className="text-xs text-muted-foreground" aria-live="polite">
+                  {quotaExhausted
+                    ? L('Daily free limit reached.', 'आज की निःशुल्क सीमा समाप्त।')
+                    : L(
+                        `${remainingFree} of ${FREE_LIMITS.questionsPerDay} free questions left today`,
+                        `आज ${FREE_LIMITS.questionsPerDay} में से ${remainingFree} निःशुल्क प्रश्न शेष`
+                      )}
+                  {quotaExhausted && (
+                    <>
+                      {' '}
+                      <Link to="/pricing" className="font-medium text-amber-600 hover:underline">
+                        {L('Upgrade to Pro', 'प्रो में अपग्रेड करें')}
+                      </Link>
+                    </>
+                  )}
+                </p>
+              )}
             </div>
 
           </CardContent>
