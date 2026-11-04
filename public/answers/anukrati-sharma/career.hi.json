@@ -17,24 +17,24 @@
     "reference_type": "natal"
   },
   "direct_answer": {
-    "en": "Career: average (41%) (average, 41%)",
-    "hi": "करियर सामान्य (41%) (सामान्य, 41%)"
+    "en": "Career: average (44%) (average, 44%)",
+    "hi": "करियर सामान्य (44%) (सामान्य, 44%)"
   },
   "verdicts": [
     {
       "topic": "career",
       "headline": {
-        "en": "Career: average (41%)",
-        "hi": "करियर सामान्य (41%)"
+        "en": "Career: average (44%)",
+        "hi": "करियर सामान्य (44%)"
       },
-      "score_0_100": 71,
+      "score_0_100": 63,
       "band": "average",
       "engine_verdict": "CONDITIONAL",
-      "confidence_0_1": 0.41,
+      "confidence_0_1": 0.44,
       "window": null,
       "rationale": {
-        "en": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 40/100, house promise scores 93/100, Dasha scores 92/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 71/100.",
-        "hi": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 40/100, house promise scores 93/100, Dasha scores 92/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 71/100."
+        "en": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 40/100, house promise scores 93/100, Dasha scores 69/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 63/100.",
+        "hi": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 40/100, house promise scores 93/100, Dasha scores 69/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 63/100."
       },
       "conflicts": [
         "House promise is real, but transit has not opened the timing gate; do not call immediate fruition.",
@@ -53,8 +53,8 @@
         },
         {
           "layer": "Dasha activation",
-          "score": 92,
-          "finding": "Venus MD with Mercury AD gives 92/100 Dasha clearance for career; delivery class is full."
+          "score": 69,
+          "finding": "Venus MD with Ketu AD gives 69/100 Dasha clearance for career; delivery class is full."
         },
         {
           "layer": "Transit timing",
@@ -62,7 +62,12 @@
           "finding": "Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
         }
       ],
-      "remedies": [],
+      "remedies": [
+        {
+          "en": "Venus",
+          "hi": "Venus"
+        }
+      ],
       "caveats": [
         {
           "en": "Windows are approximate.",
@@ -80,7 +85,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5e5698f0b3ae95af",
-    "card_hash": "b89cb772a4631c52",
+    "card_hash": "59693fea166da288",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",
