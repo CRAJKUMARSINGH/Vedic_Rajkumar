@@ -40,14 +40,34 @@ function toPosix(value: string): string {
   return value.split(sep).join('/');
 }
 
+/**
+ * Directories that never hold a production call site. `src/` should not contain
+ * any of these, but pruning keeps the walk cheap (and correct) if it ever does.
+ */
+const PRUNED = new Set(['node_modules', '.git', 'dist', 'coverage']);
+
 function walk(dir: string, out: string[] = []): string[] {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    if (PRUNED.has(entry.name)) continue;
     const full = join(dir, entry.name);
     if (entry.isDirectory()) walk(full, out);
     else if (/\.(ts|tsx)$/.test(entry.name)) out.push(toPosix(relative(ROOT, full)));
   }
   return out;
 }
+
+/**
+ * One walk of `src/` plus one read of every `.ts`/`.tsx` in it, resolved ONCE at
+ * module load. The two tests below used to walk AND read the tree independently,
+ * which made this file load-sensitive: under a saturated CI filesystem it burned
+ * the whole timeout and failed on wall-clock rather than on an assertion — the
+ * same defect class as schema.test.ts (DEF-010).
+ */
+const SRC_SOURCES = (() => {
+  const sources = new Map<string, string>();
+  for (const rel of walk(SRC)) sources.set(rel, readFileSync(join(ROOT, rel), 'utf8'));
+  return sources;
+})();
 
 function globToRegExp(glob: string): RegExp {
   const escaped = glob.replace(/[.+?^$()|[\]{}\\]/g, '\\$&');
@@ -72,7 +92,7 @@ function isAllowed(rel: string): boolean {
   return Boolean(allow.files?.[rel]) || allowedPatterns.some((p) => p.test(rel));
 }
 
-describe('chart timezone wiring', () => {
+describe('chart timezone wiring', { timeout: 30_000 }, () => {
   it('allow list file exists', () => {
     expect(existsSync(ALLOW), 'tools/accuracy/chartTzAllowList.json is missing').toBe(true);
   });
@@ -80,9 +100,9 @@ describe('chart timezone wiring', () => {
   it('routes every production call through calculateChartForBirth', () => {
     const offenders: string[] = [];
 
-    for (const rel of walk(SRC)) {
+    for (const [rel, src] of SRC_SOURCES) {
       if (isAllowed(rel)) continue;
-      readFileSync(join(ROOT, rel), 'utf8')
+      src
         .split('\n')
         .forEach((line, index) => {
           // Skip import statements — they don't call the function
@@ -101,9 +121,8 @@ describe('chart timezone wiring', () => {
   it('publishes the timezone from every non-form chart entry point', () => {
     const offenders: string[] = [];
 
-    for (const rel of walk(SRC)) {
+    for (const [rel, src] of SRC_SOURCES) {
       if (!rel.startsWith('src/pages/')) continue;
-      const src = readFileSync(join(ROOT, rel), 'utf8');
       if (DIRECT_SUBMIT.test(src) && !PUBLISHES_TZ.test(src)) {
         offenders.push(rel);
       }

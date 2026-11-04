@@ -1,0 +1,50 @@
+name: DoD
+
+# Standing contract — Part A4 of the 6.5→9.99 patch guide.
+#
+# Every pull request must carry the Definition of Done block from the PR
+# template and leave at most a small number of its lines unticked. This turns
+# "did you actually run the DoD?" from a reviewer's memory into a gate, so the
+# contract cannot be quietly skipped under deadline pressure.
+#
+# The count is scoped to the `## Definition of Done` section only: the other
+# checklist blocks in the body (blast radius, tier) are advisory and must not
+# make this gate fail.
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  dod:
+    name: Definition of Done present and ticked
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read the PR body
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+          # How many DoD lines a PR may legitimately leave unticked. A small
+          # non-zero budget keeps the gate honest — it is a nudge to justify an
+          # exception, not a checkbox theatre that blocks every merge.
+          MAX_UNTICKED: '2'
+        run: |
+          body="$(gh pr view "$PR_NUMBER" --repo "$REPO" --json body -q .body)"
+          if ! echo "$body" | grep -q '^## Definition of Done'; then
+            echo "::error::Definition of Done section missing from the PR body"
+            exit 1
+          fi
+
+          # Slice out just the DoD section (its heading up to the next `## `).
+          section="$(echo "$body" | awk '/^## Definition of Done/{f=1; next} /^## /{f=0} f')"
+          unticked="$(echo "$section" | grep -c '^- \[ \]' || true)"
+          echo "unticked DoD lines: $unticked (max $MAX_UNTICKED)"
+          if [ "$unticked" -gt "$MAX_UNTICKED" ]; then
+            echo "::error::$unticked unticked DoD lines — tick them or justify the exception in the PR body"
+            exit 1
+          fi

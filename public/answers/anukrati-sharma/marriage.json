@@ -17,24 +17,24 @@
     "reference_type": "natal"
   },
   "direct_answer": {
-    "en": "Marriage: average (46%) (average, 46%)",
-    "hi": "विवाह सामान्य (46%) (सामान्य, 46%)"
+    "en": "Marriage: average (47%) (average, 47%)",
+    "hi": "विवाह सामान्य (47%) (सामान्य, 47%)"
   },
   "verdicts": [
     {
       "topic": "marriage",
       "headline": {
-        "en": "Marriage: average (46%)",
-        "hi": "विवाह सामान्य (46%)"
+        "en": "Marriage: average (47%)",
+        "hi": "विवाह सामान्य (47%)"
       },
-      "score_0_100": 66,
+      "score_0_100": 56,
       "band": "average",
       "engine_verdict": "CONDITIONAL",
-      "confidence_0_1": 0.46,
+      "confidence_0_1": 0.47,
       "window": null,
       "rationale": {
-        "en": "Therefore: for this Jatak's birth promise, marriage is conditional now because Rajyoga scores 40/100, house promise scores 78/100, Dasha scores 89/100, and transit timing scores 32/100. The final call is CONDITIONAL: marriage is the leading field at 66/100.",
-        "hi": "Therefore: for this Jatak's birth promise, marriage is conditional now because Rajyoga scores 40/100, house promise scores 78/100, Dasha scores 89/100, and transit timing scores 32/100. The final call is CONDITIONAL: marriage is the leading field at 66/100."
+        "en": "Therefore: for this Jatak's birth promise, marriage is conditional now because Rajyoga scores 40/100, house promise scores 78/100, Dasha scores 61/100, and transit timing scores 32/100. The final call is CONDITIONAL: marriage is the leading field at 56/100.",
+        "hi": "Therefore: for this Jatak's birth promise, marriage is conditional now because Rajyoga scores 40/100, house promise scores 78/100, Dasha scores 61/100, and transit timing scores 32/100. The final call is CONDITIONAL: marriage is the leading field at 56/100."
       },
       "conflicts": [
         "House promise is real, but transit has not opened the timing gate; do not call immediate fruition.",
@@ -53,8 +53,8 @@
         },
         {
           "layer": "Dasha activation",
-          "score": 89,
-          "finding": "Venus MD with Mercury AD gives 89/100 Dasha clearance for marriage; delivery class is full."
+          "score": 61,
+          "finding": "Venus MD with Ketu AD gives 61/100 Dasha clearance for marriage; delivery class is full."
         },
         {
           "layer": "Transit timing",
@@ -62,7 +62,12 @@
           "finding": "Therefore: Marriage timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
         }
       ],
-      "remedies": [],
+      "remedies": [
+        {
+          "en": "Venus",
+          "hi": "Venus"
+        }
+      ],
       "caveats": [
         {
           "en": "Windows are approximate.",
@@ -80,7 +85,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5e5698f0b3ae95af",
-    "card_hash": "d29755582f04cefa",
+    "card_hash": "99c52498cca2e3fc",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

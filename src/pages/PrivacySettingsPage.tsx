@@ -7,7 +7,7 @@
  *
  * Three sections:
  *   1. Privacy consent      — view / grant / revoke / reset consent preferences.
- *   2. Export your data     — self-service JSON export via user-data-export edge fn.
+ *   2. Export your data     — self-service JSON export via export-user-data edge fn.
  *   3. Delete your data     — irreversible multi-step delete via user-data-delete edge fn.
  *
  * Accessibility:
@@ -30,7 +30,7 @@ import {
   Trash2,
   Clock,
 } from 'lucide-react';
-import { useSession } from '@clerk/react';
+import { useOptionalSession } from '@/hooks/useOptionalSession';
 
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -49,7 +49,7 @@ import { SEO } from '@/components/SEO';
 
 import { useConsent } from '@/hooks/useConsent';
 import { useAuthenticatedSupabase } from '@/hooks/useAuthenticatedSupabase';
-import { exportAndDownloadUserData, type ExportedUserData } from '@/services/dataExportService';
+import { exportAndDownloadUserData } from '@/services/dataExportService';
 import { deleteUserData, type DeleteResult } from '@/services/dataDeleteService';
 
 // ─── Formatting helpers ──────────────────────────────────────────────────────
@@ -155,28 +155,20 @@ function ConsentSection() {
 
 function ExportSection() {
   const supabase = useAuthenticatedSupabase();
-  const { session } = useSession();
+  const { session } = useOptionalSession();
   const isSignedIn = !!session?.user;
 
   const [exporting, setExporting] = useState(false);
-  const [success, setSuccess] = useState<ExportedUserData | null>(null);
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function handleExport() {
     setError(null);
-    setSuccess(null);
+    setSuccess(false);
     setExporting(true);
     try {
       await exportAndDownloadUserData(supabase);
-      setSuccess({
-        exportedAt: new Date().toISOString(),
-        userId: session?.user?.id ?? '',
-        userProfile: true,
-        savedReadings: [],
-        prashnaSessions: [],
-        horoscopeAnalyses: [],
-        transitReadings: [],
-      });
+      setSuccess(true);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Export failed. Please try again later.';
       setError(msg);
@@ -278,7 +270,7 @@ const DELETE_CONFIRM_TEXT = 'DELETE';
 
 function DeleteSection() {
   const supabase = useAuthenticatedSupabase();
-  const { session } = useSession();
+  const { session } = useOptionalSession();
   const isSignedIn = !!session?.user;
 
   const [ackUndo, setAckUndo] = useState(false);

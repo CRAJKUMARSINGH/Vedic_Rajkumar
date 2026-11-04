@@ -110,6 +110,7 @@ const MyReadingsPage  = lazy(() => import('@/pages/MyReadingsPage'));
 const FeedbackPage    = lazy(() => import('@/pages/FeedbackPage'));
 const PricingPage     = lazy(() => import('@/pages/PricingPage'));
 const AllFeaturesPage = lazy(() => import('@/pages/AllFeaturesPage'));
+const BetaRedeemPage  = lazy(() => import('@/pages/BetaRedeemPage'));
 const NotFound        = lazy(() => import('@/pages/NotFound'));
 const PriyanshMuhuratPage = lazy(() => import('@/pages/PriyanshMuhuratPage'));
 const PrivacyPolicyPage   = lazy(() => import('@/pages/PrivacyPolicyPage'));
@@ -206,6 +207,7 @@ export const routes: RouteConfig[] = [
   // ── Infra / User ─────────────────────────────────────────────────────────────
   { path: '/my-readings',         element: <MyReadingsPage /> },
   { path: '/feedback',            element: <FeedbackPage /> },
+  { path: '/beta',                element: <BetaRedeemPage /> },
   { path: '/pricing',             element: <PricingPage /> },
 
   // ── Auth ─────────────────────────────────────────────────────────────────────

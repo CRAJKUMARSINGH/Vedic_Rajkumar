@@ -74,15 +74,25 @@ if (runTests) {
 }
 
 const report = JSON.parse(readFileSync(REPORT, 'utf8'));
-const tests = report.numTotalTests;
+// The claim docs — and the README badge — state "<n> passing", so the canonical
+// is the *passing* count, not `numTotalTests`. The two diverge as soon as a suite
+// is legitimately skipped (e.g. the festivals golden fixture, which is absent on a
+// fresh clone), because vitest counts skipped tests in `numTotalTests`. Failures
+// are still caught explicitly via `numFailedTests` below, so this cannot mask a
+// red suite — it only stops a skip from masquerading as a new passing test.
+const tests = report.numPassedTests ?? report.numTotalTests;
 const testFiles = report.testResults.length;
 const failedTests = report.numFailedTests ?? 0;
+const skippedTests = report.numPendingTests ?? 0;
 
 console.log('Canonical (derived from the repository):');
 console.log(`  version       : ${version}`);
 console.log(`  corpus charts : ${corpusCharts}`);
 console.log(`  golden charts : ${goldenCharts}`);
-console.log(`  tests         : ${tests} across ${testFiles} files`);
+console.log(
+  `  tests         : ${tests} passed across ${testFiles} files` +
+    (skippedTests ? ` (${skippedTests} skipped)` : ''),
+);
 console.log('');
 
 // ─── Assertions: a captured doc value must equal the canonical value ─────────
@@ -100,6 +110,8 @@ const rules = [
   { file: 'docs/SOC2_PREPARATION_CHECKLIST.md', pattern: /(\d+) charts · \d+ assertions/, expected: String(corpusCharts), label: 'SOC2 accuracy corpus size' },
   { file: 'docs/CLAIMS.md', pattern: /\|\s+\*\*Reference Golden Corpus\*\*\s+\|\s+\*\*(\d+) charts\*\*/, expected: String(corpusCharts), label: 'CLAIMS golden corpus' },
   { file: 'docs/CLAIMS.md', pattern: /\*\*(\d+) tests\*\* across \*\*(\d+) test files\*\*/, join: ' tests across ', expected: `${tests} tests across ${testFiles}`, label: 'CLAIMS total test suite' },
+  { file: 'docs/launch/pre-launch-user-testing-playbook.md', pattern: /G1 unit\/integration[^\n]*?\*\*(\d+) passed\*\*/, expected: String(tests), label: 'playbook G1 unit test count' },
+  { file: 'app-robustness-testing.md', pattern: /Current canonical suite \(derived\):\*\* (\d+) tests \/ (\d+) files/, join: ' tests / ', expected: `${tests} tests / ${testFiles}`, label: 'robustness registry header pin' },
 ];
 
 // ─── Stale-token guard ───────────────────────────────────────────────────────
@@ -111,6 +123,18 @@ const staleGuardFiles = [
   'README.md',
   'docs/ENTERPRISE_LAUNCH_GUIDE.md',
   'docs/SOC2_PREPARATION_CHECKLIST.md',
+];
+
+// Retired test counts must not reappear in the *live* claim docs. The registry
+// (`app-robustness-testing.md`) is deliberately exempt: as an append-only log it is
+// allowed to cite the superseded figures it explains; only its header pin is gated.
+// Each retired count was the derived canonical at the time it was superseded, and
+// the pin only ever moves forward — so a doc that still says it is stale.
+const retiredCounts = ['2063', '2065', '2071', '2081', '2118', '2146'];
+const retiredCountFiles = [
+  'docs/launch/pre-launch-user-testing-playbook.md',
+  'README.md',
+  'docs/ENTERPRISE_LAUNCH_GUIDE.md',
 ];
 
 // ─── Evaluate ────────────────────────────────────────────────────────────────
@@ -135,6 +159,102 @@ for (const rule of rules) {
   }
 }
 
+// ─── Numeric-claim cross-check ───────────────────────────────────────────────
+// Tolerance and corpus-size claims are only trustworthy while they equal their
+// source of truth. Each claim reads a number out of a doc and asserts it equals
+// the *same* number derived from the source file, so editing one and not the
+// other is a red gate rather than a silent drift. Numbers are compared by value
+// ("2" == "2.0"), because docs legitimately drop the trailing decimal.
+const numericClaims = [
+  {
+    file: 'README.md',
+    label: 'README ayanamsa tolerance',
+    pattern: /Lahiri ayanamsa precision\s*\|\s*≤\s*([\d.]+)″/,
+    source: 'docs/accuracy/METHODOLOGY.md',
+    sourcePattern: /Lahiri ayanamsa\s*\|\s*≤\s*([\d.]+)″/,
+  },
+  {
+    file: 'README.md',
+    label: 'README ascendant tolerance',
+    pattern: /Ascendant precision\s*\|\s*≤\s*([\d.]+)″/,
+    source: 'docs/accuracy/METHODOLOGY.md',
+    sourcePattern: /Ascendant\s*\|\s*≤\s*([\d.]+)″/,
+  },
+  {
+    file: 'README.md',
+    label: 'README feature-table Tier A bound',
+    pattern: /Tier A ≤([\d.]+)″ ascendant/,
+    source: 'docs/accuracy/METHODOLOGY.md',
+    sourcePattern: /Ascendant\s*\|\s*≤\s*([\d.]+)″/,
+  },
+  {
+    file: 'README.md',
+    label: 'README accuracy-badge bound',
+    pattern: /engine%20accuracy-\d+%2F\d+%20charts%20%E2%89%A4([\d.]+)%E2%80%B3/,
+    source: 'docs/accuracy/METHODOLOGY.md',
+    sourcePattern: /Ascendant\s*\|\s*≤\s*([\d.]+)″/,
+  },
+  {
+    file: 'README.md',
+    label: 'README corpus size (badge)',
+    pattern: /engine%20accuracy-(\d+)%2F\d+/,
+    source: 'tools/accuracy/corpus/charts.jsonl',
+    count: true,
+  },
+  {
+    file: 'README.md',
+    label: 'README corpus size (feature table)',
+    pattern: /\*\*(\d+)-chart adversarial corpus\*\*/,
+    source: 'tools/accuracy/corpus/charts.jsonl',
+    count: true,
+  },
+  {
+    file: 'README.md',
+    label: 'README corpus size (run comment)',
+    pattern: /# (\d+)-chart adversarial corpus gate/,
+    source: 'tools/accuracy/corpus/charts.jsonl',
+    count: true,
+  },
+  {
+    file: 'README.md',
+    label: 'README corpus size (trust table)',
+    pattern: /across (\d+) corpus charts/,
+    source: 'tools/accuracy/corpus/charts.jsonl',
+    count: true,
+  },
+];
+
+// Numeric equality tolerant of trailing-zero form: "2.0" and "2" are the same claim.
+const numEq = (a, b) => {
+  const na = Number(a);
+  const nb = Number(b);
+  return !Number.isNaN(na) && !Number.isNaN(nb) ? na === nb : a === b;
+};
+
+for (const claim of numericClaims) {
+  const full = join(ROOT, claim.file);
+  if (!existsSync(full)) {
+    problems.push(`${claim.file}: file not found (${claim.label})`);
+    continue;
+  }
+  const m = readFileSync(full, 'utf8').match(claim.pattern);
+  if (!m) {
+    problems.push(`${claim.file}: ${claim.label} — numeric claim not found; update the doc or this rule`);
+    continue;
+  }
+  const claimed = m.slice(1).join(claim.join ?? '');
+  const derived = claim.count
+    ? String(corpusCharts)
+    : readFileSync(join(ROOT, claim.source), 'utf8').match(claim.sourcePattern)?.[1];
+  if (derived === undefined) {
+    problems.push(`${claim.source}: ${claim.label} — source value not found (${claim.sourcePattern})`);
+  } else if (!numEq(claimed, derived)) {
+    problems.push(
+      `${claim.file}: ${claim.label} — doc says "${claimed}", ${claim.source} says "${derived}"`,
+    );
+  }
+}
+
 for (const file of staleGuardFiles) {
   const full = join(ROOT, file);
   if (!existsSync(full)) continue;
@@ -142,6 +262,17 @@ for (const file of staleGuardFiles) {
   for (const token of staleTokens) {
     if (src.includes(token)) {
       problems.push(`${file}: stale token "${token}" present — superseded figure`);
+    }
+  }
+}
+
+for (const file of retiredCountFiles) {
+  const full = join(ROOT, file);
+  if (!existsSync(full)) continue;
+  const src = readFileSync(full, 'utf8');
+  for (const token of retiredCounts) {
+    if (src.includes(token)) {
+      problems.push(`${file}: retired test count "${token}" present — superseded by the derived canonical`);
     }
   }
 }

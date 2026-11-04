@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 /**
  * src/lib/vedic/ayanamsaEngine.ts
  *

@@ -26,13 +26,21 @@ describe('dataExportService', () => {
   describe('exportUserData', () => {
     it('should export user data successfully', async () => {
       const mockData = {
-        exportedAt: '2024-01-01T00:00:00Z',
-        userId: 'user_123',
-        userProfile: null,
+        exportMetadata: {
+          generatedAt: '2024-01-01T00:00:00Z',
+          formatVersion: '2.0',
+          complianceStandard: 'GDPR Article 20 / India DPDP Act 2023',
+          dataController: 'Vedic Rajkumar',
+          retentionPolicy: 'Data retained for 30 days after deletion request',
+          checksum: 'abc123',
+        },
+        user: { id: 'user_123', profile: null },
         savedReadings: [],
         prashnaSessions: [],
         horoscopeAnalyses: [],
         transitReadings: [],
+        consentHistory: [],
+        auditTrail: [],
       };
 
       const { supabase } = await import('@/integrations/supabase/client');
@@ -46,7 +54,7 @@ describe('dataExportService', () => {
       const result = await exportUserData(supabase);
 
       expect(result).toEqual(mockData);
-      expect(assertNotRateLimited).toHaveBeenCalledWith('user-data-export', {
+      expect(assertNotRateLimited).toHaveBeenCalledWith('export-user-data', {
         capacity: 5,
         refillAmount: 5,
         windowMs: 60 * 60 * 1000,
@@ -91,13 +99,21 @@ describe('dataExportService', () => {
   describe('exportAndDownloadUserData', () => {
     it('should trigger file download', async () => {
       const mockData = {
-        exportedAt: '2024-01-01T00:00:00Z',
-        userId: 'user_123',
-        userProfile: null,
+        exportMetadata: {
+          generatedAt: '2024-01-01T00:00:00Z',
+          formatVersion: '2.0',
+          complianceStandard: 'GDPR Article 20 / India DPDP Act 2023',
+          dataController: 'Vedic Rajkumar',
+          retentionPolicy: 'Data retained for 30 days after deletion request',
+          checksum: 'abc123',
+        },
+        user: { id: 'user_123', profile: null },
         savedReadings: [],
         prashnaSessions: [],
         horoscopeAnalyses: [],
         transitReadings: [],
+        consentHistory: [],
+        auditTrail: [],
       };
 
       const { supabase } = await import('@/integrations/supabase/client');

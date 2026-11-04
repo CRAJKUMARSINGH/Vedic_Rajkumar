@@ -8,3 +8,7 @@
 # Generated answer-layer artifacts are content-hashed and compared byte-for-byte
 # by src/tests/answerCard/parity.test.ts. Keep Git from touching their bytes.
 public/answers/** -text
+
+# Generated crawler pages, same contract: written verbatim by
+# scripts/prerenderAnswers.mjs and asserted by `npm run answers:html:check`.
+public/a/** -text

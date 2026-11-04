@@ -1,0 +1,34 @@
+{
+  "cookies": [],
+  "origins": [
+    {
+      "origin": "http://127.0.0.1:5173",
+      "localStorage": [
+        {
+          "name": "vr_tier",
+          "value": "\"premium\""
+        },
+        {
+          "name": "vedic_welcome_seen",
+          "value": "\"1\""
+        },
+        {
+          "name": "vedic_user_profile",
+          "value": "{\"name\":\"Pro Robot\",\"email\":\"robot+pro@example.test\",\"profiles\":[{\"id\":\"robot-pro-0\",\"name\":\"Robot 1\",\"dob\":\"1990-01-01\",\"tob\":\"06:00\",\"pob\":\"Jaipur, Rajasthan\"},{\"id\":\"robot-pro-1\",\"name\":\"Robot 2\",\"dob\":\"1990-01-01\",\"tob\":\"06:00\",\"pob\":\"Jaipur, Rajasthan\"},{\"id\":\"robot-pro-2\",\"name\":\"Robot 3\",\"dob\":\"1990-01-01\",\"tob\":\"06:00\",\"pob\":\"Jaipur, Rajasthan\"},{\"id\":\"robot-pro-3\",\"name\":\"Robot 4\",\"dob\":\"1990-01-01\",\"tob\":\"06:00\",\"pob\":\"Jaipur, Rajasthan\"},{\"id\":\"robot-pro-4\",\"name\":\"Robot 5\",\"dob\":\"1990-01-01\",\"tob\":\"06:00\",\"pob\":\"Jaipur, Rajasthan\"},{\"id\":\"robot-pro-5\",\"name\":\"Robot 6\",\"dob\":\"1990-01-01\",\"tob\":\"06:00\",\"pob\":\"Jaipur, Rajasthan\"},{\"id\":\"robot-pro-6\",\"name\":\"Robot 7\",\"dob\":\"1990-01-01\",\"tob\":\"06:00\",\"pob\":\"Jaipur, Rajasthan\"},{\"id\":\"robot-pro-7\",\"name\":\"Robot 8\",\"dob\":\"1990-01-01\",\"tob\":\"06:00\",\"pob\":\"Jaipur, Rajasthan\"},{\"id\":\"robot-pro-8\",\"name\":\"Robot 9\",\"dob\":\"1990-01-01\",\"tob\":\"06:00\",\"pob\":\"Jaipur, Rajasthan\"},{\"id\":\"robot-pro-9\",\"name\":\"Robot 10\",\"dob\":\"1990-01-01\",\"tob\":\"06:00\",\"pob\":\"Jaipur, Rajasthan\"},{\"id\":\"robot-pro-10\",\"name\":\"Robot 11\",\"dob\":\"1990-01-01\",\"tob\":\"06:00\",\"pob\":\"Jaipur, Rajasthan\"},{\"id\":\"robot-pro-11\",\"name\":\"Robot 12\",\"dob\":\"1990-01-01\",\"tob\":\"06:00\",\"pob\":\"Jaipur, Rajasthan\"}]}"
+        },
+        {
+          "name": "vr_api_tier",
+          "value": "\"developer\""
+        },
+        {
+          "name": "vr-consent",
+          "value": "{\"given\":true,\"timestamp\":\"2026-10-31T10:03:14.915Z\",\"version\":1}"
+        },
+        {
+          "name": "vedic_subscription",
+          "value": "{\"plan\":\"pro\",\"name\":\"Pro Robot\",\"email\":\"robot+pro@example.test\"}"
+        }
+      ]
+    }
+  ]
+}

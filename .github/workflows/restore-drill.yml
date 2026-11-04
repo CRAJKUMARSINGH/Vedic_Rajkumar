@@ -1,0 +1,61 @@
+name: Restore drill
+
+# Monthly, so "we have backups" becomes "we restored, here's the receipt".
+# The drill dumps production, restores into a throwaway schema, asserts row
+# counts / RLS / cross-language birth_hash, and writes reports/drills/restore-<date>.md.
+on:
+  schedule:
+    - cron: '0 4 1 * *' # 04:00 UTC on the first of each month
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  drill:
+    name: Dump · restore · assert
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run the restore drill
+        # ubuntu-latest ships pg_dump and psql. Exits non-zero if any assertion
+        # fails, so a silent regression in the backup or its RLS is loud.
+        run: npm run drill:restore
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      - name: Upload the drill report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: restore-drill-report
+          path: reports/drills/
+          retention-days: 365
+          if-no-files-found: ignore
+
+      - name: Commit the report to a branch
+        # main is PR-only, so the receipt lands on a branch for review rather
+        # than being pushed straight to main.
+        if: always() && github.event_name != 'pull_request'
+        run: |
+          if [ ! -d reports/drills ] || [ -z "$(git status --porcelain reports/drills)" ]; then
+            echo "no report to commit"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "chore/restore-drill-${{ github.run_id }}"
+          git add reports/drills/
+          git commit --no-verify -m "chore(ops): restore drill report ${{ github.run_id }}"
+          git push origin "HEAD:refs/heads/chore/restore-drill-${{ github.run_id }}"

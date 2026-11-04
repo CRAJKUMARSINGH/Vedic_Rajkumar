@@ -1,0 +1,50 @@
+name: dr-drill
+
+# Monthly. A weekly drill is noise; a quarterly one is a surprise.
+on:
+  schedule: [{ cron: '0 2 1 * *' }]
+  workflow_dispatch:
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: drill
+          POSTGRES_DB: scratch
+        ports: ['5433:5432']
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+      - name: Install pg client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client-16
+      - name: Run the restore drill against production
+        env:
+          SOURCE_DB_URL: ${{ secrets.PROD_DB_URL }}
+          TARGET_DB_URL: postgresql://postgres:drill@127.0.0.1:5433/scratch
+        run: node scripts/dr-restore-drill.mjs
+      - name: Fail if readiness regressed
+        env:
+          SOURCE_DB_URL: ${{ secrets.PROD_DB_URL }}
+        run: |
+          npm run --silent dr:readiness | tee /tmp/readiness.json
+          node -e "
+            const r = require('/tmp/readiness.json');
+            if (!r.ever_tested) { console.error('never successfully restored'); process.exit(1); }
+            if (!r.within_target) { console.error('outside RTO/RPO target'); process.exit(1); }
+            console.log('within target');
+          "
+      - name: Append to the DR logbook
+        if: always()
+        run: |
+          echo "### [$(date -Is)] — Restore drill" >> docs/ops/dr-drill-log.md
+          echo "- Result: ${{ job.status }}" >> docs/ops/dr-drill-log.md
+          echo "- Run: ${{ github.run_id }}" >> docs/ops/dr-drill-log.md
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: dr-drill-evidence, path: reports/dr }

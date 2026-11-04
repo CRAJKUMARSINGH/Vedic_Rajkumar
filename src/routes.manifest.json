@@ -1,0 +1,18 @@
+{
+  "_comment": "Declared route paths. Router must match; gtm-audit checks CTA hrefs against this. Keeping it separate from the router means a dead link is caught statically.",
+  "paths": [
+    "/",
+    "/chart/new",
+    "/chart/:id",
+    "/pricing",
+    "/horoscope",
+    "/horoscope/:sign",
+    "/dasha",
+    "/settings",
+    "/account/billing",
+    "/legal/privacy",
+    "/legal/terms",
+    "/status",
+    "/feedback"
+  ]
+}

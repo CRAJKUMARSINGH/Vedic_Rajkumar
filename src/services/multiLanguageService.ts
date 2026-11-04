@@ -9,6 +9,7 @@
 export type SupportedLanguage = 
   | 'en'    // English
   | 'hi'    // Hindi
+  | 'hi-Latn' // Hindi in Roman script (Hinglish)
   | 'bn'    // Bengali
   | 'mr'    // Marathi
   | 'gu'    // Gujarati
@@ -42,6 +43,14 @@ export const LANGUAGE_CONFIGS: Record<SupportedLanguage, LanguageConfig> = {
     nativeName: 'हिन्दी',
     direction: 'ltr',
     fontFamily: 'Noto Sans Devanagari, sans-serif',
+    region: 'North India'
+  },
+  'hi-Latn': {
+    code: 'hi-Latn',
+    name: 'Hindi (Roman)',
+    nativeName: 'Hinglish',
+    direction: 'ltr',
+    fontFamily: 'Inter, sans-serif',
     region: 'North India'
   },
   bn: {
@@ -106,6 +115,7 @@ export const LANGUAGE_CONFIGS: Record<SupportedLanguage, LanguageConfig> = {
 export interface MultiLangText {
   en: string;
   hi: string;
+  'hi-Latn'?: string;
   bn?: string;
   mr?: string;
   gu?: string;
@@ -543,6 +553,7 @@ export function formatNumber(num: number, lang: SupportedLanguage): string {
   const locales: Record<SupportedLanguage, string> = {
     en: 'en-US',
     hi: 'hi-IN',
+    'hi-Latn': 'hi-IN',
     bn: 'bn-BD',
     mr: 'mr-IN',
     gu: 'gu-IN',
@@ -562,6 +573,7 @@ export function formatDate(date: Date, lang: SupportedLanguage): string {
   const locales: Record<SupportedLanguage, string> = {
     en: 'en-US',
     hi: 'hi-IN',
+    'hi-Latn': 'hi-IN',
     bn: 'bn-BD',
     mr: 'mr-IN',
     gu: 'gu-IN',

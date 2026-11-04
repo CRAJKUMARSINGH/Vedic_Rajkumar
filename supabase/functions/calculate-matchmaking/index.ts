@@ -1,11 +1,16 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { corsHeaders, corsResponse } from '../_shared/cors.ts';
 import { checkRateLimit, rateLimitResponse } from '../_shared/rateLimit.ts';
+import { KILL_SWITCH_FLAGS, guardKillSwitch } from '../_shared/killSwitch.ts';
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return corsResponse(req);
   }
+
+  // Short-circuit before any work.
+  const killed = await guardKillSwitch(KILL_SWITCH_FLAGS.edge, 'kill_match');
+  if (killed) return killed;
 
   const allowed = await checkRateLimit(req, { endpoint: 'calculate-matchmaking' });
   if (!allowed) {

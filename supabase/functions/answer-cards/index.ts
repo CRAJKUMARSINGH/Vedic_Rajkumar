@@ -10,6 +10,11 @@
  *   anyone else          → 404 — same answer as "no such subject", so a
  *                          non-owner cannot probe for who is in the seed bank
  *
+ * Contract 1.2: the private store holds one full card per (subject, language)
+ * (`20261026120000_answer_cards_bilingual.sql`), so `?lang=` selects the
+ * language. Defaults to the default locale (`hi`) — the same row a 1.1 caller
+ * received, so a link in the wild keeps working.
+ *
  * The card itself is read with a client that carries the caller's own JWT, so
  * RLS — not this handler — is what decides whether the row is visible
  * (`20261025120000_answer_cards_rls.sql`). The service-role client is used only
@@ -20,6 +25,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { corsHeaders, corsResponse } from '../_shared/cors.ts';
 import { authenticateRequest } from '../_shared/auth.ts';
 import { checkRateLimit, rateLimitResponse } from '../_shared/rateLimit.ts';
+import { KILL_SWITCH_FLAGS, guardKillSwitch } from '../_shared/killSwitch.ts';
 
 type Viewer = 'owner' | 'admin';
 
@@ -53,6 +59,10 @@ async function findCardSlug(admin: ReturnType<typeof createClient>, person: stri
 serve(async (req) => {
   if (req.method === 'OPTIONS') return corsResponse(req);
 
+  // Short-circuit before any auth, rate-limit or DB work.
+  const killed = await guardKillSwitch(KILL_SWITCH_FLAGS.edge, KILL_SWITCH_FLAGS.api);
+  if (killed) return killed;
+
   const allowed = await checkRateLimit(req, { endpoint: 'answer-cards' });
   if (!allowed) return rateLimitResponse();
 
@@ -67,6 +77,12 @@ serve(async (req) => {
   const url = new URL(req.url);
   const person = url.searchParams.get('person');
   if (!person) return json({ error: 'invalid_input: person is required' }, 422);
+
+  const langParam = url.searchParams.get('lang');
+  if (langParam !== null && langParam !== 'hi' && langParam !== 'en') {
+    return json({ error: 'invalid_input: lang must be hi or en' }, 422);
+  }
+  const lang = langParam ?? 'hi';
 
   const supabaseUrl = Deno.env.get('SUPABASE_URL');
   const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
@@ -106,11 +122,12 @@ serve(async (req) => {
       .from('answer_cards')
       .select('card, updated_at')
       .eq('slug', slug)
+      .eq('lang', lang)
       .maybeSingle();
     if (error) throw error;
     if (!data) return json({ error: 'not_found' }, 404);
 
-    return json({ data: data.card, viewer: viewer ?? 'owner', updated_at: data.updated_at }, 200);
+    return json({ data: data.card, viewer: viewer ?? 'owner', lang, updated_at: data.updated_at }, 200);
   } catch (error) {
     console.error('answer-cards edge error:', error);
     return json({ error: 'Internal edge error' }, 500);

@@ -28,7 +28,6 @@ FUNCTIONS=(
   "get-panchang"
   "export-user-data"
   "user-data-delete"
-  "user-data-export"
   "knowledge"
   "prashna"
 )

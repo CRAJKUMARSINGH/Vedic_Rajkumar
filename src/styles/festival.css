@@ -1,0 +1,272 @@
+/**
+ * festival.css — seasonal festival dressing
+ *
+ * Tokens + CSS-only ornament. No images, no JS animation library, nothing on
+ * the critical path. Every animation is behind prefers-reduced-motion, and all
+ * ornament is suppressed in print so PDF exports stay clean.
+ */
+
+:root {
+  /* Fallbacks only — the active skin overrides these on <html>. */
+  --festival-gold: #d99a2b;
+  --festival-flame: #ffb347;
+  --festival-flame-core: #fff3d1;
+  --festival-marigold: #e8833a;
+  --festival-vermilion: #c0392b;
+  --festival-night: #1b1410;
+  --festival-ink: #1b1410;
+  --festival-glow: 0 0 0.6rem rgba(255, 179, 71, 0.55);
+  --festival-ribbon-h: 0.35rem;
+}
+
+.dark {
+  --festival-ink: #f7ead2;
+}
+
+/* ── Ribbon under the header ─────────────────────────────────────────────── */
+
+.festival-ribbon {
+  height: var(--festival-ribbon-h);
+  border: 0;
+  margin: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--festival-vermilion) 0 1.5rem,
+    var(--festival-marigold) 1.5rem 3rem,
+    var(--festival-gold) 3rem 4.5rem
+  );
+  opacity: 0.85;
+}
+
+/* ── Greeting strip ──────────────────────────────────────────────────────── */
+
+.festival-greeting {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--festival-gold) 45%, transparent);
+  border-radius: 0.75rem;
+  background:
+    radial-gradient(
+      120% 180% at 0% 0%,
+      rgba(255, 179, 71, 0.16),
+      transparent 60%
+    ),
+    linear-gradient(120deg, rgba(217, 154, 43, 0.1), rgba(192, 57, 43, 0.07));
+  color: var(--festival-ink);
+  font-size: 0.875rem;
+  overflow: hidden;
+}
+
+.dark .festival-greeting {
+  background:
+    radial-gradient(
+      120% 180% at 0% 0%,
+      rgba(255, 179, 71, 0.2),
+      transparent 60%
+    ),
+    linear-gradient(120deg, rgba(217, 154, 43, 0.14), rgba(192, 57, 43, 0.1));
+}
+
+.festival-greeting__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.festival-greeting__title {
+  display: block;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.festival-greeting__sub {
+  display: block;
+  font-size: 0.78rem;
+  opacity: 0.8;
+}
+
+.festival-greeting__close {
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease;
+}
+
+.festival-greeting__close:hover {
+  background: rgba(217, 154, 43, 0.18);
+  border-color: rgba(217, 154, 43, 0.35);
+}
+
+.festival-greeting__close:focus-visible {
+  outline: 2px solid var(--festival-gold);
+  outline-offset: 2px;
+}
+
+/* ── Diya row ────────────────────────────────────────────────────────────── */
+
+.festival-diyas {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 0.5rem 0 0.25rem;
+}
+
+.festival-diya {
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: 0 0 auto;
+}
+
+html[data-festival] .festival-diya__flame {
+  transform-origin: 50% 82%;
+  fill: var(--festival-flame);
+  filter: drop-shadow(0 0 4px rgba(255, 179, 71, 0.9));
+}
+
+/* Navratri and Holi do not use diyas — soften the flame glow to a neutral lamp
+   halo under every skin other than Diwali so one SVG serves all three. */
+html:not([data-festival="diwali"]) .festival-diya__flame {
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));
+}
+
+.festival-diya__core {
+  fill: var(--festival-flame-core);
+}
+
+.festival-diya__body {
+  fill: var(--festival-marigold);
+  stroke: var(--festival-gold);
+  stroke-width: 1;
+}
+
+.festival-diya__rim {
+  stroke: var(--festival-vermilion);
+  stroke-width: 1.25;
+  fill: none;
+  opacity: 0.55;
+}
+
+/* ── Rangoli corner flourish ─────────────────────────────────────────────── */
+
+.festival-rangoli {
+  position: absolute;
+  inset-block-start: -1.5rem;
+  inset-inline-end: -1.5rem;
+  width: 9rem;
+  height: 9rem;
+  pointer-events: none;
+  opacity: 0.16;
+  color: var(--festival-vermilion);
+  mask-image: radial-gradient(closest-side, #000 60%, transparent);
+  -webkit-mask-image: radial-gradient(closest-side, #000 60%, transparent);
+}
+
+/* ── Card accent for festival mode ───────────────────────────────────────── */
+
+.festival-accent {
+  border-color: color-mix(
+    in srgb,
+    var(--festival-gold) 55%,
+    transparent
+  ) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 0 0 1px rgba(217, 154, 43, 0.15),
+    0 10px 28px -18px rgba(192, 57, 43, 0.45);
+}
+
+/* ── Motion ──────────────────────────────────────────────────────────────── */
+
+@keyframes festival-flicker {
+  0%,
+  100% {
+    transform: scale(1) rotate(-1deg);
+    opacity: 0.95;
+  }
+  35% {
+    transform: scale(1.07) rotate(1.5deg);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(0.96) rotate(-2deg);
+    opacity: 0.88;
+  }
+}
+
+@keyframes festival-shimmer {
+  0% {
+    background-position: -150% 0;
+  }
+  100% {
+    background-position: 250% 0;
+  }
+}
+
+.festival-greeting__title {
+  background-image: linear-gradient(
+    100deg,
+    currentColor 0 40%,
+    var(--festival-gold) 50%,
+    currentColor 60% 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: festival-shimmer 6s linear infinite;
+}
+
+.festival-diya__flame {
+  animation: festival-flicker 2.4s ease-in-out infinite;
+}
+
+.festival-diya:nth-child(2) .festival-diya__flame {
+  animation-delay: -0.7s;
+}
+.festival-diya:nth-child(3) .festival-diya__flame {
+  animation-delay: -1.4s;
+}
+.festival-diya:nth-child(4) .festival-diya__flame {
+  animation-delay: -0.35s;
+}
+.festival-diya:nth-child(5) .festival-diya__flame {
+  animation-delay: -1.9s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .festival-greeting__title,
+  .festival-diya__flame {
+    animation: none;
+  }
+  .festival-greeting__title {
+    color: inherit;
+    background-image: none;
+  }
+}
+
+/* ── Print: ornament off, gold on ────────────────────────────────────────── */
+
+@media print {
+  .festival-greeting__close,
+  .festival-diyas {
+    display: none;
+  }
+  .festival-greeting {
+    border-color: #b8860b;
+    background: none;
+  }
+  .festival-accent {
+    box-shadow: none !important;
+  }
+}

@@ -1,0 +1,60 @@
+name: perf
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'vite.config.ts'
+      - 'budgets.json'
+      - 'package.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  budget:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version-file: .nvmrc, cache: npm }
+      - run: npm ci
+      - run: npm run audit:routes
+      - run: npm run build
+      - run: npm run budget:check
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: bundle-report, path: reports/bundle }
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version-file: .nvmrc, cache: npm }
+      - run: npm ci
+      - run: npm run build
+      - run: npx @lhci/cli@0.14.x autorun
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: lighthouse-report, path: reports/lighthouse }
+
+  # Real device class, not a desktop preset. Runs nightly only — too slow for PRs.
+  mobile-mainthread:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version-file: .nvmrc, cache: npm }
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:perf:mobile
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: mobile-perf, path: reports/perf }

@@ -43,6 +43,10 @@ const DEFAULT_FLAGS: Record<string, IFlagsmithFeature> = {
   kp_system:            { enabled: false, value: null },
   ashtakavarga_v2:      { enabled: false, value: null },
   new_ui:               { enabled: false, value: null },
+  // Coarse kill switches (W17) — off unless an operator pulls them.
+  'killswitch.api':       { enabled: false, value: null },
+  'killswitch.edge':      { enabled: false, value: null },
+  'killswitch.telemetry': { enabled: false, value: null },
 };
 
 export const FlagsmithProvider: React.FC<{ children: ReactNode }> = ({ children }) => {

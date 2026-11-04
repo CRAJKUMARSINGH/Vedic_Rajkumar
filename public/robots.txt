@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Allow: /a/
 
 Sitemap: https://vedicrajkumar.com/sitemap.xml
+Sitemap: https://vedicrajkumar.com/a/sitemap.xml

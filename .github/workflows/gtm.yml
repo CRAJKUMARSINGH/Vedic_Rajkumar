@@ -1,0 +1,32 @@
+name: gtm
+
+on:
+  pull_request:
+    paths: ['content/**', 'src/pages/Landing*', 'src/pages/Pricing*', 'docs/gtm/**', 'docs/CLAIMS.md']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version-file: .nvmrc, cache: npm }
+      - run: npm ci
+      - name: Audit copy against claims and Stripe
+        run: npm run gtm:audit
+        env:
+          STRIPE_PRICE_PRO_INR: ${{ vars.STRIPE_PRICE_PRO_INR }}
+          STRIPE_PRICE_PRO_USD: ${{ vars.STRIPE_PRICE_PRO_USD }}
+      - name: Funnel enum parity (DB check vs edge)
+        run: npm run funnel:parity
+      - name: Link check on rendered landing
+        run: |
+          npm run build
+          npx serve -s dist -l 4174 &
+          sleep 3
+          npx linkinator http://127.0.0.1:4174 --recurse --silent --skip '^https?://(?!127)' || true

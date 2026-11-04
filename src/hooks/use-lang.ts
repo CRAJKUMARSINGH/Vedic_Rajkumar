@@ -3,8 +3,9 @@
  * Simple language state hook — no external state manager needed.
  */
 import { useState, useEffect } from 'react';
+import { toRomanHindi } from '@/lib/hinglish';
 
-type Lang = 'en' | 'hi';
+type Lang = 'en' | 'hi' | 'hi-Latn';
 
 let _lang: Lang = 'en';
 const _listeners = new Set<() => void>();
@@ -19,10 +20,13 @@ export function useLang() {
     return () => { _listeners.delete(sync); };
   }, []);
   const setLang = (next: Lang) => { _lang = next; notifyAll(); };
-  const toggle = () => setLang(_lang === 'en' ? 'hi' : 'en');
-  return { lang, setLang, toggle };
+  const cycle = () => setLang(_lang === 'en' ? 'hi' : _lang === 'hi' ? 'hi-Latn' : 'en');
+  const toggle = cycle;
+  return { lang, setLang, toggle, cycle };
 }
 
 export function t(key: { en: string; hi: string }, lang: Lang): string {
-  return lang === 'hi' ? key.hi : key.en;
+  if (lang === 'hi') return key.hi;
+  if (lang === 'hi-Latn') return toRomanHindi(key.hi);
+  return key.en;
 }
