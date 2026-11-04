@@ -130,7 +130,7 @@ const staleGuardFiles = [
 // allowed to cite the superseded figures it explains; only its header pin is gated.
 // Each retired count was the derived canonical at the time it was superseded, and
 // the pin only ever moves forward — so a doc that still says it is stale.
-const retiredCounts = ['2063', '2065', '2071', '2081'];
+const retiredCounts = ['2063', '2065', '2071', '2081', '2118'];
 const retiredCountFiles = [
   'docs/launch/pre-launch-user-testing-playbook.md',
   'README.md',
