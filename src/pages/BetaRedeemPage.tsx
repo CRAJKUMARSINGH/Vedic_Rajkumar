@@ -11,7 +11,7 @@
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSession } from '@clerk/react';
+import { useOptionalSession } from '@/hooks/useOptionalSession';
 import { KeyRound, Loader2, AlertTriangle, CheckCircle2, XCircle } from 'lucide-react';
 import { useAuthenticatedSupabase } from '@/hooks/useAuthenticatedSupabase';
 import { redeemBetaInvite, type RedeemResult } from '@/services/betaTrialService';
@@ -32,7 +32,7 @@ const isGranted = (outcome: RedeemResult['outcome']): boolean =>
 
 const BetaRedeemPage = () => {
   const supabase = useAuthenticatedSupabase();
-  const { session } = useSession();
+  const { session } = useOptionalSession();
   const isSignedIn = !!session?.user;
 
   const [code, setCode] = useState('');

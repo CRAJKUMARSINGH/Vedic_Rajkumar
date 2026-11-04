@@ -14,6 +14,7 @@ import { Calendar, Clock, MapPin, Save, History, CheckCircle, AlertCircle } from
 import { getUserProfile, addBirthDetails, getLastUsedProfile } from "@/services/userProfileService";
 import { searchLocation, formatCoordinates, type LocationResult } from "@/services/geocodingService";
 import { resolveBirthTimezone } from "@/lib/birthTimezone";
+import { checkBirthDate, localizeDateMessage } from "@/lib/birthDateRange";
 import { setBirthTimezone } from "@/hooks/use-birth-timezone";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
@@ -51,6 +52,24 @@ function isValidISO(iso: string): boolean {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return false;
   const d = new Date(iso + "T00:00:00");
   return !isNaN(d.getTime()) && d < new Date();
+}
+
+/**
+ * Patch 03 — full birth-date verdict with an explicit message.
+ * Range + real-calendar validity come from the shared guard; the no-future-date
+ * rule stays local because it only applies to birth data.
+ */
+function validateBirthDate(iso: string, lang: "en" | "hi"): { isValid: boolean; message: string } {
+  if (!iso) return { isValid: false, message: "" };
+  const check = checkBirthDate(iso);
+  if (!check.ok) return { isValid: false, message: localizeDateMessage(check.message, lang) };
+  if (new Date(check.iso + "T00:00:00") >= new Date()) {
+    return {
+      isValid: false,
+      message: lang === "hi" ? "जन्म तिथि भविष्य में नहीं हो सकती" : "Birth date cannot be in the future",
+    };
+  }
+  return { isValid: true, message: "" };
 }
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -219,11 +238,9 @@ export default function EnhancedBirthInputForm({
 
   // Validation
   useEffect(() => {
+    const dateVerdict = validateBirthDate(date, lang);
     setValidation({
-      date: {
-        isValid: isValidISO(date),
-        message: date && !isValidISO(date) ? (lang === "hi" ? "अमान्य तिथि (DD/MM/YYYY)" : "Invalid date (DD/MM/YYYY)") : "",
-      },
+      date: dateVerdict,
       time: {
         isValid: /^([01]?\d|2[0-3]):[0-5]\d$/.test(time),
         message: time && !/^([01]?\d|2[0-3]):[0-5]\d$/.test(time) ? (lang === "hi" ? "अमान्य समय" : "Invalid time") : "",

@@ -25,7 +25,7 @@
  */
 
 import { useMemo } from 'react';
-import { useSession } from '@clerk/react';
+import { useOptionalSession } from '@/hooks/useOptionalSession';
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from '@/integrations/supabase/types';
 
@@ -39,7 +39,8 @@ const SUPABASE_ANON_KEY =
  * Clerk on every request, enabling owner-scoped RLS.
  */
 export function useAuthenticatedSupabase() {
-  const { session } = useSession();
+  // Patch 01: demo-safe — returns { session: null } when Clerk is not mounted.
+  const { session } = useOptionalSession();
 
   return useMemo(() => {
     return createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY, {

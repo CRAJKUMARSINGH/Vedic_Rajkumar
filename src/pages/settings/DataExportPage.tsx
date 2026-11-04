@@ -14,7 +14,7 @@
  */
 
 import React, { useState } from 'react';
-import { useSession } from '@clerk/react';
+import { useOptionalSession } from '@/hooks/useOptionalSession';
 import { Download, Trash2, ShieldCheck, AlertTriangle, CheckCircle2, Loader2, XCircle } from 'lucide-react';
 import { useAuthenticatedSupabase } from '@/hooks/useAuthenticatedSupabase';
 import { useConsent } from '@/hooks/useConsent';
@@ -75,7 +75,7 @@ const ConsentCard: React.FC = () => {
 
 const ExportCard: React.FC = () => {
   const supabase = useAuthenticatedSupabase();
-  const { session } = useSession();
+  const { session } = useOptionalSession();
   const isSignedIn = !!session?.user;
 
   const [exporting, setExporting] = useState(false);
@@ -172,7 +172,7 @@ const ExportCard: React.FC = () => {
 
 const DeleteCard: React.FC = () => {
   const supabase = useAuthenticatedSupabase();
-  const { session } = useSession();
+  const { session } = useOptionalSession();
   const isSignedIn = !!session?.user;
 
   const [ackIrreversible, setAckIrreversible] = useState(false);
