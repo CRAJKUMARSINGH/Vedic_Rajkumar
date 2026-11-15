@@ -1,0 +1,22 @@
+﻿
+> vedic-rajkumar@0.1.0 test:accuracy:fast
+> vitest run src/tests/timeScales.test.ts src/tests/nakshatraEdge.test.ts src/tests/chartCacheKey.test.ts src/tests/vimshottari.test.ts src/tests/birthTimezone.test.ts
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90mE:/Rajkumar/Vedic_Rajkumar[39m
+
+ [32m✓[39m src/tests/birthTimezone.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 32[2mms[22m[39m
+ [32m✓[39m src/tests/vimshottari.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 25[2mms[22m[39m
+ [32m✓[39m src/tests/chartCacheKey.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 30[2mms[22m[39m
+ [32m✓[39m src/tests/nakshatraEdge.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 173[2mms[22m[39m
+[90mstdout[2m | src/tests/timeScales.test.ts[2m > [22m[2mthe patch reached the bodies and only the bodies[2m > [22m[2mrecords which functions now take TT, and never an angle
+[22m[39mbodies on TT: getSunLongitude, getMoonLongitude, getMercuryLongitude, getVenusLongitude, getMarsLongitude, getJupiterLongitude, getSaturnLongitude, getMeanNode
+
+ [32m✓[39m src/tests/timeScales.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 43[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m5 passed[39m[22m[90m (5)[39m
+[2m      Tests [22m [1m[32m42 passed[39m[22m[90m (42)[39m
+[2m   Start at [22m 12:08:31
+[2m   Duration [22m 8.78s[2m (transform 671ms, setup 6.22s, import 703ms, tests 302ms, environment 27.75s)[22m
+
+EXITCODE=0

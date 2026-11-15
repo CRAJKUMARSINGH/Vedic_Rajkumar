@@ -1,0 +1,30 @@
+Act as a senior AI software testing and integration agent.
+Perform full programmatic testing of the entire application by rigorously validating every section, feature, component, route, asset, and data file.
+Objectives & Mandatory Actions:
+End-to-End Functional Validation
+Test every section individually and as part of the complete learning flow.
+Ensure every UI element, button, route, component, and interaction is functional and correctly linked to the main application flow.
+Data & Asset Integrity Check
+Identify any data file, section content, asset, or resource that is not integrated into the main app.
+Explicitly point out such gaps, fix them, and fully integrate all unused or orphaned data into the application logic.
+Core Component Verification
+Fix and correctly integrate the SaraswatiMascot component.
+Locate, verify, and properly connect the Home component as the root navigation anchor of the app.
+User Simulation Testing (Mandatory)
+Simulate testing with the following user groups presumed in tune of the app scope of work:
+
+Each simulated user must randomly consume 90% of all sections available in the app.
+Ensure no user encounters errors, dead ends, broken navigation, missing content, or inconsistent behavior.
+Quality & Excellence Standard
+Use all sections and data brilliantly, ensuring maximum educational coherence and technical robustness.
+Apply best-in-class reasoning, architecture awareness, and optimization intelligence while fixing issues.
+Final Requirement
+The application must reach a state where every path works flawlessly, all content is discoverable, and no beginner, intermediate, or advanced user faces any problem under any realistic usage scenario.
+Deliver a fully fixed, integrated, and production-ready application.
+###############################################################################################
+Optional Ultra-Strict Version (AI Agent Mode)
+If you want it even stronger for an autonomous AI agent:
+Act as a senior QA engineer, full-stack architect, and pedagogy optimizer. Validate the application end-to-end under heavy simulated load and randomized section access. Treat every failure as critical and resolve it permanently. Deliver a 100% section coverage, zero-defect learning experience.
+###############################################################################################
+
+

@@ -15,6 +15,8 @@
 import React, { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import ComingSoon from '@/pages/ComingSoon';
+import ClerkGate from '@/components/ClerkGate';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 // ─── Eagerly-loaded (in main bundle) ─────────────────────────────────────────
 import LandingPageV3 from '@/pages/LandingPageV3';
@@ -204,13 +206,15 @@ export const routes: RouteConfig[] = [
   { path: '/vimshottari-dasha',        element: <Navigate to="/dasha" replace /> },
 
   // ── Infra / User ─────────────────────────────────────────────────────────────
-  { path: '/my-readings',         element: <MyReadingsPage /> },
+  { path: '/my-readings',         element: <ProtectedRoute><MyReadingsPage /></ProtectedRoute> },
   { path: '/feedback',            element: <FeedbackPage /> },
   { path: '/pricing',             element: <PricingPage /> },
 
   // ── Auth ─────────────────────────────────────────────────────────────────────
-  { path: '/sign-in/*',           element: <SignInPage /> },
-  { path: '/sign-up/*',           element: <SignUpPage /> },
+  // ClerkGate: renders a graceful notice when VITE_CLERK_PUBLISHABLE_KEY is
+  // unset, instead of letting <SignIn/> / <SignUp/> throw a missing-provider error.
+  { path: '/sign-in/*',           element: <ClerkGate><SignInPage /></ClerkGate> },
+  { path: '/sign-up/*',           element: <ClerkGate><SignUpPage /></ClerkGate> },
 
   // ── Special Reports ──────────────────────────────────────────────────────────
   { path: '/priyansh-joining-muhurat', element: <PriyanshMuhuratPage /> },
@@ -219,9 +223,11 @@ export const routes: RouteConfig[] = [
   // ── Legal ────────────────────────────────────────────────────────────────────
   { path: '/privacy',            element: <PrivacyPolicyPage /> },
   { path: '/terms',              element: <TermsOfServicePage /> },
-  { path: '/privacy-settings',   element: <PrivacySettingsPage /> },
-  { path: '/settings/data',      element: <PrivacySettingsPage /> },  // Week 5: GDPR/DPDP canonical route
-  { path: '/settings/privacy',   element: <PrivacySettingsPage /> },  // alias
+  // PrivacySettingsPage calls useSession()/useAuthenticatedSupabase() — gate it so
+  // the page can't throw when Clerk is unconfigured.
+  { path: '/privacy-settings',   element: <ClerkGate><PrivacySettingsPage /></ClerkGate> },
+  { path: '/settings/data',      element: <ClerkGate><PrivacySettingsPage /></ClerkGate> },  // Week 5: GDPR/DPDP canonical route
+  { path: '/settings/privacy',   element: <ClerkGate><PrivacySettingsPage /></ClerkGate> },  // alias
 
   // ── Supplements & Synthesis (active — supplement core features with deep analysis)
   //   These are not the 4 core features but are working end-to-end, so they get

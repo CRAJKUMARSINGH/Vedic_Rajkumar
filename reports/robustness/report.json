@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T18:35:01.368Z",
+  "generatedAt": "2026-11-15T07:11:20.589Z",
   "births": [
     {
       "name": "Isha Sharma",
@@ -12,9 +12,7 @@
         "lon": 80.27
       },
       "pageErrors": [],
-      "consoleErrors": [
-        "Failed to load resource: the server responded with a status of 404 (Not Found)"
-      ]
+      "consoleErrors": []
     },
     {
       "name": "Saanvi Rao",

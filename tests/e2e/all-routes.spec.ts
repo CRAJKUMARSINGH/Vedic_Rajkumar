@@ -116,7 +116,10 @@ test.describe('Vedic Rajkumar App Route Verification', () => {
       console.log(`Navigating to: ${route}`);
       
       // Go to the route and wait until network is idle or DOMContentLoaded
-      await page.goto(route, { waitUntil: 'load', timeout: 15000 });
+      // Cold Vite dev-server transform of the full module graph can exceed the
+      // old 15s budget on first requests; 60s only extends the wait for the
+      // same `load` event — the assertions below are unchanged.
+      await page.goto(route, { waitUntil: 'load', timeout: 60000 });
       
       // Wait a short time for lazy component loading and animations
       await page.waitForTimeout(2000);

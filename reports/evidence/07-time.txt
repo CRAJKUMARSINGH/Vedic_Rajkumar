@@ -1,0 +1,47 @@
+﻿
+> vedic-rajkumar@0.1.0 test:time
+> vitest run src/tests/timeScales.test.ts src/tests/bodyFrame.test.ts --reporter=verbose
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90mE:/Rajkumar/Vedic_Rajkumar[39m
+
+[90mstdout[2m | src/tests/bodyFrame.test.ts[2m > [22m[2mbodies are on TT (regression check)[2m > [22m[2mcrosses the cardinal point near the published UTC instant: 2000 vernal equinox
+[22m[39m2000 vernal equinox: 1068.4 s late (delta-T is 63.9 s; Schlyter noise is ~876 s; a UT-based body would add +64 s)
+
+[90mstdout[2m | src/tests/bodyFrame.test.ts[2m > [22m[2mbodies are on TT (regression check)[2m > [22m[2mcrosses the cardinal point near the published UTC instant: 2000 June solstice
+[22m[39m2000 June solstice: 1135.2 s late (delta-T is 63.9 s; Schlyter noise is ~876 s; a UT-based body would add +64 s)
+
+[90mstdout[2m | src/tests/bodyFrame.test.ts[2m > [22m[2mbodies are on TT (regression check)[2m > [22m[2mcrosses the cardinal point near the published UTC instant: 2000 September equinox
+[22m[39m2000 September equinox: 1319.7 s late (delta-T is 63.9 s; Schlyter noise is ~876 s; a UT-based body would add +64 s)
+
+[90mstdout[2m | src/tests/bodyFrame.test.ts[2m > [22m[2mbodies are on TT (regression check)[2m > [22m[2mdelta-T in 2000 is large enough to matter (64 s)
+[22m[39m  delta-T 2000: 63.9 s = 35.1 arcsec of Moon motion
+
+[90mstdout[2m | src/tests/bodyFrame.test.ts[2m > [22m[2mbodies are on TT (regression check)[2m > [22m[2mthe TT_BODIES manifest exists and excludes angles
+[22m[39m  bodies on TT: getSunLongitude, getMoonLongitude, getMercuryLongitude, getVenusLongitude, getMarsLongitude, getJupiterLongitude, getSaturnLongitude, getMeanNode
+
+ [32m✓[39m src/tests/bodyFrame.test.ts[2m > [22mbodies are on TT (regression check)[2m > [22mcrosses the cardinal point near the published UTC instant: 2000 vernal equinox[32m 26[2mms[22m[39m
+ [32m✓[39m src/tests/bodyFrame.test.ts[2m > [22mbodies are on TT (regression check)[2m > [22mcrosses the cardinal point near the published UTC instant: 2000 June solstice[32m 3[2mms[22m[39m
+ [32m✓[39m src/tests/bodyFrame.test.ts[2m > [22mbodies are on TT (regression check)[2m > [22mcrosses the cardinal point near the published UTC instant: 2000 September equinox[32m 3[2mms[22m[39m
+ [32m✓[39m src/tests/bodyFrame.test.ts[2m > [22mbodies are on TT (regression check)[2m > [22mdelta-T in 2000 is large enough to matter (64 s)[32m 2[2mms[22m[39m
+ [32m✓[39m src/tests/bodyFrame.test.ts[2m > [22mbodies are on TT (regression check)[2m > [22mthe TT_BODIES manifest exists and excludes angles[32m 5[2mms[22m[39m
+[90mstdout[2m | src/tests/timeScales.test.ts[2m > [22m[2mthe patch reached the bodies and only the bodies[2m > [22m[2mrecords which functions now take TT, and never an angle
+[22m[39mbodies on TT: getSunLongitude, getMoonLongitude, getMercuryLongitude, getVenusLongitude, getMarsLongitude, getJupiterLongitude, getSaturnLongitude, getMeanNode
+
+ [32m✓[39m src/tests/timeScales.test.ts[2m > [22mdeltaTSeconds[2m > [22mmatches published Espenak & Meeus values at key epochs[32m 8[2mms[22m[39m
+ [32m✓[39m src/tests/timeScales.test.ts[2m > [22mdeltaTSeconds[2m > [22mis continuous: no jump > 5 s at boundary years[32m 3[2mms[22m[39m
+ [32m✓[39m src/tests/timeScales.test.ts[2m > [22mdeltaTSeconds[2m > [22mis positive in 2000 (clocks ran fast relative to Earth rotation)[32m 1[2mms[22m[39m
+ [32m✓[39m src/tests/timeScales.test.ts[2m > [22mtimeScalesFromJD[2m > [22mjdTT - jdUT = deltaT / 86400[32m 1[2mms[22m[39m
+ [32m✓[39m src/tests/timeScales.test.ts[2m > [22mtimeScalesFromJD[2m > [22mrejects a non-JD value[32m 11[2mms[22m[39m
+ [32m✓[39m src/tests/timeScales.test.ts[2m > [22mtimeScalesFromJD[2m > [22maccepts a valid JD[32m 1[2mms[22m[39m
+ [32m✓[39m src/tests/timeScales.test.ts[2m > [22mthe ascendant trap[2m > [22mwould be ~960 arcsec if TT were passed to the LST formula in 2000[32m 2[2mms[22m[39m
+ [32m✓[39m src/tests/timeScales.test.ts[2m > [22mthe ascendant trap[2m > [22mis near zero in 1900 (delta-T ≈ 0 then)[32m 1[2mms[22m[39m
+ [32m✓[39m src/tests/timeScales.test.ts[2m > [22mthe patch reached the bodies and only the bodies[2m > [22mrecords which functions now take TT, and never an angle[32m 22[2mms[22m[39m
+ [32m✓[39m src/tests/timeScales.test.ts[2m > [22mthe patch reached the bodies and only the bodies[2m > [22mrotation is 15 arcsec per second, which is why this slice exists[32m 1[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[32m15 passed[39m[22m[90m (15)[39m
+[2m   Start at [22m 12:08:47
+[2m   Duration [22m 18.76s[2m (transform 368ms, setup 2.79s, import 321ms, tests 113ms, environment 30.01s)[22m
+
+EXITCODE=0

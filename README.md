@@ -14,7 +14,7 @@ Casts sidereal (Lahiri ayanamsa) birth charts, prashna (horary) readings, 36-poi
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![Node](https://img.shields.io/badge/Node-%E2%89%A520-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Node](https://img.shields.io/badge/Node-%E2%89%A522.22.1-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Build](https://img.shields.io/badge/build-passing-brightgreen)](#)
 [![Tests](https://img.shields.io/badge/tests-1700%20passing-brightgreen)](#accuracy--testing)
 [![Accuracy](https://img.shields.io/badge/engine%20accuracy-15%2F15%20charts%20%E2%89%A42%E2%80%B3-brightgreen)](docs/accuracy/METHODOLOGY.md)
@@ -56,7 +56,7 @@ Vedic Rajkumar focuses on transparency, offline capability, bilingual support, a
 | 👨‍👩‍👧  | **Family Profile Mode**           | Save unlimited family member profiles — prefill any form in 1 click for repeat consultations                                                                                                                                         |
 | ⚡  | **Offline-Capable**               | Service worker + local engines — works without internet after first load                                                                                                                                                             |
 | 🎯  | **Accuracy Test Suite**           | **15-chart adversarial corpus** gate (wartime India, pre-IST, lat extremes, leap year, midnight) · Tier A ≤2″ ascendant · Tier B zero rashi/nakshatra failures · CI blocks regressions · [Methodology](docs/accuracy/METHODOLOGY.md) |
-| 🚦  | **Modern Dev Stack**              | React 18 · TypeScript strict · Vite · Tailwind 3 · shadcn/ui Radix primitives · TanStack Query · Vitest · Playwright                                                                                                                 |
+| 🚦  | **Modern Dev Stack**              | React 18 · TypeScript strict · Vite 7 · Tailwind 4 · shadcn/ui Radix primitives · TanStack Query · Vitest · Playwright                                                                                                               |
 | 🔋  | **Swiss Ephemeris Ready**         | Optional `VITE_USE_SWISS_EPHEMERIS=true` flag for research-grade planetary precision                                                                                                                                                 |
 
 ---

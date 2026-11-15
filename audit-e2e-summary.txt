@@ -1,0 +1,15 @@
+﻿
+    test-results\all-routes-Vedic-Rajkumar--bc4a7-on-Verify-route-my-readings-chromium\test-failed-1.png
+    test-results\all-routes-Vedic-Rajkumar--bc4a7-on-Verify-route-my-readings-chromium-retry1\test-failed-1.png
+    test-results\landing-page-links-Landing-3de3b-ute-links-from-landing-page-chromium\test-failed-1.png
+    test-results\landing-page-links-Landing-3de3b-ute-links-from-landing-page-chromium-retry1\test-failed-1.png
+  2 failed
+  13 did not run
+  103 passed (7.3m)
+::notice title=🎭 Playwright Run Summary::  2 failed%0A    [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic 
+Rajkumar App Route Verification › Verify route: /my-readings %0A    [chromium] › 
+tests\e2e\landing-page-links.spec.ts:38:3 › Landing page links › collects all internal route links from landing page 
+%0A  13 did not run%0A  103 passed (7.3m)
+
+
+EXITCODE[e2e]=1

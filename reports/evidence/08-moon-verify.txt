@@ -1,0 +1,40 @@
+﻿
+> vedic-rajkumar@0.1.0 moon:verify
+> vitest run src/tests/moonSeries.test.ts src/tests/moonWiring.test.ts
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90mE:/Rajkumar/Vedic_Rajkumar[39m
+
+[90mstdout[2m | src/tests/moonSeries.test.ts[2m > [22m[2mMeeus example 47.a[2m > [22m[2mreproduces the published longitude
+[22m[39mlambda delta: 0.00 arcsec
+
+[90mstdout[2m | src/tests/moonSeries.test.ts[2m > [22m[2mMeeus example 47.a[2m > [22m[2mreproduces the published latitude
+[22m[39mbeta delta: 4.18 arcsec
+
+[90mstdout[2m | src/tests/moonSeries.test.ts[2m > [22m[2mMeeus example 47.a[2m > [22m[2mreproduces the published distance
+[22m[39mdistance delta: 0.02 km
+
+[90mstdout[2m | src/tests/moonSeries.test.ts[2m > [22m[2mnutation in longitude[2m > [22m[2mmatches Meeus example 22.a to under an arcsecond
+[22m[39mdelta-psi: -3.863 arcsec (published -3.788)
+
+[90mstdout[2m | src/tests/moonSeries.test.ts[2m > [22m[2mdelta-T[2m > [22m[2mis a large fraction of the previous Moon error bar
+[22m[39mdelta-T in 1992 is 32.0 arcsec of lunar motion
+
+ [32m✓[39m src/tests/moonSeries.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 43[2mms[22m[39m
+[90mstdout[2m | src/tests/moonWiring.test.ts[2m > [22m[2mengine Moon is wired to moonSeries[2m > [22m[2magrees within 1 arcsec on 2000-10-26
+[22m[39m2000-10-26 delta: 0.000 arcsec
+
+[90mstdout[2m | src/tests/moonWiring.test.ts[2m > [22m[2mengine Moon is wired to moonSeries[2m > [22m[2magrees within 1 arcsec on 1943-06-15
+[22m[39m1943-06-15 delta: 0.000 arcsec
+
+[90mstdout[2m | src/tests/moonWiring.test.ts[2m > [22m[2mengine Moon is wired to moonSeries[2m > [22m[2magrees within 1 arcsec on 1890-06-15
+[22m[39m1890-06-15 delta: 0.000 arcsec
+
+ [32m✓[39m src/tests/moonWiring.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 38[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[32m13 passed[39m[22m[90m (13)[39m
+[2m   Start at [22m 12:09:11
+[2m   Duration [22m 7.60s[2m (transform 347ms, setup 2.00s, import 296ms, tests 81ms, environment 9.21s)[22m
+
+EXITCODE=0

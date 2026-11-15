@@ -17,24 +17,24 @@
     "reference_type": "natal"
   },
   "direct_answer": {
-    "en": "Health & wellbeing: average (49%) (average, 49%)",
-    "hi": "स्वास्थ्य सामान्य (49%) (सामान्य, 49%)"
+    "en": "Health & wellbeing: average (50%) (average, 50%)",
+    "hi": "स्वास्थ्य सामान्य (50%) (सामान्य, 50%)"
   },
   "verdicts": [
     {
       "topic": "health",
       "headline": {
-        "en": "Health & wellbeing: average (49%)",
-        "hi": "स्वास्थ्य सामान्य (49%)"
+        "en": "Health & wellbeing: average (50%)",
+        "hi": "स्वास्थ्य सामान्य (50%)"
       },
-      "score_0_100": 69,
+      "score_0_100": 63,
       "band": "average",
       "engine_verdict": "CONDITIONAL",
-      "confidence_0_1": 0.49,
+      "confidence_0_1": 0.5,
       "window": null,
       "rationale": {
-        "en": "Therefore: for this Jatak's birth promise, health is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 85/100, and transit timing scores 48/100. The final call is CONDITIONAL: health is the leading field at 69/100.",
-        "hi": "Therefore: for this Jatak's birth promise, health is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 85/100, and transit timing scores 48/100. The final call is CONDITIONAL: health is the leading field at 69/100."
+        "en": "Therefore: for this Jatak's birth promise, health is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 69/100, and transit timing scores 48/100. The final call is CONDITIONAL: health is the leading field at 63/100.",
+        "hi": "Therefore: for this Jatak's birth promise, health is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 69/100, and transit timing scores 48/100. The final call is CONDITIONAL: health is the leading field at 63/100."
       },
       "conflicts": [
         "Viparita Raj Yoga must be treated as a failure warning, not as decorative praise."
@@ -52,8 +52,8 @@
         },
         {
           "layer": "Dasha activation",
-          "score": 85,
-          "finding": "Venus MD with Mercury AD gives 85/100 Dasha clearance for health; delivery class is full."
+          "score": 69,
+          "finding": "Venus MD with Ketu AD gives 69/100 Dasha clearance for health; delivery class is full."
         },
         {
           "layer": "Transit timing",
@@ -61,7 +61,12 @@
           "finding": "health has no dedicated Moon double-transit gate here; transit is treated as secondary and cannot overturn Dasha plus house promise."
         }
       ],
-      "remedies": [],
+      "remedies": [
+        {
+          "en": "Venus",
+          "hi": "Venus"
+        }
+      ],
       "caveats": [
         {
           "en": "Windows are approximate.",
@@ -79,7 +84,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5e5698f0b3ae95af",
-    "card_hash": "eb007c3975d0f101",
+    "card_hash": "4f96804748f6bf2a",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

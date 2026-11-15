@@ -96,7 +96,9 @@ describe('chart timezone wiring', () => {
       offenders,
       'un-migrated call sites found — run: npm run migrate:chart-tz:write\n\n' + offenders.join('\n'),
     ).toEqual([]);
-  });
+    // Walks and reads the whole src/ tree; under full-suite parallel load this can
+    // exceed the 10s default and time out spuriously (observed in `docs:verify`).
+  }, 30_000);
 
   it('publishes the timezone from every non-form chart entry point', () => {
     const offenders: string[] = [];
@@ -116,7 +118,8 @@ describe('chart timezone wiring', () => {
         'modern IST instead of the resolved birth offset:\n\n' +
         offenders.join('\n'),
     ).toEqual([]);
-  });
+    // Same whole-tree walk as above; keep it off the 10s default timeout.
+  }, 30_000);
 
   it('has no stale allow-list entries', () => {
     for (const rel of Object.keys(allow.files ?? {})) {

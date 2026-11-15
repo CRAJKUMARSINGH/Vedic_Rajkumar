@@ -1,0 +1,25 @@
+﻿
+> vedic-rajkumar@0.1.0 answers:check
+> node scripts/emitAnswerCards.mjs --check
+
+node.exe : DRIFT: public\answers\anukrati-sharma\_all.json
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (DRIFT: public\a...harma\_all.json:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+DRIFT: public\answers\anukrati-sharma\_all.md
+DRIFT: public\answers\anukrati-sharma\health.json
+DRIFT: public\answers\anukrati-sharma\health.md
+DRIFT: public\answers\anukrati-sharma\house_construction.json
+DRIFT: public\answers\anukrati-sharma\house_construction.md
+DRIFT: public\answers\anukrati-sharma\career.json
+DRIFT: public\answers\anukrati-sharma\career.md
+DRIFT: public\answers\anukrati-sharma\marriage.json
+DRIFT: public\answers\anukrati-sharma\marriage.md
+DRIFT: public\answers\anukrati-sharma\finance.json
+DRIFT: public\answers\anukrati-sharma\finance.md
+
+12 file(s) out of date. Run: npm run answers:emit
+EXITCODE=1

@@ -1,0 +1,807 @@
+﻿
+Running 80 tests using 2 workers
+
+[1/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /
+[2/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /career-astrology
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /
+Navigating to: /
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /career-astrology
+Navigating to: /career-astrology
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /
+Screenshot saved for / at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_.png
+
+[3/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kaalsarp
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kaalsarp
+Navigating to: /kaalsarp
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /career-astrology
+Screenshot saved for /career-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_career-astrology.png
+
+[4/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /comprehensive
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /comprehensive
+Navigating to: /comprehensive
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kaalsarp
+Screenshot saved for /kaalsarp at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_kaalsarp.png
+
+[5/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /matchmaking
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /matchmaking
+Navigating to: /matchmaking
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /comprehensive
+Screenshot saved for /comprehensive at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_comprehensive.png
+
+[6/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enhanced-matchmaking
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enhanced-matchmaking
+Navigating to: /enhanced-matchmaking
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /matchmaking
+Screenshot saved for /matchmaking at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_matchmaking.png
+
+[7/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vaastu
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vaastu
+Navigating to: /vaastu
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enhanced-matchmaking
+Screenshot saved for /enhanced-matchmaking at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_enhanced-matchmaking.png
+
+[8/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /muhurat
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /muhurat
+Navigating to: /muhurat
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vaastu
+Screenshot saved for /vaastu at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_vaastu.png
+
+[9/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enhanced-muhurat
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enhanced-muhurat
+Navigating to: /enhanced-muhurat
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /muhurat
+Screenshot saved for /muhurat at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_muhurat.png
+
+[10/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /baby-names
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /baby-names
+Navigating to: /baby-names
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enhanced-muhurat
+Screenshot saved for /enhanced-muhurat at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_enhanced-muhurat.png
+
+[11/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /lucky-elements
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /lucky-elements
+Navigating to: /lucky-elements
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /baby-names
+Screenshot saved for /baby-names at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_baby-names.png
+
+[12/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /festival-calendar
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /festival-calendar
+Navigating to: /festival-calendar
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /lucky-elements
+Screenshot saved for /lucky-elements at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_lucky-elements.png
+
+[13/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /analytics
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /analytics
+Navigating to: /analytics
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /festival-calendar
+Screenshot saved for /festival-calendar at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_festival-calendar.png
+
+[14/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feature-requests
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feature-requests
+Navigating to: /feature-requests
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /analytics
+Screenshot saved for /analytics at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_analytics.png
+
+[15/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feedback-dashboard
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feedback-dashboard
+Navigating to: /feedback-dashboard
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feature-requests
+Screenshot saved for /feature-requests at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_feature-requests.png
+
+[16/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /quick-wins
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /quick-wins
+Navigating to: /quick-wins
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feedback-dashboard
+Screenshot saved for /feedback-dashboard at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_feedback-dashboard.png
+
+[17/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dasha
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dasha
+Navigating to: /dasha
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /quick-wins
+Screenshot saved for /quick-wins at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_quick-wins.png
+
+[18/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /jaimini
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /jaimini
+Navigating to: /jaimini
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dasha
+Screenshot saved for /dasha at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_dasha.png
+
+[19/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /tajik
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /tajik
+Navigating to: /tajik
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /jaimini
+Screenshot saved for /jaimini at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_jaimini.png
+
+[20/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /business-astrology
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /business-astrology
+Navigating to: /business-astrology
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /tajik
+Screenshot saved for /tajik at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_tajik.png
+
+[21/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /remedies
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /remedies
+Navigating to: /remedies
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /business-astrology
+Screenshot saved for /business-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_business-astrology.png
+
+[22/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /divisional-charts
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /divisional-charts
+Navigating to: /divisional-charts
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /remedies
+Screenshot saved for /remedies at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_remedies.png
+
+[23/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /planetary-strength
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /planetary-strength
+Navigating to: /planetary-strength
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /divisional-charts
+Screenshot saved for /divisional-charts at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_divisional-charts.png
+
+[24/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /horoscope
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /horoscope
+Navigating to: /horoscope
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /planetary-strength
+Screenshot saved for /planetary-strength at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_planetary-strength.png
+
+[25/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /yogas
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /yogas
+Navigating to: /yogas
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /horoscope
+Screenshot saved for /horoscope at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_horoscope.png
+
+[26/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /lal-kitab
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /lal-kitab
+Navigating to: /lal-kitab
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /yogas
+Screenshot saved for /yogas at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_yogas.png
+
+[27/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kp-system
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kp-system
+Navigating to: /kp-system
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /lal-kitab
+Screenshot saved for /lal-kitab at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_lal-kitab.png
+
+[28/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /love-astrology
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /love-astrology
+Navigating to: /love-astrology
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kp-system
+Screenshot saved for /kp-system at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_kp-system.png
+
+[29/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /nadi-astrology
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /nadi-astrology
+Navigating to: /nadi-astrology
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /love-astrology
+Screenshot saved for /love-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_love-astrology.png
+
+[30/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /western-astrology
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /western-astrology
+Navigating to: /western-astrology
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /nadi-astrology
+Screenshot saved for /nadi-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_nadi-astrology.png
+
+[31/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /chinese-astrology
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /chinese-astrology
+Navigating to: /chinese-astrology
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /western-astrology
+Screenshot saved for /western-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_western-astrology.png
+
+[32/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /ai-predictions
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /ai-predictions
+Navigating to: /ai-predictions
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /chinese-astrology
+Screenshot saved for /chinese-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_chinese-astrology.png
+
+[33/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /horary
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /horary
+Navigating to: /horary
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /ai-predictions
+Screenshot saved for /ai-predictions at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_ai-predictions.png
+
+[34/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /medical-astrology
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /medical-astrology
+Navigating to: /medical-astrology
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /horary
+Screenshot saved for /horary at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_horary.png
+
+[35/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /numerology
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /numerology
+Navigating to: /numerology
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /medical-astrology
+Screenshot saved for /medical-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_medical-astrology.png
+
+[36/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /financial-astrology
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /financial-astrology
+Navigating to: /financial-astrology
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /numerology
+Screenshot saved for /numerology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_numerology.png
+
+[37/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /learn
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /learn
+Navigating to: /learn
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /financial-astrology
+Screenshot saved for /financial-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_financial-astrology.png
+
+[38/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /marketplace
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /marketplace
+Navigating to: /marketplace
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /learn
+Screenshot saved for /learn at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_learn.png
+
+[39/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /community
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /community
+Navigating to: /community
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /marketplace
+Screenshot saved for /marketplace at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_marketplace.png
+
+[40/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /features
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /features
+Navigating to: /features
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /community
+Screenshot saved for /community at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_community.png
+
+[41/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /api-docs
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /api-docs
+Navigating to: /api-docs
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /features
+Screenshot saved for /features at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_features.png
+
+[42/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /panchang
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /panchang
+Navigating to: /panchang
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /api-docs
+Screenshot saved for /api-docs at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_api-docs.png
+
+[43/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /comparative-astrology
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /comparative-astrology
+Navigating to: /comparative-astrology
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /panchang
+Screenshot saved for /panchang at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_panchang.png
+
+[44/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /world-astrology
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /world-astrology
+Navigating to: /world-astrology
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /comparative-astrology
+Screenshot saved for /comparative-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_comparative-astrology.png
+
+[45/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /electional-astrology
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /electional-astrology
+Navigating to: /electional-astrology
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /world-astrology
+Screenshot saved for /world-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_world-astrology.png
+
+[46/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mundane-astrology
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mundane-astrology
+Navigating to: /mundane-astrology
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /electional-astrology
+Screenshot saved for /electional-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_electional-astrology.png
+
+[47/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /sade-sati
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /sade-sati
+Navigating to: /sade-sati
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mundane-astrology
+Screenshot saved for /mundane-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_mundane-astrology.png
+
+[48/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /ashtakavarga
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /ashtakavarga
+Navigating to: /ashtakavarga
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /sade-sati
+Screenshot saved for /sade-sati at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_sade-sati.png
+
+[49/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /gemstones
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /gemstones
+Navigating to: /gemstones
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /ashtakavarga
+Screenshot saved for /ashtakavarga at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_ashtakavarga.png
+
+[50/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise
+Navigating to: /enterprise
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /gemstones
+Screenshot saved for /gemstones at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_gemstones.png
+
+[51/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /varshaphal
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /varshaphal
+Navigating to: /varshaphal
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise
+Screenshot saved for /enterprise at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_enterprise.png
+
+[52/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /bv-raman
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /bv-raman
+Navigating to: /bv-raman
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /varshaphal
+Screenshot saved for /varshaphal at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_varshaphal.png
+
+[53/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /raman-archive
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /raman-archive
+Navigating to: /raman-archive
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /bv-raman
+Screenshot saved for /bv-raman at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_bv-raman.png
+
+[54/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feedback
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feedback
+Navigating to: /feedback
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /raman-archive
+Screenshot saved for /raman-archive at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_raman-archive.png
+
+[55/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise-admin
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise-admin
+Navigating to: /enterprise-admin
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feedback
+Screenshot saved for /feedback at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_feedback.png
+
+[56/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mobile-app
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mobile-app
+Navigating to: /mobile-app
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise-admin
+Screenshot saved for /enterprise-admin at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_enterprise-admin.png
+
+[57/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /spiritual-remedies
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /spiritual-remedies
+Navigating to: /spiritual-remedies
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mobile-app
+Screenshot saved for /mobile-app at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_mobile-app.png
+
+[58/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mahadasha-children
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mahadasha-children
+Navigating to: /mahadasha-children
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /spiritual-remedies
+Screenshot saved for /spiritual-remedies at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_spiritual-remedies.png
+
+[59/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dynamic-transit
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dynamic-transit
+Navigating to: /dynamic-transit
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mahadasha-children
+Screenshot saved for /mahadasha-children at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_mahadasha-children.png
+
+[60/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /consultation
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /consultation
+Navigating to: /consultation
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dynamic-transit
+Screenshot saved for /dynamic-transit at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_dynamic-transit.png
+
+[61/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /question
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /question
+Navigating to: /question
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /consultation
+Screenshot saved for /consultation at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_consultation.png
+
+[62/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna
+Navigating to: /prashna
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /question
+Screenshot saved for /question at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_question.png
+
+[63/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge
+Navigating to: /knowledge
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna
+Screenshot saved for /prashna at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_prashna.png
+
+[64/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/add
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/add
+Navigating to: /knowledge/add
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge
+Screenshot saved for /knowledge at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_knowledge.png
+
+[65/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/ingest
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/ingest
+Navigating to: /knowledge/ingest
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/add
+Screenshot saved for /knowledge/add at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_knowledge_add.png
+
+[66/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/upload
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/upload
+Navigating to: /knowledge/upload
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/ingest
+Screenshot saved for /knowledge/ingest at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_knowledge_ingest.png
+
+[67/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/export
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/export
+Navigating to: /knowledge/export
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/upload
+Screenshot saved for /knowledge/upload at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_knowledge_upload.png
+
+[68/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna-ai
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna-ai
+Navigating to: /prashna-ai
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/export
+Screenshot saved for /knowledge/export at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_knowledge_export.png
+
+[69/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna-history
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna-history
+Navigating to: /prashna-history
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna-ai
+Screenshot saved for /prashna-ai at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_prashna-ai.png
+
+[70/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /pricing
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /pricing
+Navigating to: /pricing
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna-history
+Screenshot saved for /prashna-history at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_prashna-history.png
+
+[71/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /marriage
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /marriage
+Navigating to: /marriage
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /pricing
+Screenshot saved for /pricing at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_pricing.png
+
+[72/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kanchi
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kanchi
+Navigating to: /kanchi
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /marriage
+Screenshot saved for /marriage at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_marriage.png
+
+[73/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vedic-marriage
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vedic-marriage
+Navigating to: /vedic-marriage
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kanchi
+Screenshot saved for /kanchi at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_kanchi.png
+
+[74/80] (retries) [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kanchi (retry #1)
+Navigating to: /kanchi
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vedic-marriage
+Screenshot saved for /vedic-marriage at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_vedic-marriage.png
+
+[75/80] (retries) [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vedic-marriage (retry #1)
+Navigating to: /vedic-marriage
+
+Screenshot saved for /vedic-marriage at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_vedic-marriage.png
+
+  1) [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vedic-marriage 
+
+    Test timeout of 30000ms exceeded.
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--32dcd-Verify-route-vedic-marriage-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--32dcd-Verify-route-vedic-marriage-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--32dcd-Verify-route-vedic-marriage-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[76/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kundli-compare
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kundli-compare
+Navigating to: /kundli-compare
+
+  2) [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kanchi 
+
+    Test timeout of 30000ms exceeded.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--57c0c-ication-Verify-route-kanchi-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--57c0c-ication-Verify-route-kanchi-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--57c0c-ication-Verify-route-kanchi-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--57c0c-ication-Verify-route-kanchi-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.waitForTimeout: Test timeout of 30000ms exceeded.
+
+      45 |   '/financial-astrology',
+      46 |   '/learn',
+    > 47 |   '/marketplace',
+         |                  ^
+      48 |   '/community',
+      49 |   '/features',
+      50 |   '/api-docs',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:47:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--57c0c-ication-Verify-route-kanchi-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--57c0c-ication-Verify-route-kanchi-chromium-retry1\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--57c0c-ication-Verify-route-kanchi-chromium-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--57c0c-ication-Verify-route-kanchi-chromium-retry1\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[77/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /wedding-muhurat
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /wedding-muhurat
+Navigating to: /wedding-muhurat
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kundli-compare
+Screenshot saved for /kundli-compare at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_kundli-compare.png
+
+[78/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dasha-timeline
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dasha-timeline
+Navigating to: /dasha-timeline
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /wedding-muhurat
+Screenshot saved for /wedding-muhurat at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_wedding-muhurat.png
+
+[79/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mtss
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mtss
+Navigating to: /mtss
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dasha-timeline
+Screenshot saved for /dasha-timeline at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_dasha-timeline.png
+
+[80/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vidhya-karma
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vidhya-karma
+Navigating to: /vidhya-karma
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mtss
+Screenshot saved for /mtss at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_mtss.png
+
+[81/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /nakshatra-precautions
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /nakshatra-precautions
+Navigating to: /nakshatra-precautions
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vidhya-karma
+Screenshot saved for /vidhya-karma at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_vidhya-karma.png
+
+[82/80] [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /my-readings
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /my-readings
+Navigating to: /my-readings
+
+[chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /nakshatra-precautions
+Screenshot saved for /nakshatra-precautions at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_nakshatra-precautions.png
+
+
+node.exe : [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: 
+/my-readings
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([chromium] › te...e: /my-readings:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Page error on /my-readings: [
+  PlaywrightError: useUser can only be used within the <ClerkProvider /> component.
+  
+  Possible fixes:
+  1. Ensure that the <ClerkProvider /> is correctly wrapping your application where this component is used.
+  2. Check for multiple versions of the `@clerk/shared` package in your project. Use a tool like `npm ls 
+@clerk/shared` to identify multiple versions, and update your dependencies to only rely on one.
+  
+  Learn more: https://clerk.com/docs/components/clerk-provider
+      at useAssertWrappedByClerkProvider 
+(http://127.0.0.1:5173/node_modules/.vite/deps/@clerk_react.js?v=018457f1:851:11)
+      at useUser (http://127.0.0.1:5173/node_modules/.vite/deps/@clerk_react.js?v=018457f1:1769:3)
+      at MyReadingsPage (http://127.0.0.1:5173/src/pages/MyReadingsPage.tsx:235:20)
+      at renderWithHooks (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:11596:26)
+      at updateFunctionComponent (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:14630:28)
+      at mountLazyComponent (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:14881:23)
+      at beginWork (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:15966:22)
+      at HTMLUnknownElement.callCallback2 
+(http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:3680:22)
+      at Object.invokeGuardedCallbackDev 
+(http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:3705:24)
+      at invokeGuardedCallback (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:3739:39) {
+    log: []
+  },
+  PlaywrightError: useUser can only be used within the <ClerkProvider /> component.
+  
+  Possible fixes:
+  1. Ensure that the <ClerkProvider /> is correctly wrapping your application where this component is used.
+  2. Check for multiple versions of the `@clerk/shared` package in your project. Use a tool like `npm ls 
+@clerk/shared` to identify multiple versions, and update your dependencies to only rely on one.
+  
+  Learn more: https://clerk.com/docs/components/clerk-provider
+      at useAssertWrappedByClerkProvider 
+(http://127.0.0.1:5173/node_modules/.vite/deps/@clerk_react.js?v=018457f1:851:11)
+      at useUser (http://127.0.0.1:5173/node_modules/.vite/deps/@clerk_react.js?v=018457f1:1769:3)
+      at MyReadingsPage (http://127.0.0.1:5173/src/pages/MyReadingsPage.tsx:235:20)
+      at renderWithHooks (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:11596:26)
+      at updateFunctionComponent (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:14630:28)
+      at mountLazyComponent (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:14881:23)
+      at beginWork (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:15966:22)
+      at HTMLUnknownElement.callCallback2 
+(http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:3680:22)
+      at Object.invokeGuardedCallbackDev 
+(http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:3705:24)
+      at invokeGuardedCallback (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:3739:39) {
+    log: []
+  }
+]
+[83/80] (retries) [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /my-readings (retry #1)
+Navigating to: /my-readings
+
+Page error on /my-readings: [
+  PlaywrightError: useUser can only be used within the <ClerkProvider /> component.
+  
+  Possible fixes:
+  1. Ensure that the <ClerkProvider /> is correctly wrapping your application where this component is used.
+  2. Check for multiple versions of the `@clerk/shared` package in your project. Use a tool like `npm ls 
+@clerk/shared` to identify multiple versions, and update your dependencies to only rely on one.
+  
+  Learn more: https://clerk.com/docs/components/clerk-provider
+      at useAssertWrappedByClerkProvider 
+(http://127.0.0.1:5173/node_modules/.vite/deps/@clerk_react.js?v=018457f1:851:11)
+      at useUser (http://127.0.0.1:5173/node_modules/.vite/deps/@clerk_react.js?v=018457f1:1769:3)
+      at MyReadingsPage (http://127.0.0.1:5173/src/pages/MyReadingsPage.tsx:235:20)
+      at renderWithHooks (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:11596:26)
+      at updateFunctionComponent (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:14630:28)
+      at mountLazyComponent (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:14881:23)
+      at beginWork (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:15966:22)
+      at HTMLUnknownElement.callCallback2 
+(http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:3680:22)
+      at Object.invokeGuardedCallbackDev 
+(http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:3705:24)
+      at invokeGuardedCallback (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:3739:39) {
+    log: []
+  },
+  PlaywrightError: useUser can only be used within the <ClerkProvider /> component.
+  
+  Possible fixes:
+  1. Ensure that the <ClerkProvider /> is correctly wrapping your application where this component is used.
+  2. Check for multiple versions of the `@clerk/shared` package in your project. Use a tool like `npm ls 
+@clerk/shared` to identify multiple versions, and update your dependencies to only rely on one.
+  
+  Learn more: https://clerk.com/docs/components/clerk-provider
+      at useAssertWrappedByClerkProvider 
+(http://127.0.0.1:5173/node_modules/.vite/deps/@clerk_react.js?v=018457f1:851:11)
+      at useUser (http://127.0.0.1:5173/node_modules/.vite/deps/@clerk_react.js?v=018457f1:1769:3)
+      at MyReadingsPage (http://127.0.0.1:5173/src/pages/MyReadingsPage.tsx:235:20)
+      at renderWithHooks (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:11596:26)
+      at updateFunctionComponent (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:14630:28)
+      at mountLazyComponent (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:14881:23)
+      at beginWork (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:15966:22)
+      at HTMLUnknownElement.callCallback2 
+(http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:3680:22)
+      at Object.invokeGuardedCallbackDev 
+(http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:3705:24)
+      at invokeGuardedCallback (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=018457f1:3739:39) {
+    log: []
+  }
+]
+
+  3) [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /my-readings 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 2
+
+      51 |   '/panchang',
+      52 |   '/comparative-astrology',
+    > 53 |   '/world-astrology',
+         |                                 ^
+      54 |   '/electional-astrology',
+      55 |   '/mundane-astrology',
+      56 |   '/sade-sati',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:53:33
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--bc4a7-on-Verify-route-my-readings-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--bc4a7-on-Verify-route-my-readings-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--bc4a7-on-Verify-route-my-readings-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--bc4a7-on-Verify-route-my-readings-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 2
+
+      51 |   '/panchang',
+      52 |   '/comparative-astrology',
+    > 53 |   '/world-astrology',
+         |                                 ^
+      54 |   '/electional-astrology',
+      55 |   '/mundane-astrology',
+      56 |   '/sade-sati',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:53:33
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--bc4a7-on-Verify-route-my-readings-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--bc4a7-on-Verify-route-my-readings-chromium-retry1\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--bc4a7-on-Verify-route-my-readings-chromium-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--bc4a7-on-Verify-route-my-readings-chromium-retry1\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  2 failed
+    [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kanchi 
+    [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /my-readings 
+  1 flaky
+    [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vedic-marriage 
+  77 passed (8.0m)

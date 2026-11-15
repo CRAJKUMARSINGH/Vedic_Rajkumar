@@ -14,6 +14,9 @@ export default defineConfig({
     baseURL,
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
+    // Cold dev-server module transform is slow on first requests; give
+    // navigations the same headroom as tests/e2e/all-routes.spec.ts.
+    navigationTimeout: 60_000,
   },
   projects: [
     {

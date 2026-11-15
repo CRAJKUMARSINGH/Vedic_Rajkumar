@@ -1,0 +1,213 @@
+﻿
+> vedic-rajkumar@0.1.0 test:accuracy:full
+> vitest run src/tests/accuracy/corpusPhase1.test.ts --reporter=verbose
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90mE:/Rajkumar/Vedic_Rajkumar[39m
+
+node.exe : [90mstderr[2m | src/tests/accuracy/corpusPhase1.test.ts[2m > [22m[2maccuracy corpus — 15 charts[2m > 
+[22m[2msuite health[2m > [22m[2mTier A drift stays below the user-visible threshold
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([90mstderr[2m...sible threshold:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[22m[39m
+Tier A drift vs Swiss Ephemeris (arcsecond target — informational, 163 quantities):
+  ⚠ IN-1935-BOM-001 ayanamsa 7.40"
+  ⚠ IN-1935-BOM-001 ascendant 7.51"
+  ⚠ IN-1935-BOM-001 Sun 23.90"
+  ⚠ IN-1935-BOM-001 Moon 4.71"
+  ⚠ IN-1935-BOM-001 Mercury 3.05"
+  ⚠ IN-1935-BOM-001 Venus 14.01"
+  ⚠ IN-1935-BOM-001 Mars 41.30"
+  ⚠ IN-1935-BOM-001 Jupiter 172.77"
+  ⚠ IN-1935-BOM-001 Saturn 662.40"
+  ⚠ IN-1935-BOM-001 Rahu 7.15"
+  ⚠ IN-1935-BOM-001 Ketu 7.15"
+  ⚠ IN-1943-BOM-002 ayanamsa 7.44"
+  ⚠ IN-1943-BOM-002 ascendant 7.84"
+  ⚠ IN-1943-BOM-002 Sun 26.41"
+  ⚠ IN-1943-BOM-002 Moon 7.11"
+  ⚠ IN-1943-BOM-002 Mercury 24.47"
+  ⚠ IN-1943-BOM-002 Venus 8.39"
+  ⚠ IN-1943-BOM-002 Mars 9.59"
+  ⚠ IN-1943-BOM-002 Jupiter 65.91"
+  ⚠ IN-1943-BOM-002 Saturn 48.76"
+  ⚠ IN-1943-BOM-002 Rahu 7.20"
+  ⚠ IN-1943-BOM-002 Ketu 7.20"
+  ⚠ IN-1941-DEL-004 ayanamsa 7.43"
+  ⚠ IN-1941-DEL-004 ascendant 6.26"
+  ⚠ IN-1941-DEL-004 Sun 30.70"
+  ⚠ IN-1941-DEL-004 Moon 7.06"
+  ⚠ IN-1941-DEL-004 Mercury 52.06"
+  ⚠ IN-1941-DEL-004 Venus 11.33"
+  ⚠ IN-1941-DEL-004 Mars 67.42"
+  ⚠ IN-1941-DEL-004 Jupiter 104.73"
+  ⚠ IN-1941-DEL-004 Saturn 267.57"
+  ⚠ IN-1941-DEL-004 Rahu 7.19"
+  ⚠ IN-1941-DEL-004 Ketu 7.19"
+  ⚠ IN-1942-GAP-005 ayanamsa 7.43"
+  ⚠ IN-1942-GAP-005 ascendant 5.99"
+  ⚠ IN-1942-GAP-005 Sun 35.36"
+  ⚠ IN-1942-GAP-005 Mercury 15.68"
+  ⚠ IN-1942-GAP-005 Venus 50.54"
+  ⚠ IN-1942-GAP-005 Mars 51.64"
+  ⚠ IN-1942-GAP-005 Jupiter 88.29"
+  ⚠ IN-1942-GAP-005 Saturn 92.71"
+  ⚠ IN-1942-GAP-005 Rahu 7.19"
+  ⚠ IN-1942-GAP-005 Ketu 7.19"
+  ⚠ IN-1945-END-006 ayanamsa 7.46"
+  ⚠ IN-1945-END-006 ascendant 4.22"
+  ⚠ IN-1945-END-006 Sun 9.25"
+  ⚠ IN-1945-END-006 Moon 10.41"
+  ⚠ IN-1945-END-006 Mercury 41.26"
+  ⚠ IN-1945-END-006 Venus 31.85"
+  ⚠ IN-1945-END-006 Mars 4.87"
+  ⚠ IN-1945-END-006 Jupiter 157.88"
+  ⚠ IN-1945-END-006 Saturn 331.90"
+  ⚠ IN-1945-END-006 Rahu 7.23"
+  ⚠ IN-1945-END-006 Ketu 7.23"
+  ⚠ IN-1945-IST-007 ayanamsa 7.46"
+  ⚠ IN-1945-IST-007 ascendant 3.95"
+  ⚠ IN-1945-IST-007 Sun 9.25"
+  ⚠ IN-1945-IST-007 Moon 10.37"
+  ⚠ IN-1945-IST-007 Mercury 41.24"
+  ⚠ IN-1945-IST-007 Venus 31.86"
+  ⚠ IN-1945-IST-007 Mars 4.83"
+  ⚠ IN-1945-IST-007 Jupiter 157.90"
+  ⚠ IN-1945-IST-007 Saturn 331.93"
+  ⚠ IN-1945-IST-007 Rahu 7.23"
+  ⚠ IN-1945-IST-007 Ketu 7.23"
+  ⚠ IN-1906-IST-008 ayanamsa 7.49"
+  ⚠ IN-1906-IST-008 ascendant 5.55"
+  ⚠ IN-1906-IST-008 Sun 49.92"
+  ⚠ IN-1906-IST-008 Mercury 56.45"
+  ⚠ IN-1906-IST-008 Venus 68.44"
+  ⚠ IN-1906-IST-008 Mars 48.66"
+  ⚠ IN-1906-IST-008 Jupiter 113.80"
+  ⚠ IN-1906-IST-008 Saturn 696.25"
+  ⚠ IN-1906-IST-008 Rahu 7.18"
+  ⚠ IN-1906-IST-008 Ketu 7.18"
+  ⚠ IN-1960-MID-009 ayanamsa 7.62"
+  ⚠ IN-1960-MID-009 ascendant 7.54"
+  ⚠ IN-1960-MID-009 Sun 17.08"
+  ⚠ IN-1960-MID-009 Moon 4.75"
+  ⚠ IN-1960-MID-009 Mercury 39.94"
+  ⚠ IN-1960-MID-009 Venus 30.45"
+  ⚠ IN-1960-MID-009 Mars 28.73"
+  ⚠ IN-1960-MID-009 Jupiter 50.43"
+  ⚠ IN-1960-MID-009 Saturn 148.56"
+  ⚠ IN-1960-MID-009 Rahu 7.41"
+  ⚠ IN-1960-MID-009 Ketu 7.41"
+  ⚠ XX-1990-LAT64-003 ayanamsa 8.26"
+  ⚠ XX-1990-LAT64-003 ascendant 14.97"
+  ⚠ XX-1990-LAT64-003 Sun 28.49"
+  ⚠ XX-1990-LAT64-003 Moon 9.13"
+  ⚠ XX-1990-LAT64-003 Mercury 58.27"
+  ⚠ XX-1990-LAT64-003 Venus 42.59"
+  ⚠ XX-1990-LAT64-003 Mars 2.96"
+  ⚠ XX-1990-LAT64-003 Jupiter 191.22"
+  ⚠ XX-1990-LAT64-003 Saturn 52.51"
+  ⚠ XX-1990-LAT64-003 Rahu 8.11"
+  ⚠ XX-1990-LAT64-003 Ketu 8.11"
+  ⚠ XX-1990-LAT0-010 ayanamsa 8.24"
+  ⚠ XX-1990-LAT0-010 ascendant 10.08"
+  ⚠ XX-1990-LAT0-010 Sun 33.89"
+  ⚠ XX-1990-LAT0-010 Moon 5.89"
+  ⚠ XX-1990-LAT0-010 Mercury 8.20"
+  ⚠ XX-1990-LAT0-010 Venus 37.87"
+  ⚠ XX-1990-LAT0-010 Mars 61.03"
+  ⚠ XX-1990-LAT0-010 Jupiter 332.14"
+  ⚠ XX-1990-LAT0-010 Saturn 54.85"
+  ⚠ XX-1990-LAT0-010 Rahu 8.10"
+  ⚠ XX-1990-LAT0-010 Ketu 8.10"
+  ⚠ IN-2000-IND-011 ayanamsa 8.57"
+  ⚠ IN-2000-IND-011 ascendant 5.21"
+  ⚠ IN-2000-IND-011 Sun 47.10"
+  ⚠ IN-2000-IND-011 Moon 5.63"
+  ⚠ IN-2000-IND-011 Mercury 15.60"
+  ⚠ IN-2000-IND-011 Venus 51.52"
+  ⚠ IN-2000-IND-011 Mars 57.19"
+  ⚠ IN-2000-IND-011 Jupiter 237.24"
+  ⚠ IN-2000-IND-011 Saturn 632.42"
+  ⚠ IN-2000-IND-011 Rahu 8.44"
+  ⚠ IN-2000-IND-011 Ketu 8.44"
+  ⚠ IN-1990-JYP-012 ayanamsa 8.26"
+  ⚠ IN-1990-JYP-012 ascendant 4.40"
+  ⚠ IN-1990-JYP-012 Sun 13.48"
+  ⚠ IN-1990-JYP-012 Moon 9.23"
+  ⚠ IN-1990-JYP-012 Mercury 8.48"
+  ⚠ IN-1990-JYP-012 Venus 37.59"
+  ⚠ IN-1990-JYP-012 Mars 8.07"
+  ⚠ IN-1990-JYP-012 Jupiter 132.99"
+ [32m✓[39m src/tests/accuracy/corpusPhase1.test.ts[2m > [22maccuracy corpus — 15 charts[2m > [22msuite health[2m > [22mruns all 15 charts without throwing[32m 119[2mms[22m[39m
+ [32m✓[39m src/tests/accuracy/corpusPhase1.test.ts[2m > [22maccuracy corpus — 15 charts[2m > [22msuite health[2m > [22mno Tier B failures (rashi, nakshatra, pada) against golden files[32m 54[2mms[22m[39m
+[90mstdout[2m | src/tests/accuracy/corpusPhase1.test.ts[2m > [22m[2maccuracy corpus — 15 charts[2m > [22m[2madversarial checks[2m > [22m[2mwartime 1943 Mumbai differs from flat-IST by 15–18° ascendant
+[22m[39m  1943 wartime vs IST ascendant delta: 16.4907°
+
+[90mstdout[2m | src/tests/accuracy/corpusPhase1.test.ts[2m > [22m[2maccuracy corpus — 15 charts[2m > [22m[2madversarial checks[2m > [22m[2mequatorial chart (lat=0) produces a non-degenerate ascendant
+[22m[39m  Equatorial ascendant: 248.4015° (Sagittarius)
+
+[90mstdout[2m | src/tests/accuracy/corpusPhase1.test.ts[2m > [22m[2maccuracy corpus — 15 charts[2m > [22m[2madversarial checks[2m > [22m[2mhigh-latitude chart (lat=64) produces an ascendant in a valid rashi
+[22m[39m  Lat64 ascendant: 185.2078° (Libra)
+
+[90mstdout[2m | src/tests/accuracy/corpusPhase1.test.ts[2m > [22m[2maccuracy corpus — 15 charts[2m > [22m[2madversarial checks[2m > [22m[2mLahiri ayanamsa increases over time (1935 < 1970 < 2010)
+[22m[39m  Ayanamsa progression: 22.9534° → 23.4424° → 23.9971°
+
+ [32m✓[39m src/tests/accuracy/corpusPhase1.test.ts[2m > [22maccuracy corpus — 15 charts[2m > [22msuite health[2m > [22mTier A drift stays below the user-visible threshold[32m 50[2mms[22m[39m
+ [32m✓[39m src/tests/accuracy/corpusPhase1.test.ts[2m > [22maccuracy corpus — 15 charts[2m > [22madversarial checks[2m > [22mwartime 1943 Mumbai differs from flat-IST by 15–18° ascendant[32m 3[2mms[22m[39m
+ [32m✓[39m src/tests/accuracy/corpusPhase1.test.ts[2m > [22maccuracy corpus — 15 charts[2m > [22madversarial checks[2m > [22mwartime period boundary: 1945-10-14 uses +6:30, 1945-10-15 uses +5:30[32m 2[2mms[22m[39m
+ [32m✓[39m src/tests/accuracy/corpusPhase1.test.ts[2m > [22maccuracy corpus — 15 charts[2m > [22madversarial checks[2m > [22mwartime period 1: 1941-12-01 Delhi uses +6:30[32m 1[2mms[22m[39m
+ [32m✓[39m src/tests/accuracy/corpusPhase1.test.ts[2m > [22maccuracy corpus — 15 charts[2m > [22madversarial checks[2m > [22mIST gap 1942-06-01 uses +5:30, not wartime[32m 1[2mms[22m[39m
+ [32m✓[39m src/tests/accuracy/corpusPhase1.test.ts[2m > [22maccuracy corpus — 15 charts[2m > [22madversarial checks[2m > [22mleap year 1936-02-29 is a valid date and produces a valid chart[32m 1[2mms[22m[39m
+ [32m✓[39m src/tests/accuracy/corpusPhase1.test.ts[2m > [22maccuracy corpus — 15 charts[2m > [22madversarial checks[2m > [22mequatorial chart (lat=0) produces a non-degenerate ascendant[32m 3[2mms[22m[39m
+ [32m✓[39m src/tests/accuracy/corpusPhase1.test.ts[2m > [22maccuracy corpus — 15 charts[2m > [22madversarial checks[2m > [22mhigh-latitude chart (lat=64) produces an ascendant in a valid rashi[32m 3[2mms[22m[39m
+ [32m✓[39m src/tests/accuracy/corpusPhase1.test.ts[2m > [22maccuracy corpus — 15 charts[2m > [22madversarial checks[2m > [22mmidnight chart 1960-01-01 00:00 IST does not produce a NaN Julian Day[32m 1[2mms[22m[39m
+ [32m✓[39m src/tests/accuracy/corpusPhase1.test.ts[2m > [22maccuracy corpus — 15 charts[2m > [22madversarial checks[2m > [22mLahiri ayanamsa increases over time (1935 < 1970 < 2010)[32m 3[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m12 passed[39m[22m[90m (12)[39m
+[2m   Start at [22m 12:09:23
+[2m   Duration [22m 3.83s[2m (transform 253ms, setup 523ms, import 223ms, tests 253ms, environment 2.19s)[22m
+
+  ⚠ IN-1990-JYP-012 Saturn 29.86"
+  ⚠ IN-1990-JYP-012 Rahu 8.12"
+  ⚠ IN-1990-JYP-012 Ketu 8.12"
+  ⚠ XX-1970-LON-013 ayanamsa 7.79"
+  ⚠ XX-1970-LON-013 ascendant 10.21"
+  ⚠ XX-1970-LON-013 Sun 43.25"
+  ⚠ XX-1970-LON-013 Moon 4.18"
+  ⚠ XX-1970-LON-013 Mercury 60.64"
+  ⚠ XX-1970-LON-013 Venus 42.77"
+  ⚠ XX-1970-LON-013 Mars 27.71"
+  ⚠ XX-1970-LON-013 Jupiter 60.17"
+  ⚠ XX-1970-LON-013 Saturn 465.75"
+  ⚠ XX-1970-LON-013 Rahu 7.61"
+  ⚠ XX-1970-LON-013 Ketu 7.61"
+  ⚠ XX-2010-NYC-014 ayanamsa 8.89"
+  ⚠ XX-2010-NYC-014 ascendant 2.81"
+  ⚠ XX-2010-NYC-014 Sun 44.57"
+  ⚠ XX-2010-NYC-014 Moon 7.98"
+  ⚠ XX-2010-NYC-014 Mercury 70.39"
+  ⚠ XX-2010-NYC-014 Venus 65.79"
+  ⚠ XX-2010-NYC-014 Mars 26.24"
+  ⚠ XX-2010-NYC-014 Jupiter 49.13"
+  ⚠ XX-2010-NYC-014 Saturn 549.55"
+  ⚠ XX-2010-NYC-014 Rahu 8.78"
+  ⚠ XX-2010-NYC-014 Ketu 8.78"
+  ⚠ IN-1936-LEP-015 ayanamsa 7.40"
+  ⚠ IN-1936-LEP-015 ascendant 8.66"
+  ⚠ IN-1936-LEP-015 Sun 5.20"
+  ⚠ IN-1936-LEP-015 Moon 9.36"
+  ⚠ IN-1936-LEP-015 Mercury 10.35"
+  ⚠ IN-1936-LEP-015 Venus 27.66"
+  ⚠ IN-1936-LEP-015 Mars 48.37"
+  ⚠ IN-1936-LEP-015 Jupiter 14.23"
+  ⚠ IN-1936-LEP-015 Saturn 546.84"
+  ⚠ IN-1936-LEP-015 Rahu 7.15"
+  ⚠ IN-1936-LEP-015 Ketu 7.15"
+
+
+EXITCODE=0
