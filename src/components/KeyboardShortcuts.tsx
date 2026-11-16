@@ -139,7 +139,11 @@ export const KeyboardShortcuts = ({
     },
   ];
 
-  // Initialize shortcuts
+  // Initialize shortcuts — `defaultShortcuts` is a render-time constant and
+  // `setupKeyboardListeners` reads current lang at handler registration time.
+  // Both are intentionally excluded: including them would re-run the effect on
+  // every render and repeatedly re-register keyboard listeners.
+   
   useEffect(() => {
     setActiveShortcuts(defaultShortcuts);
     setupKeyboardListeners();

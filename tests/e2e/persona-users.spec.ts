@@ -514,6 +514,44 @@ test.describe('Persona — advanced tier', () => {
     await shot(page, 'advanced-dropdown-collision');
   });
 
+  test('advanced: submit click succeeds even if dropdown is open (no force:true)', async ({ page, diag }) => {
+    // Reviewer scenario: user fills the form and clicks Calculate directly,
+    // without first picking a geocoder suggestion. The dropdown must NOT
+    // intercept the click — either it is positioned below the button (in-flow)
+    // or it has already closed by the time the user clicks.
+    await seedPersona(page);
+    await page.goto('/horoscope', { waitUntil: 'domcontentloaded', timeout: 60_000 });
+    await expect(page.locator(DOB)).toBeVisible({ timeout: 30_000 });
+
+    await page.locator(DOB).fill(PERSONA.dateDMY);
+    await page.locator(TOB).fill(PERSONA.time);
+    await page.locator(POB).fill('Udaipur');
+
+    // Wait for the geocoder listbox to appear so we know it IS open.
+    const listbox = page.locator(LISTBOX);
+    await expect(listbox).toBeVisible({ timeout: 15_000 });
+
+    // Verify the submit button is NOT covered: its bounding box must start
+    // below the bottom edge of the listbox.
+    const submit = page.getByRole('button', { name: SUBMIT });
+    const lb = await listbox.boundingBox();
+    const sb = await submit.boundingBox();
+    expect(lb, 'listbox has no bounding box').not.toBeNull();
+    expect(sb, 'submit has no bounding box').not.toBeNull();
+    expect(
+      lb!.y + lb!.height,
+      `Listbox bottom (${lb!.y + lb!.height}) must be ≤ submit top (${sb!.y}) — dropdown is overlapping the button`,
+    ).toBeLessThanOrEqual(sb!.y + 1);
+
+    // Click submit directly — no suggestion selected, dropdown still open.
+    // Actionability check: Playwright verifies the element is not covered.
+    await submit.click(); // throws if anything intercepts the pointer
+    await expect(page.getByText(HOROSCOPE_RESULT).first()).toBeVisible({ timeout: 45_000 });
+
+    expect(diag.pageErrors).toEqual([]);
+    await shot(page, 'advanced-dropdown-open-direct-submit');
+  });
+
   test('advanced: keyboard-only selection and submission', async ({ page, diag }) => {
     await seedPersona(page);
     await page.goto('/horoscope', { waitUntil: 'domcontentloaded', timeout: 60_000 });

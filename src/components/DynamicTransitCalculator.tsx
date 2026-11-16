@@ -68,11 +68,8 @@ export function DynamicTransitCalculator({
     }
   }, []);
 
-  // Load today's transits on mount
-  useEffect(() => {
-    loadTodayTransits();
-  }, [moonRashiIndex]);
-
+  // Load today's transits on mount — defined before the effect that calls it
+  // so it can be listed as a stable dependency.
   const loadTodayTransits = React.useCallback(async () => {
     setLoading(true);
     setError(null);
@@ -87,7 +84,12 @@ export function DynamicTransitCalculator({
     } finally {
       setLoading(false);
     }
+   
   }, [moonRashiIndex]);
+
+  useEffect(() => {
+    loadTodayTransits();
+  }, [loadTodayTransits]);
 
   const handleDateChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedDate(new Date(e.target.value));

@@ -218,28 +218,6 @@ const Index = () => {
     return () => performanceMonitor.stopMonitoring();
   }, []);
 
-  // Auto-load last profile
-  useEffect(() => {
-    if (!autoLoadAttempted && !rawBirthData && shouldAutoLoad()) {
-      const last = getLastUsedProfile();
-      if (last) {
-        setAutoLoadAttempted(true);
-        handleSubmit({
-          date: last.date,
-          time: last.time,
-          location: last.location,
-          name: last.name || ""
-        });
-        toast({
-          title: isHi ? "✓ स्वागत वापस!" : "✓ Welcome Back!",
-          description: isHi
-            ? `अंतिम प्रोफाईल: ${last.name || last.location}`
-            : `Last profile: ${last.name || last.location}`,
-        });
-      }
-    }
-  }, [autoLoadAttempted, rawBirthData]);
-
   const handleSubmit = useCallback(async (data: { date: string; time: string; location: string; name?: string }) => {
     const coords = parseCoordinates(data.location);
     // Publish the resolved historical birth UTC offset (covers the auto-load
@@ -292,6 +270,28 @@ const Index = () => {
     toast({ title: isHi ? "✓ कुंडली तैयार है" : "✓ Chart Calculated Successfully" });
   }, [transitDate, isHi, toast]);
 
+  // Auto-load last profile
+  useEffect(() => {
+    if (!autoLoadAttempted && !rawBirthData && shouldAutoLoad()) {
+      const last = getLastUsedProfile();
+      if (last) {
+        setAutoLoadAttempted(true);
+        handleSubmit({
+          date: last.date,
+          time: last.time,
+          location: last.location,
+          name: last.name || ""
+        });
+        toast({
+          title: isHi ? "✓ स्वागत वापस!" : "✓ Welcome Back!",
+          description: isHi
+            ? `अंतिम प्रोफाईल: ${last.name || last.location}`
+            : `Last profile: ${last.name || last.location}`,
+        });
+      }
+    }
+  }, [autoLoadAttempted, rawBirthData, handleSubmit, isHi, toast]);
+
   const handleReset = () => {
     setResults(null); setRawBirthData(null); setBirthInput(null);
     setPastReadings([]); setActiveTab("overview");
@@ -314,7 +314,7 @@ const Index = () => {
 
         {/* Hero Section (Auspicious Design - Enhanced with Hindi Bill Note Colors) */}
         {!rawBirthData && (
-          <section className="relative overflow-hidden border-b border-[hsl(var(--auspicious-accent)/0.5)] bg-gradient-to-br from-[#8B0000] via-[#A52A2A] via-[#C05000] to-[#8B4513] pt-16 pb-24">
+          <section className="vedic-hero relative overflow-hidden border-b border-[var(--vedic-saffron)]/30 pt-16 pb-24">
             {/* Sacred mandala background pattern */}
             <div className="absolute inset-0 opacity-20 pointer-events-none" 
                  style={{ 
@@ -343,7 +343,7 @@ const Index = () => {
                 </div>
                 <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 leading-tight drop-shadow-lg">
                   {isHi ? "ईश्वरीय बुद्धि," : "Divine Intelligence,"} <br />
-                  <span className="text-[hsl(var(--auspicious-accent))] italic flex items-center justify-center gap-3">
+                  <span className="vedic-hero-accent italic flex items-center justify-center gap-3">
                     <span className="text-xl opacity-50">✦</span>
                     {isHi ? "प्राचीन ज्ञान" : "Ancient Wisdom"}
                     <span className="text-xl opacity-50">✦</span>
@@ -358,8 +358,8 @@ const Index = () => {
 
               <div className="grid md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
                 {/* Prashna AI Card - Vermilion Theme */}
-                <div className="auspicious-card group hover:scale-[1.02] transition-all cursor-default bg-white/95 backdrop-blur-sm border-2 border-[hsl(var(--auspicious-vermilion)/0.3)]">
-                  <div className="auspicious-header bg-gradient-to-r from-[#8B0000] via-[#C05000] to-[#E34234]">
+                <div className="auspicious-card vedic-card-premium group hover:scale-[1.02] transition-all cursor-default bg-white/95 backdrop-blur-sm border-2 border-[#B8614D]/30">
+                  <div className="auspicious-header bg-gradient-to-r from-[#8E4636] via-[var(--vedic-terracotta)] to-[#C46A52]">
                     <div className="flex items-center gap-2">
                       <MessageSquareQuote className="h-5 w-5" />
                       <span className="font-bold tracking-wide">{isHi ? "प्रश्न एआई" : "Prashna AI"}</span>
@@ -373,10 +373,10 @@ const Index = () => {
                         : "Ask any question and receive instant horary analysis based on classical texts."}
                     </p>
                     <div className="flex gap-3">
-                      <Button asChild className="flex-1 bg-gradient-to-r from-[#E65100] to-[#E34234] hover:from-[#D84315] hover:to-[#C73E2E] shadow-lg shadow-[hsl(var(--auspicious-vermilion)/0.3)] border-b-4 border-[#8B4513] transition-all active:border-b-0 active:translate-y-1">
+                      <Button asChild className="flex-1 bg-gradient-to-r from-[var(--vedic-terracotta)] to-[#C46A52] hover:from-[#A34F3D] hover:to-[var(--vedic-terracotta)] shadow-lg shadow-[#B8614D]/30 border-b-4 border-[#7A3B2E] transition-all active:border-b-0 active:translate-y-1">
                         <Link to="/question">{isHi ? "अभी पूछें" : "Ask Now"}</Link>
                       </Button>
-                      <Button asChild variant="outline" className="flex-1 border-[hsl(var(--auspicious-gold))] text-[#8B4513] hover:bg-[hsl(var(--auspicious-gold)/0.1)]">
+                      <Button asChild variant="outline" className="flex-1 border-[var(--vedic-saffron)] text-[#8E4636] hover:bg-[var(--vedic-saffron)]/10">
                         <Link to="/prashna/history">{isHi ? "इतिहास" : "History"}</Link>
                       </Button>
                     </div>
@@ -384,8 +384,8 @@ const Index = () => {
                 </div>
 
                 {/* Eternal Knowledge Card - Emerald Theme */}
-                <div className="auspicious-card group hover:scale-[1.02] transition-all cursor-default bg-white/95 backdrop-blur-sm border-2 border-[hsl(var(--auspicious-emerald)/0.3)]">
-                  <div className="auspicious-header bg-gradient-to-r from-[#2E8B57] via-[#3D9970] to-[#2ECC71]">
+                <div className="auspicious-card vedic-card-premium group hover:scale-[1.02] transition-all cursor-default bg-white/95 backdrop-blur-sm border-2 border-[var(--vedic-violet)]/30">
+                  <div className="auspicious-header bg-gradient-to-r from-[#5B4A8A] via-[var(--vedic-violet)] to-[#A98BD6]">
                     <div className="flex items-center gap-2">
                       <BookOpen className="h-5 w-5" />
                       <span className="font-bold tracking-wide">{isHi ? "शाश्वत ज्ञान" : "Eternal Knowledge"}</span>
@@ -398,7 +398,7 @@ const Index = () => {
                         ? "हमारे एआई को शक्ति प्रदान करने वाले शास्त्रीय वैदिक ग्रंथों के विशाल पुस्तकालय तक पहुंचें।"
                         : "Access a vast, structured library of classical Vedic texts powering our AI."}
                     </p>
-                    <Button asChild className="w-full bg-gradient-to-r from-[#2E8B57] to-[#2ECC71] hover:from-[#276749] hover:to-[#27AE60] shadow-lg shadow-[hsl(var(--auspicious-emerald)/0.3)] border-b-4 border-[#1E5F3E] transition-all active:border-b-0 active:translate-y-1 text-white">
+                    <Button asChild className="w-full bg-gradient-to-r from-[#5B4A8A] to-[var(--vedic-violet)] hover:from-[#4A3B75] hover:to-[#8F70C8] shadow-lg shadow-[var(--vedic-violet)]/30 border-b-4 border-[#463a6e] transition-all active:border-b-0 active:translate-y-1 text-white">
                       <Link to="/knowledge">{isHi ? "पुस्तकालय" : "Browse Library"}</Link>
                     </Button>
                   </div>

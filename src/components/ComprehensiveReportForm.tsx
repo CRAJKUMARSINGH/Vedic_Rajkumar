@@ -587,8 +587,8 @@ export const ComprehensiveReportForm: React.FC<ComprehensiveReportProps> = ({ is
     relationship: 'Self',
   }), [name, birthDate, t.name]);
 
-  const generatedAt = useMemo(() => nowISO(), [reports]);
-  const reportId = useMemo(() => buildReportId('C'), [reports]);
+  const generatedAt = useMemo(() => nowISO(), []); // timestamp fixed at mount — not report-dependent
+  const reportId = useMemo(() => buildReportId('C'), []); // ID fixed at mount — not report-dependent
 
   const hasReports = Object.keys(reports).length > 0;
 

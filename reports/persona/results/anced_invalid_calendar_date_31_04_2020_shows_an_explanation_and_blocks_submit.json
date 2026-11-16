@@ -1,7 +1,7 @@
 {
   "title": "persona-users.spec.ts › Persona — advanced tier › advanced: invalid calendar date (31/04/2020) shows an explanation and blocks submit",
   "status": "passed",
-  "durationMs": 3722,
+  "durationMs": 8442,
   "errors": [],
   "pageErrors": [],
   "consoleErrors": [],

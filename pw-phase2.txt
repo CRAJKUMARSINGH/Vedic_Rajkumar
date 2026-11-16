@@ -1,0 +1,13 @@
+
+Running 7 tests using 1 worker
+
+  ok 1 [chromium-preview] › tests\e2e\persona-users.spec.ts:391:3 › Persona — advanced tier › advanced: leap-year dates are accepted, impossible dates rejected (13.8s)
+  ok 2 [chromium-preview] › tests\e2e\persona-users.spec.ts:412:3 › Persona — advanced tier › advanced: invalid calendar date (31/04/2020) shows an explanation and blocks submit (9.5s)
+  ok 3 [chromium-preview] › tests\e2e\persona-users.spec.ts:431:3 › Persona — advanced tier › advanced: midnight 00:00 is valid, 24:00 is rejected (4.5s)
+  ok 4 [chromium-preview] › tests\e2e\persona-users.spec.ts:486:3 › Persona — advanced tier › advanced: location dropdown cannot overlap the submit button (6.7s)
+  ok 5 [chromium-preview] › tests\e2e\persona-users.spec.ts:517:3 › Persona — advanced tier › advanced: submit click succeeds even if dropdown is open (no force:true) (6.5s)
+  ok 6 [chromium-preview] › tests\e2e\persona-users.spec.ts:555:3 › Persona — advanced tier › advanced: keyboard-only selection and submission (9.9s)
+  ok 7 [chromium-preview] › tests\e2e\persona-users.spec.ts:601:3 › Persona — advanced tier › advanced: privacy settings work without Clerk (demo mode) (6.3s)
+
+  7 passed (1.4m)
+EXIT=0

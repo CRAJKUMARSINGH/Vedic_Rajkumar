@@ -125,6 +125,18 @@
     --sacred-dot: hsl(var(--auspicious-accent) / 0.3);
     --sacred-line: hsl(var(--auspicious-secondary) / 0.2);
     --mandala-stroke: hsl(var(--auspicious-accent) / 0.15);
+
+    /* Vedic premium palette — landing/hero surfaces.
+       Complements (does not replace) the auspicious-* theme tokens. */
+    --vedic-bg: #fff8eb;
+    --vedic-ink: #191631;
+    --vedic-surface: #292344;
+    --vedic-saffron: #e7b65a;
+    --vedic-violet: #8f70c8;
+    --vedic-terracotta: #b8614d;
+    --vedic-white: #ffffff;
+    --radius-card: 18px;
+    --radius-button: 10px;
   }
 
   .dark {
@@ -291,6 +303,35 @@
       hsl(var(--auspicious-accent)),
       transparent
     );
+  }
+
+  /* Vedic premium hero — deep ink→surface gradient with saffron accent line */
+  .vedic-hero {
+    background:
+      radial-gradient(
+        ellipse at 15% 10%,
+        rgba(231, 182, 90, 0.14) 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse at 85% 90%,
+        rgba(143, 112, 200, 0.16) 0%,
+        transparent 55%
+      ),
+      linear-gradient(
+        135deg,
+        var(--vedic-ink) 0%,
+        var(--vedic-surface) 55%,
+        #3a2e63 100%
+      );
+  }
+
+  .vedic-hero-accent {
+    color: var(--vedic-saffron);
+  }
+
+  .vedic-card-premium {
+    border-radius: var(--radius-card);
   }
 
   /* Favorable/Unfavorable/Mixed indicators */

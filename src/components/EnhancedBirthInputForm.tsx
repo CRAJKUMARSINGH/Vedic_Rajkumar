@@ -234,7 +234,12 @@ export default function EnhancedBirthInputForm({
     return () => document.removeEventListener("mousedown", h);
   }, []);
 
-  // Auto-save
+  // Auto-save — `handleAutoSave` is intentionally excluded from deps.
+  // It is an async function that closes over `date`, `time`, `location` and
+  // `showAutoSave`, all of which are already listed. Including `handleAutoSave`
+  // itself would create an infinite loop because it updates state that triggers
+  // a re-render, which recreates the function, which would re-fire the effect.
+   
   useEffect(() => {
     if (!showAutoSave || !date || !time || !location) return;
     if (autoSaveTimerRef.current) clearTimeout(autoSaveTimerRef.current);

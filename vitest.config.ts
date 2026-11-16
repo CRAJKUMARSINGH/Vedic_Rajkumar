@@ -17,7 +17,10 @@ export default defineConfig({
     // overwrite the independent Swiss Ephemeris golden and make the accuracy
     // gate circular. It is a manual tool — see its own header.
     exclude: [...configDefaults.exclude, '**/src/tests/accuracy/generateGolden.test.ts'],
-    testTimeout: 10000,
+    // Heavy ephemeris tests (e.g. 30-day transit scans) exceed 10s on
+    // memory-constrained hosts; 60s prevents flaky timeouts without hiding
+    // real hangs (vitest still fails genuinely stuck tests).
+    testTimeout: 60000,
     // Cap fork workers: the suite loads the WASM ephemeris per worker and the
     // default (one per CPU core) exhausts memory on developer machines, causing
     // "Timeout waiting for worker to respond" / ENOENT worker crashes.
