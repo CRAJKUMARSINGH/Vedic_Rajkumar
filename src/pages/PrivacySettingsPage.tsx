@@ -49,6 +49,8 @@ import { SEO } from '@/components/SEO';
 
 import { useConsent } from '@/hooks/useConsent';
 import { useAuthenticatedSupabase } from '@/hooks/useAuthenticatedSupabase';
+import { isClerkConfigured } from '@/components/ClerkGate';
+import { cn } from '@/lib/utils';
 import { exportAndDownloadUserData, type ExportedUserData } from '@/services/dataExportService';
 import { deleteUserData, type DeleteResult } from '@/services/dataDeleteService';
 
@@ -152,8 +154,12 @@ function ConsentSection() {
 }
 
 // ─── Section 2: Export user data ─────────────────────────────────────────────
+//
+// Split into a demo-safe wrapper (never calls a Clerk hook) and a Clerk-backed
+// body. `useSession` / `useAuthenticatedSupabase` are only invoked inside
+// <ExportSectionAuthed>, which mounts only when Clerk is configured.
 
-function ExportSection() {
+function ExportSectionAuthed() {
   const supabase = useAuthenticatedSupabase();
   const { session } = useSession();
   const isSignedIn = !!session?.user;
@@ -273,10 +279,12 @@ function ExportSection() {
 }
 
 // ─── Section 3: Delete user data ─────────────────────────────────────────────
+//
+// Same demo-safe split as ExportSection.
 
 const DELETE_CONFIRM_TEXT = 'DELETE';
 
-function DeleteSection() {
+function DeleteSectionAuthed() {
   const supabase = useAuthenticatedSupabase();
   const { session } = useSession();
   const isSignedIn = !!session?.user;
@@ -464,6 +472,72 @@ function DeleteSection() {
       </CardContent>
     </Card>
   );
+}
+
+// ─── Demo-mode cloud sections ────────────────────────────────────────────────
+//
+// When VITE_CLERK_PUBLISHABLE_KEY is unset, Providers.tsx deliberately skips
+// <ClerkProvider>. Any Clerk hook then throws, so the export/delete sections
+// must not mount their Clerk-backed bodies. This presentational card explains
+// that cloud export and deletion require authentication, and nothing is
+// simulated — no export, no deletion, no fake success state.
+
+function CloudUnavailableCard({ kind }: { kind: 'export' | 'delete' }) {
+  const isDelete = kind === 'delete';
+  return (
+    <Card
+      className={cn(
+        isDelete
+          ? 'border-rose-500/30 bg-gradient-to-b from-rose-500/[0.04] to-transparent'
+          : 'border-amber-500/20',
+      )}
+    >
+      <CardHeader>
+        <div className="flex items-center gap-2">
+          {isDelete ? (
+            <Trash2 className="w-5 h-5 text-rose-400" aria-hidden />
+          ) : (
+            <Download className="w-5 h-5 text-amber-400" aria-hidden />
+          )}
+          <CardTitle className={cn('text-lg', isDelete && 'text-rose-100')}>
+            {isDelete ? 'Delete Your Data · अपना डेटा हटाएं' : 'Export Your Data · अपना डेटा निर्यात करें'}
+          </CardTitle>
+        </div>
+        <CardDescription className="mt-1 text-sm leading-relaxed">
+          {isDelete
+            ? 'Permanently remove every record the app has stored on your behalf.'
+            : 'Request a JSON file with everything the app has stored on your behalf.'}
+          <br />
+          <span className={isDelete ? 'text-rose-200/70' : 'text-amber-200/70'}>
+            {isDelete
+              ? 'डेटा हटाने के लिए साइन-इन आवश्यक है।'
+              : 'संग्रहीत डेटा निर्यात करने के लिए साइन-इन आवश्यक है।'}
+          </span>
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Alert variant="default" className="border-amber-500/40 bg-amber-500/10">
+          <AlertTriangle className="w-4 h-4 text-amber-400" />
+          <AlertTitle className="text-amber-200">Sign-in unavailable · साइन-इन उपलब्ध नहीं</AlertTitle>
+          <AlertDescription className="text-amber-200/80 text-xs">
+            {isDelete ? 'Cloud deletion' : 'Cloud export'} requires a signed-in account, but authentication is
+            not configured in this environment (VITE_CLERK_PUBLISHABLE_KEY is unset), so this feature is
+            unavailable. Nothing has been exported or deleted.
+          </AlertDescription>
+        </Alert>
+      </CardContent>
+    </Card>
+  );
+}
+
+function ExportSection() {
+  if (!isClerkConfigured) return <CloudUnavailableCard kind="export" />;
+  return <ExportSectionAuthed />;
+}
+
+function DeleteSection() {
+  if (!isClerkConfigured) return <CloudUnavailableCard kind="delete" />;
+  return <DeleteSectionAuthed />;
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────

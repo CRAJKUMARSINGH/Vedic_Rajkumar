@@ -14,6 +14,13 @@ import { Calendar, Clock, MapPin, Save, History, CheckCircle, AlertCircle } from
 import { getUserProfile, addBirthDetails, getLastUsedProfile } from "@/services/userProfileService";
 import { searchLocation, formatCoordinates, type LocationResult } from "@/services/geocodingService";
 import { resolveBirthTimezone } from "@/lib/birthTimezone";
+import {
+  parseDdMmYyyy,
+  parseHhMm,
+  isFutureDate,
+  todayIsoLocal,
+  type DateParseReason,
+} from "@/lib/dateValidation";
 import { setBirthTimezone } from "@/hooks/use-birth-timezone";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
@@ -28,29 +35,25 @@ interface EnhancedBirthInputFormProps {
   showProgress?: boolean;
 }
 
-// ── DD/MM/YYYY helpers ────────────────────────────────────────────────────────
+// ── Date helpers (shared strict parser in @/lib/dateValidation) ───────────────
 /** Convert YYYY-MM-DD → DD/MM/YYYY for display */
 function toDisplay(iso: string): string {
   if (!iso || !iso.includes("-")) return iso;
   const [y, m, d] = iso.split("-");
   return `${d}/${m}/${y}`;
 }
-/** Convert DD/MM/YYYY → YYYY-MM-DD for internal state */
-function toISO(dmy: string): string {
-  if (!dmy) return "";
-  // Already ISO?
-  if (/^\d{4}-\d{2}-\d{2}$/.test(dmy)) return dmy;
-  const parts = dmy.replace(/[.-]/g, "/").split("/");
-  if (parts.length === 3 && parts[2].length === 4) {
-    return `${parts[2]}-${parts[1].padStart(2,"0")}-${parts[0].padStart(2,"0")}`;
+/** Localise a strict-parser failure reason for the user. */
+function localizeDateError(reason: DateParseReason | null, lang: "en" | "hi"): string {
+  const hi = lang === "hi";
+  switch (reason) {
+    case "impossible":
+      return hi ? "अमान्य कैलेंडर तिथि" : "Not a real calendar date";
+    case "out-of-range":
+      return hi ? "तिथि समर्थित सीमा से बाहर है" : "Date is outside the supported range";
+    case "format":
+    default:
+      return hi ? "प्रारूप DD/MM/YYYY होना चाहिए" : "Use DD/MM/YYYY";
   }
-  return dmy;
-}
-/** Validate a YYYY-MM-DD string */
-function isValidISO(iso: string): boolean {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return false;
-  const d = new Date(iso + "T00:00:00");
-  return !isNaN(d.getTime()) && d < new Date();
 }
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -132,6 +135,7 @@ export default function EnhancedBirthInputForm({
   const [selectedCoords, setSelectedCoords] = useState<{ lat: number; lon: number } | null>(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const [savedDetails, setSavedDetails] = useState<Array<{ date: string; time: string; location: string; name?: string }>>([]);
   const [isAutoSaving, setIsAutoSaving] = useState(false);
   const [lastSaveTime, setLastSaveTime] = useState<Date | null>(null);
@@ -144,12 +148,19 @@ export default function EnhancedBirthInputForm({
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const autoSaveTimerRef = useRef<NodeJS.Timeout | null>(null);
+  // Monotonic id so a late geocoding response cannot overwrite/reopen a newer one.
+  const geocodeRequestIdRef = useRef(0);
+  // Set right before a selection mutates `location`, so the debounce effect does
+  // not immediately re-search the selected place and reopen the suggestions.
+  const suppressNextSearchRef = useRef(false);
   const { toast } = useToast();
   const t = labels[lang];
 
-  // Sync display whenever internal date changes
+  // Sync display when the internal ISO date is set programmatically (saved
+  // profile / quick action). When `date` is cleared because the user typed an
+  // invalid value, we deliberately keep `dateDisplay` so they can fix it.
   useEffect(() => {
-    setDateDisplay(date ? toDisplay(date) : "");
+    if (date) setDateDisplay(toDisplay(date));
   }, [date]);
 
   // Load saved profiles
@@ -180,15 +191,35 @@ export default function EnhancedBirthInputForm({
     }
   }, []);
 
-  // Location search debounce
+  // Location search debounce (with stale-response guard)
   useEffect(() => {
-    if (location.length < 2) { setLocationResults([]); setShowDropdown(false); return; }
+    // A selection just set `location`; don't re-search the chosen place.
+    if (suppressNextSearchRef.current) {
+      suppressNextSearchRef.current = false;
+      setShowDropdown(false);
+      setActiveIndex(-1);
+      return;
+    }
+    if (location.length < 2) {
+      setLocationResults([]);
+      setShowDropdown(false);
+      setActiveIndex(-1);
+      return;
+    }
+    const requestId = ++geocodeRequestIdRef.current;
     const timer = setTimeout(async () => {
       setIsSearching(true);
-      const results = await searchLocation(location);
-      setLocationResults(results);
-      setShowDropdown(results.length > 0);
-      setIsSearching(false);
+      try {
+        const results = await searchLocation(location);
+        // Ignore a response that has been superseded by a newer keystroke
+        // (prevents a slow geocode from reopening a closed dropdown).
+        if (requestId !== geocodeRequestIdRef.current) return;
+        setLocationResults(results);
+        setShowDropdown(results.length > 0);
+        setActiveIndex(-1);
+      } finally {
+        if (requestId === geocodeRequestIdRef.current) setIsSearching(false);
+      }
     }, 500);
     return () => clearTimeout(timer);
   }, [location]);
@@ -211,23 +242,31 @@ export default function EnhancedBirthInputForm({
     return () => { if (autoSaveTimerRef.current) clearTimeout(autoSaveTimerRef.current); };
   }, [date, time, location, showAutoSave]);
 
-  // Validation
+  // Validation — driven by the raw display value so an impossible date keeps a
+  // visible explanation instead of being silently normalised away.
   useEffect(() => {
+    const parsedDate = parseDdMmYyyy(dateDisplay);
+    const futureDate = parsedDate.ok && parsedDate.iso ? isFutureDate(parsedDate.iso) : false;
+    let dateMessage = "";
+    if (dateDisplay) {
+      if (!parsedDate.ok) dateMessage = localizeDateError(parsedDate.reason, lang);
+      else if (futureDate)
+        dateMessage = lang === "hi" ? "जन्म तिथि भविष्य की नहीं हो सकती" : "Birth date cannot be in the future";
+    }
+
+    const parsedTime = parseHhMm(time);
+    const timeMessage =
+      time && !parsedTime.ok ? (lang === "hi" ? "अमान्य समय (HH:MM)" : "Invalid time (HH:MM)") : "";
+
     setValidation({
-      date: {
-        isValid: isValidISO(date),
-        message: date && !isValidISO(date) ? (lang === "hi" ? "अमान्य तिथि (DD/MM/YYYY)" : "Invalid date (DD/MM/YYYY)") : "",
-      },
-      time: {
-        isValid: /^([01]?\d|2[0-3]):[0-5]\d$/.test(time),
-        message: time && !/^([01]?\d|2[0-3]):[0-5]\d$/.test(time) ? (lang === "hi" ? "अमान्य समय" : "Invalid time") : "",
-      },
+      date: { isValid: parsedDate.ok && !futureDate, message: dateMessage },
+      time: { isValid: parsedTime.ok, message: timeMessage },
       location: {
         isValid: location.length >= 2,
         message: location.length === 1 ? (lang === "hi" ? "कम से कम 2 अक्षर" : "At least 2 characters") : "",
       },
     });
-  }, [date, time, location, lang]);
+  }, [dateDisplay, time, location, lang]);
 
   // Step progress
   useEffect(() => {
@@ -249,20 +288,31 @@ export default function EnhancedBirthInputForm({
     finally { setIsAutoSaving(false); }
   };
 
-  /** Handle typed DD/MM/YYYY input — auto-format and convert to ISO internally */
+  /**
+   * Handle typed DD/MM/YYYY input — auto-format, then convert to the internal
+   * ISO date only when the value is a real calendar date in the supported range
+   * and not in the future. Invalid input is preserved in `dateDisplay` so the
+   * user sees a specific message and can correct it.
+   */
   const handleDateInput = (raw: string) => {
     // Strip non-digits/slashes, auto-insert slashes after DD and MM
     let cleaned = raw.replace(/[^\d/]/g, "");
     if (cleaned.length === 2 && !cleaned.includes("/")) cleaned += "/";
     if (cleaned.length === 5 && cleaned.split("/").length === 2) cleaned += "/";
     setDateDisplay(cleaned);
-    // Only convert to ISO when full DD/MM/YYYY entered
-    const iso = toISO(cleaned);
-    setDate(iso && isValidISO(iso) ? iso : "");
+
+    const parsed = parseDdMmYyyy(cleaned);
+    if (parsed.ok && parsed.iso && !isFutureDate(parsed.iso)) {
+      setDate(parsed.iso);
+    } else {
+      // Keep the raw text; clear the internal ISO value so the form cannot
+      // submit a date the user has not confirmed.
+      setDate("");
+    }
   };
 
   const handleSavedSelect = (index: string) => {
-    if (index === "new") { setDate(""); setTime(""); setLocation(""); setSelectedCoords(null); return; }
+    if (index === "new") { setDate(""); setDateDisplay(""); setTime(""); setLocation(""); setSelectedCoords(null); return; }
     const selected = savedDetails[parseInt(index)];
     if (selected) {
       setDate(selected.date);
@@ -274,9 +324,42 @@ export default function EnhancedBirthInputForm({
   };
 
   const handleLocationSelect = (result: LocationResult) => {
+    // Invalidate any in-flight search and stop the debounce effect from
+    // re-searching the freshly selected place (which would reopen the list).
+    geocodeRequestIdRef.current += 1;
+    suppressNextSearchRef.current = true;
     setLocation(result.displayName);
+    setLocationResults([]);
     setSelectedCoords({ lat: result.lat, lon: result.lon });
     setShowDropdown(false);
+    setActiveIndex(-1);
+  };
+
+  /** ArrowUp/ArrowDown/Enter selection + Escape dismissal for the combobox. */
+  const handleLocationKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Escape") {
+      if (showDropdown) { e.preventDefault(); setShowDropdown(false); setActiveIndex(-1); }
+      return;
+    }
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (!showDropdown) {
+        if (locationResults.length > 0) setShowDropdown(true);
+        return;
+      }
+      setActiveIndex((i) => Math.min(i + 1, locationResults.length - 1));
+      return;
+    }
+    if (e.key === "ArrowUp") {
+      if (!showDropdown) return;
+      e.preventDefault();
+      setActiveIndex((i) => Math.max(i - 1, 0));
+      return;
+    }
+    if (e.key === "Enter" && showDropdown && activeIndex >= 0 && locationResults[activeIndex]) {
+      e.preventDefault();
+      handleLocationSelect(locationResults[activeIndex]);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -292,7 +375,7 @@ export default function EnhancedBirthInputForm({
 
   const handleQuickAction = (action: string) => {
     switch (action) {
-      case "useCurrentDate": setDate(new Date().toISOString().split("T")[0]); break;
+      case "useCurrentDate": setDate(todayIsoLocal()); break;
       case "useCurrentTime": {
         const n = new Date();
         setTime(`${n.getHours().toString().padStart(2,"0")}:${n.getMinutes().toString().padStart(2,"0")}`);
@@ -303,7 +386,7 @@ export default function EnhancedBirthInputForm({
         if (lp?.location) setLocation(lp.location);
         break;
       }
-      case "clearForm": setDate(""); setTime(""); setLocation(""); setSelectedCoords(null); break;
+      case "clearForm": setDate(""); setDateDisplay(""); setTime(""); setLocation(""); setSelectedCoords(null); break;
       case "saveProfile":
         if (date && time && location) {
           handleAutoSave();
@@ -441,7 +524,7 @@ export default function EnhancedBirthInputForm({
         </div>
 
         {/* Location Field */}
-        <div className="space-y-2 relative" ref={dropdownRef}>
+        <div className="space-y-2" ref={dropdownRef}>
           <Label htmlFor="pob" className={cn("flex items-center gap-2", lang === "hi" && "font-hindi")}>
             <MapPin className="h-4 w-4" />
             {t.location}
@@ -452,24 +535,49 @@ export default function EnhancedBirthInputForm({
           <Input
             id="pob"
             type="text"
+            role="combobox"
+            aria-expanded={showDropdown}
+            aria-controls="location-listbox"
+            aria-autocomplete="list"
+            aria-activedescendant={showDropdown && activeIndex >= 0 ? `location-option-${activeIndex}` : undefined}
             value={location}
-            onChange={(e) => { setLocation(e.target.value); setSelectedCoords(null); }}
+            onChange={(e) => { setLocation(e.target.value); setSelectedCoords(null); setActiveIndex(-1); }}
+            onKeyDown={handleLocationKeyDown}
             placeholder={t.locationPlaceholder}
             className="bg-background border-border"
             required
             autoComplete="off"
           />
+          {/*
+            Suggestions render in normal flow (not absolute) so they occupy a
+            reserved area and can never overlap or intercept the submit button.
+          */}
           {showDropdown && locationResults.length > 0 && (
-            <div className="absolute z-50 w-full mt-1 bg-background border border-border rounded-md shadow-lg max-h-60 overflow-y-auto">
+            <ul
+              id="location-listbox"
+              role="listbox"
+              className="w-full bg-background border border-border rounded-md shadow-sm max-h-60 overflow-y-auto"
+            >
               {locationResults.map((result, idx) => (
-                <button key={idx} type="button" onClick={() => handleLocationSelect(result)}
-                  className="w-full px-3 py-2 text-left hover:bg-muted transition-colors border-b border-border last:border-b-0">
+                <li
+                  key={idx}
+                  id={`location-option-${idx}`}
+                  role="option"
+                  aria-selected={idx === activeIndex}
+                  onMouseEnter={() => setActiveIndex(idx)}
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => handleLocationSelect(result)}
+                  className={cn(
+                    "w-full px-3 py-2 text-left cursor-pointer transition-colors border-b border-border last:border-b-0",
+                    idx === activeIndex ? "bg-muted" : "hover:bg-muted",
+                  )}
+                >
                   <div className="text-sm font-medium">{result.name}</div>
                   <div className="text-xs text-muted-foreground">{result.displayName}</div>
                   <div className="text-xs text-primary mt-1">📍 {formatCoordinates(result.lat, result.lon)}</div>
-                </button>
+                </li>
               ))}
-            </div>
+            </ul>
           )}
           {isSearching && (
             <div className="text-xs text-muted-foreground mt-1 flex items-center gap-1">

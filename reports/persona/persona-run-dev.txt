@@ -1,0 +1,296 @@
+﻿
+Running 21 tests using 2 workers
+
+  ✓   1 [chromium] › tests\e2e\persona-users.spec.ts:170:3 › Persona — basic tier › basic: kundli input form exposes labelled date/time/place fields (19.2s)
+  ✓   2 [chromium] › tests\e2e\persona-users.spec.ts:157:3 › Persona — basic tier › basic: home renders for a synthetic visitor (19.2s)
+  ✓   3 [chromium] › tests\e2e\persona-users.spec.ts:183:3 › Persona — basic tier › basic: calculation renders a horoscope without forced clicks (8.1s)
+  ✓   4 [chromium] › tests\e2e\persona-users.spec.ts:200:3 › Persona — basic tier › basic: English/Hindi switching changes the UI language (8.6s)
+  ✓   5 [chromium] › tests\e2e\persona-users.spec.ts:216:3 › Persona — basic tier › basic: panchang navigation from the home page (8.0s)
+  ✓   6 [chromium] › tests\e2e\persona-users.spec.ts:237:3 › Persona — intermediate tier › intermediate: kundli detail view renders for the computed chart (7.5s)
+  ✓   8 [chromium] › tests\e2e\persona-users.spec.ts:279:3 › Persona — intermediate tier › intermediate: matchmaking computes compatibility from sample data (10.6s)
+  ✓   7 [chromium] › tests\e2e\persona-users.spec.ts:256:3 › Persona — intermediate tier › intermediate: prashna returns a verdict (14.5s)
+  ✓   9 [chromium] › tests\e2e\persona-users.spec.ts:299:3 › Persona — intermediate tier › intermediate: panchang renders a result region for a chosen date (11.6s)
+  ✓  11 [chromium] › tests\e2e\persona-users.spec.ts:349:3 › Persona — advanced tier › advanced: leap-year dates are accepted, impossible dates rejected (7.0s)
+  ✓  12 [chromium] › tests\e2e\persona-users.spec.ts:370:3 › Persona — advanced tier › advanced: invalid calendar date (31/04/2020) shows an explanation and blocks submit (7.3s)
+  ✓  13 [chromium] › tests\e2e\persona-users.spec.ts:389:3 › Persona — advanced tier › advanced: midnight 00:00 is valid, 24:00 is rejected (8.3s)
+  ✘  10 [chromium] › tests\e2e\persona-users.spec.ts:315:3 › Persona — intermediate tier › intermediate: PDF/print export control is wired up (53.9s)
+  ✓  15 [chromium] › tests\e2e\persona-users.spec.ts:315:3 › Persona — intermediate tier › intermediate: PDF/print export control is wired up (retry #1) (4.3s)
+  ✓  16 [chromium] › tests\e2e\persona-users.spec.ts:443:3 › Persona — advanced tier › advanced: location dropdown cannot overlap the submit button (8.7s)
+  ✓  17 [chromium] › tests\e2e\persona-users.spec.ts:474:3 › Persona — advanced tier › advanced: keyboard-only selection and submission (8.5s)
+  ✓  18 [chromium] › tests\e2e\persona-users.spec.ts:503:3 › Persona — advanced tier › advanced: a stale geocoding response does not reopen the dropdown (8.5s)
+  ✓  19 [chromium] › tests\e2e\persona-users.spec.ts:520:3 › Persona — advanced tier › advanced: privacy settings work without Clerk (demo mode) (6.9s)
+  ✓  20 [chromium] › tests\e2e\persona-users.spec.ts:548:3 › Persona — advanced tier › advanced: deep-link refresh keeps the page functional (7.0s)
+  ✓  21 [chromium] › tests\e2e\persona-users.spec.ts:564:3 › Persona — advanced tier › advanced: geocoding network failure degrades gracefully (8.3s)
+  -  22 [chromium] › tests\e2e\persona-users.spec.ts:588:3 › Persona — advanced tier › advanced: offline production preview serves a usable shell
+  ✘  14 [chromium] › tests\e2e\persona-users.spec.ts:417:3 › Persona — advanced tier › advanced: rapid repeated submissions do not crash or duplicate (2.0m)
+  ✘  23 [chromium] › tests\e2e\persona-users.spec.ts:417:3 › Persona — advanced tier › advanced: rapid repeated submissions do not crash or duplicate (retry #1) (2.0m)
+
+
+  1) [chromium] › tests\e2e\persona-users.spec.ts:417:3 › Persona — advanced tier › advanced: rapid repeated submissions do not crash or duplicate 
+
+    Test timeout of 120000ms exceeded.
+
+    Error: locator.click: Test timeout of 120000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: /Get Transit Reading|गोचर फल देखें/ })
+        - locator resolved to <button disabled type="submit" class="inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover-elevate active-elevate-2 bg-primary text-primary-foreground border border-primary-border min-h-10 rounded-md px-8 w-full text-base font-semibold">Get Transit Reading</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+        3 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for "http://127.0.0.1:5173/horoscope" navigation to finish...
+          - navigated to "http://127.0.0.1:5173/horoscope"
+          - waiting for element to be visible, enabled and stable
+        - element was detached from the DOM, retrying
+          - locator resolved to <button disabled type="submit" class="inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover-elevate active-elevate-2 bg-primary text-primary-foreground border border-primary-border min-h-10 rounded-md px-8 w-full text-base font-semibold">Get Transit Reading</button>
+        - attempting click action
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 20ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+        7 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+      - element was detached from the DOM, retrying
+        - locator resolved to <button disabled type="submit" class="inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover-elevate active-elevate-2 bg-primary text-primary-foreground border border-primary-border min-h-10 rounded-md px-8 w-full text-base font-semibold">Get Transit Reading</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+        8 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+        - waiting for "http://127.0.0.1:5173/horoscope" navigation to finish...
+        - navigated to "http://127.0.0.1:5173/horoscope"
+        - waiting for element to be visible, enabled and stable
+      2 × element was detached from the DOM, retrying
+          - locator resolved to <button disabled type="submit" class="inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover-elevate active-elevate-2 bg-primary text-primary-foreground border border-primary-border min-h-10 rounded-md px-8 w-full text-base font-semibold">Get Transit Reading</button>
+        - attempting click action
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 20ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 500ms
+        63 × waiting for element to be visible, enabled and stable
+           - element is not enabled
+         - retrying click action
+           - waiting 500ms
+
+
+      427 |     // has swapped to the result and must be harmless no-ops.
+      428 |     await Promise.all([
+    > 429 |       submit.click(),
+          |              ^
+      430 |       page.keyboard.press('Enter').catch(() => undefined),
+      431 |       page.keyboard.press('Enter').catch(() => undefined),
+      432 |     ]);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:429:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-2e9ca-s-do-not-crash-or-duplicate-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ad-2e9ca-s-do-not-crash-or-duplicate-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-2e9ca-s-do-not-crash-or-duplicate-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ad-2e9ca-s-do-not-crash-or-duplicate-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Test timeout of 120000ms exceeded.
+
+    Error: locator.click: Test timeout of 120000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: /Get Transit Reading|गोचर फल देखें/ })
+
+
+      427 |     // has swapped to the result and must be harmless no-ops.
+      428 |     await Promise.all([
+    > 429 |       submit.click(),
+          |              ^
+      430 |       page.keyboard.press('Enter').catch(() => undefined),
+      431 |       page.keyboard.press('Enter').catch(() => undefined),
+      432 |     ]);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:429:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-2e9ca-s-do-not-crash-or-duplicate-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ad-2e9ca-s-do-not-crash-or-duplicate-chromium-retry1\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-2e9ca-s-do-not-crash-or-duplicate-chromium-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ad-2e9ca-s-do-not-crash-or-duplicate-chromium-retry1\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests\e2e\persona-users.spec.ts:315:3 › Persona — intermediate tier › intermediate: PDF/print export control is wired up 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/Overall Score|समग्र स्कोर/).first()
+    Expected: visible
+    Timeout: 45000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 45000ms
+      - waiting for getByText(/Overall Score|समग्र स्कोर/).first()
+        2 × waiting for "http://127.0.0.1:5173/horoscope" navigation to finish...
+          - navigated to "http://127.0.0.1:5173/horoscope"
+
+
+      330 |     await expect(submit).toBeEnabled({ timeout: 10_000 });
+      331 |     await submit.click();
+    > 332 |     await expect(page.getByText(HOROSCOPE_RESULT).first()).toBeVisible({ timeout: 45_000 });
+          |                                                            ^
+      333 |
+      334 |     await page.getByRole('button', { name: /^Print$|^प्रिंट$/ }).click();
+      335 |     const printed = await page.evaluate(() => (window as unknown as { __printed: number }).__printed);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:332:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-6fb18--export-control-is-wired-up-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-in-6fb18--export-control-is-wired-up-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-6fb18--export-control-is-wired-up-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-in-6fb18--export-control-is-wired-up-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests\e2e\persona-users.spec.ts:417:3 › Persona — advanced tier › advanced: rapid repeated submissions do not crash or duplicate 
+  1 flaky
+    [chromium] › tests\e2e\persona-users.spec.ts:315:3 › Persona — intermediate tier › intermediate: PDF/print export control is wired up 
+  1 skipped
+  18 passed (5.6m)

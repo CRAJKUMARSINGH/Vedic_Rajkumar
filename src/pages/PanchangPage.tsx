@@ -26,6 +26,7 @@ import { type SupportedLanguage } from '@/services/multiLanguageService';
 import { SEO } from '@/components/SEO';
 import { ValidationInProgressNotice } from '@/components/PrototypeStatusBanner';
 import { localTodayISO } from '@/utils/panchangAstronomy';
+import { DATE_INPUT_FORMAT_HINT } from '@/lib/dateValidation';
 
 const PanchangCard = lazy(() => import('@/components/PanchangCard'));
 
@@ -137,8 +138,12 @@ const PanchangPage = () => {
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
                   aria-label={isHi ? 'तिथि चुनें' : 'Select date'}
+                  aria-describedby="panchang-date-format"
                   className="w-full border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 />
+                <p id="panchang-date-format" className="text-[11px] text-muted-foreground">
+                  {isHi ? `प्रारूप: ${DATE_INPUT_FORMAT_HINT}` : `Format: ${DATE_INPUT_FORMAT_HINT}`}
+                </p>
               </div>
 
               {/* City */}

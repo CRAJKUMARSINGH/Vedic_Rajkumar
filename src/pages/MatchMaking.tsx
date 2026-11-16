@@ -27,6 +27,7 @@ import CompatibilityReportComponent from '@/components/CompatibilityReport';
 import EnhancedLanguageToggle from '@/components/EnhancedLanguageToggle';
 import { ValidationInProgressNotice } from '@/components/PrototypeStatusBanner';
 import { calculateAshtakuta, type PartnerData, type CompatibilityReport } from '@/services/ashtakutaService';
+import { parseDdMmYyyy, parseHhMm, DATE_INPUT_FORMAT_HINT } from '@/lib/dateValidation';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import FamilyProfileSelector from '@/components/FamilyProfileSelector';
@@ -56,7 +57,7 @@ const LABELS = {
       "Fill in Name, DOB, Time, and Place for both partners below and click Calculate. ⚡ Tip: click Family Profile above each form to pre-fill a saved person in one click.",
     resultHeading: 'Compatibility Result',
     helper: {
-      dateFmt: 'Format: YYYY-MM-DD',
+      dateFmt: `Format: ${DATE_INPUT_FORMAT_HINT}`,
       timeFmt: '24-hour format · HH:MM · use the exact clock time on the birth certificate',
       placeFmt: 'City, State (reference only — for your records)',
     },
@@ -89,7 +90,7 @@ const LABELS = {
       'नीचे दोनों साथियों का नाम, जन्म तिथि, समय और स्थान भरें और गणना करें पर क्लिक करें। ⚡ सुझाव: एक क्लिक में सहेजी गई प्रोफ़ाइल भरने के लिए प्रत्येक फ़ॉर्म के ऊपर परिवार प्रोफ़ाइल बटन दबाएँ।',
     resultHeading: 'अनुकूलता परिणाम',
     helper: {
-      dateFmt: 'प्रारूप: YYYY-MM-DD',
+      dateFmt: `प्रारूप: ${DATE_INPUT_FORMAT_HINT}`,
       timeFmt: '24-घंटा प्रारूप · HH:MM · जन्म प्रमाण पत्र पर छपा सटीक समय प्रयोग करें',
       placeFmt: 'शहर, राज्य (केवल आपके रिकॉर्ड के लिए संदर्भ)',
     },
@@ -298,17 +299,18 @@ const MatchMaking = () => {
   };
 
   const validateInputs = () => {
-    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-    const timeRegex = /^\d{2}:\d{2}$/;
     if (
       !malePartner.name || !malePartner.dateOfBirth ||
       !malePartner.timeOfBirth || !malePartner.placeOfBirth ||
       !femalePartner.name || !femalePartner.dateOfBirth ||
       !femalePartner.timeOfBirth || !femalePartner.placeOfBirth
     ) throw new Error(t.errors.fillAllFields);
-    if (!dateRegex.test(malePartner.dateOfBirth) || !dateRegex.test(femalePartner.dateOfBirth))
-      throw new Error(t.errors.invalidDate);
-    if (!timeRegex.test(malePartner.timeOfBirth) || !timeRegex.test(femalePartner.timeOfBirth))
+    // Shared strict parser (src/lib/dateValidation.ts): rejects impossible
+    // calendar dates that a plain YYYY-MM-DD regex would let through.
+    const maleDate = parseDdMmYyyy(malePartner.dateOfBirth, { allowIso: true });
+    const femaleDate = parseDdMmYyyy(femalePartner.dateOfBirth, { allowIso: true });
+    if (!maleDate.ok || !femaleDate.ok) throw new Error(t.errors.invalidDate);
+    if (!parseHhMm(malePartner.timeOfBirth).ok || !parseHhMm(femalePartner.timeOfBirth).ok)
       throw new Error(t.errors.invalidTime);
   };
 

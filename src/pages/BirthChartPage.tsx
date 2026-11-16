@@ -40,6 +40,7 @@ import { cn } from '@/lib/utils';
 import { resolveBirthTimezone } from '@/lib/birthTimezone';
 import { setBirthTimezone } from '@/hooks/use-birth-timezone';
 import { BirthTimezoneChip } from '@/components/BirthTimezoneChip';
+import { DATE_INPUT_FORMAT_HINT } from '@/lib/dateValidation';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -346,7 +347,7 @@ export default function BirthChartPage() {
                   isHi && 'font-hindi text-[12px]',
                 )}
               >
-                {isHi ? 'यू.सी. प्रारूप YYYY-MM-DD' : 'ISO format YYYY-MM-DD'}
+                {isHi ? `प्रारूप ${DATE_INPUT_FORMAT_HINT}` : `ISO format ${DATE_INPUT_FORMAT_HINT}`}
               </p>
             </div>
 

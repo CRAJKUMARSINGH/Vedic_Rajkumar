@@ -102,6 +102,7 @@ import { LoadingSkeleton } from '@/components/ui/loading-skeleton';
 import FamilyProfileSelector from '@/components/FamilyProfileSelector';
 import { getProfileById } from '@/lib/familyProfiles';
 import type { FamilyProfile } from '@/lib/familyProfiles';
+import { DATE_INPUT_FORMAT_HINT } from '@/lib/dateValidation';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -690,13 +691,18 @@ const QuestionPage = () => {
                         />
                       </div>
                       <div>
-                        <Label>{isHi ? 'जन्म तिथि' : 'Birth Date'}</Label>
+                        <Label htmlFor="prashna-custom-date">{isHi ? 'जन्म तिथि' : 'Birth Date'}</Label>
                         <Input
+                          id="prashna-custom-date"
                           type="date"
                           value={customDate}
                           onChange={e => setCustomDate(e.target.value)}
+                          aria-describedby="prashna-custom-date-format"
                           className="mt-1 bg-white"
                         />
+                        <p id="prashna-custom-date-format" className="mt-1 text-[11px] text-muted-foreground">
+                          {isHi ? `प्रारूप: ${DATE_INPUT_FORMAT_HINT}` : `Format: ${DATE_INPUT_FORMAT_HINT}`}
+                        </p>
                       </div>
                       <div>
                         <Label>{isHi ? 'जन्म समय' : 'Birth Time'}</Label>

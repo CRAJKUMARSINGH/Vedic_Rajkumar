@@ -91,6 +91,14 @@ export default [
     },
   },
   {
+    // Playwright fixtures are not React — the `use` callback parameter is the
+    // fixture API, not a React Hook, so rules-of-hooks does not apply.
+    files: ['tests/e2e/**/*.ts'],
+    rules: {
+      'react-hooks/rules-of-hooks': 'off',
+    },
+  },
+  {
     // Ignore generated, bundled, and third-party files
     ignores: [
       'dist/**',

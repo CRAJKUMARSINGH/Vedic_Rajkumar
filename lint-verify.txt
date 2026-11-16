@@ -1,0 +1,1768 @@
+
+> vedic-rajkumar@0.1.0 lint
+> eslint src supabase/functions vite.config.ts vitest.config.ts playwright.config.ts tailwind.config.ts --ext .js,.jsx,.ts,.tsx
+
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\AdvancedAstrologyCard.tsx
+   14:29   warning  'TabsList' is defined but never used. Allowed unused vars must match /^_/u                            @typescript-eslint/no-unused-vars
+   14:39   warning  'TabsTrigger' is defined but never used. Allowed unused vars must match /^_/u                         @typescript-eslint/no-unused-vars
+   18:8    warning  'LalKitabChart' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+   22:8    warning  'KPChart' is defined but never used. Allowed unused vars must match /^_/u                             @typescript-eslint/no-unused-vars
+   26:3    warning  'searchNadiRecords' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+   27:3    warning  'getNadiConsultationRecommendations' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   28:8    warning  'NadiRecord' is defined but never used. Allowed unused vars must match /^_/u                          @typescript-eslint/no-unused-vars
+   34:3    warning  'AlertTriangle' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+   35:3    warning  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u                         @typescript-eslint/no-unused-vars
+   36:3    warning  'Clock' is defined but never used. Allowed unused vars must match /^_/u                               @typescript-eslint/no-unused-vars
+   38:3    warning  'Lightbulb' is defined but never used. Allowed unused vars must match /^_/u                           @typescript-eslint/no-unused-vars
+   49:23   warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+   64:10   warning  'showDetails' is assigned a value but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   64:23   warning  'setShowDetails' is assigned a value but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  153:91   warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+  166:42   warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+  169:54   warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+  172:45   warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+  172:152  warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+  173:45   warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+  173:155  warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+  179:37   warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+  185:42   warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+  185:122  warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+  189:54   warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+  198:52   warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+  198:125  warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+  201:81   warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+  215:40   warning  Unexpected any. Specify a different type                                                              @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\AshtakavargaPanel.tsx
+   29:3  warning  'classifyBAVScore' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  166:9  warning  'houseSignNames' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\AshtakavargaTransitOverlay.tsx
+   15:3   warning  'AshtakavargaTransitResult' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   49:7   warning  'CHART_COLORS' is assigned a value but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  173:38  warning  Unexpected any. Specify a different type                                                     @typescript-eslint/no-explicit-any
+  173:49  warning  Unexpected any. Specify a different type                                                     @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\CareerReport.tsx
+  506:55  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  508:58  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  508:98  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  520:55  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  522:58  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  522:98  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  548:56  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  573:84  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\CompanyNameLetterCard.tsx
+  105:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\CompatibilityReport.tsx
+  8:36  warning  'AshtakutaResult' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\ComprehensiveRemediesCard.tsx
+   10:76   warning  'GemstoneRecommendation' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   17:23   warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+   25:66   warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  109:19   warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  110:16   warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  333:26   warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  334:61   warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  378:31   warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  378:109  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  409:31   warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  409:109  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  440:31   warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\ComprehensiveReportForm.tsx
+   54:3   warning  'Users' is defined but never used. Allowed unused vars must match /^_/u                                        @typescript-eslint/no-unused-vars
+  463:48  warning  Unexpected any. Specify a different type                                                                       @typescript-eslint/no-explicit-any
+  590:47  warning  React Hook useMemo has an unnecessary dependency: 'reports'. Either exclude it or remove the dependency array  react-hooks/exhaustive-deps
+  591:54  warning  React Hook useMemo has an unnecessary dependency: 'reports'. Either exclude it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\DarkModeToggle.tsx
+  19:10  warning  'theme' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\DashaAIInsights.tsx
+   1:10  warning  'Card' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+   1:16  warning  'CardContent' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   1:29  warning  'CardHeader' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+   1:41  warning  'CardTitle' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  76:42  warning  Unexpected any. Specify a different type                                       @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\DashaCard.tsx
+   7:10  warning  'Card' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+   7:16  warning  'CardContent' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   7:29  warning  'CardHeader' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+   7:41  warning  'CardTitle' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  70:3   warning  'mahaActive' is defined but never used. Allowed unused args must match /^_/u   @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\DashaTransitTimelineView.tsx
+   20:27  warning  'useMemo' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+   38:10  warning  'calculateChart' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  161:10  warning  'formatMonth' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  173:16  warning  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  174:16  warning  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  257:19  warning  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  262:9   warning  'isHi' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  303:21  warning  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  363:16  warning  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  368:9   warning  'isHi' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  418:40  warning  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\DashboardShell.tsx
+   127:16   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   128:18   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   129:36   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   139:21   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   140:42   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   155:48   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   158:31   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   198:40   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   200:62   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   207:50   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   218:24   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   218:57   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   219:24   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   219:58   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   331:25   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   331:33   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   333:24   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   356:18   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   356:36   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   356:63   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   357:18   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   357:43   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   368:21   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   401:36   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   430:26   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   475:49   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   476:43   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   476:51   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   493:27   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   518:32   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   520:43   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   521:39   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   522:39   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   533:52   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   541:35   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   558:35   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   583:107  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   607:36   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   658:29   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   658:57   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   706:48   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   978:17   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   979:15   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   979:23   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   982:17   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   983:15   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   983:23   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   990:47   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   991:47   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  1003:42   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  1024:119  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  1024:249  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  1028:129  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  1096:46   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  1102:28   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\DivisionalChartsDashboard.tsx
+   14:3  warning  'PieChart' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   15:3  warning  'BarChart3' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   16:3  warning  'LineChart' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   29:3  warning  'Activity' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   38:3  warning  'ChevronRight' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+   39:3  warning  'ChevronLeft' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   40:3  warning  'Play' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+   41:3  warning  'Pause' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   42:3  warning  'RefreshCw' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   45:3  warning  'Settings' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   49:3  warning  'Music' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   50:3  warning  'Utensils' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   51:3  warning  'HandHeart' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   52:3  warning  'Calculator' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   53:3  warning  'FileText' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   57:3  warning  'Map' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+   58:3  warning  'Globe' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   66:3  warning  'Mountain' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   67:3  warning  'Waves' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   68:3  warning  'Cloud' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   69:3  warning  'Sunrise' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+   70:3  warning  'Sunset' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+  137:9  warning  'getPlanetColor' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\DynamicTransitCalculator.tsx
+  74:6  warning  React Hook useEffect has a missing dependency: 'loadTodayTransits'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\EnhancedAnalysisPanel.tsx
+  2:50  warning  'BookOpen' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\EnhancedAshtakavargaDashboard.tsx
+   16:3   warning  'LineChart' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   25:3   warning  'Briefcase' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   26:3   warning  'DollarSign' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   27:3   warning  'GraduationCap' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+   28:3   warning  'Users' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+   33:3   warning  'ChevronRight' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   34:3   warning  'ChevronLeft' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   35:3   warning  'Play' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+   36:3   warning  'Pause' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+   40:3   warning  'Eye' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+   41:3   warning  'Settings' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+   42:3   warning  'Zap' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+   45:3   warning  'BookOpen' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+   46:3   warning  'Music' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+   47:3   warning  'Utensils' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+   48:3   warning  'HandHeart' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   49:3   warning  'Calculator' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   50:3   warning  'FileText' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+   51:3   warning  'Compass' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+   52:3   warning  'Navigation' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   53:3   warning  'Map' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+   54:3   warning  'Home' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+   55:3   warning  'Car' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+   56:3   warning  'HeartHandshake' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   57:3   warning  'Baby' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+   58:3   warning  'Stethoscope' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   59:3   warning  'Award' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+   60:3   warning  'TreePine' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+   62:3   warning  'Mountain' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+   63:3   warning  'Waves' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+   64:3   warning  'Cloud' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+   65:3   warning  'Sunrise' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+   66:3   warning  'Sunset' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   67:3   warning  'MoonStar' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+   69:3   warning  'Calendar' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+   70:3   warning  'Filter' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   71:3   warning  'Search' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   72:3   warning  'Radar' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+   73:3   warning  'Gauge' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+   75:3   warning  'ScatterChart' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   76:3   warning  'AreaChart' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   77:3   warning  'Database' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+   78:3   warning  'Server' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   79:3   warning  'Cpu' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+   80:3   warning  'HardDrive' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   81:3   warning  'Wifi' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+   82:3   warning  'Battery' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+   83:3   warning  'Thermometer' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   84:3   warning  'Wind' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+   85:3   warning  'Droplets' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+   86:3   warning  'ZapOff' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   93:8   warning  'Sarvashtakavarga' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  100:10  warning  'selectedTransit' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  153:9   warning  'getPlanetColor' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\EnhancedBirthInputForm.tsx
+    8:39  warning  'useCallback' is defined but never used. Allowed unused vars must match /^_/u                                      @typescript-eslint/no-unused-vars
+  243:6   warning  React Hook useEffect has a missing dependency: 'handleAutoSave'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\EnterpriseDashboard.tsx
+  10:10  warning  'Input' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+  14:10  warning  'Select' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+  14:18  warning  'SelectContent' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+  14:33  warning  'SelectItem' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+  14:45  warning  'SelectTrigger' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+  14:60  warning  'SelectValue' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+  15:10  warning  'Progress' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+  16:10  warning  'Dialog' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+  16:18  warning  'DialogContent' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+  16:33  warning  'DialogHeader' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+  16:47  warning  'DialogTitle' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+  16:60  warning  'DialogTrigger' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+  28:3   warning  'AlertTriangle' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+  29:3   warning  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+  30:3   warning  'Clock' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+  36:3   warning  'FileText' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+  41:3   warning  'Trash2' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+  43:3   warning  'EyeOff' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+  45:3   warning  'Unlock' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+  49:3   warning  'Search' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+  50:3   warning  'Filter' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+  53:3   warning  'enterpriseSaaSService' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  61:10  warning  'users' is assigned a value but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  61:17  warning  'setUsers' is assigned a value but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  62:10  warning  'subscriptions' is assigned a value but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  62:25  warning  'setSubscriptions' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  66:10  warning  'searchTerm' is assigned a value but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  66:22  warning  'setSearchTerm' is assigned a value but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  67:10  warning  'filterStatus' is assigned a value but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  67:24  warning  'setFilterStatus' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\EventHoraTimeline.tsx
+   62:9   warning  'eventSlot' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  157:38  warning  'i' is defined but never used. Allowed unused args must match /^_/u                   @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\FamilyProfileSelector.tsx
+  19:10  warning  'getProfileById' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\FeedbackWidget.tsx
+  10:10  warning  'Badge' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\GemstoneRecommendationCard.tsx
+   16:3   warning  'validateGemstoneOrder' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+   17:8   warning  'GemstoneRecommendation' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   25:23  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  265:96  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\HoroscopeCard.tsx
+  10:29  warning  'CardHeader' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+  10:41  warning  'CardTitle' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+  17:3   warning  'generateHoroscope' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  20:8   warning  'ComprehensiveHoroscope' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  51:10  warning  'expandedCategory' is assigned a value but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  51:28  warning  'setExpandedCategory' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\KaalSarpForm.tsx
+   4:10  warning  'LanguageToggle' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  11:10  warning  'Separator' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\KeyboardShortcuts.tsx
+  150:6  warning  React Hook useEffect has missing dependencies: 'defaultShortcuts' and 'setupKeyboardListeners'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\KundliChart.tsx
+   17:8   warning  'KundliData' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   19:8   warning  'ChartHouse' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+  127:10  warning  'showDetails' is assigned a value but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  127:23  warning  'setShowDetails' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  493:54  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+  494:75  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+  495:62  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+  497:68  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+  541:50  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+  542:71  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+  543:58  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+  545:64  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\MTSSPanel.tsx
+   35:7   warning  'STRENGTH_COLOR' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  119:11  warning  'dashas' is assigned a value but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\MobileAppDashboard.tsx
+  19:3   warning  'Monitor' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+  20:3   warning  'Wifi' is defined but never used. Allowed unused vars must match /^_/u                        @typescript-eslint/no-unused-vars
+  21:3   warning  'Battery' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+  22:3   warning  'HardDrive' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+  23:3   warning  'MemoryStick' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+  30:3   warning  'TrendingDown' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+  32:3   warning  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+  35:3   warning  'Upload' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+  39:3   warning  'Globe' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+  40:3   warning  'MapPin' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+  41:3   warning  'Camera' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+  42:3   warning  'Fingerprint' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+  43:3   warning  'Volume2' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+  45:3   warning  'EyeOff' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+  46:3   warning  'Lock' is defined but never used. Allowed unused vars must match /^_/u                        @typescript-eslint/no-unused-vars
+  47:3   warning  'Unlock' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+  48:3   warning  'Zap' is defined but never used. Allowed unused vars must match /^_/u                         @typescript-eslint/no-unused-vars
+  54:3   warning  'MessageSquare' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+  56:3   warning  'ThumbsUp' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+  57:3   warning  'ThumbsDown' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+  58:3   warning  'Info' is defined but never used. Allowed unused vars must match /^_/u                        @typescript-eslint/no-unused-vars
+  59:3   warning  'HelpCircle' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+  60:3   warning  'Cpu' is defined but never used. Allowed unused vars must match /^_/u                         @typescript-eslint/no-unused-vars
+  61:3   warning  'Database' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+  62:3   warning  'Cloud' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+  63:3   warning  'Server' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+  64:3   warning  'Router' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+  65:3   warning  'Signal' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+  66:3   warning  'Power' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+  67:3   warning  'Sun' is defined but never used. Allowed unused vars must match /^_/u                         @typescript-eslint/no-unused-vars
+  68:3   warning  'Moon' is defined but never used. Allowed unused vars must match /^_/u                        @typescript-eslint/no-unused-vars
+  69:3   warning  'Palette' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+  70:3   warning  'Languages' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+  71:3   warning  'Accessibility' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+  72:3   warning  'Share2' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+  73:3   warning  'Printer' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+  74:3   warning  'Mic' is defined but never used. Allowed unused vars must match /^_/u                         @typescript-eslint/no-unused-vars
+  75:3   warning  'Headphones' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+  76:3   warning  'Gamepad2' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+  77:3   warning  'Tv' is defined but never used. Allowed unused vars must match /^_/u                          @typescript-eslint/no-unused-vars
+  78:3   warning  'Watch' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+  85:8   warning  'MobileAppSettings' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  91:10  warning  'analytics' is assigned a value but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  91:21  warning  'setAnalytics' is assigned a value but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  92:64  warning  Unexpected any. Specify a different type                                                      @typescript-eslint/no-explicit-any
+  93:10  warning  'selectedDevice' is assigned a value but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  93:26  warning  'setSelectedDevice' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\MuhurtaFinderPanel.tsx
+   7:43   warning  'Compass' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+   7:52   warning  'ShieldAlert' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+   7:72   warning  'AlertCircle' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+   7:85   warning  'HeartHandshake' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   7:101  warning  'CheckCircle2' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   8:10   warning  'Progress' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  72:14   warning  'e' is defined but never used                                                     @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\Navigation.tsx
+  30:7  warning  'NAV_LINKS' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\NorthIndianChart.tsx
+    3:37  warning  'PLANETS_HI' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   19:7   warning  'HOUSE_PATHS' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  110:7   warning  'HOUSES' is assigned a value but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  242:9   warning  'trines' is assigned a value but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\PanchangCard.tsx
+   28:3   warning  'Clock' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  370:49  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+  370:67  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+  399:51  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+  399:69  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+  418:41  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+  420:45  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+  420:67  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\PerformanceMonitor.tsx
+  21:10  warning  'isExpanded' is assigned a value but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  21:22  warning  'setIsExpanded' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\PlanetaryAspectsCard.tsx
+  5:84   warning  'PlanetaryAspect' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  5:106  warning  'VedicAspect' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  6:23   warning  'ChevronUp' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\PlanetaryPositionsCard.tsx
+  7:10  warning  'Accordion' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  7:21  warning  'AccordionItem' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  7:36  warning  'AccordionTrigger' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  7:54  warning  'AccordionContent' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\ReportShell.tsx
+  414:9  warning  'isHi' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\SEOAnalyticsDashboard.tsx
+  33:3  warning  'Star' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  34:3  warning  'ArrowUp' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  35:3  warning  'ArrowDown' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\TransitsPanel.tsx
+  489:54  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  521:56  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  569:66  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\UpgradeBanner.tsx
+  9:17  warning  'getCurrentPlan' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\UserFeedbackWidget.tsx
+   23:3   warning  'ThumbsUp' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+   25:3   warning  'Filter' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   32:3   warning  'User' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   38:8   warning  'FeedbackResponse' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   88:9   warning  'isHi' is assigned a value but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  164:81  warning  Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+  186:85  warning  Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+  236:83  warning  Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\VarshaphalCard.tsx
+   14:3   warning  'VarshaphalChart' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+   15:3   warning  'TajikaYoga' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   16:3   warning  'MuddaDasha' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   52:10  warning  'showDetails' is assigned a value but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+   52:23  warning  'setShowDetails' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  156:55  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\VedhaAnalysisCard.tsx
+  8:10  warning  'calculateVedhaAnalysis' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  8:34  warning  'getVipreetVedhaSummary' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\VimshottariDashaDashboard.tsx
+   16:3   warning  'TrendingUp' is defined but never used. Allowed unused vars must match /^_/u                                          @typescript-eslint/no-unused-vars
+   17:3   warning  'TrendingDown' is defined but never used. Allowed unused vars must match /^_/u                                        @typescript-eslint/no-unused-vars
+   39:3   warning  'ChevronRight' is defined but never used. Allowed unused vars must match /^_/u                                        @typescript-eslint/no-unused-vars
+   40:3   warning  'ChevronLeft' is defined but never used. Allowed unused vars must match /^_/u                                         @typescript-eslint/no-unused-vars
+   41:3   warning  'Play' is defined but never used. Allowed unused vars must match /^_/u                                                @typescript-eslint/no-unused-vars
+   42:3   warning  'Pause' is defined but never used. Allowed unused vars must match /^_/u                                               @typescript-eslint/no-unused-vars
+   46:3   warning  'Settings' is defined but never used. Allowed unused vars must match /^_/u                                            @typescript-eslint/no-unused-vars
+   61:38  warning  'AntardashaGuideItem' is defined but never used. Allowed unused vars must match /^_/u                                 @typescript-eslint/no-unused-vars
+  104:10  warning  'selectedPeriod' is assigned a value but never used. Allowed unused vars must match /^_/u                             @typescript-eslint/no-unused-vars
+  110:6   warning  React Hook useEffect has a missing dependency: 'loadDashaAnalysis'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  126:92  warning  Unexpected any. Specify a different type                                                                              @typescript-eslint/no-explicit-any
+  242:9   warning  'getRemedyIcon' is assigned a value but never used. Allowed unused vars must match /^_/u                              @typescript-eslint/no-unused-vars
+  487:61  warning  'index' is defined but never used. Allowed unused args must match /^_/u                                               @typescript-eslint/no-unused-vars
+  746:65  warning  'index' is defined but never used. Allowed unused args must match /^_/u                                               @typescript-eslint/no-unused-vars
+  947:36  warning  'idx' is defined but never used. Allowed unused args must match /^_/u                                                 @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\WelcomeModal.tsx
+  7:20  warning  'Star' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\YogasIdentificationDashboard.tsx
+  17:3  warning  'Sparkles' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  20:3  warning  'Info' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+  21:3  warning  'ChevronRight' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  22:3  warning  'ChevronLeft' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  23:3  warning  'Play' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+  24:3  warning  'Pause' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  28:3  warning  'Eye' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  29:3  warning  'Settings' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  34:3  warning  'Music' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  35:3  warning  'Utensils' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  36:3  warning  'HandHeart' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  37:3  warning  'Calculator' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  38:3  warning  'FileText' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  39:3  warning  'Compass' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  40:3  warning  'Navigation' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  41:3  warning  'Map' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  43:3  warning  'Heart' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  44:3  warning  'Briefcase' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  45:3  warning  'DollarSign' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  46:3  warning  'GraduationCap' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  47:3  warning  'Users' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  51:3  warning  'TrendingDown' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  52:3  warning  'Clock' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  53:3  warning  'Calendar' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  54:3  warning  'Filter' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  55:3  warning  'Search' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  56:3  warning  'Radar' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  58:3  warning  'PieChart' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  60:3  warning  'LineChart' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  62:3  warning  'Server' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  63:3  warning  'Cpu' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  64:3  warning  'HardDrive' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  65:3  warning  'Wifi' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+  66:3  warning  'Battery' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  67:3  warning  'Thermometer' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  68:3  warning  'Wind' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+  69:3  warning  'Droplets' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  70:3  warning  'ZapOff' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  71:3  warning  'Sun' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  72:3  warning  'Moon' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+  73:3  warning  'Mountain' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  74:3  warning  'Flame' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  77:3  warning  'Sunrise' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  78:3  warning  'Sunset' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  79:3  warning  'MoonStar' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  80:3  warning  'Award' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  81:3  warning  'Trophy' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  82:3  warning  'Medal' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  83:3  warning  'Key' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  85:3  warning  'Unlock' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  87:3  warning  'HeartHandshake' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  88:3  warning  'Baby' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+  89:3  warning  'Stethoscope' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  90:3  warning  'Circle' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\supplements\CompatibilityPanel.tsx
+  120:7   warning  'YONI_FRIENDLY' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  153:12  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  157:39  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  163:37  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  166:29  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  167:18  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  169:38  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  179:47  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  183:45  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  406:35  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  500:10  warning  'edA' is assigned a value but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+  501:10  warning  'edB' is assigned a value but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+  511:10  warning  'formB' is assigned a value but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  783:21  warning  'st' is assigned a value but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  784:22  warning  'expanded' is assigned a value but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  784:32  warning  'setExpanded' is assigned a value but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\supplements\DashaTimeline.tsx
+   30:20  warning  'useMemo' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   58:10  warning  'fmtYears' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+  139:9   warning  'future' is assigned a value but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  430:9   warning  'currentDate' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\supplements\JaiminiPanel.tsx
+   34:20  warning  'useMemo' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+  227:9   warning  'isFuture' is assigned a value but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  625:26  warning  'expanded' is assigned a value but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  625:36  warning  'setExpanded' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\supplements\ShadbalaPanel.tsx
+  155:10  warning  'BalaBar' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\supplements\TransitsPanel.tsx
+  489:54  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\supplements\YogaInsightsPanel.tsx
+  193:9  warning  The 'presentYogas' logical expression could make the dependencies of useMemo Hook (at line 205) change on every render. To fix this, wrap the initialization of 'presentYogas' in its own useMemo() Hook  react-hooks/exhaustive-deps
+  193:9  warning  The 'presentYogas' logical expression could make the dependencies of useMemo Hook (at line 214) change on every render. To fix this, wrap the initialization of 'presentYogas' in its own useMemo() Hook  react-hooks/exhaustive-deps
+  193:9  warning  The 'presentYogas' logical expression could make the dependencies of useMemo Hook (at line 223) change on every render. To fix this, wrap the initialization of 'presentYogas' in its own useMemo() Hook  react-hooks/exhaustive-deps
+  193:9  warning  The 'presentYogas' logical expression could make the dependencies of useMemo Hook (at line 228) change on every render. To fix this, wrap the initialization of 'presentYogas' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+E:\Rajkumar\Vedic_Rajkumar\src\components\synthesis\SynthesisDashboard.tsx
+  20:45  warning  'isHi' is assigned a value but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\data\careerData.ts
+  261:9   warning  'moonSignHi' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  264:9   warning  'ascendantHi' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  277:41  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  278:62  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  279:64  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  287:47  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  288:63  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  289:65  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  297:48  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  298:65  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  299:67  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  419:46  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  420:61  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  421:63  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  423:47  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  424:60  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  425:62  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\data\kaalSarpData.ts
+  249:56  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  268:60  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  269:63  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  270:63  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  273:65  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  274:65  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\data\manglikData.ts
+    2:10   warning  'AstrologyReport' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+    2:140  warning  'PLANETS' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+  214:3    warning  'intensity' is defined but never used. Allowed unused args must match /^_/u              @typescript-eslint/no-unused-vars
+  215:3    warning  'marriageCompatibility' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  234:3    warning  'intensity' is defined but never used. Allowed unused args must match /^_/u              @typescript-eslint/no-unused-vars
+  235:3    warning  'marriageCompatibility' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\data\sadeSatiData.ts
+    1:10  warning  'AstrologyReport' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  135:3   warning  'moonSignIndex' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+  183:49  warning  'moonSignIndex' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\features\kundli\stubs.ts
+  279:3  warning  'seedIdx' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\hooks\use-toast.ts
+  15:7  warning  'actionTypes' is assigned a value but only used as a type. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\hooks\useChartCalculation.ts
+  105:14  warning  'e' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+  242:6   warning  React Hook useEffect has a missing dependency: 'input'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\Rajkumar\Vedic_Rajkumar\src\hooks\useSubjectiveAnalysis.ts
+   13:3   warning  'SubjectiveReading' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   81:14  warning  Unexpected any. Specify a different type                                             @typescript-eslint/no-explicit-any
+  243:31  warning  Unexpected any. Specify a different type                                             @typescript-eslint/no-explicit-any
+  247:40  warning  Unexpected any. Specify a different type                                             @typescript-eslint/no-explicit-any
+  248:42  warning  Unexpected any. Specify a different type                                             @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\lib\astroUtils.ts
+  118:9  warning  'mins' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\lib\astrology\subjective-analysis-engine.ts
+   14:3   warning  'DivisionalChartType' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  218:11  warning  'yogas' is assigned a value but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  496:30  warning  Unexpected any. Specify a different type                                                     @typescript-eslint/no-explicit-any
+  592:11  warning  'targetHouse' is assigned a value but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  800:27  warning  Unexpected any. Specify a different type                                                     @typescript-eslint/no-explicit-any
+  871:11  warning  'targetLordPlanet' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\lib\birthTimezone.ts
+  29:7  warning  'IN_LAT' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  30:7  warning  'IN_LON' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\lib\errorMonitoring.ts
+  76:11  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unsafe-call' or '@typescript-eslint/no-unsafe-member-access')
+  85:13  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unsafe-call' or '@typescript-eslint/no-unsafe-member-access')
+  90:9   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unsafe-call' or '@typescript-eslint/no-unsafe-member-access')
+
+E:\Rajkumar\Vedic_Rajkumar\src\lib\mtss\dasha.ts
+  51:9  warning  'lordIdx' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\lib\mtss\kundliMilan.ts
+    8:15  warning  'calcVimshottariDashas' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   10:24  warning  'PlanetPosition' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  119:7   warning  'VARNA_BY_RASHI' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  129:7   warning  'VASHYA_GROUP' is assigned a value but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\lib\mtss\mtssEngine.ts
+    7:48  warning  'NAKSHATRAS' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+    7:60  warning  'PLANET_SYMBOLS' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+    8:63  warning  'PlanetPosition' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  237:9   warning  'jupiter' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  326:68  warning  'moonLong' is defined but never used. Allowed unused args must match /^_/u          @typescript-eslint/no-unused-vars
+  327:9   warning  'today' is assigned a value but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  342:9   warning  'venus' is assigned a value but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\lib\mtss\navamsa.ts
+  245:9  warning  'seventhSignName' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\lib\mtss\vedicEngine.ts
+  171:3   warning  'ayanamsa' is defined but never used. Allowed unused args must match /^_/u     @typescript-eslint/no-unused-vars
+  349:36  warning  'tz' is assigned a value but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\lib\validationDashboardData.ts
+  47:10  warning  'seededRand' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\lib\vedic\educationCareer.ts
+   99:10  warning  'getPlanetRashi' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  194:9   warning  'sunH' is assigned a value but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  195:9   warning  'marsH' is assigned a value but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  299:9   warning  'sunH' is assigned a value but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  300:9   warning  'marsH' is assigned a value but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  430:9   warning  'fourthRashi' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\lib\vedic\mangalDosha.ts
+   86:9   warning  'rahu' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  280:32  warning  Unexpected any. Specify a different type                                         @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\lib\vedic\marriageTiming.ts
+    6:26  warning  'PlanetPosition' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+   10:3   warning  'getTrines' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+   45:9   warning  'lagnaRashi' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  109:9   warning  'birthYear' is assigned a value but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  110:9   warning  'age' is assigned a value but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  114:9   warning  'activeDasha' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  258:3   warning  'd9' is defined but never used. Allowed unused args must match /^_/u                    @typescript-eslint/no-unused-vars
+  259:3   warning  'dashas' is defined but never used. Allowed unused args must match /^_/u                @typescript-eslint/no-unused-vars
+  271:9   warning  'venus' is assigned a value but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  272:9   warning  'moon' is assigned a value but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  308:9   warning  'venus' is assigned a value but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\lib\vedic\pdfExport.ts
+    7:3   warning  'PLANETS_HI' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+    8:3   warning  'PLANETS_EN' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+   15:3   warning  'RASHI_LORDS_HI' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   16:3   warning  'DIRECTIONS' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  698:30  warning  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\AnalyticsDashboard.tsx
+  21:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\BabyNameSuggestionsPage.tsx
+   13:10  warning  'Tabs' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+   13:16  warning  'TabsContent' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   13:29  warning  'TabsList' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+   13:39  warning  'TabsTrigger' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   16:37  warning  'Filter' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+   18:37  warning  'analyzeNameStrength' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+   19:28  warning  'BabyName' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+   36:58  warning  Unexpected any. Specify a different type                                                     @typescript-eslint/no-explicit-any
+  129:9   warning  'getStrengthColor' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  335:65  warning  Unexpected any. Specify a different type                                                     @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\BusinessAstrologyPage.tsx
+   15:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   20:60  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   21:66  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   22:56  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   48:42  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  343:88  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  358:86  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  374:95  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  495:78  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\ConsultationPage.tsx
+  45:6  warning  React Hook useEffect has a missing dependency: 'isHi'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\EnhancedKundliMilan.tsx
+  400:15  warning  '_e' is defined but never used    @typescript-eslint/no-unused-vars
+  437:14  warning  '_err' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\EnterpriseAdminPage.tsx
+    7:27   warning  'useEffect' is defined but never used. Allowed unused vars must match /^_/u                            @typescript-eslint/no-unused-vars
+   12:10   warning  'Textarea' is defined but never used. Allowed unused vars must match /^_/u                             @typescript-eslint/no-unused-vars
+   19:3    warning  'Users' is defined but never used. Allowed unused vars must match /^_/u                                @typescript-eslint/no-unused-vars
+   22:3    warning  'Globe' is defined but never used. Allowed unused vars must match /^_/u                                @typescript-eslint/no-unused-vars
+   25:3    warning  'Database' is defined but never used. Allowed unused vars must match /^_/u                             @typescript-eslint/no-unused-vars
+   27:3    warning  'TrendingUp' is defined but never used. Allowed unused vars must match /^_/u                           @typescript-eslint/no-unused-vars
+   28:3    warning  'AlertTriangle' is defined but never used. Allowed unused vars must match /^_/u                        @typescript-eslint/no-unused-vars
+   30:3    warning  'Clock' is defined but never used. Allowed unused vars must match /^_/u                                @typescript-eslint/no-unused-vars
+   31:3    warning  'Mail' is defined but never used. Allowed unused vars must match /^_/u                                 @typescript-eslint/no-unused-vars
+   32:3    warning  'Phone' is defined but never used. Allowed unused vars must match /^_/u                                @typescript-eslint/no-unused-vars
+   33:3    warning  'Key' is defined but never used. Allowed unused vars must match /^_/u                                  @typescript-eslint/no-unused-vars
+   34:3    warning  'Zap' is defined but never used. Allowed unused vars must match /^_/u                                  @typescript-eslint/no-unused-vars
+   35:3    warning  'Target' is defined but never used. Allowed unused vars must match /^_/u                               @typescript-eslint/no-unused-vars
+   36:3    warning  'FileText' is defined but never used. Allowed unused vars must match /^_/u                             @typescript-eslint/no-unused-vars
+   37:3    warning  'Download' is defined but never used. Allowed unused vars must match /^_/u                             @typescript-eslint/no-unused-vars
+   38:3    warning  'Upload' is defined but never used. Allowed unused vars must match /^_/u                               @typescript-eslint/no-unused-vars
+   40:3    warning  'Edit' is defined but never used. Allowed unused vars must match /^_/u                                 @typescript-eslint/no-unused-vars
+   41:3    warning  'Trash2' is defined but never used. Allowed unused vars must match /^_/u                               @typescript-eslint/no-unused-vars
+   42:3    warning  'Eye' is defined but never used. Allowed unused vars must match /^_/u                                  @typescript-eslint/no-unused-vars
+   43:3    warning  'EyeOff' is defined but never used. Allowed unused vars must match /^_/u                               @typescript-eslint/no-unused-vars
+   45:3    warning  'Unlock' is defined but never used. Allowed unused vars must match /^_/u                               @typescript-eslint/no-unused-vars
+   46:3    warning  'UserPlus' is defined but never used. Allowed unused vars must match /^_/u                             @typescript-eslint/no-unused-vars
+   47:3    warning  'UserMinus' is defined but never used. Allowed unused vars must match /^_/u                            @typescript-eslint/no-unused-vars
+   48:3    warning  'RefreshCw' is defined but never used. Allowed unused vars must match /^_/u                            @typescript-eslint/no-unused-vars
+   49:3    warning  'Search' is defined but never used. Allowed unused vars must match /^_/u                               @typescript-eslint/no-unused-vars
+   50:3    warning  'Filter' is defined but never used. Allowed unused vars must match /^_/u                               @typescript-eslint/no-unused-vars
+   52:3    warning  'X' is defined but never used. Allowed unused vars must match /^_/u                                    @typescript-eslint/no-unused-vars
+   53:3    warning  'Copy' is defined but never used. Allowed unused vars must match /^_/u                                 @typescript-eslint/no-unused-vars
+   54:3    warning  'ExternalLink' is defined but never used. Allowed unused vars must match /^_/u                         @typescript-eslint/no-unused-vars
+   55:3    warning  'HelpCircle' is defined but never used. Allowed unused vars must match /^_/u                           @typescript-eslint/no-unused-vars
+   56:3    warning  'Info' is defined but never used. Allowed unused vars must match /^_/u                                 @typescript-eslint/no-unused-vars
+   58:3    warning  'Server' is defined but never used. Allowed unused vars must match /^_/u                               @typescript-eslint/no-unused-vars
+   59:3    warning  'Cloud' is defined but never used. Allowed unused vars must match /^_/u                                @typescript-eslint/no-unused-vars
+   60:3    warning  'Monitor' is defined but never used. Allowed unused vars must match /^_/u                              @typescript-eslint/no-unused-vars
+   61:3    warning  'Smartphone' is defined but never used. Allowed unused vars must match /^_/u                           @typescript-eslint/no-unused-vars
+   66:8    warning  'EnterpriseUser' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+   67:8    warning  'EnterpriseSubscription' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   74:10   warning  'showCreateUserDialog' is assigned a value but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+   74:32   warning  'setShowCreateUserDialog' is assigned a value but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+   75:10   warning  'selectedTenant' is assigned a value but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+  125:9    warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-explicit-any')
+  133:15   warning  Unexpected any. Specify a different type                                                               @typescript-eslint/no-explicit-any
+  240:128  warning  Unexpected any. Specify a different type                                                               @typescript-eslint/no-explicit-any
+  258:144  warning  Unexpected any. Specify a different type                                                               @typescript-eslint/no-explicit-any
+  323:150  warning  Unexpected any. Specify a different type                                                               @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\EventTransitPage.tsx
+  18:20  warning  'MapPin' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\FeatureRequestPortal.tsx
+  22:20  warning  'setCategory' is assigned a value but never used. Allowed unused vars must match /^_/u                           @typescript-eslint/no-unused-vars
+  28:6   warning  React Hook useEffect has a missing dependency: 'loadRequests'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\FeedbackDashboard.tsx
+  13:10  warning  'feedbackService' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\FeedbackPage.tsx
+  22:3  warning  'Calendar' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  28:3  warning  'ThumbsUp' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  31:3  warning  'Send' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\FestivalCalendarPage.tsx
+   29:10  warning  'getAnushthanById' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  412:14  warning  Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\FinancialAstrologyPage.tsx
+  8:69  warning  'FinancialPeriod' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\HoroscopePage.tsx
+  16:7  warning  'parseCoords' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\Index.tsx
+   21:8   warning  'EnhancedLanguageToggle' is defined but never used. Allowed unused vars must match /^_/u                                                @typescript-eslint/no-unused-vars
+   22:8   warning  'UserProfileDialog' is defined but never used. Allowed unused vars must match /^_/u                                                     @typescript-eslint/no-unused-vars
+   29:10  warning  'Label' is defined but never used. Allowed unused vars must match /^_/u                                                                 @typescript-eslint/no-unused-vars
+   31:16  warning  'CardContent' is defined but never used. Allowed unused vars must match /^_/u                                                           @typescript-eslint/no-unused-vars
+   35:3   warning  'calculateTransits' is defined but never used. Allowed unused vars must match /^_/u                                                     @typescript-eslint/no-unused-vars
+   48:3   warning  'getMoonSign' is defined but never used. Allowed unused vars must match /^_/u                                                           @typescript-eslint/no-unused-vars
+   49:3   warning  'getSunSign' is defined but never used. Allowed unused vars must match /^_/u                                                            @typescript-eslint/no-unused-vars
+   50:3   warning  'calculateAllPlanetaryStrengths' is defined but never used. Allowed unused vars must match /^_/u                                        @typescript-eslint/no-unused-vars
+   51:8   warning  'PlanetaryStrength' is defined but never used. Allowed unused vars must match /^_/u                                                     @typescript-eslint/no-unused-vars
+   53:10  warning  'calculateKundli' is defined but never used. Allowed unused vars must match /^_/u                                                       @typescript-eslint/no-unused-vars
+   53:32  warning  'KundliData' is defined but never used. Allowed unused vars must match /^_/u                                                            @typescript-eslint/no-unused-vars
+   55:3   warning  'generateComprehensiveHoroscope' is defined but never used. Allowed unused vars must match /^_/u                                        @typescript-eslint/no-unused-vars
+   56:8   warning  'ComprehensiveHoroscope' is defined but never used. Allowed unused vars must match /^_/u                                                @typescript-eslint/no-unused-vars
+   77:7   warning  'PlanetaryAspectsCard' is assigned a value but never used. Allowed unused vars must match /^_/u                                         @typescript-eslint/no-unused-vars
+   80:7   warning  'ReadingHistory' is assigned a value but never used. Allowed unused vars must match /^_/u                                               @typescript-eslint/no-unused-vars
+   81:7   warning  'PerformanceMonitor' is assigned a value but never used. Allowed unused vars must match /^_/u                                           @typescript-eslint/no-unused-vars
+   82:7   warning  'BreadcrumbNavigation' is assigned a value but never used. Allowed unused vars must match /^_/u                                         @typescript-eslint/no-unused-vars
+   84:7   warning  'MobileNavigation' is assigned a value but never used. Allowed unused vars must match /^_/u                                             @typescript-eslint/no-unused-vars
+   87:7   warning  'AdvancedAstrologyCard' is assigned a value but never used. Allowed unused vars must match /^_/u                                        @typescript-eslint/no-unused-vars
+   88:7   warning  'PanchangCard' is assigned a value but never used. Allowed unused vars must match /^_/u                                                 @typescript-eslint/no-unused-vars
+   90:7   warning  'DarkModeToggle' is assigned a value but never used. Allowed unused vars must match /^_/u                                               @typescript-eslint/no-unused-vars
+  155:16  warning  'setLang' is assigned a value but never used. Allowed unused vars must match /^_/u                                                      @typescript-eslint/no-unused-vars
+  164:10  warning  'pastReadings' is assigned a value but never used. Allowed unused vars must match /^_/u                                                 @typescript-eslint/no-unused-vars
+  165:10  warning  'saving' is assigned a value but never used. Allowed unused vars must match /^_/u                                                       @typescript-eslint/no-unused-vars
+  170:24  warning  'isCalculating' is assigned a value but never used. Allowed unused vars must match /^_/u                                                @typescript-eslint/no-unused-vars
+  210:9   warning  'proActive' is assigned a value but never used. Allowed unused vars must match /^_/u                                                    @typescript-eslint/no-unused-vars
+  211:9   warning  'sub' is assigned a value but never used. Allowed unused vars must match /^_/u                                                          @typescript-eslint/no-unused-vars
+  241:6   warning  React Hook useEffect has missing dependencies: 'handleSubmit', 'isHi', and 'toast'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  263:37  warning  Unexpected any. Specify a different type                                                                                                @typescript-eslint/no-explicit-any
+  264:42  warning  Unexpected any. Specify a different type                                                                                                @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\KanchiPage.tsx
+  48:24  warning  'setShowTransits' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\LearningPlatformPage.tsx
+  208:10  warning  'activeTab' is assigned a value but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  208:21  warning  'setActiveTab' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\LoveAstrologyPage.tsx
+  9:10  warning  'Badge' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\LuckyElementsPage.tsx
+  24:3  warning  'isNumberLucky' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  30:3  warning  'isColorLucky' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\MobileAppPage.tsx
+   16:60   warning  'DialogTrigger' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+   20:3    warning  'Monitor' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+   21:3    warning  'Wifi' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   22:3    warning  'Battery' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+   23:3    warning  'HardDrive' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+   24:3    warning  'MemoryStick' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+   28:3    warning  'Users' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   29:3    warning  'Activity' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   30:3    warning  'TrendingUp' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+   31:3    warning  'TrendingDown' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+   32:3    warning  'AlertTriangle' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+   33:3    warning  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+   34:3    warning  'Clock' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   35:3    warning  'Download' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   36:3    warning  'Upload' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   37:3    warning  'RefreshCw' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+   38:3    warning  'Search' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   39:3    warning  'Filter' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   40:3    warning  'Globe' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   44:3    warning  'Volume2' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+   46:3    warning  'EyeOff' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   48:3    warning  'Unlock' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   49:3    warning  'Zap' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   50:3    warning  'Target' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   52:3    warning  'PieChart' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   55:3    warning  'MessageSquare' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+   56:3    warning  'Star' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   57:3    warning  'ThumbsUp' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   58:3    warning  'ThumbsDown' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+   59:3    warning  'Info' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   60:3    warning  'HelpCircle' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+   61:3    warning  'Cpu' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   62:3    warning  'Database' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   64:3    warning  'Server' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   65:3    warning  'Router' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   66:3    warning  'Signal' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   67:3    warning  'Power' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   68:3    warning  'Sun' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   69:3    warning  'Moon' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   70:3    warning  'Palette' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+   71:3    warning  'Languages' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+   72:3    warning  'Accessibility' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+   76:3    warning  'Headphones' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+   77:3    warning  'Gamepad2' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   78:3    warning  'Tv' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+   79:3    warning  'Watch' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   80:3    warning  'Plus' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   81:3    warning  'Edit' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   82:3    warning  'Trash2' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   83:3    warning  'Save' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   85:3    warning  'Copy' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   86:3    warning  'ExternalLink' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+   92:8    warning  'MobileNotification' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   93:8    warning  'MobileAnalytics' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+   94:8    warning  'MobileAppSettings' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  392:134  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+  408:142  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\MuhuratCalendarPage.tsx
+  113:21  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+  233:9   warning  'formatTime' is assigned a value but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  237:9   warning  'getQualityColor' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\PanchangPage.tsx
+  17:22  warning  'CalendarIcon' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\PriyanshMuhuratPage.tsx
+  2:66  warning  'Share2' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\QuestionPage.tsx
+   66:8   warning  'ClassicalAnswer' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  241:9   warning  'subjectiveReading' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  374:46  warning  Unexpected any. Specify a different type                                                      @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\QuickWinsDashboard.tsx
+  21:38  warning  Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+  22:40  warning  Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+  23:10  warning  'categories' is assigned a value but never used. Allowed unused vars must match /^_/u                        @typescript-eslint/no-unused-vars
+  23:48  warning  Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+  28:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\RemediesPage.tsx
+   10:10  warning  'getMantrasByPlanet' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   10:30  warning  'getMantrasByType' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   11:10  warning  'getCharityByPlanet' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   11:30  warning  'getCharityByType' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   27:44  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+   28:60  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+   53:42  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+   70:40  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+  322:47  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+  325:48  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+  328:48  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+  334:71  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+  338:72  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+  342:72  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\ReportPreviewPage.tsx
+  253:87  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\SadeSatiPage.tsx
+  57:23  warning  'rashi' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\SpiritualRemediesPage.tsx
+    4:8   warning  'EnhancedBirthInputForm' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+    7:30  warning  'recommendMantras' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+    8:28  warning  'getYantrasByCategory' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   18:10  warning  'ascendant' is assigned a value but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+   18:21  warning  'setAscendant' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+   20:9   warning  'hiLang' is assigned a value but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+   66:45  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+   86:43  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+  104:45  warning  Unexpected any. Specify a different type                                                  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\SupplementsPage.tsx
+  49:9  warning  The 'entries' logical expression could make the dependencies of useMemo Hook (at line 63) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'entries' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\SynthesisPage.tsx
+  17:24  warning  'isCalculating' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\TransitAnalysisPage.tsx
+  263:6  warning  React Hook useEffect has a missing dependency: 'selectedProfile'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\TransitTimelinePage.tsx
+   241:9   warning  'start' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   283:11  warning  'p' is assigned a value but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+   855:58  warning  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  1004:93  warning  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\VaastuAssessmentPage.tsx
+  17:32  warning  'calculateOverallVaastuScore' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  17:61  warning  'VAASTU_DIRECTIONS' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+  18:42  warning  'VaastuDosha' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\VarshaphalPage.tsx
+  13:10  warning  'Calendar' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  13:28  warning  'User' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+  17:16  warning  'setLang' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\VidhyaKarmaDarshanPage.tsx
+  24:3  warning  'TrendingDown' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\WeddingMuhuratPage.tsx
+  3:25  warning  'Download' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  9:35  warning  'getDaysInMonth' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\knowledge\KnowledgeBase.tsx
+   3:10  warning  'Link' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+  11:41  warning  'CardTitle' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  27:3   warning  'Book' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+  28:3   warning  'UploadCloud' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  29:3   warning  'Download' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+  58:31  warning  'isLoading' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  83:50  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\knowledge\KnowledgeIngest.tsx
+  36:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\knowledge\KnowledgeUpload.tsx
+  120:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  184:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\prashna\PrashnaEngine.tsx
+  11:3   warning  'CardDescription' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  47:40  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\pages\prashna\PrashnaHistory.tsx
+  1:10  warning  'useState' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\accuracyDashboardService.ts
+  76:7  warning  'PLANET_DEGREE_TOLERANCE' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\accurateHoroscopeService.ts
+  3:10  warning  'generateComprehensiveHoroscope' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\advancedSEOService.ts
+   26:11  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  209:7   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  210:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\aiPredictionService.ts
+  161:9  warning  'asc' is assigned a value but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  209:9  warning  'rashiNames' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  247:3  warning  'queryContext' is defined but never used. Allowed unused args must match /^_/u         @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\answerCard\answerCardBuilder.ts
+   22:8   warning  'LifeArea' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  132:44  warning  'lang' is defined but never used. Allowed unused args must match /^_/u      @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\answerCard\redact.ts
+  39:42  warning  'tz_defaulted' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\ashtakavargaTransitService.ts
+  256:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\ashtakutaService.ts
+  19:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\aspectsService.ts
+  82:9  warning  'malefics' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\astronomyEphemerisService.ts
+   22:3   warning  'LongitudeFromSun' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+   23:3   warning  'EclipticLongitude' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  122:11  warning  'jd' is assigned a value but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\auspiciousTimesService.ts
+  66:20  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\businessAstrologyService.ts
+  293:67  warning  'planets' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  413:23  warning  Unexpected any. Specify a different type                                   @typescript-eslint/no-explicit-any
+  414:15  warning  Unexpected any. Specify a different type                                   @typescript-eslint/no-explicit-any
+  436:23  warning  Unexpected any. Specify a different type                                   @typescript-eslint/no-explicit-any
+  437:15  warning  Unexpected any. Specify a different type                                   @typescript-eslint/no-explicit-any
+  482:15  warning  Unexpected any. Specify a different type                                   @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\cacheService.ts
+   14:47  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  115:39  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  139:61  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  150:22  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+  211:22  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+  265:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  270:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  270:53  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  281:72  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  292:53  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\careerAstrologyService.ts
+    8:10  warning  'calculateShodashVarga' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+    8:33  warning  'getNavamsha' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   92:23  warning  Unexpected any. Specify a different type                                                 @typescript-eslint/no-explicit-any
+  171:3   warning  'degrees' is defined but never used. Allowed unused args must match /^_/u                @typescript-eslint/no-unused-vars
+  334:3   warning  'strength' is defined but never used. Allowed unused args must match /^_/u               @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\charityService.ts
+  249:3  warning  'budget' is assigned a value but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\chartBuilderService.ts
+   20:43  warning  'AscendantData' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+   21:33  warning  'NakshatraInfo' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+   22:34  warning  'ManglikResult' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+   23:42  warning  'DashaResult' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+   24:29  warning  'YogaAnalysis' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   25:38  warning  'ShodashVargaResult' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+   26:34  warning  'ShadabalaAnalysis' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+   27:38  warning  'SarvashtakavargaResult' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  132:12  warning  'e' is defined but never used                                                             @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\classicalAnswerEngine.ts
+   53:15  warning  'ShadabalaResult' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   53:32  warning  'ShadabalaAnalysis' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   54:15  warning  'DashaResult' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+   55:15  warning  'YogaAnalysis' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+   56:15  warning  'JaiminiAnalysis' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  185:11  warning  'PlanetMinimal' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  195:11  warning  'TransitMinimal' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  201:11  warning  'AspectMinimal' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  469:9   warning  'isHi' is assigned a value but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\classicalAshtakavargaService.ts
+  433:3  warning  'lagnaRashiIdx' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\darkModeService.ts
+  130:35  warning  'e' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\dashaGocharaCorrelationService.ts
+  21:7  warning  'PLANET_HI' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\dashaService.ts
+  249:9   warning  'nakshatraIndex' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  349:56  warning  'lang' is assigned a value but never used. Allowed unused args must match /^_/u            @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\dashaTimelineCorrelationService.ts
+  93:10  warning  'toMs' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\dashaTransitCorrelationService.ts
+  29:15  warning  'Sarvashtakavarga' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\dataExportService.ts
+  15:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  16:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  17:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  18:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  19:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\divisionalChartsService.ts
+   38:12  warning  Unexpected any. Specify a different type                                               @typescript-eslint/no-explicit-any
+   39:11  warning  Unexpected any. Specify a different type                                               @typescript-eslint/no-explicit-any
+   40:12  warning  Unexpected any. Specify a different type                                               @typescript-eslint/no-explicit-any
+  125:11  warning  'waterStart' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\dynamicTransitService.ts
+  14:19  warning  'RASHIS' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  14:55  warning  'PLANET_REMEDIES' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\email.ts
+  45:5  warning  Unused eslint-disable directive (no problems were reported from 'no-console')
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\engineDataAssembler.ts
+   8:10  warning  'calculateDynamicTransits' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  11:12  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+  19:13  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+  20:12  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+  26:3   warning  'lat' is assigned a value but never used. Allowed unused args must match /^_/u              @typescript-eslint/no-unused-vars
+  27:3   warning  'lon' is assigned a value but never used. Allowed unused args must match /^_/u              @typescript-eslint/no-unused-vars
+  71:19  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+  82:16  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\enhancedAshtakavargaService.ts
+  166:45  warning  'params' is defined but never used. Allowed unused args must match /^_/u                  @typescript-eslint/no-unused-vars
+  594:43  warning  'transitDate' is defined but never used. Allowed unused args must match /^_/u             @typescript-eslint/no-unused-vars
+  665:85  warning  'birthPositions' is defined but never used. Allowed unused args must match /^_/u          @typescript-eslint/no-unused-vars
+  704:13  warning  'transitPoints' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  754:66  warning  'combinedChart' is defined but never used. Allowed unused args must match /^_/u           @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\enterpriseSaaSService.ts
+   98:30  warning  Unexpected any. Specify a different type                                       @typescript-eslint/no-explicit-any
+   99:9   warning  Unexpected any. Specify a different type                                       @typescript-eslint/no-explicit-any
+  241:19  warning  'id' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  297:17  warning  'id' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\ephemerisService.ts
+   13:7   warning  'AYANAMSA_2000' is assigned a value but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+   14:7   warning  'AYANAMSA_BASE_YEAR' is assigned a value but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   15:7   warning  'AYANAMSA_ANNUAL_RATE' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   16:7   warning  'AYANAMSA_2026' is assigned a value but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  145:9   warning  'M' is assigned a value but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+  720:80  warning  Unexpected any. Specify a different type                                                         @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\eventMuhuratService.ts
+    7:25  warning  'Tithi' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+    7:32  warning  'Nakshatra' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  454:3   warning  'panchang' is defined but never used. Allowed unused args must match /^_/u   @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\eventTransitAnalysisService.ts
+  394:3   warning  'eventType' is defined but never used. Allowed unused args must match /^_/u                 @typescript-eslint/no-unused-vars
+  509:12  warning  '_' is defined but never used                                                               @typescript-eslint/no-unused-vars
+  520:12  warning  '_' is defined but never used                                                               @typescript-eslint/no-unused-vars
+  637:9   warning  'activeYogaCount' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\eventTransitPdfService.ts
+   46:27  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  104:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  179:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\feedbackAnalysisService.ts
+  536:39  warning  'items' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\feedbackService.ts
+  57:29  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  92:27  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\financialAstrologyService.ts
+  40:9   warning  'baseDate' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  87:51  warning  'saturnSign' is defined but never used. Allowed unused args must match /^_/u         @typescript-eslint/no-unused-vars
+  99:74  warning  'ascendantRashi' is defined but never used. Allowed unused args must match /^_/u     @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\financialTimingService.ts
+  138:50  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  203:47  warning  'birthChart' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  203:59  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  296:43  warning  'birthChart' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  296:55  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  369:37  warning  'birthChart' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  369:49  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  431:42  warning  'birthChart' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  431:54  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  504:15  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\gemstoneService.ts
+  470:23  warning  Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+  471:3   warning  'birthDate' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  524:64  warning  Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\geocodingService.ts
+  57:55  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\horoscopeService.ts
+    9:53  warning  'TransitResult' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  344:48  warning  'category' is defined but never used. Allowed unused args must match /^_/u       @typescript-eslint/no-unused-vars
+  418:54  warning  'tone' is defined but never used. Allowed unused args must match /^_/u           @typescript-eslint/no-unused-vars
+  418:68  warning  'moonSign' is defined but never used. Allowed unused args must match /^_/u       @typescript-eslint/no-unused-vars
+  430:56  warning  'tone' is defined but never used. Allowed unused args must match /^_/u           @typescript-eslint/no-unused-vars
+  430:70  warning  'moonSign' is defined but never used. Allowed unused args must match /^_/u       @typescript-eslint/no-unused-vars
+  442:55  warning  'moonSign' is defined but never used. Allowed unused args must match /^_/u       @typescript-eslint/no-unused-vars
+  454:57  warning  'moonSign' is defined but never used. Allowed unused args must match /^_/u       @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\houseSystemService.ts
+  108:3  warning  'ayanamsaValue' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+  124:3  warning  'ayanamsaValue' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+  155:9  warning  'latRad' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  156:9  warning  'epsRad' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  162:5  warning  'mcOrIcTrop' is defined but never used. Allowed unused args must match /^_/u       @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\interpretationEngine.ts
+   29:28  warning  'DashaPeriod' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   29:41  warning  'AntarDasha' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+   33:37  warning  'ServiceEnhancedYogaResult' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+   34:32  warning  'PadaLagna' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+   34:43  warning  'Karaka' is defined but never used. Allowed unused vars must match /^_/u                         @typescript-eslint/no-unused-vars
+   36:41  warning  'ServiceArudhaPsychologyOutput' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   37:15  warning  'ClassicalAnswer' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   42:38  warning  'ServiceSixLayerRemedyStack' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+   44:15  warning  'DoubleTransitResultV2' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  200:7   warning  'RASHI_NAMES' is assigned a value but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  223:10  warning  'applyVargottamaModifier' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  228:10  warning  'applyCombustionModifier' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  371:10  warning  'ordinalSuffix' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+  516:10  warning  'assembleSixLayerStack' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  518:3   warning  'nakshatraFear' is defined but never used. Allowed unused args must match /^_/u                  @typescript-eslint/no-unused-vars
+  519:3   warning  'saturnWound' is defined but never used. Allowed unused args must match /^_/u                    @typescript-eslint/no-unused-vars
+  587:9   warning  'getPlanet' is assigned a value but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  626:11  warning  'activeLords' is assigned a value but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\jaiminiService.ts
+  580:3   warning  'ascendantRashi' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  701:61  warning  'birthYear' is defined but never used. Allowed unused args must match /^_/u       @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\jyotishApiService.ts
+  12:48  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  56:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  56:46  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\knowledgeExtractService.ts
+  263:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\kpSystemService.ts
+  198:42  warning  Unexpected any. Specify a different type                                        @typescript-eslint/no-explicit-any
+  390:28  warning  'planets' is defined but never used. Allowed unused args must match /^_/u       @typescript-eslint/no-unused-vars
+  390:49  warning  'predictions' is defined but never used. Allowed unused args must match /^_/u   @typescript-eslint/no-unused-vars
+  410:76  warning  'subLord' is defined but never used. Allowed unused args must match /^_/u       @typescript-eslint/no-unused-vars
+  456:35  warning  'significator' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  460:37  warning  'significator' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\lalKitabService.ts
+  292:3   warning  'houses' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  487:15  warning  Unexpected any. Specify a different type                                  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\loveAstrologyService.ts
+  35:3  warning  'person1Chart' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  36:3  warning  'person2Chart' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\manglikService.ts
+  336:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  350:62  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  370:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  405:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\marriageService.ts
+  19:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  20:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  21:10  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\mobileAppFoundationService.ts
+   76:25  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   92:9   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  108:30  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  342:16  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\mundaneAstrologyService.ts
+  127:34  warning  'year' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\nadiAstrologyService.ts
+  242:3   warning  'birthTime' is defined but never used. Allowed unused args must match /^_/u             @typescript-eslint/no-unused-vars
+  243:3   warning  'thumbPattern' is defined but never used. Allowed unused args must match /^_/u          @typescript-eslint/no-unused-vars
+  248:9   warning  'birthYear' is assigned a value but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  249:9   warning  'birthMonth' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  252:48  warning  'record' is defined but never used. Allowed unused args must match /^_/u                @typescript-eslint/no-unused-vars
+  266:23  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  304:58  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  325:49  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  327:9   warning  'birthYear' is assigned a value but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  328:9   warning  'currentYear' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  417:31  warning  'signature' is defined but never used. Allowed unused args must match /^_/u             @typescript-eslint/no-unused-vars
+  417:62  warning  'events' is defined but never used. Allowed unused args must match /^_/u                @typescript-eslint/no-unused-vars
+  452:34  warning  'signature' is defined but never used. Allowed unused args must match /^_/u             @typescript-eslint/no-unused-vars
+  452:65  warning  'events' is defined but never used. Allowed unused args must match /^_/u                @typescript-eslint/no-unused-vars
+  472:29  warning  'planetaryPositions' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+  472:49  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  477:30  warning  'planetaryPositions' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+  477:50  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  477:57  warning  'excludePlanet' is defined but never used. Allowed unused args must match /^_/u         @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\nameAnalysisService.ts
+    7:10  warning  'calculateNameNumber' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+    9:10  warning  'getNakshatraLetters' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  467:21  warning  Unexpected any. Specify a different type                                               @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\partnershipAnalysisService.ts
+  170:11  warning  Unexpected any. Specify a different type                                                      @typescript-eslint/no-explicit-any
+  171:3   warning  'chart2' is defined but never used. Allowed unused args must match /^_/u                      @typescript-eslint/no-unused-vars
+  171:12  warning  Unexpected any. Specify a different type                                                      @typescript-eslint/no-explicit-any
+  174:9   warning  'baseCompatibility' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  241:51  warning  Unexpected any. Specify a different type                                                      @typescript-eslint/no-explicit-any
+  331:44  warning  'birthChart' is defined but never used. Allowed unused args must match /^_/u                  @typescript-eslint/no-unused-vars
+  331:56  warning  Unexpected any. Specify a different type                                                      @typescript-eslint/no-explicit-any
+  382:52  warning  Unexpected any. Specify a different type                                                      @typescript-eslint/no-explicit-any
+  449:15  warning  Unexpected any. Specify a different type                                                      @typescript-eslint/no-explicit-any
+  450:18  warning  Unexpected any. Specify a different type                                                      @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\pdfExportService.ts
+   10:3   warning  'containsDevanagari' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  191:26  warning  Unexpected any. Specify a different type                                               @typescript-eslint/no-explicit-any
+  300:9   warning  'pageWidth' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  301:9   warning  'pageHeight' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  481:18  warning  Unexpected any. Specify a different type                                               @typescript-eslint/no-explicit-any
+  764:27  warning  Unexpected any. Specify a different type                                               @typescript-eslint/no-explicit-any
+  875:36  warning  Unexpected any. Specify a different type                                               @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\pdfFontUtils.ts
+  17:10  warning  'base64ToArrayBuffer' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\personalizedCalendarService.ts
+  13:31  warning  'getUpcomingFestivals' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\prasnaMargaExtras.ts
+  44:7  warning  'NAKSHATRA_NAMES_HI' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\questionAnalysisService.ts
+   488:7  warning  'MALEFICS' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  1045:3  warning  'lat' is defined but never used. Allowed unused args must match /^_/u                @typescript-eslint/no-unused-vars
+  1046:3  warning  'lon' is defined but never used. Allowed unused args must match /^_/u                @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\randomQuestionsService.ts
+  8:10  warning  'calculateCompleteAscendant' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\rashiService.ts
+  6:65  warning  'PlanetPosition' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\remediesService.ts
+    7:22  warning  'getMantrasByPlanet' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+    8:33  warning  'getCharityByPlanet' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  259:15  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+  260:3   warning  'duration' is assigned a value but never used. Allowed unused args must match /^_/u   @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\shadabalaService.ts
+  158:9  warning  'debilDeg' is assigned a value but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  196:9  warning  'worstHouse' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\subjectiveAnalysisService.ts
+   9:3  warning  'ArudhaPada' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  14:3  warning  'ZodiacSign' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\subscriptionService.ts
+  99:28  warning  'featureKey' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\swissEphemerisService.ts
+  43:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  56:50  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\synthesis\contradictionResolver.ts
+  10:3  warning  'signals' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\synthesis\narrativeAdapter.ts
+  3:28  warning  'ContradictionClass' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\synthesis\scoringEngine.ts
+  28:3  warning  'domain' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\synthesis\signalExtractor.ts
+  2:3  warning  'SynthesisDomain' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  6:3  warning  'SignalLayer' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\synthesis\signalTypes.ts
+  2:15  warning  'PlanetName' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  2:27  warning  'HouseNumber' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:40  warning  'ZodiacSign' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  2:52  warning  'Dignity' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\synthesis\timingEngine.ts
+  5:3  warning  'domain' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\tajikService.ts
+  205:9  warning  'isBenefic' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  345:9  warning  'calcSaham' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  381:3  warning  'yearLord' is defined but never used. Allowed unused args must match /^_/u            @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\userFeedbackService.ts
+  366:55  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  370:57  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\vaastuDoshaService.ts
+  7:26  warning  'RoomType' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\vaastuRemedyService.ts
+  7:15  warning  'DoshaSeverity' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\vaastuService.ts
+  418:9  warning  'directionInfo' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\varshaphalService.ts
+  430:13  warning  Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+  431:11  warning  Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+  433:3   warning  'positions' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\vedicGaneshPDFGenerator.ts
+     5:3   warning  'sanitizePDFText' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+     7:3   warning  'stripDevanagari' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+   325:29  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   337:54  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   338:47  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   387:56  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   388:49  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   409:60  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   410:53  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   437:58  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   438:51  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   463:30  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   471:57  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   472:50  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   522:48  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   523:34  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   638:19  warning  'd' is defined but never used. Allowed unused args must match /^_/u                         @typescript-eslint/no-unused-vars
+   641:59  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   642:52  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   667:24  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+   740:10  warning  'measureLabelWidth' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+   764:9   warning  'valueColFixedMm' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  1018:17  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+  1031:17  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\vimshottariDashaService.ts
+  194:20  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  195:5   warning  'ayanamsa' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+  223:27  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  270:27  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  318:27  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  505:5   warning  'pratyantar' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  525:5   warning  'pratyantar' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  545:5   warning  'pratyantar' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  565:5   warning  'pratyantar' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  573:5   warning  'pratyantar' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  581:5   warning  'pratyantar' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\virginWorldFameService.ts
+  107:7   warning  'RASHI_NAMES' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  112:10  warning  'getRashiIndex' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  419:11  warning  'endYear' is assigned a value but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\westernAstrologyService.ts
+  44:7  warning  'SIGN_SYMBOLS' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\whiteLabelPDF.ts
+  5:10  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\yogaExtendedService.ts
+  328:38  warning  'moon' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\yogaService.ts
+   51:7   warning  'NATURAL_MALEFICS' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  214:51  warning  'ascendantRashi' is defined but never used. Allowed unused args must match /^_/u             @typescript-eslint/no-unused-vars
+  609:9   warning  'moon' is assigned a value but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+  696:13  warning  'type' is assigned a value but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+  761:9   warning  'tenthFromLagna' is assigned a value but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  762:9   warning  'mercury' is assigned a value but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  763:9   warning  'jupiter' is assigned a value but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  764:9   warning  'venus' is assigned a value but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\services\yogasIdentificationService.ts
+  588:45  warning  'params' is defined but never used. Allowed unused args must match /^_/u          @typescript-eslint/no-unused-vars
+  772:25  warning  'housePositions' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  783:26  warning  'housePositions' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  817:59  warning  'positions' is defined but never used. Allowed unused args must match /^_/u       @typescript-eslint/no-unused-vars
+  876:34  warning  'positions' is defined but never used. Allowed unused args must match /^_/u       @typescript-eslint/no-unused-vars
+  914:60  warning  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  955:44  warning  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  972:36  warning  'yogas' is defined but never used. Allowed unused args must match /^_/u           @typescript-eslint/no-unused-vars
+  979:38  warning  'yogas' is defined but never used. Allowed unused args must match /^_/u           @typescript-eslint/no-unused-vars
+  986:57  warning  'stats' is defined but never used. Allowed unused args must match /^_/u           @typescript-eslint/no-unused-vars
+  986:64  warning  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\accuracy\corpusPhase1.test.ts
+   31:8   warning  'PreciseChart' is defined but never used. Allowed unused vars must match /^_/u                                                                              @typescript-eslint/no-unused-vars
+  132:9   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unsafe-assignment')
+  142:11  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unsafe-assignment' or '@typescript-eslint/no-unsafe-member-access')
+  145:11  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unsafe-member-access')
+  147:13  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unsafe-member-access')
+  150:11  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unsafe-member-access')
+  152:13  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unsafe-member-access' or '@typescript-eslint/no-unsafe-assignment')
+  179:9   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unsafe-assignment')
+  183:9   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unsafe-member-access')
+  188:9   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unsafe-member-access')
+  194:11  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unsafe-member-access' or '@typescript-eslint/no-unsafe-assignment')
+  198:11  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unsafe-member-access')
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\compare_parashar.ts
+   69:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   69:55  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  114:62  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\generate_summary.ts
+  20:61  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\moonFlipAudit.test.ts
+   19:33  warning  'dateTimeToJD' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   82:7   warning  'years' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  111:11  warning  'flips' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\services\ascendantService.test.ts
+   8:3   warning  'calculateHouseCusps' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   9:8   warning  'AscendantData' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  33:40  warning  'lat' is defined but never used. Allowed unused args must match /^_/u                  @typescript-eslint/no-unused-vars
+  33:50  warning  'description' is defined but never used. Allowed unused args must match /^_/u          @typescript-eslint/no-unused-vars
+  73:50  warning  'description' is defined but never used. Allowed unused args must match /^_/u          @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\services\ephemerisService.test.ts
+   4:32  warning  'beforeEach' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  70:49  warning  'description' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\services\kundliEngine.test.ts
+  98:57  warning  'id' is defined but never used. Allowed unused args must match /^_/u         @typescript-eslint/no-unused-vars
+  98:88  warning  'tolerance' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\services\manglikService.test.ts
+    7:3   warning  'calculateManglikSeverity' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+    8:3   warning  'checkCancellationConditions' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+    9:8   warning  'ManglikResult' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+  285:30  warning  'name' is defined but never used. Allowed unused args must match /^_/u                         @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\services\nakshatraService.test.ts
+    9:8   warning  'NakshatraInfo' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  157:40  warning  'description' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+  285:30  warning  'name' is defined but never used. Allowed unused args must match /^_/u           @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\services\panchangSync.test.ts
+  134:13  warning  'moonLon' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\services\questionAnalysisService.test.ts
+  4:3  warning  'HOUSE_SIGNIFICATIONS' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\services\vedicAstroEngine.test.ts
+  1:32  warning  'beforeEach' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\validation\accuracyValidator.ts
+  14:3   warning  'getLahiriAyanamsa' is defined but never used. Allowed unused vars must match /^_/u                           @typescript-eslint/no-unused-vars
+  17:40  warning  'VDashaResult' is defined but never used. Allowed unused vars must match /^_/u                                @typescript-eslint/no-unused-vars
+  71:7   warning  'DEFAULT_HOUSE_CUSP_TOLERANCE' is assigned a value but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  72:7   warning  'DEFAULT_ANTARDASHA_TOLERANCE_DAYS' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week10\accuracyDashboard.test.ts
+  15:8  warning  'ChartAccuracyResult' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week10\accuracyDashboardPage.test.tsx
+  11:32  warning  'vi' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week3\dataDeleteService.test.ts
+   41:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   46:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   63:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   74:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   79:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   86:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   91:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  110:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  115:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week3\dataExportService.test.ts
+   39:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   44:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   57:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   68:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   73:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   80:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   85:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  104:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  109:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week3\dataLayer.test.ts
+    8:36  warning  'beforeEach' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  118:11  warning  'db' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week3\security.test.ts
+  11:32  warning  'beforeEach' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week4\envConfig.test.ts
+  11:32  warning  'beforeEach' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week5\birthChartPage.test.tsx
+  12:36  warning  'beforeEach' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  13:46  warning  'act' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week5\kundliUserJourney.test.tsx
+  15:32  warning  'beforeEach' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  15:44  warning  'vi' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week5\prashnaUserJourney.test.tsx
+   29:40  warning  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+  257:11  warning  'directionSelect' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  270:11  warning  'languageSelect' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week6\ashtakutaUnit.test.ts
+  154:11  warning  'favorableTaras' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  297:11  warning  'result' is assigned a value but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week6\matchmakingIntegration.test.ts
+   11:36  warning  'beforeEach' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   19:26  warning  'data' is defined but never used. Allowed unused args must match /^_/u        @typescript-eslint/no-unused-vars
+  377:12  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week6\matchmakingPolish.test.tsx
+   50:10  warning  'fillPartnerForm' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  174:10  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week6\panchangIntegration.test.ts
+  11:32  warning  'beforeEach' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week6\panchangUnit.test.ts
+  20:3  warning  'TITHI_DATABASE' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  21:3  warning  'NAKSHATRA_DATABASE' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  22:3  warning  'YOGA_DATABASE' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  23:3  warning  'KARANA_DATABASE' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  24:3  warning  'VAR_DATABASE' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week7\dashaTransitEnhanced.test.ts
+  20:3  warning  'computeMonthlyOutlook' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week7\profileSelectorIntegration.test.tsx
+   11:26  warning  'fireEvent' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   49:11  warning  'validProfile' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   81:11  warning  'validProfile' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  189:11  warning  'profile1' is assigned a value but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  201:11  warning  'profile2' is assigned a value but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week7\profileValidation.test.ts
+   68:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  104:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  105:42  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\tests\week8\familyProfiles.test.ts
+   21:8   warning  'FamilyProfile' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  252:11  warning  'a' is assigned a value but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\utils\analytics.ts
+   36:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  104:30  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  188:67  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  271:56  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  367:71  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  395:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  446:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  447:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\utils\coordinateParser.ts
+   35:47  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  120:57  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\utils\performanceMonitor.ts
+  252:35  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  253:36  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  282:14  warning  'e' is defined but never used                                                 @typescript-eslint/no-unused-vars
+  291:26  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  292:30  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  299:14  warning  'e' is defined but never used                                                 @typescript-eslint/no-unused-vars
+  308:40  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  313:14  warning  'e' is defined but never used                                                 @typescript-eslint/no-unused-vars
+  444:32  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  444:42  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  458:32  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  458:42  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  485:52  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  537:5   warning  'renderItem' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\utils\performanceMonitoringService.ts
+   49:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   73:53  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   86:50  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  101:50  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  145:50  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  149:84  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  184:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\utils\seoMetadata.ts
+  17:7  warning  'DEFAULT_OG' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+E:\Rajkumar\Vedic_Rajkumar\src\utils\serviceWorkerRegistration.ts
+  73:59  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  89:66  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Rajkumar\Vedic_Rajkumar\src\utils\userBehaviorService.ts
+  179:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 1273 problems (0 errors, 1273 warnings)
+  0 errors and 16 warnings potentially fixable with the `--fix` option.
+
+LINT_EXIT=0

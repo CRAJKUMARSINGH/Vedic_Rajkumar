@@ -1,0 +1,9 @@
+{
+  "title": "persona-users.spec.ts › Persona — advanced tier › advanced: midnight 00:00 is valid, 24:00 is rejected",
+  "status": "passed",
+  "durationMs": 3241,
+  "errors": [],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "failedRequests": []
+}

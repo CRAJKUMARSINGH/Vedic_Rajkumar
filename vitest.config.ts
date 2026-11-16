@@ -18,5 +18,9 @@ export default defineConfig({
     // gate circular. It is a manual tool — see its own header.
     exclude: [...configDefaults.exclude, '**/src/tests/accuracy/generateGolden.test.ts'],
     testTimeout: 10000,
+    // Cap fork workers: the suite loads the WASM ephemeris per worker and the
+    // default (one per CPU core) exhausts memory on developer machines, causing
+    // "Timeout waiting for worker to respond" / ENOENT worker crashes.
+    maxWorkers: 4,
   },
 });

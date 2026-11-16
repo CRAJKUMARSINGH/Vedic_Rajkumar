@@ -58,6 +58,7 @@ import {
   Check,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { DATE_INPUT_FORMAT_HINT } from '@/lib/dateValidation';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -1191,8 +1192,12 @@ export const ComprehensiveReportForm: React.FC<ComprehensiveReportProps> = ({ is
                 type="date"
                 value={birthDate}
                 onChange={(e) => { setBirthDate(e.target.value); if (formError) setFormError(null); }}
+                aria-describedby="report-birthdate-format"
                 className="mt-1.5"
               />
+              <p id="report-birthdate-format" className={cn('mt-1 text-[11px] text-muted-foreground', isHindi && 'font-hindi')}>
+                {isHindi ? `प्रारूप: ${DATE_INPUT_FORMAT_HINT}` : `Format: ${DATE_INPUT_FORMAT_HINT}`}
+              </p>
             </div>
             <div>
               <Label htmlFor="moonsign" className={cn(isHindi && 'font-hindi')}>{t.moonSign}<span className="ml-1 text-[10px] text-muted-foreground font-normal">({t.optional})</span></Label>

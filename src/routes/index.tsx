@@ -223,11 +223,12 @@ export const routes: RouteConfig[] = [
   // ── Legal ────────────────────────────────────────────────────────────────────
   { path: '/privacy',            element: <PrivacyPolicyPage /> },
   { path: '/terms',              element: <TermsOfServicePage /> },
-  // PrivacySettingsPage calls useSession()/useAuthenticatedSupabase() — gate it so
-  // the page can't throw when Clerk is unconfigured.
-  { path: '/privacy-settings',   element: <ClerkGate><PrivacySettingsPage /></ClerkGate> },
-  { path: '/settings/data',      element: <ClerkGate><PrivacySettingsPage /></ClerkGate> },  // Week 5: GDPR/DPDP canonical route
-  { path: '/settings/privacy',   element: <ClerkGate><PrivacySettingsPage /></ClerkGate> },  // alias
+  // PrivacySettingsPage is demo-safe internally: consent always works, and the
+  // Clerk-backed export/delete sections render an "unavailable" card when Clerk
+  // is unconfigured. Do NOT wrap it in <ClerkGate> or consent would be hidden.
+  { path: '/privacy-settings',   element: <PrivacySettingsPage /> },
+  { path: '/settings/data',      element: <PrivacySettingsPage /> },  // Week 5: GDPR/DPDP canonical route
+  { path: '/settings/privacy',   element: <PrivacySettingsPage /> },  // alias
 
   // ── Supplements & Synthesis (active — supplement core features with deep analysis)
   //   These are not the 4 core features but are working end-to-end, so they get

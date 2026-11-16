@@ -14,6 +14,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import type { FamilyProfile, NewFamilyProfile } from '@/lib/familyProfiles';
+import { DATE_INPUT_FORMAT_HINT } from '@/lib/dateValidation';
 
 // ─── Relationship options ─────────────────────────────────────────────────────
 
@@ -290,7 +291,7 @@ const FamilyProfileForm: React.FC<FamilyProfileFormProps> = ({
             id="fp-date-helper"
             className={cn('text-[11px] text-muted-foreground leading-snug', isHi && 'font-hindi')}
           >
-            {t.dobHelper}
+            {t.dobHelper} · {isHi ? 'प्रारूप' : 'Format'}: {DATE_INPUT_FORMAT_HINT}
           </p>
         </div>
 
