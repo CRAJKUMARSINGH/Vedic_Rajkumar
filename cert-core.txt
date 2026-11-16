@@ -1,0 +1,14 @@
+
+> vedic-rajkumar@0.1.0 test:core
+> vitest run src/tests/featureRegistryNav.test.ts src/tests/services/ephemerisService.test.ts src/tests/services/vedicAstroEngine.test.ts
+
+
+ RUN  v4.1.11 E:/Rajkumar/Vedic_Rajkumar
+
+
+ Test Files  3 passed (3)
+      Tests  48 passed (48)
+   Start at  19:54:05
+   Duration  3.98s (transform 564ms, setup 1.46s, import 534ms, tests 158ms, environment 7.83s)
+
+CORE=0

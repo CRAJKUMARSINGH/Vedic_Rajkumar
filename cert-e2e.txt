@@ -1,0 +1,39 @@
+
+Running 24 tests using 1 worker
+
+  ok  1 [chromium-preview] › tests\e2e\persona-users.spec.ts:186:3 › Persona — basic tier › basic: home renders for a synthetic visitor (11.5s)
+  ok  2 [chromium-preview] › tests\e2e\persona-users.spec.ts:199:3 › Persona — basic tier › basic: kundli input form exposes labelled date/time/place fields (4.4s)
+  ok  3 [chromium-preview] › tests\e2e\persona-users.spec.ts:212:3 › Persona — basic tier › basic: calculation renders a horoscope without forced clicks (6.9s)
+  ok  4 [chromium-preview] › tests\e2e\persona-users.spec.ts:231:3 › Persona — basic tier › basic: English/Hindi switching changes the UI language (4.3s)
+  ok  5 [chromium-preview] › tests\e2e\persona-users.spec.ts:247:3 › Persona — basic tier › basic: panchang navigation from the home page (4.1s)
+  ok  6 [chromium-preview] › tests\e2e\persona-users.spec.ts:269:3 › Persona — intermediate tier › intermediate: kundli detail view renders for the computed chart (4.0s)
+  ok  7 [chromium-preview] › tests\e2e\persona-users.spec.ts:291:3 › Persona — intermediate tier › intermediate: prashna returns a verdict (7.0s)
+  ok  8 [chromium-preview] › tests\e2e\persona-users.spec.ts:314:3 › Persona — intermediate tier › intermediate: matchmaking computes compatibility from sample data (3.1s)
+  ok  9 [chromium-preview] › tests\e2e\persona-users.spec.ts:334:3 › Persona — intermediate tier › intermediate: panchang renders a result region for a chosen date (2.3s)
+  ok 10 [chromium-preview] › tests\e2e\persona-users.spec.ts:350:3 › Persona — intermediate tier › intermediate: PDF/print export control is wired up (3.4s)
+  ok 11 [chromium-preview] › tests\e2e\persona-users.spec.ts:391:3 › Persona — advanced tier › advanced: leap-year dates are accepted, impossible dates rejected (2.4s)
+  ok 12 [chromium-preview] › tests\e2e\persona-users.spec.ts:412:3 › Persona — advanced tier › advanced: invalid calendar date (31/04/2020) shows an explanation and blocks submit (2.6s)
+  ok 13 [chromium-preview] › tests\e2e\persona-users.spec.ts:431:3 › Persona — advanced tier › advanced: midnight 00:00 is valid, 24:00 is rejected (2.7s)
+  ok 14 [chromium-preview] › tests\e2e\persona-users.spec.ts:459:3 › Persona — advanced tier › advanced: rapid repeated submissions do not crash or duplicate (4.2s)
+  ok 15 [chromium-preview] › tests\e2e\persona-users.spec.ts:486:3 › Persona — advanced tier › advanced: location dropdown cannot overlap the submit button (4.1s)
+  ok 16 [chromium-preview] › tests\e2e\persona-users.spec.ts:517:3 › Persona — advanced tier › advanced: submit click succeeds even if dropdown is open (no force:true) (3.8s)
+  ok 17 [chromium-preview] › tests\e2e\persona-users.spec.ts:555:3 › Persona — advanced tier › advanced: keyboard-only selection and submission (4.0s)
+  ok 18 [chromium-preview] › tests\e2e\persona-users.spec.ts:584:3 › Persona — advanced tier › advanced: a stale geocoding response does not reopen the dropdown (4.6s)
+  ok 19 [chromium-preview] › tests\e2e\persona-users.spec.ts:601:3 › Persona — advanced tier › advanced: privacy settings work without Clerk (demo mode) (2.7s)
+  ok 20 [chromium-preview] › tests\e2e\persona-users.spec.ts:629:3 › Persona — advanced tier › advanced: deep-link refresh keeps the page functional (2.8s)
+  ok 21 [chromium-preview] › tests\e2e\persona-users.spec.ts:645:3 › Persona — advanced tier › advanced: geocoding network failure degrades gracefully (4.6s)
+  ok 22 [chromium-preview] › tests\e2e\persona-users.spec.ts:669:3 › Persona — advanced tier › advanced: offline production preview serves a usable shell (7.4s)
+=== PRODUCTION home / — HTTP >=400 ===
+(none)
+
+=== PRODUCTION home / — requestfailed ===
+(none)
+
+=== PRODUCTION home / — console.error ===
+(none)
+
+  ok 23 [chromium-preview] › tests\e2e\production-offline.spec.ts:28:1 › PATCH 6 — home page loads with no unexplained 4xx/5xx in production (5.1s)
+  ok 24 [chromium-preview] › tests\e2e\production-offline.spec.ts:66:1 › PATCH 5 — /panchang works offline after service worker activation (10.0s)
+
+  24 passed (2.1m)
+EXIT=0

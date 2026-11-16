@@ -1,0 +1,14 @@
+
+> vedic-rajkumar@0.1.0 test:accuracy:fast
+> vitest run src/tests/timeScales.test.ts src/tests/nakshatraEdge.test.ts src/tests/chartCacheKey.test.ts src/tests/vimshottari.test.ts src/tests/birthTimezone.test.ts
+
+
+ RUN  v4.1.11 E:/Rajkumar/Vedic_Rajkumar
+
+
+ Test Files  5 passed (5)
+      Tests  42 passed (42)
+   Start at  19:54:12
+   Duration  6.19s (transform 597ms, setup 2.52s, import 528ms, tests 228ms, environment 10.81s)
+
+ACC=0
