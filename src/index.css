@@ -126,17 +126,21 @@
     --sacred-line: hsl(var(--auspicious-secondary) / 0.2);
     --mandala-stroke: hsl(var(--auspicious-accent) / 0.15);
 
-    /* Vedic premium palette — landing/hero surfaces.
+    /* Vedic premium palette — Royal Indigo & Saffron landing identity.
        Complements (does not replace) the auspicious-* theme tokens. */
-    --vedic-bg: #fff8eb;
-    --vedic-ink: #191631;
+    --vedic-indigo: #191631;
     --vedic-surface: #292344;
     --vedic-saffron: #e7b65a;
     --vedic-violet: #8f70c8;
+    --vedic-ivory: #fff8eb;
     --vedic-terracotta: #b8614d;
+    --vedic-text: #211c31;
     --vedic-white: #ffffff;
     --radius-card: 18px;
     --radius-button: 10px;
+    /* Backwards-compatible aliases */
+    --vedic-ink: var(--vedic-indigo);
+    --vedic-bg: var(--vedic-ivory);
   }
 
   .dark {
