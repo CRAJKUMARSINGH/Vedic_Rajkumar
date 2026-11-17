@@ -2,7 +2,7 @@
 serviceWorker.ready → activating
 cache keys → ["workbox-precache-v2-http://127.0.0.1:4173/"]
 app shell cached → true
-online body length → 1861
+online body length → 1859
 offline reload error → none
-offline body length → 1861
+offline body length → 1859
 offline body head → PROTOTYPE Vedic Rajkumar — Preview Build The product is actively being refined. Astrological results are for educational reference — consult a qualified astrologer before making life decisions. Validation Progress Free plan: 3 questions/day · Upgrade to Pro for unlimited access ₹499/mo — Upgrade 🪔 

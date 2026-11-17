@@ -1,0 +1,3084 @@
+
+Running 144 tests using 2 workers
+
+Navigating to: /
+Navigating to: /career-astrology
+Screenshot saved for /career-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_career-astrology.png
+  ok   2 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /career-astrology (5.0s)
+Navigating to: /kaalsarp
+Screenshot saved for / at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_.png
+  ok   1 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: / (7.1s)
+Navigating to: /comprehensive
+Screenshot saved for /kaalsarp at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_kaalsarp.png
+  ok   3 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kaalsarp (4.7s)
+Navigating to: /matchmaking
+Screenshot saved for /comprehensive at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_comprehensive.png
+  ok   4 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /comprehensive (5.4s)
+Navigating to: /enhanced-matchmaking
+Screenshot saved for /matchmaking at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_matchmaking.png
+  ok   5 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /matchmaking (4.9s)
+Navigating to: /vaastu
+Screenshot saved for /enhanced-matchmaking at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_enhanced-matchmaking.png
+  ok   6 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enhanced-matchmaking (4.5s)
+Navigating to: /muhurat
+Screenshot saved for /vaastu at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_vaastu.png
+  ok   7 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vaastu (4.4s)
+Navigating to: /enhanced-muhurat
+Screenshot saved for /muhurat at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_muhurat.png
+  ok   8 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /muhurat (5.3s)
+Navigating to: /baby-names
+Screenshot saved for /enhanced-muhurat at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_enhanced-muhurat.png
+  ok   9 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enhanced-muhurat (4.9s)
+Navigating to: /lucky-elements
+Screenshot saved for /baby-names at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_baby-names.png
+  ok  10 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /baby-names (4.5s)
+Navigating to: /festival-calendar
+Screenshot saved for /lucky-elements at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_lucky-elements.png
+  ok  11 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /lucky-elements (5.2s)
+Navigating to: /analytics
+Screenshot saved for /festival-calendar at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_festival-calendar.png
+  ok  12 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /festival-calendar (4.8s)
+Navigating to: /feature-requests
+Screenshot saved for /analytics at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_analytics.png
+  ok  13 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /analytics (10.8s)
+Navigating to: /feedback-dashboard
+Screenshot saved for /feature-requests at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_feature-requests.png
+  ok  14 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feature-requests (11.7s)
+Navigating to: /quick-wins
+Screenshot saved for /feedback-dashboard at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_feedback-dashboard.png
+  ok  15 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feedback-dashboard (10.2s)
+Navigating to: /dasha
+Screenshot saved for /quick-wins at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_quick-wins.png
+  ok  16 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /quick-wins (10.9s)
+Screenshot saved for /dasha at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_dasha.png
+Navigating to: /jaimini
+  ok  17 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dasha (4.7s)
+Navigating to: /tajik
+  x   18 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /jaimini (2.7s)
+  x   19 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /tajik (2.8s)
+Navigating to: /business-astrology
+Navigating to: /remedies
+  x   20 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /business-astrology (2.9s)
+  x   21 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /remedies (2.8s)
+Navigating to: /divisional-charts
+Navigating to: /planetary-strength
+  x   22 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /divisional-charts (2.7s)
+  x   23 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /planetary-strength (2.7s)
+Navigating to: /yogas
+Navigating to: /horoscope
+  x   24 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /yogas (2.7s)
+  x   25 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /horoscope (2.7s)
+Navigating to: /lal-kitab
+Navigating to: /kp-system
+  x   27 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kp-system (2.7s)
+  x   26 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /lal-kitab (2.7s)
+Navigating to: /love-astrology
+Navigating to: /nadi-astrology
+  x   28 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /love-astrology (2.8s)
+  x   29 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /nadi-astrology (2.6s)
+Navigating to: /western-astrology
+Navigating to: /chinese-astrology
+  x   30 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /western-astrology (2.6s)
+  x   31 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /chinese-astrology (2.7s)
+Navigating to: /ai-predictions
+Navigating to: /horary
+  x   32 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /ai-predictions (2.7s)
+  x   33 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /horary (2.7s)
+Navigating to: /medical-astrology
+Navigating to: /numerology
+  x   34 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /medical-astrology (2.9s)
+  x   35 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /numerology (2.7s)
+Navigating to: /financial-astrology
+Navigating to: /learn
+  x   36 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /financial-astrology (2.6s)
+  x   37 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /learn (2.9s)
+Navigating to: /marketplace
+Navigating to: /community
+  x   38 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /marketplace (2.7s)
+  x   39 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /community (2.6s)
+Navigating to: /features
+Navigating to: /api-docs
+  x   40 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /features (2.6s)
+  x   41 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /api-docs (2.7s)
+Navigating to: /panchang
+Navigating to: /comparative-astrology
+  x   42 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /panchang (2.7s)
+  x   43 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /comparative-astrology (2.6s)
+Navigating to: /world-astrology
+Navigating to: /electional-astrology
+  x   44 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /world-astrology (2.6s)
+  x   45 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /electional-astrology (2.6s)
+Navigating to: /mundane-astrology
+Navigating to: /sade-sati
+  x   46 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mundane-astrology (2.8s)
+Navigating to: /ashtakavarga
+  x   47 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /sade-sati (2.8s)
+Navigating to: /gemstones
+  x   48 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /ashtakavarga (2.5s)
+  x   49 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /gemstones (2.6s)
+Navigating to: /enterprise
+Navigating to: /varshaphal
+  x   50 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise (2.7s)
+Navigating to: /bv-raman
+  x   51 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /varshaphal (2.6s)
+Navigating to: /raman-archive
+  x   52 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /bv-raman (2.8s)
+Navigating to: /feedback
+  x   53 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /raman-archive (3.0s)
+Navigating to: /enterprise-admin
+  x   55 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise-admin (2.5s)
+  x   54 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feedback (2.9s)
+Navigating to: /spiritual-remedies
+Navigating to: /mobile-app
+  x   56 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mobile-app (27.0s)
+  x   57 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /spiritual-remedies (26.8s)
+Navigating to: /mahadasha-children
+Navigating to: /dynamic-transit
+  x   59 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dynamic-transit (3.3s)
+  x   58 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mahadasha-children (3.5s)
+Navigating to: /question
+Navigating to: /consultation
+  x   60 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /consultation (2.6s)
+  x   61 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /question (2.6s)
+Navigating to: /prashna
+Navigating to: /knowledge
+  x   63 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge (3.2s)
+  x   62 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna (2.8s)
+Navigating to: /knowledge/add
+Navigating to: /knowledge/ingest
+  x   64 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/add (2.6s)
+  x   65 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/ingest (2.7s)
+Navigating to: /knowledge/upload
+Navigating to: /knowledge/export
+  x   67 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/export (2.7s)
+  x   66 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/upload (2.8s)
+Navigating to: /prashna-ai
+Navigating to: /prashna-history
+  x   68 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna-ai (2.8s)
+  x   69 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna-history (2.7s)
+Navigating to: /pricing
+Navigating to: /marriage
+  x   70 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /pricing (2.7s)
+  x   71 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /marriage (2.7s)
+Navigating to: /kanchi
+Navigating to: /vedic-marriage
+  x   72 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kanchi (2.9s)
+  x   73 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vedic-marriage (2.9s)
+Navigating to: /kundli-compare
+Navigating to: /wedding-muhurat
+  x   74 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kundli-compare (2.7s)
+  x   75 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /wedding-muhurat (2.7s)
+Navigating to: /dasha-timeline
+Navigating to: /mtss
+  x   76 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dasha-timeline (2.8s)
+  x   77 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mtss (2.8s)
+Navigating to: /vidhya-karma
+Navigating to: /nakshatra-precautions
+  x   78 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vidhya-karma (3.2s)
+  x   79 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /nakshatra-precautions (3.3s)
+Navigating to: /my-readings
+  x   81 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:22:3 › Landing page links › collects all internal route links from landing page (3.2s)
+  -   82 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:28:3 › Landing page links › in-page anchor links resolve to visible sections
+  -   83 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /
+  -   84 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /pricing
+  -   85 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /prashna
+  -   86 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /horoscope
+  -   87 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /features
+  -   88 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /matchmaking
+  -   89 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /panchang
+  -   90 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /privacy
+  -   91 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /terms
+  -   92 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /privacy-settings
+  -   93 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:54:3 › Landing page links › suite module cards navigate to correct routes
+  x   80 [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /my-readings (3.0s)
+  x   95 [chromium-preview] › tests\e2e\persona-users.spec.ts:199:3 › Persona — basic tier › basic: kundli input form exposes labelled date/time/place fields (3.3s)
+  x   94 [chromium-preview] › tests\e2e\persona-users.spec.ts:186:3 › Persona — basic tier › basic: home renders for a synthetic visitor (4.9s)
+  x   96 [chromium-preview] › tests\e2e\persona-users.spec.ts:212:3 › Persona — basic tier › basic: calculation renders a horoscope without forced clicks (2.8s)
+  x   97 [chromium-preview] › tests\e2e\persona-users.spec.ts:231:3 › Persona — basic tier › basic: English/Hindi switching changes the UI language (3.7s)
+  x   98 [chromium-preview] › tests\e2e\persona-users.spec.ts:247:3 › Persona — basic tier › basic: panchang navigation from the home page (2.7s)
+  x   99 [chromium-preview] › tests\e2e\persona-users.spec.ts:269:3 › Persona — intermediate tier › intermediate: kundli detail view renders for the computed chart (2.8s)
+  x  101 [chromium-preview] › tests\e2e\persona-users.spec.ts:314:3 › Persona — intermediate tier › intermediate: matchmaking computes compatibility from sample data (2.9s)
+  x  100 [chromium-preview] › tests\e2e\persona-users.spec.ts:291:3 › Persona — intermediate tier › intermediate: prashna returns a verdict (2.7s)
+  x  102 [chromium-preview] › tests\e2e\persona-users.spec.ts:334:3 › Persona — intermediate tier › intermediate: panchang renders a result region for a chosen date (3.0s)
+  x  103 [chromium-preview] › tests\e2e\persona-users.spec.ts:350:3 › Persona — intermediate tier › intermediate: PDF/print export control is wired up (2.8s)
+  x  104 [chromium-preview] › tests\e2e\persona-users.spec.ts:391:3 › Persona — advanced tier › advanced: leap-year dates are accepted, impossible dates rejected (2.7s)
+  x  105 [chromium-preview] › tests\e2e\persona-users.spec.ts:412:3 › Persona — advanced tier › advanced: invalid calendar date (31/04/2020) shows an explanation and blocks submit (3.2s)
+  x  106 [chromium-preview] › tests\e2e\persona-users.spec.ts:431:3 › Persona — advanced tier › advanced: midnight 00:00 is valid, 24:00 is rejected (3.7s)
+  x  107 [chromium-preview] › tests\e2e\persona-users.spec.ts:459:3 › Persona — advanced tier › advanced: rapid repeated submissions do not crash or duplicate (2.7s)
+  x  108 [chromium-preview] › tests\e2e\persona-users.spec.ts:486:3 › Persona — advanced tier › advanced: location dropdown cannot overlap the submit button (3.2s)
+  x  109 [chromium-preview] › tests\e2e\persona-users.spec.ts:517:3 › Persona — advanced tier › advanced: submit click succeeds even if dropdown is open (no force:true) (2.7s)
+  x  110 [chromium-preview] › tests\e2e\persona-users.spec.ts:555:3 › Persona — advanced tier › advanced: keyboard-only selection and submission (2.6s)
+  x  111 [chromium-preview] › tests\e2e\persona-users.spec.ts:584:3 › Persona — advanced tier › advanced: a stale geocoding response does not reopen the dropdown (2.8s)
+  x  112 [chromium-preview] › tests\e2e\persona-users.spec.ts:601:3 › Persona — advanced tier › advanced: privacy settings work without Clerk (demo mode) (2.7s)
+  x  113 [chromium-preview] › tests\e2e\persona-users.spec.ts:629:3 › Persona — advanced tier › advanced: deep-link refresh keeps the page functional (3.3s)
+  x  114 [chromium-preview] › tests\e2e\persona-users.spec.ts:645:3 › Persona — advanced tier › advanced: geocoding network failure degrades gracefully (4.1s)
+  x  115 [chromium-preview] › tests\e2e\persona-users.spec.ts:669:3 › Persona — advanced tier › advanced: offline production preview serves a usable shell (2.7s)
+  x  116 [chromium-preview] › tests\e2e\production-navigation.spec.ts:5:3 › Prashna direct navigation and refresh: /prashna (2.9s)
+  x  117 [chromium-preview] › tests\e2e\production-navigation.spec.ts:5:3 › Prashna direct navigation and refresh: /question (2.8s)
+  x  118 [chromium-preview] › tests\e2e\production-navigation.spec.ts:18:1 › documented Prasna spelling redirects to the canonical route (2.7s)
+  x  119 [chromium-preview] › tests\e2e\production-offline.spec.ts:28:1 › PATCH 6 — home page loads with no unexplained 4xx/5xx in production (2.7s)
+  x  120 [chromium-preview] › tests\e2e\production-offline.spec.ts:66:1 › PATCH 5 — /panchang works offline after service worker activation (2.6s)
+  x  121 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:168:5 › Robustness — random birth data › horoscope renders for random birth 1: Isha Sharma (01/05/1946 14:22) (2.7s)
+  -  122 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:168:5 › Robustness — random birth data › horoscope renders for random birth 2: Saanvi Rao (12/01/1935 18:20)
+  -  123 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:168:5 › Robustness — random birth data › horoscope renders for random birth 3: Arjun Reddy (21/04/1998 22:52)
+  -  124 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:168:5 › Robustness — random birth data › horoscope renders for random birth 4: Rohan Iyer (17/11/2007 12:05)
+  -  125 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:168:5 › Robustness — random birth data › horoscope renders for random birth 5: Saanvi Joshi (05/11/1988 08:32)
+  -  126 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:168:5 › Robustness — random birth data › horoscope renders for random birth 6: Ananya Joshi (07/02/1994 15:51)
+  -  127 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [career]: Will I get a promotion or job elevation in my cu…
+  -  128 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [business]: Is starting a new business venture or independen…
+  -  129 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [marriage]: Will my marriage be harmonious, stable and long-…
+  -  130 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [partner-timing]: When will I meet a compatible life partner and s…
+  -  131 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [education]: Will I clear my competitive examination and high…
+  -  132 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [foreign-study]: Is foreign education or an overseas relocation f…
+  -  133 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [finance]: Will my financial condition improve and my wealt…
+  -  134 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [property]: Is this a good period to buy real estate, land, …
+  -  135 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [health]: How can I improve my health, immunity and overal…
+  -  136 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [legal]: Will I overcome a legal dispute, court case, or …
+  -  137 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [children]: Is there a prospect of progeny and what does the…
+  -  138 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [spiritual]: Which spiritual practice or deity worship will b…
+  -  139 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [travel]: Will I undertake long-distance travel or relocat…
+  -  140 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [hindi]: क्या मेरी नौकरी में पदोन्नति होगी और आर्थिक स्थि…
+  -  141 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [edge-emoji]: 💍 Will I marry soon? 🙏 Is my partner compatibl…
+  -  142 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [edge-long]: Considering my current professional, financial, …
+  -  143 [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:201:5 › Robustness — multidimensional Prashna questions › prashna verdict for [edge-numeric]:    ??? 12345 %%%  …
+  x  144 [chromium-preview] › tests\e2e\seeded-users.spec.ts:3:1 › home route loads for a synthetic visitor (2.6s)
+
+
+  1) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /jaimini 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/jaimini
+    Call log:
+      - navigating to "http://127.0.0.1:4173/jaimini", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--4cb7c-cation-Verify-route-jaimini-chromium-preview\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--4cb7c-cation-Verify-route-jaimini-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--4cb7c-cation-Verify-route-jaimini-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /tajik 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/tajik
+    Call log:
+      - navigating to "http://127.0.0.1:4173/tajik", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--abdbd-fication-Verify-route-tajik-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--abdbd-fication-Verify-route-tajik-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--abdbd-fication-Verify-route-tajik-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--abdbd-fication-Verify-route-tajik-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /business-astrology 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/business-astrology
+    Call log:
+      - navigating to "http://127.0.0.1:4173/business-astrology", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--9c3a5-fy-route-business-astrology-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--9c3a5-fy-route-business-astrology-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--9c3a5-fy-route-business-astrology-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--9c3a5-fy-route-business-astrology-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /remedies 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/remedies
+    Call log:
+      - navigating to "http://127.0.0.1:4173/remedies", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--ce66c-ation-Verify-route-remedies-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--ce66c-ation-Verify-route-remedies-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--ce66c-ation-Verify-route-remedies-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--ce66c-ation-Verify-route-remedies-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /divisional-charts 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/divisional-charts
+    Call log:
+      - navigating to "http://127.0.0.1:4173/divisional-charts", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--a3aa6-ify-route-divisional-charts-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--a3aa6-ify-route-divisional-charts-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--a3aa6-ify-route-divisional-charts-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--a3aa6-ify-route-divisional-charts-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /planetary-strength 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/planetary-strength
+    Call log:
+      - navigating to "http://127.0.0.1:4173/planetary-strength", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--5d606-fy-route-planetary-strength-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--5d606-fy-route-planetary-strength-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--5d606-fy-route-planetary-strength-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--5d606-fy-route-planetary-strength-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /horoscope 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--c00a2-tion-Verify-route-horoscope-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--c00a2-tion-Verify-route-horoscope-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--c00a2-tion-Verify-route-horoscope-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--c00a2-tion-Verify-route-horoscope-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /yogas 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/yogas
+    Call log:
+      - navigating to "http://127.0.0.1:4173/yogas", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--973aa-fication-Verify-route-yogas-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--973aa-fication-Verify-route-yogas-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--973aa-fication-Verify-route-yogas-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--973aa-fication-Verify-route-yogas-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /lal-kitab 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/lal-kitab
+    Call log:
+      - navigating to "http://127.0.0.1:4173/lal-kitab", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--976af-tion-Verify-route-lal-kitab-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--976af-tion-Verify-route-lal-kitab-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--976af-tion-Verify-route-lal-kitab-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--976af-tion-Verify-route-lal-kitab-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kp-system 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/kp-system
+    Call log:
+      - navigating to "http://127.0.0.1:4173/kp-system", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--237e2-tion-Verify-route-kp-system-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--237e2-tion-Verify-route-kp-system-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--237e2-tion-Verify-route-kp-system-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--237e2-tion-Verify-route-kp-system-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /love-astrology 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/love-astrology
+    Call log:
+      - navigating to "http://127.0.0.1:4173/love-astrology", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--95a1e-Verify-route-love-astrology-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--95a1e-Verify-route-love-astrology-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--95a1e-Verify-route-love-astrology-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--95a1e-Verify-route-love-astrology-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /nadi-astrology 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/nadi-astrology
+    Call log:
+      - navigating to "http://127.0.0.1:4173/nadi-astrology", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--20e56-Verify-route-nadi-astrology-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--20e56-Verify-route-nadi-astrology-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--20e56-Verify-route-nadi-astrology-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--20e56-Verify-route-nadi-astrology-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /western-astrology 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/western-astrology
+    Call log:
+      - navigating to "http://127.0.0.1:4173/western-astrology", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--2cf65-ify-route-western-astrology-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--2cf65-ify-route-western-astrology-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--2cf65-ify-route-western-astrology-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--2cf65-ify-route-western-astrology-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /chinese-astrology 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/chinese-astrology
+    Call log:
+      - navigating to "http://127.0.0.1:4173/chinese-astrology", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--0e34a-ify-route-chinese-astrology-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--0e34a-ify-route-chinese-astrology-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--0e34a-ify-route-chinese-astrology-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--0e34a-ify-route-chinese-astrology-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  15) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /ai-predictions 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/ai-predictions
+    Call log:
+      - navigating to "http://127.0.0.1:4173/ai-predictions", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--1c5b5-Verify-route-ai-predictions-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--1c5b5-Verify-route-ai-predictions-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--1c5b5-Verify-route-ai-predictions-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--1c5b5-Verify-route-ai-predictions-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  16) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /horary 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horary
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horary", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--6b154-ication-Verify-route-horary-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--6b154-ication-Verify-route-horary-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--6b154-ication-Verify-route-horary-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--6b154-ication-Verify-route-horary-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  17) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /medical-astrology 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/medical-astrology
+    Call log:
+      - navigating to "http://127.0.0.1:4173/medical-astrology", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--afb75-ify-route-medical-astrology-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--afb75-ify-route-medical-astrology-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--afb75-ify-route-medical-astrology-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--afb75-ify-route-medical-astrology-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  18) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /numerology 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/numerology
+    Call log:
+      - navigating to "http://127.0.0.1:4173/numerology", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--6deb5-ion-Verify-route-numerology-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--6deb5-ion-Verify-route-numerology-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--6deb5-ion-Verify-route-numerology-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--6deb5-ion-Verify-route-numerology-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  19) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /financial-astrology 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/financial-astrology
+    Call log:
+      - navigating to "http://127.0.0.1:4173/financial-astrology", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--a715b-y-route-financial-astrology-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--a715b-y-route-financial-astrology-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--a715b-y-route-financial-astrology-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--a715b-y-route-financial-astrology-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  20) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /learn 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/learn
+    Call log:
+      - navigating to "http://127.0.0.1:4173/learn", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--bfe9e-fication-Verify-route-learn-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--bfe9e-fication-Verify-route-learn-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--bfe9e-fication-Verify-route-learn-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--bfe9e-fication-Verify-route-learn-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  21) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /marketplace 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/marketplace
+    Call log:
+      - navigating to "http://127.0.0.1:4173/marketplace", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--91eaa-on-Verify-route-marketplace-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--91eaa-on-Verify-route-marketplace-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--91eaa-on-Verify-route-marketplace-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--91eaa-on-Verify-route-marketplace-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  22) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /community 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/community
+    Call log:
+      - navigating to "http://127.0.0.1:4173/community", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--66489-tion-Verify-route-community-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--66489-tion-Verify-route-community-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--66489-tion-Verify-route-community-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--66489-tion-Verify-route-community-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  23) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /features 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/features
+    Call log:
+      - navigating to "http://127.0.0.1:4173/features", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--c3389-ation-Verify-route-features-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--c3389-ation-Verify-route-features-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--c3389-ation-Verify-route-features-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--c3389-ation-Verify-route-features-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  24) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /api-docs 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/api-docs
+    Call log:
+      - navigating to "http://127.0.0.1:4173/api-docs", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--4f26a-ation-Verify-route-api-docs-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--4f26a-ation-Verify-route-api-docs-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--4f26a-ation-Verify-route-api-docs-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--4f26a-ation-Verify-route-api-docs-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  25) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /panchang 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/panchang
+    Call log:
+      - navigating to "http://127.0.0.1:4173/panchang", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--ddba9-ation-Verify-route-panchang-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--ddba9-ation-Verify-route-panchang-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--ddba9-ation-Verify-route-panchang-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--ddba9-ation-Verify-route-panchang-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  26) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /comparative-astrology 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/comparative-astrology
+    Call log:
+      - navigating to "http://127.0.0.1:4173/comparative-astrology", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--4f96a-route-comparative-astrology-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--4f96a-route-comparative-astrology-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--4f96a-route-comparative-astrology-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--4f96a-route-comparative-astrology-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  27) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /world-astrology 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/world-astrology
+    Call log:
+      - navigating to "http://127.0.0.1:4173/world-astrology", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--eaeb6-erify-route-world-astrology-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--eaeb6-erify-route-world-astrology-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--eaeb6-erify-route-world-astrology-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--eaeb6-erify-route-world-astrology-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  28) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /electional-astrology 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/electional-astrology
+    Call log:
+      - navigating to "http://127.0.0.1:4173/electional-astrology", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--83af6--route-electional-astrology-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--83af6--route-electional-astrology-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--83af6--route-electional-astrology-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--83af6--route-electional-astrology-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  29) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mundane-astrology 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/mundane-astrology
+    Call log:
+      - navigating to "http://127.0.0.1:4173/mundane-astrology", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--05d1c-ify-route-mundane-astrology-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--05d1c-ify-route-mundane-astrology-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--05d1c-ify-route-mundane-astrology-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--05d1c-ify-route-mundane-astrology-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  30) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /sade-sati 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/sade-sati
+    Call log:
+      - navigating to "http://127.0.0.1:4173/sade-sati", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--1374f-tion-Verify-route-sade-sati-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--1374f-tion-Verify-route-sade-sati-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--1374f-tion-Verify-route-sade-sati-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--1374f-tion-Verify-route-sade-sati-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  31) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /ashtakavarga 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/ashtakavarga
+    Call log:
+      - navigating to "http://127.0.0.1:4173/ashtakavarga", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--e8cdd-n-Verify-route-ashtakavarga-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--e8cdd-n-Verify-route-ashtakavarga-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--e8cdd-n-Verify-route-ashtakavarga-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--e8cdd-n-Verify-route-ashtakavarga-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  32) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /gemstones 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/gemstones
+    Call log:
+      - navigating to "http://127.0.0.1:4173/gemstones", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--e4110-tion-Verify-route-gemstones-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--e4110-tion-Verify-route-gemstones-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--e4110-tion-Verify-route-gemstones-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--e4110-tion-Verify-route-gemstones-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  33) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/enterprise
+    Call log:
+      - navigating to "http://127.0.0.1:4173/enterprise", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--9259f-ion-Verify-route-enterprise-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--9259f-ion-Verify-route-enterprise-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--9259f-ion-Verify-route-enterprise-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--9259f-ion-Verify-route-enterprise-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  34) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /varshaphal 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/varshaphal
+    Call log:
+      - navigating to "http://127.0.0.1:4173/varshaphal", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--5c239-ion-Verify-route-varshaphal-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--5c239-ion-Verify-route-varshaphal-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--5c239-ion-Verify-route-varshaphal-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--5c239-ion-Verify-route-varshaphal-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  35) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /bv-raman 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/bv-raman
+    Call log:
+      - navigating to "http://127.0.0.1:4173/bv-raman", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--d3a46-ation-Verify-route-bv-raman-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--d3a46-ation-Verify-route-bv-raman-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--d3a46-ation-Verify-route-bv-raman-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--d3a46-ation-Verify-route-bv-raman-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  36) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /raman-archive 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/raman-archive
+    Call log:
+      - navigating to "http://127.0.0.1:4173/raman-archive", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--a47d4--Verify-route-raman-archive-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--a47d4--Verify-route-raman-archive-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--a47d4--Verify-route-raman-archive-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--a47d4--Verify-route-raman-archive-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  37) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feedback 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/feedback
+    Call log:
+      - navigating to "http://127.0.0.1:4173/feedback", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--7b59e-ation-Verify-route-feedback-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--7b59e-ation-Verify-route-feedback-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--7b59e-ation-Verify-route-feedback-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--7b59e-ation-Verify-route-feedback-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  38) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise-admin 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/enterprise-admin
+    Call log:
+      - navigating to "http://127.0.0.1:4173/enterprise-admin", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--50339-rify-route-enterprise-admin-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--50339-rify-route-enterprise-admin-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--50339-rify-route-enterprise-admin-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--50339-rify-route-enterprise-admin-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  39) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mobile-app 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/mobile-app
+    Call log:
+      - navigating to "http://127.0.0.1:4173/mobile-app", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--96b28-ion-Verify-route-mobile-app-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--96b28-ion-Verify-route-mobile-app-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--96b28-ion-Verify-route-mobile-app-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--96b28-ion-Verify-route-mobile-app-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  40) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /spiritual-remedies 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/spiritual-remedies
+    Call log:
+      - navigating to "http://127.0.0.1:4173/spiritual-remedies", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--3ec7c-fy-route-spiritual-remedies-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--3ec7c-fy-route-spiritual-remedies-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--3ec7c-fy-route-spiritual-remedies-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--3ec7c-fy-route-spiritual-remedies-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  41) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mahadasha-children 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/mahadasha-children
+    Call log:
+      - navigating to "http://127.0.0.1:4173/mahadasha-children", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--84c45-fy-route-mahadasha-children-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--84c45-fy-route-mahadasha-children-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--84c45-fy-route-mahadasha-children-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--84c45-fy-route-mahadasha-children-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  42) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dynamic-transit 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/dynamic-transit
+    Call log:
+      - navigating to "http://127.0.0.1:4173/dynamic-transit", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--b04a1-erify-route-dynamic-transit-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--b04a1-erify-route-dynamic-transit-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--b04a1-erify-route-dynamic-transit-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--b04a1-erify-route-dynamic-transit-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  43) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /consultation 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/consultation
+    Call log:
+      - navigating to "http://127.0.0.1:4173/consultation", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--e3111-n-Verify-route-consultation-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--e3111-n-Verify-route-consultation-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--e3111-n-Verify-route-consultation-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--e3111-n-Verify-route-consultation-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  44) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /question 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/question
+    Call log:
+      - navigating to "http://127.0.0.1:4173/question", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--e3763-ation-Verify-route-question-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--e3763-ation-Verify-route-question-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--e3763-ation-Verify-route-question-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--e3763-ation-Verify-route-question-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  45) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/prashna
+    Call log:
+      - navigating to "http://127.0.0.1:4173/prashna", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--d7cc7-cation-Verify-route-prashna-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--d7cc7-cation-Verify-route-prashna-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--d7cc7-cation-Verify-route-prashna-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--d7cc7-cation-Verify-route-prashna-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  46) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/knowledge
+    Call log:
+      - navigating to "http://127.0.0.1:4173/knowledge", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--b17be-tion-Verify-route-knowledge-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--b17be-tion-Verify-route-knowledge-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--b17be-tion-Verify-route-knowledge-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--b17be-tion-Verify-route-knowledge-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  47) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/add 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/knowledge/add
+    Call log:
+      - navigating to "http://127.0.0.1:4173/knowledge/add", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--158c5--Verify-route-knowledge-add-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--158c5--Verify-route-knowledge-add-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--158c5--Verify-route-knowledge-add-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--158c5--Verify-route-knowledge-add-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  48) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/ingest 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/knowledge/ingest
+    Call log:
+      - navigating to "http://127.0.0.1:4173/knowledge/ingest", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--20388-rify-route-knowledge-ingest-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--20388-rify-route-knowledge-ingest-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--20388-rify-route-knowledge-ingest-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--20388-rify-route-knowledge-ingest-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  49) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/upload 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/knowledge/upload
+    Call log:
+      - navigating to "http://127.0.0.1:4173/knowledge/upload", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--d38f5-rify-route-knowledge-upload-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--d38f5-rify-route-knowledge-upload-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--d38f5-rify-route-knowledge-upload-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--d38f5-rify-route-knowledge-upload-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  50) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/export 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/knowledge/export
+    Call log:
+      - navigating to "http://127.0.0.1:4173/knowledge/export", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--be87c-rify-route-knowledge-export-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--be87c-rify-route-knowledge-export-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--be87c-rify-route-knowledge-export-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--be87c-rify-route-knowledge-export-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  51) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna-ai 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/prashna-ai
+    Call log:
+      - navigating to "http://127.0.0.1:4173/prashna-ai", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--38b29-ion-Verify-route-prashna-ai-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--38b29-ion-Verify-route-prashna-ai-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--38b29-ion-Verify-route-prashna-ai-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--38b29-ion-Verify-route-prashna-ai-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  52) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna-history 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/prashna-history
+    Call log:
+      - navigating to "http://127.0.0.1:4173/prashna-history", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--2bf6c-erify-route-prashna-history-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--2bf6c-erify-route-prashna-history-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--2bf6c-erify-route-prashna-history-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--2bf6c-erify-route-prashna-history-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  53) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /pricing 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/pricing
+    Call log:
+      - navigating to "http://127.0.0.1:4173/pricing", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--2ab9e-cation-Verify-route-pricing-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--2ab9e-cation-Verify-route-pricing-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--2ab9e-cation-Verify-route-pricing-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--2ab9e-cation-Verify-route-pricing-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  54) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /marriage 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/marriage
+    Call log:
+      - navigating to "http://127.0.0.1:4173/marriage", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--6b075-ation-Verify-route-marriage-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--6b075-ation-Verify-route-marriage-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--6b075-ation-Verify-route-marriage-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--6b075-ation-Verify-route-marriage-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  55) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kanchi 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/kanchi
+    Call log:
+      - navigating to "http://127.0.0.1:4173/kanchi", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--57c0c-ication-Verify-route-kanchi-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--57c0c-ication-Verify-route-kanchi-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--57c0c-ication-Verify-route-kanchi-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--57c0c-ication-Verify-route-kanchi-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  56) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vedic-marriage 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/vedic-marriage
+    Call log:
+      - navigating to "http://127.0.0.1:4173/vedic-marriage", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--32dcd-Verify-route-vedic-marriage-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--32dcd-Verify-route-vedic-marriage-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--32dcd-Verify-route-vedic-marriage-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--32dcd-Verify-route-vedic-marriage-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  57) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kundli-compare 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/kundli-compare
+    Call log:
+      - navigating to "http://127.0.0.1:4173/kundli-compare", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--77fc4-Verify-route-kundli-compare-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--77fc4-Verify-route-kundli-compare-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--77fc4-Verify-route-kundli-compare-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--77fc4-Verify-route-kundli-compare-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  58) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /wedding-muhurat 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/wedding-muhurat
+    Call log:
+      - navigating to "http://127.0.0.1:4173/wedding-muhurat", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--336c2-erify-route-wedding-muhurat-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--336c2-erify-route-wedding-muhurat-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--336c2-erify-route-wedding-muhurat-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--336c2-erify-route-wedding-muhurat-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  59) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dasha-timeline 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/dasha-timeline
+    Call log:
+      - navigating to "http://127.0.0.1:4173/dasha-timeline", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--076e8-Verify-route-dasha-timeline-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--076e8-Verify-route-dasha-timeline-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--076e8-Verify-route-dasha-timeline-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--076e8-Verify-route-dasha-timeline-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  60) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mtss 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/mtss
+    Call log:
+      - navigating to "http://127.0.0.1:4173/mtss", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--9dd0d-ification-Verify-route-mtss-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--9dd0d-ification-Verify-route-mtss-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--9dd0d-ification-Verify-route-mtss-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--9dd0d-ification-Verify-route-mtss-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  61) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vidhya-karma 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/vidhya-karma
+    Call log:
+      - navigating to "http://127.0.0.1:4173/vidhya-karma", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--18b84-n-Verify-route-vidhya-karma-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--18b84-n-Verify-route-vidhya-karma-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--18b84-n-Verify-route-vidhya-karma-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--18b84-n-Verify-route-vidhya-karma-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  62) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /nakshatra-precautions 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/nakshatra-precautions
+    Call log:
+      - navigating to "http://127.0.0.1:4173/nakshatra-precautions", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--211bf-route-nakshatra-precautions-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--211bf-route-nakshatra-precautions-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--211bf-route-nakshatra-precautions-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--211bf-route-nakshatra-precautions-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  63) [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /my-readings 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/my-readings
+    Call log:
+      - navigating to "http://127.0.0.1:4173/my-readings", waiting until "load"
+
+
+      39 |   '/western-astrology',
+      40 |   '/chinese-astrology',
+    > 41 |   '/ai-predictions',
+         |                  ^
+      42 |   '/horary',
+      43 |   '/medical-astrology',
+      44 |   '/numerology',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:41:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--bc4a7-on-Verify-route-my-readings-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--bc4a7-on-Verify-route-my-readings-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--bc4a7-on-Verify-route-my-readings-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--bc4a7-on-Verify-route-my-readings-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  64) [chromium-preview] › tests\e2e\landing-page-links.spec.ts:22:3 › Landing page links › collects all internal route links from landing page 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/
+    Call log:
+      - navigating to "http://127.0.0.1:4173/", waiting until "domcontentloaded"
+
+
+       5 | const destination = (route: string) => route;
+       6 |
+    >  7 | async function home(page: Page) {
+         |              ^
+       8 |   await page.goto('/', { waitUntil: 'domcontentloaded' });
+       9 |   await expect(page.getByRole('heading', { name: /Guidance for Every Question/ })).toBeVisible({ timeout: 60_000 });
+      10 |
+        at home (E:\Rajkumar\Vedic_Rajkumar\tests\e2e\landing-page-links.spec.ts:7:14)
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\landing-page-links.spec.ts:31:11
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\landing-page-links-Landing-3de3b-ute-links-from-landing-page-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\landing-page-links-Landing-3de3b-ute-links-from-landing-page-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\landing-page-links-Landing-3de3b-ute-links-from-landing-page-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\landing-page-links-Landing-3de3b-ute-links-from-landing-page-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  65) [chromium-preview] › tests\e2e\persona-users.spec.ts:186:3 › Persona — basic tier › basic: home renders for a synthetic visitor 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/
+    Call log:
+      - navigating to "http://127.0.0.1:4173/", waiting until "domcontentloaded"
+
+
+      199 |   test('basic: kundli input form exposes labelled date/time/place fields', async ({ page, diag }) => {
+      200 |     await seedPersona(page);
+    > 201 |     await page.goto('/horoscope', { waitUntil: 'domcontentloaded', timeout: 60_000 });
+          |                ^
+      202 |
+      203 |     await expect(page.locator(DOB)).toBeVisible({ timeout: 30_000 });
+      204 |     await expect(page.locator(TOB)).toBeVisible();
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:201:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ba-c6efb-ers-for-a-synthetic-visitor-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ba-c6efb-ers-for-a-synthetic-visitor-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ba-c6efb-ers-for-a-synthetic-visitor-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ba-c6efb-ers-for-a-synthetic-visitor-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  66) [chromium-preview] › tests\e2e\persona-users.spec.ts:199:3 › Persona — basic tier › basic: kundli input form exposes labelled date/time/place fields 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "domcontentloaded"
+
+
+      217 |     await fillBirthForm(page);
+      218 |
+    > 219 |     const submit = page.getByRole('button', { name: SUBMIT });
+          |                ^
+      220 |     await expect(submit).toBeEnabled({ timeout: 10_000 });
+      221 |     await submit.click(); // actionability-checked: fails if anything covers it
+      222 |
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:219:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ba-17936-lled-date-time-place-fields-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ba-17936-lled-date-time-place-fields-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ba-17936-lled-date-time-place-fields-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ba-17936-lled-date-time-place-fields-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  67) [chromium-preview] › tests\e2e\persona-users.spec.ts:212:3 › Persona — basic tier › basic: calculation renders a horoscope without forced clicks 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "domcontentloaded"
+
+
+      237 |
+      238 |     // Open the language menu (accessible name contains the current native name).
+    > 239 |     await header.getByRole('button', { name: /English/i }).click();
+          |                ^
+      240 |     await page.getByRole('menuitem', { name: /हिन्दी/ }).click();
+      241 |
+      242 |     await expect(header.getByRole('heading', { name: 'राशिफल' })).toBeVisible({ timeout: 15_000 });
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:239:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ba-3cf5d-scope-without-forced-clicks-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ba-3cf5d-scope-without-forced-clicks-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ba-3cf5d-scope-without-forced-clicks-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ba-3cf5d-scope-without-forced-clicks-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  68) [chromium-preview] › tests\e2e\persona-users.spec.ts:231:3 › Persona — basic tier › basic: English/Hindi switching changes the UI language 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "domcontentloaded"
+
+
+      267 |   test.describe.configure({ timeout: 240_000 });
+      268 |
+    > 269 |   test('intermediate: kundli detail view renders for the computed chart', async ({ page, diag }) => {
+          |                ^
+      270 |     await seedPersona(page);
+      271 |     await page.goto('/horoscope', { waitUntil: 'domcontentloaded', timeout: 60_000 });
+      272 |     await expect(page.locator(DOB)).toBeVisible({ timeout: 30_000 });
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:269:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ba-6aa60-ing-changes-the-UI-language-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ba-6aa60-ing-changes-the-UI-language-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ba-6aa60-ing-changes-the-UI-language-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ba-6aa60-ing-changes-the-UI-language-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  69) [chromium-preview] › tests\e2e\persona-users.spec.ts:247:3 › Persona — basic tier › basic: panchang navigation from the home page 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/
+    Call log:
+      - navigating to "http://127.0.0.1:4173/", waiting until "domcontentloaded"
+
+
+      298 |
+      299 |     const submit = page.getByRole('button', { name: /Get Phaladesh|फलादेश पाएं/ });
+    > 300 |     await expect(submit).toBeEnabled({ timeout: 10_000 });
+          |                ^
+      301 |     await submit.click();
+      302 |
+      303 |     const result = page.locator(
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:300:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ba-93298-vigation-from-the-home-page-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ba-93298-vigation-from-the-home-page-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ba-93298-vigation-from-the-home-page-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ba-93298-vigation-from-the-home-page-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  70) [chromium-preview] › tests\e2e\persona-users.spec.ts:269:3 › Persona — intermediate tier › intermediate: kundli detail view renders for the computed chart 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "domcontentloaded"
+
+
+      331 |     await shot(page, 'intermediate-matchmaking');
+      332 |   });
+    > 333 |
+          | ^
+      334 |   test('intermediate: panchang renders a result region for a chosen date', async ({ page, diag }) => {
+      335 |     await seedPersona(page);
+      336 |     await page.goto('/panchang', { waitUntil: 'domcontentloaded', timeout: 60_000 });
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:333:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-b8564-ders-for-the-computed-chart-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-in-b8564-ders-for-the-computed-chart-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-b8564-ders-for-the-computed-chart-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-in-b8564-ders-for-the-computed-chart-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  71) [chromium-preview] › tests\e2e\persona-users.spec.ts:291:3 › Persona — intermediate tier › intermediate: prashna returns a verdict 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/prashna
+    Call log:
+      - navigating to "http://127.0.0.1:4173/prashna", waiting until "domcontentloaded"
+
+
+      368 |     // Cold-start: the lazily-loaded HoroscopeCard chunk compiles on first hit,
+      369 |     // so allow a generous window before asserting the export control.
+    > 370 |     const resultHeading = page.getByRole('heading', { name: HOROSCOPE_RESULT });
+          |                ^
+      371 |     await expect(resultHeading.first()).toBeVisible({ timeout: 75_000 });
+      372 |
+      373 |     const printButton = page.getByRole('button', { name: /^Print$|^प्रिंट$/ });
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:370:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-52bad-e-prashna-returns-a-verdict-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-in-52bad-e-prashna-returns-a-verdict-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-52bad-e-prashna-returns-a-verdict-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-in-52bad-e-prashna-returns-a-verdict-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  72) [chromium-preview] › tests\e2e\persona-users.spec.ts:314:3 › Persona — intermediate tier › intermediate: matchmaking computes compatibility from sample data 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/matchmaking
+    Call log:
+      - navigating to "http://127.0.0.1:4173/matchmaking", waiting until "domcontentloaded"
+
+
+      400 |     // 29/02/1900 is NOT (century year not divisible by 400).
+      401 |     await page.locator(DOB).fill('29/02/1900');
+    > 402 |     await expect(page.getByText(/Not a real calendar date|अमान्य कैलेंडर तिथि/)).toBeVisible({ timeout: 5_000 });
+          |                ^
+      403 |
+      404 |     // 29/02/2024 is a real leap date.
+      405 |     await page.locator(DOB).fill('29/02/2024');
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:402:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-8101e-patibility-from-sample-data-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-in-8101e-patibility-from-sample-data-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-8101e-patibility-from-sample-data-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-in-8101e-patibility-from-sample-data-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  73) [chromium-preview] › tests\e2e\persona-users.spec.ts:334:3 › Persona — intermediate tier › intermediate: panchang renders a result region for a chosen date 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/panchang
+    Call log:
+      - navigating to "http://127.0.0.1:4173/panchang", waiting until "domcontentloaded"
+
+
+      433 |     await page.goto('/horoscope', { waitUntil: 'domcontentloaded', timeout: 60_000 });
+      434 |     await expect(page.locator(DOB)).toBeVisible({ timeout: 30_000 });
+    > 435 |
+          | ^
+      436 |     await page.locator(DOB).fill(PERSONA.dateDMY);
+      437 |     await page.locator(POB).fill(PERSONA.city);
+      438 |
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:435:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-a0b69-lt-region-for-a-chosen-date-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-in-a0b69-lt-region-for-a-chosen-date-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-a0b69-lt-region-for-a-chosen-date-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-in-a0b69-lt-region-for-a-chosen-date-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  74) [chromium-preview] › tests\e2e\persona-users.spec.ts:350:3 › Persona — intermediate tier › intermediate: PDF/print export control is wired up 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "domcontentloaded"
+
+
+      455 |     expect(diag.pageErrors).toEqual([]);
+      456 |     await shot(page, 'advanced-midnight');
+    > 457 |   });
+          |                ^
+      458 |
+      459 |   test('advanced: rapid repeated submissions do not crash or duplicate', async ({ page, diag }) => {
+      460 |     await seedPersona(page);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:457:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-6fb18--export-control-is-wired-up-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-in-6fb18--export-control-is-wired-up-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-6fb18--export-control-is-wired-up-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-in-6fb18--export-control-is-wired-up-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  75) [chromium-preview] › tests\e2e\persona-users.spec.ts:391:3 › Persona — advanced tier › advanced: leap-year dates are accepted, impossible dates rejected 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "domcontentloaded"
+
+
+      514 |     await shot(page, 'advanced-dropdown-collision');
+      515 |   });
+    > 516 |
+          | ^
+      517 |   test('advanced: submit click succeeds even if dropdown is open (no force:true)', async ({ page, diag }) => {
+      518 |     // Reviewer scenario: user fills the form and clicks Calculate directly,
+      519 |     // without first picking a geocoder suggestion. The dropdown must NOT
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:516:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-846ca-d-impossible-dates-rejected-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ad-846ca-d-impossible-dates-rejected-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-846ca-d-impossible-dates-rejected-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ad-846ca-d-impossible-dates-rejected-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  76) [chromium-preview] › tests\e2e\persona-users.spec.ts:412:3 › Persona — advanced tier › advanced: invalid calendar date (31/04/2020) shows an explanation and blocks submit 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "domcontentloaded"
+
+
+      547 |     // Actionability check: Playwright verifies the element is not covered.
+      548 |     await submit.click(); // throws if anything intercepts the pointer
+    > 549 |     await expect(page.getByText(HOROSCOPE_RESULT).first()).toBeVisible({ timeout: 45_000 });
+          |                ^
+      550 |
+      551 |     expect(diag.pageErrors).toEqual([]);
+      552 |     await shot(page, 'advanced-dropdown-open-direct-submit');
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:549:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-47b73-planation-and-blocks-submit-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ad-47b73-planation-and-blocks-submit-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-47b73-planation-and-blocks-submit-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ad-47b73-planation-and-blocks-submit-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  77) [chromium-preview] › tests\e2e\persona-users.spec.ts:431:3 › Persona — advanced tier › advanced: midnight 00:00 is valid, 24:00 is rejected 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "domcontentloaded"
+
+
+      571 |     await page.keyboard.press('ArrowDown');
+      572 |     await page.keyboard.press('Enter');
+    > 573 |     await expect(page.locator(POB)).toHaveValue(/Udaipur/);
+          |                ^
+      574 |     await expect(page.locator(LISTBOX)).toBeHidden();
+      575 |
+      576 |     // Implicit form submission (the only submit control, now enabled).
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:573:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-ab572--is-valid-24-00-is-rejected-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ad-ab572--is-valid-24-00-is-rejected-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-ab572--is-valid-24-00-is-rejected-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ad-ab572--is-valid-24-00-is-rejected-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  78) [chromium-preview] › tests\e2e\persona-users.spec.ts:459:3 › Persona — advanced tier › advanced: rapid repeated submissions do not crash or duplicate 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "domcontentloaded"
+
+
+      611 |     const accept = page.getByRole('button', { name: /^Accept optional/ });
+      612 |     await expect(accept).toBeVisible();
+    > 613 |     await accept.click();
+          |                ^
+      614 |     await expect(page.getByText(/Consent given|सहमति दी गई/).first()).toBeVisible({ timeout: 5_000 });
+      615 |
+      616 |     // Cloud export/delete must surface an honest state — either "unavailable
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:613:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-2e9ca-s-do-not-crash-or-duplicate-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ad-2e9ca-s-do-not-crash-or-duplicate-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-2e9ca-s-do-not-crash-or-duplicate-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ad-2e9ca-s-do-not-crash-or-duplicate-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  79) [chromium-preview] › tests\e2e\persona-users.spec.ts:486:3 › Persona — advanced tier › advanced: location dropdown cannot overlap the submit button 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "domcontentloaded"
+
+
+      650 |     await page.goto('/horoscope', { waitUntil: 'domcontentloaded', timeout: 60_000 });
+      651 |     await expect(page.locator(POB)).toBeVisible({ timeout: 30_000 });
+    > 652 |
+          | ^
+      653 |     await page.locator(DOB).fill(PERSONA.dateDMY);
+      654 |     await page.locator(TOB).fill(PERSONA.time);
+      655 |     await page.locator(POB).fill('Springfield'); // deliberately not pre-cached
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:652:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-3192b-t-overlap-the-submit-button-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ad-3192b-t-overlap-the-submit-button-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-3192b-t-overlap-the-submit-button-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ad-3192b-t-overlap-the-submit-button-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  80) [chromium-preview] › tests\e2e\persona-users.spec.ts:517:3 › Persona — advanced tier › advanced: submit click succeeds even if dropdown is open (no force:true) 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "domcontentloaded"
+
+
+
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:698:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-95ebc-down-is-open-no-force-true--chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ad-95ebc-down-is-open-no-force-true--chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-95ebc-down-is-open-no-force-true--chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ad-95ebc-down-is-open-no-force-true--chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  81) [chromium-preview] › tests\e2e\persona-users.spec.ts:555:3 › Persona — advanced tier › advanced: keyboard-only selection and submission 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "domcontentloaded"
+
+
+
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:740:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-7ced4-ly-selection-and-submission-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ad-7ced4-ly-selection-and-submission-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-7ced4-ly-selection-and-submission-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ad-7ced4-ly-selection-and-submission-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  82) [chromium-preview] › tests\e2e\persona-users.spec.ts:584:3 › Persona — advanced tier › advanced: a stale geocoding response does not reopen the dropdown 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "domcontentloaded"
+
+
+
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:778:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-e60e9-oes-not-reopen-the-dropdown-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ad-e60e9-oes-not-reopen-the-dropdown-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-e60e9-oes-not-reopen-the-dropdown-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ad-e60e9-oes-not-reopen-the-dropdown-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  83) [chromium-preview] › tests\e2e\persona-users.spec.ts:601:3 › Persona — advanced tier › advanced: privacy settings work without Clerk (demo mode) 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/privacy-settings
+    Call log:
+      - navigating to "http://127.0.0.1:4173/privacy-settings", waiting until "domcontentloaded"
+
+
+
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:802:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-26509-rk-without-Clerk-demo-mode--chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ad-26509-rk-without-Clerk-demo-mode--chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-26509-rk-without-Clerk-demo-mode--chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ad-26509-rk-without-Clerk-demo-mode--chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  84) [chromium-preview] › tests\e2e\persona-users.spec.ts:629:3 › Persona — advanced tier › advanced: deep-link refresh keeps the page functional 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/panchang
+    Call log:
+      - navigating to "http://127.0.0.1:4173/panchang", waiting until "domcontentloaded"
+
+
+
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:839:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-6ae60-h-keeps-the-page-functional-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ad-6ae60-h-keeps-the-page-functional-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-6ae60-h-keeps-the-page-functional-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ad-6ae60-h-keeps-the-page-functional-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  85) [chromium-preview] › tests\e2e\persona-users.spec.ts:645:3 › Persona — advanced tier › advanced: geocoding network failure degrades gracefully 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "domcontentloaded"
+
+
+
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:867:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-d5b43-failure-degrades-gracefully-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ad-d5b43-failure-degrades-gracefully-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-d5b43-failure-degrades-gracefully-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ad-d5b43-failure-degrades-gracefully-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  86) [chromium-preview] › tests\e2e\persona-users.spec.ts:669:3 › Persona — advanced tier › advanced: offline production preview serves a usable shell 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/panchang
+    Call log:
+      - navigating to "http://127.0.0.1:4173/panchang", waiting until "load"
+
+
+
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:900:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-77ca5-eview-serves-a-usable-shell-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ad-77ca5-eview-serves-a-usable-shell-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ad-77ca5-eview-serves-a-usable-shell-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ad-77ca5-eview-serves-a-usable-shell-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  87) [chromium-preview] › tests\e2e\production-navigation.spec.ts:5:3 › Prashna direct navigation and refresh: /prashna 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/prashna
+    Call log:
+      - navigating to "http://127.0.0.1:4173/prashna", waiting until "load"
+
+
+       8 |     await page.goto(route, { waitUntil: 'load' });
+       9 |     await expect(page.getByRole('heading', { name: 'Question / Prashna', exact: true })).toBeVisible({ timeout: 60_000 });
+    > 10 |     await expect(page).toHaveURL(url => url.pathname === route);
+         |                ^
+      11 |     await page.reload({ waitUntil: 'load' });
+      12 |     await expect(page.getByRole('heading', { name: 'Question / Prashna', exact: true })).toBeVisible({ timeout: 60_000 });
+      13 |     await expect(page).toHaveURL(url => url.pathname === route);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\production-navigation.spec.ts:10:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\production-navigation-Pras-857d7-igation-and-refresh-prashna-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\production-navigation-Pras-857d7-igation-and-refresh-prashna-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\production-navigation-Pras-857d7-igation-and-refresh-prashna-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\production-navigation-Pras-857d7-igation-and-refresh-prashna-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  88) [chromium-preview] › tests\e2e\production-navigation.spec.ts:5:3 › Prashna direct navigation and refresh: /question 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/question
+    Call log:
+      - navigating to "http://127.0.0.1:4173/question", waiting until "load"
+
+
+       8 |     await page.goto(route, { waitUntil: 'load' });
+       9 |     await expect(page.getByRole('heading', { name: 'Question / Prashna', exact: true })).toBeVisible({ timeout: 60_000 });
+    > 10 |     await expect(page).toHaveURL(url => url.pathname === route);
+         |                ^
+      11 |     await page.reload({ waitUntil: 'load' });
+      12 |     await expect(page.getByRole('heading', { name: 'Question / Prashna', exact: true })).toBeVisible({ timeout: 60_000 });
+      13 |     await expect(page).toHaveURL(url => url.pathname === route);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\production-navigation.spec.ts:10:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\production-navigation-Pras-2ae45-gation-and-refresh-question-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\production-navigation-Pras-2ae45-gation-and-refresh-question-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\production-navigation-Pras-2ae45-gation-and-refresh-question-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\production-navigation-Pras-2ae45-gation-and-refresh-question-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  89) [chromium-preview] › tests\e2e\production-navigation.spec.ts:18:1 › documented Prasna spelling redirects to the canonical route 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/prasna
+    Call log:
+      - navigating to "http://127.0.0.1:4173/prasna", waiting until "load"
+
+
+
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\production-navigation.spec.ts:36:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\production-navigation-docu-2afe3-ects-to-the-canonical-route-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\production-navigation-docu-2afe3-ects-to-the-canonical-route-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\production-navigation-docu-2afe3-ects-to-the-canonical-route-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\production-navigation-docu-2afe3-ects-to-the-canonical-route-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  90) [chromium-preview] › tests\e2e\production-offline.spec.ts:28:1 › PATCH 6 — home page loads with no unexplained 4xx/5xx in production 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/
+    Call log:
+      - navigating to "http://127.0.0.1:4173/", waiting until "load"
+
+
+      47 |
+      48 |   const report = [
+    > 49 |     '=== PRODUCTION home / — HTTP >=400 ===',
+         |              ^
+      50 |     ...(bad.length ? bad : ['(none)']),
+      51 |     '',
+      52 |     '=== PRODUCTION home / — requestfailed ===',
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\production-offline.spec.ts:49:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\production-offline-PATCH-6-cb5df-ained-4xx-5xx-in-production-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\production-offline-PATCH-6-cb5df-ained-4xx-5xx-in-production-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\production-offline-PATCH-6-cb5df-ained-4xx-5xx-in-production-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\production-offline-PATCH-6-cb5df-ained-4xx-5xx-in-production-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  91) [chromium-preview] › tests\e2e\production-offline.spec.ts:66:1 › PATCH 5 — /panchang works offline after service worker activation 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/panchang
+    Call log:
+      - navigating to "http://127.0.0.1:4173/panchang", waiting until "load"
+
+
+      63 |   expect(bad, `Unexpected >=400 responses:\n${bad.join('\n')}`).toEqual([]);
+      64 | });
+    > 65 |
+         | ^
+      66 | test('PATCH 5 — /panchang works offline after service worker activation', async ({ page, context }) => {
+      67 |   const log: string[] = [];
+      68 |
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\production-offline.spec.ts:65:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\production-offline-PATCH-5-7f8d7-r-service-worker-activation-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\production-offline-PATCH-5-7f8d7-r-service-worker-activation-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\production-offline-PATCH-5-7f8d7-r-service-worker-activation-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\production-offline-PATCH-5-7f8d7-r-service-worker-activation-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  92) [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:168:5 › Robustness — random birth data › horoscope renders for random birth 1: Isha Sharma (01/05/1946 14:22) 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/horoscope
+    Call log:
+      - navigating to "http://127.0.0.1:4173/horoscope", waiting until "domcontentloaded"
+
+
+      204 |
+      205 |       await page.goto('/question', { waitUntil: 'domcontentloaded', timeout: 60_000 });
+    > 206 |
+          | ^
+      207 |       const textarea = page.locator('textarea').first();
+      208 |       await expect(textarea).toBeVisible({ timeout: 30_000 });
+      209 |       await textarea.fill(q.text);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\robustness-random-birth.spec.ts:206:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\robustness-random-birth-Ro-3efca-ha-Sharma-01-05-1946-14-22--chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\robustness-random-birth-Ro-3efca-ha-Sharma-01-05-1946-14-22--chromium-preview\error-context.md
+
+    Error Context: test-results\robustness-random-birth-Ro-3efca-ha-Sharma-01-05-1946-14-22--chromium-preview\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\robustness-random-birth-Ro-3efca-ha-Sharma-01-05-1946-14-22--chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\robustness-random-birth-Ro-3efca-ha-Sharma-01-05-1946-14-22--chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  93) [chromium-preview] › tests\e2e\seeded-users.spec.ts:3:1 › home route loads for a synthetic visitor 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/
+    Call log:
+      - navigating to "http://127.0.0.1:4173/", waiting until "load"
+
+
+      3 | test("home route loads for a synthetic visitor", async ({ page }) => {
+      4 |   await page.goto("/");
+    > 5 |   await expect(page).toHaveURL(/.*\/$/);
+        |              ^
+      6 |   await expect(page.locator("body")).not.toContainText("Application Error");
+      7 |
+      8 |   const searchInput = page.getByRole("textbox", { name: /search/i }).first();
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\seeded-users.spec.ts:5:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\seeded-users-home-route-loads-for-a-synthetic-visitor-chromium-preview\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\seeded-users-home-route-loads-for-a-synthetic-visitor-chromium-preview\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\seeded-users-home-route-loads-for-a-synthetic-visitor-chromium-preview\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\seeded-users-home-route-loads-for-a-synthetic-visitor-chromium-preview\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  93 failed
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /jaimini 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /tajik 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /business-astrology 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /remedies 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /divisional-charts 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /planetary-strength 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /horoscope 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /yogas 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /lal-kitab 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kp-system 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /love-astrology 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /nadi-astrology 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /western-astrology 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /chinese-astrology 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /ai-predictions 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /horary 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /medical-astrology 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /numerology 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /financial-astrology 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /learn 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /marketplace 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /community 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /features 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /api-docs 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /panchang 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /comparative-astrology 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /world-astrology 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /electional-astrology 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mundane-astrology 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /sade-sati 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /ashtakavarga 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /gemstones 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /varshaphal 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /bv-raman 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /raman-archive 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feedback 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise-admin 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mobile-app 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /spiritual-remedies 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mahadasha-children 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dynamic-transit 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /consultation 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /question 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/add 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/ingest 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/upload 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/export 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna-ai 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna-history 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /pricing 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /marriage 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kanchi 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vedic-marriage 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kundli-compare 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /wedding-muhurat 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dasha-timeline 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mtss 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vidhya-karma 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /nakshatra-precautions 
+    [chromium-preview] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /my-readings 
+    [chromium-preview] › tests\e2e\landing-page-links.spec.ts:22:3 › Landing page links › collects all internal route links from landing page 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:186:3 › Persona — basic tier › basic: home renders for a synthetic visitor 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:199:3 › Persona — basic tier › basic: kundli input form exposes labelled date/time/place fields 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:212:3 › Persona — basic tier › basic: calculation renders a horoscope without forced clicks 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:231:3 › Persona — basic tier › basic: English/Hindi switching changes the UI language 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:247:3 › Persona — basic tier › basic: panchang navigation from the home page 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:269:3 › Persona — intermediate tier › intermediate: kundli detail view renders for the computed chart 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:291:3 › Persona — intermediate tier › intermediate: prashna returns a verdict 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:314:3 › Persona — intermediate tier › intermediate: matchmaking computes compatibility from sample data 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:334:3 › Persona — intermediate tier › intermediate: panchang renders a result region for a chosen date 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:350:3 › Persona — intermediate tier › intermediate: PDF/print export control is wired up 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:391:3 › Persona — advanced tier › advanced: leap-year dates are accepted, impossible dates rejected 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:412:3 › Persona — advanced tier › advanced: invalid calendar date (31/04/2020) shows an explanation and blocks submit 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:431:3 › Persona — advanced tier › advanced: midnight 00:00 is valid, 24:00 is rejected 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:459:3 › Persona — advanced tier › advanced: rapid repeated submissions do not crash or duplicate 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:486:3 › Persona — advanced tier › advanced: location dropdown cannot overlap the submit button 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:517:3 › Persona — advanced tier › advanced: submit click succeeds even if dropdown is open (no force:true) 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:555:3 › Persona — advanced tier › advanced: keyboard-only selection and submission 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:584:3 › Persona — advanced tier › advanced: a stale geocoding response does not reopen the dropdown 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:601:3 › Persona — advanced tier › advanced: privacy settings work without Clerk (demo mode) 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:629:3 › Persona — advanced tier › advanced: deep-link refresh keeps the page functional 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:645:3 › Persona — advanced tier › advanced: geocoding network failure degrades gracefully 
+    [chromium-preview] › tests\e2e\persona-users.spec.ts:669:3 › Persona — advanced tier › advanced: offline production preview serves a usable shell 
+    [chromium-preview] › tests\e2e\production-navigation.spec.ts:5:3 › Prashna direct navigation and refresh: /prashna 
+    [chromium-preview] › tests\e2e\production-navigation.spec.ts:5:3 › Prashna direct navigation and refresh: /question 
+    [chromium-preview] › tests\e2e\production-navigation.spec.ts:18:1 › documented Prasna spelling redirects to the canonical route 
+    [chromium-preview] › tests\e2e\production-offline.spec.ts:28:1 › PATCH 6 — home page loads with no unexplained 4xx/5xx in production 
+    [chromium-preview] › tests\e2e\production-offline.spec.ts:66:1 › PATCH 5 — /panchang works offline after service worker activation 
+    [chromium-preview] › tests\e2e\robustness-random-birth.spec.ts:168:5 › Robustness — random birth data › horoscope renders for random birth 1: Isha Sharma (01/05/1946 14:22) 
+    [chromium-preview] › tests\e2e\seeded-users.spec.ts:3:1 › home route loads for a synthetic visitor 
+  34 did not run
+  17 passed (11.5m)
+EXIT=1

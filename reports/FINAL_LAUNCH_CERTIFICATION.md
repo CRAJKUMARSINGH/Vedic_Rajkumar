@@ -1,3 +1,66 @@
+# Current browser regression certification — 2026-11-16
+
+**Status: HOLD ? landing regression resolved; complete E2E gate failed.** This current-session entry supersedes the historical certification retained below. No push, merge, or deployment is authorized or performed.
+
+Branch: `feature/browser-regression-certification`. Base commit: `c9f7b43eb86bfc78e12748d9a1f2291a23e42c98`. Environment: Windows, Node v24.14.0, Playwright Chromium, localhost only.
+
+## Route investigation and test corrections
+
+`src/App.tsx` imports `routes` from `src/routes/index.tsx`. This active router serves `QuestionPage` at `/prashna` and `/question`. Homepage navigation consistently uses `/prashna`, making it the canonical user-facing route. `/question` is a supported alias that stays at `/question`; it does **not** redirect. `/prasna` redirects to `/prashna`. The conflicting `src/routes/appRoutes.tsx` is not imported by App.tsx and was not used as authority. `/privacy` serves the privacy page directly. Application routes were preserved.
+
+The original landing test expected the old homepage's links and section IDs. The corrected serial suite covers all 10 unique current internal destinations, current in-page anchors, and ordinary clicks on all four module cards. It uses the cookie button's actual accessible name (`Decline optional cookies`), then performs footer clicks without forced actionability. The consent preferences link to `/privacy-settings` is tested while its banner is present. No overlay removal, navigation mocking, new skips, or assertion weakening was introduced to make an interaction pass.
+
+The historical serial suite had 14 cases and stopped after its first failure (1 failed, 13 unexecuted). The current homepage has 10 unique route destinations rather than 11 old/current mixed destinations; the corrected suite has 13 cases, all executed. Old removed-homepage sections were not reinstated just to satisfy stale tests.
+
+## Executed gates and exact counts
+
+| Run                                                                         |       Passed |  Failed | Skipped / unexecuted                                             |   Flaky | Evidence                                           |
+| --------------------------------------------------------------------------- | -----------: | ------: | ---------------------------------------------------------------- | ------: | -------------------------------------------------- |
+| Initial routes + personas (production-only offline case excluded by filter) |          101 |       0 | 0 selected cases skipped; 1 excluded by filter                   |       0 | Initial Playwright console run                     |
+| Corrected landing serial suite                                              |           13 |       0 | 0                                                                |       0 | `browser-regression-landing.log`                   |
+| Production build                                                            | PASS, exit 0 |       — | —                                                                |       — | `browser-regression-build.log`                     |
+| Complete production-preview gate                                            |           40 |       0 | 0                                                                |       0 | `browser-regression-preview.json`, `.log`          |
+| First complete dev gate, 30s default                                        |          118 |       1 | 25 total: 3 production-only skips + 22 serial-blocked/unexecuted |       0 | `browser-regression-final-dev.json`, `.log`        |
+| Complete dev gate, 90s budget                                               |          121 |       2 | 21 total: 3 production-only skips + 18 serial-blocked/unexecuted |       0 | `browser-regression-complete-dev.json`, `.log`     |
+| Full production preview, 144 cases                                          |          121 |       1 | 22 serial-blocked/unexecuted; 0 explicit skips                   |       0 | `browser-regression-full-preview.json`, `.log`     |
+| Single failing robustness case in isolation                                 |            1 |       0 | 0                                                                |       0 | `browser-regression-robustness-debug.json`, `.log` |
+| Whole robustness file                                                       |            0 |       1 | 22 serial-blocked/unexecuted; 0 explicit skips                   |       0 | `browser-regression-robustness.json`, `.log`       |
+| Added ordinary 100ms pointer-press regression                               |            1 |       0 | 0                                                                |       0 | `browser-submit-before.json`, `.log`               |
+| Final unfiltered preview, one worker, 145 cases                             |      PENDING | PENDING | PENDING                                                          | PENDING | `browser-regression-release.json`, `.log`          |
+
+The 30s dev failure occurred in `page.screenshot` in the first synthetic random-birth robustness case, after the result and no-crash assertions passed. Existing individual navigation/result waits allow 60s/45s, exceeding that default total budget. The entire dev suite was rerun with `--timeout=90000`, with all assertions preserved, no retry, no filter, and no concurrent build or preview test. This is a harness timing adjustment, not a performance certification. An obsolete intermediate full run was interrupted after test corrections; it is not counted as a passing gate (`browser-regression-dev.log`).
+
+## Additional failures and investigation
+
+The 90s dev run failed the basic synthetic calculation (submit stayed disabled after the form values reset) and random-birth case 5 (no result). The dev trace shows two Vite connection sequences in one test, consistent with a reload; frequent HMR updates were observed during generated-artifact writes. This does not establish the root cause of the separate static-preview failure.
+
+Full preview failed the first random-birth case waiting for the result; its whole-file rerun failed similarly, while the individual case passed. Retained failure screenshot shows a valid completed form still visible after the ordinary submit click. An outside-mousedown/layout-change hypothesis was investigated using a normal click with a 100ms mouse press while suggestions were open; that focused regression passed. The hypothesis is **not confirmed**. No application changes or suggestion-selection shortcuts were made to hide this behavior. Reported flaky counts are Playwright retry classifications; zero there does **not** mean manual reruns were consistent.
+
+The final one-worker static-preview gate selected all 145 tests without filtering: 125 passed, 1 failed, and 19 were serial-blocked/unexecuted (Playwright JSON reports these as skipped). There were no explicit production-only skips on preview and no retry-classified flaky cases. It failed random-birth case 4 waiting for the horoscope result, despite other submissions passing. The 19 blocked cases are not counted as passes. This fails the full-suite acceptance criterion; the cause of intermittent submission/result failure remains unresolved.
+
+The focused 100ms click regression passed in the final full run too. All 13 landing cases, all 80 route checks, all 22 persona cases, the 3 direct-navigation/refresh/alias cases, both production asset/offline cases, and the synthetic-home smoke passed. Three random-birth cases passed before case 4 failed; the remaining two birth cases and 17 question cases did not execute.
+
+**Release assessment: HOLD on this verification.** The landing route/selector defect is fixed, but the complete browser gate is not green. No claim of zero genuine regressions or full launch readiness is made. Resolve the intermittent submission/result failure and rerun the complete gate before changing this status. No application routes or form behavior were changed during the investigation.
+
+## Production-preview findings
+
+- All 13 landing tests passed, including ordinary cookie dismissal, footer `/privacy` and `/terms` clicks, canonical `/prashna` navigation, all actual homepage destinations and anchors, and all four module cards.
+- Direct navigation and browser refresh passed at `/prashna` and `/question`, with the expected heading, URL preservation and no uncaught page errors.
+- `/prasna` redirected to `/prashna` and rendered the expected page.
+- Synthetic persona tests passed, including keyboard-only submission, date validation, open dropdown interaction, geocoding failure and privacy settings.
+- Production homepage asset probe passed; service-worker activation and offline Panchang checks passed.
+- No broken homepage internal links were found. This is not a claim that every link in every authenticated page or the deployed Netlify site was crawled.
+
+## Scope and compliance limits
+
+Only tests, preview/full-preview test configurations, reports, generated synthetic test evidence, and the local continuity log changed. No working application routes or production behavior changed. No files were deleted; instruction documents and historical evidence were retained. See `MARKDOWN_INSTRUCTION_COMPLIANCE.md` for applicable requirement handling and unavailable historical instruction paths. No seed data was inspected/emitted/published; no `ship` or `answers:emit` command was run. Generated browser evidence is from synthetic fixtures.
+
+This run does not renew historical unit/accuracy/security/Lighthouse claims. Normal click/keyboard checks do not substitute for a complete accessibility audit. The build retains warnings about bundle size and browser externalization of Node modules in the Swiss Ephemeris dependency. No deployed-site smoke test was performed. Auth/database environment variables are not configured, so this run covers demo/offline behavior, not authenticated backend integration.
+
+---
+
+# Historical certification retained for provenance (not results of this run)
+
 # FINAL LAUNCH CERTIFICATION — Vedic Rajkumar
 
 **Date:** 2026-11-16 · All results executed this session, not historical.
@@ -64,3 +127,33 @@ FINAL DECISION:        GO (for merge → deploy pipeline), conditional on:
 - `npm ci` not re-run (node_modules current; `npm uninstall pino` refreshed lock).
 - `npm run test:e2e` dev-server config not run — preview config is the
   authoritative production gate by design.
+
+## Addendum — landing-page E2E verification (post-merge, 2026-11-16)
+
+- `landing-page-links.spec.ts` rewritten to assert the actual LandingPageV3
+  route set (`/`, `/pricing`, `/prashna`, `/horoscope`, `/features`,
+  `/matchmaking`, `/panchang`, `/privacy`, `/terms`, `/privacy-settings`)
+  and canonical `/prashna` + `/privacy` routes — test-harness fixes only,
+  no app routes changed, no `force: true`.
+- Landing serial suite: **13/13 PASS** (incl. all 13 previously-skipped
+  tests) — `landing-run.txt`.
+- Full E2E (`playwright.full-preview.config.ts`, all specs vs prod preview):
+  first attempt aborted mid-run when the `vite preview` server died
+  (ERR_CONNECTION_REFUSED on all remaining tests — infra flake, not app
+  assertions); rerun in progress — see `e2e-full-run2.txt`.
+
+## Addendum 2 — full E2E rerun results (final)
+
+- Landing serial suite: **13/13 PASS** — all previously-skipped tests now run;
+  consent dismissed via accessible-name click; `/prashna` + `/privacy` canonical.
+- Full suite (`playwright.full-preview.config.ts`, 144 tests, prod preview):
+  attempt 1 aborted — `vite preview` server died mid-run (infra flake).
+  attempt 2: **122 passed / 1 failed / 22 did not run** (serial skip after
+  failure) — `e2e-full-run2.txt`.
+- The 1 failure: `robustness-random-birth` horoscope birth-1 — "Overall Score"
+  not visible in 45s. **Manual probe of identical steps PASSED in ~5s** —
+  classified TEST-HARNESS timing issue, NOT an app defect. Secondary finding:
+  the cookie-consent banner CAN overlay the submit CTA for undismissed users
+  (observed intercepting pointer events) — documented UX backlog item.
+- Net: no genuine application regression found; harness needs a settle-wait
+  or longer timeout for that spec.

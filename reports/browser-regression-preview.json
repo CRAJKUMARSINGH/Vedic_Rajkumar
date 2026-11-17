@@ -1,0 +1,1507 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Rajkumar\\Vedic_Rajkumar\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.preview.config.ts",
+      "--reporter=list,json",
+      "--output=test-results/final-preview"
+    ],
+    "configFile": "E:\\Rajkumar\\Vedic_Rajkumar\\playwright.preview.config.ts",
+    "rootDir": "E:/Rajkumar/Vedic_Rajkumar/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "E:/Rajkumar/Vedic_Rajkumar/test-results/final-preview",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-preview",
+        "name": "chromium-preview",
+        "testDir": "E:/Rajkumar/Vedic_Rajkumar/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/production-*.spec.ts",
+          "**/persona-users.spec.ts",
+          "**/landing-page-links.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [["list"], ["json"]],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": {
+      "command": "npx vite preview --host 127.0.0.1 --port 4173",
+      "url": "http://127.0.0.1:4173",
+      "reuseExistingServer": true,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "landing-page-links.spec.ts",
+      "file": "landing-page-links.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Landing page links",
+          "file": "landing-page-links.spec.ts",
+          "line": 19,
+          "column": 6,
+          "specs": [
+            {
+              "title": "collects all internal route links from landing page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3883,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:06:24.036Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "145152ca827e675294be-033f81201071e2b1dc13",
+              "file": "landing-page-links.spec.ts",
+              "line": 22,
+              "column": 3
+            },
+            {
+              "title": "in-page anchor links resolve to visible sections",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3486,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:06:28.841Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "145152ca827e675294be-e3df9641eba224d2fb3b",
+              "file": "landing-page-links.spec.ts",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "route link works: /",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2919,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:06:32.374Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "145152ca827e675294be-c67cdc70ed2cef6bded4",
+              "file": "landing-page-links.spec.ts",
+              "line": 40,
+              "column": 5
+            },
+            {
+              "title": "route link works: /pricing",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3981,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:06:35.334Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "145152ca827e675294be-6abb7e701f4cbc457def",
+              "file": "landing-page-links.spec.ts",
+              "line": 40,
+              "column": 5
+            },
+            {
+              "title": "route link works: /prashna",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4333,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:06:39.354Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "145152ca827e675294be-7223d74212a35a2011ab",
+              "file": "landing-page-links.spec.ts",
+              "line": 40,
+              "column": 5
+            },
+            {
+              "title": "route link works: /horoscope",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3844,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:06:43.734Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "145152ca827e675294be-9816ce57d8b8cb7d7980",
+              "file": "landing-page-links.spec.ts",
+              "line": 40,
+              "column": 5
+            },
+            {
+              "title": "route link works: /features",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3740,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:06:47.627Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "145152ca827e675294be-f5c45eea12065e6658a7",
+              "file": "landing-page-links.spec.ts",
+              "line": 40,
+              "column": 5
+            },
+            {
+              "title": "route link works: /matchmaking",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3435,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:06:51.412Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "145152ca827e675294be-9d028f57e679cc75504f",
+              "file": "landing-page-links.spec.ts",
+              "line": 40,
+              "column": 5
+            },
+            {
+              "title": "route link works: /panchang",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3718,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:06:54.884Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "145152ca827e675294be-0a9ad0e547472e13b7e8",
+              "file": "landing-page-links.spec.ts",
+              "line": 40,
+              "column": 5
+            },
+            {
+              "title": "route link works: /privacy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4000,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:06:58.646Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "145152ca827e675294be-15f39f4db7b20fc2812c",
+              "file": "landing-page-links.spec.ts",
+              "line": 40,
+              "column": 5
+            },
+            {
+              "title": "route link works: /terms",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6351,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:07:02.687Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "145152ca827e675294be-83f052234374bc60e324",
+              "file": "landing-page-links.spec.ts",
+              "line": 40,
+              "column": 5
+            },
+            {
+              "title": "route link works: /privacy-settings",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3605,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:07:09.077Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "145152ca827e675294be-d494725cf1fea89f536d",
+              "file": "landing-page-links.spec.ts",
+              "line": 40,
+              "column": 5
+            },
+            {
+              "title": "suite module cards navigate to correct routes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8565,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:07:12.720Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "145152ca827e675294be-a7b478b120dd098ba27b",
+              "file": "landing-page-links.spec.ts",
+              "line": 54,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "persona-users.spec.ts",
+      "file": "persona-users.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Persona — basic tier",
+          "file": "persona-users.spec.ts",
+          "line": 180,
+          "column": 6,
+          "specs": [
+            {
+              "title": "basic: home renders for a synthetic visitor",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5023,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:07:21.409Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-98e15945227f280496f2",
+              "file": "persona-users.spec.ts",
+              "line": 186,
+              "column": 3
+            },
+            {
+              "title": "basic: kundli input form exposes labelled date/time/place fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2990,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:07:26.471Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-fabab7e4b07f5e3421d0",
+              "file": "persona-users.spec.ts",
+              "line": 199,
+              "column": 3
+            },
+            {
+              "title": "basic: calculation renders a horoscope without forced clicks",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5296,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:07:29.523Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-40979a7c9a4077d1658b",
+              "file": "persona-users.spec.ts",
+              "line": 212,
+              "column": 3
+            },
+            {
+              "title": "basic: English/Hindi switching changes the UI language",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4567,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:07:34.863Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-5c3a08cea6b52832ad08",
+              "file": "persona-users.spec.ts",
+              "line": 231,
+              "column": 3
+            },
+            {
+              "title": "basic: panchang navigation from the home page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3837,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:07:39.507Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-189e3a58dbda1de20cb5",
+              "file": "persona-users.spec.ts",
+              "line": 247,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Persona — intermediate tier",
+          "file": "persona-users.spec.ts",
+          "line": 265,
+          "column": 6,
+          "specs": [
+            {
+              "title": "intermediate: kundli detail view renders for the computed chart",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5991,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:07:43.387Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-65ba8f57e239b816d160",
+              "file": "persona-users.spec.ts",
+              "line": 269,
+              "column": 3
+            },
+            {
+              "title": "intermediate: prashna returns a verdict",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10413,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:07:49.415Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-6e057f003dae16e736a1",
+              "file": "persona-users.spec.ts",
+              "line": 291,
+              "column": 3
+            },
+            {
+              "title": "intermediate: matchmaking computes compatibility from sample data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4385,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:07:59.865Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-f6b88d5bb72e7ab6d61a",
+              "file": "persona-users.spec.ts",
+              "line": 314,
+              "column": 3
+            },
+            {
+              "title": "intermediate: panchang renders a result region for a chosen date",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3961,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:08:04.287Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-3463d41a798d869c8fd8",
+              "file": "persona-users.spec.ts",
+              "line": 334,
+              "column": 3
+            },
+            {
+              "title": "intermediate: PDF/print export control is wired up",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5832,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:08:08.320Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-2b6ef9acbdaac1ca0765",
+              "file": "persona-users.spec.ts",
+              "line": 350,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Persona — advanced tier",
+          "file": "persona-users.spec.ts",
+          "line": 387,
+          "column": 6,
+          "specs": [
+            {
+              "title": "advanced: leap-year dates are accepted, impossible dates rejected",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3314,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:08:14.191Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-4850c31add27bba40e16",
+              "file": "persona-users.spec.ts",
+              "line": 391,
+              "column": 3
+            },
+            {
+              "title": "advanced: invalid calendar date (31/04/2020) shows an explanation and blocks submit",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3214,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:08:17.539Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-eabd0241be0ba3b2f89e",
+              "file": "persona-users.spec.ts",
+              "line": 412,
+              "column": 3
+            },
+            {
+              "title": "advanced: midnight 00:00 is valid, 24:00 is rejected",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4534,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:08:20.791Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-0bbd7fa3eccc7040837f",
+              "file": "persona-users.spec.ts",
+              "line": 431,
+              "column": 3
+            },
+            {
+              "title": "advanced: rapid repeated submissions do not crash or duplicate",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5084,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:08:25.363Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-ff8d77e50c802c2272a6",
+              "file": "persona-users.spec.ts",
+              "line": 459,
+              "column": 3
+            },
+            {
+              "title": "advanced: location dropdown cannot overlap the submit button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5968,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:08:30.481Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-5e8664daa35607c442da",
+              "file": "persona-users.spec.ts",
+              "line": 486,
+              "column": 3
+            },
+            {
+              "title": "advanced: submit click succeeds even if dropdown is open (no force:true)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5246,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:08:36.486Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-aaeb28d543d9ccbd201e",
+              "file": "persona-users.spec.ts",
+              "line": 517,
+              "column": 3
+            },
+            {
+              "title": "advanced: keyboard-only selection and submission",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6928,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:08:41.767Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-23ab8131bbcd9617ef96",
+              "file": "persona-users.spec.ts",
+              "line": 555,
+              "column": 3
+            },
+            {
+              "title": "advanced: a stale geocoding response does not reopen the dropdown",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6100,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:08:48.730Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-4c4db8546ce21422dc7b",
+              "file": "persona-users.spec.ts",
+              "line": 584,
+              "column": 3
+            },
+            {
+              "title": "advanced: privacy settings work without Clerk (demo mode)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3814,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:08:54.864Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-496fa9a99687c1d7bb58",
+              "file": "persona-users.spec.ts",
+              "line": 601,
+              "column": 3
+            },
+            {
+              "title": "advanced: deep-link refresh keeps the page functional",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3642,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:08:58.715Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-5ae1cf042a907847c348",
+              "file": "persona-users.spec.ts",
+              "line": 629,
+              "column": 3
+            },
+            {
+              "title": "advanced: geocoding network failure degrades gracefully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5854,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:09:02.392Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-d6be7804219a1ee02585",
+              "file": "persona-users.spec.ts",
+              "line": 645,
+              "column": 3
+            },
+            {
+              "title": "advanced: offline production preview serves a usable shell",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11206,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T17:09:08.284Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "57dbab869d8f902818fe-03bcb20437465bdd29cd",
+              "file": "persona-users.spec.ts",
+              "line": 669,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "production-navigation.spec.ts",
+      "file": "production-navigation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Prashna direct navigation and refresh: /prashna",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-preview",
+              "projectName": "chromium-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3675,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:09:19.555Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5294e9593cdbea7ee78c-6f86df69a7865d3f5bf5",
+          "file": "production-navigation.spec.ts",
+          "line": 5,
+          "column": 3
+        },
+        {
+          "title": "Prashna direct navigation and refresh: /question",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-preview",
+              "projectName": "chromium-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3115,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:09:23.283Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5294e9593cdbea7ee78c-8a37856bffdf59efc4bd",
+          "file": "production-navigation.spec.ts",
+          "line": 5,
+          "column": 3
+        },
+        {
+          "title": "documented Prasna spelling redirects to the canonical route",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-preview",
+              "projectName": "chromium-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4025,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:09:26.434Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5294e9593cdbea7ee78c-2f441508664b76fed035",
+          "file": "production-navigation.spec.ts",
+          "line": 18,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "production-offline.spec.ts",
+      "file": "production-offline.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "PATCH 6 — home page loads with no unexplained 4xx/5xx in production",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-preview",
+              "projectName": "chromium-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6258,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "=== PRODUCTION home / — HTTP >=400 ===\n(none)\n\n=== PRODUCTION home / — requestfailed ===\n(none)\n\n=== PRODUCTION home / — console.error ===\n(none)\n\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:09:30.522Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b84f5b53779e4c0405ad-1b53a9e27ea38d17a5d9",
+          "file": "production-offline.spec.ts",
+          "line": 28,
+          "column": 1
+        },
+        {
+          "title": "PATCH 5 — /panchang works offline after service worker activation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-preview",
+              "projectName": "chromium-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14752,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:09:36.822Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b84f5b53779e4c0405ad-4155ca857085ff9fac61",
+          "file": "production-offline.spec.ts",
+          "line": 66,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-16T17:05:44.075Z",
+    "duration": 256758.73500000002,
+    "expected": 40,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

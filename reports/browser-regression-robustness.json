@@ -1,0 +1,927 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Rajkumar\\Vedic_Rajkumar\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.full-preview.config.ts",
+      "tests/e2e/robustness-random-birth.spec.ts",
+      "--workers=1",
+      "--output=reports/browser-robustness-complete-artifacts",
+      "--reporter=list,json"
+    ],
+    "configFile": "E:\\Rajkumar\\Vedic_Rajkumar\\playwright.full-preview.config.ts",
+    "rootDir": "E:/Rajkumar/Vedic_Rajkumar/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "E:/Rajkumar/Vedic_Rajkumar/reports/browser-robustness-complete-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-preview",
+        "name": "chromium-preview",
+        "testDir": "E:/Rajkumar/Vedic_Rajkumar/tests/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.spec.ts"],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [["list"], ["json"]],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": {
+      "command": "npx vite preview --host 127.0.0.1 --port 4173",
+      "url": "http://127.0.0.1:4173",
+      "reuseExistingServer": true,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "robustness-random-birth.spec.ts",
+      "file": "robustness-random-birth.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Robustness — random birth data",
+          "file": "robustness-random-birth.spec.ts",
+          "line": 164,
+          "column": 6,
+          "specs": [
+            {
+              "title": "horoscope renders for random birth 1: Isha Sharma (01/05/1946 14:22)",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 54745,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/Overall Score|समग्र स्कोर/).first()\nExpected: visible\nTimeout: 45000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 45000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/Overall Score|समग्र स्कोर/).first()\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/Overall Score|समग्र स्कोर/).first()\nExpected: visible\nTimeout: 45000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 45000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/Overall Score|समग्र स्कोर/).first()\u001b[22m\n\n    at E:\\Rajkumar\\Vedic_Rajkumar\\tests\\e2e\\robustness-random-birth.spec.ts:184:73",
+                        "location": {
+                          "file": "E:\\Rajkumar\\Vedic_Rajkumar\\tests\\e2e\\robustness-random-birth.spec.ts",
+                          "column": 73,
+                          "line": 184
+                        },
+                        "snippet": "  182 |\n  183 |       // HoroscopeCard is lazy-loaded and computed from the birth date.\n> 184 |       await expect(page.getByText(/Overall Score|समग्र स्कोर/).first()).toBeVisible({ timeout: 45_000 });\n      |                                                                         ^\n  185 |\n  186 |       await assertNoCrash(page, `horoscope/${i + 1}`);\n  187 |       expect(errors.pageErrors, `uncaught page error for ${birth.name}`).toEqual([]);"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "E:\\Rajkumar\\Vedic_Rajkumar\\tests\\e2e\\robustness-random-birth.spec.ts",
+                            "column": 73,
+                            "line": 184
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/Overall Score|समग्र स्कोर/).first()\nExpected: visible\nTimeout: 45000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 45000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/Overall Score|समग्र स्कोर/).first()\u001b[22m\n\n\n  182 |\n  183 |       // HoroscopeCard is lazy-loaded and computed from the birth date.\n> 184 |       await expect(page.getByText(/Overall Score|समग्र स्कोर/).first()).toBeVisible({ timeout: 45_000 });\n      |                                                                         ^\n  185 |\n  186 |       await assertNoCrash(page, `horoscope/${i + 1}`);\n  187 |       expect(errors.pageErrors, `uncaught page error for ${birth.name}`).toEqual([]);\n    at E:\\Rajkumar\\Vedic_Rajkumar\\tests\\e2e\\robustness-random-birth.spec.ts:184:73"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:37:45.093Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "E:\\Rajkumar\\Vedic_Rajkumar\\reports\\browser-robustness-complete-artifacts\\robustness-random-birth-Ro-3efca-ha-Sharma-01-05-1946-14-22--chromium-preview\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "E:\\Rajkumar\\Vedic_Rajkumar\\reports\\browser-robustness-complete-artifacts\\robustness-random-birth-Ro-3efca-ha-Sharma-01-05-1946-14-22--chromium-preview\\error-context.md"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "E:\\Rajkumar\\Vedic_Rajkumar\\reports\\browser-robustness-complete-artifacts\\robustness-random-birth-Ro-3efca-ha-Sharma-01-05-1946-14-22--chromium-preview\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "E:\\Rajkumar\\Vedic_Rajkumar\\reports\\browser-robustness-complete-artifacts\\robustness-random-birth-Ro-3efca-ha-Sharma-01-05-1946-14-22--chromium-preview\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "E:\\Rajkumar\\Vedic_Rajkumar\\tests\\e2e\\robustness-random-birth.spec.ts",
+                        "column": 73,
+                        "line": 184
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-25575a512fd33e8fd150",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 168,
+              "column": 5
+            },
+            {
+              "title": "horoscope renders for random birth 2: Saanvi Rao (12/01/1935 18:20)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.572Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-e27ccf567a1d7675a9c3",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 168,
+              "column": 5
+            },
+            {
+              "title": "horoscope renders for random birth 3: Arjun Reddy (21/04/1998 22:52)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.573Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-c90a91ed8b48c748caf1",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 168,
+              "column": 5
+            },
+            {
+              "title": "horoscope renders for random birth 4: Rohan Iyer (17/11/2007 12:05)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.573Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-2e3463e5545ded3eccb5",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 168,
+              "column": 5
+            },
+            {
+              "title": "horoscope renders for random birth 5: Saanvi Joshi (05/11/1988 08:32)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.574Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-6b630aa5bde2152aa5ee",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 168,
+              "column": 5
+            },
+            {
+              "title": "horoscope renders for random birth 6: Ananya Joshi (07/02/1994 15:51)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.574Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-56de1b651801baf231b4",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 168,
+              "column": 5
+            }
+          ]
+        },
+        {
+          "title": "Robustness — multidimensional Prashna questions",
+          "file": "robustness-random-birth.spec.ts",
+          "line": 199,
+          "column": 6,
+          "specs": [
+            {
+              "title": "prashna verdict for [career]: Will I get a promotion or job elevation in my cu…",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.574Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-5fd87a1832728e3c53e4",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [business]: Is starting a new business venture or independen…",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.575Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-0eb394209f817baeabdf",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [marriage]: Will my marriage be harmonious, stable and long-…",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.575Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-8e669214b68a3977e94b",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [partner-timing]: When will I meet a compatible life partner and s…",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.575Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-dba797186492dad238ad",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [education]: Will I clear my competitive examination and high…",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.576Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-d57f844411f53c2fe4a9",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [foreign-study]: Is foreign education or an overseas relocation f…",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.576Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-4e959a87274e1d7cea3a",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [finance]: Will my financial condition improve and my wealt…",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.576Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-150c3bc104ceb03dc841",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [property]: Is this a good period to buy real estate, land, …",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.576Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-ec2287908a72b8f91854",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [health]: How can I improve my health, immunity and overal…",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.577Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-1f6946694d5ff2cdff76",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [legal]: Will I overcome a legal dispute, court case, or …",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.577Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-79c221a8db8458b7e072",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [children]: Is there a prospect of progeny and what does the…",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.577Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-9986cfc197d9c8345007",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [spiritual]: Which spiritual practice or deity worship will b…",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.577Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-9cc3d6f5cd544043bbad",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [travel]: Will I undertake long-distance travel or relocat…",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.577Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-fe544202a0a4b5733c29",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [hindi]: क्या मेरी नौकरी में पदोन्नति होगी और आर्थिक स्थि…",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.578Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-15e6ddef80d4c800b7ba",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [edge-emoji]: 💍 Will I marry soon? 🙏 Is my partner compatibl…",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.578Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-56183b2a8aa5125c7ee9",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [edge-long]: Considering my current professional, financial, …",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.578Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-e7bce7f896cedf5bde28",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            },
+            {
+              "title": "prashna verdict for [edge-numeric]:    ??? 12345 %%%  …",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-preview",
+                  "projectName": "chromium-preview",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-17T02:38:49.578Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9b014a7219f2e1eba37f-e675ce1d18f143c1dbb1",
+              "file": "robustness-random-birth.spec.ts",
+              "line": 201,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-17T02:37:38.740Z",
+    "duration": 72860.149,
+    "expected": 0,
+    "skipped": 22,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

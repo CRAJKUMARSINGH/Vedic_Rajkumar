@@ -1,7 +1,7 @@
 {
   "title": "persona-users.spec.ts › Persona — advanced tier › advanced: submit click succeeds even if dropdown is open (no force:true)",
   "status": "passed",
-  "durationMs": 3688,
+  "durationMs": 5288,
   "errors": [],
   "pageErrors": [],
   "consoleErrors": [],

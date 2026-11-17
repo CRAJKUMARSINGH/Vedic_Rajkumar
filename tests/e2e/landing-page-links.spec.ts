@@ -1,117 +1,68 @@
-import { test, expect } from '@playwright/test';
-import * as path from 'path';
-import { fileURLToPath } from 'url';
+import { test, expect, type Page } from '@playwright/test';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Current LandingPageV3 destinations, including global privacy links.
+const ROUTES = ['/', '/pricing', '/prashna', '/horoscope', '/features', '/matchmaking', '/panchang', '/privacy', '/terms', '/privacy-settings'];
+const destination = (route: string) => route;
 
-const LANDING_PATH = '/';
-const NAV_TIMEOUT = 60000;
-const screenshotDir = path.join(__dirname, '../../test-results/landing-links');
+async function home(page: Page) {
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await expect(page.getByRole('heading', { name: /Guidance for Every Question/ })).toBeVisible({ timeout: 60_000 });
 
-/** Routes linked from the landing page that should load without a crash. */
-const EXPECTED_ROUTE_LINKS = [
-  '/',
-  '/pricing',
-  '/question',
-  '/dasha',
-  '/features',
-  '/landing-classic',
-  '/prashna-ai',
-  '/vedic-marriage',
-  '/vidhya-karma',
-  '/wedding-muhurat',
-  '/spiritual-remedies',
-];
+}
 
-const EXPECTED_ANCHOR_IDS = ['method', 'workspace', 'interactive-charts', 'report', 'solution-grid'];
+async function noCrash(page: Page) {
+  await expect(page.locator('body')).not.toContainText(/Something went wrong|Application Error|Oops! Page not found/);
+  await expect(page.getByRole('heading', { name: '404', exact: true })).toHaveCount(0);
+}
 
-test.describe.configure({ mode: 'serial' });
-
+test.describe.configure({ mode: 'serial', timeout: 90_000 });
 test.describe('Landing page links', () => {
-  test.beforeAll(async () => {
-    await import('fs').then(fs =>
-      fs.promises.mkdir(screenshotDir, { recursive: true }),
-    );
-  });
+  test.beforeEach(async ({ page }) => { await home(page); });
 
   test('collects all internal route links from landing page', async ({ page }) => {
-    await page.goto(LANDING_PATH, { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT });
-    await page.waitForTimeout(1500);
-
     const hrefs = await page.locator('a[href^="/"]').evaluateAll(anchors =>
-      [...new Set(anchors.map(a => (a as HTMLAnchorElement).getAttribute('href') ?? '').filter(Boolean))],
-    );
-
-    for (const expected of EXPECTED_ROUTE_LINKS) {
-      expect(hrefs, `missing landing link: ${expected}`).toContain(expected);
-    }
+      [...new Set(anchors.map(a => a.getAttribute('href') ?? '').filter(Boolean))]);
+    expect(hrefs.slice().sort()).toEqual(ROUTES.slice().sort());
   });
 
   test('in-page anchor links resolve to visible sections', async ({ page }) => {
-    await page.goto(LANDING_PATH, { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT });
-
-    for (const id of EXPECTED_ANCHOR_IDS) {
-      const anchor = page.locator(`a[href="#${id}"]`).first();
-      await expect(anchor, `anchor nav link #${id}`).toBeVisible();
-      await anchor.click();
-      await expect(page.locator(`#${id}`)).toBeVisible();
+    const hrefs = await page.locator('a[href^="#"]').evaluateAll(anchors =>
+      [...new Set(anchors.map(a => a.getAttribute('href') ?? ''))]);
+    expect(hrefs).toContain('#features');
+    for (const href of hrefs) {
+      expect(href.length).toBeGreaterThan(1);
+      await page.locator(`a[href="${href}"]`).first().click();
+      await expect(page.locator(href)).toBeVisible();
     }
   });
 
-  for (const route of EXPECTED_ROUTE_LINKS) {
+  for (const route of ROUTES) {
     test(`route link works: ${route}`, async ({ page }) => {
-      const pageErrors: Error[] = [];
-      page.on('pageerror', err => pageErrors.push(err));
-
-      await page.goto(LANDING_PATH, { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT });
-      await page.waitForTimeout(1000);
-
+      const errors: string[] = [];
+      page.on('pageerror', err => errors.push(err.message));
+      if (route !== '/privacy-settings') await page.getByRole('button', { name: 'Decline optional cookies', exact: true }).click();
       const link = page.locator(`a[href="${route}"]`).first();
-      await expect(link, `no link to ${route} on landing`).toBeVisible();
-
+      await link.scrollIntoViewIfNeeded();
       await link.click();
-      await page.waitForURL(
-        url => url.pathname === route || (route === '/' && url.pathname === ''),
-        { timeout: NAV_TIMEOUT },
-      );
-      await page.waitForTimeout(1500);
-
-      expect(pageErrors.length).toBe(0);
-
-      const bodyText = await page.innerText('body');
-      expect(bodyText).not.toContain('Something went wrong');
-      expect(bodyText).not.toContain('Application Error');
-
-      const safeName = route.replace(/\//g, '_') || 'home';
-      await page.screenshot({
-        path: path.join(screenshotDir, `click_${safeName}.png`),
-        fullPage: true,
-      });
+      await expect(page).toHaveURL(url => url.pathname === destination(route));
+      await expect(page.locator('main').first()).toBeVisible({ timeout: 60_000 });
+      await noCrash(page);
+      expect(errors).toEqual([]);
     });
   }
 
   test('suite module cards navigate to correct routes', async ({ page }) => {
-    const suiteRoutes = [
-      '/prashna-ai',
-      '/dasha',
-      '/vedic-marriage',
-      '/vidhya-karma',
-      '/wedding-muhurat',
-      '/spiritual-remedies',
-    ];
-
-    await page.goto(LANDING_PATH, { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT });
-    await page.locator('#solution-grid').scrollIntoViewIfNeeded();
-
-    for (const route of suiteRoutes) {
-      const card = page.locator(`a[href="${route}"]`).filter({ hasText: 'Open module' }).first();
-      if (await card.count() === 0) {
-        const fallback = page.locator(`a[href="${route}"]`).first();
-        await expect(fallback).toBeVisible();
-        continue;
-      }
-      await expect(card).toBeVisible();
+    for (const route of ['/prashna', '/horoscope', '/matchmaking', '/panchang']) {
+      await home(page);
+      const decline = page.getByRole('button', { name: 'Decline optional cookies', exact: true });
+      if (await decline.isVisible()) await decline.click();
+      const card = page.locator(`#features a[href="${route}"]`).first();
+      await card.scrollIntoViewIfNeeded();
+      await card.click();
+      await expect(page).toHaveURL(url => url.pathname === route);
+      await noCrash(page);
     }
   });
 });
+
+

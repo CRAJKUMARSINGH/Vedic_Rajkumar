@@ -1,0 +1,19 @@
+
+Running 13 tests using 1 worker
+
+  ok  1 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:22:3 › Landing page links › collects all internal route links from landing page (2.5s)
+  ok  2 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:28:3 › Landing page links › in-page anchor links resolve to visible sections (2.9s)
+  ok  3 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: / (5.1s)
+  ok  4 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /pricing (3.8s)
+  ok  5 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /prashna (4.0s)
+  ok  6 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /horoscope (4.0s)
+  ok  7 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /features (4.2s)
+  ok  8 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /matchmaking (3.6s)
+  ok  9 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /panchang (3.9s)
+  ok 10 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /privacy (4.2s)
+  ok 11 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /terms (3.6s)
+  ok 12 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /privacy-settings (3.5s)
+  ok 13 [chromium-preview] › tests\e2e\landing-page-links.spec.ts:54:3 › Landing page links › suite module cards navigate to correct routes (8.0s)
+
+  13 passed (1.1m)
+EXIT=0
