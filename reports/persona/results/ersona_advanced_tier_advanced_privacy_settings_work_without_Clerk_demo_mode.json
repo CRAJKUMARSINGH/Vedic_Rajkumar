@@ -1,7 +1,7 @@
 {
   "title": "persona-users.spec.ts › Persona — advanced tier › advanced: privacy settings work without Clerk (demo mode)",
   "status": "passed",
-  "durationMs": 3680,
+  "durationMs": 6300,
   "errors": [],
   "pageErrors": [],
   "consoleErrors": [],

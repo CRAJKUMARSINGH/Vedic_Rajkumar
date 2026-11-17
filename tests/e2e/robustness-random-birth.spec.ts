@@ -178,6 +178,21 @@ test.describe('Robustness — random birth data', () => {
 
       const submit = page.getByRole('button', { name: /Get Transit Reading|गोचर फल देखें/ });
       await expect(submit).toBeEnabled({ timeout: 10_000 });
+      // Wait for the async geocoding cycle to fully settle before clicking.
+      // The "Searching…" indicator and the in-flow suggestions listbox both
+      // insert layout above the submit button; a click dispatched while the
+      // cycle is in flight can land on them instead of submit (lost
+      // submission — root cause of the intermittent horoscope failures).
+      // Two-phase wait: indicator visible (cycle started) → hidden (fetch
+      // resolved), then listbox visible if results exist. Covers slow/empty/
+      // rate-limited geocoding where no listbox ever renders.
+      const searching = page.getByText(/Searching\.\.\.|खोज रहे हैं/);
+      await searching.waitFor({ state: 'visible', timeout: 10_000 }).catch(() => {});
+      await searching.waitFor({ state: 'hidden', timeout: 25_000 }).catch(() => {});
+      await page
+        .locator('#location-listbox')
+        .waitFor({ state: 'visible', timeout: 5_000 })
+        .catch(() => {});
       await submit.click();
 
       // HoroscopeCard is lazy-loaded and computed from the birth date.

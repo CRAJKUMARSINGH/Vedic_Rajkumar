@@ -1,4 +1,4 @@
-## Final browser results ? 2026-11-17
+## Final browser results - 2026-11-17
 
 **Disposition: HOLD; full E2E acceptance not met.** Standalone corrected landing suite: 13 passed, 0 failed, 0 skipped, 0 flaky. Initial production-preview selection: 40 passed, 0 failed, 0 skipped, 0 flaky. Final unfiltered one-worker preview selection: 145 cases; **125 passed, 1 failed, 19 serial-blocked/unexecuted, 0 explicit skips, 0 retry-classified flaky**. Playwright JSON counts the 19 blocked cases under skipped; they are not passes. The full gate failed random-birth case 4 waiting for a horoscope result. The landing suite and direct/refresh/alias checks all passed in that same final run.
 
@@ -77,3 +77,10 @@ instruction files (open BLOCKED items), the untracked compliance guide
 
 Landing-page serial suite 13/13 PASS post route-correction; full-suite
 rerun recorded in FINAL_LAUNCH_CERTIFICATION.md addendum.
+
+## Addendum — horoscope submission stability (2026-11-17)
+
+Root cause: async geocode-cycle layout insertion stealing in-flight
+clicks. Fixed in 3 specs via deterministic settle waits + layout-stability
+assertion. Full preview E2E 145/145 PASS. See FINAL_LAUNCH_CERTIFICATION
+Addendum 4.

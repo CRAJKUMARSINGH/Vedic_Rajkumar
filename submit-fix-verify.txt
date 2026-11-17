@@ -1,0 +1,10 @@
+
+Running 4 tests using 2 workers
+
+  ok 1 [chromium-preview] › tests\e2e\persona-users.spec.ts:486:3 › Persona — advanced tier › advanced: location dropdown cannot overlap the submit button (7.3s)
+  ok 2 [chromium-preview] › tests\e2e\persona-users.spec.ts:517:3 › Persona — advanced tier › advanced: submit click succeeds even if dropdown is open (no force:true) (8.3s)
+  ok 3 [chromium-preview] › tests\e2e\persona-users.spec.ts:597:3 › Persona — advanced tier › advanced: a stale geocoding response does not reopen the dropdown (6.1s)
+  ok 4 [chromium-preview] › tests\e2e\production-submit.spec.ts:3:1 › ordinary submit click remains effective while location suggestions are open (5.5s)
+
+  4 passed (23.4s)
+EXIT=0

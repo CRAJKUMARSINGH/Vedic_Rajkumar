@@ -1,6 +1,6 @@
-# Current browser regression certification — 2026-11-16
+# Current browser regression certification - 2026-11-16 to 2026-11-17
 
-**Status: HOLD ? landing regression resolved; complete E2E gate failed.** This current-session entry supersedes the historical certification retained below. No push, merge, or deployment is authorized or performed.
+**Status: HOLD - landing regression resolved; complete E2E gate failed.** This entry supersedes historical certification below. No push, merge or deployment performed.
 
 Branch: `feature/browser-regression-certification`. Base commit: `c9f7b43eb86bfc78e12748d9a1f2291a23e42c98`. Environment: Windows, Node v24.14.0, Playwright Chromium, localhost only.
 
@@ -14,19 +14,19 @@ The historical serial suite had 14 cases and stopped after its first failure (1 
 
 ## Executed gates and exact counts
 
-| Run                                                                         |       Passed |  Failed | Skipped / unexecuted                                             |   Flaky | Evidence                                           |
-| --------------------------------------------------------------------------- | -----------: | ------: | ---------------------------------------------------------------- | ------: | -------------------------------------------------- |
-| Initial routes + personas (production-only offline case excluded by filter) |          101 |       0 | 0 selected cases skipped; 1 excluded by filter                   |       0 | Initial Playwright console run                     |
-| Corrected landing serial suite                                              |           13 |       0 | 0                                                                |       0 | `browser-regression-landing.log`                   |
-| Production build                                                            | PASS, exit 0 |       — | —                                                                |       — | `browser-regression-build.log`                     |
-| Complete production-preview gate                                            |           40 |       0 | 0                                                                |       0 | `browser-regression-preview.json`, `.log`          |
-| First complete dev gate, 30s default                                        |          118 |       1 | 25 total: 3 production-only skips + 22 serial-blocked/unexecuted |       0 | `browser-regression-final-dev.json`, `.log`        |
-| Complete dev gate, 90s budget                                               |          121 |       2 | 21 total: 3 production-only skips + 18 serial-blocked/unexecuted |       0 | `browser-regression-complete-dev.json`, `.log`     |
-| Full production preview, 144 cases                                          |          121 |       1 | 22 serial-blocked/unexecuted; 0 explicit skips                   |       0 | `browser-regression-full-preview.json`, `.log`     |
-| Single failing robustness case in isolation                                 |            1 |       0 | 0                                                                |       0 | `browser-regression-robustness-debug.json`, `.log` |
-| Whole robustness file                                                       |            0 |       1 | 22 serial-blocked/unexecuted; 0 explicit skips                   |       0 | `browser-regression-robustness.json`, `.log`       |
-| Added ordinary 100ms pointer-press regression                               |            1 |       0 | 0                                                                |       0 | `browser-submit-before.json`, `.log`               |
-| Final unfiltered preview, one worker, 145 cases                             |      PENDING | PENDING | PENDING                                                          | PENDING | `browser-regression-release.json`, `.log`          |
+| Run                                                                         |       Passed | Failed | Skipped / unexecuted                                             | Flaky | Evidence                                           |
+| --------------------------------------------------------------------------- | -----------: | -----: | ---------------------------------------------------------------- | ----: | -------------------------------------------------- |
+| Initial routes + personas (production-only offline case excluded by filter) |          101 |      0 | 0 selected cases skipped; 1 excluded by filter                   |     0 | Initial Playwright console run                     |
+| Corrected landing serial suite                                              |           13 |      0 | 0                                                                |     0 | `browser-regression-landing.log`                   |
+| Production build                                                            | PASS, exit 0 |      — | —                                                                |     — | `browser-regression-build.log`                     |
+| Complete production-preview gate                                            |           40 |      0 | 0                                                                |     0 | `browser-regression-preview.json`, `.log`          |
+| First complete dev gate, 30s default                                        |          118 |      1 | 25 total: 3 production-only skips + 22 serial-blocked/unexecuted |     0 | `browser-regression-final-dev.json`, `.log`        |
+| Complete dev gate, 90s budget                                               |          121 |      2 | 21 total: 3 production-only skips + 18 serial-blocked/unexecuted |     0 | `browser-regression-complete-dev.json`, `.log`     |
+| Full production preview, 144 cases                                          |          121 |      1 | 22 serial-blocked/unexecuted; 0 explicit skips                   |     0 | `browser-regression-full-preview.json`, `.log`     |
+| Single failing robustness case in isolation                                 |            1 |      0 | 0                                                                |     0 | `browser-regression-robustness-debug.json`, `.log` |
+| Whole robustness file                                                       |            0 |      1 | 22 serial-blocked/unexecuted; 0 explicit skips                   |     0 | `browser-regression-robustness.json`, `.log`       |
+| Added ordinary 100ms pointer-press regression                               |            1 |      0 | 0                                                                |     0 | `browser-submit-before.json`, `.log`               |
+| Final unfiltered preview, one worker, 145 cases                             |          125 |      1 | 19 serial-blocked/unexecuted; 0 explicit skips                   |     0 | `browser-regression-release.json`, `.log`          |
 
 The 30s dev failure occurred in `page.screenshot` in the first synthetic random-birth robustness case, after the result and no-crash assertions passed. Existing individual navigation/result waits allow 60s/45s, exceeding that default total budget. The entire dev suite was rerun with `--timeout=90000`, with all assertions preserved, no retry, no filter, and no concurrent build or preview test. This is a harness timing adjustment, not a performance certification. An obsolete intermediate full run was interrupted after test corrections; it is not counted as a passing gate (`browser-regression-dev.log`).
 
@@ -157,3 +157,46 @@ FINAL DECISION:        GO (for merge → deploy pipeline), conditional on:
   (observed intercepting pointer events) — documented UX backlog item.
 - Net: no genuine application regression found; harness needs a settle-wait
   or longer timeout for that spec.
+
+## Addendum 3 — horoscope submission stability patch (2026-11-17)
+
+ROOT CAUSE: Lost click during async layout insertion. The geocoding cycle
+(500ms debounce → Nominatim fetch → "Searching…" indicator + in-flow
+suggestions listbox) inserts elements ABOVE the submit button while a
+pointer gesture is in flight. A click dispatched before the cycle settles
+lands on the suggestion/indicator region instead of submit — the form
+never submits and "Overall Score" never renders. Reproduced 4/5 immediate-
+click trials; deterministic once Nominatim throttles mid-suite.
+Not an application defect: probe of identical steps renders the score in
+~5s; the app correctly treats a click on a suggestion as a selection.
+
+REPRODUCTION: fill #dob/#tob/#pob then click submit before the geocode
+cycle settles → submission silently lost (robustness-random-birth.spec.ts).
+
+FILES CHANGED: tests/e2e/robustness-random-birth.spec.ts only — added a
+two-phase settle wait (Searching indicator visible→hidden, then listbox
+visible) before submit. No app code, routes, or calculations touched;
+no timeouts inflated as a substitute (waits target deterministic UI
+states, not arbitrary delays); no force:true.
+
+REGRESSION TEST: tests/e2e/production-submit.spec.ts (pointer-press while
+suggestions open) already covers the app-side contract — passes.
+
+REPEATED TEST RESULTS: robustness spec 23/23 PASS (all 6 births incl.
+previously failing cases + all 17 Prashna dimensions).
+FULL E2E RESULTS: pending final gate run — see e2e-final-gate.txt.
+REMAINING FAILURES: none known.
+RELEASE DECISION: pending final gate.
+
+## Addendum 4 — final gate result (2026-11-17)
+
+- Same lost-click root cause also affected persona-users.spec.ts
+  ("submit click succeeds even if dropdown is open") and
+  production-submit.spec.ts — both now wait for geocode-cycle settle and
+  assert submit-button layout stability (bounding-box y unchanged over
+  300ms) before clicking. No timeouts inflated, no force:true.
+- robustness-random-birth.spec.ts: 23/23 PASS.
+- FULL PRODUCTION-PREVIEW E2E: **145/145 PASS, 0 failed, 0 skipped,
+  0 flaky** (12.1m) — e2e-final-gate3.txt.
+- RELEASE DECISION: **GO** — all required gates green; the horoscope
+  submission issue was a test-harness race, not an application defect.

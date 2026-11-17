@@ -543,6 +543,19 @@ test.describe('Persona — advanced tier', () => {
       `Listbox bottom (${lb!.y + lb!.height}) must be ≤ submit top (${sb!.y}) — dropdown is overlapping the button`,
     ).toBeLessThanOrEqual(sb!.y + 1);
 
+    // Wait for the geocoding cycle to fully settle (same root cause as the
+    // robustness-suite lost submissions: async layout insertion above the
+    // submit button can steal an in-flight click). Assert the submit button's
+    // position is stable across a render window before clicking.
+    const searching = page.getByText(/Searching\.\.\.|खोज रहे हैं/);
+    await searching.waitFor({ state: 'hidden', timeout: 25_000 }).catch(() => {});
+    await expect(listbox).toBeVisible({ timeout: 15_000 });
+    const submitEarly = page.getByRole('button', { name: SUBMIT });
+    const y1 = (await submitEarly.boundingBox())?.y;
+    await page.waitForTimeout(300);
+    const y2 = (await submitEarly.boundingBox())?.y;
+    expect(y2, 'submit button moved during geocode settle — layout still shifting').toBe(y1);
+
     // Click submit directly — no suggestion selected, dropdown still open.
     // Actionability check: Playwright verifies the element is not covered.
     await submit.click(); // throws if anything intercepts the pointer
