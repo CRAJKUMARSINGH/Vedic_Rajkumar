@@ -1,7 +1,0 @@
-
-Running 1 test using 1 worker
-
-  ok 1 [chromium-preview] › tests\e2e\persona-users.spec.ts:517:3 › Persona — advanced tier › advanced: submit click succeeds even if dropdown is open (no force:true) (6.6s)
-
-  1 passed (14.1s)
-EXIT=0

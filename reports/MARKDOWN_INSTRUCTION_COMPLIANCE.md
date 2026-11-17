@@ -84,3 +84,15 @@ Root cause: async geocode-cycle layout insertion stealing in-flight
 clicks. Fixed in 3 specs via deterministic settle waits + layout-stability
 assertion. Full preview E2E 145/145 PASS. See FINAL_LAUNCH_CERTIFICATION
 Addendum 4.
+
+## Addendum 2 — final .txt instruction-source cleanup (2026-11-17)
+
+Deleted as disposable instruction sources (compliance evidence preserved in
+reports/): CODE-JUNCTION/ENRICH REPOSITORY GUIDE.txt, Tex21.txt,
+0 test by senior AI software testing.txt — all requirements either applied,
+documented as BLOCKED/backlog in RELEASE_CONDITIONS.md + FINAL_ACCEPTANCE.md,
+or not applicable. Also removed scratch probe/run-log duplicates
+(probe-_.mjs, e2e-full-run_, e2e-final-gate{,2}, robustness-fixed*,
+robustness-rerun, submit-fix-verify, persona-fix, md-txt-test, cert-test).
+Canonical evidence retained: cert-test2.txt, e2e-final-gate3.txt,
+landing-run.txt, reports/evidence/_, reports/browser-_.json/log.
