@@ -15,9 +15,15 @@
 
 ## Answer Layer contract
 
-contract_version: 1.1
-updated: 2026-10-25
+contract_version: 1.2
+updated: 2026-10-26
 stability: additive within a minor; any removal or rename bumps the major.
+languages: hi, en
+default_language: hi
+
+1.2 is additive over 1.1: every artifact now ships per language as
+`<name>.<lang>.<ext>`, and the default locale stays reachable at the
+un-suffixed path. A 1.1 reader still parses every card unchanged.
 
 ### Surfaces
 
@@ -25,6 +31,7 @@ stability: additive within a minor; any removal or rename bumps the major.
 |---|---|---|---|---|
 | /answers/index.json | GET | none | public | redacted |
 | /answers/{slug}/{topic}.md · .json | GET | none | public | redacted |
+| /answers/{slug}/_all.{lang}.md · .json | GET | none | public | redacted |
 | /api/v1/answer | GET | API key | public | redacted, always |
 | /functions/v1/answer-cards | GET | Supabase JWT | owner · admin | full |
 
@@ -32,6 +39,13 @@ Always link answer cards *with* a file extension — the `/*` SPA rewrite swallo
 extensionless paths. `/functions/v1/answer-cards` is listed for completeness but
 is **not** a link target (`fetchable: false`): it is JWT-gated by design and
 answers `401` to an anonymous fetch, which is intended, not broken.
+
+Per-language artifacts are named `<slug>/_all.<lang>.{json,md}` (and
+`<slug>/<topic>.<lang>.{json,md}`). The rendered markdown is single-language:
+`_all.en.md` carries no Devanagari and `_all.hi.md` no English-only prose. The
+JSON card stays bilingual (`direct_answer.hi` *and* `.en`), so either language
+can be quoted from one read. The un-suffixed `_all.md`/`_all.json` are the
+default locale (`hi`). `?lang=` selects the language on the query surfaces.
 
 Redacted `subject` keys: `name`, `slug`, `aliases`, `jatak_id`, `birth_hash`.
 Full subject adds: `dob`, `tob`, `place`, `lat`, `lon`, `tz`, `tz_defaulted`.

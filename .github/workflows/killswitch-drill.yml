@@ -1,0 +1,62 @@
+name: Kill-switch drill
+
+# A switch nobody has seen fire is a hypothesis. Monthly, this pulls each coarse
+# flag, asserts the dependent surface returns a bilingual 503, then flips it back
+# (the drill self-heals in a `finally`). Writes reports/drills/killswitch-<date>.md.
+on:
+  schedule:
+    - cron: '0 5 1 * *' # 05:00 UTC on the first of each month
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  drill:
+    name: Pull · assert 503 · release
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run the kill-switch drill
+        # Exits non-zero if any switch failed to cut, or failed to release.
+        run: npm run drill:killswitch
+        env:
+          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+      - name: Upload the drill report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: killswitch-drill-report
+          path: reports/drills/
+          retention-days: 365
+          if-no-files-found: ignore
+
+      - name: Commit the report to a branch
+        # main is PR-only, so the receipt lands on a branch for review rather
+        # than being pushed straight to main.
+        if: always() && github.event_name != 'pull_request'
+        run: |
+          if [ ! -d reports/drills ] || [ -z "$(git status --porcelain reports/drills)" ]; then
+            echo "no report to commit"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "chore/killswitch-drill-${{ github.run_id }}"
+          git add reports/drills/
+          git commit --no-verify -m "chore(ops): kill-switch drill report ${{ github.run_id }}"
+          git push origin "HEAD:refs/heads/chore/killswitch-drill-${{ github.run_id }}"

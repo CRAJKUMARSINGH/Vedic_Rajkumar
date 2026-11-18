@@ -2,7 +2,8 @@
  * App.tsx — application root.
  *
  * This file is intentionally thin:
- *   - Registers the service worker on mount
+ *   - Installs the service-worker update flow on mount (registration is owned by
+ *     vite-plugin-pwa — see ADR-004)
  *   - Composes Providers (all context) + MainLayout + lazy routes + page transitions
  *   - Mounts the ConsentBanner (Week 4) outside the main layout so it floats globally
  *
@@ -20,7 +21,7 @@ import MainLayout from '@/components/MainLayout';
 import ConsentBanner from '@/components/ConsentBanner';
 import { routes } from '@/routes';
 import { funnelEvent } from '@/analytics/funnels';
-import { registerServiceWorker, setupConnectionListeners } from '@/utils/serviceWorkerRegistration';
+import { installUpdateFlow } from '@/pwa/update';
 
 // ─── Page transition config ───────────────────────────────────────────────────
 
@@ -67,8 +68,7 @@ function AnimatedRoutes() {
 
 function App() {
   useEffect(() => {
-    registerServiceWorker();
-    setupConnectionListeners();
+    installUpdateFlow();
   }, []);
 
   return (

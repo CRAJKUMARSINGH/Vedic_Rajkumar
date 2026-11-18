@@ -1,0 +1,52 @@
+name: release
+
+on:
+  push:
+    branches: [main, beta]
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  # Release only from a green main. Reuses the same gate set as PRs.
+  gate:
+    uses: ./.github/workflows/ci.yml
+    secrets: inherit
+
+  release:
+    needs: gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with: { node-version-file: .nvmrc, cache: npm }
+      - run: npm ci
+      - run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Sentry release tag + source maps are emitted here, not in deploy.yml,
+          # so a release and its artefacts are one atomic event.
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+
+  # Post-release evidence: the release notes are the audit artefact.
+  evidence:
+    needs: release
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+      - name: Append release entry to the logbook
+        run: |
+          echo "### [$(date -Is)] — Release" >> docs/audit/RELEASE_LOG.md
+          echo "- Tag: $(git describe --tags --abbrev=0 2>/dev/null || echo none)" >> docs/audit/RELEASE_LOG.md
+          echo "- Commit: ${GITHUB_SHA:0:8}" >> docs/audit/RELEASE_LOG.md

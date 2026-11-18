@@ -1,8 +1,12 @@
 /**
- * Week 4: Environment Configuration Tests
+ * Week 4: Environment Contract Tests
  *
- * Tests for validateEnv(), isProduction(), isDevelopment(),
- * isSupabaseConfigured(), isClerkConfigured(), and the env object.
+ * Tests for assertProdEnv(), warnMissingObservability() and the derived exports
+ * of `@/config/env` (the single env contract — ADR-004 removed the
+ * `@/lib/envConfig` duplicate, whose validateEnv() only warned).
+ *
+ * The contract that matters: production FAILS FAST when Supabase/Clerk keys are
+ * missing, rather than silently degrading to demo mode.
  *
  * Note: import.meta.env is mocked per Vitest's environment setup.
  * We use vi.stubEnv() to control env vars without touching the real .env file.
@@ -10,170 +14,132 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 
+/** Real-looking value that satisfies `.min(20)`. */
+const REAL_ANON_KEY = 'eyJhbGciOiJIUzI1NiJ9.real-anon-key-value';
+
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 /**
  * Re-import the module under test with fresh import.meta.env state.
- * We reset modules between tests because envConfig reads import.meta.env
- * at module evaluation time (the `env` object is created at module load).
+ * We reset modules between tests because env.ts parses import.meta.env at module
+ * evaluation time (the `env` object is created at load).
  */
-async function loadEnvConfig() {
-  // Reset cached module so the `env` object re-evaluates
+async function loadEnv() {
   vi.resetModules();
-  return import('@/lib/envConfig');
+  return import('@/config/env');
 }
 
-// ─── isProduction / isDevelopment ────────────────────────────────────────────
+// ─── Defaults ────────────────────────────────────────────────────────────────
 
-describe('isProduction / isDevelopment', () => {
+describe('env — defaults', () => {
+  beforeEach(() => vi.unstubAllEnvs());
   afterEach(() => vi.unstubAllEnvs());
 
-  it('isDevelopment returns true in test/development mode', async () => {
-    vi.stubEnv('MODE', 'test');
-    const { isDevelopment, isProduction } = await loadEnvConfig();
-    expect(isDevelopment()).toBe(true);
-    expect(isProduction()).toBe(false);
+  it('defaults the release version to "dev"', async () => {
+    const { releaseVersion } = await loadEnv();
+    expect(releaseVersion).toBe('dev');
   });
 
-  it('isProduction returns true when MODE is production', async () => {
-    vi.stubEnv('MODE', 'production');
-    const { isProduction, isDevelopment } = await loadEnvConfig();
-    expect(isProduction()).toBe(true);
-    expect(isDevelopment()).toBe(false);
+  it('leaves the Swiss Ephemeris switch off unless explicitly enabled', async () => {
+    vi.stubEnv('VITE_USE_SWISS_EPHEMERIS', '');
+    const { useSwissEphemeris } = await loadEnv();
+    expect(useSwissEphemeris).toBe(false);
+  });
+
+  it('isProd mirrors import.meta.env.PROD', async () => {
+    const { isProd } = await loadEnv();
+    expect(isProd).toBe(false);
   });
 });
 
-// ─── validateEnv — development mode ─────────────────────────────────────────
+// ─── assertProdEnv — development / test ──────────────────────────────────────
 
-describe('validateEnv — development mode (warns, does not throw)', () => {
+describe('assertProdEnv — non-production (no-op)', () => {
   afterEach(() => vi.unstubAllEnvs());
 
-  it('emits console.warn when required vars are missing in dev', async () => {
-    vi.stubEnv('MODE', 'test');
+  it('does not throw when keys are missing outside production', async () => {
+    vi.stubEnv('PROD', false);
     vi.stubEnv('VITE_SUPABASE_URL', '');
     vi.stubEnv('VITE_SUPABASE_ANON_KEY', '');
     vi.stubEnv('VITE_CLERK_PUBLISHABLE_KEY', '');
 
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-
-    const { validateEnv } = await loadEnvConfig();
-    expect(() => validateEnv()).not.toThrow();
-    expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining('Missing or placeholder env vars'),
-    );
-
-    warnSpy.mockRestore();
-  });
-
-  it('does not warn when all required vars are present in dev', async () => {
-    vi.stubEnv('MODE', 'test');
-    vi.stubEnv('VITE_SUPABASE_URL', 'https://real.supabase.co');
-    vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'real-anon-key');
-    vi.stubEnv('VITE_CLERK_PUBLISHABLE_KEY', 'pk_live_real');
-
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const infoSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
-
-    const { validateEnv } = await loadEnvConfig();
-    validateEnv();
-    expect(warnSpy).not.toHaveBeenCalledWith(
-      expect.stringContaining('Missing or placeholder env vars'),
-    );
-
-    warnSpy.mockRestore();
-    infoSpy.mockRestore();
-  });
-
-  it('detects placeholder values as missing', async () => {
-    vi.stubEnv('MODE', 'test');
-    vi.stubEnv('VITE_SUPABASE_URL', 'https://your-project.supabase.co');
-    vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'your-supabase-anon-key');
-    vi.stubEnv('VITE_CLERK_PUBLISHABLE_KEY', 'pk_test_your_clerk_key');
-
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-
-    const { validateEnv } = await loadEnvConfig();
-    validateEnv();
-    expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining('VITE_SUPABASE_URL'),
-    );
-
-    warnSpy.mockRestore();
+    const { assertProdEnv } = await loadEnv();
+    expect(() => assertProdEnv()).not.toThrow();
   });
 });
 
-// ─── validateEnv — production mode ──────────────────────────────────────────
+// ─── assertProdEnv — production ──────────────────────────────────────────────
 
-describe('validateEnv — production mode (warns and continues)', () => {
+describe('assertProdEnv — production (fails fast)', () => {
   afterEach(() => vi.unstubAllEnvs());
 
-  it('warns and continues when VITE_SUPABASE_URL is missing in production', async () => {
-    vi.stubEnv('MODE', 'production');
+  it('throws when VITE_SUPABASE_URL is missing in production', async () => {
+    vi.stubEnv('PROD', true);
     vi.stubEnv('VITE_SUPABASE_URL', '');
-    vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'real-key');
+    vi.stubEnv('VITE_SUPABASE_ANON_KEY', REAL_ANON_KEY);
     vi.stubEnv('VITE_CLERK_PUBLISHABLE_KEY', 'pk_live_real');
 
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const { validateEnv } = await loadEnvConfig();
-    expect(() => validateEnv()).not.toThrow();
-    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('VITE_SUPABASE_URL'));
-    warnSpy.mockRestore();
+    const { assertProdEnv } = await loadEnv();
+    expect(() => assertProdEnv()).toThrow(/VITE_SUPABASE_URL/);
+    expect(() => assertProdEnv()).toThrow(/refusing to boot/);
   });
 
-  it('warns and continues while listing all missing keys in production', async () => {
-    vi.stubEnv('MODE', 'production');
+  it('names every missing key, not just the first', async () => {
+    vi.stubEnv('PROD', true);
     vi.stubEnv('VITE_SUPABASE_URL', '');
     vi.stubEnv('VITE_SUPABASE_ANON_KEY', '');
     vi.stubEnv('VITE_CLERK_PUBLISHABLE_KEY', '');
 
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const { validateEnv } = await loadEnvConfig();
-    expect(() => validateEnv()).not.toThrow();
-    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('VITE_SUPABASE_URL'));
-    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('VITE_SUPABASE_ANON_KEY'));
-    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('VITE_CLERK_PUBLISHABLE_KEY'));
-    warnSpy.mockRestore();
+    const { assertProdEnv } = await loadEnv();
+    expect(() => assertProdEnv()).toThrow(
+      /VITE_SUPABASE_URL.*VITE_SUPABASE_ANON_KEY.*VITE_CLERK_PUBLISHABLE_KEY/s,
+    );
   });
 
-  it('does not warn when all vars are present in production', async () => {
-    vi.stubEnv('MODE', 'production');
+  it('does not throw when all required keys are present in production', async () => {
+    vi.stubEnv('PROD', true);
     vi.stubEnv('VITE_SUPABASE_URL', 'https://real.supabase.co');
-    vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'real-anon-key');
+    vi.stubEnv('VITE_SUPABASE_ANON_KEY', REAL_ANON_KEY);
     vi.stubEnv('VITE_CLERK_PUBLISHABLE_KEY', 'pk_live_real');
 
-    const infoSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const { validateEnv } = await loadEnvConfig();
-    expect(() => validateEnv()).not.toThrow();
-    expect(warnSpy).not.toHaveBeenCalledWith(expect.stringContaining('Missing or placeholder env vars'));
-    infoSpy.mockRestore();
-    warnSpy.mockRestore();
+    const { assertProdEnv } = await loadEnv();
+    expect(() => assertProdEnv()).not.toThrow();
   });
 });
 
-// ─── isSupabaseConfigured ────────────────────────────────────────────────────
+// ─── warnMissingObservability — non-fatal ────────────────────────────────────
 
-describe('isSupabaseConfigured', () => {
+describe('warnMissingObservability', () => {
   afterEach(() => vi.unstubAllEnvs());
 
-  it('returns false when URL is empty', async () => {
-    vi.stubEnv('VITE_SUPABASE_URL', '');
-    vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'key');
-    const { isSupabaseConfigured } = await loadEnvConfig();
-    expect(isSupabaseConfigured()).toBe(false);
+  it('warns and returns the missing keys when observability is unconfigured', async () => {
+    vi.stubEnv('VITE_SENTRY_DSN', '');
+    vi.stubEnv('VITE_POSTHOG_KEY', '');
+    vi.stubEnv('VITE_FLAGSMITH_ENV_KEY', '');
+
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const { warnMissingObservability } = await loadEnv();
+
+    const missing = warnMissingObservability();
+
+    expect(missing).toEqual(['VITE_SENTRY_DSN', 'VITE_POSTHOG_KEY', 'VITE_FLAGSMITH_ENV_KEY']);
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('VITE_SENTRY_DSN'));
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('observability unconfigured'));
+
+    warnSpy.mockRestore();
   });
 
-  it('returns false when URL contains placeholder', async () => {
-    vi.stubEnv('VITE_SUPABASE_URL', 'https://placeholder.supabase.co');
-    vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'key');
-    const { isSupabaseConfigured } = await loadEnvConfig();
-    expect(isSupabaseConfigured()).toBe(false);
-  });
+  it('returns an empty list and stays quiet when observability is configured', async () => {
+    vi.stubEnv('VITE_SENTRY_DSN', 'https://sentry.example.com/1');
+    vi.stubEnv('VITE_POSTHOG_KEY', 'phc_real');
+    vi.stubEnv('VITE_FLAGSMITH_ENV_KEY', 'fs_real');
 
-  it('returns true with real Supabase credentials', async () => {
-    vi.stubEnv('VITE_SUPABASE_URL', 'https://abcxyz.supabase.co');
-    vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'eyJhbGciOiJIUzI1NiJ9.real');
-    const { isSupabaseConfigured } = await loadEnvConfig();
-    expect(isSupabaseConfigured()).toBe(true);
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const { warnMissingObservability } = await loadEnv();
+
+    expect(warnMissingObservability()).toEqual([]);
+    expect(warnSpy).not.toHaveBeenCalled();
+
+    warnSpy.mockRestore();
   });
 });

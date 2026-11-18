@@ -25,6 +25,7 @@ import { Button } from '@/components/ui/button';
 import { type SupportedLanguage } from '@/services/multiLanguageService';
 import { SEO } from '@/components/SEO';
 import { ValidationInProgressNotice } from '@/components/PrototypeStatusBanner';
+import LakshmiPujaCard from '@/components/LakshmiPujaCard';
 import { localTodayISO } from '@/utils/panchangAstronomy';
 import { DATE_INPUT_FORMAT_HINT } from '@/lib/dateValidation';
 
@@ -217,6 +218,7 @@ const PanchangPage = () => {
             aria-atomic="false"
             aria-label={isHi ? 'पंचांग परिणाम' : 'Panchang result'}
           >
+            <LakshmiPujaCard lat={coords.lat} lon={coords.lon} lang={hiLang} className="mb-6" />
             <ErrorBoundary
               fallback={
                 <ChartErrorState

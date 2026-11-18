@@ -1,0 +1,13 @@
+{
+  "imports": {
+    "@/": "../../src/",
+    "@/integrations/supabase/client": "./_shared/edgeClient.ts",
+    "@/lib/supabaseClient": "./_shared/edgeClient.ts"
+  },
+  "compilerOptions": {
+    "strict": true,
+    "lib": ["deno.window", "dom"]
+  },
+  "fmt": { "lineWidth": 100 },
+  "lint": { "rules": { "exclude": ["no-explicit-any"] } }
+}

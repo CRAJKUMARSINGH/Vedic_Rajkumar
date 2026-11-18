@@ -1,1 +1,12 @@
 project_id = "zgfgudeuuorwzsgyrphf"
+
+# ── Edge Functions ────────────────────────────────────────────────────────────
+# JWT verification defaults to TRUE for every function. Only the two anonymous
+# surfaces opt out: a visitor who has never signed in carries no JWT, and neither
+# reading the kill switches nor ingesting a funnel event may fail for that reason.
+
+[functions.flags]
+verify_jwt = false
+
+[functions.funnel]
+verify_jwt = false

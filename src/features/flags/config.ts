@@ -36,3 +36,17 @@ export const FEATURE_FLAGS = {
 } as const;
 
 export type FeatureFlag = (typeof FEATURE_FLAGS)[keyof typeof FEATURE_FLAGS];
+
+/**
+ * Coarse kill switches (W17). These are not tier features — they are pulled by an
+ * operator to cut a whole surface. The names must match the Flagsmith flags and
+ * the rows seeded in `kill_switches` (migration 20261026130000) and the names in
+ * `supabase/functions/_shared/killSwitch.ts`.
+ */
+export const KILL_SWITCH_FLAGS = {
+  API: 'killswitch.api',
+  EDGE: 'killswitch.edge',
+  TELEMETRY: 'killswitch.telemetry',
+} as const;
+
+export type KillSwitchFlag = (typeof KILL_SWITCH_FLAGS)[keyof typeof KILL_SWITCH_FLAGS];

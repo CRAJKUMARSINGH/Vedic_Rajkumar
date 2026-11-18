@@ -1,5 +1,6 @@
 import { onCLS, onFCP, onLCP, onTTFB, onINP, type Metric } from 'web-vitals';
 import { trackEvent } from '../analytics/posthog';
+import { reportVital } from '../rum';
 
 const BUDGETS: Record<string, number> = {
   LCP: 2500,
@@ -18,6 +19,8 @@ const report = (metric: Metric) => {
     budget_ms: BUDGETS[metric.name],
     over_budget: metric.value > (BUDGETS[metric.name] ?? Infinity),
   });
+  // Batch + ship to the server ingest endpoint (what measures vs. what delivers).
+  reportVital(metric.name, metric.value);
 };
 
 export const initWebVitals = () => {

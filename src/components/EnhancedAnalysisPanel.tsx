@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layers, ShieldAlert, Zap, Flame, Brain, BookOpen } from 'lucide-react';
 import type { EnhancedClassicalAnswer } from '../services/classicalAnswerEngine';
+import { VerificationBadge } from '@/components/VerificationBadge';
 
 interface Props {
   answer: EnhancedClassicalAnswer;
@@ -19,6 +20,7 @@ export default function EnhancedAnalysisPanel({ answer, isHi }: Props) {
         <h3 className="font-bold text-lg text-slate-800 dark:text-slate-100">
           {isHi ? '13-स्तरीय ज्योतिष विश्लेषण' : '13-Layer Cognitive Synthesis'}
         </h3>
+        <VerificationBadge topic="interpretation" lang={isHi ? 'hi' : 'en'} className="ml-auto" />
       </div>
       
       <div className="p-5 space-y-8">

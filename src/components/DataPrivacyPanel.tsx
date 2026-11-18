@@ -4,7 +4,7 @@
  * Week 3: User-facing panel for data privacy controls.
  *
  * Provides:
- *  - Export all data as JSON (calls user-data-export edge function)
+ *  - Export all data as JSON (calls export-user-data edge function)
  *  - Delete all data permanently (calls user-data-delete edge function)
  *    with a two-step confirmation dialog to prevent accidental deletion.
  *

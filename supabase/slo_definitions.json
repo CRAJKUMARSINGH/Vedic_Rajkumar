@@ -1,0 +1,42 @@
+[
+  {
+    "id": "avail-api",
+    "name": "API availability",
+    "sli_kind": "availability",
+    "target": 0.999,
+    "window_min": 60,
+    "severity": "critical",
+    "runbook_url": "docs/observability/runbooks.md#high-error-rate"
+  },
+  {
+    "id": "latency-api",
+    "name": "API p95 latency",
+    "sli_kind": "latency",
+    "threshold_ms": 800,
+    "target": 0.95,
+    "window_min": 60,
+    "severity": "warning",
+    "runbook_url": "docs/observability/runbooks.md#latency-degradation"
+  },
+  {
+    "id": "avail-charts",
+    "name": "Chart calc availability",
+    "sli_kind": "availability",
+    "route": "calculate-kundli",
+    "target": 0.999,
+    "window_min": 60,
+    "severity": "critical",
+    "runbook_url": "docs/observability/runbooks.md#accuracy-degradation"
+  },
+  {
+    "id": "rum-lcp",
+    "name": "Web LCP budget",
+    "sli_kind": "rum",
+    "metric": "LCP",
+    "threshold_ms": 2500,
+    "target": 0.9,
+    "window_min": 1440,
+    "severity": "warning",
+    "runbook_url": "docs/observability/runbooks.md#web-vitals"
+  }
+]

@@ -22,6 +22,9 @@ import EnhancedLanguageToggle from '@/components/EnhancedLanguageToggle';
 import UserProfileDialog from '@/components/UserProfileDialog';
 import WelcomeModal from '@/components/WelcomeModal';
 import UpgradeBanner from '@/components/UpgradeBanner';
+import TrialBanner from '@/components/TrialBanner';
+import TierBadge from '@/components/TierBadge';
+import WeeklyDriveCard from '@/components/WeeklyDriveCard';
 import { MuhurtaFinderPanel } from '@/components/MuhurtaFinderPanel';
 import { MTSSPanel } from '@/components/MTSSPanel';
 import { Button } from '@/components/ui/button';
@@ -63,6 +66,7 @@ import { useChartCalculation, type BirthInput } from '@/hooks/useChartCalculatio
 import { SEO, webAppSchema } from '@/components/SEO';
 import RandomQuestionCard from '@/components/RandomQuestionCard';
 import SaraswatiMascot from '@/components/SaraswatiMascot';
+import FestivalGreeting from '@/components/FestivalGreeting';
 import { generateEnhancedClassicalAnswer, type EnhancedClassicalAnswer } from '@/services/classicalAnswerEngine';
 import EnhancedAnalysisPanel from '@/components/EnhancedAnalysisPanel';
 
@@ -310,6 +314,11 @@ const Index = () => {
     <div className="min-h-screen bg-auspicious-pattern text-foreground font-body antialiased selection:bg-primary/20">
         <WelcomeModal open={showWelcomeModal} onClose={() => setShowWelcomeModal(false)} isHi={isHi} />
         <UpgradeBanner isHi={isHi} />
+        <TrialBanner isHi={isHi} />
+        <div className="flex flex-wrap items-center gap-3 px-4 py-2">
+          <TierBadge isHi={isHi} />
+          <WeeklyDriveCard isHi={isHi} />
+        </div>
 
 
         {/* Hero Section (Auspicious Design - Enhanced with Hindi Bill Note Colors) */}
@@ -334,6 +343,7 @@ const Index = () => {
             <div className="absolute top-60 right-10 text-5xl opacity-10 animate-[float-auspicious_9s_ease-in-out_infinite_3s]">🌟</div>
             
             <div className="max-w-5xl mx-auto px-4 text-center space-y-12 relative z-10">
+              <FestivalGreeting lang={isHi ? 'hi' : 'en'} className="mb-6" />
               <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
                 <div className="mb-8 flex justify-center">
                   <SaraswatiMascot isHi={isHi} size={110} />

@@ -1,0 +1,27 @@
+name: load
+
+on:
+  schedule: [{ cron: '30 19 * * *' }]   # 01:00 IST
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: grafana/setup-k6-action@v1
+      - name: Resolve preview URL
+        run: echo "EDGE_URL=${{ vars.PREVIEW_EDGE_URL }}" >> "$GITHUB_ENV"
+      - run: mkdir -p reports/load && k6 run ops/load/smoke.js
+        env:
+          EDGE_URL: ${{ vars.PREVIEW_EDGE_URL }}
+          CRON_TOKEN: ${{ secrets.CRON_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: k6-smoke, path: reports/load }
+      - name: Note in the logbook on failure
+        if: failure()
+        run: |
+          echo "### [$(date -Is)] — k6 smoke FAILED" >> docs/audit/PERF_LOG.md
+          echo "- Artifact: k6-smoke (workflow run ${{ github.run_id }})" >> docs/audit/PERF_LOG.md

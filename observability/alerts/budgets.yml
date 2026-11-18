@@ -1,0 +1,53 @@
+# Cost and volume budgets — W17 "make the paper real".
+#
+# Every budget has a runbook anchor in docs/observability/runbooks.md, which is
+# the procedure to observe the alarm actually firing (an alarm nobody has seen
+# fire is a hypothesis, not a control).
+#
+# `warn_at` / `page_at` are fractions of `budget`. `month` windows reset on the
+# 1st at 00:00 UTC.
+budgets:
+  - name: SupabaseCompute
+    metric: supabase_compute_hours_month
+    budget: 100
+    warn_at: 0.8
+    page_at: 1.0
+    severity: critical
+    owner: infra
+    runbook: docs/observability/runbooks.md#budget-supabase-compute
+
+  - name: SupabaseEgress
+    metric: supabase_egress_gb_month
+    budget: 250
+    warn_at: 0.8
+    page_at: 1.0
+    severity: warning
+    owner: infra
+    runbook: docs/observability/runbooks.md#budget-supabase-compute
+
+  - name: NetlifyBuildMinutes
+    metric: netlify_build_minutes_month
+    budget: 300
+    warn_at: 0.75
+    page_at: 1.0
+    severity: warning
+    owner: infra
+    runbook: docs/observability/runbooks.md#budget-netlify-build-minutes
+
+  - name: SentryQuota
+    metric: sentry_events_month
+    budget: 50000
+    warn_at: 0.8
+    page_at: 1.0
+    severity: warning
+    owner: infra
+    runbook: docs/observability/runbooks.md#budget-sentry-quota
+
+  - name: PostHogEventVolume
+    metric: posthog_events_month
+    budget: 1000000
+    warn_at: 0.8
+    page_at: 1.0
+    severity: warning
+    owner: product
+    runbook: docs/observability/runbooks.md#budget-posthog-event-volume

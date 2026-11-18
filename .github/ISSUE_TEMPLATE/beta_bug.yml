@@ -1,0 +1,132 @@
+name: 🧪 Beta Bug
+description: Pre-launch beta tester report. Carries a chart/fixture ID — never birth data.
+title: "[Beta]: "
+labels: ["beta", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing! 🙏 Two rules before you start:
+
+        **1. Do not paste birth dates, birth times, places or coordinates.**
+        Birth data is private. Give us the **chart ID / fixture ID** shown in the
+        app instead — that is enough to reproduce. A report containing birth data
+        will be redacted before triage.
+
+        **2. One bug per issue.** If you found three things, file three issues.
+
+  - type: dropdown
+    id: cohort
+    attributes:
+      label: Your tester cohort
+      description: The cohort you were assigned when you joined the beta.
+      multiple: false
+      options:
+        - nascent
+        - intermediate
+        - advanced
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which area is this bug in?
+      multiple: false
+      options:
+        - Kundli / Birth Chart
+        - Prashna / Horary
+        - Kundli Milan / Matchmaking
+        - Panchang / Muhurat
+        - PDF Export / Print
+        - Sign-in / Registration
+        - Trial / Entitlement
+        - Language / Hindi / Devanagari
+        - Other (describe below)
+    validations:
+      required: true
+
+  - type: input
+    id: chart_id
+    attributes:
+      label: Chart / fixture ID
+      description: The ID shown in the app for the chart you were looking at. No birth data.
+      placeholder: "chart_1a2b3c  ·  fixture: delhi-1990-01-15-1435"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: SEV1 = blocks all testing · SEV2 = wrong verdict on common input · SEV3 = wrong on edge case · SEV4 = cosmetic.
+      multiple: false
+      options:
+        - "SEV1 — blocker: app unusable, crash, data loss, or auth bypass"
+        - "SEV2 — high: wrong output for common inputs"
+        - "SEV3 — medium: wrong output in an edge case / rough UX"
+        - "SEV4 — low: cosmetic, typo, wording"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Numbered steps from a clean start. Use the chart ID, not birth data.
+      placeholder: |
+        1. Sign in as my beta account
+        2. Open chart `chart_1a2b3c`
+        3. Tap "Marriage window"
+        4. Observe: window says 2027 — expected 2026
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_actual
+    attributes:
+      label: Expected vs actual
+      description: What you expected to see, and what you actually saw. If a number is wrong, give both numbers.
+      placeholder: |
+        Expected: ...
+        Actual: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Screenshot, console error, or the exact verdict text you saw. Drag-drop images here.
+      placeholder: Screenshots, full console error + stack trace, network responses.
+    validations:
+      required: false
+
+  - type: input
+    id: build_sha
+    attributes:
+      label: Build SHA (if you know it)
+      description: Shown in the app footer / About, or in the beta channel you were given.
+      placeholder: "e.g. 2bae6a4"
+    validations:
+      required: false
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser / device
+      placeholder: "Chrome Android 14 · Safari iOS 17 · Edge Windows 11"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Pre-flight
+      options:
+        - label: I have not included any birth date, birth time, place or coordinates in this report.
+          required: true
+        - label: I have searched open beta issues to check this is not already reported.
+          required: true
+        - label: This is not a security issue (leak / auth bypass) — those go through SECURITY.md privately.
+          required: true

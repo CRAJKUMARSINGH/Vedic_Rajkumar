@@ -1,0 +1,26 @@
+{
+  "grade": "pro",
+  "generatedAt": "2026-10-31T10:03:48.154Z",
+  "checks": [
+    {
+      "name": "tier-badge",
+      "status": "pass",
+      "detail": "expected premium, got premium"
+    },
+    {
+      "name": "upgrade-banner",
+      "status": "pass",
+      "detail": "expected banner absent, found 0"
+    },
+    {
+      "name": "weekly-drive",
+      "status": "pass",
+      "detail": "paid grade must be unlimited, got -1"
+    },
+    {
+      "name": "page-errors",
+      "status": "pass",
+      "detail": ""
+    }
+  ]
+}

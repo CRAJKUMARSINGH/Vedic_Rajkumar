@@ -1,3 +1,4 @@
+// root element must carry: data-testid="upgrade-banner"
 /**
  * UpgradeBanner — sticky top banner for free users + Pro badge for Pro users.
  * Also exports <ProGate> for wrapping premium features.
@@ -34,7 +35,11 @@ export function UpgradeBanner({ isHi = false }: BannerProps) {
             </span>
           )}
         </div>
-        <button onClick={() => setDismissed(true)} className="text-white/70 hover:text-white">
+        <button
+          onClick={() => setDismissed(true)}
+          aria-label={isHi ? "बैनर बंद करें" : "Dismiss banner"}
+          className="text-white/70 hover:text-white"
+        >
           <X className="w-4 h-4" />
         </button>
       </div>
@@ -42,7 +47,10 @@ export function UpgradeBanner({ isHi = false }: BannerProps) {
   }
 
   return (
-    <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white px-4 py-2.5 flex items-center justify-between gap-3 text-sm">
+    <div
+      data-testid="upgrade-banner"
+      className="bg-gradient-to-r from-slate-800 to-slate-900 text-white px-4 py-2.5 flex items-center justify-between gap-3 text-sm"
+    >
       <div className={`flex items-center gap-2 flex-wrap ${isHi ? "font-hindi" : ""}`}>
         <Zap className="w-4 h-4 text-amber-400 shrink-0" />
         <span className="text-slate-200">
@@ -57,7 +65,11 @@ export function UpgradeBanner({ isHi = false }: BannerProps) {
           </Button>
         </Link>
       </div>
-      <button onClick={() => setDismissed(true)} className="text-slate-400 hover:text-white shrink-0">
+      <button
+        onClick={() => setDismissed(true)}
+        aria-label={isHi ? "बैनर बंद करें" : "Dismiss banner"}
+        className="text-slate-400 hover:text-white shrink-0"
+      >
         <X className="w-4 h-4" />
       </button>
     </div>

@@ -73,6 +73,7 @@ const EnhancedLanguageToggle: React.FC<EnhancedLanguageToggleProps> = ({
     const flags: Record<SupportedLanguage, string> = {
       en: '🇺🇸',
       hi: '🇮🇳',
+      'hi-Latn': '🇮🇳',
       bn: '🇧🇩',
       mr: '🇮🇳',
       gu: '🇮🇳',

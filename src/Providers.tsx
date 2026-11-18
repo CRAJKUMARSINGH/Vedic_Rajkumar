@@ -20,6 +20,7 @@ import { ClerkProvider, useClerk } from '@clerk/react';
 import { shadcn } from '@clerk/themes';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { FlagsmithProvider } from '@/features/flags/provider';
+import { EntitlementBootstrap } from '@/features/tier/useEntitlement';
 
 // ─── QueryClient singleton ────────────────────────────────────────────────────
 
@@ -126,6 +127,8 @@ export default function Providers({ children }: ProvidersProps) {
           <Sonner />
           <ErrorBoundary>
             <FlagsmithProvider>
+              {/* Server entitlement fetch (no-op when no backend is configured). */}
+              <EntitlementBootstrap />
               <BrowserRouter>
                 <ClerkProviderWithNavigate>
                   {children}

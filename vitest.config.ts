@@ -11,7 +11,9 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/tests/setup.ts'],
-    include: ['src/**/*.test.{ts,tsx}', 'src/**/*.spec.{ts,tsx}'],
+    // Explicit, not `src/**` — the parallel `src/test` tree was retired
+    // (ADR-004, docs/DUPLICATES.md). A new tree must be a conscious edit here.
+    include: ['src/tests/**/*.test.{ts,tsx}', 'src/tests/**/*.spec.{ts,tsx}'],
     // One manual tool rewrites baselines from the engine itself and must never
     // run inside the normal suite — it would turn a gate circular.
     //   generateGolden  rewrites tools/accuracy/golden/ (Swiss Ephemeris)
@@ -21,21 +23,26 @@ export default defineConfig({
       ...configDefaults.exclude,
       '**/src/tests/accuracy/generateGolden.test.ts',
     ],
-    // Explicit floor timeout. Suites that walk `src/` or read the answer corpus
-    // (chartTimezoneWiring, schema) can spend a large portion of a short budget
-    // on I/O alone on a saturated filesystem — causing wall-clock failures
-    // rather than assertion failures (DEF-010). Files with longer needs carry
-    // their own per-test timeout; 20s is the universal floor.
+    // Explicit, not the framework default. A couple of suites walk `src/` and
+    // read the emitted answer corpus, so on a saturated CI filesystem a short
+    // budget can be spent on I/O alone and the test fails on wall-clock rather
+    // than on an assertion (DEF-010). Those files carry their own larger
+    // timeout; this is the floor for everything else.
+    //
+    // This was THE knob for DEF-010: the timed work ran inside `it()` bodies
+    // (chartTimezoneWiring.test.ts walked `src/` in two tests; schema.test.ts
+    // read the answer corpus per topic). Neither file had hooks, so the stock
+    // 10s hookTimeout was never in play — note the old explicit 10000 here
+    // simply happened to equal the 10s hook default.
     testTimeout: 20000,
-    // Insurance for WASM `beforeAll` (wasmPathAccuracy loads Swiss Ephemeris;
-    // a saturated disk can blow a 10s hook budget). 30s prevents the same
-    // "passes on retry" pattern that DEF-010 exposed for `it()` bodies. The CI
-    // gate that keeps DEF-010 closed runs the hookless suites at
+    // Insurance, not the DEF-010 fix. `wasmPathAccuracy.test.ts` loads the
+    // Swiss Ephemeris WASM inside `beforeAll`, so a saturated disk could blow
+    // the stock 10s hook budget on the same "passes on retry" pattern. The CI
+    // gate that keeps DEF-010 closed runs the *hookless* suites at
     // `--hookTimeout=2000` (see .github/workflows/accuracy.yml).
     hookTimeout: 30000,
     // Cap fork workers: the WASM ephemeris loads per worker and exhausts memory
-    // on developer machines with the default (one per CPU core), causing
-    // "Timeout waiting for worker to respond" / ENOENT worker crashes.
+    // on developer machines with the default (one per CPU core).
     maxWorkers: 4,
     // Coverage is SCOPED, not global (Week 15 "Strengthen"). The interpretive
     // core — `src/lib/vedic` and `src/services` — is where an untested branch

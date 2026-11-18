@@ -1,0 +1,96 @@
+{
+  "card_version": "1.0",
+  "subject": {
+    "name": "Swami Rajeev Anand",
+    "slug": "swami-rajeev-anand",
+    "aliases": [],
+    "jatak_id": "jatak_017",
+    "birth_hash": "4882787bc296ed45"
+  },
+  "query": {
+    "asked": "Forecast prospects",
+    "topics": [
+      "marriage"
+    ],
+    "language": "hi",
+    "as_of": "2026-10-24",
+    "reference_type": "natal"
+  },
+  "direct_answer": {
+    "en": "Marriage: avoid (58%) (avoid, 58%)",
+    "hi": "विवाह प्रतिकूल (58%) (प्रतिकूल, 58%)"
+  },
+  "verdicts": [
+    {
+      "topic": "marriage",
+      "headline": {
+        "en": "Marriage: avoid (58%)",
+        "hi": "विवाह प्रतिकूल (58%)"
+      },
+      "score_0_100": 33,
+      "band": "avoid",
+      "engine_verdict": "BLOCKED",
+      "confidence_0_1": 0.58,
+      "window": null,
+      "rationale": {
+        "en": "Therefore: for this Jatak's birth promise, marriage is blocked now because Rajyoga scores 0/100, house promise scores 54/100, Dasha scores 40/100, and transit timing scores 32/100. The final call is BLOCKED: marriage is the leading field at 33/100.",
+        "hi": "Therefore: for this Jatak's birth promise, marriage is blocked now because Rajyoga scores 0/100, house promise scores 54/100, Dasha scores 40/100, and transit timing scores 32/100. The final call is BLOCKED: marriage is the leading field at 33/100."
+      },
+      "conflicts": [
+        "Viparita Raj Yoga must be treated as a failure warning, not as decorative praise."
+      ],
+      "evidence": [
+        {
+          "layer": "Rajyoga gate",
+          "score": 0,
+          "finding": "Viparita Raj Yoga is present but broken by Shadbala gate; the yoga cannot be treated as a clean promise."
+        },
+        {
+          "layer": "House promise",
+          "score": 54,
+          "finding": "marriage houses average 54/100 by SAV; strongest is house 7 at 29 points and weakest is house 2 at 19 points."
+        },
+        {
+          "layer": "Dasha activation",
+          "score": 40,
+          "finding": "Mercury MD with Mars AD gives 40/100 Dasha clearance for marriage; delivery class is full."
+        },
+        {
+          "layer": "Transit timing",
+          "score": 32,
+          "finding": "Therefore: Marriage timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
+        }
+      ],
+      "remedies": [
+        {
+          "en": "Mars",
+          "hi": "Mars"
+        }
+      ],
+      "caveats": [
+        {
+          "en": "Windows are approximate.",
+          "hi": "समय-सीमाएँ अनुमानित हैं।"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "engine_version": "0.1.0",
+    "ayanamsa": "Lahiri (Chitrapaksha)",
+    "house_system": "Whole-sign",
+    "dasha_system": "Vimshottari",
+    "ephemeris": "local",
+    "computed_at": "2026-10-24T00:00:00.000Z",
+    "as_of": "2026-10-24",
+    "input_hash": "cfb5558207c8a51e",
+    "card_hash": "ef144dd5643c52e2",
+    "source_files": [
+      "src/services/conclusiveJatakJudgmentService.ts",
+      "src/services/dashaForecastService.ts",
+      "src/services/ashtakavargaService.ts",
+      "src/services/chartBuilderService.ts",
+      "src/services/answerCard/chartAdapter.ts"
+    ]
+  }
+}

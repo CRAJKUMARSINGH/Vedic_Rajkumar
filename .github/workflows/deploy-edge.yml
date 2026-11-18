@@ -1,0 +1,99 @@
+name: Deploy edge functions
+
+# Path-filtered so a frontend-only push doesn't touch production functions.
+# This workflow owns function deploys; `deploy.yml` no longer deploys them (that
+# would double-deploy). Rollback is built and exercised in the same week as the
+# deploy — shipping the deploy without the undo is how you end up hand-deploying.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'supabase/functions/**'
+      - 'supabase/migrations/**'
+  workflow_dispatch:
+
+concurrency:
+  group: edge-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Typecheck · Deploy · Smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # rollback-edge.mjs resolves `github.event.before` to a commit, which
+          # a depth-1 clone cannot see.
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck edge functions
+        # deno check — never deploy code that doesn't compile.
+        run: npm run typecheck:edge
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+
+      - name: Deploy edge functions
+        run: supabase functions deploy --project-ref ${{ secrets.SUPABASE_REF }}
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
+      - name: Smoke the deployed edge functions
+        # --require-all: a missing secret fails loudly rather than silently
+        # skipping the auth checks after someone rotates a token.
+        run: >-
+          node scripts/smoke-edge.mjs --require-all
+          --report reports/deploys/edge-${{ github.run_id }}.md
+        env:
+          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SMOKE_OWNER_JWT: ${{ secrets.SMOKE_OWNER_JWT }}
+          SMOKE_NONOWNER_JWT: ${{ secrets.SMOKE_NONOWNER_JWT }}
+          SMOKE_SUBJECT: ${{ vars.SMOKE_SUBJECT }}
+
+      - name: Roll back to the previous SHA
+        # `before` is the exact pre-push SHA — the last known-good state. Guarded
+        # to push events because workflow_dispatch has no `before`.
+        if: failure() && github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
+        run: >-
+          node scripts/rollback-edge.mjs --to ${{ github.event.before }}
+          --reason "post-deploy smoke failed (run ${{ github.run_id }})"
+        env:
+          SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_REF }}
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SMOKE_OWNER_JWT: ${{ secrets.SMOKE_OWNER_JWT }}
+          SMOKE_NONOWNER_JWT: ${{ secrets.SMOKE_NONOWNER_JWT }}
+          SMOKE_SUBJECT: ${{ vars.SMOKE_SUBJECT }}
+
+      - name: Upload deploy evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: edge-deploy-evidence
+          path: reports/deploys/
+          retention-days: 90
+          if-no-files-found: ignore

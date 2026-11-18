@@ -130,7 +130,6 @@ export default defineConfig({
     css: true,
     include: [
       'src/tests/**/*.{test,spec}.{ts,tsx}',
-      'src/test/**/*.{test,spec}.{ts,tsx}',
       'tests/**/*.{test,spec}.{ts,tsx,js,jsx}',
     ],
   },

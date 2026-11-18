@@ -1,0 +1,11 @@
+{
+  "_comment": "Copyleft dependencies permitted with a recorded decision. See docs/adr/ADR-007.",
+  "allowed": [
+    {
+      "package": "swisseph-wasm",
+      "license": "AGPL-3.0-or-later",
+      "adr": "ADR-007",
+      "reason": "Astrological core. We ship it as a WASM dependency and do NOT modify it, so AGPL section 13 network-copyleft attaches to the combined work only if the service is offered over a network AND we choose the AGPL branch. The commercial licence is the fallback if a closed-source white-label customer objects."
+    }
+  ]
+}

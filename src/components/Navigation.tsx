@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Menu, FlaskConical } from 'lucide-react';
 import UserProfileDialog from './UserProfileDialog';
 import DarkModeToggle from './DarkModeToggle';
+import { resolveFestival } from '@/lib/festival';
 
 /**
  * NAV_LINKS — Week 3 scope reduction + Labs dropdown.
@@ -38,8 +39,10 @@ export default function Navigation({ lang, onLangToggle }: NavigationProps) {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const isHi = lang === 'hi';
+  const showRibbon = resolveFestival(location.search) !== null;
 
   return (
+    <>
     <nav aria-label="Main navigation" className="sticky top-0 z-50 w-full border-b border-[hsl(var(--auspicious-accent)/0.3)] bg-gradient-to-r from-[#8B0000] via-[#B22222] to-[#8B0000] shadow-lg">
       <div className="max-w-screen-2xl mx-auto px-4 flex h-14 items-center gap-4">
         {/* Logo — routes to /app workspace so users aren't kicked back to marketing */}
@@ -175,5 +178,7 @@ export default function Navigation({ lang, onLangToggle }: NavigationProps) {
         </div>
       </div>
     </nav>
+    {showRibbon && <hr className="festival-ribbon" aria-hidden="true" />}
+    </>
   );
 }

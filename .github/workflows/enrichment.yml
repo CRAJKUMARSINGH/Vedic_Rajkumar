@@ -1,0 +1,53 @@
+name: enrichment
+
+# Monthly window + a hard check that next year's festival calendar exists.
+on:
+  schedule:
+    - cron: '30 20 1 * *'      # 02:00 IST on the 1st
+    - cron: '0 3 30 11 *'      # 30 Nov — festival deadline check
+  workflow_dispatch:
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install psql
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client-16
+      - name: Coverage for every kind
+        env: { DB: '${{ secrets.PROD_DB_URL }}' }
+        run: |
+          fail=0
+          check() {
+            local kind=$1 expected=$2
+            local r; r=$(psql "$DB" -tAc "select public.content_coverage('$kind', $expected)")
+            echo "  $kind: $r"
+            echo "$r" | grep -q '"complete": true' || { echo "  FAIL $kind incomplete"; fail=1; }
+          }
+          check nakshatra 27
+          check rashi 12
+          check planet 9
+          check dasha 9
+          exit $fail
+      - name: Festival calendar for this year and next
+        env: { DB: '${{ secrets.PROD_DB_URL }}' }
+        run: |
+          y=$(date +%Y); n=$((y+1))
+          for year in $y $n; do
+            r=$(psql "$DB" -tAc "select public.festival_year_health($year)")
+            echo "  $year: $r"
+            echo "$r" | grep -q '"ready": true' || {
+              # This year being incomplete is an incident; next year is a deadline.
+              [ "$year" = "$y" ] && { echo "FAIL current year incomplete"; exit 1; }
+              echo "  warn next year ($n) not ready — deadline is 30 Nov"
+            }
+          done
+      - name: Golden fixture is in sync with the DB
+        env: { DB: '${{ secrets.PROD_DB_URL }}' }
+        run: npm run content:golden:sync -- --check
+      - name: Log the window
+        if: always()
+        run: |
+          echo "### [$(date -Is)] — Enrichment window check" >> docs/ops/enrichment-log.md
+          echo "- Result: ${{ job.status }}" >> docs/ops/enrichment-log.md

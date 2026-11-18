@@ -15,7 +15,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { AnswerCard } from '@/services/answerCard/AnswerCard.types';
-import { ALL_TOPICS, ANSWER_CONTRACT_VERSION } from '@/services/answerCard/AnswerCard.types';
+import { ALL_TOPICS, ANSWER_CONTRACT_VERSION, DEFAULT_LANG, LANGUAGES } from '@/services/answerCard/AnswerCard.types';
 import { redactAnswerCard } from '@/services/answerCard/redact';
 import { generateOpenApi } from '@/api/v1/openapi';
 
@@ -25,6 +25,8 @@ const WELL_KNOWN = JSON.parse(
   readFileSync(join(ROOT, 'public', '.well-known', 'vedic-rajkumar.json'), 'utf8'),
 ) as {
   contract_version: string;
+  languages: string[];
+  default_language: string;
   surfaces: Array<{ path: string }>;
   redacted_subject_keys: string[];
   full_subject_extra_keys: string[];
@@ -104,6 +106,19 @@ describe('agent guide contract', () => {
     expect(WELL_KNOWN.contract_version).toBe(ANSWER_CONTRACT_VERSION);
     const escaped = ANSWER_CONTRACT_VERSION.replace(/\./g, '\\.');
     expect(GUIDE).toMatch(new RegExp(`contract_version:\\s*${escaped}\\b`));
+  });
+
+  /**
+   * Contract 1.2 (locale standing rule): the published language set and default
+   * locale are facts about the code, not prose. Both guides must advertise the
+   * same set `LANGUAGES`/`DEFAULT_LANG` defines, or a reader picks a locale that
+   * is not there.
+   */
+  it('advertises the same languages and default locale as the code', () => {
+    expect(WELL_KNOWN.languages).toEqual([...LANGUAGES]);
+    expect(WELL_KNOWN.default_language).toBe(DEFAULT_LANG);
+    expect(GUIDE).toMatch(new RegExp(`^languages:\\s*${LANGUAGES.join(', ')}$`, 'm'));
+    expect(GUIDE).toMatch(new RegExp(`^default_language:\\s*${DEFAULT_LANG}$`, 'm'));
   });
 
   it('lists every ALL_TOPICS value in the guide', () => {

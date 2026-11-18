@@ -5,6 +5,9 @@
  * Implements comprehensive feedback collection and analysis
  */
 
+import { supabase } from '@/integrations/supabase/client';
+import { classifyScreenshot, SCREENSHOT_BUCKET } from '@/features/feedback/screenshot';
+
 export interface UserFeedback {
   id: string;
   userId?: string;
@@ -70,7 +73,10 @@ class UserFeedbackService {
   /**
    * Submit new feedback
    */
-  async submitFeedback(feedbackData: Omit<UserFeedback, 'id' | 'timestamp' | 'metadata'>): Promise<UserFeedback> {
+  async submitFeedback(
+    feedbackData: Omit<UserFeedback, 'id' | 'timestamp' | 'metadata'>,
+    screenshot?: File | null,
+  ): Promise<UserFeedback> {
     const feedback: UserFeedback = {
       ...feedbackData,
       id: this.generateId(),
@@ -87,10 +93,13 @@ class UserFeedbackService {
 
     this.feedback.push(feedback);
     this.saveToStorage();
-    
+
+    // Attach a screenshot first (best-effort) so the report can reference it.
+    const screenshotPath = screenshot ? await this.uploadScreenshot(screenshot) : null;
+
     // Send to backend (if available)
     try {
-      await this.sendToBackend(feedback);
+      await this.sendToBackend(feedback, screenshotPath);
     } catch (error) {
       console.warn('Failed to send feedback to backend:', error);
     }
@@ -377,19 +386,59 @@ ${analytics.feedbackTrend
     }
   }
 
-  private async sendToBackend(feedback: UserFeedback): Promise<void> {
-    // Mock backend integration - replace with actual API call
-    console.log('Sending feedback to backend:', feedback);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // In a real implementation, this would be:
-    // await fetch('/api/feedback', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(feedback)
-    // });
+  /**
+   * Upload a screenshot to the private bucket through a short-lived,
+   * server-minted signed upload URL. Best-effort by design: any failure returns
+   * null so the report still lands — a broken attachment must never block the
+   * tester. The bucket has no client policy, so this signed URL is the only way
+   * in (playbook §3.1).
+   */
+  private async uploadScreenshot(file: File): Promise<string | null> {
+    try {
+      if (!classifyScreenshot(file).ok) return null;
+
+      const { data: signed, error: signErr } = await supabase.functions.invoke(
+        'feedback-screenshot',
+        { body: { action: 'sign-upload', mimeType: file.type } },
+      );
+      const path = (signed as { path?: string } | null)?.path;
+      const token = (signed as { token?: string } | null)?.token;
+      if (signErr || !path || !token) return null;
+
+      const { error: upErr } = await supabase.storage
+        .from(SCREENSHOT_BUCKET)
+        .uploadToSignedUrl(path, token, file);
+      if (upErr) return null;
+
+      return path;
+    } catch {
+      return null;
+    }
+  }
+
+  private async sendToBackend(
+    feedback: UserFeedback,
+    screenshotPath: string | null = null,
+  ): Promise<void> {
+    // Private sink: supabase/functions/submit-feedback -> public.user_feedback.
+    // The edge function derives user_id and tier from the verified JWT; the
+    // payload carries only what the tester typed. Best-effort by design — a
+    // failing sink must never block the user's submission (see submitFeedback).
+    const { error } = await supabase.functions.invoke('submit-feedback', {
+      body: {
+        category: feedback.category,
+        title: feedback.title,
+        description: feedback.description,
+        page: feedback.metadata?.page,
+        userAgent: feedback.userAgent,
+        appVersion: import.meta.env?.VITE_APP_VERSION,
+        sessionId: feedback.sessionId,
+        screenshotPath,
+        tags: feedback.tags,
+      },
+    });
+
+    if (error) throw new Error(`feedback sink rejected the report: ${error.message}`);
   }
 }
 

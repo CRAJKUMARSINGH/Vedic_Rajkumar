@@ -1,0 +1,26 @@
+{
+  "grade": "free",
+  "generatedAt": "2026-10-31T10:03:34.197Z",
+  "checks": [
+    {
+      "name": "tier-badge",
+      "status": "pass",
+      "detail": "expected registered, got registered"
+    },
+    {
+      "name": "upgrade-banner",
+      "status": "pass",
+      "detail": "expected banner present, found 1"
+    },
+    {
+      "name": "weekly-drive",
+      "status": "pass",
+      "detail": "expected 1..21, got 21"
+    },
+    {
+      "name": "page-errors",
+      "status": "pass",
+      "detail": ""
+    }
+  ]
+}

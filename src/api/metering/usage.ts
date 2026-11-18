@@ -1,14 +1,13 @@
 /**
  * usage.ts — API Usage Metering (Week 11/13 gap fill)
  *
- * Records every API request to the `api_usage` table for:
- *   - Billing: per-key daily/monthly usage aggregation
- *   - Rate-limit enforcement: daily quota top-up check
- *   - Analytics: endpoint popularity + latency percentiles
+ * READER + optional writer. The AUTHORITY is the edge: admit_request() increments
+ * api_usage_daily atomically inside the same call that rate-limits. The client no
+ * longer reports its own usage on the hot path, so a tampered browser cannot
+ * exceed its plan.
  *
- * Usage:
- *   await metering.record({ keyId, endpoint, method, status, latencyMs });
- *   const ok = await metering.checkDailyQuota(keyId, tier);
+ *   const usage = await metering.getDailyUsage(keyId);   // reads the counter
+ *   await metering.recordRaw({ keyId, endpoint, status }); // analytics rows, sampled
  */
 
 import { supabase } from '@/integrations/supabase/client';
@@ -33,14 +32,13 @@ export interface DailyUsage {
   avgLatency: number;
 }
 
-// ─── Service ──────────────────────────────────────────────────────────────────
+// ─── Service (server-authoritative reads) ─────────────────────────────────────
 
 class MeteringService {
   /**
-   * Record a single API request.
-   * Fire-and-forget — never throws; metering must not break the request path.
+   * Analytics-only row. Sampled; NOT the quota authority. Fire-and-forget.
    */
-  record(usage: UsageRecord): void {
+  recordRaw(usage: UsageRecord): void {
     void this._write(usage);
   }
 
@@ -70,31 +68,33 @@ class MeteringService {
   }
 
   /**
-   * Check whether a key has remaining daily quota.
-   * Returns true (allowed) or false (quota exhausted).
+   * READ the server counter. O(1) — the previous implementation did
+   * `select count(*)` over api_usage on every check, which is O(n) per request.
    */
-  async checkDailyQuota(keyId: string, tier: Tier): Promise<boolean> {
+  async getQuotaState(keyId: string, tier: Tier): Promise<{ allowed: boolean; used: number; quota: number }> {
     const { dailyQuota } = RATE_LIMITS[tier];
-    if (dailyQuota === Infinity || dailyQuota <= 0) return true; // unlimited
+    if (dailyQuota === Infinity || dailyQuota <= 0) return { allowed: true, used: 0, quota: -1 };
 
     const today = new Date().toISOString().slice(0, 10);
 
     try {
-      const { count, error } = await supabase
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .from('api_usage' as any)
-        .select('*', { count: 'exact', head: true })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data, error } = await (supabase as any)
+        .from('api_usage_daily')
+        .select('requests')
         .eq('key_id', keyId)
-        .eq('day', today);
+        .eq('day', today)
+        .maybeSingle();
 
       if (error) {
-        log.warn('quota_check_failed', { error: error.message });
-        return true; // fail-open to avoid blocking legitimate traffic
+        log.warn('quota_read_failed', { error: error.message });
+        return { allowed: true, used: 0, quota: dailyQuota }; // fail-open
       }
 
-      return (count ?? 0) < dailyQuota;
+      const used = Number(data?.requests ?? 0);
+      return { allowed: used <= dailyQuota, used, quota: dailyQuota };
     } catch {
-      return true; // fail-open
+      return { allowed: true, used: 0, quota: dailyQuota };
     }
   }
 

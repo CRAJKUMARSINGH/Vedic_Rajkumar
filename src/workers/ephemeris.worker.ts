@@ -6,8 +6,8 @@
  * so the UI stays responsive during chart generation.
  *
  * Usage (from main thread):
- *   import { calcWorker } from '@/workers/ephemerisWorkerClient';
- *   const result = await calcWorker.calculate({ dateStr, timeStr });
+ *   import { runInWorker } from '@/workers/client';
+ *   const result = await runInWorker({ type: 'CALC_PLANETS', dateStr, timeStr });
  */
 
 import {

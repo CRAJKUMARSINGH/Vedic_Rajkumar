@@ -7,9 +7,13 @@
  *   - a surface that renders an unverified transform actually carries the badge.
  */
 import { describe, it, expect } from 'vitest';
+import type { ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
 import { VerificationBadge } from '@/components/VerificationBadge';
 import ShadabalaCard from '@/components/ShadabalaCard';
+import AshtakavargaCard from '@/components/AshtakavargaCard';
+import YogaCard from '@/components/YogaCard';
+import DivisionalChartsCard from '@/components/DivisionalChartsCard';
 import { VERIFICATION, verificationOf } from '@/config/verification';
 import type { PlanetData } from '@/services/shadabalaService';
 
@@ -67,4 +71,53 @@ describe('shadbala surface labelling', () => {
     const badge = screen.getByTestId('verification-badge');
     expect(badge).toHaveAttribute('data-status', 'unverified');
   });
+});
+
+/**
+ * Every shipping surface that renders an unverified transform must carry a
+ * badge, not just shadbala. This is what turns `docs/accuracy/UNVERIFIED.md`
+ * into something the build enforces: add a surface, forget the badge, this
+ * fails. The registry is the single source of truth, so each card is asserted
+ * to resolve to the *unverified* status, not merely "a badge".
+ */
+describe('unverified surfaces are labelled', () => {
+  const RASHIS: Record<string, number> = {
+    Sun: 0, Moon: 1, Mars: 2, Mercury: 3, Jupiter: 4, Venus: 5, Saturn: 6,
+  };
+  const LONGITUDES: Record<string, number> = {
+    Sun: 10, Moon: 33, Mars: 298, Mercury: 165, Jupiter: 95, Venus: 357, Saturn: 200,
+  };
+
+  const cases: Array<{ name: string; topic: string; ui: ReactNode }> = [
+    {
+      name: 'AshtakavargaCard',
+      topic: 'ashtakavarga',
+      ui: <AshtakavargaCard planetRashis={RASHIS} ascendantRashi={0} lang="en" />,
+    },
+    {
+      name: 'YogaCard',
+      topic: 'yogas',
+      ui: <YogaCard planets={PLANETS} ascendantRashi={0} lang="en" />,
+    },
+    {
+      name: 'DivisionalChartsCard',
+      topic: 'divisional',
+      ui: (
+        <DivisionalChartsCard
+          planetLongitudes={LONGITUDES}
+          ascendantLongitude={100}
+          lang="en"
+        />
+      ),
+    },
+  ];
+
+  for (const c of cases) {
+    it(`${c.name} carries a badge for the "${c.topic}" transform`, () => {
+      expect(verificationOf(c.topic).status).toBe('unverified');
+      render(c.ui);
+      const badge = screen.getByTestId('verification-badge');
+      expect(badge).toHaveAttribute('data-status', 'unverified');
+    });
+  }
 });

@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { analyzeYogas, type YogaResult } from '@/services/yogaService';
 import type { SupportedLanguage } from '@/services/multiLanguageService';
+import { VerificationBadge } from '@/components/VerificationBadge';
 
 interface YogaCardProps {
   planets: Array<{ name: string; rashiIndex: number; house: number; degrees: number; isRetrograde?: boolean }>;
@@ -100,6 +101,7 @@ const YogaCard = ({ planets, ascendantRashi = 0, lang }: YogaCardProps) => {
         <CardTitle className={`flex items-center gap-2 ${isHi ? 'font-hindi' : ''}`}>
           <span className="text-2xl">✨</span>
           {isHi ? 'योग विश्लेषण' : 'Yoga Analysis'}
+          <VerificationBadge topic="yogas" lang={lang} className="ml-auto" />
         </CardTitle>
         <p className={`text-sm text-muted-foreground ${isHi ? 'font-hindi' : ''}`}>
           {isHi ? summary.hi : summary.en}

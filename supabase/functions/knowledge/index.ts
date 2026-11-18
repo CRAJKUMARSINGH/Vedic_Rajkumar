@@ -4,11 +4,16 @@ import { corsHeaders, corsResponse } from '../_shared/cors.ts';
 import { checkRateLimit, rateLimitResponse } from '../_shared/rateLimit.ts';
 import { authenticateRequest } from '../_shared/auth.ts';
 import { safeFetch } from '../_shared/ssrf.ts';
+import { KILL_SWITCH_FLAGS, guardKillSwitch } from '../_shared/killSwitch.ts';
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return corsResponse(req);
   }
+
+  // Short-circuit before any work.
+  const killed = await guardKillSwitch(KILL_SWITCH_FLAGS.edge);
+  if (killed) return killed;
 
   try {
     const url = new URL(req.url);

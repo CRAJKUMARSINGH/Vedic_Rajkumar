@@ -13,6 +13,7 @@ import {
   type AshtakavargaTable,
 } from '@/services/ashtakavargaService';
 import type { SupportedLanguage } from '@/services/multiLanguageService';
+import { VerificationBadge } from '@/components/VerificationBadge';
 
 const RASHI_NAMES = [
   { en: 'Ari', hi: 'मेष' }, { en: 'Tau', hi: 'वृष' }, { en: 'Gem', hi: 'मिथुन' },
@@ -132,6 +133,7 @@ const AshtakavargaCard = ({ planetRashis, ascendantRashi, lang }: Props) => {
         <CardTitle className={`flex items-center gap-2 ${isHi ? 'font-hindi' : ''}`}>
           <span className="text-2xl">📊</span>
           {isHi ? 'अष्टकवर्ग' : 'Ashtakavarga'}
+          <VerificationBadge topic="ashtakavarga" lang={lang} className="ml-auto" />
         </CardTitle>
         <p className={`text-sm text-muted-foreground ${isHi ? 'font-hindi' : ''}`}>
           {isHi
