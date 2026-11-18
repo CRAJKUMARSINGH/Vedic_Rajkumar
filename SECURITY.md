@@ -1,5 +1,9 @@
 # Security Implementation Documentation
 
+> See also: [SECURITY policy](SECURITY.md) · [Threat model](docs/THREAT-MODEL.md) ·
+> [Licensing (MIT / AGPL boundary)](LICENSING.md) ·
+> [Standing confidentiality order](AGENTS.md).
+
 ## Overview
 
 This document describes the security implementation for the Vedic_Rajkumar application, focusing on Row Level Security (RLS) policies, data isolation, user privacy features, and data management operations.
@@ -7,11 +11,13 @@ This document describes the security implementation for the Vedic_Rajkumar appli
 ## Authentication & Authorization
 
 ### Identity Provider
+
 - **Primary**: Clerk (JWT-based authentication)
 - **Fallback**: Supabase Auth (for compatibility)
 - **User ID Resolution**: Uses `COALESCE(auth.uid()::TEXT, auth.jwt() ->> 'sub')` to support both providers
 
 ### Authentication Flow
+
 1. User authenticates via Clerk
 2. Clerk generates JWT with user ID in `sub` claim
 3. JWT is forwarded to Supabase in Authorization header
@@ -23,24 +29,24 @@ This document describes the security implementation for the Vedic_Rajkumar appli
 
 All personal data tables follow the owner-scoped pattern:
 
-| Table | Owner Column | RLS Policy Pattern |
-|-------|-------------|-------------------|
-| `saved_readings` | `user_id` | User ID must match JWT `sub` |
-| `user_profiles` | `id` | Primary key must match JWT `sub` |
-| `transit_readings` | `owner_id` | Owner ID must match JWT `sub` |
-| `prashna_sessions` | `owner_id` | Owner ID must match JWT `sub` |
-| `horoscope_analyses` | `owner_id` | Owner ID must match JWT `sub` |
+| Table                | Owner Column | RLS Policy Pattern               |
+| -------------------- | ------------ | -------------------------------- |
+| `saved_readings`     | `user_id`    | User ID must match JWT `sub`     |
+| `user_profiles`      | `id`         | Primary key must match JWT `sub` |
+| `transit_readings`   | `owner_id`   | Owner ID must match JWT `sub`    |
+| `prashna_sessions`   | `owner_id`   | Owner ID must match JWT `sub`    |
+| `horoscope_analyses` | `owner_id`   | Owner ID must match JWT `sub`    |
 
 ### Public Data Tables
 
-| Table | Access Pattern | RLS Policy |
-|-------|---------------|------------|
+| Table               | Access Pattern                   | RLS Policy                                                  |
+| ------------------- | -------------------------------- | ----------------------------------------------------------- |
 | `knowledge_entries` | Public read, authenticated write | SELECT: all users, INSERT/UPDATE/DELETE: authenticated only |
 
 ### System Tables
 
-| Table | Access Pattern | RLS Policy |
-|-------|---------------|------------|
+| Table            | Access Pattern    | RLS Policy                        |
+| ---------------- | ----------------- | --------------------------------- |
 | `rate_limit_log` | Service role only | All operations: service_role only |
 
 ## Row Level Security (RLS) Policies
@@ -101,6 +107,7 @@ CREATE POLICY "table_name_authenticated_delete"
 **Authentication**: Required (valid Clerk JWT)
 
 **Exported Data**:
+
 - User profile settings
 - Saved readings (`saved_readings`)
 - Transit readings (`transit_readings`)
@@ -108,6 +115,7 @@ CREATE POLICY "table_name_authenticated_delete"
 - Horoscope analyses (`horoscope_analyses`)
 
 **Implementation**:
+
 - Uses user-scoped Supabase client (respects RLS)
 - Parallel data fetching for performance
 - Returns JSON with Content-Disposition for file download
@@ -122,6 +130,7 @@ CREATE POLICY "table_name_authenticated_delete"
 **Confirmation**: Required (`{ confirm: true }` in body or `?confirm=true` query param)
 
 **Deleted Data**:
+
 - All saved readings
 - All transit readings
 - All prashna sessions
@@ -129,6 +138,7 @@ CREATE POLICY "table_name_authenticated_delete"
 - User profile
 
 **Safety Features**:
+
 - Explicit confirmation required
 - Rate limiting prevents accidental mass deletion
 - Idempotent (safe to call multiple times)
@@ -144,14 +154,15 @@ CREATE POLICY "table_name_authenticated_delete"
 
 ### Rate Limits
 
-| Endpoint | Limit | Window |
-|----------|-------|--------|
-| `user-data-export` | 5 requests | 1 hour |
+| Endpoint           | Limit      | Window   |
+| ------------------ | ---------- | -------- |
+| `user-data-export` | 5 requests | 1 hour   |
 | `user-data-delete` | 3 requests | 24 hours |
 
 ### Client-Side Rate Limiting
 
 Additional client-side rate limiting using token bucket algorithm:
+
 - Implemented in `@/lib/rateLimiter`
 - Applied before server calls for early rejection
 - Configurable capacity and refill rate
@@ -163,15 +174,17 @@ Additional client-side rate limiting using token bucket algorithm:
 All user inputs are sanitized before database insertion:
 
 ```typescript
-import { sanitizeText, sanitizeHtml, sanitizeObject } from '@/lib/sanitize';
+import { sanitizeText, sanitizeHtml, sanitizeObject } from "@/lib/sanitize";
 ```
 
 **Functions**:
+
 - `sanitizeText()`: Strips HTML tags, trims whitespace
 - `sanitizeHtml()`: Allows safe formatting tags only
 - `sanitizeObject()`: Recursively sanitizes all string values
 
 **Applied To**:
+
 - Reading titles and notes
 - Birth location strings
 - Profile display names
@@ -234,7 +247,7 @@ npm test -- src/tests/week3/
 ✅ **Audit Trail**: Rate limit logging for monitoring  
 ✅ **Safe Defaults**: RLS enabled by default, no anonymous access  
 ✅ **Explicit Confirmation**: Destructive operations require confirmation  
-✅ **Comprehensive Testing**: Full test coverage for security features  
+✅ **Comprehensive Testing**: Full test coverage for security features
 
 ### Future Enhancements
 
@@ -279,21 +292,22 @@ For security concerns or vulnerabilities, please follow the project's security d
 
 All production responses now include:
 
-| Header | Value | Purpose |
-|--------|-------|---------|
-| `Content-Security-Policy` | `default-src 'self'; script-src 'self' 'unsafe-eval' <Clerk CDNs>; ...` | XSS mitigation |
-| `Strict-Transport-Security` | `max-age=63072000; includeSubDomains; preload` | Force HTTPS (2-year) |
-| `X-Frame-Options` | `DENY` | Clickjacking prevention |
-| `X-Content-Type-Options` | `nosniff` | MIME sniffing prevention |
-| `Referrer-Policy` | `strict-origin-when-cross-origin` | Referrer leakage prevention |
-| `Permissions-Policy` | `camera=(), microphone=(), geolocation=(), payment=()` | Feature restriction |
-| `X-Permitted-Cross-Domain-Policies` | `none` | Flash/PDF embedding prevention |
+| Header                              | Value                                                                   | Purpose                        |
+| ----------------------------------- | ----------------------------------------------------------------------- | ------------------------------ |
+| `Content-Security-Policy`           | `default-src 'self'; script-src 'self' 'unsafe-eval' <Clerk CDNs>; ...` | XSS mitigation                 |
+| `Strict-Transport-Security`         | `max-age=63072000; includeSubDomains; preload`                          | Force HTTPS (2-year)           |
+| `X-Frame-Options`                   | `DENY`                                                                  | Clickjacking prevention        |
+| `X-Content-Type-Options`            | `nosniff`                                                               | MIME sniffing prevention       |
+| `Referrer-Policy`                   | `strict-origin-when-cross-origin`                                       | Referrer leakage prevention    |
+| `Permissions-Policy`                | `camera=(), microphone=(), geolocation=(), payment=()`                  | Feature restriction            |
+| `X-Permitted-Cross-Domain-Policies` | `none`                                                                  | Flash/PDF embedding prevention |
 
 `'unsafe-eval'` is required in `script-src` for `swisseph-wasm` (WebAssembly instantiation).
 
 ### Input Validation (Zod)
 
 All API boundaries now use typed Zod schemas from `src/lib/validation.ts`:
+
 - `BirthDataSchema` — date/time/lat/lon/timezone/gender
 - `PrashnaInputSchema` — question text (3–500 chars)
 - `PanchangRequestSchema` — date + location
@@ -306,17 +320,18 @@ All API boundaries now use typed Zod schemas from `src/lib/validation.ts`:
 
 The direct dependencies were updated to patched versions for the previously tracked advisories:
 
-| Package | Patched baseline |
-|---------|-----------------|
-| `jspdf` | `4.2.1` |
-| `react-router-dom` | `7.18.4` |
-| `vite` | `7.3.7` |
+| Package            | Patched baseline |
+| ------------------ | ---------------- |
+| `jspdf`            | `4.2.1`          |
+| `react-router-dom` | `7.18.4`         |
+| `vite`             | `7.3.7`          |
 
 PDF generation runs in browser-side code as well as in utilities, so it must not be treated as server-only or protected by CSP as a substitute for dependency updates. The security workflow now blocks on moderate-or-higher advisories in production dependencies; a separate full-tree audit remains informational while development-tool advisories are triaged.
 
 ### CI Security Gate (.github/workflows/security.yml)
 
 Three-job pipeline running on every push to `main`/`develop` and weekly:
+
 1. `dependency-audit` — blocking `npm audit --omit=dev --audit-level=moderate`, plus a non-blocking full-tree audit
 2. `secrets-scan` — TruffleHog full-history scan, verified secrets only
 3. `typecheck` — `tsc --noEmit` strict check

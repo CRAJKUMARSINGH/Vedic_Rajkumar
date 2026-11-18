@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // @ts-nocheck
 /**
  * Vedic Astrology Calculation Engine

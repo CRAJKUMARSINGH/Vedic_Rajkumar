@@ -1,0 +1,82 @@
+{
+  "convention": "parashari-classical-starts-D2-D3-D7-D10-D12-D20-D24-D30-D40-D45-D60",
+  "ayanamsa": "Lahiri",
+  "longitudeSource": "tools/accuracy/golden (swisseph-wasm)",
+  "swisseph": "0.1.0",
+  "corpusHash": "sha256:2fad515f99afa89686e521b22bf8042c6147c6ccfe4fcc12e7a2dcae8f55f9cf",
+  "vargas": [
+    "D2",
+    "D3",
+    "D7",
+    "D10",
+    "D12",
+    "D20",
+    "D24",
+    "D30",
+    "D40",
+    "D45",
+    "D60"
+  ],
+  "charts": [
+    {
+      "id": "IN-1935-BOM-001",
+      "sha256": "6d39ed34d94f6ea4c225ac5d6389b4b9bdf8c0c76f6f6e496014d2edbce8d2fd"
+    },
+    {
+      "id": "IN-1943-BOM-002",
+      "sha256": "40dbe99cfcf6c54066ef6b41d28a2680cbec6abe1587cfa814829a11778e8d9d"
+    },
+    {
+      "id": "IN-1941-DEL-004",
+      "sha256": "ca66d8e943eb8e45c5368cdaf695b7dd6f01875191a99497f9aa6bff240e7023"
+    },
+    {
+      "id": "IN-1942-GAP-005",
+      "sha256": "8d53ec148e3134ca91cc2a6eb91a69e2b6ab1c3f40e9c7d8dc9f980dbeec1b1e"
+    },
+    {
+      "id": "IN-1945-END-006",
+      "sha256": "5c273527a1d94bbeef21c23bf113b8967b74c15d1901239a33683a0cc7544f7d"
+    },
+    {
+      "id": "IN-1945-IST-007",
+      "sha256": "aa486ee664267ab6e413a8e0249b966b4ba24479266959ce8933ebef418f08b4"
+    },
+    {
+      "id": "IN-1906-IST-008",
+      "sha256": "a27ad37db71b7537d6a2b313b3f7192539bb00bea940faaf216dd75c01426371"
+    },
+    {
+      "id": "IN-1960-MID-009",
+      "sha256": "435901236a700009b932ba0d29b059433a5f64b5eb296e4c3d257602793fd735"
+    },
+    {
+      "id": "XX-1990-LAT64-003",
+      "sha256": "356413439f2d59439a98b734e8f79af02f83b1ca40c52fda66b309caa2d7a991"
+    },
+    {
+      "id": "XX-1990-LAT0-010",
+      "sha256": "78d3c3e025a0171b2c960ee0de15d7d328b1a1a1cacb99c32b3a21e9b99702f1"
+    },
+    {
+      "id": "IN-2000-IND-011",
+      "sha256": "fbccb7aac4f69280e508047d9f96995650c29a6ab020d8ddc021ae6a2d04126c"
+    },
+    {
+      "id": "IN-1990-JYP-012",
+      "sha256": "35d05e464ab2ae9d9fb5de3d6f135606dadf334bb7756e1178486fd9ad4a1279"
+    },
+    {
+      "id": "XX-1970-LON-013",
+      "sha256": "dcad4bc03edd40a05236da50415df450b4ba675291940475534e62d1ca4cfd4b"
+    },
+    {
+      "id": "XX-2010-NYC-014",
+      "sha256": "7ef30696125eb08064d14ac3e3e7a16be871213127e6deb7e04173d12b521aa8"
+    },
+    {
+      "id": "IN-1936-LEP-015",
+      "sha256": "33dfb9772c1dc4222dd80939ce87774acafd715bff720600d2ea73c2601473bb"
+    }
+  ]
+}

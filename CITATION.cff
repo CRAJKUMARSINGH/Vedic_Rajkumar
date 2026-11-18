@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: If you use this engine in research, cite it.
+title: Vedic Rajkumar
+abstract: >-
+  Open-source Vedic astrology (Jyotish) platform: sidereal Lahiri birth charts,
+  prashna (horary), 36-point Kundli Milan matchmaking, and Panchang/Muhurat, with
+  a published, independently-gated accuracy corpus.
+authors:
+  - family-names: Singh Chauhan
+    given-names: Rajkumar
+    email: crajkumarsingh@hotmail.com
+license: MIT
+keywords:
+  - vedic-astrology
+  - jyotish
+  - kundli
+  - prashna
+  - panchang
+  - swiss-ephemeris

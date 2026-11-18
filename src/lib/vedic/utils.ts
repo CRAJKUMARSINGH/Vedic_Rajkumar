@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 export function formatDate(d: Date): string {
   const months = ['जन', 'फर', 'मार्च', 'अप्र', 'मई', 'जून', 'जुल', 'अग', 'सित', 'अक्त', 'नव', 'दिस'];
   return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;

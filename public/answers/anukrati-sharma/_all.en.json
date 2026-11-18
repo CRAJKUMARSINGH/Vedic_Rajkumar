@@ -21,24 +21,24 @@
     "reference_type": "natal"
   },
   "direct_answer": {
-    "en": "Health & wellbeing: average (49%) (average, 49%) · New house construction: average (44%) (average, 44%) · Career: average (41%) (average, 41%) · Marriage: average (46%) (average, 46%) · Finance: average (41%) (average, 41%)",
-    "hi": "स्वास्थ्य सामान्य (49%) (सामान्य, 49%) · नया घर निर्माण सामान्य (44%) (सामान्य, 44%) · करियर सामान्य (41%) (सामान्य, 41%) · विवाह सामान्य (46%) (सामान्य, 46%) · आर्थिक सामान्य (41%) (सामान्य, 41%)"
+    "en": "Health & wellbeing: average (50%) (average, 50%) · New house construction: average (48%) (average, 48%) · Career: average (44%) (average, 44%) · Marriage: average (47%) (average, 47%) · Finance: average (49%) (average, 49%)",
+    "hi": "स्वास्थ्य सामान्य (50%) (सामान्य, 50%) · नया घर निर्माण सामान्य (48%) (सामान्य, 48%) · करियर सामान्य (44%) (सामान्य, 44%) · विवाह सामान्य (47%) (सामान्य, 47%) · आर्थिक सामान्य (49%) (सामान्य, 49%)"
   },
   "verdicts": [
     {
       "topic": "health",
       "headline": {
-        "en": "Health & wellbeing: average (49%)",
-        "hi": "स्वास्थ्य सामान्य (49%)"
+        "en": "Health & wellbeing: average (50%)",
+        "hi": "स्वास्थ्य सामान्य (50%)"
       },
-      "score_0_100": 69,
+      "score_0_100": 63,
       "band": "average",
       "engine_verdict": "CONDITIONAL",
-      "confidence_0_1": 0.49,
+      "confidence_0_1": 0.5,
       "window": null,
       "rationale": {
-        "en": "Therefore: for this Jatak's birth promise, health is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 85/100, and transit timing scores 48/100. The final call is CONDITIONAL: health is the leading field at 69/100.",
-        "hi": "Therefore: for this Jatak's birth promise, health is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 85/100, and transit timing scores 48/100. The final call is CONDITIONAL: health is the leading field at 69/100."
+        "en": "Therefore: for this Jatak's birth promise, health is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 69/100, and transit timing scores 48/100. The final call is CONDITIONAL: health is the leading field at 63/100.",
+        "hi": "Therefore: for this Jatak's birth promise, health is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 69/100, and transit timing scores 48/100. The final call is CONDITIONAL: health is the leading field at 63/100."
       },
       "conflicts": [
         "Viparita Raj Yoga must be treated as a failure warning, not as decorative praise."
@@ -56,8 +56,8 @@
         },
         {
           "layer": "Dasha activation",
-          "score": 85,
-          "finding": "Venus MD with Mercury AD gives 85/100 Dasha clearance for health; delivery class is full."
+          "score": 69,
+          "finding": "Venus MD with Ketu AD gives 69/100 Dasha clearance for health; delivery class is full."
         },
         {
           "layer": "Transit timing",
@@ -65,7 +65,12 @@
           "finding": "health has no dedicated Moon double-transit gate here; transit is treated as secondary and cannot overturn Dasha plus house promise."
         }
       ],
-      "remedies": [],
+      "remedies": [
+        {
+          "en": "Venus",
+          "hi": "Venus"
+        }
+      ],
       "caveats": [
         {
           "en": "Windows are approximate.",
@@ -76,17 +81,17 @@
     {
       "topic": "house_construction",
       "headline": {
-        "en": "New house construction: average (44%)",
-        "hi": "नया घर निर्माण सामान्य (44%)"
+        "en": "New house construction: average (48%)",
+        "hi": "नया घर निर्माण सामान्य (48%)"
       },
-      "score_0_100": 68,
+      "score_0_100": 57,
       "band": "average",
       "engine_verdict": "CONDITIONAL",
-      "confidence_0_1": 0.44,
+      "confidence_0_1": 0.48,
       "window": null,
       "rationale": {
-        "en": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 96/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 71/100.",
-        "hi": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 96/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 71/100."
+        "en": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 61/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 58/100.",
+        "hi": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 61/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 58/100."
       },
       "conflicts": [
         "House promise is real, but transit has not opened the timing gate; do not call immediate fruition.",
@@ -105,8 +110,8 @@
         },
         {
           "layer": "Dasha activation",
-          "score": 96,
-          "finding": "Venus MD with Mercury AD gives 96/100 Dasha clearance for wealth; delivery class is full."
+          "score": 61,
+          "finding": "Venus MD with Ketu AD gives 61/100 Dasha clearance for wealth; delivery class is full."
         },
         {
           "layer": "Transit timing",
@@ -114,7 +119,12 @@
           "finding": "Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
         }
       ],
-      "remedies": [],
+      "remedies": [
+        {
+          "en": "Venus",
+          "hi": "Venus"
+        }
+      ],
       "caveats": [
         {
           "en": "Windows are approximate.",
@@ -125,17 +135,17 @@
     {
       "topic": "career",
       "headline": {
-        "en": "Career: average (41%)",
-        "hi": "करियर सामान्य (41%)"
+        "en": "Career: average (44%)",
+        "hi": "करियर सामान्य (44%)"
       },
-      "score_0_100": 71,
+      "score_0_100": 63,
       "band": "average",
       "engine_verdict": "CONDITIONAL",
-      "confidence_0_1": 0.41,
+      "confidence_0_1": 0.44,
       "window": null,
       "rationale": {
-        "en": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 40/100, house promise scores 93/100, Dasha scores 92/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 71/100.",
-        "hi": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 40/100, house promise scores 93/100, Dasha scores 92/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 71/100."
+        "en": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 40/100, house promise scores 93/100, Dasha scores 69/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 63/100.",
+        "hi": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 40/100, house promise scores 93/100, Dasha scores 69/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 63/100."
       },
       "conflicts": [
         "House promise is real, but transit has not opened the timing gate; do not call immediate fruition.",
@@ -154,8 +164,8 @@
         },
         {
           "layer": "Dasha activation",
-          "score": 92,
-          "finding": "Venus MD with Mercury AD gives 92/100 Dasha clearance for career; delivery class is full."
+          "score": 69,
+          "finding": "Venus MD with Ketu AD gives 69/100 Dasha clearance for career; delivery class is full."
         },
         {
           "layer": "Transit timing",
@@ -163,7 +173,12 @@
           "finding": "Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
         }
       ],
-      "remedies": [],
+      "remedies": [
+        {
+          "en": "Venus",
+          "hi": "Venus"
+        }
+      ],
       "caveats": [
         {
           "en": "Windows are approximate.",
@@ -174,17 +189,17 @@
     {
       "topic": "marriage",
       "headline": {
-        "en": "Marriage: average (46%)",
-        "hi": "विवाह सामान्य (46%)"
+        "en": "Marriage: average (47%)",
+        "hi": "विवाह सामान्य (47%)"
       },
-      "score_0_100": 66,
+      "score_0_100": 56,
       "band": "average",
       "engine_verdict": "CONDITIONAL",
-      "confidence_0_1": 0.46,
+      "confidence_0_1": 0.47,
       "window": null,
       "rationale": {
-        "en": "Therefore: for this Jatak's birth promise, marriage is conditional now because Rajyoga scores 40/100, house promise scores 78/100, Dasha scores 89/100, and transit timing scores 32/100. The final call is CONDITIONAL: marriage is the leading field at 66/100.",
-        "hi": "Therefore: for this Jatak's birth promise, marriage is conditional now because Rajyoga scores 40/100, house promise scores 78/100, Dasha scores 89/100, and transit timing scores 32/100. The final call is CONDITIONAL: marriage is the leading field at 66/100."
+        "en": "Therefore: for this Jatak's birth promise, marriage is conditional now because Rajyoga scores 40/100, house promise scores 78/100, Dasha scores 61/100, and transit timing scores 32/100. The final call is CONDITIONAL: marriage is the leading field at 56/100.",
+        "hi": "Therefore: for this Jatak's birth promise, marriage is conditional now because Rajyoga scores 40/100, house promise scores 78/100, Dasha scores 61/100, and transit timing scores 32/100. The final call is CONDITIONAL: marriage is the leading field at 56/100."
       },
       "conflicts": [
         "House promise is real, but transit has not opened the timing gate; do not call immediate fruition.",
@@ -203,8 +218,8 @@
         },
         {
           "layer": "Dasha activation",
-          "score": 89,
-          "finding": "Venus MD with Mercury AD gives 89/100 Dasha clearance for marriage; delivery class is full."
+          "score": 61,
+          "finding": "Venus MD with Ketu AD gives 61/100 Dasha clearance for marriage; delivery class is full."
         },
         {
           "layer": "Transit timing",
@@ -212,7 +227,12 @@
           "finding": "Therefore: Marriage timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
         }
       ],
-      "remedies": [],
+      "remedies": [
+        {
+          "en": "Venus",
+          "hi": "Venus"
+        }
+      ],
       "caveats": [
         {
           "en": "Windows are approximate.",
@@ -223,17 +243,17 @@
     {
       "topic": "finance",
       "headline": {
-        "en": "Finance: average (41%)",
-        "hi": "आर्थिक सामान्य (41%)"
+        "en": "Finance: average (49%)",
+        "hi": "आर्थिक सामान्य (49%)"
       },
-      "score_0_100": 71,
+      "score_0_100": 58,
       "band": "average",
       "engine_verdict": "CONDITIONAL",
-      "confidence_0_1": 0.41,
+      "confidence_0_1": 0.49,
       "window": null,
       "rationale": {
-        "en": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 96/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 71/100.",
-        "hi": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 96/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 71/100."
+        "en": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 61/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 58/100.",
+        "hi": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 61/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 58/100."
       },
       "conflicts": [
         "House promise is real, but transit has not opened the timing gate; do not call immediate fruition.",
@@ -252,8 +272,8 @@
         },
         {
           "layer": "Dasha activation",
-          "score": 96,
-          "finding": "Venus MD with Mercury AD gives 96/100 Dasha clearance for wealth; delivery class is full."
+          "score": 61,
+          "finding": "Venus MD with Ketu AD gives 61/100 Dasha clearance for wealth; delivery class is full."
         },
         {
           "layer": "Transit timing",
@@ -261,7 +281,12 @@
           "finding": "Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
         }
       ],
-      "remedies": [],
+      "remedies": [
+        {
+          "en": "Venus",
+          "hi": "Venus"
+        }
+      ],
       "caveats": [
         {
           "en": "Windows are approximate.",
@@ -279,7 +304,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5e5698f0b3ae95af",
-    "card_hash": "8b71c88ca760956e",
+    "card_hash": "8bbf3881289ded13",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 import jsPDF from 'jspdf';
 import type { ChartData } from './vedicCalc';
 import {

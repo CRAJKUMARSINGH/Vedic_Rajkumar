@@ -17,6 +17,18 @@ import {
   MAX_YEAR,
 } from '@/lib/birthDateRange';
 
+/**
+ * The failure message for a rejected date. `tsconfig.tests.json` runs with
+ * `strict: false`, where a boolean discriminant does not narrow the union, so
+ * read `.message` through an `in` guard rather than `if (!check.ok)`.
+ */
+function failureMessage(input: string | Date): string {
+  const check = checkBirthDate(input);
+  expect(check.ok, `expected ${String(input)} to be rejected`).toBe(false);
+  if (!('message' in check)) throw new Error('rejected date has no message');
+  return check.message;
+}
+
 describe('checkBirthDate — accepted formats', () => {
   it('accepts DD/MM/YYYY and returns ISO', () => {
     expect(checkBirthDate('15/09/1963')).toEqual({ ok: true, iso: '1963-09-15' });
@@ -42,37 +54,27 @@ describe('checkBirthDate — leap years', () => {
   });
 
   it('rejects 29 Feb in a non-leap year with an explicit message', () => {
-    const check = checkBirthDate('29/02/1900');
-    expect(check.ok).toBe(false);
-    if (!check.ok) expect(check.message).toMatch(/Invalid calendar date/i);
+    expect(failureMessage('29/02/1900')).toMatch(/Invalid calendar date/i);
   });
 });
 
 describe('checkBirthDate — out of range', () => {
   it('rejects a year below the supported range', () => {
-    const check = checkBirthDate('01/01/1899');
-    expect(check.ok).toBe(false);
-    if (!check.ok) expect(check.message).toMatch(/outside supported range/i);
+    expect(failureMessage('01/01/1899')).toMatch(/outside supported range/i);
   });
 
   it('rejects a year above the supported range', () => {
-    const check = checkBirthDate('31/12/2100');
-    expect(check.ok).toBe(false);
-    if (!check.ok) expect(check.message).toMatch(/outside supported range/i);
+    expect(failureMessage('31/12/2100')).toMatch(/outside supported range/i);
   });
 });
 
 describe('checkBirthDate — malformed input', () => {
   it('reports an unusable format', () => {
-    const check = checkBirthDate('not-a-date');
-    expect(check.ok).toBe(false);
-    if (!check.ok) expect(check.message).toMatch(/DD\/MM\/YYYY/);
+    expect(failureMessage('not-a-date')).toMatch(/DD\/MM\/YYYY/);
   });
 
   it('reports an invalid Date instance', () => {
-    const check = checkBirthDate(new Date('nope'));
-    expect(check.ok).toBe(false);
-    if (!check.ok) expect(check.message).toMatch(/Invalid date/i);
+    expect(failureMessage(new Date('nope'))).toMatch(/Invalid date/i);
   });
 });
 

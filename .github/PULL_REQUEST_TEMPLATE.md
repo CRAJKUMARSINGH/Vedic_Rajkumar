@@ -6,6 +6,40 @@
 
 <!-- the problem, not the solution. Link the finding / issue. -->
 
+## Tier
+
+<!-- Which environment does this change reach? A production (gated) change must
+     pass every required CI check before merge. A preview (ungated) change is
+     labelled `preview` and must not touch main. -->
+
+- [ ] **production** — reaches `main`; all required checks are green
+- [ ] **preview** — labelled `preview`; does not merge to `main`
+
+## Gate
+
+<!-- The gate-first rule: name the check that fails without this change. If no
+     existing gate covers it, a new gate is part of this PR, not a follow-up. -->
+
+**Which test fails without this change?** <!-- test file / CI job -->
+
+## Definition of Done
+
+<!-- Tick only what this PR's blast radius actually exercises. The full list and
+     rationale live in docs/DEFINITION-OF-DONE.md. -->
+
+- [ ] Correctness — the change is covered by a test that fails without it
+- [ ] Claims — any number in README/docs is re-derived by `npm run docs:verify`
+- [ ] Data — no seed-bank birth data leaves its owner scope (see `AGENTS.md`)
+- [ ] Quality — `npm run typecheck` , `npm run lint` and `npm run test:run` pass
+- [ ] Hygiene — no orphaned files, no commented-out code, no stale TODOs
+
+## Claims touched
+
+<!-- Any README/docs number changed? Name the docs:verify rule that covers it so
+     the reviewer can confirm the pin was re-derived, not hand-edited. -->
+
+<!-- e.g. "README test-count badge -> derived from the Vitest JSON report" -->
+
 ## Blast radius
 
 - [ ] Touches a migration (forward-only; state the rollback)

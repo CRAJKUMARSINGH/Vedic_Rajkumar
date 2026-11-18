@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 /**
  * Mangal Dosha (Kuja Dosha) Analysis
  *

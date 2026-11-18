@@ -17,24 +17,24 @@
     "reference_type": "natal"
   },
   "direct_answer": {
-    "en": "New house construction: average (44%) (average, 44%)",
-    "hi": "नया घर निर्माण सामान्य (44%) (सामान्य, 44%)"
+    "en": "New house construction: average (48%) (average, 48%)",
+    "hi": "नया घर निर्माण सामान्य (48%) (सामान्य, 48%)"
   },
   "verdicts": [
     {
       "topic": "house_construction",
       "headline": {
-        "en": "New house construction: average (44%)",
-        "hi": "नया घर निर्माण सामान्य (44%)"
+        "en": "New house construction: average (48%)",
+        "hi": "नया घर निर्माण सामान्य (48%)"
       },
-      "score_0_100": 68,
+      "score_0_100": 57,
       "band": "average",
       "engine_verdict": "CONDITIONAL",
-      "confidence_0_1": 0.44,
+      "confidence_0_1": 0.48,
       "window": null,
       "rationale": {
-        "en": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 96/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 71/100.",
-        "hi": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 96/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 71/100."
+        "en": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 61/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 58/100.",
+        "hi": "Therefore: for this Jatak's birth promise, wealth is conditional now because Rajyoga scores 40/100, house promise scores 85/100, Dasha scores 61/100, and transit timing scores 32/100. The final call is CONDITIONAL: wealth is the leading field at 58/100."
       },
       "conflicts": [
         "House promise is real, but transit has not opened the timing gate; do not call immediate fruition.",
@@ -53,8 +53,8 @@
         },
         {
           "layer": "Dasha activation",
-          "score": 96,
-          "finding": "Venus MD with Mercury AD gives 96/100 Dasha clearance for wealth; delivery class is full."
+          "score": 61,
+          "finding": "Venus MD with Ketu AD gives 61/100 Dasha clearance for wealth; delivery class is full."
         },
         {
           "layer": "Transit timing",
@@ -62,7 +62,12 @@
           "finding": "Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
         }
       ],
-      "remedies": [],
+      "remedies": [
+        {
+          "en": "Venus",
+          "hi": "Venus"
+        }
+      ],
       "caveats": [
         {
           "en": "Windows are approximate.",
@@ -80,7 +85,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5e5698f0b3ae95af",
-    "card_hash": "25d09d7dd85e0be8",
+    "card_hash": "6e4a5ef9d93874a4",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

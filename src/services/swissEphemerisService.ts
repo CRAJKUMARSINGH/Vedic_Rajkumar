@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// This module wraps swisseph-wasm (AGPL-3.0). See LICENSING.md for the license
+// boundary; the default build keeps VITE_USE_SWISS_EPHEMERIS=false (MIT-only).
 // @ts-nocheck
 /**
  * src/services/swissEphemerisService.ts

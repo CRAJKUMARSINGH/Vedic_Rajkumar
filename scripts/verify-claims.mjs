@@ -130,7 +130,7 @@ const staleGuardFiles = [
 // allowed to cite the superseded figures it explains; only its header pin is gated.
 // Each retired count was the derived canonical at the time it was superseded, and
 // the pin only ever moves forward — so a doc that still says it is stale.
-const retiredCounts = ['2063', '2065', '2071', '2081', '2118'];
+const retiredCounts = ['2063', '2065', '2071', '2081', '2118', '2146'];
 const retiredCountFiles = [
   'docs/launch/pre-launch-user-testing-playbook.md',
   'README.md',
@@ -156,6 +156,102 @@ for (const rule of rules) {
   const found = m.slice(1).join(rule.join ?? '');
   if (found !== rule.expected) {
     problems.push(`${rule.file}: ${rule.label} — doc says "${found}", code says "${rule.expected}"`);
+  }
+}
+
+// ─── Numeric-claim cross-check ───────────────────────────────────────────────
+// Tolerance and corpus-size claims are only trustworthy while they equal their
+// source of truth. Each claim reads a number out of a doc and asserts it equals
+// the *same* number derived from the source file, so editing one and not the
+// other is a red gate rather than a silent drift. Numbers are compared by value
+// ("2" == "2.0"), because docs legitimately drop the trailing decimal.
+const numericClaims = [
+  {
+    file: 'README.md',
+    label: 'README ayanamsa tolerance',
+    pattern: /Lahiri ayanamsa precision\s*\|\s*≤\s*([\d.]+)″/,
+    source: 'docs/accuracy/METHODOLOGY.md',
+    sourcePattern: /Lahiri ayanamsa\s*\|\s*≤\s*([\d.]+)″/,
+  },
+  {
+    file: 'README.md',
+    label: 'README ascendant tolerance',
+    pattern: /Ascendant precision\s*\|\s*≤\s*([\d.]+)″/,
+    source: 'docs/accuracy/METHODOLOGY.md',
+    sourcePattern: /Ascendant\s*\|\s*≤\s*([\d.]+)″/,
+  },
+  {
+    file: 'README.md',
+    label: 'README feature-table Tier A bound',
+    pattern: /Tier A ≤([\d.]+)″ ascendant/,
+    source: 'docs/accuracy/METHODOLOGY.md',
+    sourcePattern: /Ascendant\s*\|\s*≤\s*([\d.]+)″/,
+  },
+  {
+    file: 'README.md',
+    label: 'README accuracy-badge bound',
+    pattern: /engine%20accuracy-\d+%2F\d+%20charts%20%E2%89%A4([\d.]+)%E2%80%B3/,
+    source: 'docs/accuracy/METHODOLOGY.md',
+    sourcePattern: /Ascendant\s*\|\s*≤\s*([\d.]+)″/,
+  },
+  {
+    file: 'README.md',
+    label: 'README corpus size (badge)',
+    pattern: /engine%20accuracy-(\d+)%2F\d+/,
+    source: 'tools/accuracy/corpus/charts.jsonl',
+    count: true,
+  },
+  {
+    file: 'README.md',
+    label: 'README corpus size (feature table)',
+    pattern: /\*\*(\d+)-chart adversarial corpus\*\*/,
+    source: 'tools/accuracy/corpus/charts.jsonl',
+    count: true,
+  },
+  {
+    file: 'README.md',
+    label: 'README corpus size (run comment)',
+    pattern: /# (\d+)-chart adversarial corpus gate/,
+    source: 'tools/accuracy/corpus/charts.jsonl',
+    count: true,
+  },
+  {
+    file: 'README.md',
+    label: 'README corpus size (trust table)',
+    pattern: /across (\d+) corpus charts/,
+    source: 'tools/accuracy/corpus/charts.jsonl',
+    count: true,
+  },
+];
+
+// Numeric equality tolerant of trailing-zero form: "2.0" and "2" are the same claim.
+const numEq = (a, b) => {
+  const na = Number(a);
+  const nb = Number(b);
+  return !Number.isNaN(na) && !Number.isNaN(nb) ? na === nb : a === b;
+};
+
+for (const claim of numericClaims) {
+  const full = join(ROOT, claim.file);
+  if (!existsSync(full)) {
+    problems.push(`${claim.file}: file not found (${claim.label})`);
+    continue;
+  }
+  const m = readFileSync(full, 'utf8').match(claim.pattern);
+  if (!m) {
+    problems.push(`${claim.file}: ${claim.label} — numeric claim not found; update the doc or this rule`);
+    continue;
+  }
+  const claimed = m.slice(1).join(claim.join ?? '');
+  const derived = claim.count
+    ? String(corpusCharts)
+    : readFileSync(join(ROOT, claim.source), 'utf8').match(claim.sourcePattern)?.[1];
+  if (derived === undefined) {
+    problems.push(`${claim.source}: ${claim.label} — source value not found (${claim.sourcePattern})`);
+  } else if (!numEq(claimed, derived)) {
+    problems.push(
+      `${claim.file}: ${claim.label} — doc says "${claimed}", ${claim.source} says "${derived}"`,
+    );
   }
 }
 

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 /**
  * Ashtakoot Milan — 8-Factor Kundli Compatibility
  *
