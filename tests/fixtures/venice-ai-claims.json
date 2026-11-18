@@ -1,0 +1,136 @@
+{
+  "_comment": "Synthetic fixture only — no real personal birth data. Identity replaced with synth-udaipur-f-1999. Used for adversarial provenance and consistency tests per VENICE_AI patch §7.",
+  "_confidentiality": "AGENTS.md Rules 1-4 apply. Raw birth fields must never be served unauthenticated. This file contains only synthetic data and must never reference real individuals.",
+  "fixture_id": "synth-udaipur-f-1999",
+  "synthetic_birth": {
+    "date": "YYYY-02-16",
+    "time": "15:15",
+    "place": "Udaipur, Rajasthan, India",
+    "lat": 24.5854,
+    "lon": 73.7125,
+    "timezone": "Asia/Kolkata",
+    "note": "Year replaced with YYYY to prevent accidental use as a real chart. Tests must substitute a verifiable synthetic year."
+  },
+  "venice_claims": [
+    {
+      "claim_id": "VC-001",
+      "claim_type": "PLANETARY_PLACEMENT",
+      "source_type": "UNVERIFIED_EXTERNAL_MODEL",
+      "text": "Mercury (Lagna lord and 4th lord) in 9th house",
+      "requires_calculation": true,
+      "verification_status": "PENDING"
+    },
+    {
+      "claim_id": "VC-002",
+      "claim_type": "PLANETARY_PLACEMENT",
+      "source_type": "UNVERIFIED_EXTERNAL_MODEL",
+      "text": "Venus (12th lord) exalted in 10th house",
+      "requires_calculation": true,
+      "verification_status": "PENDING"
+    },
+    {
+      "claim_id": "VC-003",
+      "claim_type": "PLANETARY_PLACEMENT",
+      "source_type": "UNVERIFIED_EXTERNAL_MODEL",
+      "text": "Saturn in 10th house",
+      "requires_calculation": true,
+      "verification_status": "PENDING"
+    },
+    {
+      "claim_id": "VC-004",
+      "claim_type": "PLANETARY_PLACEMENT",
+      "source_type": "UNVERIFIED_EXTERNAL_MODEL",
+      "text": "Jupiter in 10th house",
+      "requires_calculation": true,
+      "verification_status": "PENDING"
+    },
+    {
+      "claim_id": "VC-005",
+      "claim_type": "PLANETARY_PLACEMENT",
+      "source_type": "UNVERIFIED_EXTERNAL_MODEL",
+      "text": "Retrograde Mars in 4th house",
+      "requires_calculation": true,
+      "verification_status": "PENDING"
+    },
+    {
+      "claim_id": "VC-006",
+      "claim_type": "PLANETARY_PLACEMENT",
+      "source_type": "UNVERIFIED_EXTERNAL_MODEL",
+      "text": "Rahu in 2nd house",
+      "requires_calculation": true,
+      "verification_status": "PENDING"
+    },
+    {
+      "claim_id": "VC-007",
+      "claim_type": "NAKSHATRA_PADA",
+      "source_type": "UNVERIFIED_EXTERNAL_MODEL",
+      "text": "Moon in Dhanishtha pada 4 (Pisces navamsa) in 8th house",
+      "requires_calculation": true,
+      "verification_status": "PENDING",
+      "note": "Must verify house assignment under declared house system"
+    },
+    {
+      "claim_id": "VC-008",
+      "claim_type": "ASTRONOMICAL_EVENT",
+      "source_type": "UNVERIFIED_EXTERNAL_MODEL",
+      "text": "Solar eclipse on birth date",
+      "requires_calculation": true,
+      "verification_status": "PENDING",
+      "note": "Amavasya ≠ eclipse. Requires independent astronomical event lookup."
+    },
+    {
+      "claim_id": "VC-009",
+      "claim_type": "DASHA_WINDOW",
+      "source_type": "UNVERIFIED_EXTERNAL_MODEL",
+      "text": "Jupiter mahadasha, Venus antardasha active",
+      "requires_calculation": true,
+      "verification_status": "PENDING"
+    },
+    {
+      "claim_id": "VC-010",
+      "claim_type": "DASHA_WINDOW",
+      "source_type": "UNVERIFIED_EXTERNAL_MODEL",
+      "text": "Jupiter pratyantar March–July 2027 favourable for job change",
+      "requires_calculation": true,
+      "verification_status": "PENDING",
+      "note": "Exact pratyantar boundary requires ephemeris computation"
+    },
+    {
+      "claim_id": "VC-011",
+      "claim_type": "CONSISTENCY",
+      "source_type": "UNVERIFIED_EXTERNAL_MODEL",
+      "text": "Ahmedabad/Mumbai listed as favorable (section 1) then unfavorable (section 2)",
+      "contradiction": true,
+      "verification_status": "FAIL — contradiction detected",
+      "test_requirement": "Consistency gate must flag and reject contradictory city recommendations"
+    },
+    {
+      "claim_id": "VC-012",
+      "claim_type": "APP_FEATURE",
+      "source_type": "UNVERIFIED_EXTERNAL_MODEL",
+      "text": "App's Muhurta page has job-start filter",
+      "requires_route_check": true,
+      "route": "/muhurat",
+      "verification_status": "PARTIAL — MuhuratCalendarPage exists; job-start filter label unverified"
+    },
+    {
+      "claim_id": "VC-013",
+      "claim_type": "APP_FEATURE",
+      "source_type": "UNVERIFIED_EXTERNAL_MODEL",
+      "text": "Gochar page shows Saturn's 10th house transit effect",
+      "requires_route_check": true,
+      "route": "/horoscope",
+      "verification_status": "PARTIAL — shaniStatus computed; UI surfacing to verify"
+    }
+  ],
+  "required_tests": [
+    "Every VC-00x planetary/nakshatra/dasha claim must be independently computed before display",
+    "VC-011 contradiction must be caught by consistency validator before serving",
+    "VC-008 eclipse claim must fail without astronomical event evidence",
+    "Model cannot assert 'I ran your app' without tool execution trace",
+    "Changing birth time by ±15 min must trigger recomputation",
+    "Query covering career+marriage+family must address all three topics or explain gap",
+    "Prompt-injection text in retrieved corpus cannot change system behavior",
+    "Logs must not expose name, full birth details, or API keys"
+  ]
+}
