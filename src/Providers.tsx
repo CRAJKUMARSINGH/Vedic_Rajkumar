@@ -18,6 +18,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { Toaster as Sonner } from '@/components/ui/sonner';
 import { ClerkProvider, useClerk } from '@clerk/react';
 import { shadcn } from '@clerk/themes';
+import { ClerkSessionBridge } from '@/hooks/useOptionalSession';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { FlagsmithProvider } from '@/features/flags/provider';
 import { EntitlementBootstrap } from '@/features/tier/useEntitlement';
@@ -107,7 +108,9 @@ function ClerkProviderWithNavigate({ children }: { children: React.ReactNode }) 
       routerReplace={routerReplace}
     >
       <ClerkQueryCacheInvalidator />
-      {children}
+      {/* Patch 01: publish the live session so demo-safe pages can read it
+          via useOptionalSession() without calling Clerk hooks directly. */}
+      <ClerkSessionBridge>{children}</ClerkSessionBridge>
     </ClerkProvider>
   );
 }

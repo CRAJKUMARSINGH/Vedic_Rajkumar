@@ -30,7 +30,7 @@ import {
   Trash2,
   Clock,
 } from 'lucide-react';
-import { useSession } from '@clerk/react';
+import { useOptionalSession } from '@/hooks/useOptionalSession';
 
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -161,7 +161,7 @@ function ConsentSection() {
 
 function ExportSectionAuthed() {
   const supabase = useAuthenticatedSupabase();
-  const { session } = useSession();
+  const { session } = useOptionalSession();
   const isSignedIn = !!session?.user;
 
   const [exporting, setExporting] = useState(false);
@@ -286,7 +286,7 @@ const DELETE_CONFIRM_TEXT = 'DELETE';
 
 function DeleteSectionAuthed() {
   const supabase = useAuthenticatedSupabase();
-  const { session } = useSession();
+  const { session } = useOptionalSession();
   const isSignedIn = !!session?.user;
 
   const [ackUndo, setAckUndo] = useState(false);

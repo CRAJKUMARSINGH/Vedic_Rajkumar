@@ -13,7 +13,7 @@
 | ----------------------------- | ---------------------------------------- | ---------------------------------- | -------------------------------------------- |
 | **Reference Golden Corpus**   | **15 charts**                            | `npm run validate:accuracy`        | `tools/accuracy/golden/`                     |
 | **Accuracy Assertions**       | **155 assertions**                       | `npm run validate:accuracy`        | `src/tests/validation/accuracySuite.test.ts` |
-| **Total Test Suite**          | **2118 tests** across **128 test files** | `npm run test:run`                 | `src/tests/`                                 |
+| **Total Test Suite**          | **2146 tests** across **131 test files** | `npm run test:run`                 | `src/tests/`                                 |
 | **Ascendant Accuracy**        | **Sub-arcsecond (≤ 2″)**                 | `npm run test:accuracy:full`       | `src/tests/accuracy/corpusPhase1.test.ts`    |
 | **Wartime Timezone Offset**   | **+6:30 (1941–1945 India)**              | `npm run test:tz-wiring`           | `src/services/chartWithTimezone.ts`          |
 | **Ashta Koota Compatibility** | **36 points (all 8 factors)**            | `vitest run ashtakutaUnit.test.ts` | `src/tests/week6/ashtakutaUnit.test.ts`      |
