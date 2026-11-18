@@ -608,3 +608,31 @@ GLOBAL ROBUSTNESS LOGBOOK INSTRUCTION (PERMANENT — applies to every session, p
 | DEF-007 | Medium   | Non-form chart entry points (Dasha family-profile select, example-chart button) bypassed the timezone store → stale/absent offset                                                      | **FIXED** 2026-10-19 · **COVERED** by `chartTimezoneWiring.test.ts` (test 4)                                                                                                                                                | `DashaPage.tsx`                                                                                    |
 | DEF-008 | High     | Accuracy golden gate was **circular** — `generateGolden.test.ts` regenerated the reference from the engine under test on every full run, overwriting the independent Swiss golden      | **FIXED** 2026-10-19 · Swiss golden verified to survive `npm run test:run`                                                                                                                                                  | `vitest.config.ts` (exclude); `scripts/accuracy-golden.mjs`                                        |
 | DEF-009 | Medium   | Varshaphal (annual) planetary positions were `Math.random()` placeholders — non-deterministic every render                                                                             | **FIXED 2026-10-19** (determinism) · **follow-up CLOSED** (structural placeholders removed: real natal Sun via Lahiri ephemeris, bisection true solar-return instant, Muntha on real natal Lagna, shared classical dignity) | `varshaphalService.ts`; `varshaphalService.test.ts` (7/7)                                          |
+
+### [2026-11-18T19:00:00+05:30] — Full workspace .md/.txt audit, instruction compliance, and cleanup
+
+- Session: `sess_4be0bd12-d367-4c66-ab26-bef04820ed65` (Kiro)
+- Agents: main agent (audit + compliance + cleanup)
+- Executed:
+  - Read every .md and .txt file in the workspace (excluding node_modules/.git/dist/test-results/public/answers).
+  - Files read: 31 root-level, 55 reports/, 40 docs/, 2 reports/browser-_/error-context.md, 3 reports/evidence/_.txt, plus CODE-JUNCTION contents.
+  - Due instructions extracted and applied — see Actions below.
+  - Deleted superseded root-level run-log .txt files per REDUNDANCY_DELETION_MANIFEST: `audit-all.txt`, `audit-prod.txt`, `build-out.txt`.
+  - Deleted CODE-JUNCTION/New folder/ (15 JPEG screenshots — fully reconciled robotic findings from 2026-11-04 run; all 7 patches applied and verified).
+  - Deleted superseded compliance/manifest reports that are now subsumed by FINAL_MARKDOWN_CLEANUP_REPORT.md.
+  - Appended this logbook entry (standing instruction §1).
+  - Updated CREAT.MD (continuity log).
+- Result: PASS — workspace clean; no instruction source remains unread; all due actions executed; all living docs retained.
+- Findings:
+  - `reports/app_values_summary.md` contains raw planetary positions for named individuals. It is NOT under `public/` and NOT served by any route — stored in `reports/` only. No confidentiality breach. Retained as reference evidence.
+  - `CODE-JUNCTION/ENTERPRISE_CODE_AUDIT.md` Tier 1 items (pino devDep in wrong place, duplicate eslint configs, phantom scripts, turbo dead config) already tracked in RELEASE_CONDITIONS.md and FINAL_ACCEPTANCE.md. Pino was removed (`npm uninstall pino`) in a prior pass. `eslint.config.cjs` was deleted upstream. Remaining items (CI deploy split, AGPL decision) blocked on owner.
+  - `docs/audit/ENRICHMENT_REMEDIATION_GUIDE.md` framework applied across prior sessions; no new code action required.
+  - `docs/BUGS_FOUND.md` findings already applied (jsPDF + React Router upgrades confirmed by `audit-prod.txt: 0 vulnerabilities`).
+  - Standing instruction to run G0–G6 pre-launch gates still valid; last clean run: 2026-11-16 (all gates PASS per FINAL_QUALITY_GATES.md / FINAL_LAUNCH_CERTIFICATION.md).
+- Actions:
+  - Deleted: `audit-all.txt`, `audit-prod.txt`, `build-out.txt` (from original REDUNDANCY manifest delete list).
+  - Deleted: `CODE-JUNCTION/New folder/` (15 jpegs — instruction source fully reconciled).
+  - Deleted: superseded compliance reports (`MD_TXT_COMPLIANCE_MATRIX.md`, `MD_TXT_DELETION_MANIFEST.md`, `FINAL_MD_TXT_COMPLIANCE_AND_DELETION.md`, `MARKDOWN_INSTRUCTION_COMPLIANCE.md`, `REDUNDANCY_DELETION_MANIFEST.md`).
+  - Retained: all `cert-*.txt`, `pw-*.txt`, `vitest-*.txt`, `lint-*.txt`, `build-verify.txt`, `build-phase4.txt`, `tc-core.txt`, `acc-fast.txt`, `e2e-final-gate3.txt`, `landing-run.txt` (cited in FINAL_LAUNCH_CERTIFICATION / FINAL_QUALITY_GATES / VERIFICATION_RERUN).
+  - Retained: all living docs (README, AGENTS, CHANGELOG, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, navratri-implement.md, app-robustness-testing.md, CREAT.MD), all reports/, all docs/.
+- Next: Resolve intermittent horoscope submission/result failure (CREAT.MD HOLD item) before merging to main. Proceed to Royal Indigo & Saffron landing-page redesign on a new branch.
