@@ -39,6 +39,7 @@
       "auth": "jwt",
       "viewer": "owner|admin",
       "birth_data": "full",
+      "fetchable": false,
       "not_found_semantics": "404 for non-owner, indistinguishable from absent"
     }
   ],

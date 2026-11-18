@@ -17,12 +17,18 @@ export default defineConfig({
     // overwrite the independent Swiss Ephemeris golden and make the accuracy
     // gate circular. It is a manual tool — see its own header.
     exclude: [...configDefaults.exclude, '**/src/tests/accuracy/generateGolden.test.ts'],
-    // Heavy ephemeris tests (e.g. 30-day transit scans) exceed 10s on
-    // memory-constrained hosts; 60s prevents flaky timeouts without hiding
-    // real hangs (vitest still fails genuinely stuck tests).
-    testTimeout: 60000,
-    // Cap fork workers: the suite loads the WASM ephemeris per worker and the
-    // default (one per CPU core) exhausts memory on developer machines, causing
+    // Explicit floor timeout. Suites that walk `src/` or read the answer corpus
+    // (chartTimezoneWiring, schema) can spend a large portion of a short budget
+    // on I/O alone on a saturated filesystem — causing wall-clock failures
+    // rather than assertion failures (DEF-010). Files with longer needs carry
+    // their own per-test timeout; 20s is the universal floor.
+    testTimeout: 20000,
+    // Insurance for WASM `beforeAll` (wasmPathAccuracy loads Swiss Ephemeris;
+    // a saturated disk can blow a 10s hook budget). 30s prevents the same
+    // "passes on retry" pattern that DEF-010 exposed for `it()` bodies.
+    hookTimeout: 30000,
+    // Cap fork workers: the WASM ephemeris loads per worker and exhausts memory
+    // on developer machines with the default (one per CPU core), causing
     // "Timeout waiting for worker to respond" / ENOENT worker crashes.
     maxWorkers: 4,
   },
