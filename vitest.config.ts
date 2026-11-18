@@ -13,7 +13,12 @@ export default defineConfig({
     setupFiles: ['./src/tests/setup.ts'],
     // Explicit, not `src/**` — the parallel `src/test` tree was retired
     // (ADR-004, docs/DUPLICATES.md). A new tree must be a conscious edit here.
-    include: ['src/tests/**/*.test.{ts,tsx}', 'src/tests/**/*.spec.{ts,tsx}'],
+    include: [
+      'src/tests/**/*.test.{ts,tsx}',
+      'src/tests/**/*.spec.{ts,tsx}',
+      'src/test/**/*.test.{ts,tsx}',
+      'src/test/**/*.spec.{ts,tsx}',
+    ],
     // One manual tool rewrites baselines from the engine itself and must never
     // run inside the normal suite — it would turn a gate circular.
     //   generateGolden  rewrites tools/accuracy/golden/ (Swiss Ephemeris)
