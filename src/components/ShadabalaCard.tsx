@@ -5,6 +5,7 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { VerificationBadge } from '@/components/VerificationBadge';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { calculateShadbala, type ShadabalaResult } from '@/services/shadabalaService';
 import type { SupportedLanguage } from '@/services/multiLanguageService';
@@ -105,6 +106,7 @@ const ShadabalaCard = ({ planets, isDaytime = true, birthMonth = 1, lang }: Prop
         <CardTitle className={`flex items-center gap-2 ${isHi ? 'font-hindi' : ''}`}>
           <span className="text-2xl">⚖️</span>
           {isHi ? 'षड्बल' : 'Shadbala'}
+          <VerificationBadge topic="shadbala" lang={lang} className="ml-auto" />
         </CardTitle>
         <p className={`text-sm text-muted-foreground ${isHi ? 'font-hindi' : ''}`}>
           {isHi ? 'छह-गुना ग्रह शक्ति विश्लेषण • BPHS' : 'Six-fold planetary strength analysis • BPHS'}

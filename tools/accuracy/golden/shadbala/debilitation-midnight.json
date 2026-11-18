@@ -1,0 +1,188 @@
+{
+  "_meta": {
+    "caseId": "debilitation-midnight",
+    "label": "Every graha at its debilitation degree, in the weakest bhava, at midnight",
+    "unit": "virupas (shashtiamsas); 60 virupas = 1 rupa",
+    "school": "A",
+    "source": "tools/accuracy/shadbalaReference.mjs",
+    "note": "Regression baseline for the independent oracle. Not a published table.",
+    "generatedAt": "2026-10-26T02:31:36.025Z"
+  },
+  "inputs": {
+    "sky": {
+      "lon": {
+        "Sun": 190,
+        "Moon": 213,
+        "Mars": 118,
+        "Mercury": 345,
+        "Jupiter": 275,
+        "Venus": 177,
+        "Saturn": 20
+      },
+      "house": {
+        "Sun": 4,
+        "Moon": 10,
+        "Mars": 4,
+        "Mercury": 7,
+        "Jupiter": 7,
+        "Venus": 10,
+        "Saturn": 1
+      },
+      "speed": {
+        "Sun": 1,
+        "Moon": 1,
+        "Mars": 1,
+        "Mercury": 1,
+        "Jupiter": 1,
+        "Venus": 1,
+        "Saturn": 1
+      },
+      "declination": {
+        "Sun": 24,
+        "Moon": 24,
+        "Mars": 24,
+        "Mercury": 24,
+        "Jupiter": 24,
+        "Venus": 24,
+        "Saturn": 24
+      }
+    },
+    "ctx": {
+      "cusps": [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330],
+      "localHours": 0,
+      "isDay": false,
+      "third": 0,
+      "lords": {
+        "Sun": "Saturn",
+        "Moon": "Saturn",
+        "Mars": "Saturn",
+        "Mercury": "Saturn",
+        "Jupiter": "Saturn",
+        "Venus": "Saturn",
+        "Saturn": "Saturn"
+      }
+    },
+    "school": "A"
+  },
+  "shadbala": {
+    "Sun": {
+      "sthana": {
+        "uchcha": 0,
+        "kendradi": 60,
+        "ojhayugmarasyamsa": 15,
+        "drekkana": 0,
+        "saptavargaja": 157.5
+      },
+      "dig": 33.333333333333336,
+      "kala": 112.33333333333334,
+      "cheshta": 0,
+      "naisargika": 60,
+      "drik": 27.166666666666668,
+      "totalVirupas": 465.3333333333333,
+      "rupas": 7.7555555555555555,
+      "meetsMinimum": true
+    },
+    "Moon": {
+      "sthana": {
+        "uchcha": 0,
+        "kendradi": 60,
+        "ojhayugmarasyamsa": 15,
+        "drekkana": 0,
+        "saptavargaja": 52.5
+      },
+      "dig": 19,
+      "kala": 172.33333333333334,
+      "cheshta": 0,
+      "naisargika": 51.43,
+      "drik": 4.583333333333333,
+      "totalVirupas": 374.8466666666667,
+      "rupas": 6.247444444444445,
+      "meetsMinimum": true
+    },
+    "Mars": {
+      "sthana": {
+        "uchcha": 0,
+        "kendradi": 60,
+        "ojhayugmarasyamsa": 0,
+        "drekkana": 0,
+        "saptavargaja": 315
+      },
+      "dig": 9.333333333333334,
+      "kala": 112.33333333333334,
+      "cheshta": 0,
+      "naisargika": 17.14,
+      "drik": -1,
+      "totalVirupas": 512.8066666666666,
+      "rupas": 8.546777777777777,
+      "meetsMinimum": true
+    },
+    "Mercury": {
+      "sthana": {
+        "uchcha": 0,
+        "kendradi": 60,
+        "ojhayugmarasyamsa": 0,
+        "drekkana": 15,
+        "saptavargaja": 52.5
+      },
+      "dig": 55,
+      "kala": 7.666666666666667,
+      "cheshta": 0,
+      "naisargika": 25.71,
+      "drik": -3.916666666666668,
+      "totalVirupas": 211.96,
+      "rupas": 3.5326666666666666,
+      "meetsMinimum": false
+    },
+    "Jupiter": {
+      "sthana": {
+        "uchcha": 0,
+        "kendradi": 60,
+        "ojhayugmarasyamsa": 0,
+        "drekkana": 15,
+        "saptavargaja": 105
+      },
+      "dig": 31.666666666666668,
+      "kala": 127.66666666666667,
+      "cheshta": 0,
+      "naisargika": 34.29,
+      "drik": 9.75,
+      "totalVirupas": 383.37333333333333,
+      "rupas": 6.389555555555556,
+      "meetsMinimum": false
+    },
+    "Venus": {
+      "sthana": {
+        "uchcha": 0,
+        "kendradi": 60,
+        "ojhayugmarasyamsa": 15,
+        "drekkana": 15,
+        "saptavargaja": 52.5
+      },
+      "dig": 31,
+      "kala": 67.66666666666667,
+      "cheshta": 0,
+      "naisargika": 42.86,
+      "drik": 2.083333333333333,
+      "totalVirupas": 286.11,
+      "rupas": 4.7685,
+      "meetsMinimum": false
+    },
+    "Saturn": {
+      "sthana": {
+        "uchcha": 0,
+        "kendradi": 60,
+        "ojhayugmarasyamsa": 15,
+        "drekkana": 0,
+        "saptavargaja": 13.125
+      },
+      "dig": 6.666666666666667,
+      "kala": 52.333333333333336,
+      "cheshta": 0,
+      "naisargika": 8.57,
+      "drik": 5.500000000000001,
+      "totalVirupas": 161.195,
+      "rupas": 2.686583333333333,
+      "meetsMinimum": false
+    }
+  }
+}

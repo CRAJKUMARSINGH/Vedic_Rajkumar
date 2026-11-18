@@ -20,6 +20,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # commitlint needs the commits on both sides of the range, so the
+          # default depth-1 clone is not enough.
+          fetch-depth: 0
 
       - name: Setup Node ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -29,6 +33,16 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Lint commit messages (pull request range)
+        if: github.event_name == 'pull_request'
+        run: npx commitlint --from "${{ github.event.pull_request.base.sha }}" --to "${{ github.event.pull_request.head.sha }}" --verbose
+
+      - name: Lint commit messages (pushed range)
+        # Skipped when `before` is the zero SHA (first push of a branch), which
+        # has no range to walk.
+        if: github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
+        run: npx commitlint --from "${{ github.event.before }}" --to "${{ github.event.after }}" --verbose
 
       - name: Quality gates
         # docs:verify runs the full Vitest suite (pretty + JSON reporters) and
