@@ -175,13 +175,21 @@ function ExportSectionAuthed() {
     try {
       await exportAndDownloadUserData(supabase);
       setSuccess({
-        exportedAt: new Date().toISOString(),
-        userId: session?.user?.id ?? '',
-        userProfile: true,
+        exportMetadata: {
+          generatedAt: new Date().toISOString(),
+          formatVersion: '1.0',
+          complianceStandard: 'GDPR/DPDP',
+          dataController: 'Vedic Rajkumar',
+          retentionPolicy: 'On request',
+          checksum: '',
+        },
+        user: { id: session?.user?.id ?? '', profile: null },
         savedReadings: [],
         prashnaSessions: [],
         horoscopeAnalyses: [],
         transitReadings: [],
+        consentHistory: [],
+        auditTrail: [],
       });
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Export failed. Please try again later.';
