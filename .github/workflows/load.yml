@@ -17,7 +17,7 @@ jobs:
         env:
           EDGE_URL: ${{ vars.PREVIEW_EDGE_URL }}
           CRON_TOKEN: ${{ secrets.CRON_TOKEN }}
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with: { name: k6-smoke, path: reports/load }
       - name: Note in the logbook on failure
