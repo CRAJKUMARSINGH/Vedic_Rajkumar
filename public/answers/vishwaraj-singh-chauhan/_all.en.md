@@ -1,7 +1,26 @@
 # Vishwaraj Singh Chauhan — Direct Answer
-<!-- card_hash: 24b850d7456c8651 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: c3ee6694eda3c55f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (40%) (average, 40%) · New house construction: good (43%) (good, 43%) · Career: average (42%) (average, 42%) · Marriage: caution (49%) (caution, 49%) · Finance: good (43%) (good, 43%)
+
+**yes — but clear the gate first — the money decision. the construction: yes — but clear the gate first.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Sun in the 4th (Virgo).
+- Mars in the 2nd (Cancer) — debilitated, the promise needs repair.
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the money decision, then the construction, then the health regimen, then the job change. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the construction, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

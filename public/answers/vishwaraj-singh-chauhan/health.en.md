@@ -1,7 +1,22 @@
 # Vishwaraj Singh Chauhan — Direct Answer
-<!-- card_hash: d0ce27cd28d11014 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 80fac06fef064bec | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (40%) (average, 40%)
+
+**yes, conditionally — the health regimen.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Moon in the 1st (Taurus) — exalted, a clean promise.
+- Moon in the 1st (Taurus) — exalted, a clean promise.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

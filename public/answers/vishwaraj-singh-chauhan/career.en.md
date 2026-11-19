@@ -1,7 +1,22 @@
 # Vishwaraj Singh Chauhan — Direct Answer
-<!-- card_hash: 68a6bcb4d86a9d3a | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 9c48b08121cf8982 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (42%) (average, 42%)
+
+**yes, conditionally — the job change.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mars in the 2nd (Cancer) — debilitated, the promise needs repair.
+- Moon in the 1st (Taurus) — exalted, a clean promise.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

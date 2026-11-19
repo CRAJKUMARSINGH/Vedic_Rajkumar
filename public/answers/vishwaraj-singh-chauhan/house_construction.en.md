@@ -1,7 +1,22 @@
 # Vishwaraj Singh Chauhan — Direct Answer
-<!-- card_hash: 728944dbadac8227 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 672c73fdf9e2ae7c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: good (43%) (good, 43%)
+
+**yes — but clear the gate first — the construction.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 6th (Libra) — in its own sign, self-contained but slow to move.
+- Sun in the 4th (Virgo).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
