@@ -1,7 +1,22 @@
 # Rajkumar — Direct Answer
-<!-- card_hash: e7f011cf5ff2f25a | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 5c084ae4937bc98f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (50%) (average, 50%)
+
+**yes, conditionally — the job change.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 2nd (Virgo) — debilitated, the promise needs repair.
+- Sun in the 2nd (Leo) — in its own sign, self-contained but slow to move.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

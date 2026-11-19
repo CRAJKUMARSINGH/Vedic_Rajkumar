@@ -1,7 +1,22 @@
 # Rajkumar — Direct Answer
-<!-- card_hash: 810aa778b71e8f85 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 00bb3365eaad007b | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: caution (53%) (caution, 53%)
+
+**not yet — fix the base first — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 6th (Capricorn), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.
+- Mercury in the 2nd (Virgo), retrograde — the result arrives in re-runs — exalted, a clean promise.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

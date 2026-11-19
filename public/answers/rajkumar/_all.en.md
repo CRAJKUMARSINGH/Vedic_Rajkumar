@@ -1,7 +1,26 @@
 # Rajkumar — Direct Answer
-<!-- card_hash: 1b1219a88e0e39b0 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 76f1072d4b7a652a | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (51%) (average, 51%) · New house construction: average (60%) (average, 60%) · Career: average (50%) (average, 50%) · Marriage: caution (53%) (caution, 53%) · Finance: average (52%) (average, 52%)
+
+**yes, conditionally — the job change. the construction: yes, conditionally.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 2nd (Virgo) — debilitated, the promise needs repair.
+- Sun in the 2nd (Leo) — in its own sign, self-contained but slow to move.
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the job change, then the construction, then the health regimen, then the money decision. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the construction, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
