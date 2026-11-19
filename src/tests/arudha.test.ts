@@ -26,7 +26,9 @@ function planetAt(name: string, rashiIndex: number): JaiminiPlanet {
  */
 function expectedPada(target: number, lordSign: number): number {
   const dist = ((lordSign - target + 12) % 12) || 12; // inclusive distance (1..12)
-  if (dist === 1 || dist === 7) return (target + 9) % 12; // 10th from source
+  // BPHS 29.4-5: dist 1 → 10th from source (+9); dist 7 → 4th from source (+3)
+  if (dist === 1) return (target + 9) % 12;
+  if (dist === 7) return (target + 3) % 12;
   return (lordSign + dist - 1) % 12;
 }
 

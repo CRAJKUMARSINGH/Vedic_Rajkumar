@@ -108,3 +108,11 @@ All return the corrected pada value.
 1. **Owner decision required:** dist===7 → 10th or 4th from source (BPHS 29.5 variant).
 2. **Mutation testing:** adding a dedicated test for each exception variant is recommended.
 3. **Alternative co-lord conventions:** Scorpio/Aquarius co-lord merging not implemented.
+
+
+## Resolution (v2.txt §0, BPHS 29.4-5)
+
+Lord distance 1 (same sign) → 10th from source = source+9.
+Lord distance 7 → raw pada = source+6 → 10th from raw = source+3 = 4th.
+Code now uses EXCEPTION_OFFSET {1:9, 7:3}; test matrix updated; 148/148 PASS.
+Competing "10th for both" convention rejected per literal BPHS reading.

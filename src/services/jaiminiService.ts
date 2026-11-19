@@ -310,8 +310,12 @@ export function calculateArudhaPada(
   // Note: "distance" here is the inclusive sign-count lord→source; the
   // exception is tested on that distance, not on the final unadjusted Pada
   // (the old test on the final value was unreachable in both cases).
+  // BPHS 29.4-5: pada in source → 10th from it; pada in 7th → 4th from source.
+  // Lord at distance 1 (same sign) → raw pada = source → +9 (10th).
+  // Lord at distance 7 → raw pada = source+6 → 10th from raw = source+3 (4th).
+  const EXCEPTION_OFFSET: Record<1 | 7, number> = { 1: 9, 7: 3 };
   if (dist === 1 || dist === 7) {
-    const padaRashi = (targetRashi + 9) % 12;
+    const padaRashi = (targetRashi + EXCEPTION_OFFSET[dist as 1 | 7]) % 12;
     return {
       rashiIndex: padaRashi,
       rashiName: RASHI_NAMES[padaRashi],
