@@ -41,7 +41,7 @@ describe('buildChartFacts — projection validation', () => {
     expect(buildChartFacts(null)).toBeNull();
     expect(buildChartFacts(baseData({ planetaryPositions: null }))).toBeNull();
     expect(buildChartFacts(baseData({
-      planetaryPositions: { planets: [] } as ChartData['planetaryPositions'],
+      planetaryPositions: { planets: [] } as unknown as ChartData['planetaryPositions'],
     }))).toBeNull();
   });
 

@@ -134,3 +134,8 @@ export function houseLord(ascSign: number | null, house: number): Planet | null 
 export function placementsIn(facts: ChartFacts, house: number): Placement[] {
   return facts.placements.filter(p => p.house === house);
 }
+
+/** First placement for a planet, or undefined. */
+export function placementOf(facts: ChartFacts, planet: Planet): Placement | undefined {
+  return facts.placements.find(p => p.planet === planet);
+}
