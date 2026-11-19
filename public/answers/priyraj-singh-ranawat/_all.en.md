@@ -1,7 +1,26 @@
 # Priyraj Singh Ranawat — Direct Answer
-<!-- card_hash: 34db81f4f5ad4adf | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: cb0e68df08c0a143 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (48%) (average, 48%) · New house construction: average (40%) (average, 40%) · Career: average (40%) (average, 40%) · Marriage: average (38%) (average, 38%) · Finance: average (42%) (average, 42%)
+
+**yes, conditionally — the construction. the money decision: yes, conditionally.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mars in the 12th (Virgo).
+- Sun in the 4th (Capricorn).
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the construction, then the money decision, then the job change, then the health regimen, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the money decision, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

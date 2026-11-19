@@ -1,7 +1,22 @@
 # Priyraj Singh Ranawat — Direct Answer
-<!-- card_hash: 67979f61a56a56b9 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 514d96a300b58e33 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (42%) (average, 42%)
+
+**yes, conditionally — the money decision.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 6th (Pisces).
+- Mars in the 12th (Virgo).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

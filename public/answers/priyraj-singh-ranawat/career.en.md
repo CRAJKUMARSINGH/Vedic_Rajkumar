@@ -1,7 +1,22 @@
 # Priyraj Singh Ranawat — Direct Answer
-<!-- card_hash: 31c6b79f64132e99 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: e4407724fc1a6660 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (40%) (average, 40%)
+
+**yes, conditionally — the job change.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 4th (Capricorn).
+- Saturn in the 6th (Pisces).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

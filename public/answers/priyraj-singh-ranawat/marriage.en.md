@@ -1,7 +1,22 @@
 # Priyraj Singh Ranawat — Direct Answer
-<!-- card_hash: 65c0b7063f6a4dc4 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 9d5bb93291cb6190 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (38%) (average, 38%)
+
+**yes, conditionally — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Moon in the 1st (Virgo).
+- Saturn in the 6th (Pisces).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

@@ -77,6 +77,80 @@
       ]
     }
   ],
+  "composed": {
+    "verdict_line": {
+      "en": "yes, conditionally — the job change.",
+      "hi": "हाँ, शर्त के साथ — नौकरी परिवर्तन।"
+    },
+    "depth": "standard",
+    "ranked": [
+      {
+        "topic": "career",
+        "decision": {
+          "en": "yes, conditionally",
+          "hi": "हाँ, शर्त के साथ"
+        }
+      }
+    ],
+    "sections": [
+      {
+        "id": "why",
+        "title": {
+          "en": "Why",
+          "hi": "क्यों"
+        },
+        "body": {
+          "en": "The call rests on these placements, not on a general stanza:",
+          "hi": "निर्णय सामान्य श्लोक पर नहीं, इन स्थितियों पर टिका है:"
+        },
+        "citations": [
+          {
+            "en": "Venus in the 4th (Capricorn).",
+            "hi": "शुक्र चतुर्थ भाव (मकर) में।"
+          },
+          {
+            "en": "Saturn in the 6th (Pisces).",
+            "hi": "शनि षष्ठ भाव (मीन) में।"
+          }
+        ]
+      }
+    ],
+    "sequence": null,
+    "app_links": [
+      {
+        "label": {
+          "en": "Transit (gochar) overlay",
+          "hi": "गोचर परत"
+        },
+        "path": "/transits"
+      },
+      {
+        "label": {
+          "en": "Muhurat windows",
+          "hi": "मुहूर्त"
+        },
+        "path": "/muhurat"
+      },
+      {
+        "label": {
+          "en": "Kundli Milan",
+          "hi": "कुंडली मिलान"
+        },
+        "path": "/matchmaking"
+      },
+      {
+        "label": {
+          "en": "Dasha timeline",
+          "hi": "दशा-क्रम"
+        },
+        "path": "/dasha"
+      }
+    ],
+    "closing_question": {
+      "en": "Say the one thing you want tightened and I will take it alone.",
+      "hi": "जो एक बात पक्की करनी है, बताइए — अकेले लेंगे।"
+    }
+  },
   "provenance": {
     "engine_version": "0.1.0",
     "ayanamsa": "Lahiri (Chitrapaksha)",
@@ -86,12 +160,17 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "7582ae63ef0373e0",
-    "card_hash": "31c6b79f64132e99",
+    "card_hash": "e4407724fc1a6660",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",
       "src/services/ashtakavargaService.ts",
       "src/services/chartBuilderService.ts",
+      "src/services/answerCard/chartFacts.ts",
+      "src/services/answerCard/answerComposer.ts",
+      "src/services/answerCard/depth.ts",
+      "src/services/answerCard/sequencing.ts",
+      "src/services/answerCard/remedyPlan.ts",
       "src/services/answerCard/chartAdapter.ts"
     ]
   }

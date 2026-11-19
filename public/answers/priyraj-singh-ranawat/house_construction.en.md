@@ -1,7 +1,22 @@
 # Priyraj Singh Ranawat — Direct Answer
-<!-- card_hash: 8785fb2daf8a3c54 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: a5c4a92fc140db57 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (40%) (average, 40%)
+
+**yes, conditionally — the construction.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mars in the 12th (Virgo).
+- Sun in the 4th (Capricorn).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
