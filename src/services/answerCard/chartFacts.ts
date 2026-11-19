@@ -117,3 +117,20 @@ export function buildChartFacts(data: ChartData | null | undefined): ChartFacts 
 
   return { ascSign, placements, houses };
 }
+
+/** Rashi lords, 0..11 (Aries..Pisces) — whole-sign house system. */
+export const SIGN_LORD: readonly (Planet | null)[] = [
+  'Mars', 'Venus', 'Mercury', 'Moon', 'Sun', 'Mercury',
+  'Venus', 'Mars', 'Jupiter', 'Saturn', 'Saturn', 'Jupiter',
+] as const;
+
+/** Lord of the house counted from ascSign (whole-sign). Null if asc unknown. */
+export function houseLord(ascSign: number | null, house: number): Planet | null {
+  if (ascSign === null || !isInt(house, 1, 12)) return null;
+  return SIGN_LORD[(ascSign + house - 1) % 12];
+}
+
+/** Planets placed in the given whole-sign house. */
+export function placementsIn(facts: ChartFacts, house: number): Placement[] {
+  return facts.placements.filter(p => p.house === house);
+}
