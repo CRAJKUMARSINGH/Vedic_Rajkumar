@@ -1,7 +1,22 @@
 # Premlata Jain — Direct Answer
-<!-- card_hash: 5e2082ad53cceeb9 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 81ef7d5e54ddbd1c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (49%) (average, 49%)
+
+**yes, conditionally — the construction.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Jupiter in the 7th (Aquarius).
+- Rahu in the 4th (Scorpio), retrograde — the result arrives in re-runs.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

@@ -1,7 +1,22 @@
 # Premlata Jain — Direct Answer
-<!-- card_hash: 665d7bceb827af55 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: b6b88aa94632f89d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (63%) (average, 63%)
+
+**yes, conditionally — the health regimen.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mercury in the 3rd (Libra).
+- Moon in the 1st (Leo).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

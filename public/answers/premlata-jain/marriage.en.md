@@ -1,7 +1,22 @@
 # Premlata Jain — Direct Answer
-<!-- card_hash: 2c1f06cbe152d108 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 47998323e7a8aa05 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (54%) (average, 54%)
+
+**yes, conditionally — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Jupiter in the 7th (Aquarius).
+- Jupiter in the 7th (Aquarius).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

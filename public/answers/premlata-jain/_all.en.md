@@ -1,7 +1,26 @@
 # Premlata Jain — Direct Answer
-<!-- card_hash: 670b82252c984be2 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: a9f64cc1969afb4b | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (63%) (average, 63%) · New house construction: average (49%) (average, 49%) · Career: average (56%) (average, 56%) · Marriage: average (54%) (average, 54%) · Finance: average (56%) (average, 56%)
+
+**yes, conditionally — the construction. the marriage step: yes, conditionally.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Jupiter in the 7th (Aquarius).
+- Rahu in the 4th (Scorpio), retrograde — the result arrives in re-runs.
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the construction, then the marriage step, then the money decision, then the job change, then the health regimen. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the marriage step, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

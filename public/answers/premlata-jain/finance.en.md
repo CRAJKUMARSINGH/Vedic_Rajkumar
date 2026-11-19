@@ -1,7 +1,22 @@
 # Premlata Jain — Direct Answer
-<!-- card_hash: c7fccc958363e99f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 1ace7c4d8cf3ccd1 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (56%) (average, 56%)
+
+**yes, conditionally — the money decision.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 3rd (Libra) — in its own sign, self-contained but slow to move.
+- Moon in the 1st (Leo).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
