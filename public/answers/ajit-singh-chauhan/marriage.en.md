@@ -1,7 +1,22 @@
 # Ajit Singh Chauhan — Direct Answer
-<!-- card_hash: a230f0b04e49a110 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: a277b30ce9332124 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: good (37%) (good, 37%)
+
+**yes — but clear the gate first — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 10th (Cancer).
+- Jupiter in the 7th (Aries), retrograde — the result arrives in re-runs.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

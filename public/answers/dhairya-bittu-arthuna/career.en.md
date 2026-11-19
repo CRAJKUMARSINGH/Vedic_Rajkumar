@@ -1,7 +1,22 @@
 # Dhairya Bittu Arthuna — Direct Answer
-<!-- card_hash: b041fae8e6d73ccb | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 7749248808c656cd | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (47%) (average, 47%)
+
+**yes, conditionally — the job change.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 1st (Capricorn) — in its own sign, self-contained but slow to move.
+- Mars in the 6th (Gemini).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

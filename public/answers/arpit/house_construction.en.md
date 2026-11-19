@@ -1,7 +1,22 @@
 # Arpit — Direct Answer
-<!-- card_hash: 9fc5e9814b3d44b4 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: c415d2eb1a2894a6 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (56%) (average, 56%)
+
+**yes, conditionally — the construction.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 2nd (Taurus), retrograde — the result arrives in re-runs.
+- Mars in the 9th (Sagittarius).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

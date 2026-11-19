@@ -1,7 +1,26 @@
 # Dhairya Bittu Arthuna — Direct Answer
-<!-- card_hash: 580289bf8affc6ec | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: fc5b9683262511bc | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (39%) (average, 39%) · New house construction: average (46%) (average, 46%) · Career: average (47%) (average, 47%) · Marriage: average (46%) (average, 46%) · Finance: average (48%) (average, 48%)
+
+**yes, conditionally — the construction. the money decision: yes, conditionally.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Moon in the 1st (Sagittarius).
+- Sun in the 4th (Aries) — exalted, a clean promise.
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the construction, then the money decision, then the job change, then the health regimen, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the money decision, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

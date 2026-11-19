@@ -1,7 +1,22 @@
 # Arpit — Direct Answer
-<!-- card_hash: 1fba2f0a6da6a201 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 3d14ddc6d1fe534c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (46%) (average, 46%)
+
+**yes, conditionally — the job change.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Moon in the 1st (Pisces).
+- Venus in the 5th (Leo).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

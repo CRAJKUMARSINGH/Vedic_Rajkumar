@@ -1,7 +1,22 @@
 # Ajit Singh Chauhan — Direct Answer
-<!-- card_hash: 724e2f5308e92c88 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 7081e2472a5befac | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: good (44%) (good, 44%)
+
+**yes — but clear the gate first — the health regimen.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Sun in the 12th (Leo) — in its own sign, self-contained but slow to move.
+- Moon in the 1st (Virgo).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

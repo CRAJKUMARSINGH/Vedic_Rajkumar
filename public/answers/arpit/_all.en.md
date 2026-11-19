@@ -1,7 +1,26 @@
 # Arpit — Direct Answer
-<!-- card_hash: 91ccd647552854f1 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: dc7e34ea892f870a | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (38%) (average, 38%) · New house construction: average (56%) (average, 56%) · Career: average (46%) (average, 46%) · Marriage: average (48%) (average, 48%) · Finance: average (58%) (average, 58%)
+
+**yes, conditionally — the job change. the health regimen: yes, conditionally.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Moon in the 1st (Pisces).
+- Venus in the 5th (Leo).
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the job change, then the health regimen, then the construction, then the money decision, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the health regimen, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

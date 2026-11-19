@@ -1,7 +1,22 @@
 # Ajit Singh Chauhan — Direct Answer
-<!-- card_hash: 9caea2e8e1f856a4 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 9adfca38bdc8ffa5 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (39%) (average, 39%)
+
+**yes, conditionally — the money decision.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mercury in the 1st (Virgo) — exalted, a clean promise.
+- Rahu in the 2nd (Scorpio), retrograde — the result arrives in re-runs.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

@@ -70,6 +70,80 @@
       ]
     }
   ],
+  "composed": {
+    "verdict_line": {
+      "en": "yes, conditionally — the construction.",
+      "hi": "हाँ, शर्त के साथ — निर्माण कार्य।"
+    },
+    "depth": "standard",
+    "ranked": [
+      {
+        "topic": "house_construction",
+        "decision": {
+          "en": "yes, conditionally",
+          "hi": "हाँ, शर्त के साथ"
+        }
+      }
+    ],
+    "sections": [
+      {
+        "id": "why",
+        "title": {
+          "en": "Why",
+          "hi": "क्यों"
+        },
+        "body": {
+          "en": "The call rests on these placements, not on a general stanza:",
+          "hi": "निर्णय सामान्य श्लोक पर नहीं, इन स्थितियों पर टिका है:"
+        },
+        "citations": [
+          {
+            "en": "Moon in the 1st (Sagittarius).",
+            "hi": "चंद्र प्रथम भाव (धनु) में।"
+          },
+          {
+            "en": "Sun in the 4th (Aries) — exalted, a clean promise.",
+            "hi": "सूर्य चतुर्थ भाव (मेष) में — उच्च का, स्पष्ट प्रतिज्ञा।"
+          }
+        ]
+      }
+    ],
+    "sequence": null,
+    "app_links": [
+      {
+        "label": {
+          "en": "Transit (gochar) overlay",
+          "hi": "गोचर परत"
+        },
+        "path": "/transits"
+      },
+      {
+        "label": {
+          "en": "Muhurat windows",
+          "hi": "मुहूर्त"
+        },
+        "path": "/muhurat"
+      },
+      {
+        "label": {
+          "en": "Kundli Milan",
+          "hi": "कुंडली मिलान"
+        },
+        "path": "/matchmaking"
+      },
+      {
+        "label": {
+          "en": "Dasha timeline",
+          "hi": "दशा-क्रम"
+        },
+        "path": "/dasha"
+      }
+    ],
+    "closing_question": {
+      "en": "Say the one thing you want tightened and I will take it alone.",
+      "hi": "जो एक बात पक्की करनी है, बताइए — अकेले लेंगे।"
+    }
+  },
   "provenance": {
     "engine_version": "0.1.0",
     "ayanamsa": "Lahiri (Chitrapaksha)",
@@ -79,12 +153,17 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "298c7ebe027e9553",
-    "card_hash": "b88654a95f819e9b",
+    "card_hash": "25aee218d2ae4ad8",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",
       "src/services/ashtakavargaService.ts",
       "src/services/chartBuilderService.ts",
+      "src/services/answerCard/chartFacts.ts",
+      "src/services/answerCard/answerComposer.ts",
+      "src/services/answerCard/depth.ts",
+      "src/services/answerCard/sequencing.ts",
+      "src/services/answerCard/remedyPlan.ts",
       "src/services/answerCard/chartAdapter.ts"
     ]
   }

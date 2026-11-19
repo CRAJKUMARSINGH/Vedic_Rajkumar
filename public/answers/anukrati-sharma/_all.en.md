@@ -1,7 +1,26 @@
 # Anukrati Sharma — Direct Answer
-<!-- card_hash: 8bbf3881289ded13 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 29c1eb8961bf0af5 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (50%) (average, 50%) · New house construction: average (48%) (average, 48%) · Career: average (44%) (average, 44%) · Marriage: average (47%) (average, 47%) · Finance: average (49%) (average, 49%)
+
+**yes, conditionally — the job change. the health regimen: yes, conditionally.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 6th (Taurus), retrograde — the result arrives in re-runs.
+- Venus in the 1st (Sagittarius).
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the job change, then the health regimen, then the money decision, then the construction, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the health regimen, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

@@ -1,7 +1,22 @@
 # Anukrati Sharma — Direct Answer
-<!-- card_hash: d651231680bdfaaa | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 8de75e6516921095 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (44%) (average, 44%)
+
+**yes, conditionally — the job change.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 6th (Taurus), retrograde — the result arrives in re-runs.
+- Venus in the 1st (Sagittarius).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

@@ -1,7 +1,22 @@
 # Ajit Singh Chauhan — Direct Answer
-<!-- card_hash: e7c99fe06687b8bf | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 12d771b061419cc8 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (52%) (average, 52%)
+
+**yes, conditionally — the job change.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 11th (Leo), retrograde — the result arrives in re-runs.
+- Saturn in the 10th (Cancer).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

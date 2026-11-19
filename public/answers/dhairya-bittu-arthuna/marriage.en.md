@@ -1,7 +1,22 @@
 # Dhairya Bittu Arthuna — Direct Answer
-<!-- card_hash: 420547f14616e1a9 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: f44c435d696f527c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (46%) (average, 46%)
+
+**yes, conditionally — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 5th (Aries).
+- Venus in the 5th (Aries).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

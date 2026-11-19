@@ -1,7 +1,22 @@
 # Arpit — Direct Answer
-<!-- card_hash: 328dfecff2f05a6c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 1d321a06ea86a190 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (58%) (average, 58%)
+
+**yes, conditionally — the money decision.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mars in the 9th (Sagittarius).
+- Saturn in the 2nd (Taurus), retrograde — the result arrives in re-runs.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

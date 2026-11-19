@@ -1,7 +1,22 @@
 # Dhairya Bittu Arthuna — Direct Answer
-<!-- card_hash: f4d4fc0207f2d64f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 170ddae118327fbb | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (39%) (average, 39%)
+
+**yes, conditionally — the health regimen.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mars in the 6th (Gemini).
+- Moon in the 1st (Sagittarius).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

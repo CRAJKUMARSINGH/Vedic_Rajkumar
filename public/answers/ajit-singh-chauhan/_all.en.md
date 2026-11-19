@@ -1,7 +1,26 @@
 # Ajit Singh Chauhan — Direct Answer
-<!-- card_hash: 5a701ef6d30c6fcf | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: b17add43d663aa98 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: good (44%) (good, 44%) · New house construction: average (40%) (average, 40%) · Career: average (52%) (average, 52%) · Marriage: good (37%) (good, 37%) · Finance: average (39%) (average, 39%)
+
+**yes, conditionally — the construction. the health regimen: yes — but clear the gate first.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mars in the 9th (Taurus).
+- Mercury in the 1st (Virgo) — exalted, a clean promise.
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the health regimen, then the marriage step, then the construction, then the money decision, then the job change. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the health regimen, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

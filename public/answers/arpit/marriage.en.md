@@ -1,7 +1,22 @@
 # Arpit — Direct Answer
-<!-- card_hash: 4ae7db6bcbd2b592 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 230f9723086b1704 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (48%) (average, 48%)
+
+**yes, conditionally — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mars in the 9th (Sagittarius).
+- Mercury in the 7th (Libra), retrograde — the result arrives in re-runs.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
