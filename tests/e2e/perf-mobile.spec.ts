@@ -17,7 +17,9 @@ test('kundli compute does not block the main thread', async ({ page, browserName
   const cdp = await page.context().newCDPSession(page);
   await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
 
-  await page.goto('/');
+  // '/' is the marketing landing (LandingPageV3) — no tier badge. The app
+  // shell with TierBadge lives at '/app'.
+  await page.goto('/app');
   await page.getByTestId('tier-badge').first().waitFor();
 
   const longTasks = await page.evaluate(async () => {

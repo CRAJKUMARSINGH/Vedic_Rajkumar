@@ -106,7 +106,9 @@ test.describe('Advanced persona — edge dates', () => {
     await page.goto('/horoscope', { waitUntil: 'domcontentloaded', timeout: 60_000 });
     await expect(page.locator('#dob')).toBeVisible({ timeout: 30_000 });
 
-    await page.locator('#dob').fill('01/01/1899');
+    // 1899 is INSIDE the supported range (min 1800-01-01 — pre-1905 LMT
+    // births are supported). Use 1799 to exercise the out-of-range path.
+    await page.locator('#dob').fill('01/01/1799');
 
     await expect(page.getByText(/outside (the )?supported range|समर्थित सीमा/i)).toBeVisible({ timeout: 10_000 });
 
