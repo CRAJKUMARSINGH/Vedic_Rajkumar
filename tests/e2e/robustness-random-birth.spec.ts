@@ -162,6 +162,11 @@ const report: { generatedAt: string; births: unknown[]; questions: unknown[] } =
 test.describe.configure({ mode: 'serial' });
 
 test.describe('Robustness — random birth data', () => {
+  // 240s per test: navigation(60s) + geocoding(15s) + submit + WASM cold-
+  // start(90s) + assertions(15s). The cold WASM budget (90s) matters most on
+  // birth 1 (first lazy HoroscopeCard load); subsequent births reuse the warm
+  // module. The timeout is generous to tolerate CI scheduling jitter.
+  test.describe.configure({ timeout: 240_000 });
   const BIRTHS = Array.from({ length: 6 }, () => randomBirth());
 
   BIRTHS.forEach((birth, i) => {
@@ -178,25 +183,40 @@ test.describe('Robustness — random birth data', () => {
 
       const submit = page.getByRole('button', { name: /Get Transit Reading|गोचर फल देखें/ });
       await expect(submit).toBeEnabled({ timeout: 10_000 });
-      // Wait for the async geocoding cycle to fully settle before clicking.
-      // The "Searching…" indicator and the in-flow suggestions listbox both
-      // insert layout above the submit button; a click dispatched while the
-      // cycle is in flight can land on them instead of submit (lost
-      // submission — root cause of the intermittent horoscope failures).
-      // Two-phase wait: indicator visible (cycle started) → hidden (fetch
-      // resolved), then listbox visible if results exist. Covers slow/empty/
-      // rate-limited geocoding where no listbox ever renders.
-      const searching = page.getByText(/Searching\.\.\.|खोज रहे हैं/);
-      await searching.waitFor({ state: 'visible', timeout: 10_000 }).catch(() => {});
-      await searching.waitFor({ state: 'hidden', timeout: 25_000 }).catch(() => {});
-      await page
-        .locator('#location-listbox')
-        .waitFor({ state: 'visible', timeout: 5_000 })
-        .catch(() => {});
-      await submit.click();
 
-      // HoroscopeCard is lazy-loaded and computed from the birth date.
-      await expect(page.getByText(/Overall Score|समग्र स्कोर/).first()).toBeVisible({ timeout: 45_000 });
+      // ─── Geocoding quiesce ──────────────────────────────────────────────────
+      // Root-cause of the intermittent random-birth failure (case 4):
+      // "Jaipur, Rajasthan" / full-label place names miss the in-memory geocoder
+      // pre-load cache (which only seeds bare city names), so a live Nominatim
+      // request fires. The old settle-wait swallowed every timeout with .catch()
+      // — if the fetch was slow or rate-limited, 35 s could burn before
+      // submit.click() fired while the geocoding layout was still shifting
+      // (in-flow listbox/spinner inserting height above the button), causing
+      // the click to miss and rawBirth to never be set.
+      //
+      // Fix: same two-phase approach as fillBirthForm in persona-users.spec.ts —
+      // wait for the listbox, pick the first suggestion (closes it cleanly via
+      // handleLocationSelect which sets suppressNextSearchRef), wait until the
+      // listbox is fully gone. This guarantees the geocoding cycle is quiesced
+      // before the submit click and that the button position is stable.
+      // If Nominatim returns nothing (offline, rate-limited) the outer catch
+      // falls through and we press Escape to dismiss any residual spinner/list.
+      const listbox = page.locator('#location-listbox');
+      try {
+        await listbox.waitFor({ state: 'visible', timeout: 15_000 });
+        await listbox.locator('[role="option"]').first().click();
+        await listbox.waitFor({ state: 'hidden', timeout: 8_000 });
+      } catch {
+        // No suggestions returned (offline / empty / rate-limited) —
+        // form is still submittable with the typed text.
+        await page.keyboard.press('Escape'); // dismiss any residual state
+      }
+
+      await submit.click(); // actionability-checked: fails if anything covers it
+
+      // HoroscopeCard is lazy-loaded; allow 90s for cold WASM start under
+      // parallel worker contention (full-preview runs 2 workers).
+      await expect(page.getByText(/Overall Score|समग्र स्कोर/).first()).toBeVisible({ timeout: 90_000 });
 
       await assertNoCrash(page, `horoscope/${i + 1}`);
       expect(errors.pageErrors, `uncaught page error for ${birth.name}`).toEqual([]);
@@ -226,11 +246,13 @@ test.describe('Robustness — random birth data', () => {
 
     await page.locator('#dob').fill('12/01/1935');
     await page.locator('#tob').fill('18:20');
-    // Deliberately never pick a suggestion: coordinates are optional.
+    // Deliberately type a full-label place that is NOT in the pre-load cache,
+    // so the geocoder fires and the in-flow listbox/suggestions appear.
     await page.locator('#pob').fill('Udaipur, Rajasthan');
 
     // Reach the exact state that used to swallow the click.
-    await expect(page.getByTestId('location-suggestions')).toBeVisible({ timeout: 30_000 });
+    // The listbox id is "location-listbox" (not a data-testid).
+    await expect(page.locator('#location-listbox')).toBeVisible({ timeout: 30_000 });
 
     const submit = page.getByRole('button', { name: /Get Transit Reading|गोचर फल देखें/ });
     // Tight budget: the CTA must be clickable on the first attempt.

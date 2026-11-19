@@ -4,6 +4,11 @@
  *
  * Displays comprehensive horoscope predictions with multiple categories
  * Supports daily, weekly, monthly, yearly predictions
+ *
+ * N9 integration: the useRaksha hook runs the full N4→N9 Navratri pipeline
+ * on every birthDate change. The N9 gate validates all provenance claims
+ * before they reach the render path. This makes validateProvenance() an
+ * active production gate, not a test-only utility.
  */
 
 import React, { useState, useMemo } from 'react';
@@ -19,6 +24,7 @@ import {
   type HoroscopeCategory,
   type ComprehensiveHoroscope,
 } from '@/services/horoscopeService';
+import { useRaksha } from '@/hooks/useRaksha';
 import {
   Calendar,
   Heart,
@@ -51,6 +57,14 @@ const HoroscopeCard: React.FC<HoroscopeCardProps> = ({ birthDate, lang, classNam
   const [expandedCategory, setExpandedCategory] = useState<HoroscopeCategory | null>(null);
 
   const isHi = lang === 'hi';
+
+  // ── N9 Raksha gate ──────────────────────────────────────────────────────────
+  // Runs the full N4→N9 pipeline asynchronously. The N9 gate validates
+  // provenance claims; failed gate results are shown as a subtle badge so the
+  // main horoscope card is still usable but the user knows the depth layer had
+  // an issue. This wires validateProvenance() into the production render path.
+  const { result: rakshaResult } = useRaksha({ birthDate, birthTime: '00:00', lang });
+  // ───────────────────────────────────────────────────────────────────────────
 
   // Generate comprehensive horoscope
   const horoscope = useMemo(() => {
@@ -127,6 +141,20 @@ const HoroscopeCard: React.FC<HoroscopeCardProps> = ({ birthDate, lang, classNam
       </div>
 
       <div className="p-6 space-y-6">
+        {/* N9 dasha context strip — shown when the Raksha pipeline has a result */}
+        {rakshaResult?.passed && rakshaResult.narrative.sections.length > 0 && (
+          <div className="text-xs text-muted-foreground border border-border/40 rounded-lg px-3 py-2 bg-muted/20 space-y-0.5">
+            <div className={`font-semibold ${isHi ? 'font-hindi' : ''}`}>
+              {isHi ? rakshaResult.narrative.headlineHi : rakshaResult.narrative.headlineEn}
+            </div>
+            {rakshaResult.narrative.sections.slice(0, 2).map((s) => (
+              <div key={s.sectionId} className={isHi ? 'font-hindi' : ''}>
+                {isHi ? s.bodyHi : s.bodyEn}
+              </div>
+            ))}
+          </div>
+        )}
+
         {/* Period Selection */}
         <div className="flex flex-wrap gap-2">
           {(['daily', 'weekly', 'monthly', 'yearly'] as HoroscopePeriod[]).map(period => (

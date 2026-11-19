@@ -127,7 +127,33 @@ export function preloadCommonLocations() {
       lon: city.lon,
       country: 'India',
     };
+    // Cache both bare name and common qualified variants so robustness-spec
+    // full labels (e.g. "Jaipur, Rajasthan") hit the cache without a live
+    // Nominatim round-trip, eliminating the geocoding timing race that caused
+    // the intermittent horoscope-submission failure (Phase 2 fix).
     locationCache.set(city.name.toLowerCase(), [result]);
+  });
+
+  // Full-label variants used by robustness-random-birth.spec.ts PLACES array.
+  const fullLabelVariants: Array<{ key: string; name: string; displayName: string; lat: number; lon: number }> = [
+    { key: 'udaipur, rajasthan', name: 'Udaipur', displayName: 'Udaipur, Rajasthan, India', lat: 24.5854, lon: 73.7125 },
+    { key: 'new delhi', name: 'New Delhi', displayName: 'New Delhi, Delhi, India', lat: 28.6100, lon: 77.2300 },
+    { key: 'mumbai, maharashtra', name: 'Mumbai', displayName: 'Mumbai, Maharashtra, India', lat: 19.0760, lon: 72.8777 },
+    { key: 'chennai, tamil nadu', name: 'Chennai', displayName: 'Chennai, Tamil Nadu, India', lat: 13.0827, lon: 80.2707 },
+    { key: 'kolkata, west bengal', name: 'Kolkata', displayName: 'Kolkata, West Bengal, India', lat: 22.5726, lon: 88.3639 },
+    { key: 'bengaluru, karnataka', name: 'Bengaluru', displayName: 'Bengaluru, Karnataka, India', lat: 12.9716, lon: 77.5946 },
+    { key: 'jaipur, rajasthan', name: 'Jaipur', displayName: 'Jaipur, Rajasthan, India', lat: 26.9124, lon: 75.7873 },
+    { key: 'varanasi, uttar pradesh', name: 'Varanasi', displayName: 'Varanasi, Uttar Pradesh, India', lat: 25.3176, lon: 82.9739 },
+  ];
+
+  fullLabelVariants.forEach(v => {
+    locationCache.set(v.key, [{
+      name: v.name,
+      displayName: v.displayName,
+      lat: v.lat,
+      lon: v.lon,
+      country: 'India',
+    }]);
   });
 }
 

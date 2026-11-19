@@ -200,3 +200,22 @@ RELEASE DECISION: pending final gate.
   0 flaky** (12.1m) — e2e-final-gate3.txt.
 - RELEASE DECISION: **GO** — all required gates green; the horoscope
   submission issue was a test-harness race, not an application defect.
+
+## Addendum 5 — AARUDH-LAGNA / Lovable Arudha patch (2026-11-19)
+
+```
+LOVABLE SOURCE ACCESS: BLOCKED (no export; independent impl per spec)
+LOVABLE TYPECHECK/TESTS/BUILD: NOT RUN (source unavailable)
+ARUDHA RULE CONVENTION: jaiminiService.calculateArudhaPada — inclusive
+  counting, single-lord map, +10 self/7th exception (unreachable — OPEN)
+ARUDHA REFERENCE MATRIX: 148/148 PASS (src/tests/arudha.test.ts)
+TARGET ENGINE PARITY: PASS (existing engine reused, no duplicate)
+TARGET E2E: 145/145 PASS (pre-patch); robustness spec refined further
+PROVENANCE BOUNDARY: PARTIAL — N9 Raksha gate wired into HoroscopeCard;
+  trace-level fields documented gap
+PRIVACY REVIEW: PASS — synthetic fixtures only
+NAVRATRI N4–N9: 32/32 tests PASS; useRaksha in production path
+TYPECHECK: exit 0
+RELEASE STATUS: HOLD — awaiting AGPL decision + owner review of OPEN
+  exception-convention finding; no push/merge/deploy performed
+```
