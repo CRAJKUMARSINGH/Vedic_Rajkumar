@@ -13,7 +13,7 @@
  * loses data; only the rendered bytes are split by language.
  */
 
-import { TOPIC_LABEL, type AnswerCard, type Lang } from './AnswerCard.types';
+import { ANSWER_CONTRACT_VERSION, TOPIC_LABEL, type AnswerCard, type Lang } from './AnswerCard.types';
 
 /** Section headings and fixed labels — every user-visible string, both langs. */
 const SECTION: Record<string, { en: string; hi: string }> = {
@@ -47,6 +47,17 @@ export function renderAnswerMarkdown(card: AnswerCard): string {
 
 ${card.direct_answer[lang]}
 
+${(() => {
+    if (!card.composed) return '';
+    const c = card.composed;
+    const sectionsMd = c.sections
+      .map(sec => `### ${sec.title[lang]}\n${sec.body[lang]}\n${sec.citations.map(x => `- ${x[lang]}`).join('\n')}`)
+      .join('\n\n');
+    const linksMd = c.app_links.length
+      ? `**${lang === 'hi' ? 'ऐप में देखें' : 'Check in the app'}**\n${c.app_links.map(l => `- [${l.label[lang]}](${l.path})`).join('\n')}`
+      : '';
+    return `**${c.verdict_line[lang]}**\n\n${sectionsMd}\n\n${linksMd}\n\n> ${c.closing_question[lang]}\n`;
+  })()}
 ## ${s('verdicts')}
 | ${s('table')} |
 |---|---|---|---|---|
@@ -78,10 +89,9 @@ export interface AnswerIndex {
   generated_at: string;
   contract: string;
   /**
-   * Contract 1.2 — additive. Reader-visible facts about the corpus's languages.
-   * `default_language` names the locale served at the un-suffixed path.
+   * Contract version — mirrors ANSWER_CONTRACT_VERSION (additive bumps only).
    */
-  contract_version: '1.2';
+  contract_version: string;
   languages: Lang[];
   default_language: Lang;
   template: {
@@ -115,7 +125,7 @@ export function renderIndex(
     card_version: '1.0',
     generated_at: generatedAt,
     contract: 'Read the card, reply from direct_answer, do not recompute.',
-    contract_version: '1.2',
+    contract_version: ANSWER_CONTRACT_VERSION,
     languages: [...languages],
     default_language: defaultLang,
     template: {

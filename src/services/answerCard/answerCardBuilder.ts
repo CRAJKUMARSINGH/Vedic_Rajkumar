@@ -25,6 +25,8 @@ import type { DashaForecastResult } from '@/services/dashaForecastService';
 import { stableHash } from '@/lib/hash/stableHash';
 import { slugify, toSubject, type JatakRecord } from '@/lib/jataks/resolveJatak';
 import { buildChartFor, forecastFor } from './chartAdapter';
+import { buildChartFacts } from './chartFacts';
+import { composeAnswer } from './answerComposer';
 import { TOPIC_EXTRA_HOUSES, TOPIC_TO_AREA } from './topicMap';
 import { deriveConfidence } from './confidence';
 import { glossRationale } from './hiGloss';
@@ -48,6 +50,11 @@ const SOURCE_FILES = [
   'src/services/dashaForecastService.ts',
   'src/services/ashtakavargaService.ts',
   'src/services/chartBuilderService.ts',
+  'src/services/answerCard/chartFacts.ts',
+  'src/services/answerCard/answerComposer.ts',
+  'src/services/answerCard/depth.ts',
+  'src/services/answerCard/sequencing.ts',
+  'src/services/answerCard/remedyPlan.ts',
 ];
 
 const clamp = (n: number, lo = 0, hi = 100) => Math.max(lo, Math.min(hi, Math.round(n)));
@@ -184,6 +191,12 @@ export function buildAnswerCard(
     query: { asked, topics, language, as_of: asOf, reference_type: 'natal' },
     direct_answer: composeDirectAnswer(verdicts, language),
     verdicts,
+    composed: composeAnswer({
+      facts: buildChartFacts(chart) ?? { ascSign: null, placements: [], houses: {} },
+      verdicts,
+      asked,
+      language,
+    }),
   };
 
   return { ...body, provenance: provenanceOf(body, asOf, 'src/services/answerCard/chartAdapter.ts') };
@@ -221,6 +234,18 @@ export function buildAnswerCardByName(
     query: { asked, topics, language, as_of: asOf, reference_type: 'natal' },
     direct_answer: { hi: msg, en: msg },
     verdicts: topics.map(t => degraded(t, 'Person not in seed bank.')),
+    composed: {
+      verdict_line: { en: 'Person not in seed bank.', hi: 'व्यक्ति सीड-बैंक में नहीं है।' },
+      depth: 'brief',
+      ranked: [],
+      sections: [],
+      sequence: null,
+      app_links: [],
+      closing_question: {
+        en: 'Add the birth data and re-emit.',
+        hi: 'जन्म विवरण जोड़कर पुनः उत्पन्न करें।',
+      },
+    },
   };
 
   return { ...body, provenance: provenanceOf(body, asOf, 'src/services/answerCard/answerCardBuilder.ts') };

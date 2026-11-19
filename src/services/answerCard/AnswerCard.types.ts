@@ -7,6 +7,7 @@
  */
 
 import type { VerdictType } from '@/services/conclusiveJatakJudgmentService';
+import type { ComposedAnswer } from './answerComposer';
 
 export type Topic = 'health' | 'house_construction' | 'career' | 'marriage' | 'finance';
 export type Lang = 'hi' | 'en';
@@ -39,8 +40,12 @@ export const DEFAULT_LANG: Lang = 'hi';
  * 1.2 — additive: bilingual artifacts (`languages`, `default_language`,
  * per-language path templates). No field removed or renamed, so a 1.1 reader
  * still parses every card.
+ *
+ * 1.3 — additive: optional `composed` reading layer (verdict_line, ranked
+ * decisions, why/sequence/remedy sections, verified app links). Legacy
+ * cards without `composed` remain valid; readers must treat it as optional.
  */
-export const ANSWER_CONTRACT_VERSION = '1.2';
+export const ANSWER_CONTRACT_VERSION = '1.3';
 
 /** 1:1 from the engine's VerdictType — no meaning invented. */
 export const BAND_FROM_VERDICT: Record<VerdictType, Band> = {
@@ -126,6 +131,8 @@ export interface AnswerCard {
   /** FIELD #1. Reply from this and nothing else. */
   direct_answer: { hi: string; en: string };
   verdicts: Verdict[];
+  /** 1.3 — optional composed reading layer. Absent on legacy cards. */
+  composed?: ComposedAnswer;
   provenance: {
     engine_version: string;
     ayanamsa: string;
