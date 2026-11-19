@@ -1,7 +1,22 @@
 # Hunar Jain — Direct Answer
-<!-- card_hash: f1d621930a515216 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: dca533fb0b23c826 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (50%) (average, 50%)
+
+**yes, conditionally — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 12th (Cancer).
+- Jupiter in the 6th (Sagittarius) — in its own sign, self-contained but slow to move.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

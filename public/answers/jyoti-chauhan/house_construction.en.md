@@ -1,7 +1,22 @@
 # Jyoti Chauhan — Direct Answer
-<!-- card_hash: 0c9d2734de8c5808 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 66d595525de6ccff | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (46%) (average, 46%)
+
+**yes, conditionally — the construction.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 12th (Pisces) — exalted, a clean promise.
+- Sun in the 11th (Aquarius).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

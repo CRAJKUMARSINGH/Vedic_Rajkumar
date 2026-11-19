@@ -1,7 +1,22 @@
 # Jaya Sisodia — Direct Answer
-<!-- card_hash: e014caba100a64e8 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 9dd9bef1e4c35ce3 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (52%) (average, 52%)
+
+**yes, conditionally — the health regimen.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Sun in the 6th (Gemini).
+- Moon in the 1st (Capricorn).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

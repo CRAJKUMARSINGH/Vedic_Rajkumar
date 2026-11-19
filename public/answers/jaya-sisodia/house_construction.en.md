@@ -1,7 +1,22 @@
 # Jaya Sisodia — Direct Answer
-<!-- card_hash: 98bea22fd7b9f1cc | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 00722eed2b1d8f88 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (52%) (average, 52%)
+
+**yes, conditionally — the construction.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mars in the 4th (Taurus).
+- Mars in the 4th (Taurus).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

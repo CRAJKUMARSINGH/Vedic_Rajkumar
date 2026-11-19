@@ -1,7 +1,22 @@
 # Jaya Sisodia — Direct Answer
-<!-- card_hash: e4e1cf57214d57a0 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 86a541c2baee4186 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (54%) (average, 54%)
+
+**yes, conditionally — the money decision.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mercury in the 6th (Gemini), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.
+- Saturn in the 2nd (Aquarius), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

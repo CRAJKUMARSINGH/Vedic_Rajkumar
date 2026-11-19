@@ -1,7 +1,22 @@
 # Hunar Jain — Direct Answer
-<!-- card_hash: 8ed1af8a2fab0482 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: ce33ba2c497d24be | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (53%) (average, 53%)
+
+**yes, conditionally — the money decision.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Jupiter in the 6th (Sagittarius) — in its own sign, self-contained but slow to move.
+- Sun in the 2nd (Leo) — in its own sign, self-contained but slow to move.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

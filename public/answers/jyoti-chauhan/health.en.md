@@ -1,7 +1,22 @@
 # Jyoti Chauhan — Direct Answer
-<!-- card_hash: d5f338c2c327fd8f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: d617e06ed5c853e8 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (48%) (average, 48%)
+
+**yes, conditionally — the health regimen.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Moon in the 1st (Aries).
+- Moon in the 1st (Aries).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

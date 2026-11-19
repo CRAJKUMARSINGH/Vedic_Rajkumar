@@ -1,7 +1,22 @@
 # Jyoti Chauhan — Direct Answer
-<!-- card_hash: d9cb8c1f8ae805e9 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 1882fdf8d2a2db6d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (48%) (average, 48%)
+
+**yes, conditionally — the money decision.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Sun in the 11th (Aquarius).
+- Venus in the 12th (Pisces) — exalted, a clean promise.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

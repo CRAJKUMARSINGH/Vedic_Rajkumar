@@ -1,7 +1,22 @@
 # Hunar Jain — Direct Answer
-<!-- card_hash: 1ef484572ca56b80 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 8c728cc53ae1e442 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: caution (47%) (caution, 47%)
+
+**not yet — fix the base first — the health regimen.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mars in the 12th (Cancer) — debilitated, the promise needs repair.
+- Moon in the 1st (Cancer) — in its own sign, self-contained but slow to move.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

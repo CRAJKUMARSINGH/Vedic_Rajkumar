@@ -1,7 +1,22 @@
 # Kanchi Jain — Direct Answer
-<!-- card_hash: 1789ed95bad46e6f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: d2c4e7b18d430b9e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: caution (44%) (caution, 44%)
+
+**not yet — fix the base first — the money decision.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Moon in the 1st (Gemini).
+- Mercury in the 2nd (Leo).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

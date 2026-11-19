@@ -1,7 +1,22 @@
 # Kanchi Jain — Direct Answer
-<!-- card_hash: ae7bc288163f1885 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 1b2e86632f8a8f4f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (34%) (average, 34%)
+
+**yes, conditionally — the health regimen.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mercury in the 2nd (Leo).
+- Moon in the 1st (Gemini).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

@@ -1,7 +1,26 @@
 # Jaya Sisodia — Direct Answer
-<!-- card_hash: df4ebbdc4272aa65 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: e9d7ddb4d30c1af4 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (52%) (average, 52%) · New house construction: average (52%) (average, 52%) · Career: good (55%) (good, 55%) · Marriage: average (59%) (average, 59%) · Finance: average (54%) (average, 54%)
+
+**yes — but clear the gate first — the job change. the construction: yes, conditionally.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 7th (Cancer).
+- Jupiter in the 10th (Libra), retrograde — the result arrives in re-runs.
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the job change, then the construction, then the health regimen, then the marriage step, then the money decision. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the construction, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

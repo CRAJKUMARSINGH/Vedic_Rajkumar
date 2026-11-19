@@ -1,7 +1,22 @@
 # Kanchi Jain — Direct Answer
-<!-- card_hash: c3d575828d8cb634 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: df2b6bc6f5d1fff4 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (45%) (average, 45%)
+
+**yes, conditionally — the job change.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Jupiter in the 3rd (Virgo).
+- Mercury in the 2nd (Leo).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

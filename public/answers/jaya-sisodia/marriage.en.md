@@ -1,7 +1,22 @@
 # Jaya Sisodia — Direct Answer
-<!-- card_hash: 9e70284cc174e916 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 54fc46f0f12c6d93 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (59%) (average, 59%)
+
+**yes, conditionally — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 2nd (Aquarius), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.
+- Venus in the 7th (Cancer).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

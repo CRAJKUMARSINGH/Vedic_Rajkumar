@@ -1,7 +1,22 @@
 # Kanchi Jain — Direct Answer
-<!-- card_hash: 7144300d8a71a3b9 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: d7d04afa53adc9c6 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: caution (46%) (caution, 46%)
+
+**not yet — fix the base first — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Jupiter in the 3rd (Virgo).
+- Moon in the 1st (Gemini).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

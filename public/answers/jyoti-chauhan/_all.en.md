@@ -1,7 +1,26 @@
 # Jyoti Chauhan — Direct Answer
-<!-- card_hash: 2393d411733d3aa5 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: c6d8b3786f14b6ba | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (48%) (average, 48%) · New house construction: average (46%) (average, 46%) · Career: average (44%) (average, 44%) · Marriage: average (53%) (average, 53%) · Finance: average (48%) (average, 48%)
+
+**yes, conditionally — the construction. the money decision: yes, conditionally.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 12th (Pisces) — exalted, a clean promise.
+- Sun in the 11th (Aquarius).
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the construction, then the money decision, then the health regimen, then the job change, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the money decision, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

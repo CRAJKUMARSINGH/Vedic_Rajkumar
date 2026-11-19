@@ -1,7 +1,22 @@
 # Kanchi Jain — Direct Answer
-<!-- card_hash: 0a014791968da6af | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 92ed921e0c5bcb82 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: caution (43%) (caution, 43%)
+
+**not yet — fix the base first — the construction.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mercury in the 2nd (Leo).
+- Moon in the 1st (Gemini).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
