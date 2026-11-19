@@ -1,7 +1,22 @@
 # Priyansh Singh Chauhan — Direct Answer
-<!-- card_hash: d735f8f4a8b0e4f6 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 5b8c1350df2c6767 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (53%) (average, 53%)
+
+**yes, conditionally — the money decision.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Sun in the 1st (Libra) — debilitated, the promise needs repair.
+- Venus in the 2nd (Scorpio).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

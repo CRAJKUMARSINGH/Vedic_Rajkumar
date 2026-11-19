@@ -1,7 +1,22 @@
 # Priyansh Singh Chauhan — Direct Answer
-<!-- card_hash: 0d32a090e1dc90f0 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 9a1997ebf7b26c1b | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (56%) (average, 56%)
+
+**yes, conditionally — the construction.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 2nd (Scorpio).
+- Ketu in the 4th (Sagittarius), retrograde — the result arrives in re-runs.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

@@ -1,7 +1,22 @@
 # Priyansh Singh Chauhan — Direct Answer
-<!-- card_hash: e06fc36a2d80198f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: a06870d67ba17f8d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (42%) (average, 42%)
+
+**yes, conditionally — the job change.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mars in the 12th (Virgo).
+- Rahu in the 10th (Gemini), retrograde — the result arrives in re-runs.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

@@ -1,7 +1,26 @@
 # Priyansh Singh Chauhan — Direct Answer
-<!-- card_hash: c07f32a3062758a5 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 903a9191b660f96e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (50%) (average, 50%) · New house construction: average (56%) (average, 56%) · Career: average (42%) (average, 42%) · Marriage: caution (55%) (caution, 55%) · Finance: average (53%) (average, 53%)
+
+**yes, conditionally — the job change. the health regimen: yes, conditionally.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mars in the 12th (Virgo).
+- Rahu in the 10th (Gemini), retrograde — the result arrives in re-runs.
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the job change, then the health regimen, then the construction, then the money decision. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the health regimen, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

@@ -1,7 +1,22 @@
 # Priyansh Singh Chauhan — Direct Answer
-<!-- card_hash: f0541b9639e9fb6f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: aa2a7793004730bb | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: caution (55%) (caution, 55%)
+
+**not yet — fix the base first — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 8th (Taurus), retrograde — the result arrives in re-runs.
+- Sun in the 1st (Libra) — debilitated, the promise needs repair.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
