@@ -1,0 +1,120 @@
+# ARUDHA LAGNA — MATHEMATICAL CONVENTION RESOLUTION PATCH
+
+**Repository:** `E:\Rajkumar\Vedic_Rajkumar`
+
+**Priority:** P0 for Arudha calculation correctness
+
+**Current release status:** HOLD
+
+## Objective
+
+Resolve the mathematically unreachable self/seventh-house exception without introducing a second Arudha calculator or breaking existing Jaimini features.
+
+## Step 1 — Inspect the actual implementation
+
+Read:
+
+- `jaiminiService.ts`
+- `src/tests/arudha.test.ts`
+- `reports/ARUDHA_CALCULATION_CONVENTION.md`
+- `reports/ARUDHA_REFERENCE_TEST_MATRIX.md`
+
+Identify the exact meaning of `d`, sign indexing, intermediate position, and exception target.
+
+Do not modify the implementation before documenting the current algorithm.
+
+## Step 2 — Independently verify the classical convention
+
+Consult authoritative Jaimini/BPHS references and document the precise rule used for:
+
+1. Counting from the source sign to its lord.
+2. Counting the same distance onward from the lord.
+3. Handling a lord in the source sign.
+4. Handling a lord in the seventh sign.
+5. Determining the tenth-house exception.
+6. Applying the convention consistently to AL, A4, A10 and UL.
+
+Distinguish source-text evidence from modern software conventions.
+
+Where authorities differ, document the alternatives and request an owner decision.
+
+## Step 3 — Resolve the unreachable branch
+
+Investigate whether the existing code applies the exception to the final calculated Pada when the traditional rule requires testing the lord's position relative to the source sign.
+
+A possible corrected algorithm, subject to authoritative confirmation, is:
+
+```typescript
+function calculateArudhaPada(
+  sourceSign: number,
+  lordSign: number
+): number {
+  const distance =
+    ((lordSign - sourceSign + 12) % 12) + 1;
+
+  // Classical exception: lord in source or seventh.
+  // Confirm the tenth-house convention before adoption.
+  if (distance === 1 || distance === 7) {
+    return (sourceSign + 9) % 12;
+  }
+
+  return (lordSign + distance - 1) % 12;
+}
+```
+
+**Important:** This is a candidate implementation for a zero-based sign index, not an approved replacement. Validate the rule and indexing against independent reference examples before applying it.
+
+Preserve the existing API and null/invalid-input behavior.
+
+## Step 4 — Strengthen regression tests
+
+Keep the existing 148 tests.
+
+Add independent reference cases that specifically exercise:
+
+- Lord in the source sign.
+- Lord in the seventh sign.
+- Ordinary sign placement.
+- Zodiac wraparound.
+- All applicable Arudha Padas.
+- Rotation invariance.
+- Exception branch coverage.
+
+Do not use the production implementation itself to generate expected results.
+
+## Step 5 — Verify downstream behavior
+
+Run the affected tests for:
+
+- Jaimini calculations
+- Arudha forecasting
+- Navratri N4–N9
+- HoroscopeCard provenance validation
+- Hindi/English UI rendering
+- Existing Jaimini routes
+
+Verify that calculated Arudha signs are consistent across all consuming components.
+
+## Step 6 — Record evidence
+
+Update:
+
+- `reports/ARUDHA_CALCULATION_CONVENTION.md`
+- `reports/ARUDHA_REFERENCE_TEST_MATRIX.md`
+- `reports/ARUDHA_PROVENANCE_VALIDATION.md`
+- `reports/FINAL_LAUNCH_CERTIFICATION.md`
+
+Document the old behavior, reference rule, chosen convention, changed results and regression evidence.
+
+## Step 7 — Final safeguards
+
+Do not:
+
+- Delete the existing engine.
+- Introduce a duplicate calculator.
+- Change the convention without reference evidence.
+- Overwrite unrelated uncommitted work.
+- Push, merge or deploy without authorization.
+- Mark the release GO while licensing or release gates remain unresolved.
+
+**Acceptance:** The exception rule must be mathematically reachable when applicable, independently verified, covered by regression tests, and consistent across all Arudha consumers.

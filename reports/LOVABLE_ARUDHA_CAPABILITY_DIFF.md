@@ -1,14 +1,17 @@
-# LOVABLE ARUDHA CAPABILITY DIFF — 2026-11-19
+# LOVABLE ARUDHA CAPABILITY DIFF — 2026-11-19 (CODEX classification)
 
-Lovable source: NOT accessible (export unavailable) → independent
-implementation against spec. Existing engine reused — no second calculator.
+Lovable source: BLOCKED (no export). Existing engine audited per §3.
 
-| Candidate feature | Target equivalent | Decision |
+| Feature | Class | Evidence |
 |---|---|---|
-| Arudha sign calc (sign-distance + self/7th exception) | `jaiminiService.calculateArudhaPada` (+A4/A10/UL wrappers) | ADAPT — reused; convention documented |
-| Manual sign entry mode | n/a — target computes from chart | REJECT manual-only mode; computed mode only |
-| Planet influences per house | JaiminiPanel padas + navratri N4–N9 provenance pipeline | ADAPT — existing + N9 gate wired in HoroscopeCard |
-| Bilingual EN/HI reading | JaiminiPage `/jaimini`, `/supplements/jaimini` (RASHI_NAMES_HI) | ALREADY SATISFIED |
-| TanStack Start migration | React/Vite app | REJECT per patch §4 |
-| Forecast sections (image/work/resources/relations) | JaiminiPanel pada narratives + N7 Vani | PARTIAL — interpretive depth documented as backlog |
-| Provenance/tradition claims | `provenanceContract.ts` + n9Raksha gate | ADAPT — gate wired into HoroscopeCard (uncommitted→committed) |
+| Sign-distance Arudha calc | ALREADY IMPLEMENTED | jaiminiService.calculateArudhaPada |
+| A4/A10/Upapada variants | ALREADY IMPLEMENTED | wrappers lines ~326-341 |
+| Inclusive counting + wraparound | ALREADY IMPLEMENTED + TESTED | arudha.test.ts 148/148 |
+| Self/seventh +10 exception | MATHEMATICALLY UNVERIFIED | unreachable under current formula — OPEN, documented |
+| Single-lord map (no co-lord merge) | ALREADY IMPLEMENTED | RASHI_LORDS in engine |
+| Manual sign-entry mode | NOT REQUIRED | computed mode only per spec |
+| TanStack Start port | INCOMPATIBLE | rejected per §5 |
+| Bilingual EN/HI UI | ALREADY IMPLEMENTED | /jaimini, /supplements/jaimini |
+| "Why this interpretation?" toggle | REQUIRES ADAPTATION | interpretive text exists; per-claim trace toggle = backlog |
+| Navratri N4–N9 provenance | REUSABLE | n9Raksha gate wired into HoroscopeCard |
+| Calculated vs AI vs unavailable labels | PARTIAL | provenance claims typed; UI labels backlog |
