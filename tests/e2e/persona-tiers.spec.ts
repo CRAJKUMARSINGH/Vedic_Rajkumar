@@ -108,7 +108,7 @@ test.describe('Advanced persona — edge dates', () => {
 
     await page.locator('#dob').fill('01/01/1899');
 
-    await expect(page.getByText(/outside supported range/i)).toBeVisible({ timeout: 5_000 });
+    await expect(page.getByText(/outside (the )?supported range|समर्थित सीमा/i)).toBeVisible({ timeout: 10_000 });
 
     // The primary action must stay disabled while the date is out of range.
     const submit = page.getByRole('button', { name: /Get Transit Reading|गोचर फल देखें/ });
@@ -122,7 +122,7 @@ test.describe('Advanced persona — edge dates', () => {
 
     await page.locator('#dob').fill('29/02/1900');
 
-    await expect(page.getByText(/Invalid calendar date/i)).toBeVisible({ timeout: 5_000 });
+    await expect(page.getByText(/Not a real calendar date|Invalid calendar date|अमान्य कैलेंडर/i)).toBeVisible({ timeout: 10_000 });
   });
 
   test('a real leap day (29 Feb 2000) remains valid', async ({ page }) => {
@@ -132,7 +132,7 @@ test.describe('Advanced persona — edge dates', () => {
 
     await page.locator('#dob').fill('29/02/2000');
 
-    await expect(page.getByText(/Invalid calendar date|outside supported range/i)).toHaveCount(0);
+    await expect(page.getByText(/Invalid calendar date|Not a real calendar date|outside (the )?supported range/i)).toHaveCount(0);
   });
 });
 

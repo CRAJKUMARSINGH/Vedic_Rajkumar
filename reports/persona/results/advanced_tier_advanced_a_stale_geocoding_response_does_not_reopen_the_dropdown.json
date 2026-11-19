@@ -1,7 +1,7 @@
 {
   "title": "persona-users.spec.ts › Persona — advanced tier › advanced: a stale geocoding response does not reopen the dropdown",
   "status": "passed",
-  "durationMs": 16035,
+  "durationMs": 12469,
   "errors": [],
   "pageErrors": [],
   "consoleErrors": [],

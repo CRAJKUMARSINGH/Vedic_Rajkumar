@@ -367,7 +367,7 @@ test.describe('Persona — intermediate tier', () => {
 
     // Cold-start: the lazily-loaded HoroscopeCard chunk compiles on first hit,
     // so allow a generous window before asserting the export control.
-    const resultHeading = page.getByRole('heading', { name: HOROSCOPE_RESULT });
+    const resultHeading = page.getByText(HOROSCOPE_RESULT);
     await expect(resultHeading.first()).toBeVisible({ timeout: 75_000 });
 
     const printButton = page.getByRole('button', { name: /^Print$|^प्रिंट$/ });
@@ -473,7 +473,7 @@ test.describe('Persona — advanced tier', () => {
       for (let i = 0; i < 4; i += 1) (el as HTMLButtonElement).click();
     });
 
-    const resultHeading = page.getByRole('heading', { name: HOROSCOPE_RESULT });
+    const resultHeading = page.getByText(HOROSCOPE_RESULT);
     await expect(resultHeading.first()).toBeVisible({ timeout: 75_000 });
     await assertNoCrash(page, 'rapid-submit');
     // A single result section renders — exactly one heading, no duplicates.

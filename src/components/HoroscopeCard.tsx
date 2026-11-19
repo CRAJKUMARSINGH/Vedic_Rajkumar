@@ -59,11 +59,14 @@ const HoroscopeCard: React.FC<HoroscopeCardProps> = ({ birthDate, lang, classNam
   const isHi = lang === 'hi';
 
   // ── N9 Raksha gate ──────────────────────────────────────────────────────────
-  // Runs the full N4→N9 pipeline asynchronously. The N9 gate validates
-  // provenance claims; failed gate results are shown as a subtle badge so the
-  // main horoscope card is still usable but the user knows the depth layer had
-  // an issue. This wires validateProvenance() into the production render path.
-  const { result: rakshaResult } = useRaksha({ birthDate, birthTime: '00:00', lang });
+  // Guard: only run when birthDate is a valid non-empty ISO date string.
+  // An empty birthDate (e.g. from Index.tsx before submission) would cause
+  // runRaksha → computeKaal → calculateVimshottariDasha to fail and potentially
+  // surface a page error. Pass null to skip the pipeline gracefully.
+  const rakshaInput = birthDate && /^\d{4}-\d{2}-\d{2}$/.test(birthDate)
+    ? { birthDate, birthTime: '00:00', lang }
+    : null;
+  const { result: rakshaResult } = useRaksha(rakshaInput);
   // ───────────────────────────────────────────────────────────────────────────
 
   // Generate comprehensive horoscope

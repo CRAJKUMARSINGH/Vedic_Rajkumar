@@ -1,10 +1,8 @@
 {
   "title": "persona-users.spec.ts › Persona — basic tier › basic: calculation renders a horoscope without forced clicks",
-  "status": "failed",
-  "durationMs": 135728,
-  "errors": [
-    "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/Overall Score|समग्र स्कोर/).first()\nExpected: visible\nTimeout: 120000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 120000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/Overall Score|समग्र स्कोर/).first()\u001b[22m\n\u001b[2m    4 × waiting for \"http://127.0.0.1:5173/horoscope\" navigation to finish...\u001b[22m\n\u001b[2m      - navigated to \"http://127.0.0.1:5173/horoscope\"\u001b[22m\n"
-  ],
+  "status": "passed",
+  "durationMs": 12221,
+  "errors": [],
   "pageErrors": [],
   "consoleErrors": [],
   "failedRequests": []
