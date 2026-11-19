@@ -1,0 +1,104 @@
+# CODEX — FINAL STABLE-TREE E2E CERTIFICATION
+
+## 1. Freeze the source tree
+
+Before execution:
+
+```powershell
+git rev-parse HEAD
+git status --short
+git diff --check
+```
+
+Record the exact commit SHA and working-tree state.
+
+Ensure no parallel agent, editor automation or build process modifies source files during the run.
+
+Preserve existing evidence files.
+
+## 2. Run the complete primary E2E suite
+
+Use the repository's configured Playwright command.
+
+Capture:
+
+- Total passed, failed and skipped
+- Execution duration
+- Browser/project coverage
+- Console and network errors
+- Trace files for failures
+- Exit code
+
+Do not modify tests during execution.
+
+## 3. Verify tier/billing coverage separately
+
+Inspect `playwright.tiers.config.ts`.
+
+Run the tier/billing suite separately if its dependencies and environment are available.
+
+Record its results independently.
+
+Do not claim the entire application passes E2E merely because the primary configuration excludes those tests.
+
+## 4. Correct the vacuous performance test
+
+Inspect `perf-mobile.spec.ts`.
+
+The missing `__runChart` hook means the long-task assertion does not currently exercise chart computation.
+
+Do not introduce a production-only test hook unnecessarily.
+
+Prefer a real user journey:
+
+1. Navigate to `/app`.
+2. Enter deterministic synthetic birth details.
+3. Submit a calculation.
+4. Observe calculation completion.
+5. Measure responsiveness and long tasks during the actual calculation.
+
+Record measured performance and a justified acceptance threshold.
+
+Until this is implemented, report mobile performance coverage as **INCOMPLETE**, even if the current test passes.
+
+## 5. Produce certification evidence
+
+Update the existing E2E certification report with:
+
+- Exact tested SHA
+- Working-tree fingerprint or recorded status
+- Primary suite results
+- Tier/billing suite results
+- Performance coverage limitation
+- Accuracy results
+- Unit-test results
+- Remaining release blockers
+
+Do not overwrite earlier failed-run evidence.
+
+## 6. Release and Git safeguards
+
+Keep RELEASE HOLD for unresolved:
+
+- AGPL licensing decision
+- Arudha exception-convention sign-off
+- Jaimini provenance verification, if still outstanding
+- Accessibility audit
+- Lighthouse certification
+- Genuine mobile calculation performance coverage
+
+Do not commit generated evidence indiscriminately.
+
+Do not push, merge or deploy without explicit authorization.
+
+## Final response format
+
+Report:
+
+**PRIMARY E2E:** PASS / FAIL / INCOMPLETE  
+**TIER/BILLING E2E:** PASS / FAIL / BLOCKED  
+**MOBILE PERFORMANCE:** VERIFIED / INCOMPLETE  
+**ACCURACY:** PASS / FAIL  
+**RELEASE:** HOLD / GO, with justification
+
+Include exact test counts and evidence paths.

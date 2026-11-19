@@ -1,0 +1,12 @@
+{
+  "longTasks": [
+    93,
+    108,
+    114
+  ],
+  "blocking": [],
+  "budgetMs": 250,
+  "route": "/horoscope real submission",
+  "cpuThrottle": "4x",
+  "at": "2026-11-19T12:14:48.111Z"
+}
