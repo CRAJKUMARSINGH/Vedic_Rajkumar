@@ -1,0 +1,14 @@
+
+> vedic-rajkumar@0.0.0-development test:run
+> vitest run
+
+
+ RUN  v4.1.11 E:/Rajkumar/Vedic_Rajkumar
+
+
+ Test Files  140 passed | 1 skipped (141)
+      Tests  2419 passed | 4 skipped (2423)
+   Start at  11:39:08
+   Duration  433.80s (transform 45.91s, setup 222.27s, import 250.27s, tests 66.77s, environment 975.93s)
+
+UNIT_EXIT=0

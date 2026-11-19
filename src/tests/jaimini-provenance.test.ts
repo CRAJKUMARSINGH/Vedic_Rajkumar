@@ -95,7 +95,7 @@ describe('Jaimini provenance gate — validateProvenance', () => {
       ...baseClaim,
       claim_id: 'PC-005',
       claim_type: 'INTERPRETATION',
-      verification_status: 'TRADITIONAL',
+      verification_status: 'VERIFIED',
     };
     expect(validateProvenance(env([interp])).passed).toBe(true);
   });

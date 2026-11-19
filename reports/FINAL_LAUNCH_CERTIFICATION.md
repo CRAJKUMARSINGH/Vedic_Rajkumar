@@ -219,3 +219,44 @@ TYPECHECK: exit 0
 RELEASE STATUS: HOLD — awaiting AGPL decision + owner review of OPEN
   exception-convention finding; no push/merge/deploy performed
 ```
+
+---
+
+## Addendum — 2026-11-19 (CODE-JUNCTION patch session)
+
+**Branch:** `main`  
+**HEAD:** `ac2733afa012ff22a68735eac87ef5d1653fcef5`  
+**origin/main:** `d711be73cbfd62aa6fb938bc225eda99e23dc7c4` (36 files ahead, not yet pushed — HOLD)  
+**Status: HOLD** — all gates below pass; release blockers documented at bottom.
+
+### Quality gates this session
+
+| Gate | Command | Exit | Result |
+|---|---|---|---|
+| Typecheck | `npx tsc --noEmit` | 0 | ✅ PASS |
+| Build | `npm run build` | 0 | ✅ PASS — 270 precache entries |
+| Targeted unit suite | vitest run (8 files: arch/navratri/provenance/analytics/arudha/jaimini-provenance) | 0 | ✅ 212/212 PASS |
+| Production audit | `npm audit --omit=dev` | 1 | ⚠️ 1 moderate (Hono transitive — previously documented, non-blocking) |
+
+### New since previous certification
+
+| Item | Status |
+|---|---|
+| Arudha exception fix (CODEX.txt) | ✅ DONE — dist===1\|\|dist===7 triggers correctly; 148/148 |
+| N4–N9 Navratri Phase B services | ✅ DONE — 44/44 |
+| useRaksha wired into HoroscopeCard | ✅ DONE |
+| JaiminiPanel N9 gate (fail-closed) | ✅ DONE |
+| Architecture ADR-004 violation fixed | ✅ DONE — src/test/ removed |
+| geocodingService full-label cache seeding | ✅ DONE |
+| robustness-random-birth settle-wait fixed | ✅ DONE |
+| jaimini-provenance.test.ts | ✅ 7/7 |
+| CODE-JUNCTION/.gitkeep (empty-folder standing order) | ✅ |
+| CREAT.MD updated | ✅ |
+
+### Release blockers (unchanged)
+
+1. **Intermittent E2E horoscope submit** — root cause identified (geocoder settle-wait race); fix applied in robustness spec; full 145-test preview gate not re-run this session.
+2. **AGPL `swisseph-wasm`** — owner decision required before production deployment.
+3. **Full `validate:accuracy`** + Lighthouse CI — not run this session.
+4. **dist===7 exception variant** — owner to confirm: 10th (current) or 4th from source.
+5. **Jaimini provenance UI tooltip** ("यह निष्कर्ष क्यों?") — backlog.

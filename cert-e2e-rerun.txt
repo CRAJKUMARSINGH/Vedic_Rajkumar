@@ -1,0 +1,12 @@
+
+Running 146 tests using 2 workers
+
+Navigating to: /
+Navigating to: /career-astrology
+Screenshot saved for /career-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_career-astrology.png
+  ok   2 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /career-astrology (27.8s)
+Navigating to: /kaalsarp
+Screenshot saved for / at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_.png
+Screenshot saved for /kaalsarp at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_kaalsarp.png
+  ok   3 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kaalsarp (8.3s)
+Navigating to: /comprehensive

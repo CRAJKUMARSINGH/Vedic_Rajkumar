@@ -1,12 +1,12 @@
 {
   "title": "persona-users.spec.ts › Persona — advanced tier › advanced: geocoding network failure degrades gracefully",
   "status": "passed",
-  "durationMs": 13866,
+  "durationMs": 14267,
   "errors": [],
   "pageErrors": [],
   "consoleErrors": [
     "Failed to load resource: net::ERR_FAILED",
-    "Geocoding error: TypeError: Failed to fetch\n    at l (http://127.0.0.1:4173/assets/geocodingService-BM2e-Ez5.js:1:275)\n    at http://127.0.0.1:4173/assets/EnhancedBirthInputForm-Bjy79KD8.js:1:4956"
+    "Geocoding error: TypeError: Failed to fetch\n    at searchLocation (http://127.0.0.1:5173/src/services/geocodingService.ts:12:28)\n    at http://127.0.0.1:5173/src/components/EnhancedBirthInputForm.tsx:175:31"
   ],
   "failedRequests": [
     "GET https://nominatim.openstreetmap.org/search?q=Springfield&format=json&addressdetails=1&limit=5&countrycodes=in — net::ERR_FAILED"

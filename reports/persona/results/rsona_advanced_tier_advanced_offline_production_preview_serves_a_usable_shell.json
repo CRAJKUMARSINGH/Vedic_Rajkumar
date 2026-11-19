@@ -1,7 +1,7 @@
 {
   "title": "persona-users.spec.ts › Persona — advanced tier › advanced: offline production preview serves a usable shell",
-  "status": "passed",
-  "durationMs": 15232,
+  "status": "skipped",
+  "durationMs": 530,
   "errors": [],
   "pageErrors": [],
   "consoleErrors": [],
