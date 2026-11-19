@@ -1,7 +1,22 @@
 # Pankaj Jain — Direct Answer
-<!-- card_hash: 6731ff0ce8ece38e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 50997ff1037670eb | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (40%) (average, 40%)
+
+**yes, conditionally — the money decision.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 11th (Cancer).
+- Saturn in the 12th (Leo).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

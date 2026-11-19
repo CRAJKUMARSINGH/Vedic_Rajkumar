@@ -1,7 +1,22 @@
 # Kiwangi Jain — Direct Answer
-<!-- card_hash: cdb67dc4225a2614 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 92616e0eb8345f9f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (44%) (average, 44%)
+
+**yes, conditionally — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Moon in the 1st (Gemini).
+- Sun in the 7th (Sagittarius).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

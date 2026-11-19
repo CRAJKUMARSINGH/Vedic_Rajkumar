@@ -1,7 +1,22 @@
 # Kiwangi Jain — Direct Answer
-<!-- card_hash: e903e0f6bb3a2eea | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: e80a041f24940eb1 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (36%) (average, 36%)
+
+**yes, conditionally — the health regimen.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 4th (Virgo).
+- Moon in the 1st (Gemini).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

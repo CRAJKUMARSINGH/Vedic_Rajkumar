@@ -1,7 +1,22 @@
 # Pankaj Jain — Direct Answer
-<!-- card_hash: c58cd76b0b131bf7 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 1a14518d67f57a5d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: caution (41%) (caution, 41%)
+
+**not yet — fix the base first — the health regimen.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mars in the 9th (Taurus).
+- Moon in the 1st (Virgo).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

@@ -1,7 +1,22 @@
 # Mummy — Direct Answer
-<!-- card_hash: 688d1239482428e6 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 323df9301b484310 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: good (39%) (good, 39%)
+
+**yes — but clear the gate first — the money decision.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mercury in the 5th (Leo).
+- Mercury in the 5th (Leo).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

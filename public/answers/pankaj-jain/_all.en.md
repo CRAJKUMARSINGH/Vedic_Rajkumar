@@ -1,7 +1,26 @@
 # Pankaj Jain — Direct Answer
-<!-- card_hash: abdc7f4f033d00a0 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 084cd26c230eddc9 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: caution (41%) (caution, 41%) · New house construction: average (44%) (average, 44%) · Career: caution (39%) (caution, 39%) · Marriage: caution (47%) (caution, 47%) · Finance: average (40%) (average, 40%)
+
+**yes, conditionally — the construction. the money decision: yes, conditionally.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Moon in the 1st (Virgo).
+- Venus in the 11th (Cancer).
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the construction, then the money decision. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the money decision, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

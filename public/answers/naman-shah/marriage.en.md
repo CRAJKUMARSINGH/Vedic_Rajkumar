@@ -1,7 +1,22 @@
 # Naman Shah — Direct Answer
-<!-- card_hash: 8dd04e61027fca00 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: c3d888cb2f8f811e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: caution (55%) (caution, 55%)
+
+**not yet — fix the base first — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Moon in the 1st (Scorpio) — debilitated, the promise needs repair.
+- Saturn in the 5th (Pisces).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

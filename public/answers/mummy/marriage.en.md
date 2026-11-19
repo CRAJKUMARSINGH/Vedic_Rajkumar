@@ -1,7 +1,22 @@
 # Mummy — Direct Answer
-<!-- card_hash: 3d3ec6922d38b955 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: d3bb9de10ab56491 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: good (41%) (good, 41%)
+
+**yes — but clear the gate first — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 4th (Cancer).
+- Jupiter in the 7th (Libra).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

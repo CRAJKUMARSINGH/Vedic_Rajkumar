@@ -1,7 +1,22 @@
 # Naman Shah — Direct Answer
-<!-- card_hash: c884e0798de38a6f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: dc9e01979c0d7bdf | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (47%) (average, 47%)
+
+**yes, conditionally — the health regimen.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 5th (Pisces).
+- Moon in the 1st (Scorpio) — debilitated, the promise needs repair.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

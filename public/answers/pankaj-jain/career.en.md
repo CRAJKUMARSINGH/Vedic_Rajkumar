@@ -1,7 +1,22 @@
 # Pankaj Jain — Direct Answer
-<!-- card_hash: 95ecc402e767819e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 8eacc6aff080f858 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: caution (39%) (caution, 39%)
+
+**not yet — fix the base first — the job change.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 12th (Leo).
+- Mars in the 9th (Taurus).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

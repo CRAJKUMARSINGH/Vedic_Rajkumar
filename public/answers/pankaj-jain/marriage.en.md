@@ -1,7 +1,22 @@
 # Pankaj Jain — Direct Answer
-<!-- card_hash: cfab677d59196d4b | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: a4dd6655db23486e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: caution (47%) (caution, 47%)
+
+**not yet — fix the base first — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 11th (Cancer).
+- Venus in the 11th (Cancer).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

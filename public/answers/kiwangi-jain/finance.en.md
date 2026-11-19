@@ -1,7 +1,22 @@
 # Kiwangi Jain — Direct Answer
-<!-- card_hash: 8dc5cddc696d8617 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 0e2c5ecacdb6e9a6 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (37%) (average, 37%)
+
+**yes, conditionally — the money decision.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 4th (Virgo).
+- Mars in the 7th (Sagittarius).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

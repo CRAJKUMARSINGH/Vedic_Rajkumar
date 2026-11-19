@@ -1,7 +1,22 @@
 # Kiwangi Jain — Direct Answer
-<!-- card_hash: d30f42a271f955db | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 032ab8c8a2935c89 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (48%) (average, 48%)
+
+**yes, conditionally — the job change.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 5th (Libra) — in its own sign, self-contained but slow to move.
+- Saturn in the 4th (Virgo).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

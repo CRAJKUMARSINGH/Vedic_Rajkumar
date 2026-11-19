@@ -270,6 +270,123 @@
       ]
     }
   ],
+  "composed": {
+    "verdict_line": {
+      "en": "yes — but clear the gate first — the health regimen. the job change: yes — but clear the gate first.",
+      "hi": "हाँ — पर पहले अड़चन हटाएँ — स्वास्थ्य नियम। नौकरी परिवर्तन: हाँ — पर पहले अड़चन हटाएँ।"
+    },
+    "depth": "standard",
+    "ranked": [
+      {
+        "topic": "health",
+        "decision": {
+          "en": "yes — but clear the gate first",
+          "hi": "हाँ — पर पहले अड़चन हटाएँ"
+        }
+      },
+      {
+        "topic": "career",
+        "decision": {
+          "en": "yes — but clear the gate first",
+          "hi": "हाँ — पर पहले अड़चन हटाएँ"
+        }
+      },
+      {
+        "topic": "marriage",
+        "decision": {
+          "en": "yes — but clear the gate first",
+          "hi": "हाँ — पर पहले अड़चन हटाएँ"
+        }
+      },
+      {
+        "topic": "finance",
+        "decision": {
+          "en": "yes — but clear the gate first",
+          "hi": "हाँ — पर पहले अड़चन हटाएँ"
+        }
+      },
+      {
+        "topic": "house_construction",
+        "decision": {
+          "en": "yes — but clear the gate first",
+          "hi": "हाँ — पर पहले अड़चन हटाएँ"
+        }
+      }
+    ],
+    "sections": [
+      {
+        "id": "why",
+        "title": {
+          "en": "Why",
+          "hi": "क्यों"
+        },
+        "body": {
+          "en": "The call rests on these placements, not on a general stanza:",
+          "hi": "निर्णय सामान्य श्लोक पर नहीं, इन स्थितियों पर टिका है:"
+        },
+        "citations": [
+          {
+            "en": "Sun in the 5th (Leo) — in its own sign, self-contained but slow to move.",
+            "hi": "सूर्य पंचम भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+          },
+          {
+            "en": "Moon in the 1st (Aries).",
+            "hi": "चंद्र प्रथम भाव (मेष) में।"
+          }
+        ]
+      },
+      {
+        "id": "sequence",
+        "title": {
+          "en": "Sequence",
+          "hi": "क्रम"
+        },
+        "body": {
+          "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the health regimen, then the job change, then the marriage step, then the money decision, then the construction. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
+          "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — स्वास्थ्य नियम, फिर नौकरी परिवर्तन, फिर विवाह कदम, फिर आर्थिक निर्णय, फिर निर्माण कार्य। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
+        },
+        "citations": []
+      }
+    ],
+    "sequence": {
+      "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the health regimen, then the job change, then the marriage step, then the money decision, then the construction. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
+      "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — स्वास्थ्य नियम, फिर नौकरी परिवर्तन, फिर विवाह कदम, फिर आर्थिक निर्णय, फिर निर्माण कार्य। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
+    },
+    "app_links": [
+      {
+        "label": {
+          "en": "Transit (gochar) overlay",
+          "hi": "गोचर परत"
+        },
+        "path": "/transits"
+      },
+      {
+        "label": {
+          "en": "Muhurat windows",
+          "hi": "मुहूर्त"
+        },
+        "path": "/muhurat"
+      },
+      {
+        "label": {
+          "en": "Kundli Milan",
+          "hi": "कुंडली मिलान"
+        },
+        "path": "/matchmaking"
+      },
+      {
+        "label": {
+          "en": "Dasha timeline",
+          "hi": "दशा-क्रम"
+        },
+        "path": "/dasha"
+      }
+    ],
+    "closing_question": {
+      "en": "Which single variable do you want fixed first — the job change, or the city? Say one and I will take it alone.",
+      "hi": "पहले कौन-सा एक चर तय करें — नौकरी परिवर्तन, या शहर? एक बताइए, उसे अकेले लेंगे।"
+    }
+  },
   "provenance": {
     "engine_version": "0.1.0",
     "ayanamsa": "Lahiri (Chitrapaksha)",
@@ -279,12 +396,17 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "74e54a095e91fd62",
-    "card_hash": "571bbe5e84778f31",
+    "card_hash": "fad4b6ca3098e3e5",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",
       "src/services/ashtakavargaService.ts",
       "src/services/chartBuilderService.ts",
+      "src/services/answerCard/chartFacts.ts",
+      "src/services/answerCard/answerComposer.ts",
+      "src/services/answerCard/depth.ts",
+      "src/services/answerCard/sequencing.ts",
+      "src/services/answerCard/remedyPlan.ts",
       "src/services/answerCard/chartAdapter.ts"
     ]
   }

@@ -1,7 +1,26 @@
 # Mummy — Direct Answer
-<!-- card_hash: 6440b5ee2bf235ff | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 21c8be9aee6427f3 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: good (54%) (good, 54%) · New house construction: good (39%) (good, 39%) · Career: good (42%) (good, 42%) · Marriage: good (41%) (good, 41%) · Finance: good (39%) (good, 39%)
+
+**yes — but clear the gate first — the health regimen. the job change: yes — but clear the gate first.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Sun in the 5th (Leo) — in its own sign, self-contained but slow to move.
+- Moon in the 1st (Aries).
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the health regimen, then the job change, then the marriage step, then the money decision, then the construction. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the job change, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
