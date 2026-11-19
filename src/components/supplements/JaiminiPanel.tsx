@@ -34,6 +34,7 @@
 import { useState, useMemo } from "react";
 import { assembleEngineData }  from "@/services/engineDataAssembler";
 import { searchLocation }      from "@/services/geocodingService";
+import { runRaksha }           from "@/services/navratri/n9Raksha";
 import EnhancedBirthInputForm from "@/components/EnhancedBirthInputForm";
 import type {
   JaiminiAnalysis,
@@ -346,6 +347,22 @@ export function JaiminiPanel() {
       if (geo.length > 0) { lat = geo[0].lat; lng = geo[0].lon; }
       const bd         = parseBirthDate(form.date, form.time);
       const engineData = assembleEngineData(bd, lat, lng);
+
+      // N9 Raksha provenance gate — fail closed: do not render astrological
+      // claims when provenance validation rejects the computation envelope.
+      const raksha = await runRaksha({
+        birthDate: form.date,
+        birthTime: form.time,
+        lang: 'en',
+      });
+      if (!raksha.passed) {
+        setError(
+          'Provenance validation failed — analysis withheld. ' +
+          (raksha.blockReasons.join('; ') || 'unverified claims detected'),
+        );
+        return;
+      }
+
       setAnalysis(engineData.jaiminiAnalysis);
       setBirthDate(bd);
       setSubjectLabel(`${form.location} · ${form.date} ${form.time} IST`);
