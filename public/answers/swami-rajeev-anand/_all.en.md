@@ -1,7 +1,22 @@
 # Swami Rajeev Anand — Direct Answer
-<!-- card_hash: 851c7accb9890ea3 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 44bd7b26f0fc593d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: caution (35%) (caution, 35%) · New house construction: caution (46%) (caution, 46%) · Career: average (49%) (average, 49%) · Marriage: avoid (58%) (avoid, 58%) · Finance: caution (45%) (caution, 45%)
+
+**yes, conditionally — the job change. the health regimen: not yet — fix the base first.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 6th (Sagittarius), retrograde — the result arrives in re-runs.
+- Mars in the 12th (Gemini).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the health regimen, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

@@ -1,7 +1,22 @@
 # Swami Rajeev Anand — Direct Answer
-<!-- card_hash: 0afd952fce078ccb | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 2e3a151639a9457d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: caution (46%) (caution, 46%)
+
+**not yet — fix the base first — the construction.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Moon in the 1st (Gemini).
+- Venus in the 11th (Taurus) — in its own sign, self-contained but slow to move.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

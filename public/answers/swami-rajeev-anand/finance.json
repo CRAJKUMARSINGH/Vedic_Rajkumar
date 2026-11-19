@@ -75,6 +75,80 @@
       ]
     }
   ],
+  "composed": {
+    "verdict_line": {
+      "en": "not yet — fix the base first — the money decision.",
+      "hi": "अभी नहीं — पहले आधार सुधारें — आर्थिक निर्णय।"
+    },
+    "depth": "standard",
+    "ranked": [
+      {
+        "topic": "finance",
+        "decision": {
+          "en": "not yet — fix the base first",
+          "hi": "अभी नहीं — पहले आधार सुधारें"
+        }
+      }
+    ],
+    "sections": [
+      {
+        "id": "why",
+        "title": {
+          "en": "Why",
+          "hi": "क्यों"
+        },
+        "body": {
+          "en": "The call rests on these placements, not on a general stanza:",
+          "hi": "निर्णय सामान्य श्लोक पर नहीं, इन स्थितियों पर टिका है:"
+        },
+        "citations": [
+          {
+            "en": "Venus in the 11th (Taurus) — in its own sign, self-contained but slow to move.",
+            "hi": "शुक्र एकादश भाव (वृषभ) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+          },
+          {
+            "en": "Ketu in the 2nd (Leo), retrograde — the result arrives in re-runs.",
+            "hi": "केतु द्वितीय भाव (सिंह) में, वक्री — फल दोबारा आता है।"
+          }
+        ]
+      }
+    ],
+    "sequence": null,
+    "app_links": [
+      {
+        "label": {
+          "en": "Transit (gochar) overlay",
+          "hi": "गोचर परत"
+        },
+        "path": "/transits"
+      },
+      {
+        "label": {
+          "en": "Muhurat windows",
+          "hi": "मुहूर्त"
+        },
+        "path": "/muhurat"
+      },
+      {
+        "label": {
+          "en": "Kundli Milan",
+          "hi": "कुंडली मिलान"
+        },
+        "path": "/matchmaking"
+      },
+      {
+        "label": {
+          "en": "Dasha timeline",
+          "hi": "दशा-क्रम"
+        },
+        "path": "/dasha"
+      }
+    ],
+    "closing_question": {
+      "en": "Say the one thing you want tightened and I will take it alone.",
+      "hi": "जो एक बात पक्की करनी है, बताइए — अकेले लेंगे।"
+    }
+  },
   "provenance": {
     "engine_version": "0.1.0",
     "ayanamsa": "Lahiri (Chitrapaksha)",
@@ -84,12 +158,17 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "cfb5558207c8a51e",
-    "card_hash": "58466a34195c8d52",
+    "card_hash": "f723b61045a377e0",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",
       "src/services/ashtakavargaService.ts",
       "src/services/chartBuilderService.ts",
+      "src/services/answerCard/chartFacts.ts",
+      "src/services/answerCard/answerComposer.ts",
+      "src/services/answerCard/depth.ts",
+      "src/services/answerCard/sequencing.ts",
+      "src/services/answerCard/remedyPlan.ts",
       "src/services/answerCard/chartAdapter.ts"
     ]
   }

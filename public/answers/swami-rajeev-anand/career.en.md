@@ -1,7 +1,22 @@
 # Swami Rajeev Anand — Direct Answer
-<!-- card_hash: 8537018708a1aaa6 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: c82a4bab705d9432 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (49%) (average, 49%)
+
+**yes, conditionally — the job change.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 6th (Sagittarius), retrograde — the result arrives in re-runs.
+- Mars in the 12th (Gemini).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

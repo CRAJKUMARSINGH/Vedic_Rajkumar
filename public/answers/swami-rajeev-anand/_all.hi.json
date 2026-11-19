@@ -291,6 +291,108 @@
       ]
     }
   ],
+  "composed": {
+    "verdict_line": {
+      "en": "yes, conditionally — the job change. the health regimen: not yet — fix the base first.",
+      "hi": "हाँ, शर्त के साथ — नौकरी परिवर्तन। स्वास्थ्य नियम: अभी नहीं — पहले आधार सुधारें।"
+    },
+    "depth": "standard",
+    "ranked": [
+      {
+        "topic": "career",
+        "decision": {
+          "en": "yes, conditionally",
+          "hi": "हाँ, शर्त के साथ"
+        }
+      },
+      {
+        "topic": "health",
+        "decision": {
+          "en": "not yet — fix the base first",
+          "hi": "अभी नहीं — पहले आधार सुधारें"
+        }
+      },
+      {
+        "topic": "house_construction",
+        "decision": {
+          "en": "not yet — fix the base first",
+          "hi": "अभी नहीं — पहले आधार सुधारें"
+        }
+      },
+      {
+        "topic": "finance",
+        "decision": {
+          "en": "not yet — fix the base first",
+          "hi": "अभी नहीं — पहले आधार सुधारें"
+        }
+      },
+      {
+        "topic": "marriage",
+        "decision": {
+          "en": "no, for now",
+          "hi": "नहीं, अभी के लिए"
+        }
+      }
+    ],
+    "sections": [
+      {
+        "id": "why",
+        "title": {
+          "en": "Why",
+          "hi": "क्यों"
+        },
+        "body": {
+          "en": "The call rests on these placements, not on a general stanza:",
+          "hi": "निर्णय सामान्य श्लोक पर नहीं, इन स्थितियों पर टिका है:"
+        },
+        "citations": [
+          {
+            "en": "Saturn in the 6th (Sagittarius), retrograde — the result arrives in re-runs.",
+            "hi": "शनि षष्ठ भाव (धनु) में, वक्री — फल दोबारा आता है।"
+          },
+          {
+            "en": "Mars in the 12th (Gemini).",
+            "hi": "मंगल द्वादश भाव (मिथुन) में।"
+          }
+        ]
+      }
+    ],
+    "sequence": null,
+    "app_links": [
+      {
+        "label": {
+          "en": "Transit (gochar) overlay",
+          "hi": "गोचर परत"
+        },
+        "path": "/transits"
+      },
+      {
+        "label": {
+          "en": "Muhurat windows",
+          "hi": "मुहूर्त"
+        },
+        "path": "/muhurat"
+      },
+      {
+        "label": {
+          "en": "Kundli Milan",
+          "hi": "कुंडली मिलान"
+        },
+        "path": "/matchmaking"
+      },
+      {
+        "label": {
+          "en": "Dasha timeline",
+          "hi": "दशा-क्रम"
+        },
+        "path": "/dasha"
+      }
+    ],
+    "closing_question": {
+      "en": "Which single variable do you want fixed first — the health regimen, or the city? Say one and I will take it alone.",
+      "hi": "पहले कौन-सा एक चर तय करें — स्वास्थ्य नियम, या शहर? एक बताइए, उसे अकेले लेंगे।"
+    }
+  },
   "provenance": {
     "engine_version": "0.1.0",
     "ayanamsa": "Lahiri (Chitrapaksha)",
@@ -300,12 +402,17 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "cfb5558207c8a51e",
-    "card_hash": "ff25165c4da331c9",
+    "card_hash": "b4863a72b122b333",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",
       "src/services/ashtakavargaService.ts",
       "src/services/chartBuilderService.ts",
+      "src/services/answerCard/chartFacts.ts",
+      "src/services/answerCard/answerComposer.ts",
+      "src/services/answerCard/depth.ts",
+      "src/services/answerCard/sequencing.ts",
+      "src/services/answerCard/remedyPlan.ts",
       "src/services/answerCard/chartAdapter.ts"
     ]
   }

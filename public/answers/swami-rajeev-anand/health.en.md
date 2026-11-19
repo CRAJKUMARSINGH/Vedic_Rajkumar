@@ -1,7 +1,22 @@
 # Swami Rajeev Anand — Direct Answer
-<!-- card_hash: 803f1fab06139a90 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: f167ab8643334bb8 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: caution (35%) (caution, 35%)
+
+**not yet — fix the base first — the health regimen.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mars in the 12th (Gemini).
+- Moon in the 1st (Gemini).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

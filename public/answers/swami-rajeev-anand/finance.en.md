@@ -1,7 +1,22 @@
 # Swami Rajeev Anand — Direct Answer
-<!-- card_hash: 3c943f78e6444c4c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: d91d2e540e04c5ce | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: caution (45%) (caution, 45%)
+
+**not yet — fix the base first — the money decision.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 11th (Taurus) — in its own sign, self-contained but slow to move.
+- Ketu in the 2nd (Leo), retrograde — the result arrives in re-runs.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
