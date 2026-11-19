@@ -1,7 +1,22 @@
 # Priyanka Jain — Direct Answer
-<!-- card_hash: 09b579ce492f93cd | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: a3d199923b63632f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (43%) (average, 43%)
+
+**yes, conditionally — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Jupiter in the 3rd (Sagittarius) — in its own sign, self-contained but slow to move.
+- Venus in the 2nd (Scorpio).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

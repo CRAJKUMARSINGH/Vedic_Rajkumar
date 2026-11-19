@@ -1,7 +1,22 @@
 # Priyanka Jain — Direct Answer
-<!-- card_hash: c7ec4a78179be2db | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 099cfe9f0d27edaa | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (57%) (average, 57%)
+
+**yes, conditionally — the money decision.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 2nd (Scorpio).
+- Venus in the 2nd (Scorpio).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

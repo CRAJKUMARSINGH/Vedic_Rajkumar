@@ -1,7 +1,26 @@
 # Priyanka Jain — Direct Answer
-<!-- card_hash: 7ea1959f159bfa12 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 902f736c8ae6d290 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (45%) (average, 45%) · New house construction: average (55%) (average, 55%) · Career: average (42%) (average, 42%) · Marriage: average (43%) (average, 43%) · Finance: average (57%) (average, 57%)
+
+**yes, conditionally — the job change. the health regimen: yes, conditionally.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mercury in the 1st (Libra).
+- Mercury in the 1st (Libra).
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the job change, then the health regimen, then the marriage step, then the construction, then the money decision. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the health regimen, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
