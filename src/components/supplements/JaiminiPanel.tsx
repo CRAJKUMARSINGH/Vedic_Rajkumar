@@ -205,6 +205,45 @@ function PadaCard({
             <p className="text-[11px] text-slate-500 leading-relaxed">{pada.meaning.hi}</p>
           )}
           <p className="text-[11px] text-slate-400 italic leading-relaxed">{description}</p>
+
+          {/* Why this conclusion — calculated fact vs interpretation */}
+          <details className="rounded-md border border-white/10 bg-white/[0.02] px-3 py-2">
+            <summary className="cursor-pointer text-[11px] font-semibold text-amber-300/90 select-none">
+              यह निष्कर्ष क्यों? / Why this conclusion?
+            </summary>
+            <dl className="mt-2 space-y-1.5 text-[11px] leading-relaxed">
+              <div>
+                <dt className="inline font-semibold text-slate-300">Calculated fact: </dt>
+                <dd className="inline text-slate-400">
+                  Arudha sign = {RASHI_SYMBOLS[pada.rashiIndex]} {pada.rashiName}
+                  (rashi index {pada.rashiIndex}) — computed by
+                  jaiminiService.calculateArudhaPada, inclusive sign-distance
+                  counting, single-lord map, sidereal (Lahiri).
+                </dd>
+              </div>
+              <div>
+                <dt className="inline font-semibold text-slate-300">Interpretation rule: </dt>
+                <dd className="inline text-slate-400">
+                  Traditional Jaimini reading — the pada reflects the world's
+                  perception of the house, not an objectively established outcome.
+                </dd>
+              </div>
+              <div>
+                <dt className="inline font-semibold text-slate-300">Convention note: </dt>
+                <dd className="inline text-slate-400">
+                  The self/seventh +10 exception is currently unreachable under
+                  the inclusive-count convention (OPEN — see
+                  reports/ARUDHA_CALCULATION_CONVENTION.md).
+                </dd>
+              </div>
+              <div>
+                <dt className="inline font-semibold text-slate-300">Nature of claim: </dt>
+                <dd className="inline text-slate-500 italic">
+                  Interpretive guidance only — not a verified prediction, diagnosis, or guarantee.
+                </dd>
+              </div>
+            </dl>
+          </details>
         </div>
       )}
     </div>
