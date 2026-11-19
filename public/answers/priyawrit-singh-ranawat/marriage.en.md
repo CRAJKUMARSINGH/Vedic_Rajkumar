@@ -1,7 +1,22 @@
 # Priyawrit Singh Ranawat — Direct Answer
-<!-- card_hash: 64c72ba0080667f2 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 583328685e1614db | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (54%) (average, 54%)
+
+**yes, conditionally — the marriage step.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mars in the 3rd (Scorpio) — in its own sign, self-contained but slow to move.
+- Mars in the 3rd (Scorpio) — in its own sign, self-contained but slow to move.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

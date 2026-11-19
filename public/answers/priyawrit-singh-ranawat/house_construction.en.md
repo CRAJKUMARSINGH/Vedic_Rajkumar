@@ -1,7 +1,22 @@
 # Priyawrit Singh Ranawat — Direct Answer
-<!-- card_hash: 375203a61af1e08e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 7e5c4e7498faee2e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (48%) (average, 48%)
+
+**yes, conditionally — the construction.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Saturn in the 8th (Aries), retrograde — the result arrives in re-runs — debilitated, the promise needs repair.
+- Mars in the 3rd (Scorpio) — in its own sign, self-contained but slow to move.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

@@ -1,7 +1,22 @@
 # Priyawrit Singh Ranawat — Direct Answer
-<!-- card_hash: a339d7dcb53c8f62 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 96451e8b2fc982a5 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (50%) (average, 50%)
+
+**yes, conditionally — the money decision.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mars in the 3rd (Scorpio) — in its own sign, self-contained but slow to move.
+- Mercury in the 2nd (Libra).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

@@ -1,7 +1,22 @@
 # Priyawrit Singh Ranawat — Direct Answer
-<!-- card_hash: e1071e619812fc0c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: e290f8ee088d7012 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (45%) (average, 45%)
+
+**yes, conditionally — the health regimen.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 12th (Leo).
+- Sun in the 1st (Virgo).
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
