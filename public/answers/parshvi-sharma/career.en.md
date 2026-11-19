@@ -1,7 +1,22 @@
 # Parshvi Sharma — Direct Answer
-<!-- card_hash: 080baafdde3209c7 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 3991f277c80046ca | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (57%) (average, 57%)
+
+**yes, conditionally — the job change.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Mercury in the 4th (Capricorn), retrograde — the result arrives in re-runs.
+- Mercury in the 4th (Capricorn), retrograde — the result arrives in re-runs.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |

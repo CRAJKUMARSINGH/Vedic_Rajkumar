@@ -1,7 +1,26 @@
 # Parshvi Sharma — Direct Answer
-<!-- card_hash: 33d002996bc546e6 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 0389d98bc5606406 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (49%) (average, 49%) · New house construction: good (46%) (good, 46%) · Career: average (57%) (average, 57%) · Marriage: good (47%) (good, 47%) · Finance: good (47%) (good, 47%)
+
+**yes — but clear the gate first — the money decision. the marriage step: yes — but clear the gate first.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 4th (Capricorn).
+- Moon in the 1st (Virgo).
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the money decision, then the marriage step, then the construction, then the job change, then the health regimen. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Which single variable do you want fixed first — the marriage step, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
