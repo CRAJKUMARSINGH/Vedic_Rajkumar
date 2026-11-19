@@ -336,7 +336,14 @@ working on this repository. They apply to all sessions until explicitly revoked.
    from `CREAT.MD` when a new entry is written. The file stays short by design —
    it is a rolling window, not an archive.
 4. **Never let `CREAT.MD` go stale.** If you did work, log it before you stop.
-5. **CONFIDENTIALITY — hard constraint.** Seed-bank birth data and everything
+5. **Update cadence.** `CREAT.MD` must be updated at least every **12 minutes**
+   during active work sessions — never let the log go stale mid-task.
+6. **Keep folders, even when empty.** Never delete directory structures
+   (`vedic-vijay/`, `CODE-JUNCTION/`, `reports/`, `docs/`, etc.) even if they
+   become empty — folder presence is part of the project contract. Delete
+   files only, never the folders themselves.
+
+7. **CONFIDENTIALITY — hard constraint.** Seed-bank birth data and everything
    derived from it is **private**. The code must not reveal seed-bank details
    (name, date/time of birth, place, coordinates, or any chart/verdict derived
    from them) to any random user — **only the authenticated admin** (a

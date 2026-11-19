@@ -19,12 +19,15 @@ function planetAt(name: string, rashiIndex: number): JaiminiPlanet {
   return { name, rashiIndex, degrees: 10, house: ((rashiIndex - 0) % 12) + 1 };
 }
 
-/** Independent re-implementation of the documented convention. */
+/** Independent re-implementation of the documented classical convention.
+ *  Exception fires when lord is in the source sign (dist===1) or the 7th
+ *  from it (dist===7) — the lord's inclusive distance, not the final pada.
+ *  Reference: BPHS / Upadesa Sutra Jaimini tradition.
+ */
 function expectedPada(target: number, lordSign: number): number {
   const dist = ((lordSign - target + 12) % 12) || 12; // inclusive distance (1..12)
-  let pada = (lordSign + dist - 1) % 12;
-  if (pada === target || pada === (target + 6) % 12) pada = (pada + 10) % 12;
-  return pada;
+  if (dist === 1 || dist === 7) return (target + 9) % 12; // 10th from source
+  return (lordSign + dist - 1) % 12;
 }
 
 describe('calculateArudhaPada — convention matrix', () => {

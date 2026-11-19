@@ -301,12 +301,29 @@ export function calculateArudhaPada(
   if (!lordPlanet) return null;
 
   const dist = (lordPlanet.rashiIndex - targetRashi + 12) % 12 || 12;
-  let padaRashi = (lordPlanet.rashiIndex + dist - 1) % 12;
 
-  if (padaRashi === targetRashi || padaRashi === (targetRashi + 6) % 12) {
-    padaRashi = (padaRashi + 10) % 12;
+  // Classical Jaimini exception (BPHS / Upadesa Sutra):
+  // When the lord falls in the source sign (distance 1) or the 7th from it
+  // (distance 7), the unadjusted Pada lands back on the source or its 7th —
+  // making the result identical to either the native's lagna or its mirror.
+  // The resolution is to count 10 signs forward from the source sign instead.
+  // Note: "distance" here is the inclusive sign-count lord→source; the
+  // exception is tested on that distance, not on the final unadjusted Pada
+  // (the old test on the final value was unreachable in both cases).
+  if (dist === 1 || dist === 7) {
+    const padaRashi = (targetRashi + 9) % 12;
+    return {
+      rashiIndex: padaRashi,
+      rashiName: RASHI_NAMES[padaRashi],
+      degrees: 0,
+      meaning: {
+        en: `Arudha of house ${houseNumber} in ${RASHI_NAMES[padaRashi]}`,
+        hi: `भाव ${houseNumber} का आरूढ ${RASHI_NAMES_HI[padaRashi]} में`,
+      },
+    };
   }
 
+  const padaRashi = (lordPlanet.rashiIndex + dist - 1) % 12;
   return {
     rashiIndex: padaRashi,
     rashiName: RASHI_NAMES[padaRashi],

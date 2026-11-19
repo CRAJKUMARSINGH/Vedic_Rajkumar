@@ -16,8 +16,6 @@ export default defineConfig({
     include: [
       'src/tests/**/*.test.{ts,tsx}',
       'src/tests/**/*.spec.{ts,tsx}',
-      'src/test/**/*.test.{ts,tsx}',
-      'src/test/**/*.spec.{ts,tsx}',
     ],
     // One manual tool rewrites baselines from the engine itself and must never
     // run inside the normal suite — it would turn a gate circular.
