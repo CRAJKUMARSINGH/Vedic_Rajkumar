@@ -9,12 +9,10 @@
 
 import { jdTTFromUT } from '@/lib/timeScales';
 
-// Ayanamsa (Lahiri) - Precession correction for sidereal zodiac
-// As of 2000-01-01: approximately 23.85° (Lahiri standard)
-const AYANAMSA_2000 = 23.85;
-const AYANAMSA_BASE_YEAR = 2000;
-const AYANAMSA_ANNUAL_RATE = 0.0139; // degrees per year
-const AYANAMSA_2026 = 24.21; // Lahiri Ayanamsa for 2026 (safe fallback)
+// Ayanamsa (Lahiri) — precession correction for the sidereal zodiac.
+// The Lahiri epoch value is derived from the Julian Day inside
+// calculateAyanamsa; no cached "current-year" constant is kept, because a
+// stale constant is exactly how a wrong ayanamsa slips past review.
 
 /**
  * Calculate Ayanamsa for a given date (Lahiri system)
@@ -35,8 +33,17 @@ export function calculateAyanamsa(date: Date | string | number): number {
     jd = calculateJulianDay(new Date(date));
   }
   
-  if (isNaN(jd)) return 24.21; // Fallback
-  
+  if (isNaN(jd)) {
+    // Fail closed. An unparseable date yields a NaN Julian Day; returning a
+    // hardcoded epoch value here would silently ship a wrong ayanamsa — the
+    // same class of bug as the hardcoded-IST ascendant incident.
+    throw new Error(
+      `calculateAyanamsa: could not derive a Julian Day from ${
+        typeof date === 'string' ? `"${date}"` : String(date)
+      }`,
+    );
+  }
+
   const T = (jd - 2451545.0) / 36525.0;
   return 23.85472 + (0.0139601 * T * 100) - (0.000308 * T * T);
 }

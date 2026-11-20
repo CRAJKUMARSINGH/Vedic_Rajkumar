@@ -55,6 +55,12 @@ describe('EphemerisService - Core Astronomical Calculations', () => {
       const ayanamsa2026 = calculateAyanamsa('2026-03-17');
       expect(ayanamsa2026).toBeGreaterThan(ayanamsa2000);
     });
+
+    it('throws on an invalid date instead of returning a silent constant', () => {
+      // Fail-closed contract: a NaN Julian Day must never masquerade as a
+      // valid ayanamsa (the ±constant fallback that hid the wrong-ayanamsa bug).
+      expect(() => calculateAyanamsa('not-a-date')).toThrow(/calculateAyanamsa/);
+    });
   });
 
   describe('Sun Position Calculation', () => {
