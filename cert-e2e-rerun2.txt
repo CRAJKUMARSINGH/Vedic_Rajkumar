@@ -1,0 +1,121 @@
+
+Running 6 tests using 2 workers
+
+Navigating to: /
+Screenshot saved for / at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_.png
+  ok 2 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: / (29.8s)
+  x  1 [chromium] › tests\e2e\perf-mobile.spec.ts:15:1 › kundli compute does not block the main thread (37.0s)
+  x  3 [chromium] › tests\e2e\persona-tiers.spec.ts:104:3 › Advanced persona — edge dates › out-of-range date shows an explicit message, not a silent no-op (13.9s)
+  x  4 [chromium] › tests\e2e\persona-tiers.spec.ts:118:3 › Advanced persona — edge dates › non-existent leap day (29 Feb 1900) is rejected explicitly (11.9s)
+  ok 5 [chromium] › tests\e2e\persona-users.spec.ts:212:3 › Persona — basic tier › basic: calculation renders a horoscope without forced clicks (12.7s)
+  ok 6 [chromium] › tests\e2e\persona-users.spec.ts:459:3 › Persona — advanced tier › advanced: rapid repeated submissions do not crash or duplicate (16.9s)
+
+
+  1) [chromium] › tests\e2e\perf-mobile.spec.ts:15:1 › kundli compute does not block the main thread 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.goto: Test timeout of 30000ms exceeded.
+    Call log:
+      - navigating to "http://127.0.0.1:5173/", waiting until "load"
+
+
+      18 |   await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
+      19 |
+    > 20 |   await page.goto('/');
+         |              ^
+      21 |   await page.getByTestId('tier-badge').first().waitFor();
+      22 |
+      23 |   const longTasks = await page.evaluate(async () => {
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\perf-mobile.spec.ts:20:14
+
+    Error Context: test-results\perf-mobile-kundli-compute-does-not-block-the-main-thread-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-mobile-kundli-compute-does-not-block-the-main-thread-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-mobile-kundli-compute-does-not-block-the-main-thread-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests\e2e\persona-tiers.spec.ts:104:3 › Advanced persona — edge dates › out-of-range date shows an explicit message, not a silent no-op 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/outside supported range/i)
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText(/outside supported range/i)
+
+
+      109 |     await page.locator('#dob').fill('01/01/1899');
+      110 |
+    > 111 |     await expect(page.getByText(/outside supported range/i)).toBeVisible({ timeout: 5_000 });
+          |                                                              ^
+      112 |
+      113 |     // The primary action must stay disabled while the date is out of range.
+      114 |     const submit = page.getByRole('button', { name: /Get Transit Reading|गोचर फल देखें/ });
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-tiers.spec.ts:111:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-tiers-Advanced-per-a3196--message-not-a-silent-no-op-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-tiers-Advanced-per-a3196--message-not-a-silent-no-op-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-tiers-Advanced-per-a3196--message-not-a-silent-no-op-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-tiers-Advanced-per-a3196--message-not-a-silent-no-op-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests\e2e\persona-tiers.spec.ts:118:3 › Advanced persona — edge dates › non-existent leap day (29 Feb 1900) is rejected explicitly 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/Invalid calendar date/i)
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText(/Invalid calendar date/i)
+
+
+      123 |     await page.locator('#dob').fill('29/02/1900');
+      124 |
+    > 125 |     await expect(page.getByText(/Invalid calendar date/i)).toBeVisible({ timeout: 5_000 });
+          |                                                            ^
+      126 |   });
+      127 |
+      128 |   test('a real leap day (29 Feb 2000) remains valid', async ({ page }) => {
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-tiers.spec.ts:125:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-tiers-Advanced-per-6d696-1900-is-rejected-explicitly-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-tiers-Advanced-per-6d696-1900-is-rejected-explicitly-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-tiers-Advanced-per-6d696-1900-is-rejected-explicitly-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-tiers-Advanced-per-6d696-1900-is-rejected-explicitly-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [chromium] › tests\e2e\perf-mobile.spec.ts:15:1 › kundli compute does not block the main thread 
+    [chromium] › tests\e2e\persona-tiers.spec.ts:104:3 › Advanced persona — edge dates › out-of-range date shows an explicit message, not a silent no-op 
+    [chromium] › tests\e2e\persona-tiers.spec.ts:118:3 › Advanced persona — edge dates › non-existent leap day (29 Feb 1900) is rejected explicitly 
+  3 passed (1.7m)
+EXIT=1

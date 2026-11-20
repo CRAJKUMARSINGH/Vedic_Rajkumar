@@ -1,0 +1,6 @@
+﻿
+> vedic-rajkumar@0.0.0-development answers:check
+> node scripts/emitAnswerCards.mjs --check
+
+
+21 cards verified (as_of 2026-10-24).

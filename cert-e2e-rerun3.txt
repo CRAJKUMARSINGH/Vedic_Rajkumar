@@ -1,0 +1,15 @@
+
+Running 2 tests using 2 workers
+
+  ok 1 [chromium] › tests\e2e\persona-tiers.spec.ts:49:3 › Basic persona — happy path › home → horoscope → calculate → result renders (20.0s)
+  ok 2 [chromium] › tests\e2e\persona-users.spec.ts:350:3 › Persona — intermediate tier › intermediate: PDF/print export control is wired up (20.2s)
+
+  2 passed (26.8s)
+
+Running 1 test using 1 worker
+
+Navigating to: /kundli-compare
+Screenshot saved for /kundli-compare at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_kundli-compare.png
+  ok 1 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kundli-compare (12.2s)
+
+  1 passed (19.8s)

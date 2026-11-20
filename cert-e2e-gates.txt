@@ -1,0 +1,876 @@
+
+> vedic-rajkumar@0.0.0-development test:e2e
+> playwright test
+
+
+Running 155 tests using 2 workers
+
+Navigating to: /
+Navigating to: /career-astrology
+  x    2 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: / (1.6m)
+Navigating to: /kaalsarp
+  x    1 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /career-astrology (1.7m)
+Navigating to: /comprehensive
+  x    3 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kaalsarp (1.5m)
+  x    4 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /comprehensive (1.2m)
+Navigating to: /matchmaking
+Navigating to: /enhanced-matchmaking
+Screenshot saved for /enhanced-matchmaking at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_enhanced-matchmaking.png
+Screenshot saved for /matchmaking at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_matchmaking.png
+  ok   5 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /matchmaking (1.3m)
+  ok   6 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enhanced-matchmaking (1.2m)
+Navigating to: /vaastu
+Navigating to: /muhurat
+Screenshot saved for /vaastu at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_vaastu.png
+Screenshot saved for /muhurat at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_muhurat.png
+  ok   7 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vaastu (16.5s)
+  ok   8 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /muhurat (16.6s)
+Navigating to: /enhanced-muhurat
+Navigating to: /baby-names
+Screenshot saved for /enhanced-muhurat at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_enhanced-muhurat.png
+  ok   9 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enhanced-muhurat (6.1s)
+Navigating to: /lucky-elements
+Screenshot saved for /baby-names at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_baby-names.png
+  ok  10 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /baby-names (7.2s)
+Navigating to: /festival-calendar
+Screenshot saved for /lucky-elements at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_lucky-elements.png
+  ok  11 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /lucky-elements (6.0s)
+Navigating to: /analytics
+Screenshot saved for /festival-calendar at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_festival-calendar.png
+  ok  12 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /festival-calendar (6.2s)
+Navigating to: /feature-requests
+Screenshot saved for /analytics at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_analytics.png
+Screenshot saved for /feature-requests at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_feature-requests.png
+  ok  14 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feature-requests (13.1s)
+  ok  13 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /analytics (15.2s)
+Navigating to: /feedback-dashboard
+Navigating to: /quick-wins
+Screenshot saved for /quick-wins at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_quick-wins.png
+Screenshot saved for /feedback-dashboard at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_feedback-dashboard.png
+  ok  15 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feedback-dashboard (1.1m)
+  ok  16 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /quick-wins (1.1m)
+Navigating to: /jaimini
+Navigating to: /dasha
+Screenshot saved for /dasha at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_dasha.png
+Screenshot saved for /jaimini at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_jaimini.png
+  ok  17 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dasha (13.4s)
+  ok  18 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /jaimini (13.1s)
+Navigating to: /tajik
+Navigating to: /business-astrology
+Screenshot saved for /business-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_business-astrology.png
+Screenshot saved for /tajik at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_tajik.png
+  ok  19 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /tajik (8.0s)
+  ok  20 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /business-astrology (7.9s)
+Navigating to: /divisional-charts
+Navigating to: /remedies
+Screenshot saved for /divisional-charts at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_divisional-charts.png
+Screenshot saved for /remedies at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_remedies.png
+  ok  22 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /divisional-charts (7.0s)
+  ok  21 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /remedies (7.0s)
+Navigating to: /horoscope
+Navigating to: /planetary-strength
+Screenshot saved for /horoscope at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_horoscope.png
+Screenshot saved for /planetary-strength at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_planetary-strength.png
+  ok  24 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /horoscope (6.5s)
+  ok  23 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /planetary-strength (6.7s)
+Navigating to: /yogas
+Navigating to: /lal-kitab
+Screenshot saved for /yogas at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_yogas.png
+Screenshot saved for /lal-kitab at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_lal-kitab.png
+  ok  25 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /yogas (7.5s)
+  ok  26 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /lal-kitab (7.5s)
+Navigating to: /kp-system
+Navigating to: /love-astrology
+Screenshot saved for /kp-system at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_kp-system.png
+Screenshot saved for /love-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_love-astrology.png
+  ok  27 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kp-system (10.0s)
+  ok  28 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /love-astrology (9.9s)
+Navigating to: /western-astrology
+Navigating to: /nadi-astrology
+Screenshot saved for /western-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_western-astrology.png
+Screenshot saved for /nadi-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_nadi-astrology.png
+  ok  29 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /nadi-astrology (7.4s)
+  ok  30 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /western-astrology (7.4s)
+Navigating to: /chinese-astrology
+Navigating to: /ai-predictions
+Screenshot saved for /ai-predictions at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_ai-predictions.png
+Screenshot saved for /chinese-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_chinese-astrology.png
+  ok  32 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /ai-predictions (7.7s)
+Navigating to: /horary
+  ok  31 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /chinese-astrology (8.5s)
+Navigating to: /medical-astrology
+Screenshot saved for /medical-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_medical-astrology.png
+  ok  34 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /medical-astrology (6.5s)
+Navigating to: /numerology
+Screenshot saved for /horary at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_horary.png
+  ok  33 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /horary (11.2s)
+Navigating to: /financial-astrology
+Screenshot saved for /numerology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_numerology.png
+  ok  35 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /numerology (7.8s)
+Navigating to: /learn
+Screenshot saved for /financial-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_financial-astrology.png
+  ok  36 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /financial-astrology (7.0s)
+Navigating to: /marketplace
+Screenshot saved for /learn at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_learn.png
+  ok  37 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /learn (7.5s)
+Navigating to: /community
+Screenshot saved for /marketplace at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_marketplace.png
+  ok  38 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /marketplace (7.1s)
+Navigating to: /features
+Screenshot saved for /community at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_community.png
+  ok  39 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /community (5.9s)
+Navigating to: /api-docs
+Screenshot saved for /features at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_features.png
+  ok  40 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /features (7.1s)
+Navigating to: /panchang
+Screenshot saved for /api-docs at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_api-docs.png
+  ok  41 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /api-docs (7.4s)
+Navigating to: /comparative-astrology
+Screenshot saved for /comparative-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_comparative-astrology.png
+  ok  43 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /comparative-astrology (6.3s)
+Navigating to: /world-astrology
+Screenshot saved for /panchang at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_panchang.png
+  ok  42 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /panchang (15.9s)
+Navigating to: /electional-astrology
+Screenshot saved for /world-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_world-astrology.png
+  ok  44 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /world-astrology (8.3s)
+Navigating to: /mundane-astrology
+Screenshot saved for /electional-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_electional-astrology.png
+  ok  45 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /electional-astrology (7.5s)
+Navigating to: /sade-sati
+Screenshot saved for /mundane-astrology at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_mundane-astrology.png
+  ok  46 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mundane-astrology (7.5s)
+Navigating to: /ashtakavarga
+Screenshot saved for /sade-sati at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_sade-sati.png
+Screenshot saved for /ashtakavarga at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_ashtakavarga.png
+  ok  48 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /ashtakavarga (30.7s)
+  ok  47 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /sade-sati (33.6s)
+Navigating to: /enterprise
+Navigating to: /gemstones
+Screenshot saved for /gemstones at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_gemstones.png
+  ok  49 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /gemstones (33.4s)
+Navigating to: /varshaphal
+  x   50 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise (48.3s)
+Screenshot saved for /varshaphal at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_varshaphal.png
+  ok  51 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /varshaphal (31.9s)
+Navigating to: /raman-archive
+Navigating to: /bv-raman
+  x   52 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /raman-archive (1.2m)
+Navigating to: /feedback
+Screenshot saved for /feedback at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_feedback.png
+  ok  54 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /feedback (44.6s)
+Navigating to: /enterprise-admin
+  x   53 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /bv-raman (1.2m)
+Navigating to: /mobile-app
+Screenshot saved for /mobile-app at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_mobile-app.png
+  ok  56 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mobile-app (14.6s)
+Navigating to: /spiritual-remedies
+Screenshot saved for /spiritual-remedies at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_spiritual-remedies.png
+  ok  57 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /spiritual-remedies (5.0s)
+Screenshot saved for /enterprise-admin at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_enterprise-admin.png
+Navigating to: /mahadasha-children
+  ok  55 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise-admin (43.1s)
+Navigating to: /dynamic-transit
+Screenshot saved for /mahadasha-children at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_mahadasha-children.png
+  ok  58 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mahadasha-children (19.9s)
+Navigating to: /consultation
+Screenshot saved for /consultation at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_consultation.png
+  ok  60 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /consultation (5.3s)
+Screenshot saved for /dynamic-transit at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_dynamic-transit.png
+Navigating to: /question
+  ok  59 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dynamic-transit (59.1s)
+Navigating to: /prashna
+Screenshot saved for /question at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_question.png
+  ok  61 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /question (1.3m)
+Navigating to: /knowledge
+Screenshot saved for /prashna at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_prashna.png
+  ok  62 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna (47.3s)
+Navigating to: /knowledge/add
+Screenshot saved for /knowledge at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_knowledge.png
+  ok  63 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge (18.6s)
+Navigating to: /knowledge/ingest
+Screenshot saved for /knowledge/add at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_knowledge_add.png
+  ok  64 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/add (13.6s)
+Navigating to: /knowledge/upload
+Screenshot saved for /knowledge/ingest at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_knowledge_ingest.png
+  ok  65 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/ingest (7.5s)
+Navigating to: /knowledge/export
+Screenshot saved for /knowledge/upload at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_knowledge_upload.png
+  ok  66 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/upload (7.8s)
+Navigating to: /prashna-ai
+Screenshot saved for /knowledge/export at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_knowledge_export.png
+  ok  67 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /knowledge/export (5.9s)
+Navigating to: /prashna-history
+Screenshot saved for /prashna-ai at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_prashna-ai.png
+  ok  68 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna-ai (6.9s)
+Navigating to: /pricing
+Screenshot saved for /prashna-history at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_prashna-history.png
+Screenshot saved for /pricing at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_pricing.png
+  ok  69 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /prashna-history (16.8s)
+Navigating to: /marriage
+  ok  70 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /pricing (14.5s)
+Navigating to: /kanchi
+Screenshot saved for /marriage at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_marriage.png
+  ok  71 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /marriage (5.1s)
+Navigating to: /vedic-marriage
+Screenshot saved for /kanchi at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_kanchi.png
+  ok  72 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kanchi (4.9s)
+Navigating to: /kundli-compare
+Screenshot saved for /kundli-compare at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_kundli-compare.png
+  ok  74 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kundli-compare (9.5s)
+Navigating to: /wedding-muhurat
+Screenshot saved for /vedic-marriage at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_vedic-marriage.png
+  ok  73 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vedic-marriage (11.9s)
+Navigating to: /dasha-timeline
+Screenshot saved for /dasha-timeline at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_dasha-timeline.png
+Screenshot saved for /wedding-muhurat at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_wedding-muhurat.png
+  ok  76 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /dasha-timeline (6.6s)
+  ok  75 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /wedding-muhurat (8.6s)
+Navigating to: /mtss
+Navigating to: /vidhya-karma
+Screenshot saved for /vidhya-karma at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_vidhya-karma.png
+  ok  78 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /vidhya-karma (12.0s)
+Navigating to: /nakshatra-precautions
+Screenshot saved for /nakshatra-precautions at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_nakshatra-precautions.png
+  ok  79 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /nakshatra-precautions (5.7s)
+Navigating to: /my-readings
+Screenshot saved for /mtss at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_mtss.png
+  ok  77 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /mtss (21.6s)
+Screenshot saved for /my-readings at E:\Rajkumar\Vedic_Rajkumar\test-results\screenshots\_my-readings.png
+  ok  80 [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /my-readings (7.1s)
+  ok  81 [chromium] › tests\e2e\landing-page-links.spec.ts:22:3 › Landing page links › collects all internal route links from landing page (5.8s)
+  ok  83 [chromium] › tests\e2e\landing-page-links.spec.ts:28:3 › Landing page links › in-page anchor links resolve to visible sections (25.4s)
+  ok  84 [chromium] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: / (7.2s)
+  ok  85 [chromium] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /pricing (4.3s)
+  ok  86 [chromium] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /prashna (9.7s)
+  ok  87 [chromium] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /horoscope (16.2s)
+  ok  88 [chromium] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /features (4.8s)
+  x   82 [chromium] › tests\e2e\perf-mobile.spec.ts:15:1 › kundli compute does not block the main thread (1.0m)
+  x   89 [chromium] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /matchmaking (4.4s)
+  -   90 [chromium] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /panchang
+  -   91 [chromium] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /privacy
+  -   92 [chromium] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /terms
+  -   93 [chromium] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /privacy-settings
+  -   94 [chromium] › tests\e2e\landing-page-links.spec.ts:54:3 › Landing page links › suite module cards navigate to correct routes
+  ok  96 [chromium] › tests\e2e\persona-tiers.spec.ts:78:3 › Intermediate persona — CTAs › matchmaking: sample data → calculate becomes clickable → result renders (9.8s)
+  ok  95 [chromium] › tests\e2e\persona-tiers.spec.ts:49:3 › Basic persona — happy path › home → horoscope → calculate → result renders (11.5s)
+  ok  97 [chromium] › tests\e2e\persona-tiers.spec.ts:104:3 › Advanced persona — edge dates › out-of-range date shows an explicit message, not a silent no-op (5.2s)
+  ok  99 [chromium] › tests\e2e\persona-tiers.spec.ts:130:3 › Advanced persona — edge dates › a real leap day (29 Feb 2000) remains valid (8.2s)
+  ok  98 [chromium] › tests\e2e\persona-tiers.spec.ts:120:3 › Advanced persona — edge dates › non-existent leap day (29 Feb 1900) is rejected explicitly (11.4s)
+  ok 100 [chromium] › tests\e2e\persona-tiers.spec.ts:142:3 › Advanced persona — demo mode without Clerk › /privacy-settings does not crash when the Clerk key is absent (6.3s)
+  ok 102 [chromium] › tests\e2e\persona-users.spec.ts:199:3 › Persona — basic tier › basic: kundli input form exposes labelled date/time/place fields (4.7s)
+  ok 101 [chromium] › tests\e2e\persona-users.spec.ts:186:3 › Persona — basic tier › basic: home renders for a synthetic visitor (9.1s)
+  ok 103 [chromium] › tests\e2e\persona-users.spec.ts:212:3 › Persona — basic tier › basic: calculation renders a horoscope without forced clicks (12.6s)
+  ok 104 [chromium] › tests\e2e\persona-users.spec.ts:231:3 › Persona — basic tier › basic: English/Hindi switching changes the UI language (15.8s)
+  x  105 [chromium] › tests\e2e\persona-users.spec.ts:247:3 › Persona — basic tier › basic: panchang navigation from the home page (15.6s)
+  x  106 [chromium] › tests\e2e\persona-users.spec.ts:269:3 › Persona — intermediate tier › intermediate: kundli detail view renders for the computed chart (12.6s)
+  ok 108 [chromium] › tests\e2e\persona-users.spec.ts:314:3 › Persona — intermediate tier › intermediate: matchmaking computes compatibility from sample data (8.2s)
+  ok 109 [chromium] › tests\e2e\persona-users.spec.ts:334:3 › Persona — intermediate tier › intermediate: panchang renders a result region for a chosen date (10.4s)
+  ok 110 [chromium] › tests\e2e\persona-users.spec.ts:350:3 › Persona — intermediate tier › intermediate: PDF/print export control is wired up (10.4s)
+  ok 111 [chromium] › tests\e2e\persona-users.spec.ts:391:3 › Persona — advanced tier › advanced: leap-year dates are accepted, impossible dates rejected (12.0s)
+  ok 112 [chromium] › tests\e2e\persona-users.spec.ts:412:3 › Persona — advanced tier › advanced: invalid calendar date (31/04/2020) shows an explanation and blocks submit (12.2s)
+  ok 113 [chromium] › tests\e2e\persona-users.spec.ts:431:3 › Persona — advanced tier › advanced: midnight 00:00 is valid, 24:00 is rejected (11.7s)
+  ok 114 [chromium] › tests\e2e\persona-users.spec.ts:459:3 › Persona — advanced tier › advanced: rapid repeated submissions do not crash or duplicate (10.6s)
+  ok 115 [chromium] › tests\e2e\persona-users.spec.ts:486:3 › Persona — advanced tier › advanced: location dropdown cannot overlap the submit button (10.2s)
+  x  107 [chromium] › tests\e2e\persona-users.spec.ts:291:3 › Persona — intermediate tier › intermediate: prashna returns a verdict (1.0m)
+  ok 116 [chromium] › tests\e2e\persona-users.spec.ts:517:3 › Persona — advanced tier › advanced: submit click succeeds even if dropdown is open (no force:true) (16.8s)
+  ok 117 [chromium] › tests\e2e\persona-users.spec.ts:568:3 › Persona — advanced tier › advanced: keyboard-only selection and submission (14.2s)
+  ok 119 [chromium] › tests\e2e\persona-users.spec.ts:614:3 › Persona — advanced tier › advanced: privacy settings work without Clerk (demo mode) (21.5s)
+  ok 118 [chromium] › tests\e2e\persona-users.spec.ts:597:3 › Persona — advanced tier › advanced: a stale geocoding response does not reopen the dropdown (27.0s)
+  ok 120 [chromium] › tests\e2e\persona-users.spec.ts:642:3 › Persona — advanced tier › advanced: deep-link refresh keeps the page functional (15.5s)
+  -  122 [chromium] › tests\e2e\persona-users.spec.ts:682:3 › Persona — advanced tier › advanced: offline production preview serves a usable shell
+  ok 121 [chromium] › tests\e2e\persona-users.spec.ts:658:3 › Persona — advanced tier › advanced: geocoding network failure degrades gracefully (40.2s)
+  ok 123 [chromium] › tests\e2e\production-navigation.spec.ts:5:3 › Prashna direct navigation and refresh: /prashna (35.7s)
+  ok 124 [chromium] › tests\e2e\production-navigation.spec.ts:5:3 › Prashna direct navigation and refresh: /question (25.4s)
+  -  126 [chromium] › tests\e2e\production-offline.spec.ts:28:1 › PATCH 6 — home page loads with no unexplained 4xx/5xx in production
+  -  127 [chromium] › tests\e2e\production-offline.spec.ts:66:1 › PATCH 5 — /panchang works offline after service worker activation
+  ok 125 [chromium] › tests\e2e\production-navigation.spec.ts:18:1 › documented Prasna spelling redirects to the canonical route (33.0s)
+  -  129 [chromium] › tests\e2e\rate-limit.spec.ts:13:3 › rate limit headers › advertises the policy on every response
+  -  130 [chromium] › tests\e2e\rate-limit.spec.ts:19:3 › rate limit headers › burst then 429 with Retry-After
+  ok 128 [chromium] › tests\e2e\production-submit.spec.ts:3:1 › ordinary submit click remains effective while location suggestions are open (32.2s)
+  ok 131 [chromium] › tests\e2e\robustness-random-birth.spec.ts:173:5 › Robustness — random birth data › horoscope renders for random birth 1: Isha Sharma (01/05/1946 14:22) (24.7s)
+  ok 132 [chromium] › tests\e2e\seeded-users.spec.ts:3:1 › home route loads for a synthetic visitor (30.6s)
+  x  133 [chromium] › tests\e2e\robustness-random-birth.spec.ts:173:5 › Robustness — random birth data › horoscope renders for random birth 2: Saanvi Rao (12/01/1935 18:20) (2.2m)
+  -  134 [chromium] › tests\e2e\robustness-random-birth.spec.ts:173:5 › Robustness — random birth data › horoscope renders for random birth 3: Arjun Reddy (21/04/1998 22:52)
+  -  135 [chromium] › tests\e2e\robustness-random-birth.spec.ts:173:5 › Robustness — random birth data › horoscope renders for random birth 4: Rohan Iyer (17/11/2007 12:05)
+  -  136 [chromium] › tests\e2e\robustness-random-birth.spec.ts:173:5 › Robustness — random birth data › horoscope renders for random birth 5: Saanvi Joshi (05/11/1988 08:32)
+  -  137 [chromium] › tests\e2e\robustness-random-birth.spec.ts:173:5 › Robustness — random birth data › horoscope renders for random birth 6: Ananya Joshi (07/02/1994 15:51)
+  -  138 [chromium] › tests\e2e\robustness-random-birth.spec.ts:240:3 › Robustness — random birth data › location suggestions do not block the primary submit action
+  -  139 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [career]: Will I get a promotion or job elevation in my cu…
+  -  140 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [business]: Is starting a new business venture or independen…
+  -  141 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [marriage]: Will my marriage be harmonious, stable and long-…
+  -  142 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [partner-timing]: When will I meet a compatible life partner and s…
+  -  143 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [education]: Will I clear my competitive examination and high…
+  -  144 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [foreign-study]: Is foreign education or an overseas relocation f…
+  -  145 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [finance]: Will my financial condition improve and my wealt…
+  -  146 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [property]: Is this a good period to buy real estate, land, …
+  -  147 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [health]: How can I improve my health, immunity and overal…
+  -  148 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [legal]: Will I overcome a legal dispute, court case, or …
+  -  149 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [children]: Is there a prospect of progeny and what does the…
+  -  150 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [spiritual]: Which spiritual practice or deity worship will b…
+  -  151 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [travel]: Will I undertake long-distance travel or relocat…
+  -  152 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [hindi]: क्या मेरी नौकरी में पदोन्नति होगी और आर्थिक स्थि…
+  -  153 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [edge-emoji]: 💍 Will I marry soon? 🙏 Is my partner compatibl…
+  -  154 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [edge-long]: Considering my current professional, financial, …
+  -  155 [chromium] › tests\e2e\robustness-random-birth.spec.ts:269:5 › Robustness — multidimensional Prashna questions › prashna verdict for [edge-numeric]:    ??? 12345 %%%  …
+
+
+  1) [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: / 
+
+    TimeoutError: page.goto: Timeout 60000ms exceeded.
+    Call log:
+      - navigating to "http://127.0.0.1:5173/", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--8cd4f--Verification-Verify-route--chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--8cd4f--Verification-Verify-route--chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--8cd4f--Verification-Verify-route--chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /career-astrology 
+
+    Test timeout of 90000ms exceeded.
+
+    TimeoutError: page.goto: Timeout 60000ms exceeded.
+    Call log:
+      - navigating to "http://127.0.0.1:5173/career-astrology", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--c137e-rify-route-career-astrology-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--c137e-rify-route-career-astrology-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--c137e-rify-route-career-astrology-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kaalsarp 
+
+    TimeoutError: page.goto: Timeout 60000ms exceeded.
+    Call log:
+      - navigating to "http://127.0.0.1:5173/kaalsarp", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--fd126-ation-Verify-route-kaalsarp-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--fd126-ation-Verify-route-kaalsarp-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--fd126-ation-Verify-route-kaalsarp-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /comprehensive 
+
+    TimeoutError: page.goto: Timeout 60000ms exceeded.
+    Call log:
+      - navigating to "http://127.0.0.1:5173/comprehensive", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--1bb6e--Verify-route-comprehensive-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--1bb6e--Verify-route-comprehensive-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--1bb6e--Verify-route-comprehensive-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise 
+
+    Error: page.screenshot: Target page, context or browser has been closed
+    Browser logs:
+
+    [pid=24932][err] [1120/114625.237:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114625.426:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114625.426:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114627.484:INFO:CONSOLE:433] "Translation missing for key: select_language", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114627.485:INFO:CONSOLE:433] "Translation missing for key: languages_supported", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114627.486:INFO:CONSOLE:433] "Translation missing for key: select_language", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114627.487:INFO:CONSOLE:433] "Translation missing for key: languages_supported", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114627.560:INFO:CONSOLE:433] "Translation missing for key: select_language", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114627.560:INFO:CONSOLE:433] "Translation missing for key: languages_supported", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114627.561:INFO:CONSOLE:433] "Translation missing for key: select_language", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114627.562:INFO:CONSOLE:433] "Translation missing for key: languages_supported", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114630.852:INFO:CONSOLE:733] "[vite] connecting...", source: http://127.0.0.1:5173/@vite/client (733)
+    [pid=24932][err] [1120/114631.059:INFO:CONSOLE:827] "[vite] connected.", source: http://127.0.0.1:5173/@vite/client (827)
+    [pid=24932][err] [1120/114632.098:INFO:CONSOLE:21609] "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold", source: http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=fb9d4851 (21609)
+    [pid=24932][err] [1120/114632.414:INFO:CONSOLE:51] "[env] observability unconfigured (no-op in prod): VITE_SENTRY_DSN, VITE_POSTHOG_KEY, VITE_FLAGSMITH_ENV_KEY", source: http://127.0.0.1:5173/src/config/env.ts (51)
+    [pid=24932][err] [1120/114632.422:INFO:CONSOLE:39] "[info] observability_initialized [object Object]", source: http://127.0.0.1:5173/src/observability/logging/logger.ts (39)
+    [pid=24932][err] [1120/114632.423:INFO:CONSOLE:9] "[Telemetry] PostHog key not configured — analytics disabled.", source: http://127.0.0.1:5173/src/lib/telemetry.ts (9)
+    [pid=24932][err] [1120/114632.518:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114632.518:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114632.725:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114632.725:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114633.604:INFO:CONSOLE:433] "Translation missing for key: select_language", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114633.606:INFO:CONSOLE:433] "Translation missing for key: languages_supported", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114633.607:INFO:CONSOLE:433] "Translation missing for key: select_language", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114633.608:INFO:CONSOLE:433] "Translation missing for key: languages_supported", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114637.967:INFO:CONSOLE:733] "[vite] connecting...", source: http://127.0.0.1:5173/@vite/client (733)
+    [pid=24932][err] [1120/114638.418:INFO:CONSOLE:827] "[vite] connected.", source: http://127.0.0.1:5173/@vite/client (827)
+    [pid=24932][err] [1120/114638.927:INFO:CONSOLE:21609] "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold", source: http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=fb9d4851 (21609)
+    [pid=24932][err] [1120/114639.207:INFO:CONSOLE:51] "[env] observability unconfigured (no-op in prod): VITE_SENTRY_DSN, VITE_POSTHOG_KEY, VITE_FLAGSMITH_ENV_KEY", source: http://127.0.0.1:5173/src/config/env.ts (51)
+    [pid=24932][err] [1120/114639.214:INFO:CONSOLE:39] "[info] observability_initialized [object Object]", source: http://127.0.0.1:5173/src/observability/logging/logger.ts (39)
+    [pid=24932][err] [1120/114639.215:INFO:CONSOLE:9] "[Telemetry] PostHog key not configured — analytics disabled.", source: http://127.0.0.1:5173/src/lib/telemetry.ts (9)
+    [pid=24932][err] [1120/114639.549:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114639.549:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114639.761:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114639.761:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114640.714:INFO:CONSOLE:433] "Translation missing for key: select_language", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114640.716:INFO:CONSOLE:433] "Translation missing for key: languages_supported", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114640.718:INFO:CONSOLE:433] "Translation missing for key: select_language", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114640.718:INFO:CONSOLE:433] "Translation missing for key: languages_supported", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114645.132:INFO:CONSOLE:733] "[vite] connecting...", source: http://127.0.0.1:5173/@vite/client (733)
+    [pid=24932][err] [1120/114645.207:INFO:CONSOLE:827] "[vite] connected.", source: http://127.0.0.1:5173/@vite/client (827)
+    [pid=24932][err] [1120/114646.077:INFO:CONSOLE:21609] "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold", source: http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=fb9d4851 (21609)
+    [pid=24932][err] [1120/114646.297:INFO:CONSOLE:51] "[env] observability unconfigured (no-op in prod): VITE_SENTRY_DSN, VITE_POSTHOG_KEY, VITE_FLAGSMITH_ENV_KEY", source: http://127.0.0.1:5173/src/config/env.ts (51)
+    [pid=24932][err] [1120/114646.303:INFO:CONSOLE:39] "[info] observability_initialized [object Object]", source: http://127.0.0.1:5173/src/observability/logging/logger.ts (39)
+    [pid=24932][err] [1120/114646.304:INFO:CONSOLE:9] "[Telemetry] PostHog key not configured — analytics disabled.", source: http://127.0.0.1:5173/src/lib/telemetry.ts (9)
+    [pid=24932][err] [1120/114646.367:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114646.368:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114646.567:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114646.567:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114647.750:INFO:CONSOLE:433] "Translation missing for key: select_language", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114647.753:INFO:CONSOLE:433] "Translation missing for key: languages_supported", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114647.754:INFO:CONSOLE:433] "Translation missing for key: select_language", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114647.756:INFO:CONSOLE:433] "Translation missing for key: languages_supported", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114701.430:INFO:CONSOLE:733] "[vite] connecting...", source: http://127.0.0.1:5173/@vite/client (733)
+    [pid=24932][err] [1120/114701.602:INFO:CONSOLE:827] "[vite] connected.", source: http://127.0.0.1:5173/@vite/client (827)
+    [pid=24932][err] [1120/114702.584:INFO:CONSOLE:21609] "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold", source: http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=fb9d4851 (21609)
+    [pid=24932][err] [1120/114702.866:INFO:CONSOLE:51] "[env] observability unconfigured (no-op in prod): VITE_SENTRY_DSN, VITE_POSTHOG_KEY, VITE_FLAGSMITH_ENV_KEY", source: http://127.0.0.1:5173/src/config/env.ts (51)
+    [pid=24932][err] [1120/114702.877:INFO:CONSOLE:39] "[info] observability_initialized [object Object]", source: http://127.0.0.1:5173/src/observability/logging/logger.ts (39)
+    [pid=24932][err] [1120/114702.878:INFO:CONSOLE:9] "[Telemetry] PostHog key not configured — analytics disabled.", source: http://127.0.0.1:5173/src/lib/telemetry.ts (9)
+    [pid=24932][err] [1120/114702.954:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114702.954:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114703.200:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114703.201:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114705.460:INFO:CONSOLE:433] "Translation missing for key: select_language", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114705.464:INFO:CONSOLE:433] "Translation missing for key: languages_supported", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114705.465:INFO:CONSOLE:433] "Translation missing for key: select_language", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114705.467:INFO:CONSOLE:433] "Translation missing for key: languages_supported", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114709.490:INFO:CONSOLE:733] "[vite] connecting...", source: http://127.0.0.1:5173/@vite/client (733)
+    [pid=24932][err] [1120/114709.499:INFO:CONSOLE:827] "[vite] connected.", source: http://127.0.0.1:5173/@vite/client (827)
+    [pid=24932][err] [1120/114710.800:INFO:CONSOLE:21609] "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold", source: http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=fb9d4851 (21609)
+    [pid=24932][err] [1120/114711.203:INFO:CONSOLE:51] "[env] observability unconfigured (no-op in prod): VITE_SENTRY_DSN, VITE_POSTHOG_KEY, VITE_FLAGSMITH_ENV_KEY", source: http://127.0.0.1:5173/src/config/env.ts (51)
+    [pid=24932][err] [1120/114711.211:INFO:CONSOLE:39] "[info] observability_initialized [object Object]", source: http://127.0.0.1:5173/src/observability/logging/logger.ts (39)
+    [pid=24932][err] [1120/114711.211:INFO:CONSOLE:9] "[Telemetry] PostHog key not configured — analytics disabled.", source: http://127.0.0.1:5173/src/lib/telemetry.ts (9)
+    [pid=24932][err] [1120/114711.283:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114711.284:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114711.585:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114711.586:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114713.301:INFO:CONSOLE:433] "Translation missing for key: select_language", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114713.303:INFO:CONSOLE:433] "Translation missing for key: languages_supported", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114713.303:INFO:CONSOLE:433] "Translation missing for key: select_language", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114713.303:INFO:CONSOLE:433] "Translation missing for key: languages_supported", source: http://127.0.0.1:5173/src/services/multiLanguageService.ts (433)
+    [pid=24932][err] [1120/114742.583:INFO:CONSOLE:733] "[vite] connecting...", source: http://127.0.0.1:5173/@vite/client (733)
+    [pid=24932][err] [1120/114742.685:INFO:CONSOLE:827] "[vite] connected.", source: http://127.0.0.1:5173/@vite/client (827)
+    [pid=24932][err] [1120/114744.595:INFO:CONSOLE:21609] "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold", source: http://127.0.0.1:5173/node_modules/.vite/deps/chunk-4RV6I5B3.js?v=fb9d4851 (21609)
+    [pid=24932][err] [1120/114744.911:INFO:CONSOLE:51] "[env] observability unconfigured (no-op in prod): VITE_SENTRY_DSN, VITE_POSTHOG_KEY, VITE_FLAGSMITH_ENV_KEY", source: http://127.0.0.1:5173/src/config/env.ts (51)
+    [pid=24932][err] [1120/114744.920:INFO:CONSOLE:39] "[info] observability_initialized [object Object]", source: http://127.0.0.1:5173/src/observability/logging/logger.ts (39)
+    [pid=24932][err] [1120/114744.921:INFO:CONSOLE:9] "[Telemetry] PostHog key not configured — analytics disabled.", source: http://127.0.0.1:5173/src/lib/telemetry.ts (9)
+    [pid=24932][err] [1120/114744.999:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114745.000:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114745.253:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] [1120/114745.253:INFO:CONSOLE:63] "[Vedic Rajkumar] ⚠️  VITE_CLERK_PUBLISHABLE_KEY is not set. Auth features are disabled. Configure it in the deployment environment to enable sign-in.", source: http://127.0.0.1:5173/src/Providers.tsx (63)
+    [pid=24932][err] Received fatal exception 0xe0000008
+    [pid=24932][err] Received fatal exception 0xe0000008
+    [pid=24932][err] 	KERNELBASE!RaiseException [0x7ffcb9433b19+69]
+    [pid=24932][err] 	chrome-headless-shell!CrashForExceptionInNonABICompliantCodeRange [0x7ff653492ab4+290a9f4]
+    [pid=24932][err] 	KERNELBASE!RaiseException [0x7ffcb9433b19+69]
+    [pid=24932][err] 	chrome-headless-shell!CrashForExceptionInNonABICompliantCodeRange [0x7ff653492ac9+290aa09]
+    [pid=24932][err] 	chrome-headless-shell!CrashForExceptionInNonABICompliantCodeRange [0x7ff653492ab4+290a9f4]
+    [pid=24932][err] 	chrome-headless-shell!CrashForExceptionInNonABICompliantCodeRange [0x7ff653492ae5+290aa25]
+    [pid=24932][err] 	chrome-headless-shell!CrashForExceptionInNonABICompliantCodeRange [0x7ff653492ac9+290aa09]
+    [pid=24932][err] 	chrome-headless-shell!CrashForExceptionInNonABICompliantCodeRange [0x7ff653491409+2909349]
+    [pid=24932][err] 	chrome-headless-shell!	IsSandboxedProcess chrome-headless-shell[0x7ff6509377cd+2367b2d]!CrashForExceptionInNonABICompliantCodeRange 
+    [pid=24932][err] [0x7ff6534928d7+290a817]
+    [pid=24932][err] 	chrome-headless-shell!IsSandboxedProcess [0x7ff64ebae14b+5de4ab]
+    [pid=24932][err] 	chrome-headless-shell!IsSandboxedProcess [0x7ff64ebac249+5dc5a9]
+    [pid=24932][err] 	chrome-headless-shell!IsSandboxedProcess [0x7ff650937190+23674f0]
+    [pid=24932][err] 	chrome-headless-shell!IsSandboxedProcess [0x7ff650397e2a+1dc818a]
+    [pid=24932][err] 	chrome-headless-shell!IsSandboxedProcess [0x7ff650974bd3+23a4f33]
+    [pid=24932][err] 	chrome-headless-shell!IsSandboxedProcess [0x7ff65084a187+227a4e7]
+    [pid=24932][err] 	chrome-headless-shell!IsSandboxedProcess [0x7ff650974a52+23a4db2]
+    [pid=24932][err] 	chrome-headless-shell!(No symbol) [0x7ff64d231a94]
+    [pid=24932][err] 	chrome-headless-shell!(No symbol) [0x7ff64d04654f]
+    [pid=24932][err] 	chrome-headless-shell!(No symbol) [0x7ff64d0e59fa]
+    [pid=24932][err] 	chrome-headless-shell!(No symbol) [0x7ff64c7b75ce]
+    [pid=24932][err] 	chrome-headless-shell!CrashForExceptionInNonABICompliantCodeRange [0x7ff651b5992d+fd186d]
+    [pid=24932][err] 	chrome-headless-shell!(No symbol) [0x7ff64c7b2a04]
+    [pid=24932][err] 	chrome-headless-shell!CrashForExceptionInNonABICompliantCodeRange [0x7ff651b598ad+fd17ed]
+    [pid=24932][err] 	chrome-headless-shell!(No symbol) [0x7ff64c7b1cb1]
+    [pid=24932][err] 	chrome-headless-shell!(No symbol) [0x7ff64c7b054b]
+    [pid=24932][err] 	chrome-headless-shell!(No symbol) [0x7ff64c7af3a4]
+    [pid=24932][err] 	chrome-headless-shell!sqlite3_dbdata_init [0x7ff65508a0d6+175bce6]
+    [pid=24932][err] 	chrome-headless-shell!IsSandboxedProcess [0x7ff64f7b8975+11e8cd5]
+    [pid=24932][err] 	chrome-headless-shell!(No symbol) [0x7ff64d89d4c6]
+    [pid=24932][err] 	chrome-headless-shell!(No symbol) [0x7ff64c48d700]
+    [pid=24932][err] 	chrome-headless-shell!IsSandboxedProcess [0x7ff64fa193a9+1449709]	chrome-headless-shell
+    [pid=24932][err] !(No symbol) [0x7ff64c48d38b]
+    [pid=24932][err] 	chrome-headless-shell!	chrome-headless-shellIsSandboxedProcess! (No symbol) [0x7ff64fa171de+144753e][0x7ff64c48d095]
+    [pid=24932][err] 
+    [pid=24932][err] 		chrome-headless-shellchrome-headless-shell!!IsSandboxedProcessIsSandboxedProcess  [0x7ff64ed0f874+73fbd4][0x7ff64fa0ecf0+143f050]
+    [pid=24932][err] 
+    [pid=24932][err] 	chrome-headless-shell!	IsSandboxedProcesschrome-headless-shell ![0x7ff64ec96372+6c66d2]
+    [pid=24932][err] (No symbol) [0x7ff64d2a080b]
+    [pid=24932][err] 	chrome-headless-shell!(No symbol) [0x7ff64c11e0b3]	chrome-headless-shell
+    [pid=24932][err] !(No symbol) [0x7ff64d29ff27]
+    [pid=24932][err] 	chrome-headless-shell!IsSandboxedProcess [0x7ff6501fa977+1c2acd7]
+    [pid=24932][err] 	chrome-headless-shell!IsSandboxedProcess [0x7ff6504f1212+1f21572]	
+    [pid=24932][err] chrome-headless-shell!(No symbol) [0x7ff64ccf5546]
+    [pid=24932][err] 	chrome-headless-shell!	chrome-headless-shellIsSandboxedProcess ![0x7ff64ed0f874+73fbd4](No symbol) 
+    [pid=24932][err] [0x7ff64ccf4ac9]
+    [pid=24932][err] 	chrome-headless-shell!IsSandboxedProcess	chrome-headless-shell ![0x7ff64fedb259+190b5b9](No symbol) 
+    [pid=24932][err] [0x7ff64c750afe]
+    [pid=24932][err] 	KERNEL32!BaseThreadInitThunk [0x7ffcba387c24+14]
+    [pid=24932][err] 	chrome-headless-shell!IsSandboxedProcess [0x7ff6501fa977+1c2acd7]
+    [pid=24932][err] 	ntdll!RtlUserThreadStart [0x7ffcbc32d721+21]
+    [pid=24932][err] 	chrome-headless-shell!(No symbol) [0x7ff64ccf5546]
+    [pid=24932][err] 	chrome-headless-shell!(No symbol) [0x7ff64d063204]
+    [pid=24932][err] 	chrome-headless-shell!(No symbol) [0x7ff64d062feb]
+    [pid=24932][err] 	chrome-headless-shell!(No symbol) [0x7ff64c750afe]
+    [pid=24932][err] 	KERNEL32!BaseThreadInitThunk [0x7ffcba387c24+14]
+    [pid=24932][err] 	ntdll!RtlUserThreadStart [0x7ffcbc32d721+21]
+    Call log:
+      - taking page screenshot
+      - waiting for fonts to load...
+      - fonts loaded
+
+
+      134 |       const safeName = route.replace(/\//g, '_') || 'home';
+      135 |       const screenshotPath = path.join(screenshotDir, `${safeName}.png`);
+    > 136 |       await page.screenshot({ path: screenshotPath, fullPage: true });
+          |                  ^
+      137 |       console.log(`Screenshot saved for ${route} at ${screenshotPath}`);
+      138 |
+      139 |       // Verify the page doesn't show standard React error boundaries or crashed pages
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:136:18
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--9259f-ion-Verify-route-enterprise-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--9259f-ion-Verify-route-enterprise-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--9259f-ion-Verify-route-enterprise-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /bv-raman 
+
+    TimeoutError: page.goto: Timeout 60000ms exceeded.
+    Call log:
+      - navigating to "http://127.0.0.1:5173/bv-raman", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--d3a46-ation-Verify-route-bv-raman-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--d3a46-ation-Verify-route-bv-raman-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--d3a46-ation-Verify-route-bv-raman-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /raman-archive 
+
+    TimeoutError: page.goto: Timeout 60000ms exceeded.
+    Call log:
+      - navigating to "http://127.0.0.1:5173/raman-archive", waiting until "load"
+
+
+      120 |       // old 15s budget on first requests; 60s only extends the wait for the
+      121 |       // same `load` event — the assertions below are unchanged.
+    > 122 |       await page.goto(route, { waitUntil: 'load', timeout: 60000 });
+          |                  ^
+      123 |       
+      124 |       // Wait a short time for lazy component loading and animations
+      125 |       await page.waitForTimeout(2000);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\all-routes.spec.ts:122:18
+
+    Error Context: test-results\all-routes-Vedic-Rajkumar--a47d4--Verify-route-raman-archive-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\all-routes-Vedic-Rajkumar--a47d4--Verify-route-raman-archive-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\all-routes-Vedic-Rajkumar--a47d4--Verify-route-raman-archive-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [chromium] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /matchmaking 
+
+    Error: locator.scrollIntoViewIfNeeded: Element is not attached to the DOM
+    Call log:
+      - attempting scroll into view action
+        - waiting for element to be stable
+
+
+      43 |       if (route !== '/privacy-settings') await page.getByRole('button', { name: 'Decline optional cookies', exact: true }).click();
+      44 |       const link = page.locator(`a[href="${route}"]`).first();
+    > 45 |       await link.scrollIntoViewIfNeeded();
+         |                  ^
+      46 |       await link.click();
+      47 |       await expect(page).toHaveURL(url => url.pathname === destination(route));
+      48 |       await expect(page.locator('main').first()).toBeVisible({ timeout: 60_000 });
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\landing-page-links.spec.ts:45:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\landing-page-links-Landing-df67c-oute-link-works-matchmaking-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\landing-page-links-Landing-df67c-oute-link-works-matchmaking-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\landing-page-links-Landing-df67c-oute-link-works-matchmaking-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\landing-page-links-Landing-df67c-oute-link-works-matchmaking-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) [chromium] › tests\e2e\perf-mobile.spec.ts:15:1 › kundli compute does not block the main thread 
+
+    Error: tasks over 250ms: 380, 330, 781
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 5
+
+    - Array []
+    + Array [
+    +   380,
+    +   330,
+    +   781,
+    + ]
+
+      84 |   );
+      85 |
+    > 86 |   expect(blocking, `tasks over ${BUDGET_MS}ms: ${blocking.join(', ')}`).toEqual([]);
+         |                                                                         ^
+      87 | });
+      88 |
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\perf-mobile.spec.ts:86:73
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\perf-mobile-kundli-compute-does-not-block-the-main-thread-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\perf-mobile-kundli-compute-does-not-block-the-main-thread-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-mobile-kundli-compute-does-not-block-the-main-thread-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-mobile-kundli-compute-does-not-block-the-main-thread-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) [chromium] › tests\e2e\persona-users.spec.ts:247:3 › Persona — basic tier › basic: panchang navigation from the home page 
+
+    Error: UNKNOWN: unknown error, open 'E:\Rajkumar\Vedic_Rajkumar\reports\persona\results\users_spec_ts_Persona_basic_tier_basic_panchang_navigation_from_the_home_page.json'
+
+      94 |       failedRequests: diag.failedRequests,
+      95 |     };
+    > 96 |     fs.writeFileSync(
+         |        ^
+      97 |       path.join(RESULTS_DIR, `${slugify(testInfo.titlePath.join('_').slice(-80))}.json`),
+      98 |       JSON.stringify(record, null, 2),
+      99 |       'utf8',
+        at Object.diag (E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:96:8)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ba-93298-vigation-from-the-home-page-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-ba-93298-vigation-from-the-home-page-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-ba-93298-vigation-from-the-home-page-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-ba-93298-vigation-from-the-home-page-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) [chromium] › tests\e2e\persona-users.spec.ts:269:3 › Persona — intermediate tier › intermediate: kundli detail view renders for the computed chart 
+
+    Error: UNKNOWN: unknown error, open 'E:\Rajkumar\Vedic_Rajkumar\reports\persona\results\ntermediate_tier_intermediate_kundli_detail_view_renders_for_the_computed_chart.json'
+
+      94 |       failedRequests: diag.failedRequests,
+      95 |     };
+    > 96 |     fs.writeFileSync(
+         |        ^
+      97 |       path.join(RESULTS_DIR, `${slugify(testInfo.titlePath.join('_').slice(-80))}.json`),
+      98 |       JSON.stringify(record, null, 2),
+      99 |       'utf8',
+        at Object.diag (E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:96:8)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-b8564-ders-for-the-computed-chart-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-in-b8564-ders-for-the-computed-chart-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-b8564-ders-for-the-computed-chart-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-in-b8564-ders-for-the-computed-chart-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) [chromium] › tests\e2e\persona-users.spec.ts:291:3 › Persona — intermediate tier › intermediate: prashna returns a verdict 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('[aria-label="Prashna analysis result"], [aria-label="प्रश्न विश्लेषण परिणाम"]')
+    Expected: visible
+    Timeout: 45000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 45000ms
+      - waiting for locator('[aria-label="Prashna analysis result"], [aria-label="प्रश्न विश्लेषण परिणाम"]')
+        2 × waiting for "http://127.0.0.1:5173/prashna" navigation to finish...
+          - navigated to "http://127.0.0.1:5173/prashna"
+
+
+      304 |       '[aria-label="Prashna analysis result"], [aria-label="प्रश्न विश्लेषण परिणाम"]',
+      305 |     );
+    > 306 |     await expect(result).toBeVisible({ timeout: 45_000 });
+          |                          ^
+      307 |     await expect(result.getByText(/Score|अंक/).first()).toBeVisible({ timeout: 15_000 });
+      308 |
+      309 |     await assertNoCrash(page, 'prashna');
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\persona-users.spec.ts:306:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-52bad-e-prashna-returns-a-verdict-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\persona-users-Persona-—-in-52bad-e-prashna-returns-a-verdict-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\persona-users-Persona-—-in-52bad-e-prashna-returns-a-verdict-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\persona-users-Persona-—-in-52bad-e-prashna-returns-a-verdict-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) [chromium] › tests\e2e\robustness-random-birth.spec.ts:173:5 › Robustness — random birth data › horoscope renders for random birth 2: Saanvi Rao (12/01/1935 18:20) 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/Overall Score|समग्र स्कोर/).first()
+    Expected: visible
+    Timeout: 90000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 90000ms
+      - waiting for getByText(/Overall Score|समग्र स्कोर/).first()
+        - waiting for "http://127.0.0.1:5173/horoscope" navigation to finish...
+        - navigated to "http://127.0.0.1:5173/horoscope"
+
+
+      217 |       // HoroscopeCard is lazy-loaded; allow 90s for cold WASM start under
+      218 |       // parallel worker contention (full-preview runs 2 workers).
+    > 219 |       await expect(page.getByText(/Overall Score|समग्र स्कोर/).first()).toBeVisible({ timeout: 90_000 });
+          |                                                                         ^
+      220 |
+      221 |       await assertNoCrash(page, `horoscope/${i + 1}`);
+      222 |       expect(errors.pageErrors, `uncaught page error for ${birth.name}`).toEqual([]);
+        at E:\Rajkumar\Vedic_Rajkumar\tests\e2e\robustness-random-birth.spec.ts:219:73
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\robustness-random-birth-Ro-54bae-aanvi-Rao-12-01-1935-18-20--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\robustness-random-birth-Ro-54bae-aanvi-Rao-12-01-1935-18-20--chromium\error-context.md
+
+    Error Context: test-results\robustness-random-birth-Ro-54bae-aanvi-Rao-12-01-1935-18-20--chromium\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\robustness-random-birth-Ro-54bae-aanvi-Rao-12-01-1935-18-20--chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\robustness-random-birth-Ro-54bae-aanvi-Rao-12-01-1935-18-20--chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13 failed
+    [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: / 
+    [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /career-astrology 
+    [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /kaalsarp 
+    [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /comprehensive 
+    [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /enterprise 
+    [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /bv-raman 
+    [chromium] › tests\e2e\all-routes.spec.ts:100:5 › Vedic Rajkumar App Route Verification › Verify route: /raman-archive 
+    [chromium] › tests\e2e\landing-page-links.spec.ts:40:5 › Landing page links › route link works: /matchmaking 
+    [chromium] › tests\e2e\perf-mobile.spec.ts:15:1 › kundli compute does not block the main thread 
+    [chromium] › tests\e2e\persona-users.spec.ts:247:3 › Persona — basic tier › basic: panchang navigation from the home page 
+    [chromium] › tests\e2e\persona-users.spec.ts:269:3 › Persona — intermediate tier › intermediate: kundli detail view renders for the computed chart 
+    [chromium] › tests\e2e\persona-users.spec.ts:291:3 › Persona — intermediate tier › intermediate: prashna returns a verdict 
+    [chromium] › tests\e2e\robustness-random-birth.spec.ts:173:5 › Robustness — random birth data › horoscope renders for random birth 2: Saanvi Rao (12/01/1935 18:20) 
+  5 skipped
+  27 did not run
+  110 passed (28.7m)
+E2E_EXIT=1

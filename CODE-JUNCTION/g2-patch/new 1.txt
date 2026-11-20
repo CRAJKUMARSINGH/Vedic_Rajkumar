@@ -1,0 +1,387 @@
+All five artifacts are built. Every fact below traces to the repo at `6b1c0fbf95f25cc5478d60b0b319b6969a098fa0` or was measured by executing the code.
+
+---
+
+# 1 · Phase 2 patch plan, P7 onward — line-verified before/after hunks
+
+**Download: [PHASE2_P7_PLUS_PATCH_PLAN.md](https://www.genspark.ai/api/files/s/xxrlp3Qt)** *(the P7+ document is the new file; full text follows below)*
+
+Every `BEFORE` block was read out of the working tree with `grep -n` / `awk '{printf "%d\t%s\n", NR, $0}'`, never reconstructed. `NEW FILE` means there is nothing to quote at that commit.
+
+## P7 · Router fail-rules — VERIFIED · gate G6
+
+### P7.1 — `src/api/v1/router.ts:120-127`
+
+**BEFORE:**
+```
+118  });
+119
+120  async function computeChart(input: unknown) { return { id: crypto.randomUUID(), ...(input as object) }; }
+121  async function getChart(id: string, userId: string) {
+122    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+123    const { data } = await (supabase as any).from('charts').select('*').eq('id', id).eq('user_id', userId).maybeSingle();
+124    return data;
+125  }
+126
+127  async function getNatal(_chartId: string) { return { lagnaSign: 0, planets: { Moon: 45 } }; }
+```
+
+**AFTER** (line 120 and line 127 replaced; `getChart` at 121–125 untouched):
+```
+120  /** Chart computation is not implemented. Throws rather than returning
+121   *  `{ id, ...input }`, because a caller cannot tell a stub chart from a
+122   *  computed one — that is what makes F-08 a false-success contract. */
+123  async function computeChart(_input: unknown): Promise<never> {
+124    throw new NotImplementedError('chart computation');
+125  }
+126  async function getChart(id: string, userId: string) {
+127    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+128    const { data } = await (supabase as any).from('charts').select('*').eq('id', id).eq('user_id', userId).maybeSingle();
+129    return data;
+130  }
+131
+132  /** Natal positions. Returns null when the row exists without a snapshot;
+133   *  the route maps that to 503 chart_not_computed. It must never synthesise
+134   *  positions — { lagnaSign: 0, planets: { Moon: 45 } } was an Aries lagna
+135   *  and a Moon at 45 deg being served as fact. */
+136  async function getNatal(chartId: string): Promise<NatalSnapshot | null> {
+137    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+138    const { data } = await (supabase as any)
+139      .from('charts').select('natal_snapshot').eq('id', chartId).maybeSingle();
+140    const snapshot = data?.natal_snapshot as NatalSnapshot | null | undefined;
+141    return snapshot && Number.isFinite(snapshot.lagnaSign) ? snapshot : null;
+142  }
+```
+
+⚠ **Unconfirmed:** `natal_snapshot` is a column I could not verify — no migration for it is in the tree. If it does not exist, every transit request 503s on first deploy. Ship the column in the same migration, or return `null` unconditionally until it exists.
+
+### P7.2 — `src/api/v1/router.ts:61-81`, the transit route
+
+**BEFORE** (verbatim):
+```
+61  api.get('/v1/transits/:chartId', async (c) => {
+62    const ctx = c.get('ctx');
+63    if (!requireScope(ctx, 'transits:read')) return c.json({ error: { code: 'forbidden', message: 'Missing transits:read' } }, 403);
+64    // `asOf` is optional; when present it must be a real `YYYY-MM-DD` (or full
+65    // ISO-8601) date. Passing a bare string to `new Date()` silently yields an
+66    // `Invalid Date`, which would then flow into transitService.snapshot as NaN
+67    // Julian days instead of failing loudly.
+68    const asOfRaw = c.req.query('asOf');
+69    let asOf = new Date();
+70    if (asOfRaw !== undefined) {
+71      // Anchor date-only input to UTC midnight so the instant is deterministic
+72      // regardless of the server's local zone.
+73      asOf = new Date(ISO_DATE_RE.test(asOfRaw) ? `${asOfRaw}T00:00:00Z` : asOfRaw);
+74      if (Number.isNaN(asOf.getTime())) {
+75        return c.json({ error: { code: 'invalid_input', message: 'asOf must be a valid date' } }, 422);
+76      }
+77    }
+78    const natal = await getNatal(c.req.param('chartId'));
+79    const snap = await transitService.snapshot(natal, asOf);
+80    return c.json(snap);
+81  });
+```
+
+Lines 78–80 are the defect: `getNatal` returns the stub at 127, and line 80 hands the caller a 200.
+
+**AFTER** (78–80 replaced; the `asOf` validation block at 62–77 untouched):
+```
+78    const natal = await getNatal(c.req.param('chartId'));
+79    if (natal === null) {
+80      const e = serviceUnavailable(
+81        'chart_not_computed', 'This chart has no computed natal snapshot', 'natal-snapshot-missing');
+82      return c.json(e.body, e.status);
+83    }
+84    try {
+85      const snap = await transitService.snapshot(natal, asOf);
+86      return c.json(snap);
+87    } catch (err) {
+88      if (err instanceof EphemerisUnavailableError) {
+89        const e = serviceUnavailable('compute_unavailable', 'Ephemeris unavailable', err.reason);
+90        return c.json(e.body, e.status);
+91      }
+92      throw err;
+93    }
+94  });
+```
+
+### P7.3 — `src/api/v1/errors.ts` — **NEW FILE**
+
+No error module exists at the base commit; `router.ts` inlines `{ error: { code, message, requestId } }` literals in six places.
+```ts
+export type ApiErrorCode =
+  | 'invalid_input' | 'unauthorized' | 'forbidden' | 'not_found' | 'rate_limited'
+  | 'chart_not_computed' | 'compute_unavailable' | 'ephemeris_degraded'
+  | 'anchor_pending_golden' | 'not_implemented';
+
+export const serviceUnavailable = (
+  code: ApiErrorCode, message: string, reason: string, requestId = crypto.randomUUID(),
+): { status: 503; body: ApiErrorBody } => ({
+  status: 503,
+  body: { error: { code, message, reason, retryable: true, requestId } },
+});
+export class NotImplementedError extends Error { /* name = 'NotImplementedError' */ }
+```
+
+### P7.4 — route contract (line ranges verified against the file)
+
+| Route | Lines | Today | After P7 |
+|---|---|---|---|
+| `POST /v1/charts` | 34–51 | 201 from stub `computeChart` (:120) | 501 `not_implemented` |
+| `GET /v1/charts/:id` | 53–58 | 404, no code (:57) | 404 `not_found` / 503 `chart_not_computed` |
+| `GET /v1/transits/:chartId` | 61–81 | **200 from `{Moon:45}`** (:78→:80) | 503 `chart_not_computed` |
+| `GET /v1/answer` | 84–109 | 200 even when `resolveJatak` misses (:99–102) | 404 `not_found` |
+| `POST /v1/keys` | 112–118 | fine | unchanged |
+
+## P8 · Confidence caps — VERIFIED · `src/services/answerCard/confidence.ts`
+
+**BEFORE** (`confidence.ts:11-35`):
+```
+11  const BOUNDARIES = [40, 56, 75] as const;
+12
+13  export function deriveConfidence(j: ConclusiveJatakJudgment): number {
+14    let c = 0.55;
+15
+16    // Proximity to a band boundary: a 76 is shakier than an 88.
+17    const nearest = Math.min(...BOUNDARIES.map(b => Math.abs(j.score - b)));
+18    c += Math.min(nearest / 100, 0.18);
+19
+20    // Inter-layer agreement: tight spread = confident.
+21    const scores = j.evidence.map(e => e.score);
+22    if (scores.length > 0) {
+23      const spread = Math.max(...scores) - Math.min(...scores);
+24      c += spread < 25 ? 0.12 : spread > 55 ? -0.1 : 0;
+25    }
+26
+27    // Every unresolved conflict costs.
+28    c -= j.conflictResolution.length * 0.04;
+29
+30    // The engine's own data-absence signals.
+31    if (/not SAV-certified|Ashtakavarga data is unavailable/i.test(j.houseVerdict)) c -= 0.1;
+32    if (/cannot be certified|no dedicated Moon double-transit/i.test(j.transitVerdict)) c -= 0.08;
+33
+34    return Math.max(0.2, Math.min(0.9, Number(c.toFixed(2))));
+35  }
+```
+
+Three named defects: **line 34** (ceiling is a global constant, not a function of input quality), **lines 31–32** (caveats detected by regex on prose — any copy edit silently disables the penalty), **lines 11, 17** (proximity measured to band boundaries, not astronomical ones).
+
+**AFTER** — line 11 (`BOUNDARIES`) is **unchanged**; lines 13–35 are replaced:
+```
+13  export interface ConfidenceInputs {
+14    judgment: ConclusiveJatakJudgment;
+15    ayanamsaDegraded: readonly AyanamsaDegraded[];   // ayanamsaAt(...).degraded
+16    positionSources: readonly PositionSource[];       // ephemeris position rows
+17    boundaryMarginDeg: number;                        // boundaryMargins().nearest
+18    systemsDisagree: boolean;                         // Lahiri vs FB nakshatra
+19    flags: { savCertified: boolean; ashtakavargaAvailable: boolean; dedicatedMoonTransit: boolean };
+20  }
+21  export interface ConfidenceResult { value: number; cappedBy: string | null; cap: number }
+22
+23  interface Cap { readonly id: string; readonly when: (i: ConfidenceInputs) => boolean; readonly cap: number }
+24
+25  /** Hard ceiling per degraded input. First match wins; applied AFTER the score, never blended. */
+26  const CAPS: readonly Cap[] = [
+27    { id: 'C1',  when: (i) => i.positionSources.includes('mean-motion'),              cap: 0.40 },
+28    { id: 'C2',  when: (i) => i.ayanamsaDegraded.includes('true-citra-approximated'), cap: 0.55 },
+29    { id: 'C3',  when: (i) => i.ayanamsaDegraded.includes('anchor-pending-golden'),   cap: 0.60 },
+30    { id: 'C4',  when: (i) => i.ayanamsaDegraded.includes('delta-t-out-of-range'),    cap: 0.65 },
+31    { id: 'C5',  when: (i) => i.systemsDisagree,                                      cap: 0.50 },
+32    { id: 'C6',  when: (i) => i.boundaryMarginDeg < 0.05,                             cap: 0.55 },
+33    { id: 'C7',  when: (i) => i.boundaryMarginDeg < 0.25,                             cap: 0.68 },
+34    { id: 'C8',  when: (i) => !i.flags.savCertified,                                  cap: 0.72 },
+35    { id: 'C9',  when: (i) => !i.flags.ashtakavargaAvailable,                         cap: 0.75 },
+36    { id: 'C10', when: (i) => !i.flags.dedicatedMoonTransit,                          cap: 0.80 },
+37    { id: 'C11', when: (i) => i.judgment.conflictResolution.length >= 3,              cap: 0.62 },
+38  ];
+39
+40  /** The pre-existing arithmetic, extracted verbatim — no behaviour change. */
+41  function additiveScore(j: ConclusiveJatakJudgment): number {
+42    let c = 0.55;
+43    const nearest = Math.min(...BOUNDARIES.map((b) => Math.abs(j.score - b)));
+44    c += Math.min(nearest / 100, 0.18);
+45    const scores = j.evidence.map((e) => e.score);
+46    if (scores.length > 0) {
+47      const spread = Math.max(...scores) - Math.min(...scores);
+48      c += spread < 25 ? 0.12 : spread > 55 ? -0.1 : 0;
+49    }
+50    c -= j.conflictResolution.length * 0.04;
+51    return c;
+52  }
+53
+54  export function deriveConfidenceV2(i: ConfidenceInputs): ConfidenceResult {
+55    const raw = additiveScore(i.judgment);
+56    const hit = CAPS.find((c) => c.when(i));
+57    const cap = hit?.cap ?? 0.90;
+58    return { value: Math.max(0.2, Math.min(cap, Number(raw.toFixed(2)))), cappedBy: hit?.id ?? null, cap };
+59  }
+```
+
+The regexes at old 31–32 are deleted; their effect moves to C8–C10, which read booleans. **Consequence:** `confidenceWord` (lines 37–48) maps ≥0.75 to `high`; under C3 the cap is 0.60, so an unlocked anchor can never read "high". That is the point — a cap applied at render time is formatting, and formatting gets reverted.
+
+## P9 · Provenance 1.3 + publish guard — VERIFIED · gate G4
+
+**BEFORE** (`AnswerCard.types.ts:129-140`):
+```
+129    provenance: {
+130      engine_version: string;
+131      ayanamsa: string;
+132      house_system: string;
+133      dasha_system: string;
+134      ephemeris: 'local' | 'swisseph';
+135      computed_at: string;
+136      as_of: string;
+137      input_hash: string;
+138      card_hash: string;
+139      source_files: string[];
+140    };
+```
+**AFTER** — `ayanamsa_system: AyanamsaSystem`, `ayanamsa_source`, `ayanamsa_value`, `ayanamsa_degraded: AyanamsaDegraded[]` added after line 132; `ephemeris` widened at 143 to `'swisseph' | 'swisseph-endpoint' | 'local-sidereal' | 'mean-motion'`; `position_sources: Record<string, string>` added at 146. Reader-compatible: no old value disappears.
+
+`AnswerCard.types.ts:43` — BEFORE `export const ANSWER_CONTRACT_VERSION = '1.2';` → AFTER `'1.3'` (additive: no field removed or renamed).
+
+`publishGuard.ts` — the file is 67 lines with exactly one guard (`PII_KEYS` :21, `assertNoPii` :52, closing :67). **AFTER**, appended at line 68:
+```ts
+export function assertProvenancePublishable(rel, provenance): void {
+  if (provenance.ayanamsa_degraded.includes('anchor-pending-golden')) {
+    throw new Error(`REFUSING to publish ${rel}: ayanamsa anchor is pending-golden (${provenance.ayanamsa_system})`);
+  }
+  if (provenance.ephemeris === 'mean-motion') {
+    throw new Error(`REFUSING to publish ${rel}: computed from the mean-motion fallback`);
+  }
+}
+```
+`emitAnswerCards.mjs:63-66` — BEFORE `let assertNoPii;` / `function write(rel, content, subject) { assertNoPii(rel, content, subject);` → AFTER adds a second binding at :64 and `assertProvenancePublishable(rel, parseProvenance(content));` at :68. Line 150 (`({ assertNoPii } = await server.ssrLoadModule(...))`) becomes a two-name destructure.
+
+**The version bump alone turns `guideContract.test.ts:105-109` red**, because that test asserts all three agree — so both must move in the same commit: `public/llms.txt:18` `contract_version: 1.2` → `1.3`; `public/.well-known/vedic-rajkumar.json:4` `"contract_version": "1.2"` → `"1.3"`.
+
+## P10 · Anchor oracle (Tier 1) — **NEW FILE**
+
+`tools/accuracy/golden/manifest.json:5-6` records `"ayanamsaMode": "Lahiri", "sidMode": 1` — the golden set *is* Swiss Ephemeris. That is a legitimate oracle only while the shipped engine is a different implementation. New `tools/accuracy/ayanamsa/anchors.golden.json` with `valueAtJ2000: null` for all four systems — deliberately null, because **the epoch Swiss Ephemeris anchors Lahiri to is not documented in the sources I retrieved**. Guessing it would put a fabricated constant at the bottom of the whole harness.
+
+## P11 · Manifest + tolerance guard — VERIFIED · gate G3
+
+`scripts/accuracy-golden.mjs:188-199` — BEFORE `ayanamsaMode: 'Lahiri'` is a typed string; `sidMode` is the binding. AFTER: `sidMode` first, `ayanamsaMode: SE_SIDM_NAME[LAHIRI_SID_MODE]` derived from it, plus `acceptedToleranceArcsec: { graha: 1.0, moon: 3.0, node: 1.0, ascendant: 2.0, ayanamsa: 0.1 }`.
+
+`corpusPhase1.test.ts:72` — BEFORE `const TOL = { graha: 1.0, moon: 3.0, node: 1.0, ascendant: 2.0, ayanamsa: 0.1 };` — a literal that duplicates `METHODOLOGY.md:9-16` with nothing checking they agree. AFTER: `TOL` imported from `manifest.acceptedToleranceArcsec`, plus an assertion that `METHODOLOGY.md` contains `Graha longitudes (Sun, Mercury…Saturn) | ≤ 1.0″` and `Lahiri ayanamsa … | ≤ 0.1″`. Raising a tolerance without editing the doc now fails the build.
+
+## P12 · Second-engine fidelity + CI wiring — **NEW FILE** · gate G5
+
+`accuracy.yml` is 96 lines, ending `93 Run all tests / 94 npm run test:run / 95 Build / 96 npm run build`. Appended at 98: a `second-engine` job with `if: github.event_name == 'schedule'`, running `node scripts/accuracy-second-engine.mjs --tolerance-arcsec 1`. Scheduled only — a 100 MB kernel on every PR is the reason such jobs get deleted later. Nothing in this repo currently tests `swisseph-wasm` against the C library.
+
+| Patch | Depends on | Exit criteria |
+|---|---|---|
+| P7 | P1–P4 (`EphemerisUnavailableError`) | G6: no route 200s with placeholders |
+| P8 | P5 (`degraded[]` exists) | every C-row has a test |
+| P9 | P8 | G4: `answers:check` refuses a degraded card |
+| P10 | P6 | G2: `git diff --exit-code` clean |
+| P11 | P10 | G3: tolerances traced to a committed artifact |
+| P12 | P6, P11 | G5: nightly green, licence gate green |
+
+**Ordering rule:** P8 before P9 — the guard refuses on `ayanamsa_degraded`, which is only meaningful once the cap table consumes it.
+
+---
+
+# 2 · Gantt — P1–P6 dependency chain and gate order
+
+![P1–P6 dependency chain and quality gate order](https://www.genspark.ai/api/files/s/QHmYJ6CF)
+
+**Download: [p1-p6-dependency-gantt.png](https://www.genspark.ai/api/files/s/QHmYJ6CF)** · also as HTML: [p1-p6-gantt.html](https://www.genspark.ai/api/files/s/VYt1p7SW)
+
+**Dependency chain (the order is not cosmetic):**
+
+| Step | Blocks because |
+|---|---|
+| **P1 → P2** | The facade has nothing to delegate to; without P1 the four exports must re-derive locally — reinstating F-01. |
+| **P1 → P3** | The derived `accuracy` label reads `source` + `degraded`; those fields only exist on the core's return type. |
+| **P1 → P4** | P4's sidereal conversion must call the same core, or the two paths re-diverge. |
+| **P2,P3,P4 → P5** | Invariants test the public surface: facade exports, service rows, the thrown error. Half a patch is untestable. |
+| **P5 → P6** | A golden lock is a promise; it may only be taken over a surface already proven structurally sound. |
+| **P6 → P7+** | Cap C3 (`anchor-pending-golden` → 0.60) is meaningless until C3 can be false. |
+
+**Gate order — sequential, blocking:** `G0 typecheck (d5) → G1 invariants (d6) → G2 anchor lock (d7) → G6 router (d10) → G4 publish guard (d14) → G3 corpus 1″/5″ (d20) → G5 licence gate (d24)`.
+
+**Why G1 sits before G2:** G1 needs no oracle, so it can never be skipped "because the ephemeris is unavailable" — it is the gate the 0.699° Fagan-Bradley split had to fail and could not.
+
+**Anti-rule:** a second ayanamsa implementation must never be introduced "temporarily". That is exactly how F-01 happened.
+
+---
+
+# 3 · Deck A — audit findings, V1 vs V2 vs V3, Phase 1 plan
+
+**Download: [vedic-rajkumar-audit-v1v2v3-phase1.pptx](https://www.genspark.ai/api/files/s/fVjYCFZN)** — 14 slides, editable PPTX.
+
+| # | Slide | Substance |
+|---|---|---|
+| 1 | Title | commit `6b1c0fb…`, 19 Nov 2026, 2,275 files |
+| 2 | What was inspected, and how | 4 modules read in full; 10 defects; **0 existing ayanamsa-isolation tests** |
+| 3 | Ten defects · four ship a wrong answer | full F-01…F-10 table with `file:line` |
+| 4 | Three implementations of the same number | V1/V2/V3 formula table |
+| 5 | Measured divergence at 2026-09-04 | numbers below |
+| 6–7 | Register F-01…F-05 / F-06…F-10 | one card per defect: severity, mechanism, evidence |
+| 8 | What 0.699° actually costs | pada = 200′, split = 41.9′ = 21% of a pada |
+| 9 | The chart computed twice in two time zones | F-03 four-step diagram |
+| 10 | One registry, two consumers | Phase 1 architecture |
+| 11 | File-by-file change set | 851 insertions, 276 deletions, 0 tsc errors |
+| 12 | Nothing at a call site changes | 10-row API before/after |
+| 13 | The failure mode changes from silent to loud | BEFORE/AFTER contract |
+| 14 | What Phase 1 deliberately does not fix | F-02, F-08, F-09, F-10 deferrals |
+
+**The V1 / V2 / V3 comparison — measured, not asserted.** At JD 2461288.0 (2026-09-04), `T = (JD − 2451545)/36525`:
+
+| System | V1 `ayanamsaEngine.ts` | V2 `ayanamsaService.ts` | V3 `validate-ephemeris.js` | Patched core | Delta |
+|---|---|---|---|---|---|
+| Lahiri | 23.85472 + 1.39600T − 0.000308T² → **24.227082°** | 23.85472 + 1.396T → **24.227082°** | 23.85 + (year−2000)×0.0139 → **24.211400°** | **24.225815°** | V3 **−0.0144°** vs core (52″) |
+| Fagan-Bradley | 24.74261 + 1.39600T − 0.000308T² | 24.0440 + 1.396T | — | 25.115231° | **V1−V2 = 0.6990°** ≈ 23 days of Sun |
+| KP | 23.85022 + 1.39600T − 0.000308T² | 23.8628 + 1.396T | — | 24.222841° | **V2−V1 = +0.0126°** = 45″ |
+| Raman | 22.45986 + 1.39600T − 0.000308T² | 22.4604 + 1.3972T | — | 22.832481° | rate 1.39600 vs 1.3972 |
+
+Only V1 carries the T² term. V3 validates a formula that agrees with **neither** shipped path.
+
+---
+
+# 4 · Deck B — stakeholder briefing
+
+**Download: [vedic-rajkumar-stakeholder-briefing.pptx](https://www.genspark.ai/api/files/s/cNOAyFDQ)** — 9 slides, with the Gantt embedded full-width on slide 5.
+
+| # | Slide | Substance |
+|---|---|---|
+| 1 | Ayanamsa accuracy: what is broken and what it costs to fix | — |
+| 2 | Four numbers to hold onto | **0.699°** · **5h30m** · **4** · **6** |
+| 3 | In plain terms | six one-line findings, no jargon |
+| 4 | V1 vs V2 vs V3 | same table, plain-language columns |
+| 5 | Phase 1 · six patches, dependency-ordered | the Gantt |
+| 6 | What each patch does | P1–P6 cards |
+| 7 | What must be green before each week closes | G0–G6 |
+| 8 | What users will actually notice | 5 surfaces |
+| 9 | What is being asked for | 3 decisions |
+
+Slide 8 carries the one uncomfortable line, stated rather than buried: *some published charts will change — they are currently wrong by up to 0.9° of sidereal longitude.*
+
+---
+
+# 5 · Sprint board — six patches, owners, estimates, weeks
+
+**Download: [phase1-sprint-board.xlsx](https://www.genspark.ai/api/files/s/Anrj46Q5)** — 4 sheets, live formulas (`=SUM`, `=SUM(E6:E11)`), data bar on estimates.
+
+⚠ **Owners are role placeholders, not people.** The repository records no assignees for this work, and I will not invent names. Flagged as such on row 3 of the sheet.
+
+| ID | Patch | File | Owner (role) | Est (h) | Depends on | Days | Wk | Exit gate |
+|---|---|---|---|---|---|---|---|---|
+| P1 | Ayanamsa core registry | `src/lib/vedic/ayanamsaCore.ts` | Astro/Backend Dev | 14 | — | 1–2 | W1 | G0 typecheck |
+| P2 | Engine compatibility facade | `src/lib/vedic/ayanamsaEngine.ts` | Backend Dev | 10 | P1 | 2–3 | W1 | G0 typecheck |
+| P3 | Service rows + toJD fix | `src/services/ayanamsaService.ts` | Frontend Dev | 12 | P1 | 3–4 | W1 | G0 typecheck |
+| P4 | Ephemeris fail-loud | `src/astrology/core/ephemeris.ts` | Backend Dev | 11 | P1 | 3–5 | W1 | G0 typecheck |
+| P5 | Ayanamsa invariants test | `src/tests/ayanamsa/ayanamsaInvariants.test.ts` | QA / Test Eng | 6 | P2, P3, P4 | 5–6 | W1 | G1 invariants |
+| P6 | Anchor golden lock | `tools/accuracy/ayanamsa/anchors.golden.json` | Astro/Backend Dev | 5 | P5 | 6–7 | W1 | G2 anchor lock |
+| | **Phase 1 total** | | | **58** | | | | |
+
+**Estimate basis (sheet "Estimate Basis").** Hours = changed lines ÷ 22 (read + reason + edit + review), plus a fixed test cost: P1 355 lines → 14h; P2 232 → 10h; P3 315 → 12h; P4 225 → 11h; P5 ~120 new → 6h; P6 ~80 → 5h. These are derived from diff size, **not measured effort** — no velocity history exists for this path, so calibrate after P1 lands.
+
+**Workload by role:** Astro/Backend Dev 19h (P1, P6) · Backend Dev 21h (P2, P4) · Frontend Dev 12h (P3) · QA/Test Eng 6h (P5). P5 is deliberately owned by someone who did not write the engine — otherwise the invariants encode its bugs.
+
+**Week grid (sheet "Week by Week")** also carries the deferred tail: P7 router 7h (W2), P8 caps 8h (W2), P9 provenance 9h (W2), P10 oracle 10h (W3), P11 manifest 6h (W3), P12 fidelity 8h (W4).
+
+---
+
+**What I did not verify, stated plainly:** no hunk in the P7+ document was compiled — every line number is quoted from the file, but the patches themselves are untested. `natal_snapshot` (P7.1) may not exist in the schema. The Lahiri anchor epoch Swiss Ephemeris uses (P10) is undocumented in the sources I could retrieve, which is why those values are `null` rather than guessed.

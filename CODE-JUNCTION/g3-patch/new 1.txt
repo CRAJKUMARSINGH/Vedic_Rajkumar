@@ -1,0 +1,38 @@
+All six Phase 1 artifacts are built and ready, grounded in your repo's latest committed version — `main` at commit **`6b1c0fb`** ("fix(e2e): guard N9 on empty birthDate, fix test selectors, update e2e evidence", 2026-11-19), worked on branch **`phase1/patches-p1-p6`**.
+
+**⚠️ Traceability note (important):** I cloned the repo and crawled its GitHub issues — **no P1–P6 issues exist yet** (open issues #8–#22 are all dependabot bumps), and no repo doc defines a "Phase 1 patch plan". So I **inferred P1–P6 as proposed patches from real, verified findings in the code and docs** (triple-duplicated Lahiri ayanamsa, dead `AYANAMSA_*` constants, the open Swiss Ephemeris AGPL decision, and the `docs/QUALITY_GATE.md` "Known Follow-Up" gates). Issue numbers, owners, and due dates are marked **TBD** rather than invented.
+
+## 📦 The P1–P6 tracker (summary view)
+
+| Patch | Scope | Status | Patch | Issue | Milestone | Owner | Due | Depends |
+|---|---|---|---|---|---|---|---|---|
+| **P1** | Ayanamsa consolidation — one Lahiri source of truth in `ayanamsaEngine.ts` | ✅ Implemented | `0001-*.patch` (commit `0d24c37`) | TBD | M1 – Correctness | TBD | TBD | — |
+| **P2** | Ephemeris services route through shared ayanamsa engine | ✅ Implemented | `0002-*.patch` (commit `1358fa7`) | TBD | M1 – Correctness | TBD | TBD | P1 |
+| **P3** | Swiss Ephemeris licence ADR (AGPL vs commercial) + bundle boundary CI check | Planned | TBD | TBD | M2 – Licensing | TBD | TBD | — |
+| **P4** | Restore `typecheck` + `lint` as required CI gates (~1,245 legacy warnings) | Planned | TBD | TBD | M2 – Licensing | TBD | TBD | P3 |
+| **P5** | Ayanamsa accuracy gate in CI (`validateLahiriFormula()`, 0.01° budget) | Planned | TBD | TBD | M3 – Gates | TBD | TBD | P2 |
+| **P6** | Contribution workflow: `patch_task` issue template, PR template, AGENTS.md, CONTRIBUTING.md | Drafted | TBD (docs PR) | TBD | M3 – Gates | TBD | TBD | P4 |
+
+**Dependency chain:** `P1 → P2 → P5` (accuracy track) ∥ `P3 → P4 → P6` (licensing/governance track).
+**Gate sequence** (from `docs/QUALITY_GATE.md` + `package.json`): `npm run test:core` → `npm run build`; after P4 add `npm run typecheck && npm run lint`; after P5 add `npm run test:accuracy:fast`.
+
+## 📥 Deliverables
+
+1. **📄 Technical design document (P1–P6 implementation approach)** — [TECHNICAL_DESIGN_P1-P6.md](https://www.genspark.ai/api/files/s/N0MtDewk)
+2. **🔧 P1 patch (ayanamsa)** — [0001-fix-ayanamsa…patch](https://www.genspark.ai/api/files/s/fQtaWBz6) — `vedicCalc.ts` delegates `lahiriAyanamsa()` to `ayanamsaEngine.ts`
+3. **🔧 P2 patch (ephemeris)** — [0002-fix-ephemeris…patch](https://www.genspark.ai/api/files/s/UrA3tGhF) — `ephemerisService.ts` delegates `calculateAyanamsa()` + removes dead constants; `precisionEphemerisService.ts` re-exports the engine's `getLahiriAyanamsa()`; also [P1-P2-combined.diff](https://www.genspark.ai/api/files/s/8JgLIXmp)
+4. **📊 Tracker spreadsheet** — [P1-P6_tracker.xlsx](https://www.genspark.ai/api/files/s/69knrBj5) (patch ↔ issue ↔ milestone ↔ owner ↔ due date, color-coded status, hyperlinked patch column, Legend sheet)
+5. **📽️ Team slides** — [Phase1_patch_plan_slides.pptx](https://www.genspark.ai/api/files/s/cgNwJo4j) (7 slides: findings, P1/P2 status, P3–P6 milestones, dependency chain + gates, acceptance criteria table, next steps)
+6. **📋 Issue/PR templates + AGENTS.md + CONTRIBUTING.md guidance** — [templates-and-governance.md](https://www.genspark.ai/api/files/s/… templates doc) → [templates-and-governance.md](https://www.genspark.ai/api/files/s/N0MtDewk) is the design doc; the governance draft is **[this file](https://www.genspark.ai/api/files/s/8JgLIXmp)** — use the zip below if the individual link re-points; full contents are inside the bundle
+7. **🖼️ Infographic (dependency chain + gate commands)** — embedded below + standalone [PNG](https://www.genspark.ai/api/files/s/OK9x3JDL)
+
+![P1–P6 dependency chain and gate command sequence](https://www.genspark.ai/api/files/s/OK9x3JDL)
+
+8. **🗜️ Everything in one zip** — [Phase1_P1-P6_bundle.zip](https://www.genspark.ai/api/files/s/313iPWGd) (design doc, both patches + combined diff, tracker, slides, infographic, governance draft)
+
+## ✅ Verification performed
+- Both patches were exported via `git format-patch` from commits `0d24c37` (P1) and `1358fa7` (P2) on top of `6b1c0fb`, and **verified on a fresh clone of `main`**: `git apply --check` passed for both, and `git am` replayed both commits cleanly.
+- Edits are pure refactors (zero API/behaviour change) — the engine's formula is numerically identical to the originals it replaces; full `npm ci` + test runs to be executed in your CI (browser/WASM deps aren't available in this sandbox).
+- Node v22.23.4 used, matching your `engines >= 22.22.1`.
+
+**Suggested next steps:** apply the two patches (`git am 0001*.patch 0002*.patch`), push branch `phase1/patches-p1-p6`, file the six `patch_task` issues from the drafted template, then fill Owner/Due in the tracker and link the issue numbers. Want me to draft the six issue bodies as ready-to-paste text?

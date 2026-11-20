@@ -1,0 +1,675 @@
+
+> vedic-rajkumar@0.0.0-development validate:accuracy
+> vitest run src/tests/validation/accuracySuite.test.ts --reporter=verbose
+
+
+ RUN  v4.1.11 E:/Rajkumar/Vedic_Rajkumar
+
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > Suite health > should complete all 15 charts without throwing 7ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > Suite health > should complete within 2000ms 18ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > Suite health > should have ≥ 12 / 15 charts passing (Week 1 threshold) 2ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > Suite health > should have 0 rashi-level failures 4ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > Suite health > should have field accuracy ≥ 80% 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > Suite health > should produce a valid JSON summary 3ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > Suite health > should have house cusp data for extended charts 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > Suite health > should have antardasha data for extended charts 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-001 — Priyansh Singh Chauhan > should calculate without error 3ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-001 — Priyansh Singh Chauhan > ayanamsa should be within tolerance 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-001 — Priyansh Singh Chauhan > ascendant rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-001 — Priyansh Singh Chauhan > sun rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-001 — Priyansh Singh Chauhan > moon rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-001 — Priyansh Singh Chauhan > moon nakshatra should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-001 — Priyansh Singh Chauhan > moon pada should match (or be within 1 for border cases) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-001 — Priyansh Singh Chauhan > dasha seed lord should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-001 — Priyansh Singh Chauhan > all 9 planet rashis should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-001 — Priyansh Singh Chauhan > house cusps should match (rashi level) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-001 — Priyansh Singh Chauhan > first antardasha lord should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-002 — Swami Vivekananda > should calculate without error 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-002 — Swami Vivekananda > ayanamsa should be within tolerance 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-002 — Swami Vivekananda > ascendant rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-002 — Swami Vivekananda > sun rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-002 — Swami Vivekananda > moon rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-002 — Swami Vivekananda > moon nakshatra should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-002 — Swami Vivekananda > moon pada should match (or be within 1 for border cases) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-002 — Swami Vivekananda > dasha seed lord should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-002 — Swami Vivekananda > all 9 planet rashis should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-002 — Swami Vivekananda > house cusps should match (rashi level) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-002 — Swami Vivekananda > first antardasha lord should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-003 — Mahatma Gandhi > should calculate without error 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-003 — Mahatma Gandhi > ayanamsa should be within tolerance 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-003 — Mahatma Gandhi > ascendant rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-003 — Mahatma Gandhi > sun rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-003 — Mahatma Gandhi > moon rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-003 — Mahatma Gandhi > moon nakshatra should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-003 — Mahatma Gandhi > moon pada should match (or be within 1 for border cases) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-003 — Mahatma Gandhi > dasha seed lord should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-003 — Mahatma Gandhi > all 9 planet rashis should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-003 — Mahatma Gandhi > house cusps should match (rashi level) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-003 — Mahatma Gandhi > first antardasha lord should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-004 — Albert Einstein > should calculate without error 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-004 — Albert Einstein > ayanamsa should be within tolerance 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-004 — Albert Einstein > ascendant rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-004 — Albert Einstein > sun rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-004 — Albert Einstein > moon rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-004 — Albert Einstein > moon nakshatra should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-004 — Albert Einstein > moon pada should match (or be within 1 for border cases) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-004 — Albert Einstein > dasha seed lord should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-004 — Albert Einstein > all 9 planet rashis should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-005 — Narendra Modi > should calculate without error 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-005 — Narendra Modi > ayanamsa should be within tolerance 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-005 — Narendra Modi > ascendant rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-005 — Narendra Modi > sun rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-005 — Narendra Modi > moon rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-005 — Narendra Modi > moon nakshatra should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-005 — Narendra Modi > moon pada should match (or be within 1 for border cases) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-005 — Narendra Modi > dasha seed lord should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-005 — Narendra Modi > all 9 planet rashis should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-006 — Rajkumar > should calculate without error 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-006 — Rajkumar > ayanamsa should be within tolerance 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-006 — Rajkumar > ascendant rashi should match 2ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-006 — Rajkumar > sun rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-006 — Rajkumar > moon rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-006 — Rajkumar > moon nakshatra should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-006 — Rajkumar > moon pada should match (or be within 1 for border cases) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-006 — Rajkumar > dasha seed lord should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-006 — Rajkumar > all 9 planet rashis should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-006 — Rajkumar > house cusps should match (rashi level) 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-006 — Rajkumar > first antardasha lord should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-007 — Jawaharlal Nehru > should calculate without error 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-007 — Jawaharlal Nehru > ayanamsa should be within tolerance 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-007 — Jawaharlal Nehru > ascendant rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-007 — Jawaharlal Nehru > sun rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-007 — Jawaharlal Nehru > moon rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-007 — Jawaharlal Nehru > moon nakshatra should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-007 — Jawaharlal Nehru > moon pada should match (or be within 1 for border cases) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-007 — Jawaharlal Nehru > dasha seed lord should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-007 — Jawaharlal Nehru > all 9 planet rashis should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-008 — Indira Gandhi > should calculate without error 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-008 — Indira Gandhi > ayanamsa should be within tolerance 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-008 — Indira Gandhi > ascendant rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-008 — Indira Gandhi > sun rashi should match 4ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-008 — Indira Gandhi > moon rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-008 — Indira Gandhi > moon nakshatra should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-008 — Indira Gandhi > moon pada should match (or be within 1 for border cases) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-008 — Indira Gandhi > dasha seed lord should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-008 — Indira Gandhi > all 9 planet rashis should match 0ms
+stdout | src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite
+══════════════════════════════════════════════════════════════════════
+ VEDIC RAJKUMAR — ACCURACY VALIDATION REPORT
+ Engine : precisionEphemerisService (Meeus full perturbation + Lahiri ayanamsa)
+ Run at : 2026-11-20T02:56:50.983Z
+ Scope  : Week 2 (Extended: house cusps, antardasha)
+══════════════════════════════════════════════════════════════════════
+
+Chart REF-001: Priyansh Singh Chauhan
+──────────────────────────────────────────────────────────────────────
+  ✅ ayanamsa                     calc: 23.8661              exp: 23.866               Δ0.000
+  ✅ ascendant                    calc: Cancer               exp: Cancer               
+  ✅ sun_rashi                    calc: Libra                exp: Libra                
+  ✅ moon_rashi                   calc: Virgo                exp: Virgo                
+  ✅ mercury_rashi                calc: Libra                exp: Libra                
+  ✅ venus_rashi                  calc: Scorpio              exp: Scorpio              
+  ✅ mars_rashi                   calc: Virgo                exp: Virgo                
+  ✅ jupiter_rashi                calc: Taurus               exp: Taurus               
+  ✅ saturn_rashi                 calc: Taurus               exp: Taurus               
+  ✅ rahu_rashi                   calc: Gemini               exp: Gemini               
+  ✅ ketu_rashi                   calc: Sagittarius          exp: Sagittarius          
+  ✅ moon_nakshatra               calc: Hasta                exp: Hasta                
+  ✅ moon_pada                    calc: 3                    exp: 3                    
+  ✅ dasha_seed_lord              calc: Moon                 exp: Moon                 
+  ⚠️  dasha_balance_days           calc: 972.1                exp: 960                  Δ12.084  (Delta 12.1 days. Julian Day precision - check timezone handling; Moon position accuracy at nakshatra boundaries)
+  ✅ house_1_cusp                 calc: Cancer               exp: Cancer               
+  ✅ house_4_cusp                 calc: Libra                exp: Libra                
+  ✅ house_7_cusp                 calc: Capricorn            exp: Capricorn            
+  ✅ house_10_cusp                calc: Aries                exp: Aries                
+  ✅ first_antardasha_lord        calc: Moon                 exp: Moon                 
+
+  ⚠️  WARN  19/20 fields (95%)  warn:1  fail:0  skip:0
+──────────────────────────────────────────────────────────────────────
+
+Chart REF-002: Swami Vivekananda
+──────────────────────────────────────────────────────────────────────
+  ✅ ayanamsa                     calc: 21.9421              exp: 21.941               Δ0.001
+  ✅ ascendant                    calc: Sagittarius          exp: Sagittarius          
+  ✅ sun_rashi                    calc: Sagittarius          exp: Sagittarius          
+  ✅ moon_rashi                   calc: Virgo                exp: Virgo                
+  ✅ mercury_rashi                calc: Capricorn            exp: Capricorn            
+  ✅ venus_rashi                  calc: Capricorn            exp: Capricorn            
+  ✅ mars_rashi                   calc: Aries                exp: Aries                
+  ✅ jupiter_rashi                calc: Libra                exp: Libra                
+  ✅ saturn_rashi                 calc: Virgo                exp: Virgo                
+  ✅ rahu_rashi                   calc: Scorpio              exp: Scorpio              
+  ✅ ketu_rashi                   calc: Taurus               exp: Taurus               
+  ✅ moon_nakshatra               calc: Hasta                exp: Hasta                
+  ✅ moon_pada                    calc: 3                    exp: 3                    
+  ✅ dasha_seed_lord              calc: Moon                 exp: Moon                 
+  ✅ house_1_cusp                 calc: Sagittarius          exp: Sagittarius          
+  ✅ house_4_cusp                 calc: Pisces               exp: Pisces               
+  ✅ house_7_cusp                 calc: Gemini               exp: Gemini               
+  ✅ house_10_cusp                calc: Virgo                exp: Virgo                
+  ✅ first_antardasha_lord        calc: Moon                 exp: Moon                 
+
+  ✅ PASS  19/19 fields (100%)  warn:0  fail:0  skip:0
+──────────────────────────────────────────────────────────────────────
+
+Chart REF-003: Mahatma Gandhi
+──────────────────────────────────────────────────────────────────────
+  ✅ ayanamsa                     calc: 22.036               exp: 22.035               Δ0.001
+  ✅ ascendant                    calc: Virgo                exp: Virgo                
+  ✅ sun_rashi                    calc: Virgo                exp: Virgo                
+  ✅ moon_rashi                   calc: Cancer               exp: Cancer               
+  ✅ mercury_rashi                calc: Libra                exp: Libra                
+  ✅ venus_rashi                  calc: Libra                exp: Libra                
+  ✅ mars_rashi                   calc: Libra                exp: Libra                
+  ✅ jupiter_rashi                calc: Aries                exp: Aries                
+  ✅ saturn_rashi                 calc: Scorpio              exp: Scorpio              
+  ✅ rahu_rashi                   calc: Cancer               exp: Cancer               
+  ✅ ketu_rashi                   calc: Capricorn            exp: Capricorn            
+  ✅ moon_nakshatra               calc: Ashlesha             exp: Ashlesha             
+  ✅ moon_pada                    calc: 4                    exp: 4                    
+  ✅ dasha_seed_lord              calc: Mercury              exp: Mercury              
+  ✅ house_1_cusp                 calc: Virgo                exp: Virgo                
+  ✅ house_4_cusp                 calc: Sagittarius          exp: Sagittarius          
+  ✅ house_7_cusp                 calc: Pisces               exp: Pisces               
+  ✅ house_10_cusp                calc: Gemini               exp: Gemini               
+  ✅ first_antardasha_lord        calc: Mercury              exp: Mercury              
+
+  ✅ PASS  19/19 fields (100%)  warn:0  fail:0  skip:0
+──────────────────────────────────────────────────────────────────────
+
+Chart REF-004: Albert Einstein
+──────────────────────────────────────────────────────────────────────
+  ✅ ayanamsa                     calc: 22.1679              exp: 22.167               Δ0.001
+  ✅ ascendant                    calc: Gemini               exp: Gemini               
+  ✅ sun_rashi                    calc: Pisces               exp: Pisces               
+  ✅ moon_rashi                   calc: Scorpio              exp: Scorpio              
+  ✅ mercury_rashi                calc: Pisces               exp: Pisces               
+  ✅ venus_rashi                  calc: Pisces               exp: Pisces               
+  ✅ mars_rashi                   calc: Capricorn            exp: Capricorn            
+  ✅ jupiter_rashi                calc: Aquarius             exp: Aquarius             
+  ✅ saturn_rashi                 calc: Pisces               exp: Pisces               
+  ✅ rahu_rashi                   calc: Capricorn            exp: Capricorn            
+  ✅ ketu_rashi                   calc: Cancer               exp: Cancer               
+  ✅ moon_nakshatra               calc: Jyeshtha             exp: Jyeshtha             
+  ✅ moon_pada                    calc: 2                    exp: 2                    
+  ✅ dasha_seed_lord              calc: Mercury              exp: Mercury              
+
+  ✅ PASS  14/14 fields (100%)  warn:0  fail:0  skip:0
+──────────────────────────────────────────────────────────────────────
+
+Chart REF-005: Narendra Modi
+──────────────────────────────────────────────────────────────────────
+  ✅ ayanamsa                     calc: 23.1665              exp: 23.166               Δ0.001
+  ✅ ascendant                    calc: Leo                  exp: Leo                  
+  ✅ sun_rashi                    calc: Virgo                exp: Virgo                
+  ✅ moon_rashi                   calc: Scorpio              exp: Scorpio              
+  ✅ mercury_rashi                calc: Virgo                exp: Virgo                
+  ✅ venus_rashi                  calc: Leo                  exp: Leo                  
+  ✅ mars_rashi                   calc: Scorpio              exp: Scorpio              
+  ✅ jupiter_rashi                calc: Aquarius             exp: Aquarius             
+  ✅ saturn_rashi                 calc: Leo                  exp: Leo                  
+  ✅ rahu_rashi                   calc: Pisces               exp: Pisces               
+  ✅ ketu_rashi                   calc: Virgo                exp: Virgo                
+  ✅ moon_nakshatra               calc: Anuradha             exp: Anuradha             
+  ✅ moon_pada                    calc: 1                    exp: 1                    
+  ✅ dasha_seed_lord              calc: Saturn               exp: Saturn               
+
+  ✅ PASS  14/14 fields (100%)  warn:0  fail:0  skip:0
+──────────────────────────────────────────────────────────────────────
+
+Chart REF-006: Rajkumar
+──────────────────────────────────────────────────────────────────────
+  ✅ ayanamsa                     calc: 23.348               exp: 23.348               Δ0.000
+  ✅ ascendant                    calc: Leo                  exp: Leo                  
+  ✅ sun_rashi                    calc: Leo                  exp: Leo                  
+  ✅ moon_rashi                   calc: Cancer               exp: Cancer               
+  ✅ mercury_rashi                calc: Virgo                exp: Virgo                
+  ✅ venus_rashi                  calc: Virgo                exp: Virgo                
+  ✅ mars_rashi                   calc: Libra                exp: Libra                
+  ✅ jupiter_rashi                calc: Pisces               exp: Pisces               
+  ✅ saturn_rashi                 calc: Capricorn            exp: Capricorn            
+  ✅ rahu_rashi                   calc: Gemini               exp: Gemini               
+  ✅ ketu_rashi                   calc: Sagittarius          exp: Sagittarius          
+  ✅ moon_nakshatra               calc: Ashlesha             exp: Ashlesha             
+  ✅ moon_pada                    calc: 3                    exp: 3                    
+  ✅ dasha_seed_lord              calc: Mercury              exp: Mercury              
+  ✅ house_1_cusp                 calc: Leo                  exp: Leo                  
+  ✅ house_4_cusp                 calc: Scorpio              exp: Scorpio              
+  ✅ house_7_cusp                 calc: Aquarius             exp: Aquarius             
+  ✅ house_10_cusp                calc: Taurus               exp: Taurus               
+  ✅ first_antardasha_lord        calc: Mercury              exp: Mercury              
+
+  ✅ PASS  19/19 fields (100%)  warn:0  fail:0  skip:0
+──────────────────────────────────────────────────────────────────────
+
+Chart REF-007: Jawaharlal Nehru
+──────────────────────────────────────────────────────────────────────
+  ✅ ayanamsa                     calc: 22.317               exp: 22.316               Δ0.001
+  ✅ ascendant                    calc: Cancer               exp: Cancer               
+  ✅ sun_rashi                    calc: Scorpio              exp: Scorpio              
+  ✅ moon_rashi                   calc: Cancer               exp: Cancer               
+  ✅ mercury_rashi                calc: Libra                exp: Libra                
+  ✅ venus_rashi                  calc: Libra                exp: Libra                
+  ✅ mars_rashi                   calc: Virgo                exp: Virgo                
+  ✅ jupiter_rashi                calc: Sagittarius          exp: Sagittarius          
+  ✅ saturn_rashi                 calc: Leo                  exp: Leo                  
+  ✅ rahu_rashi                   calc: Gemini               exp: Gemini               
+  ✅ ketu_rashi                   calc: Sagittarius          exp: Sagittarius          
+  ✅ moon_nakshatra               calc: Ashlesha             exp: Ashlesha             
+  ✅ moon_pada                    calc: 1                    exp: 1                    
+  ✅ dasha_seed_lord              calc: Mercury              exp: Mercury              
+
+  ✅ PASS  14/14 fields (100%)  warn:0  fail:0  skip:0
+──────────────────────────────────────────────────────────────────────
+
+Chart REF-008: Indira Gandhi
+──────────────────────────────────────────────────────────────────────
+  ✅ ayanamsa                     calc: 22.7082              exp: 22.707               Δ0.001
+  ✅ ascendant                    calc: Cancer               exp: Cancer               
+  ✅ sun_rashi                    calc: Scorpio              exp: Scorpio              
+  ✅ moon_rashi                   calc: Capricorn            exp: Capricorn            
+  ✅ mercury_rashi                calc: Scorpio              exp: Scorpio              
+  ✅ venus_rashi                  calc: Sagittarius          exp: Sagittarius          
+  ✅ mars_rashi                   calc: Leo                  exp: Leo                  
+  ✅ jupiter_rashi                calc: Taurus               exp: Taurus               
+  ✅ saturn_rashi                 calc: Cancer               exp: Cancer               
+  ✅ rahu_rashi                   calc: Sagittarius          exp: Sagittarius          
+  ✅ ketu_rashi                   calc: Gemini               exp: Gemini               
+  ✅ moon_nakshatra               calc: Uttara Ashadha       exp: Uttara Ashadha       
+  ✅ moon_pada                    calc: 3                    exp: 3                    
+  ✅ dasha_seed_lord              calc: Sun                  exp: Sun                  
+
+  ✅ PASS  14/14 fields (100%)  warn:0  fail:0  skip:0
+──────────────────────────────────────────────────────────────────────
+
+Chart REF-009: Sachin Tendulkar
+──────────────────────────────────────────────────────────────────────
+  ✅ ayanamsa                     calc: 23.4821              exp: 23.482               Δ0.000
+  ✅ ascendant                    calc: Libra                exp: Libra                
+  ✅ sun_rashi                    calc: Aries                exp: Aries                
+  ✅ moon_rashi                   calc: Sagittarius          exp: Sagittarius          
+  ✅ mercury_rashi                calc: Pisces               exp: Pisces               
+  ✅ venus_rashi                  calc: Aries                exp: Aries                
+  ✅ mars_rashi                   calc: Capricorn            exp: Capricorn            
+  ✅ jupiter_rashi                calc: Capricorn            exp: Capricorn            
+  ✅ saturn_rashi                 calc: Taurus               exp: Taurus               
+  ✅ rahu_rashi                   calc: Sagittarius          exp: Sagittarius          
+  ✅ ketu_rashi                   calc: Gemini               exp: Gemini               
+  ✅ moon_nakshatra               calc: Uttara Ashadha       exp: Uttara Ashadha       
+  ✅ moon_pada                    calc: 1                    exp: 1                    
+  ✅ dasha_seed_lord              calc: Sun                  exp: Sun                  
+  ✅ house_1_cusp                 calc: Libra                exp: Libra                
+  ✅ house_4_cusp                 calc: Capricorn            exp: Capricorn            
+  ✅ house_7_cusp                 calc: Aries                exp: Aries                
+  ✅ house_10_cusp                calc: Cancer               exp: Cancer               
+  ✅ first_antardasha_lord        calc: Sun                  exp: Sun                  
+
+  ✅ PASS  19/19 fields (100%)  warn:0  fail:0  skip:0
+──────────────────────────────────────────────────────────────────────
+
+Chart REF-010: Lata Mangeshkar
+──────────────────────────────────────────────────────────────────────
+  ✅ ayanamsa                     calc: 22.8738              exp: 22.873               Δ0.001
+  ✅ ascendant                    calc: Gemini               exp: Gemini               
+  ✅ sun_rashi                    calc: Virgo                exp: Virgo                
+  ✅ moon_rashi                   calc: Cancer               exp: Cancer               
+  ✅ mercury_rashi                calc: Virgo                exp: Virgo                
+  ✅ venus_rashi                  calc: Leo                  exp: Leo                  
+  ✅ mars_rashi                   calc: Libra                exp: Libra                
+  ✅ jupiter_rashi                calc: Taurus               exp: Taurus               
+  ✅ saturn_rashi                 calc: Sagittarius          exp: Sagittarius          
+  ✅ rahu_rashi                   calc: Aries                exp: Aries                
+  ✅ ketu_rashi                   calc: Libra                exp: Libra                
+  ✅ moon_nakshatra               calc: Ashlesha             exp: Ashlesha             
+  ✅ moon_pada                    calc: 1                    exp: 1                    
+  ✅ dasha_seed_lord              calc: Mercury              exp: Mercury              
+
+  ✅ PASS  14/14 fields (100%)  warn:0  fail:0  skip:0
+──────────────────────────────────────────────────────────────────────
+
+Chart REF-011: Amitabh Bachchan
+──────────────────────────────────────────────────────────────────────
+  ✅ ayanamsa                     calc: 23.0558              exp: 23.055               Δ0.001
+  ✅ ascendant                    calc: Aquarius             exp: Aquarius             
+  ✅ sun_rashi                    calc: Virgo                exp: Virgo                
+  ✅ moon_rashi                   calc: Libra                exp: Libra                
+  ✅ mercury_rashi                calc: Virgo                exp: Virgo                
+  ✅ venus_rashi                  calc: Virgo                exp: Virgo                
+  ✅ mars_rashi                   calc: Virgo                exp: Virgo                
+  ✅ jupiter_rashi                calc: Cancer               exp: Cancer               
+  ✅ saturn_rashi                 calc: Taurus               exp: Taurus               
+  ✅ rahu_rashi                   calc: Leo                  exp: Leo                  
+  ✅ ketu_rashi                   calc: Aquarius             exp: Aquarius             
+  ✅ moon_nakshatra               calc: Swati                exp: Swati                
+  ✅ moon_pada                    calc: 2                    exp: 2                    
+  ✅ dasha_seed_lord              calc: Rahu                 exp: Rahu                 
+
+  ✅ PASS  14/14 fields (100%)  warn:0  fail:0  skip:0
+──────────────────────────────────────────────────────────────────────
+
+Chart REF-012: Atal Bihari Vajpayee
+──────────────────────────────────────────────────────────────────────
+  ✅ ayanamsa                     calc: 22.8073              exp: 22.807               Δ0.000
+  ✅ ascendant                    calc: Libra                exp: Libra                
+  ✅ sun_rashi                    calc: Sagittarius          exp: Sagittarius          
+  ✅ moon_rashi                   calc: Scorpio              exp: Scorpio              
+  ✅ mercury_rashi                calc: Sagittarius          exp: Sagittarius          
+  ✅ venus_rashi                  calc: Scorpio              exp: Scorpio              
+  ✅ mars_rashi                   calc: Pisces               exp: Pisces               
+  ✅ jupiter_rashi                calc: Sagittarius          exp: Sagittarius          
+  ✅ saturn_rashi                 calc: Libra                exp: Libra                
+  ✅ rahu_rashi                   calc: Cancer               exp: Cancer               
+  ✅ ketu_rashi                   calc: Capricorn            exp: Capricorn            
+  ✅ moon_nakshatra               calc: Jyeshtha             exp: Jyeshtha             
+  ✅ moon_pada                    calc: 2                    exp: 2                    
+  ✅ dasha_seed_lord              calc: Mercury              exp: Mercury              
+
+  ✅ PASS  14/14 fields (100%)  warn:0  fail:0  skip:0
+──────────────────────────────────────────────────────────────────────
+
+Chart REF-013: Veerpratap Singh Rathore
+──────────────────────────────────────────────────────────────────────
+  ✅ ayanamsa                     calc: 24.0182              exp: 24.019               Δ0.001
+  ✅ ascendant                    calc: Virgo                exp: Virgo                
+  ✅ sun_rashi                    calc: Virgo                exp: Virgo                
+  ✅ moon_rashi                   calc: Taurus               exp: Taurus               
+  ✅ mercury_rashi                calc: Leo                  exp: Leo                  
+  ✅ venus_rashi                  calc: Virgo                exp: Virgo                
+  ✅ mars_rashi                   calc: Cancer               exp: Cancer               
+  ✅ jupiter_rashi                calc: Aries                exp: Aries                
+  ✅ saturn_rashi                 calc: Virgo                exp: Virgo                
+  ✅ rahu_rashi                   calc: Scorpio              exp: Scorpio              
+  ✅ ketu_rashi                   calc: Taurus               exp: Taurus               
+  ✅ moon_nakshatra               calc: Krittika             exp: Krittika             
+  ✅ moon_pada                    calc: 2                    exp: 2                    
+  ✅ dasha_seed_lord              calc: Sun                  exp: Sun                  
+  ✅ dasha_balance_days           calc: 1204.6               exp: 1205                 Δ0.362
+  ✅ house_1_cusp                 calc: Virgo                exp: Virgo                
+  ✅ house_4_cusp                 calc: Sagittarius          exp: Sagittarius          
+  ✅ house_7_cusp                 calc: Pisces               exp: Pisces               
+  ✅ house_10_cusp                calc: Gemini               exp: Gemini               
+  ✅ first_antardasha_lord        calc: Sun                  exp: Sun                  
+
+  ✅ PASS  20/20 fields (100%)  warn:0  fail:0  skip:0
+──────────────────────────────────────────────────────────────────────
+
+Chart REF-014: Vishwaraj Singh Chauhan
+──────────────────────────────────────────────────────────────────────
+  ✅ ayanamsa                     calc: 23.7812              exp: 23.781               Δ0.000
+  ✅ ascendant                    calc: Cancer               exp: Cancer               
+  ✅ sun_rashi                    calc: Virgo                exp: Virgo                
+  ✅ moon_rashi                   calc: Taurus               exp: Taurus               
+  ✅ mercury_rashi                calc: Libra                exp: Libra                
+  ✅ venus_rashi                  calc: Libra                exp: Libra                
+  ✅ mars_rashi                   calc: Cancer               exp: Cancer               
+  ✅ jupiter_rashi                calc: Libra                exp: Libra                
+  ✅ saturn_rashi                 calc: Aquarius             exp: Aquarius             
+  ✅ rahu_rashi                   calc: Libra                exp: Libra                
+  ✅ ketu_rashi                   calc: Aries                exp: Aries                
+  ✅ moon_nakshatra               calc: Rohini               exp: Rohini               
+  ✅ moon_pada                    calc: 2                    exp: 2                    
+  ✅ dasha_seed_lord              calc: Moon                 exp: Moon                 
+
+  ✅ PASS  14/14 fields (100%)  warn:0  fail:0  skip:0
+──────────────────────────────────────────────────────────────────────
+
+Chart REF-015: Mummy (Rajkumar mother)
+──────────────────────────────────────────────────────────────────────
+  ✅ ayanamsa                     calc: 23.1242              exp: 23.124               Δ0.000
+  ✅ ascendant                    calc: Leo                  exp: Leo                  
+  ✅ sun_rashi                    calc: Leo                  exp: Leo                  
+  ✅ moon_rashi                   calc: Aries                exp: Aries                
+  ✅ mercury_rashi                calc: Leo                  exp: Leo                  
+  ✅ venus_rashi                  calc: Leo                  exp: Leo                  
+  ✅ mars_rashi                   calc: Gemini               exp: Gemini               
+  ✅ jupiter_rashi                calc: Libra                exp: Libra                
+  ✅ saturn_rashi                 calc: Cancer               exp: Cancer               
+  ✅ rahu_rashi                   calc: Taurus               exp: Taurus               
+  ✅ ketu_rashi                   calc: Scorpio              exp: Scorpio              
+  ✅ moon_nakshatra               calc: Ashwini              exp: Ashwini              
+  ✅ moon_pada                    calc: 3                    exp: 3                    
+  ✅ dasha_seed_lord              calc: Ketu                 exp: Ketu                 
+
+  ✅ PASS  14/14 fields (100%)  warn:0  fail:0  skip:0
+──────────────────────────────────────────────────────────────────────
+
+══════════════════════════════════════════════════════════════════════
+ SUITE SUMMARY
+──────────────────────────────────────────────────────────────────────
+  Charts : 15  ✅ Pass: 14  ⚠️  Warn: 1  ❌ Fail: 0  (93% charts pass)
+  Fields : 242  ✅ Pass: 241  Field accuracy: 99.6%
+
+ Week 1 target: ≥ 12/15 charts PASS, 0 rashi failures
+ Week 2 target: Extended coverage with house cusps and antardasha
+  ✅ WEEK 1 ACCEPTANCE: PASS
+══════════════════════════════════════════════════════════════════════
+
+JSON Summary: {
+  "runAt": "2026-11-20T02:56:50.983Z",
+  "engine": "precisionEphemerisService (Meeus full perturbation + Lahiri ayanamsa)",
+  "totalCharts": 15,
+  "passCharts": 14,
+  "warnCharts": 1,
+  "failCharts": 0,
+  "fieldAccuracyPct": 99.6,
+  "week1Verdict": "PASS",
+  "rashiFailureCount": 0,
+  "charts": [
+    {
+      "id": "REF-001",
+      "name": "Priyansh Singh Chauhan",
+      "status": "WARN",
+      "passCount": 19,
+      "failCount": 0,
+      "warnCount": 1,
+      "failures": []
+    },
+    {
+      "id": "REF-002",
+      "name": "Swami Vivekananda",
+      "status": "PASS",
+      "passCount": 19,
+      "failCount": 0,
+      "warnCount": 0,
+      "failures": []
+    },
+    {
+      "id": "REF-003",
+      "name": "Mahatma Gandhi",
+      "status": "PASS",
+      "passCount": 19,
+      "failCount": 0,
+      "warnCount": 0,
+      "failures": []
+    },
+    {
+      "id": "REF-004",
+      "name": "Albert Einstein",
+      "status": "PASS",
+      "passCount": 14,
+      "failCount": 0,
+      "warnCount": 0,
+      "failures": []
+    },
+    {
+      "id": "REF-005",
+      "name": "Narendra Modi",
+      "status": "PASS",
+      "passCount": 14,
+      "failCount": 0,
+      "warnCount": 0,
+      "failures": []
+    },
+    {
+      "id": "REF-006",
+      "name": "Rajkumar",
+      "status": "PASS",
+      "passCount": 19,
+      "failCount": 0,
+      "warnCount": 0,
+      "failures": []
+    },
+    {
+      "id": "REF-007",
+      "name": "Jawaharlal Nehru",
+      "status": "PASS",
+      "passCount": 14,
+      "failCount": 0,
+      "warnCount": 0,
+      "failures": []
+    },
+    {
+      "id": "REF-008",
+      "name": "Indira Gandhi",
+      "status": "PASS",
+      "passCount": 14,
+      "failCount": 0,
+      "warnCount": 0,
+      "failures": []
+    },
+    {
+      "id": "REF-009",
+      "name": "Sachin Tendulkar",
+      "status": "PASS",
+      "passCount": 19,
+      "failCount": 0,
+      "warnCount": 0,
+      "failures": []
+    },
+    {
+      "id": "REF-010",
+      "name": "Lata Mangeshkar",
+      "status": "PASS",
+      "passCount": 14,
+      "failCount": 0,
+      "warnCount": 0,
+      "failures": []
+    },
+    {
+      "id": "REF-011",
+      "name": "Amitabh Bachchan",
+      "status": "PASS",
+      "passCount": 14,
+      "failCount": 0,
+      "warnCount": 0,
+      "failures": []
+    },
+    {
+      "id": "REF-012",
+      "name": "Atal Bihari Vajpayee",
+      "status": "PASS",
+      "passCount": 14,
+      "failCount": 0,
+      "warnCount": 0,
+      "failures": []
+    },
+    {
+      "id": "REF-013",
+      "name": "Veerpratap Singh Rathore",
+      "status": "PASS",
+      "passCount": 20,
+      "failCount": 0,
+      "warnCount": 0,
+      "failures": []
+    },
+    {
+      "id": "REF-014",
+      "name": "Vishwaraj Singh Chauhan",
+      "status": "PASS",
+      "passCount": 14,
+      "failCount": 0,
+      "warnCount": 0,
+      "failures": []
+    },
+    {
+      "id": "REF-015",
+      "name": "Mummy (Rajkumar mother)",
+      "status": "PASS",
+      "passCount": 14,
+      "failCount": 0,
+      "warnCount": 0,
+      "failures": []
+    }
+  ]
+}
+
+stdout | src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite
+
+📄 Reports written:
+   dist/accuracy-report.txt
+   dist/accuracy-summary.json
+
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-009 — Sachin Tendulkar > should calculate without error 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-009 — Sachin Tendulkar > ayanamsa should be within tolerance 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-009 — Sachin Tendulkar > ascendant rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-009 — Sachin Tendulkar > sun rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-009 — Sachin Tendulkar > moon rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-009 — Sachin Tendulkar > moon nakshatra should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-009 — Sachin Tendulkar > moon pada should match (or be within 1 for border cases) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-009 — Sachin Tendulkar > dasha seed lord should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-009 — Sachin Tendulkar > all 9 planet rashis should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-009 — Sachin Tendulkar > house cusps should match (rashi level) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-009 — Sachin Tendulkar > first antardasha lord should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-010 — Lata Mangeshkar > should calculate without error 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-010 — Lata Mangeshkar > ayanamsa should be within tolerance 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-010 — Lata Mangeshkar > ascendant rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-010 — Lata Mangeshkar > sun rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-010 — Lata Mangeshkar > moon rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-010 — Lata Mangeshkar > moon nakshatra should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-010 — Lata Mangeshkar > moon pada should match (or be within 1 for border cases) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-010 — Lata Mangeshkar > dasha seed lord should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-010 — Lata Mangeshkar > all 9 planet rashis should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-011 — Amitabh Bachchan > should calculate without error 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-011 — Amitabh Bachchan > ayanamsa should be within tolerance 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-011 — Amitabh Bachchan > ascendant rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-011 — Amitabh Bachchan > sun rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-011 — Amitabh Bachchan > moon rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-011 — Amitabh Bachchan > moon nakshatra should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-011 — Amitabh Bachchan > moon pada should match (or be within 1 for border cases) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-011 — Amitabh Bachchan > dasha seed lord should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-011 — Amitabh Bachchan > all 9 planet rashis should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-012 — Atal Bihari Vajpayee > should calculate without error 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-012 — Atal Bihari Vajpayee > ayanamsa should be within tolerance 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-012 — Atal Bihari Vajpayee > ascendant rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-012 — Atal Bihari Vajpayee > sun rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-012 — Atal Bihari Vajpayee > moon rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-012 — Atal Bihari Vajpayee > moon nakshatra should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-012 — Atal Bihari Vajpayee > moon pada should match (or be within 1 for border cases) 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-012 — Atal Bihari Vajpayee > dasha seed lord should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-012 — Atal Bihari Vajpayee > all 9 planet rashis should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-013 — Veerpratap Singh Rathore > should calculate without error 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-013 — Veerpratap Singh Rathore > ayanamsa should be within tolerance 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-013 — Veerpratap Singh Rathore > ascendant rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-013 — Veerpratap Singh Rathore > sun rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-013 — Veerpratap Singh Rathore > moon rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-013 — Veerpratap Singh Rathore > moon nakshatra should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-013 — Veerpratap Singh Rathore > moon pada should match (or be within 1 for border cases) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-013 — Veerpratap Singh Rathore > dasha seed lord should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-013 — Veerpratap Singh Rathore > all 9 planet rashis should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-013 — Veerpratap Singh Rathore > house cusps should match (rashi level) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-013 — Veerpratap Singh Rathore > first antardasha lord should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-014 — Vishwaraj Singh Chauhan > should calculate without error 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-014 — Vishwaraj Singh Chauhan > ayanamsa should be within tolerance 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-014 — Vishwaraj Singh Chauhan > ascendant rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-014 — Vishwaraj Singh Chauhan > sun rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-014 — Vishwaraj Singh Chauhan > moon rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-014 — Vishwaraj Singh Chauhan > moon nakshatra should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-014 — Vishwaraj Singh Chauhan > moon pada should match (or be within 1 for border cases) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-014 — Vishwaraj Singh Chauhan > dasha seed lord should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-014 — Vishwaraj Singh Chauhan > all 9 planet rashis should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-015 — Mummy (Rajkumar mother) > should calculate without error 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-015 — Mummy (Rajkumar mother) > ayanamsa should be within tolerance 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-015 — Mummy (Rajkumar mother) > ascendant rashi should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-015 — Mummy (Rajkumar mother) > sun rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-015 — Mummy (Rajkumar mother) > moon rashi should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-015 — Mummy (Rajkumar mother) > moon nakshatra should match 0ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-015 — Mummy (Rajkumar mother) > moon pada should match (or be within 1 for border cases) 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-015 — Mummy (Rajkumar mother) > dasha seed lord should match 1ms
+ ✓ src/tests/validation/accuracySuite.test.ts > Week 2 — Extended Accuracy Validation Suite > REF-015 — Mummy (Rajkumar mother) > all 9 planet rashis should match 1ms
+
+ Test Files  1 passed (1)
+      Tests  155 passed (155)
+   Start at  08:26:45
+   Duration  6.12s (transform 950ms, setup 1.15s, import 650ms, tests 198ms, environment 3.23s)
+
+ACC_EXIT=0

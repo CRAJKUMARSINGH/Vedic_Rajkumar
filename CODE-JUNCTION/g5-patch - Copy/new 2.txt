@@ -1,0 +1,33 @@
+All six deliverables are complete and verified (deck: 5 slides ✓ · F1–F10 tracker: 10 findings ✓ · Phase 2 tracker: 12 tasks ✓ · SVG flowchart ✓ · infographic ✓ · report ✓) — grounded in the repo at `main` commit `6b1c0fb` (2026-11-19), with all file/line references read from `git show 6b1c0fb:<path>` or explicitly flagged `[unverified]`.
+
+## 📥 Deliverables 7–12
+
+| # | Deliverable | Download |
+|---|---|---|
+| 7 | 🗺️ **Flowchart** — P1–P6 dependency order with the 4 verification gates between patches (SVG, editable/sharp at any zoom) | [P1-P6_gate_flowchart.svg](https://www.genspark.ai/api/files/s/ZLEfO5vk) |
+| 8 | 📊 **F1–F10 audit backlog tracker** — severity, evidence line-refs, status, owner, target phase, dependency, acceptance test per finding | [F1-F10_audit_backlog_tracker.xlsx](https://www.genspark.ai/api/files/s/6K8radQl) |
+| 9 | 📽️ **Stakeholder deck** — audit findings F1–F10, patch roadmap status, 8-week rollout timeline, asks (5 slides) | [Phase1_patch_plan_slides.pptx](https://www.genspark.ai/api/files/s/oyjsWgKE) |
+| 10 | 🖼️ **Infographic** — dependency order + rollout timeline | [P1-P6_rollout_infographic.png](https://www.genspark.ai/api/files/s/GPObxqxy) — embedded below |
+| 11 | 📄 **Architecture report** — gaps G1–G5, winning ideas from the competitor benchmark, Phase 1 execution plan | [ARCHITECTURE_REPORT.md](https://www.genspark.ai/api/files/s/vez47PI4) |
+| 12 | 📊 **Phase 2 task tracker** — 12 tasks (PH2-01…12) with owner, status dropdown (Planned/In progress/Blocked/Done), dependency, and the **exact verification command** per task | [Phase2_task_tracker.xlsx](https://www.genspark.ai/api/files/s/5LTkx8hm) |
+
+## 🗺️ The gate flowchart (rendered)
+
+![P1–P6 gate flowchart](https://www.genspark.ai/api/files/s/ZLEfO5vk)
+
+**How the gates chain the patches:**
+- **Accuracy track:** `P1` → **GATE 1** `npm run test:core && npm run build` (today's required merge gate, per `docs/QUALITY_GATE.md`) → `P2` → **GATE 2** `+ npm run test:accuracy:fast` (added by P5) → `P5` (0.01° accuracy gate in CI, with a negative test: perturb a coefficient +0.02° → CI must fail)
+- **Governance track:** `P3` → **GATE 3** `npm run build` + bundle grep (`swisseph` must not appear in a flag-off build) → `P4` → **GATE 4** `npm run typecheck && npm run lint -- --max-warnings=100` (both required) → `P6`
+- **Hand-off rule (every patch):** `git apply --check` on a fresh clone of `main` → `git am` → gate → land. Rollback = `git revert`, unwinding P6→P5→P4→P3→P2→P1.
+
+## 🖼️ Rollout infographic
+
+![P1–P6 dependency order and rollout timeline](https://www.genspark.ai/api/files/s/GPObxqxy)
+
+## Key content notes
+
+- **F1–F10 mapping (item 8):** F1–F9 are the nine findings of `docs/BUGS_FOUND.md` read directly from the file (F1 critical privacy → *Open, owner decision*; F2–F7 fixed locally; F8 lint debt → **P4**; F9 dev advisories → Phase 2), and **F10 is the calc-core finding from this series' code inspection** (triplicated Lahiri formula + dead constants → fixed by the verified P1/P2 patches). Severity color-coded; owners TBD pending issue filing.
+- **Phase 2 tracker (item 12)** goes beyond gates: multi-ayanamsa UI exposure (the 5-system engine already exists — competitor table stakes), Swiss Ephemeris enablement behind the P3 ADR decision, golden-corpus cross-check, F1 privacy remediation, and a published ±0.02°-vs-ICRC methodology page.
+- **Honest status, unchanged from prior rounds:** P1/P2 patches are real and verified to apply cleanly on fresh `main` (`git apply --check` + `git am`); `npm ci`/Vitest runs are left as open checkboxes for project CI; P1–P6 and F1–F10 are **proposed identifiers** — the repo currently has no such labelled issues (only dependabot #8–#22), so issue numbers, owners, and due dates remain TBD rather than invented.
+
+Want the two trackers pre-filled with proposed owners/dates for your review, or the six patch_task issue bodies drafted as ready-to-paste text next?

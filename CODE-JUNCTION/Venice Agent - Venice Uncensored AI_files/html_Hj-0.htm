@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html style="background-color: rgb(250, 248, 243);"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https://esm.sh https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://skypack.dev https://esm.run https://deno.land https://ga.jspm.io https://v8.js-dos.com https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://esm.sh https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://v8.js-dos.com https://cdn.tailwindcss.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' data: blob: https://unpkg.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://*.basemaps.cartocdn.com https://api.mapbox.com https://*.tiles.mapbox.com; frame-src 'self' blob:; connect-src 'self' https://esm.sh https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://skypack.dev https://esm.run https://deno.land https://ga.jspm.io https://*.basemaps.cartocdn.com https://api.mapbox.com https://*.tiles.mapbox.com https://api.venice.ai https://v8.js-dos.com; media-src 'self' blob: data:; worker-src 'self' blob:; object-src 'self' blob:">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root, html, body { width: 100%; height: 100%; overflow: hidden; }
+    #sandbox { border: none; width: 100%; height: 100%; }
+    
+  </style>
+</head>
+<body style="background-color: rgb(250, 248, 243);">
+  
+  <iframe id="sandbox" allow="fullscreen" sandbox="allow-scripts allow-forms allow-same-origin" style="background-color: rgb(250, 248, 243);" src="blob:https://b64062-agenti-rwdtona.prod.veniceaisandbox.com/4ce6413a-ecc4-40b9-a168-0129be183288"></iframe>
+  <script>
+    (function() {
+      var theme = {"bg":"rgb(250, 248, 243)","fg":"rgb(27, 25, 19)","fgMuted":"rgb(78, 74, 63)","card":"rgb(255, 254, 250)","cardFg":"rgb(27, 25, 19)","input":"rgb(255, 254, 250)","muted":"rgba(0, 0, 0, 0.04)","border":"rgba(0, 0, 0, 0.08)","borderHover":"rgba(0, 0, 0, 0.14)","primary":"rgb(18, 92, 161)","secondary":"rgba(0, 0, 0, 0.04)","secondaryFg":"rgb(27, 25, 19)","success":"#22c55e","error":"#ef4444","mode":"light"};
+      var sandbox = document.getElementById('sandbox');
+      document.documentElement.style.setProperty('background-color', theme.bg);
+      document.body.style.setProperty('background-color', theme.bg);
+      sandbox.style.setProperty('background-color', theme.bg);
+      var lastContent = null;
+
+      // Avoid infinite message loops when hosted as top frame (e.g., React Native)
+      function postToHost(message) {
+        var nativeBridge = window.ReactNativeWebView;
+        if (nativeBridge && typeof nativeBridge.postMessage === 'function') {
+          nativeBridge.postMessage(JSON.stringify(message));
+          return;
+        }
+        if (window.parent !== window) {
+          window.parent.postMessage(message, '*');
+        }
+      }
+      
+      function render(content, isSvg) {
+        if (content === lastContent) return;
+        lastContent = content;
+        
+        var hostVars = ':root { ' +
+          '--host-bg: ' + theme.bg + '; ' +
+          '--host-fg: ' + theme.fg + '; ' +
+          '--host-fg-muted: ' + theme.fgMuted + '; ' +
+          '--host-card: ' + theme.card + '; ' +
+          '--host-card-fg: ' + theme.cardFg + '; ' +
+          '--host-input: ' + theme.input + '; ' +
+          '--host-muted: ' + theme.muted + '; ' +
+          '--host-border: ' + theme.border + '; ' +
+          '--host-border-hover: ' + theme.borderHover + '; ' +
+          '--host-primary: ' + theme.primary + '; ' +
+          '--host-secondary: ' + theme.secondary + '; ' +
+          '--host-secondary-fg: ' + theme.secondaryFg + '; ' +
+          '--host-success: ' + theme.success + '; ' +
+          '--host-error: ' + theme.error + '; ' +
+        '} ';
+        
+        var innerStyles = hostVars +
+          '* { box-sizing: border-box; margin: 0; padding: 0; } ' +
+          ':root, html, body { width: 100%; max-width: 100%; height: auto; overflow-x: hidden; overflow-y: visible; background: transparent; font-family: Inter, system-ui, -apple-system, sans-serif; } ' +
+          '#sandbox-content { width: 100%; } ' +
+          // On small screens, ensure images and SVGs don't overflow
+          '@media (max-width: 640px) { :where(#sandbox-content svg, #sandbox-content img) { max-width: 100%; height: auto; } } ';
+        var enforcedStyles =
+          ':root, html, body { height: auto !important; max-height: 5000px !important; overflow-x: hidden !important; overflow-y: auto !important; background: transparent !important; } ' +
+          // iOS text autosizing enlarges individual blocks of over-wide content, which overlaps lines and destabilizes the reported height
+          'html { -webkit-text-size-adjust: 100% !important; text-size-adjust: 100% !important; } ';
+        var styles = innerStyles;
+        if (isSvg) {
+          styles += `
+/* Color classes - 9 ramps × 7 stops */
+.c-purple-50  { fill: #faf5ff; } .c-purple-100 { fill: #f3e8ff; } .c-purple-200 { fill: #e9d5ff; }
+.c-purple-300 { fill: #d8b4fe; } .c-purple-400 { fill: #c084fc; } .c-purple-500 { fill: #a855f7; }
+.c-purple-600 { fill: #9333ea; } .c-purple-700 { fill: #7c3aed; } .c-purple-800 { fill: #6b21a8; }
+.c-purple-900 { fill: #581c87; }
+
+.c-teal-50  { fill: #f0fdfa; } .c-teal-100 { fill: #ccfbf1; } .c-teal-200 { fill: #99f6e4; }
+.c-teal-300 { fill: #5eead4; } .c-teal-400 { fill: #2dd4bf; } .c-teal-500 { fill: #14b8a6; }
+.c-teal-600 { fill: #0d9488; } .c-teal-700 { fill: #0f766e; } .c-teal-800 { fill: #115e59; }
+.c-teal-900 { fill: #134e4a; }
+
+.c-coral-50  { fill: #fff7ed; } .c-coral-100 { fill: #ffedd5; } .c-coral-200 { fill: #fed7aa; }
+.c-coral-300 { fill: #fdba74; } .c-coral-400 { fill: #fb923c; } .c-coral-500 { fill: #f97316; }
+.c-coral-600 { fill: #ea580c; } .c-coral-700 { fill: #c2410c; } .c-coral-800 { fill: #9a3412; }
+.c-coral-900 { fill: #7c2d12; }
+
+.c-pink-50  { fill: #fdf2f8; } .c-pink-100 { fill: #fce7f3; } .c-pink-200 { fill: #fbcfe8; }
+.c-pink-300 { fill: #f9a8d4; } .c-pink-400 { fill: #f472b6; } .c-pink-500 { fill: #ec4899; }
+.c-pink-600 { fill: #db2777; } .c-pink-700 { fill: #be185d; } .c-pink-800 { fill: #9d174d; }
+.c-pink-900 { fill: #831843; }
+
+.c-gray-50  { fill: #f9fafb; } .c-gray-100 { fill: #f3f4f6; } .c-gray-200 { fill: #e5e7eb; }
+.c-gray-300 { fill: #d1d5db; } .c-gray-400 { fill: #9ca3af; } .c-gray-500 { fill: #6b7280; }
+.c-gray-600 { fill: #4b5563; } .c-gray-700 { fill: #374151; } .c-gray-800 { fill: #1f2937; }
+.c-gray-900 { fill: #111827; }
+
+.c-blue-50  { fill: #eff6ff; } .c-blue-100 { fill: #dbeafe; } .c-blue-200 { fill: #bfdbfe; }
+.c-blue-300 { fill: #93c5fd; } .c-blue-400 { fill: #60a5fa; } .c-blue-500 { fill: #3b82f6; }
+.c-blue-600 { fill: #2563eb; } .c-blue-700 { fill: #1d4ed8; } .c-blue-800 { fill: #1e40af; }
+.c-blue-900 { fill: #1e3a8a; }
+
+.c-green-50  { fill: #f0fdf4; } .c-green-100 { fill: #dcfce7; } .c-green-200 { fill: #bbf7d0; }
+.c-green-300 { fill: #86efac; } .c-green-400 { fill: #4ade80; } .c-green-500 { fill: #22c55e; }
+.c-green-600 { fill: #16a34a; } .c-green-700 { fill: #15803d; } .c-green-800 { fill: #166534; }
+.c-green-900 { fill: #14532d; }
+
+.c-amber-50  { fill: #fffbeb; } .c-amber-100 { fill: #fef3c7; } .c-amber-200 { fill: #fde68a; }
+.c-amber-300 { fill: #fcd34d; } .c-amber-400 { fill: #fbbf24; } .c-amber-500 { fill: #f59e0b; }
+.c-amber-600 { fill: #d97706; } .c-amber-700 { fill: #b45309; } .c-amber-800 { fill: #92400e; }
+.c-amber-900 { fill: #78350f; }
+
+.c-red-50  { fill: #fef2f2; } .c-red-100 { fill: #fee2e2; } .c-red-200 { fill: #fecaca; }
+.c-red-300 { fill: #fca5a5; } .c-red-400 { fill: #f87171; } .c-red-500 { fill: #ef4444; }
+.c-red-600 { fill: #dc2626; } .c-red-700 { fill: #b91c1c; } .c-red-800 { fill: #991b1b; }
+.c-red-900 { fill: #7f1d1d; }
+
+/* Text classes */
+.th { font-size: 14px; font-weight: 500; }
+.ts { font-size: 11px; }
+.t  { font-size: 12px; }
+
+/* Arrow class */
+.arr { marker-end: url(#arrow); }
+`;
+        }
+        
+        var bodyContent = '';
+        if (isSvg) {
+          bodyContent = `
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" 
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+    </marker>
+    <marker id="arrow-filled" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+    </marker>
+    <marker id="dot" viewBox="0 0 10 10" refX="5" refY="5"
+            markerWidth="5" markerHeight="5">
+      <circle cx="5" cy="5" r="4" fill="currentColor"/>
+    </marker>
+  </defs>
+</svg>
+` +
+            '<div id="sandbox-content"><div class="vis-container">' + content + '</div></div>';
+        } else {
+          bodyContent = '<div id="sandbox-content">' + content + '</div>';
+        }
+        
+        var cookieBlockScript = '<script>' +
+          'Object.defineProperty(document, "cookie", {' +
+            'get: function() { return ""; },' +
+            'set: function() {},' +
+            'configurable: false' +
+          '});' +
+          '<\/script>';
+        
+        var opfsPolyfillScript = '<script type="module">' +
+          '(async()=>{' +
+            'if(typeof FileSystemFileHandle!=="undefined"&&"createWritable"in FileSystemFileHandle.prototype)return;' +
+            'if(!navigator.storage?.getDirectory)return;' +
+            'try{' +
+              'const{createWorker}=await import("https://esm.sh/opfs-worker@1.3.1");' +
+              'const w=await createWorker();' +
+              'class W{constructor(p){this.p=p;this.c=[];this.x=false}' +
+                'write(d){if(this.x)throw new DOMException("closed","InvalidStateError");' +
+                  'if(typeof d==="object"&&"type"in d&&!(d instanceof Blob)&&!(d instanceof ArrayBuffer)){' +
+                    'if(d.type==="write")this.c.push(d.data);else if(d.type==="truncate")this.c=[];return}' +
+                  'this.c.push(d)}' +
+                'async close(){if(this.x)return;const b=new Blob(this.c);' +
+                  'await w.writeFile(this.p,new Uint8Array(await b.arrayBuffer()));this.x=true;this.c=[]}' +
+                'abort(){this.x=true;this.c=[]}}' +
+              'const pF=(h,p)=>new Proxy(h,{get:(t,k)=>k==="createWritable"?async()=>new W(p):typeof t[k]==="function"?t[k].bind(t):t[k]});' +
+              'const pD=(h,p)=>new Proxy(h,{get:(t,k)=>{' +
+                'if(k==="getFileHandle")return async(n,o)=>pF(await t.getFileHandle(n,o),(p+"/"+n).replace(/[/]+/g,"/"));' +
+                'if(k==="getDirectoryHandle")return async(n,o)=>pD(await t.getDirectoryHandle(n,o),(p+"/"+n).replace(/[/]+/g,"/"));' +
+                'return typeof t[k]==="function"?t[k].bind(t):t[k]}});' +
+              'const og=navigator.storage.getDirectory.bind(navigator.storage);' +
+              'navigator.storage.getDirectory=async function(){return pD(await og.call(this),"/")};' +
+            '}catch(e){console.warn("[OPFS]",e)}' +
+          '})();' +
+          '<\/script>';
+        
+        var readyScript = '<script>' +
+          '(function() {' +
+            'var lastHeight = 0;' +
+            'var debounceTimer = null;' +
+            'function reportHeight() {' +
+              'var rect = document.body.getBoundingClientRect();' +
+              'var h = Math.ceil(rect.height);' +
+              'if (h !== lastHeight && h > 0) {' +
+                'lastHeight = h;' +
+                'window.parent.postMessage({ type: "html-sandbox-height", height: h }, "*");' +
+              '}' +
+            '}' +
+            'new ResizeObserver(function() {' +
+              'clearTimeout(debounceTimer);' +
+              'debounceTimer = setTimeout(reportHeight, 100);' +
+            '}).observe(document.body);' +
+            'window.addEventListener("load", function() {' +
+              'window.parent.postMessage({ type: "html-sandbox-ready" }, "*");' +
+            '});' +
+            'document.fonts && document.fonts.ready.then(function() {' +
+              'reportHeight();' +
+            '});' +
+          '})();' +
+          '<\/script>';
+        
+        var fullHtml = '<!DOCTYPE html><html data-host-mode="' + theme.mode + '"><head>' +
+          '<meta charset="utf-8">' +
+          '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+          cookieBlockScript +
+          opfsPolyfillScript +
+          '<link rel="preconnect" href="https://fonts.googleapis.com">' +
+          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' +
+          '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">' +
+          '<style>' + styles + '</style>' +
+          '</head><body>' + bodyContent + '<style>' + enforcedStyles + '</style>' + readyScript + '</body></html>';
+        
+        var blob = new Blob([fullHtml], { type: 'text/html' });
+        var url = URL.createObjectURL(blob);
+        
+        if (sandbox._blobUrl) {
+          URL.revokeObjectURL(sandbox._blobUrl);
+        }
+        sandbox._blobUrl = url;
+        sandbox.src = url;
+      }
+      
+      function normalizeMessage(data) {
+        if (typeof data === 'string') {
+          try {
+            var parsed = JSON.parse(data);
+            return parsed && typeof parsed === 'object' ? parsed : null;
+          } catch (error) {
+            return null;
+          }
+        }
+        return data && typeof data === 'object' ? data : null;
+      }
+      
+      function handleMessage(event) {
+        var data = normalizeMessage(event.data);
+        if (!data) return;
+        
+        if (data.type === 'html-sandbox-content') {
+          render(data.content, data.isSvgMode);
+        } else if (data.type === 'html-sandbox-height' || data.type === 'html-sandbox-ready') {
+          postToHost(data);
+        }
+      }
+      
+      window.addEventListener('message', handleMessage);
+      // Listen for messages from both window (iOS) and document (Android)
+      document.addEventListener('message', handleMessage);
+      
+      postToHost({ type: 'html-sandbox-proxy-ready' });
+    })();
+  </script>
+
+
+</body></html>

@@ -1,0 +1,48 @@
+All six deliverables are complete — each built this turn, grounded in the repo at `main` commit `6b1c0fb` (2026-11-19), with every file/line reference verified via `git show 6b1c0fb:<path>` or explicitly flagged. Everything is below, including the full inline research write-up.
+
+---
+
+## 📥 The six deliverables (download links)
+
+| # | Deliverable | Download |
+|---|---|---|
+| 1 | 📽️ **Patch-plan deck** — audit findings + V1/V2/V3 brief comparison + P1–P6 roadmap (5 slides) | [Phase1_patch_plan_slides.pptx](https://www.genspark.ai/api/files/s/EcFsHJ16) |
+| 2 | 📊 **Tracker spreadsheet** — P1–P6 with owner, status, dependencies, milestone, and 5 ☐/☑ **data-validation checkbox columns** per patch (apply-on-fresh-main, test:core, full suite, build, acceptance) | [P1-P6_tracker.xlsx](https://www.genspark.ai/api/files/s/JYwahGBX) |
+| 3 | 📘 **Developer implementation guide** — P1–P6 walkthrough with exact file paths, verified line numbers, and the edits | [DEV_GUIDE_P1-P6.md](https://www.genspark.ai/api/files/s/qVC1A8vp) |
+| 4 | 🔬 **Competitor research doc** — ayanamsa selection & ephemeris accuracy across the market | [COMPETITOR_RESEARCH_AYANAMSA_EPHEMERIS.md](https://www.genspark.ai/api/files/s/sUjiijB8) |
+| 5 | 🏛️ **Stakeholder deck** — architecture gaps (G1–G5) & the winning fixes (5 slides) | [Architecture_gaps_stakeholder_deck.pptx](https://www.genspark.ai/api/files/s/8YGNCB9v) |
+| 6 | 🛠️ **Phase 1 runbook** — apply → verify → acceptance → **rollback** commands for each of P1–P6 | [RUNBOOK_P1-P6.md](https://www.genspark.ai/api/files/s/XvTMjrMp) |
+
+Plus, from the previous round (still valid): [P1/P2 patches](https://www.genspark.ai/api/files/s/fQtaWBz6) · [0002](https://www.genspark.ai/api/files/s/UrA3tGhF) · [design doc](https://www.genspark.ai/api/files/s/N0MtDewk) · [infographic](https://www.genspark.ai/api/files/s/OK9x3JDL) · [full bundle zip](https://www.genspark.ai/api/files/s/313iPWGd).
+
+---
+
+## 🔬 Research: how competing Vedic astrology apps handle ayanamsa & ephemeris accuracy
+
+### Comparison table
+
+| App / Software | Ayanamsa options | Default | Ephemeris source | Accuracy claims / community standing |
+|---|---|---|---|---|
+| **Jagannatha Hora (JHora)** | Many — Lahiri family, Raman, KP, Yukteshwar, True Chitra, etc., user-selectable | Lahiri-family | Swiss Ephemeris | Practitioners rank it **more accurate than AstroSage** ([r/vedicastrology](https://www.reddit.com/r/vedicastrology/comments/1ctem1u/jagannatha_hora_vs_others/)); vendor advertises complete Shadbala, Ashtakavarga and Varga analysis ([jagannathahora.com](https://jagannathahora.com/)) |
+| **Parashara's Light 9** | Lahiri (default) + **True Chitra** (manual; vendor says it is "more accurate" than Lahiri) | **Lahiri** | **Swiss Ephemeris pulling NASA JPL data, spanning 13201 BC – AD 17191** — vendor calls it "the most precise ephemeris currently available" ([parasharaslight.com](https://parasharaslight.com/parasharas-light-9-new-features-editing/reason-3/)) | Commercial desktop; the vendor itself publishes an accuracy-upgrade path (True Chitra) |
+| **AstroSage** | Ayanamsa calculator covers **Lahiri, Raman, KP Old, KP New** ([astrosage.com](https://www.astrosage.com/astrology/ayanamsa-calculator.asp)) | Lahiri (implied platform default) | Cloud service; community regards it as **less accurate than JHora** ([r/vedicastrology](https://www.reddit.com/r/vedicastrology/comments/1ctem1u/jagannatha_hora_vs_others/)) | Third-party verification reports benchmark against it — e.g. AstroMaya claims 100% match with AstroSage using **Swiss Ephemeris VSOP87 + Lahiri** ([report](https://www.scribd.com/document/1046034889/AstroMaya-Accuracy-Verification-Report)) |
+| **astro.com (Astrodienst)** | Sidereal options incl. Lahiri/Raman variants (Western focus, tropical default) | Tropical | **Swiss Ephemeris natively — the reference implementation**, built on JPL **DE431** ([astroratan.ai](https://astroratan.ai/blog/swiss-ephemeris-explained)) | The engine others verify against |
+| **Drik Panchang ecosystem** | Drik Siddhanta vs Surya Siddhanta debate; KP practitioners prefer KP New over KP Old/Lahiri ([RVA forum](https://ask.rahasyavedicastrology.com/different-ayanamshas-in-rva/)) | Drik Siddhanta (Lahiri-based) | Modern observational ephemeris; third-party calculators reproduce its charts **within 0.5′ (max 0.42′) on all 7 planets + Rahu** ([astrosheelagoklani.com](https://www.astrosheelagoklani.com/how-we-calculate)) | Panchang-grade daily accuracy is the credibility bar ([drikpanchang.com](https://www.drikpanchang.com/utilities/astrology-utilities.html)) |
+| **KarmaWheel** (modern web app) | Six choices: **Lahiri, Raman, KP, Yukteshwar, Fagan-Bradley, Tropical** — per-chart dropdown + settings default; saved charts remember their ayanamsa | **Lahiri** ("for 95% of users") | Modern web engine (docs don't name it) | Documents arc-minute differences between systems and sign-boundary flips; warns its readings library is calibrated to Lahiri only ([karmawheel.app](https://karmawheel.app/docs/choosing-your-ayanamsha)) |
+| **Swiss Ephemeris (engine)** | Ships Lahiri & B.V. Raman; Raman uses constant precession 50.3333″/yr, Lahiri based on Newcomb's model ([swisseph groups.io](https://groups.io/g/swisseph/topic/lahiri_and_b_v_raman_ayanamsa/73355685)) | — | JPL DE431-derived; used by JHora, Parashara's Light "and every other serious Vedic astrology software" ([vedintelastroapi.com](https://vedintelastroapi.com/blog/swiss-ephemeris-api)) | Market tolerance norm: **±0.02° vs the ICRC Lahiri constant 23.853222° at J2000.0**; table-interpolation implementations err 0.05–0.3°, enough to flip a nakshatra or sign ([vedika.io](https://vedika.io/blog/swiss-ephemeris-api-accuracy-guide)) |
+
+### Takeaways for Vedic_Rajkumar
+
+1. **Lahiri is the universal default** — matching the repo's own DoD ("sidereal Lahiri ayanamsa unless explicitly Western") and `ayanamsaEngine.ts`. Already aligned.
+2. **Multi-ayanamsa selection is table stakes at the pro end** — the repo already has a 5-system engine; exposing it in the UI is cheap differentiation.
+3. **Swiss Ephemeris is the accuracy gold standard**, and the repo has it built (`swissEphemerisService.ts`) but **off by default** because of the AGPL-3.0 licence — that is exactly decision **P3**; competitors either accept AGPL (JHora) or buy the commercial licence (Parashara's Light).
+4. **Market accuracy tolerance is ±0.02°** — the repo's CI gate (P5) tightens to 0.01°, which would exceed the norm its competitors publish; the J2000 anchor difference (23.85472° in-engine vs ICRC 23.853222°, ≈5.4″) is within tolerance and should be documented in the gate.
+
+---
+
+## ⚠️ Honest verification notes
+
+- **P1–P6 definitions are inferred, not found**: the repo has no P1–P6 issues (open issues #8–#22 are dependabot bumps) and no Phase 1 patch-plan doc — issue numbers, owners and due dates are marked **TBD**, not invented.
+- **V1/V2 briefs do not exist in the repo** at `6b1c0fb` — the deck's comparison slide states this plainly (only `LandingPageV3.tsx` + `docs/gtm/`, `docs/launch/` exist) rather than fabricating a comparison.
+- **P1/P2 patches are real and verified**: commits `0d24c37`/`1358fa7` on branch `phase1/patches-p1-p6`; both pass `git apply --check` and `git am` on a fresh clone of `main`. The `npm ci` + Vitest suites were **not** run in this sandbox (no browser/WASM tooling) — the runbook and tracker leave those checkboxes open for project CI.
+- Every line reference in the dev guide and runbook was read from `git show 6b1c0fb:<path>`; the two spots that couldn't be verified at that commit (the CI workflow filename, the to-do-list line anchor) are flagged `[unverified]` in the documents themselves.

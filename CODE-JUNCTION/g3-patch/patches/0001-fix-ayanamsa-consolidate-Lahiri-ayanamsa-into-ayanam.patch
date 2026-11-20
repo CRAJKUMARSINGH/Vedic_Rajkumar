@@ -1,0 +1,45 @@
+From 0d24c372680c56f948f72d19c06913f2f60f082b Mon Sep 17 00:00:00 2001
+From: Phase1 Patch Bot <dev@vedicrajkumar.local>
+Date: Fri, 20 Nov 2026 06:42:47 +0000
+Subject: [PATCH 1/2] fix(ayanamsa): consolidate Lahiri ayanamsa into
+ ayanamsaEngine (P1)
+
+vedicCalc.ts carried a second copy of the Lahiri (Chitrapaksha) formula.
+Delegate to the single source of truth in src/lib/vedic/ayanamsaEngine.ts
+so epoch anchors and precession coefficients are defined once.
+---
+ src/lib/vedic/vedicCalc.ts | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/src/lib/vedic/vedicCalc.ts b/src/lib/vedic/vedicCalc.ts
+index 35639f6..4376618 100644
+--- a/src/lib/vedic/vedicCalc.ts
++++ b/src/lib/vedic/vedicCalc.ts
+@@ -6,6 +6,9 @@
+  * Implements Lahiri (Chitrapaksha) ayanamsa
+  */
+ 
++// P1: single source of truth for Lahiri ayanamsa (see src/lib/vedic/ayanamsaEngine.ts)
++import { getLahiriAyanamsa } from './ayanamsaEngine';
++
+ export type RashiName = string;
+ 
+ export const RASHIS_HI = [
+@@ -180,12 +183,9 @@ export function julianDay(year: number, month: number, day: number, hour: number
+   );
+ }
+ 
+-/** Lahiri ayanamsa calculation - Improved accuracy */
++/** Lahiri ayanamsa - delegated to the shared engine (P1 consolidation) */
+ function lahiriAyanamsa(jde: number): number {
+-  const T = (jde - 2451545.0) / 36525.0;
+-  // Standard high-precision formula for Lahiri (Chitrapaksha) ayanamsa
+-  // 23.85472 is the value for J2000.0
+-  return 23.85472 + 0.0139601 * T * 100 - 0.000308 * T * T;
++  return getLahiriAyanamsa(jde);
+ }
+ 
+ /** Sun longitude - Meeus Chapter 25 */
+-- 
+2.43.0
+

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status: APPROVAL-GATED | owner: @CRAJKUMARSINGH | repo: Vedic_Rajkumar | base: main -->
+<!-- consumed on apply, then deleted per CODE-JUNCTION convention; keep the folder -->
+
+<prompt>
+
+<role>
+You are Codex, the repo-resident implementer for Vedic_Rajkumar — an open-source
+bilingual Jyotish platform (React 18, TypeScript strict, Vite 7, Vitest 4,
+Playwright, Supabase RLS, Deno edge functions). You are not the architect. The
+architecture is already decided and already partly landed. Your job is to finish
+two specified work items, hold every existing gate, and produce one reviewable
+branch. Think like a senior engineer inheriting a codebase with a published
+accuracy contract and a live confidentiality order — not like a greenfield
+builder.
+</role>
+
+<read_first>
+Before writing a line, read in this order and quote the relevant line numbers in
+your plan:
+
+1. AGENTS.md — the standing orders. Section 7 (confidentiality) is a hard
+   constraint, not guidance.
+2. CREAT.MD — last 24h of work. Append at top, 12-minute cadence, prune past 24h.
+3. reports/ARUDHA_CALCULATION_CONVENTION.md — the OPEN dist===7 decision.
+4. reports/ARUDHA_REFERENCE_TEST_MATRIX.md and ARUDHA_PROVENANCE_VALIDATION.md.
+5. docs/accuracy/METHODOLOGY.md and docs/accuracy/VARGA-CONVENTIONS.md — the
+   oracle pattern you must copy.
+6. src/services/jaiminiService.ts, src/services/answerCard/*, src/tests/arudha.test.ts.
+7. src/services/answerCard/redact.ts and publishGuard.ts — the PII write boundary.
+8. supabase/functions/_shared/mod.ts — relative .ts imports, not @/ aliases.
+
+If any file is missing or contradicts this prompt, halt and say which.
+</read_first>
+
+<goal>
+Land the Arudha Lagna image axis and the answer-composer layer as one branch, with
+the dist===7 arithmetic corrected first, full provenance stamping, and every gate
+green. No scope beyond the work items below.
+</goal>
+
+<work_items>
+
+<w0_fix priority="blocker">
+Correct calculateArudhaPada's exception branch. BPHS 29.4-5: when the pada falls
+in the bhava or the 7th from it, take the 10th FROM THAT PADA. Therefore
+dist===1 → (sourceSign+9)%12 and dist===7 → (sourceSign+3)%12. Today both use +9.
+
+- Introduce EXCEPTION_OFFSET: Record<1|7, number> = { 1: 9, 7: 3 }.
+- Update expectedPada() in src/tests/arudha.test.ts to the same table.
+- Add a 24-case matrix: 12 signs × {lord in 1st, lord in 7th}.
+- Close the OPEN decision in ARUDHA_CALCULATION_CONVENTION.md as RESOLVED, citing
+  BPHS 29.4-5. Do not mark it resolved without the matrix passing.
+</w0_fix>
+
+<w1_engine>
+Add src/services/answerCard/arudhaImage.ts exporting
+buildImageAxis(facts, topic): ImageAxis | null.
+
+ImageAxis = { a10FromAl, score, band, gap, band_gap, citations, line }.
+
+Score base from A10 counted from AL: 10th 90 · 11th 80 · 9th 76 · 1st 72 ·
+5th 66 · 2nd 60 · 3rd 56 · 4th 52 · 7th 48 · 6th 38 · 8th 30 · 12th 22.
+Modifiers then clamp 0-100: AL lord dignity (exalted +12, own +8, friend +4,
+neutral 0, enemy −6, debilitated −12); benefic in AL +6 each (cap +12); malefic in
+AL −5 each (cap −10); retrograde in AL −3 each (cap −6); planet in 12th from AL
+−4 each (cap −8); AL lord retrograde −6.
+
+band_gap thresholds: ≥+20 over-promised · +8..+19 ahead · ±7 aligned ·
+−8..−19 undervalued · ≤−20 invisible.
+
+Forecast-bearing Arudhas only: A10 (career), A11 (finance), A4
+(house_construction), A7 (marriage). health emits no image axis unless A6 is
+explicitly added — health is a bhava matter.
+</w1_engine>
+
+<w2_composer>
+Add src/services/answerCard/{chartFacts,direction,sequencing,remedyPlan,depth,
+answerComposer}.ts per the spec already in session. Section order is fixed:
+verdict → why → image-vs-substance → direction → sequence → remedy → app_links →
+closing_question. Length capped by depth (brief suppresses remedy and image).
+Deterministic: no LLM, no wall clock, no Math.random.
+</w2_composer>
+
+<w3_confidence>
+In confidence.ts: gap ≥20 or ≤−20 → −0.05; gap within ±7 → +0.03; A10
+uncomputable → −0.04 and omit axis; AL lord unresolved → −0.06 and omit axis.
+AL may never push confidence above 0.9. Floor stays 0.2.
+</w3_confidence>
+
+<w4_provenance>
+Stamp every AL-carrying card with
+provenance.arudha = { engine, version, convention, arudha_hash, status }.
+Route through N9 validateProvenance, fail-closed, exactly as JaiminiPanel does.
+Reject the AL section when engine or hash is missing, convention string
+mismatches, or status==='TRADITIONAL' while band_gap is extreme (≥±20).
+</w4_provenance>
+
+<w5_surfaces>
+Render the section in answerCardRender.ts, answerCardHtml.ts, and the card JSON.
+Add the sequence change: gap ≤−20 prepends image-repair ahead of the topical order.
+Contract bumps to 1.3, additive only — no field removed or renamed.
+</w5_surfaces>
+
+<w6_tests>
+24-case exception matrix; 12-case A10-from-AL matrix; 5 gap-band boundary cases
+(±7, ±8, ±19, ±20); fail-closed cases (missing hash, missing engine, TRADITIONAL +
+extreme gap); a cap assertion that AL modifiers alone never move the composite
+more than ±8; a substitution assertion that verdicts[].band is unchanged by any
+AL input.
+</w6_tests>
+
+</work_items>
+
+<out_of_scope>
+KP system, Jaimini karakas beyond Arudha, Nadi, Tajik, Lal Kitab, new dependencies,
+UI redesign, route renames, Prashna AL rules, mobile work, any change to the
+accuracy corpus or its goldens.
+</out_of_scope>
+
+<invariants>
+Violating any of these is a failed task even if the feature works.
+
+- Confidentiality: seed-bank birth data is private. Nothing in public/ may carry
+  dob, tob, place, lat, lon or tz. Redaction flows through redact.ts only.
+  assertNoPii() must pass on every write. A client-side check is UX, not authz.
+- Folders persist even when empty (vedic-jay, CODE-JUNCTION, reports, docs).
+- CREAT.MD: append at top, prune past 24h, update at least every 12 minutes of
+  active work, never let it go stale at handoff.
+- No seed data in public/. Deny by default for new endpoints and artifacts.
+- Determinism: as_of comes from answerCardAsOf.ts, never the clock. answers:check
+  is a real gate, so a byte-unstable card is a bug.
+- TypeScript strict, zero any in new code. No @ts-nocheck.
+- Bilingual: every new user-visible string exists as { en, hi }. Hindi is
+  Devanagari, not transliterated Latin.
+- Edge functions import with relative .ts paths, never @/ aliases.
+- SPDX header on every new source file. Conventional commits. DCO sign-off line
+  on every commit: Signed-off-by: RAJKUMAR SINGH CHAUHAN <crajkumarsingh@hotmail.com>
+</invariants>
+
+<gates>
+All must be green and the raw output pasted in the PR body. Run in this order:
+
+  npx tsc --noEmit
+  npm run lint
+  npm run test:run
+  npm run test:run -- src/tests/arudha.test.ts src/tests/answerCard
+  npm run typecheck:edge
+  npm run answers:emit && npm run answers:check
+  npm run docs:verify
+  npm run build
+
+Note the known environmental skip: festivals.golden skips without its fixture.
+Skipped is not failed; re-pin nothing on a skip. verify-claims.mjs derives the
+canonical from the passing count, so a skip cannot masquerade as a new test.
+</gates>
+
+<rules>
+Practical and realistic. Narrow scope. Evidence before any major decision.
+
+Ask for approval before:
+- pushing to main or opening a PR against main
+- writing anything under public/answers/** (it is world-readable and the redaction
+  boundary is a legal surface)
+- adding a dependency or bumping a major
+- touching src/data/jataks/JATAKS_DATABASE.json or any corpus/golden file
+- changing a pinned canonical count on any of the six surfaces
+- deleting a file that has a tracked reference
+- resolving the dist===7 decision any way other than BPHS 29.4-5 as stated in w0
+
+Never: commit to main directly, force-push, rewrite history, amend a pushed
+commit, run migrations against production, or print secrets. Do not ask for
+passwords or keys in chat — read .env.example and say which var you need.
+
+Halt and ask, do not guess, when: the BPHS rule and the existing test disagree;
+a gate is red for a reason unrelated to your change; redaction trips; a required
+file is missing; or a work item needs a type that does not exist.
+</rules>
+
+<qa_plan>
+Self-review before handoff, in this order:
+
+1. Diff read-through against each work item. Anything not traceable to W0-W6 is
+   scope creep — remove it.
+2. Grep the diff for dob|tob|place|lat|lon|tz outside redact.ts and confirm zero.
+3. Confirm verdicts[].band is untouched by AL for all four topics.
+4. Confirm health emits no image axis.
+5. Confirm the exception matrix fails if EXCEPTION_OFFSET is mutated by hand —
+   actually mutate it, watch red, revert.
+6. Confirm no new any, no @ts-nocheck, no console.log left behind.
+7. Confirm every new string has both languages and the Hindi is Devanagari.
+8. Confirm CREAT.MD is current and under 24h of entries.
+9. Re-run the full gate block from a clean tree.
+</qa_plan>
+
+<output>
+One branch named feat/arudha-composer, conventional commits, DCO sign-off.
+
+PR body, in this order:
+- What changed, mapped one line per W0-W6.
+- The dist===7 resolution with the BPHS citation and the matrix result.
+- Evidence table: gate | command | exit code | pasted tail of output.
+- Redaction proof: the grep result showing zero raw birth fields.
+- Risk note: which claims are VERIFIED vs TRADITIONAL and why.
+- HOLD list: anything you could not close and the exact reason.
+- CREAT.MD entry text, ready to paste.
+
+End with the line: START HERE FIRST — then the single highest-value next action
+after this PR merges.
+</output>
+
+<start>
+Confirm you have read items 1-8 of read_first by quoting one line from each with
+its file and line number. Then post a 6-line plan mapped to W0-W6 and wait for
+approval before editing anything.
+</start>
+
+</prompt>
