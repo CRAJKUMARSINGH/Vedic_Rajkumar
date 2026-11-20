@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { classifyDepth, sectionBudget } from '@/services/answerCard/depth';
 import { deriveSequencing } from '@/services/answerCard/sequencing';
 import { buildRemedy, pickRemedyTarget } from '@/services/answerCard/remedyPlan';
+import { cardEphemeris } from '@/services/answerCard/answerCardBuilder';
 import type { Verdict } from '@/services/answerCard/AnswerCard.types';
 import type { ChartFacts } from '@/services/answerCard/chartFacts';
 
@@ -78,5 +79,23 @@ describe('remedyPlan', () => {
 
   it('returns null when ascendant unknown and no placements', () => {
     expect(buildRemedy(facts({ ascSign: null, placements: [] }), 'career')).toBeNull();
+  });
+});
+
+describe('answerCardBuilder.cardEphemeris — engine honesty', () => {
+  const chartWith = (ephemerisSource?: 'swiss-wasm' | 'fallback') =>
+    ({ planetaryPositions: ephemerisSource ? { ephemerisSource } : null }) as unknown as Parameters<typeof cardEphemeris>[0];
+
+  it('discloses the coarse fallback engine when the ephemeris service reports it', () => {
+    expect(cardEphemeris(chartWith('fallback'))).toBe('fallback');
+  });
+
+  it('reports swisseph only when the WASM engine actually produced the chart', () => {
+    expect(cardEphemeris(chartWith('swiss-wasm'))).toBe('swisseph');
+  });
+
+  it('defaults to the local engine when the chart carries no engine stamp', () => {
+    expect(cardEphemeris(chartWith())).toBe('local');
+    expect(cardEphemeris(null)).toBe('local');
   });
 });

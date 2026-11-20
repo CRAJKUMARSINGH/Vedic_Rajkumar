@@ -81,7 +81,7 @@ export const AnswerCardSchema = z.object({
     ayanamsa: z.string(),
     house_system: z.string(),
     dasha_system: z.string(),
-    ephemeris: z.enum(['local', 'swisseph']),
+    ephemeris: z.enum(['local', 'swisseph', 'fallback']),
     computed_at: z.string(),
     as_of: z.string(),
     input_hash: z.string(),

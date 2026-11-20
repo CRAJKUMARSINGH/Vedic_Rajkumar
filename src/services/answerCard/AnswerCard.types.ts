@@ -145,7 +145,14 @@ export interface AnswerCard {
      * that stops the field advertising an unimplemented system.
      */
     dasha_system: string;
-    ephemeris: 'local' | 'swisseph';
+    /**
+     * Engine that produced the positions:
+     *  - 'swisseph' — Swiss Ephemeris WASM (arc-second);
+     *  - 'local'    — VSOP87 precision engine (default MIT build);
+     *  - 'fallback' — the coarse ±2–3° Schlyter engine, disclosed so a card
+     *                 never presents approximate positions as authoritative.
+     */
+    ephemeris: 'local' | 'swisseph' | 'fallback';
     computed_at: string;
     as_of: string;
     input_hash: string;

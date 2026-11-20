@@ -60,11 +60,31 @@ const SOURCE_FILES = [
 
 const clamp = (n: number, lo = 0, hi = 100) => Math.max(lo, Math.min(hi, Math.round(n)));
 
-function headlineFor(j: ConclusiveJatakJudgment, topic: Topic, lang: Lang): string {
+/**
+ * The engine that ACTUALLY produced the chart, taken from the ephemeris
+ * service's own source stamp — not the build flag. A card must disclose a
+ * degraded chart (coarse ±2–3° Schlyter fallback) rather than present it as
+ * authoritative. Falls back to the flag only when the chart carries no stamp
+ * (the primary VSOP87 path does not set one).
+ */
+export function cardEphemeris(chart: ChartData | null): 'local' | 'swisseph' | 'fallback' {
+  const source = chart?.planetaryPositions?.ephemerisSource;
+  if (source === 'fallback') return 'fallback';
+  if (source === 'swiss-wasm') return 'swisseph';
+  return import.meta.env?.VITE_USE_SWISS_EPHEMERIS === 'true' ? 'swisseph' : 'local';
+}
+
+/** Printed and confidence-capped when the coarse fallback engine was used. */
+const DEGRADED_CAVEAT = {
+  en: 'Approximate ephemeris (±2–3°); positions are indicative, not arc-second.',
+  hi: 'अनुमानित एफेमेरिस (±2–3°); स्थितियाँ सांकेतिक हैं, आर्क-सेकंड नहीं।',
+};
+
+function headlineFor(j: ConclusiveJatakJudgment, topic: Topic, lang: Lang, conf: number): string {
   const band = BAND_WORD[BAND_FROM_VERDICT[j.verdictType]][lang];
   const label = TOPIC_LABEL[topic][lang];
-  const conf = Math.round(deriveConfidence(j) * 100);
-  return lang === 'hi' ? `${label} ${band} (${conf}%)` : `${label}: ${band} (${conf}%)`;
+  const pct = Math.round(conf * 100);
+  return lang === 'hi' ? `${label} ${band} (${pct}%)` : `${label}: ${band} (${pct}%)`;
 }
 
 function caveatsFor(j: ConclusiveJatakJudgment, chart: ChartData): Array<{ en: string; hi: string }> {
@@ -117,13 +137,24 @@ function buildVerdict(
   }
   const merged: ConclusiveJatakJudgment = { ...j, score };
 
+  // Engine honesty: a coarse (±2–3°) fallback chart cannot honestly carry
+  // engine-grade confidence — cap it and disclose the engine in the caveats.
+  const degradedEngine = chart.planetaryPositions?.ephemerisSource === 'fallback';
+  const confidence = deriveConfidence(merged);
+  const capped = degradedEngine ? Math.min(confidence, 0.6) : confidence;
+  const caveats = caveatsFor(merged, chart);
+  if (degradedEngine) caveats.push(DEGRADED_CAVEAT);
+
   return {
     topic,
-    headline: { en: headlineFor(merged, topic, 'en'), hi: headlineFor(merged, topic, 'hi') },
+    headline: {
+      en: headlineFor(merged, topic, 'en', capped),
+      hi: headlineFor(merged, topic, 'hi', capped),
+    },
     score_0_100: merged.score,
     band: BAND_FROM_VERDICT[merged.verdictType],
     engine_verdict: merged.verdictType,
-    confidence_0_1: deriveConfidence(merged),
+    confidence_0_1: capped,
     window: normalizeWindow(forecast, area),
     rationale: { en: merged.therefore, hi: glossRationale(merged.therefore) },
     conflicts: merged.conflictResolution,
@@ -133,7 +164,7 @@ function buildVerdict(
       finding: e.finding,
     })),
     remedies: normalizeRemedies(forecast.remedyTarget),
-    caveats: caveatsFor(merged, chart),
+    caveats,
   };
 }
 
@@ -150,7 +181,8 @@ function composeDirectAnswer(v: Verdict[], lang: Lang): { hi: string; en: string
 function provenanceOf(
   body: Omit<AnswerCard, 'provenance'>,
   asOf: string,
-  extraSource: string
+  extraSource: string,
+  chart: ChartData | null
 ): AnswerCard['provenance'] {
   const input_hash = stableHash({
     dob: body.subject.dob,
@@ -166,7 +198,7 @@ function provenanceOf(
     // One system, named once — sourced from the engine so the card cannot
     // advertise a dasha the app does not compute (F10).
     dasha_system: DASHA_SYSTEM,
-    ephemeris: import.meta.env?.VITE_USE_SWISS_EPHEMERIS === 'true' ? 'swisseph' : 'local',
+    ephemeris: cardEphemeris(chart),
     // Pinned to `asOf`, not wall-clock, so answers:check is deterministic.
     computed_at: `${asOf}T00:00:00.000Z`,
     as_of: asOf,
@@ -202,7 +234,7 @@ export function buildAnswerCard(
     }),
   };
 
-  return { ...body, provenance: provenanceOf(body, asOf, 'src/services/answerCard/chartAdapter.ts') };
+  return { ...body, provenance: provenanceOf(body, asOf, 'src/services/answerCard/chartAdapter.ts', chart) };
 }
 
 /**
@@ -251,5 +283,5 @@ export function buildAnswerCardByName(
     },
   };
 
-  return { ...body, provenance: provenanceOf(body, asOf, 'src/services/answerCard/answerCardBuilder.ts') };
+  return { ...body, provenance: provenanceOf(body, asOf, 'src/services/answerCard/answerCardBuilder.ts', null) };
 }

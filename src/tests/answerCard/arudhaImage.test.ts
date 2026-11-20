@@ -164,3 +164,77 @@ describe('arudhaImage — provenance fail-closed (v2 §6/§9)', () => {
     expect(validateImageProvenance(valid({ status: 'TRADITIONAL' }, 12))).toBe(true);
   });
 });
+
+// ─── W3 — confidence.ts image-gap adjustments (v2 §3) ────────────────────────
+
+describe('confidence — image-gap adjustments (v2 §3 / W3)', () => {
+  // Build a minimal ConclusiveJatakJudgment stand-in.
+  const j = {
+    score: 65,
+    evidence: [{ score: 60 }, { score: 70 }],
+    conflictResolution: [],
+    houseVerdict: 'clear',
+    transitVerdict: 'clear',
+  } as unknown as Parameters<typeof import('@/services/answerCard/confidence').deriveConfidence>[0];
+
+  it('no image input → no change from baseline (additive only)', async () => {
+    const { deriveConfidence } = await import('@/services/answerCard/confidence');
+    const base = deriveConfidence(j);
+    const withNull = deriveConfidence(j, null);
+    expect(withNull).toBe(base);
+  });
+
+  it('aligned gap (|gap| ≤ 7) → +0.03', async () => {
+    const { deriveConfidence } = await import('@/services/answerCard/confidence');
+    const base = deriveConfidence(j);
+    const aligned = deriveConfidence(j, { gap: 5, alLordUnresolved: false });
+    expect(aligned).toBeCloseTo(Math.min(0.9, base + 0.03), 2);
+  });
+
+  it('extreme gap (|gap| ≥ 20) → −0.05', async () => {
+    const { deriveConfidence } = await import('@/services/answerCard/confidence');
+    const base = deriveConfidence(j);
+    const extreme = deriveConfidence(j, { gap: 25, alLordUnresolved: false });
+    expect(extreme).toBeCloseTo(Math.max(0.2, base - 0.05), 2);
+  });
+
+  it('A10 uncomputable (gap null) → −0.04', async () => {
+    const { deriveConfidence } = await import('@/services/answerCard/confidence');
+    const base = deriveConfidence(j);
+    const uncomputable = deriveConfidence(j, { gap: null, alLordUnresolved: false });
+    expect(uncomputable).toBeCloseTo(Math.max(0.2, base - 0.04), 2);
+  });
+
+  it('AL lord unresolved → −0.06', async () => {
+    const { deriveConfidence } = await import('@/services/answerCard/confidence');
+    const base = deriveConfidence(j);
+    const unresolved = deriveConfidence(j, { gap: 0, alLordUnresolved: true });
+    expect(unresolved).toBeCloseTo(Math.max(0.2, base - 0.06 + 0.03), 2);
+  });
+
+  it('ceiling is always 0.90 regardless of AL adjustments', async () => {
+    const { deriveConfidence } = await import('@/services/answerCard/confidence');
+    const highJ = { ...j, score: 88, evidence: [{ score: 85 }, { score: 90 }] };
+    const result = deriveConfidence(
+      highJ as typeof j,
+      { gap: 3, alLordUnresolved: false },
+    );
+    expect(result).toBeLessThanOrEqual(0.9);
+  });
+
+  it('floor is always 0.20 regardless of AL adjustments', async () => {
+    const { deriveConfidence } = await import('@/services/answerCard/confidence');
+    const lowJ = {
+      ...j, score: 10,
+      evidence: [{ score: 5 }, { score: 90 }],
+      conflictResolution: ['c1', 'c2', 'c3', 'c4', 'c5'],
+      houseVerdict: 'Ashtakavarga data is unavailable',
+      transitVerdict: 'cannot be certified',
+    };
+    const result = deriveConfidence(
+      lowJ as typeof j,
+      { gap: -25, alLordUnresolved: true },
+    );
+    expect(result).toBeGreaterThanOrEqual(0.2);
+  });
+});
