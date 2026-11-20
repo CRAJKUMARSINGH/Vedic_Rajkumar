@@ -26,9 +26,11 @@ export interface Sequencing {
   max: number;
   order: Topic[];
   line: Bi;
+  /** v2 §8: prepended when the image axis is badly negative (gap ≤ −20). */
+  leadIn?: Bi;
 }
 
-export function deriveSequencing(verdicts: Verdict[]): Sequencing | null {
+export function deriveSequencing(verdicts: Verdict[], imageGap?: number): Sequencing | null {
   const live = verdicts.filter(v => BAND_RANK[v.band] >= 3);
   if (live.length < 2) return null;
 
@@ -44,6 +46,15 @@ export function deriveSequencing(verdicts: Verdict[]): Sequencing | null {
   const en = order.map(t => TOPIC_WORD[t].en);
   const hi = order.map(t => TOPIC_WORD[t].hi);
 
+  // v2 §8: substance without audience moves nothing — repair the image first.
+  const leadIn: Bi | undefined =
+    imageGap !== undefined && imageGap <= -20
+      ? {
+          en: 'Start with image repair before any topical step:',
+          hi: 'किसी भी विषय-कदम से पहले छवि-सुधार करें:',
+        }
+      : undefined;
+
   return {
     max,
     order,
@@ -51,5 +62,6 @@ export function deriveSequencing(verdicts: Verdict[]): Sequencing | null {
       en: `Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most ${max} at a time — ${en.join(', then ')}. This is sequencing guidance only; it never overrides medical, financial or safety obligations.`,
       hi: `वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम ${max} से शुरू करने का सुझाव देती हैं — ${hi.join(', फिर ')}। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।`,
     },
+    leadIn,
   };
 }

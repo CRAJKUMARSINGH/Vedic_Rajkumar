@@ -16,6 +16,7 @@ import type { Topic, Verdict, Band, Lang } from './AnswerCard.types';
 import { classifyDepth, sectionBudget, type Depth } from './depth';
 import { deriveSequencing } from './sequencing';
 import { buildRemedy } from './remedyPlan';
+import { buildImageAxis, isImageAxisEnabled, validateImageProvenance } from './arudhaImage';
 import type { Bi } from './bilingual';
 
 export interface ComposedSection {
@@ -171,12 +172,34 @@ export function composeAnswer({ facts, verdicts, asked, language }: ComposeInput
     });
   }
 
-  const sequence = deriveSequencing(verdicts);
+  // Image-vs-substance axis (v2 §8). Research-only, gated OFF by default and
+  // validated fail-closed; the substance verdict is never overwritten.
+  const image =
+    lead && isImageAxisEnabled()
+      ? buildImageAxis({ facts, topic: lead.topic, substanceScore: lead.score_0_100 })
+      : null;
+  const validImage = image && validateImageProvenance(image) ? image : null;
+  if (validImage && budget >= 4) {
+    sections.push({
+      id: 'image-vs-substance',
+      title: { en: 'How you are seen vs how you deliver', hi: 'दिखना बनाम करना' },
+      body: validImage.line,
+      citations: validImage.citations,
+    });
+  }
+
+  const sequence = deriveSequencing(verdicts, validImage?.gap);
   if (sequence && budget >= 4) {
+    const body: Bi = sequence.leadIn
+      ? {
+          en: `${sequence.leadIn.en} ${sequence.line.en}`,
+          hi: `${sequence.leadIn.hi} ${sequence.line.hi}`,
+        }
+      : sequence.line;
     sections.push({
       id: 'sequence',
       title: { en: 'Sequence', hi: 'क्रम' },
-      body: sequence.line,
+      body,
       citations: [],
     });
   }
