@@ -3,6 +3,12 @@
  * The primary predictive system in Vedic astrology
  * Total cycle: 120 years across 9 planets
  *
+ * SCOPE (F10): this module implements the Vimshottari Dasha — and ONLY that
+ * system. Chara Dasha (Jaimini) and Mudda Dasha (Varshaphal) live in their own
+ * services; Ashtottari, Yogini and Kalachakra are **not implemented anywhere in
+ * the app**. Any surface that advertises a dasha capability must name
+ * Vimshottari explicitly rather than imply a family of systems.
+ *
  * IMPORTANT: This service accepts an optional `accurateMoonLongitude` parameter.
  * When provided (from Swiss Ephemeris or VSOP87), it is used directly.
  * The legacy ephemerisService is ONLY used as a last-resort fallback.
@@ -10,6 +16,19 @@
 
 import { calculateNakshatra } from './nakshatraService';
 import { calculateMoonPosition } from './ephemerisService';
+
+/**
+ * The one dasha system this repository computes and shows. Exported so a label
+ * cannot drift from the engine that produces it (provenance, UI, docs all read
+ * this rather than re-typing the string).
+ */
+export const DASHA_SYSTEM = 'Vimshottari' as const;
+
+/** Bilingual display label for the system above. */
+export const DASHA_SYSTEM_LABEL = {
+  en: 'Vimshottari Dasha',
+  hi: 'विंशोत्तरी दशा',
+} as const;
 
 // Vimshottari Dasha periods (years) for each planet
 export const DASHA_PERIODS: Record<string, number> = {

@@ -27,6 +27,27 @@ Every interpretive output in the app must be labelled **verified** or
 saying so; the absence of a badge is a claim of verification and must not be made
 by accident.
 
+## Dasha systems — implemented scope
+
+The Vimshottari row above is about _accuracy_ (dates not checked against JHora).
+This table is about _scope_: which dasha systems the app implements at all. A
+system that is not implemented must never be advertised as a capability, in the
+UI, in documentation or in an AnswerCard's `provenance.dasha_system`.
+
+| System                                 | Status in this repository                                                                                                          |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **Vimshottari Dasha** (विंशोत्तरी दशा) | **Implemented** — `src/services/dashaService.ts` (120-year, 9-lord cycle). The primary forecast system.                            |
+| Chara Dasha (Jaimini)                  | Implemented — `src/services/jaiminiService.ts`.                                                                                    |
+| Mudda Dasha (Varshaphal)               | Implemented — `src/services/varshaphalService.ts` (annual period).                                                                 |
+| Ashtottari / Yogini / Kalachakra       | **Not implemented.** Named only in a legacy type union (`vimshottariDashaService.ts`); no calculation, no dates, no output exists. |
+
+Only `Vimshottari` is a valid AnswerCard input, so emitted cards pin
+`provenance.dasha_system` to that one value (`DASHA_SYSTEM` in `dashaService.ts`),
+asserted by `src/tests/answerCard/dashaProvenance.test.ts`. Re-adding any of the
+unimplemented names to a public surface is a documentation lie, not a roadmap
+item — it requires a calculation and a verified fixture first (see "How a layer
+leaves this list" below).
+
 ## What "unverified" does and does not mean
 
 - **Verified** means: gated against an authority that is _not this codebase_ — Swiss

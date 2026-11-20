@@ -137,6 +137,13 @@ export interface AnswerCard {
     engine_version: string;
     ayanamsa: string;
     house_system: string;
+    /**
+     * The dasha system the card's timing is derived from. Always
+     * `'Vimshottari'` (see `DASHA_SYSTEM` in `src/services/dashaService.ts`) —
+     * the app implements no other system as a card input. The string type is
+     * kept for contract stability, so `dashaProvenance.test.ts` is the gate
+     * that stops the field advertising an unimplemented system.
+     */
     dasha_system: string;
     ephemeris: 'local' | 'swisseph';
     computed_at: string;

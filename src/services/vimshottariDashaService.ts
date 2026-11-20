@@ -79,7 +79,12 @@ export interface DashaCalculationParams {
     degree: number;
   };
   ayanamsa: number;
-  system: 'vimshottari' | 'ashtottari' | 'yogini' | 'kalachakra';
+  /**
+   * SCOPE (F10): this service implements Vimshottari only. Ashtottari, Yogini
+   * and Kalachakra are NOT implemented anywhere in the app, so naming them in
+   * this union would advertise a capability that does not exist.
+   */
+  system: 'vimshottari';
 }
 
 export interface PlanetPosition {

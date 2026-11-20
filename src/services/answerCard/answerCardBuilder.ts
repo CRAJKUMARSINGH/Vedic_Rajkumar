@@ -22,6 +22,7 @@ import {
   type LifeArea,
 } from '@/services/conclusiveJatakJudgmentService';
 import type { DashaForecastResult } from '@/services/dashaForecastService';
+import { DASHA_SYSTEM } from '@/services/dashaService';
 import { stableHash } from '@/lib/hash/stableHash';
 import { slugify, toSubject, type JatakRecord } from '@/lib/jataks/resolveJatak';
 import { buildChartFor, forecastFor } from './chartAdapter';
@@ -162,7 +163,9 @@ function provenanceOf(
     engine_version: ENGINE_VERSION,
     ayanamsa: 'Lahiri (Chitrapaksha)',
     house_system: 'Whole-sign',
-    dasha_system: 'Vimshottari',
+    // One system, named once — sourced from the engine so the card cannot
+    // advertise a dasha the app does not compute (F10).
+    dasha_system: DASHA_SYSTEM,
     ephemeris: import.meta.env?.VITE_USE_SWISS_EPHEMERIS === 'true' ? 'swisseph' : 'local',
     // Pinned to `asOf`, not wall-clock, so answers:check is deterministic.
     computed_at: `${asOf}T00:00:00.000Z`,

@@ -122,7 +122,8 @@ Create FEATURE_INVENTORY.md. Domains to check:
   CORE: Birth chart, divisional charts (D1-D60), planetary positions,
     house lords, nakshatra, ayanamsa, house system
   PANCHANGA: Tithi, Vara, Nakshatra, Yoga, Karana
-  DASHA: Vimshottari, Yogini, Chara, others
+  DASHA: Vimshottari (primary forecast system), Chara (Jaimini), Mudda
+    (Varshaphal) — Ashtottari / Yogini / Kalachakra are NOT implemented
   STRENGTHS: Shadbala, Ashtakavarga, dignity, yogas, doshas
   COMPATIBILITY: Ashtakoot, Dashakoot, Mangal Dosha, Nadi Dosha
   MARRIAGE: Timing prediction, Upapada Lagna, 7th house, D9
