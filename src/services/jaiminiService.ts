@@ -300,19 +300,16 @@ export function calculateArudhaPada(
   const lordPlanet = planets.find(p => p.name === lordName);
   if (!lordPlanet) return null;
 
-  const dist = (lordPlanet.rashiIndex - targetRashi + 12) % 12 || 12;
+  // Inclusive sign-distance from the bhava to its lord, 1..12:
+  //   lord in the bhava itself → 1; lord in the 7th from it → 7.
+  const dist = ((lordPlanet.rashiIndex - targetRashi + 12) % 12) + 1;
 
-  // Classical Jaimini exception (BPHS / Upadesa Sutra):
-  // When the lord falls in the source sign (distance 1) or the 7th from it
-  // (distance 7), the unadjusted Pada lands back on the source or its 7th —
-  // making the result identical to either the native's lagna or its mirror.
-  // The resolution is to count 10 signs forward from the source sign instead.
-  // Note: "distance" here is the inclusive sign-count lord→source; the
-  // exception is tested on that distance, not on the final unadjusted Pada
-  // (the old test on the final value was unreachable in both cases).
-  // BPHS 29.4-5: pada in source → 10th from it; pada in 7th → 4th from source.
-  // Lord at distance 1 (same sign) → raw pada = source → +9 (10th).
-  // Lord at distance 7 → raw pada = source+6 → 10th from raw = source+3 (4th).
+  // Classical Jaimini exception (BPHS 29.4-5):
+  // When the lord sits in the bhava (dist 1) the raw Pada lands back on the
+  // bhava; when it sits in the 7th from the bhava (dist 7) the raw Pada lands
+  // there too. In either case the 10th sign from that raw Pada is taken:
+  //   dist 1 → raw = source      → 10th from source = source + 9
+  //   dist 7 → raw = source + 6  → 10th from raw    = source + 3 (4th)
   const EXCEPTION_OFFSET: Record<1 | 7, number> = { 1: 9, 7: 3 };
   if (dist === 1 || dist === 7) {
     const padaRashi = (targetRashi + EXCEPTION_OFFSET[dist as 1 | 7]) % 12;

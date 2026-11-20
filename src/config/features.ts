@@ -38,6 +38,10 @@ export const featureFlags: Record<string, FeatureFlagConfig> = {
   // Experimental - dev rollout
   KP_SYSTEM: { enabled: false, tier: 'enterprise', flag: 'kp-alpha' },
   ASHTAKAVARGA_V2: { enabled: false, tier: 'enterprise' },
+
+  // Research-only: bounded Arudha image axis (c3 Phase 6). Default OFF —
+  // public activation requires explicit owner approval.
+  ARUDHA_IMAGE_AXIS: { enabled: false, tier: 'enterprise', flag: 'arudha-image' },
 } as const;
 
 const TIER_LEVELS: Record<UserTier, number> = {

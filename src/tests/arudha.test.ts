@@ -2,9 +2,9 @@
  * Arudha (Pada) Lagna — calculation contract tests.
  *
  * Convention under test (see reports/ARUDHA_CALCULATION_CONVENTION.md):
- *   distance  = inclusive sign count from target sign to its lord's sign
+ *   distance  = inclusive sign count from target sign to its lord's sign (1..12)
  *   unadjusted = advance same inclusive distance onward from the lord's sign
- *   exception = if result lands on the target sign or its 7th, add 10 signs
+ *   exception = lord in the bhava (dist 1) → +9; lord in the 7th (dist 7) → +3
  *   co-lordship: single-lord map (Scorpio→Mars? no — see RASHI_LORDS in
  *   jaiminiService); Saturn rules both Capricorn & Aquarius, Jupiter both
  *   Sagittarius & Pisces, Mars both Aries & Libra — one lord per sign.
@@ -25,7 +25,7 @@ function planetAt(name: string, rashiIndex: number): JaiminiPlanet {
  *  Reference: BPHS / Upadesa Sutra Jaimini tradition.
  */
 function expectedPada(target: number, lordSign: number): number {
-  const dist = ((lordSign - target + 12) % 12) || 12; // inclusive distance (1..12)
+  const dist = ((lordSign - target + 12) % 12) + 1; // inclusive distance (1..12)
   // BPHS 29.4-5: dist 1 → 10th from source (+9); dist 7 → 4th from source (+3)
   if (dist === 1) return (target + 9) % 12;
   if (dist === 7) return (target + 3) % 12;
@@ -68,20 +68,19 @@ describe('calculateArudhaPada — convention matrix', () => {
     expect(res!.rashiIndex).toBe(expectedPada(11, 0));
   });
 
-  it('documents that the self/seventh exception is unreachable under this convention', () => {
-    // Unadjusted pada offset from target = 2d-1 (mod 12), always odd, so it
-    // can never equal 0 (self) or 6 (seventh). The +10 exception branch in
-    // calculateArudhaPada is dead code — flagged OPEN in
-    // reports/ARUDHA_CALCULATION_CONVENTION.md for authoritative review.
-    let reachable = 0;
+  it('exception branch is reachable for dist 1 and dist 7 (v2 §0 mutation guard)', () => {
+    // Under the inclusive-distance convention the exception fires exactly when
+    // the lord sits in the bhava (dist 1) or the 7th from it (dist 7). Count
+    // the (target, lord) pairs that hit the branch: removing EXCEPTION_OFFSET
+    // would change 24 matrix results.
+    let hits = 0;
     for (let t = 0; t < 12; t++) {
       for (let s = 0; s < 12; s++) {
-        const d = ((s - t + 12) % 12) || 12;
-        const raw = (s + d - 1) % 12;
-        if (raw === t || raw === (t + 6) % 12) reachable++;
+        const d = ((s - t + 12) % 12) + 1;
+        if (d === 1 || d === 7) hits++;
       }
     }
-    expect(reachable).toBe(0);
+    expect(hits).toBe(24);
   });
 });
 
@@ -102,4 +101,29 @@ describe('calculateArudhaPada — house variants', () => {
     // A10 targets sign (2+10-1)%12=11 → lord Jupiter at sign 8
     expect(a10!.rashiIndex).toBe(expectedPada(11, 8));
   });
+});
+
+describe('calculateArudhaPada — BPHS exception matrix (v2 §9)', () => {
+  // 12 source signs × {lord in source (dist 1), lord in the 7th (dist 7)}.
+  // Independence: expected values are hand-derived from BPHS 29.4-5, never
+  // from the production algorithm.
+  //   dist 1 → 10th from source = (source + 9) % 12
+  //   dist 7 → 10th from raw pada (source+6) = (source + 3) % 12
+  for (let source = 0; source < 12; source++) {
+    it(`source=${source} lord in source sign → 10th from source`, () => {
+      const lordName = RASHI_LORDS[source];
+      const planets = [planetAt(lordName, source)];
+      const res = calculateArudhaPada(1, source, planets);
+      expect(res).not.toBeNull();
+      expect(res!.rashiIndex).toBe((source + 9) % 12);
+    });
+
+    it(`source=${source} lord in 7th sign → 4th from source`, () => {
+      const lordName = RASHI_LORDS[source];
+      const planets = [planetAt(lordName, (source + 6) % 12)];
+      const res = calculateArudhaPada(1, source, planets);
+      expect(res).not.toBeNull();
+      expect(res!.rashiIndex).toBe((source + 3) % 12);
+    });
+  }
 });
