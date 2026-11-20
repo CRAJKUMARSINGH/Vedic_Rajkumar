@@ -15,7 +15,13 @@ export default defineConfig({
   testDir: './tests/e2e',
   // production-* verifies the built bundle (PATCH 5/6); persona-users is the
   // PATCH 7 regression suite, whose offline test also needs the real bundle.
-  testMatch: ['**/production-*.spec.ts', '**/persona-users.spec.ts', '**/landing-page-links.spec.ts'],
+  testMatch: [
+    '**/production-*.spec.ts',
+    '**/persona-users.spec.ts',
+    '**/persona-tiers.spec.ts',
+    '**/perf-mobile.spec.ts',
+    '**/landing-page-links.spec.ts',
+  ],
   fullyParallel: false,
   workers: 1,
   retries: 0,

@@ -1,8 +1,10 @@
 {
   "title": "persona-users.spec.ts › Persona — intermediate tier › intermediate: prashna returns a verdict",
-  "status": "passed",
-  "durationMs": 18749,
-  "errors": [],
+  "status": "failed",
+  "durationMs": 59445,
+  "errors": [
+    "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[aria-label=\"Prashna analysis result\"], [aria-label=\"प्रश्न विश्लेषण परिणाम\"]')\nExpected: visible\nTimeout: 45000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 45000ms\u001b[22m\n\u001b[2m  - waiting for locator('[aria-label=\"Prashna analysis result\"], [aria-label=\"प्रश्न विश्लेषण परिणाम\"]')\u001b[22m\n\u001b[2m    2 × waiting for \"http://127.0.0.1:5173/prashna\" navigation to finish...\u001b[22m\n\u001b[2m      - navigated to \"http://127.0.0.1:5173/prashna\"\u001b[22m\n"
+  ],
   "pageErrors": [],
   "consoleErrors": [],
   "failedRequests": []

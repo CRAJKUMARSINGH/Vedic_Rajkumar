@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T06:48:43.438Z",
+  "generatedAt": "2026-11-20T06:32:12.977Z",
   "births": [
     {
       "name": "Isha Sharma",
@@ -10,71 +10,6 @@
         "label": "Chennai, Tamil Nadu",
         "lat": 13.08,
         "lon": 80.27
-      },
-      "pageErrors": [],
-      "consoleErrors": []
-    },
-    {
-      "name": "Saanvi Rao",
-      "dateISO": "1935-01-12",
-      "dateDMY": "12/01/1935",
-      "time": "18:20",
-      "place": {
-        "label": "Udaipur, Rajasthan",
-        "lat": 24.58,
-        "lon": 73.68
-      },
-      "pageErrors": [],
-      "consoleErrors": []
-    },
-    {
-      "name": "Arjun Reddy",
-      "dateISO": "1998-04-21",
-      "dateDMY": "21/04/1998",
-      "time": "22:52",
-      "place": {
-        "label": "Bengaluru, Karnataka",
-        "lat": 12.97,
-        "lon": 77.59
-      },
-      "pageErrors": [],
-      "consoleErrors": []
-    },
-    {
-      "name": "Rohan Iyer",
-      "dateISO": "2007-11-17",
-      "dateDMY": "17/11/2007",
-      "time": "12:05",
-      "place": {
-        "label": "Jaipur, Rajasthan",
-        "lat": 26.91,
-        "lon": 75.78
-      },
-      "pageErrors": [],
-      "consoleErrors": []
-    },
-    {
-      "name": "Saanvi Joshi",
-      "dateISO": "1988-11-05",
-      "dateDMY": "05/11/1988",
-      "time": "08:32",
-      "place": {
-        "label": "Bengaluru, Karnataka",
-        "lat": 12.97,
-        "lon": 77.59
-      },
-      "pageErrors": [],
-      "consoleErrors": []
-    },
-    {
-      "name": "Ananya Joshi",
-      "dateISO": "1994-02-07",
-      "dateDMY": "07/02/1994",
-      "time": "15:51",
-      "place": {
-        "label": "Varanasi, Uttar Pradesh",
-        "lat": 25.31,
-        "lon": 82.97
       },
       "pageErrors": [],
       "consoleErrors": []

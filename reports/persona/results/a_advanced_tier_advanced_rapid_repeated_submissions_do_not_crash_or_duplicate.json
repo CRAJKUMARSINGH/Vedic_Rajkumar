@@ -1,7 +1,7 @@
 {
   "title": "persona-users.spec.ts › Persona — advanced tier › advanced: rapid repeated submissions do not crash or duplicate",
   "status": "passed",
-  "durationMs": 16326,
+  "durationMs": 10303,
   "errors": [],
   "pageErrors": [],
   "consoleErrors": [],

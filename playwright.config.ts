@@ -14,6 +14,9 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   workers: 2,
   reporter: process.env.CI ? "github" : "list",
+  // 90s per test: covers WASM ephemeris cold-start (~50s) + navigation (60s)
+  // + all assertions. The default 30s was exceeded by route / on first load.
+  timeout: 90_000,
   use: {
     baseURL,
     trace: "retain-on-failure",

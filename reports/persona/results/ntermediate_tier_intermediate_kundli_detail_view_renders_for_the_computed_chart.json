@@ -1,8 +1,10 @@
 {
   "title": "persona-users.spec.ts › Persona — intermediate tier › intermediate: kundli detail view renders for the computed chart",
-  "status": "passed",
-  "durationMs": 14872,
-  "errors": [],
+  "status": "failed",
+  "durationMs": 128489,
+  "errors": [
+    "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/Overall Score|समग्र स्कोर/).first()\nExpected: visible\nTimeout: 120000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 120000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/Overall Score|समग्र स्कोर/).first()\u001b[22m\n\u001b[2m    3 × waiting for \"http://127.0.0.1:5173/horoscope\" navigation to finish...\u001b[22m\n\u001b[2m      - navigated to \"http://127.0.0.1:5173/horoscope\"\u001b[22m\n"
+  ],
   "pageErrors": [],
   "consoleErrors": [],
   "failedRequests": []
