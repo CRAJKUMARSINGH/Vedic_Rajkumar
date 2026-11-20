@@ -18,7 +18,20 @@ tree). DevDeps do not ship to production. Action: schedule `npm audit fix`
 **Disposition:** documented, non-blocking for launch; production runtime
 surface = 1 moderate transitive dep.
 
-## 2. swisseph-wasm AGPL — decision required (owner)
+## 2. swisseph-wasm AGPL — three-tier status (post-audit, HEAD b8b1a11)
+
+- **Structural isolation: VERIFIED BY TESTS** — `src/tests/accuracy/
+  agplBoundary.test.ts` (4/4): zero static/require import edges to
+  swisseph-wasm in src/; exactly one dynamic-import site
+  (swissEphemerisService.ts:57); VITE_USE_SWISS_EPHEMERIS gated at call
+  site; env defaults 'false'.
+- **AGPL legal compliance: PENDING DECISION** — owner must still choose
+  distribution model (open-source-compatible / build-exclude / commercial
+  license). Test proves structure, not legality.
+- **Production activation of Swiss Ephemeris: NOT AUTHORIZED** — flag
+  stays off; enabling it in production requires explicit owner approval.
+
+## 2a. Original analysis (retained)
 
 Facts: `swisseph-wasm@^0.1.0` is a runtime dependency; `swissEphemerisService`
 dynamic-imports it **only when `VITE_USE_SWISS_EPHEMERIS=true`**

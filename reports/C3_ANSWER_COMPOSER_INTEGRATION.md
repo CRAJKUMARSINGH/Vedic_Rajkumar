@@ -123,3 +123,82 @@ bilingual deterministic · legacy cards compatible.
 c3: IMPLEMENTED but NOT CERTIFIED — perf-mobile intermittently exceeds
 the 250ms longtask budget under real load; full E2E has 6 load-flake
 failures + cascade. RELEASE HOLD. C4 NOT READY until perf + E2E stabilize.
+
+## F2/F3/F8/F10 reconciliation patch (2026-11-20)
+
+Governed by the owner's decision: implement F10 and F3, retain the F2 standing
+order, formally descope F8. Execution order F10 → F3 → F8 docs → F2 unchanged.
+
+### F10 — Vimshottari scope honesty (IMPLEMENTED)
+- `src/services/dashaService.ts` now exports the single source of truth
+  `DASHA_SYSTEM = 'Vimshottari'` and `DASHA_SYSTEM_LABEL` (EN/हिं); header states
+  the module implements **only** Vimshottari and names the unimplemented systems.
+- `answerCardBuilder.ts` provenance reads `dasha_system: DASHA_SYSTEM` (was a
+  literal) — value unchanged (`'Vimshottari'`), so no `card_hash` drift.
+- `AnswerCard.types.ts` `provenance.dasha_system` doc comment narrowed to
+  "always Vimshottari".
+- `vimshottariDashaService.ts` type union `'vimshottari' | 'ashtottari' |
+  'yogini' | 'kalachakra'` → `'vimshottari'` (the union advertised three systems
+  that no code computes; the only consumer already passed `'vimshottari'`).
+- `KnowledgeExport.tsx` dasha inventory line corrected: Vimshottari (primary) /
+  Chara (Jaimini) / Mudda (Varshaphal) implemented; Ashtottari/Yogini/Kalachakra
+  explicitly NOT implemented.
+- `docs/accuracy/UNVERIFIED.md` gains a "Dasha systems — implemented scope"
+  section (scope ≠ the gated accuracy list, so `UNVERIFIED_AREAS` is unchanged).
+- New gate `src/tests/answerCard/dashaProvenance.test.ts`: every emitted card's
+  `provenance.dasha_system` is `DASHA_SYSTEM` and contains no unimplemented name.
+- No dasha dates or calculations were changed; existing cards remain valid.
+
+### F3 — CI-derived certification counts (IMPLEMENTED)
+- `scripts/verify-claims.mjs` (the existing `docs:verify` gate) now also writes a
+  machine-readable summary to `dist/certification-summary.json` (same `dist/`
+  convention as the accuracy reports). It records:
+  `counts {passed, failed, skipped, total, files, cases}`, `corpus`, per-claim
+  `{file, label, found, expected, ok}`, and `source {revision, branch, dirty,
+  tests_freshly_run}`.
+- Counts come from the **structured** vitest JSON reporter (`.vitest-report.json`),
+  never from parsed console text. A `--no-tests` run reuses the last report and
+  marks `tests_freshly_run: false` while carrying that report's own revision, so a
+  historical count is never presented as current.
+- The six pinned documentation surfaces remain validated (claims equal derived
+  values, else exit 1); the `docs:verify` contract (exit 0/1, same script name)
+  is preserved.
+- AGPL boundary test deduplicated: the untracked `src/tests/licensing/` copy was
+  removed; the tracked, stronger `src/tests/accuracy/agplBoundary.test.ts`
+  (static+require+dynamic+env-gate) is the single guard. LICENSING.md reference
+  corrected to that path.
+
+### F8 — Direction feature (FORMALLY DESCOPED)
+- The composer's `direction` section stays intentionally omitted
+  (`answerComposer.ts` header). No kilometre ranges, rotated city pools or
+  geographic predictions are emitted from deterministic seeds.
+- Any independently validated traditional directional interpretation that exists
+  elsewhere is untouched; no replacement feature is added without an approved
+  calculation + interpretation specification.
+
+### F2 — Standing instruction (RETAINED, UNCHANGED)
+- `CREAT.MD` cadence remains **every 12 minutes** (README §Standing Instructions
+  item 5). No change to the cadence; no background timer introduced.
+
+### Licensing status
+- AGPL boundary remains a **tested structure, not legal clearance**. A passing
+  import-boundary test does not resolve the AGPL-3.0 decision. **Release blocker
+  retained** until a qualified legal review records a decision.
+
+### Verification (this patch)
+Recorded in the completion report of the session; exact commands, exit codes and
+`dist/certification-summary.json` are the evidence of record.
+
+
+## Mobile long-task investigation (post-audit gate)
+
+- Route: /horoscope real submission · Device: 393×851 (Pixel-class) ·
+  CPU throttle 4× (CDP) · Observer: PerformanceObserver longtask
+- Budget: no single task > 250ms
+- Run A (warm): longtasks 92/106/192ms → PASS — reports/perf/mobile-mainthread.json
+- Run B (suite load): longtasks 334/298/293/586ms → FAIL — 4 over budget
+- Frequency: intermittent; correlates with parallel-worker CPU contention
+  and WASM cold-start, NOT with a deterministic app regression
+- Verdict: NOT resolved. Budget breach is real under load; candidate fixes
+  (worker offload of chart compute, chunked ephemeris) require profiling.
+  Do not raise the 250ms budget without owner sign-off.
