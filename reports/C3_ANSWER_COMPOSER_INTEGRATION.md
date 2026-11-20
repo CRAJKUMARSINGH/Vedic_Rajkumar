@@ -67,3 +67,59 @@ CODE-JUNCTION retained: v1.txt v2.txt c3.txt c4.txt (+ .gitkeep files)
 - docs:verify + full E2E + Lighthouse + a11y audit re-run
 - v1.txt/v2.txt/c3.txt requirement-by-requirement reconciliation sign-off
 - c4 premium chart engine — not started (blocked until c3 certified)
+
+## Final certification attempt (HEAD 5934148)
+
+### Engine audit (Step 2)
+- dist now `((lord-target+12)%12)+1` → true inclusive 1..12; same-sign=1,
+  7th=7; exceptions {1:9,7:3} per BPHS 29.4-5. Committed 5934148.
+- Worked-example check: asc Aries, Mars@Aries → AL=Capricorn(sign9);
+  Saturn@Capricorn → A10=Virgo(sign6); A10-from-AL=10th → base 90.
+- Convention: RESOLVED-by-derivation; competing readings documented in
+  ARUDHA_CALCULATION_CONVENTION.md; owner sign-off still recommended.
+
+### Image-axis contract (Step 3) — verified via 25 tests
+flag OFF default · fail-closed provenance · null on missing inputs ·
+substance untouched · health excluded · TRADITIONAL+extreme-gap withheld ·
+bilingual deterministic · legacy cards compatible.
+
+### Gates
+- docs:verify → FAIL (transient): ran full suite, 13 files ENOENT-flaked
+  (2570 vs documented 2613 — count drift is the known vitest worker-temp
+  flake, not doc error; docs correctly say 2613 for clean runs)
+- test:run → 2613p/4s exit 0 (earlier, pre-5934148; engine commit is
+  test-covered: 197/197 arudha+image rerun after)
+- validate:accuracy → 155/155 exit 0 · build → exit 0 (270 precache)
+- answers:emit/check → 21/21
+- FULL E2E → 122p / 6f / 5s / 22 did-not-run, exit 1 (cert-e2e-c3final.txt)
+
+### E2E failure classification (NOT clean — c3 NOT certified)
+1. all-routes `/` + `/career-astrology`: page.goto 60s timeouts — startup
+   contention under workers:2 (infra flake class, seen before)
+2. persona-users ×2 + robustness birth-2: "Overall Score"/submit-enabled
+   timeouts — WASM cold-start + geocode-settle contention (flake class)
+3. **perf-mobile: REAL signal** — longtasks 334/298/293/**586ms** over the
+   250ms budget during a real 4x-throttled submission. Earlier run showed
+   92/106/192ms. Variance = cold vs warm WASM + machine load. This is the
+   first non-vacuous measurement and it FAILS intermittently — mobile
+   main-thread budget is NOT reliably met. Genuine perf finding, not a
+   test defect. Requires investigation (worker offload / chunked compute),
+   not threshold-weakening.
+
+### CODE-JUNCTION reconciliation
+- v1.txt: composer modules implemented (chartFacts/depth/sequencing/
+  remedyPlan/answerComposer); direction.ts deliberately omitted (c3 §3).
+- v2.txt: arudhaImage implemented flag-OFF; exception {1:9,7:3} landed.
+- c3.txt: Phases 1-9 implemented; Phase 10 partial (E2E not clean);
+  Phase 11 report updated.
+- V1-CLAUDE/V2-CLAUDE/V3-CLAUD-ALL: Codex/Claude instruction exports —
+  content duplicates already-applied arudha/composer work; retained as
+  reference, no unique unapplied requirements found (spot-checked).
+- CHART IMAGES/, WhatsApp folders, AARUDH PDF, Venice files: c4 visual
+  references + assets — retained for c4.
+- c4.txt: RETAINED (chart engine not started).
+
+### Verdict
+c3: IMPLEMENTED but NOT CERTIFIED — perf-mobile intermittently exceeds
+the 250ms longtask budget under real load; full E2E has 6 load-flake
+failures + cascade. RELEASE HOLD. C4 NOT READY until perf + E2E stabilize.
