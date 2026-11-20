@@ -16,14 +16,21 @@
  *   node scripts/verify-claims.mjs              # runs the suite, then verifies
  *   node scripts/verify-claims.mjs --no-tests   # docs-only (uses last report)
  *
+ * In both modes it writes a machine-readable certification summary to
+ * `dist/certification-summary.json` (the same `dist/` convention the accuracy
+ * reports use). The summary records passed/failed/skipped/total counts, files
+ * vs cases, and — critically — the **source revision** the counts came from, so
+ * a reused (historical) report can never be reported as a current result.
+ *
  * Exit codes: 0 = docs agree with the code; 1 = drift or tests failed.
  */
 import { spawnSync } from 'node:child_process';
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 
 const ROOT = process.cwd();
 const REPORT = join(ROOT, '.vitest-report.json');
+const SUMMARY = join(ROOT, 'dist', 'certification-summary.json');
 const runTests = !process.argv.includes('--no-tests');
 
 // ─── Canonical values ────────────────────────────────────────────────────────
@@ -85,13 +92,65 @@ const testFiles = report.testResults.length;
 const failedTests = report.numFailedTests ?? 0;
 const skippedTests = report.numPendingTests ?? 0;
 
+/**
+ * Certification counts. `total`/`cases` are the same number by two names on
+ * purpose: a reader must be able to tell *test files* from *test cases* without
+ * inferring it, because every pinned claim doc states one or the other.
+ */
+const counts = {
+  passed: tests,
+  failed: failedTests,
+  skipped: skippedTests,
+  total: report.numTotalTests ?? tests + failedTests + skippedTests,
+  files: testFiles,
+  cases: report.numTotalTests ?? tests + failedTests + skippedTests,
+};
+
+// ─── Source revision ─────────────────────────────────────────────────────────
+// A test count without the revision it was measured at is unfalsifiable, so the
+// summary always carries one. On a `--no-tests` run the numbers are reused from
+// a previous report; the summary then carries THAT run's revision and marks
+// itself non-fresh rather than dressing a historical count as current.
+
+function git(args) {
+  const r = spawnSync('git', args, { cwd: ROOT, encoding: 'utf8' });
+  return r.status === 0 ? r.stdout.trim() : null;
+}
+
+function currentRevision() {
+  return {
+    revision: git(['rev-parse', 'HEAD']),
+    branch: git(['rev-parse', '--abbrev-ref', 'HEAD']),
+    dirty: (git(['status', '--porcelain']) ?? '').length > 0,
+  };
+}
+
+function reusedRevision() {
+  if (!existsSync(SUMMARY)) return { revision: null, branch: null, dirty: null };
+  try {
+    const prev = JSON.parse(readFileSync(SUMMARY, 'utf8'));
+    return {
+      revision: prev?.source?.revision ?? null,
+      branch: prev?.source?.branch ?? null,
+      dirty: prev?.source?.dirty ?? null,
+    };
+  } catch {
+    return { revision: null, branch: null, dirty: null };
+  }
+}
+
+const source = runTests
+  ? { ...currentRevision(), tests_freshly_run: true }
+  : { ...reusedRevision(), tests_freshly_run: false };
+
 console.log('Canonical (derived from the repository):');
+console.log(`  source        : ${source.revision ?? 'unknown'}${source.branch ? ` (${source.branch})` : ''}${source.dirty ? ' +dirty' : ''}${source.tests_freshly_run ? '' : ' — counts reused, NOT freshly run'}`);
 console.log(`  version       : ${version}`);
 console.log(`  corpus charts : ${corpusCharts}`);
 console.log(`  golden charts : ${goldenCharts}`);
 console.log(
-  `  tests         : ${tests} passed across ${testFiles} files` +
-    (skippedTests ? ` (${skippedTests} skipped)` : ''),
+  `  tests         : ${counts.passed} passed / ${counts.failed} failed / ${counts.skipped} skipped` +
+    ` (total ${counts.total}) across ${counts.files} files`,
 );
 console.log('');
 
@@ -140,20 +199,25 @@ const retiredCountFiles = [
 // ─── Evaluate ────────────────────────────────────────────────────────────────
 
 const problems = [];
+/** Per-claim evidence for the machine-readable certification summary. */
+const claims = [];
 
 for (const rule of rules) {
   const full = join(ROOT, rule.file);
   if (!existsSync(full)) {
     problems.push(`${rule.file}: file not found (${rule.label})`);
+    claims.push({ file: rule.file, label: rule.label, found: null, expected: rule.expected, ok: false });
     continue;
   }
   const src = readFileSync(full, 'utf8');
   const m = src.match(rule.pattern);
   if (!m) {
     problems.push(`${rule.file}: ${rule.label} — claim site not found; update the doc or this rule`);
+    claims.push({ file: rule.file, label: rule.label, found: null, expected: rule.expected, ok: false });
     continue;
   }
   const found = m.slice(1).join(rule.join ?? '');
+  claims.push({ file: rule.file, label: rule.label, found, expected: rule.expected, ok: found === rule.expected });
   if (found !== rule.expected) {
     problems.push(`${rule.file}: ${rule.label} — doc says "${found}", code says "${rule.expected}"`);
   }
@@ -235,11 +299,13 @@ for (const claim of numericClaims) {
   const full = join(ROOT, claim.file);
   if (!existsSync(full)) {
     problems.push(`${claim.file}: file not found (${claim.label})`);
+    claims.push({ file: claim.file, label: claim.label, found: null, expected: null, ok: false });
     continue;
   }
   const m = readFileSync(full, 'utf8').match(claim.pattern);
   if (!m) {
     problems.push(`${claim.file}: ${claim.label} — numeric claim not found; update the doc or this rule`);
+    claims.push({ file: claim.file, label: claim.label, found: null, expected: null, ok: false });
     continue;
   }
   const claimed = m.slice(1).join(claim.join ?? '');
@@ -248,10 +314,15 @@ for (const claim of numericClaims) {
     : readFileSync(join(ROOT, claim.source), 'utf8').match(claim.sourcePattern)?.[1];
   if (derived === undefined) {
     problems.push(`${claim.source}: ${claim.label} — source value not found (${claim.sourcePattern})`);
-  } else if (!numEq(claimed, derived)) {
-    problems.push(
-      `${claim.file}: ${claim.label} — doc says "${claimed}", ${claim.source} says "${derived}"`,
-    );
+    claims.push({ file: claim.file, label: claim.label, found: claimed, expected: null, ok: false });
+  } else {
+    const ok = numEq(claimed, derived);
+    claims.push({ file: claim.file, label: claim.label, found: claimed, expected: derived, ok });
+    if (!ok) {
+      problems.push(
+        `${claim.file}: ${claim.label} — doc says "${claimed}", ${claim.source} says "${derived}"`,
+      );
+    }
   }
 }
 
@@ -284,10 +355,31 @@ if (failedTests > 0) {
   problems.push(`${failedTests} test(s) failed — test counts cannot be trusted`);
 }
 
+// ─── Machine-readable certification summary ──────────────────────────────────
+// One artifact a CI job (or a reviewer) can read to see exactly which counts
+// were derived, from which revision, and which claim sites agreed. Written
+// before any exit, so a failing gate still leaves its evidence behind.
+const summary = {
+  schema: 'vedic-rajkumar/certification-summary@1',
+  generated_at: new Date().toISOString(),
+  source,
+  app_version: version,
+  counts,
+  corpus: { charts: corpusCharts, golden_charts: goldenCharts },
+  claims,
+  claims_ok: problems.length === 0,
+  problems,
+};
+
+mkdirSync(dirname(SUMMARY), { recursive: true });
+writeFileSync(SUMMARY, `${JSON.stringify(summary, null, 2)}\n`);
+console.log(`certification summary → ${SUMMARY}`);
+
 if (problems.length > 0) {
   console.error('✖ docs:verify — documentation drift detected:\n');
   for (const p of problems) console.error(`  • ${p}`);
-  console.error('\nFix the documents to match the code, then re-run: npm run docs:verify');
+  console.error(`\nClaim-by-claim evidence: ${SUMMARY}`);
+  console.error('Fix the documents to match the code, then re-run: npm run docs:verify');
   process.exit(1);
 }
 
