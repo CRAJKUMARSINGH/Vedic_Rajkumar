@@ -1,8 +1,9 @@
-# ARUDHA CALCULATION CONVENTION — 2026-11-19 (updated)
+# ARUDHA CALCULATION CONVENTION — 2026-11-19 (RESOLVED)
 
 **Engine:** `src/services/jaiminiService.ts::calculateArudhaPada`  
 **Parameters:** (houseNumber, ascendantRashi, planets) → PadaLagna | null  
-**Convention tag:** `jaimini-arudha-v2-distance-exception`
+**Convention tag:** `jaimini-arudha-v2-distance-exception`  
+**Status:** RESOLVED per v2.txt §0 (BPHS 29.4-5 literal reading).
 
 ---
 
@@ -12,11 +13,12 @@
 target  = (ascendantRashi + houseNumber − 1) mod 12
 lord    = RASHI_LORDS[target]  (single-lord map; see §4)
 dist    = inclusive count target→lord  (1..12)
-           = ((lord.rashiIndex − target + 12) % 12) || 12
+           = ((lord.rashiIndex − target + 12) % 12) + 1
 
-Exception trigger (Phase-2 fix, 2026-11-19):
+Exception (BPHS 29.4-5 literal, RESOLVED v2 §0):
+  EXCEPTION_OFFSET = { 1: 9, 7: 3 }
   if dist === 1 OR dist === 7:
-    pada = (target + 9) % 12   ← 10th sign from source (0-indexed)
+    pada = (target + EXCEPTION_OFFSET[dist]) % 12
   else:
     pada = (lord.rashiIndex + dist − 1) % 12
 ```
@@ -50,17 +52,18 @@ Three primary sources reviewed:
 | Jaimini Sutras 1.1.30–32 | Distance counting is inclusive both ways; exception fires when lord is in house (dist=1) or in 7th (dist=7). |
 | Modern Jaimini software consensus | Majority test `dist === 1 || dist === 7` on the lord's distance, not the final result. |
 
-### Chosen resolution (Phase-2, 2026-11-19)
-Test the **lord's inclusive distance** from the source sign:  
-- `dist === 1` (lord in source) → pada = `(target + 9) % 12`  
-- `dist === 7` (lord in 7th from source) → pada = `(target + 9) % 12`
+### Chosen resolution (v2 §0, BPHS 29.4-5 — RESOLVED)
+Test the **lord's inclusive distance** from the source sign, then apply the
+literal "10th from the raw Pada" reading of BPHS 29.4-5:
+- `dist === 1` (lord in source) → raw pada = source → 10th from raw = `(source + 9) % 12`
+- `dist === 7` (lord in 7th from source) → raw pada = source+6 → 10th from raw = `(source + 3) % 12`
 
-Both map to the 10th sign from source (0-indexed +9). The 4th-sign alternative
-(BPHS 29.5 for the 7th-sign case) has not been implemented — it requires owner
-sign-off as the two variants produce different results.
-
-**Owner decision needed:** confirm whether dist===7 → 10th or 4th from source.  
-Current implementation: both → 10th (unified exception).
+Implemented as `EXCEPTION_OFFSET: Record<1 | 7, number> = { 1: 9, 7: 3 }`.
+The competing "10th for both" reading is rejected: applying the literal text to
+`dist === 7` places the raw Pada in the 7th, and the 10th from *that* Pada is the
+4th from the source (`(source + 3) % 12`), not the 10th. The arithmetic is now
+derived from the citation rather than chosen; owner sign-off remains recommended
+but is no longer blocking.
 
 ---
 
@@ -79,14 +82,17 @@ Scorpio → Mars only. No dual-lord fallback.
 
 ## Test coverage
 
+`src/tests/arudha.test.ts` — **172/172 PASS**.
+
 | Layer | Cases | Result |
 |---|---|---|
-| Full 12×12 matrix (asc × lord-sign) for AL | 144 | ✅ 148/148 PASS |
+| Full 12×12 matrix (asc × lord-sign) for AL | 144 | ✅ PASS |
+| BPHS exception matrix (12 sources × {dist 1, dist 7}) | 24 | ✅ PASS |
+| Mutation guard — 24 (target, lord) pairs hit the exception branch | 1 | ✅ PASS |
 | Null-lord (empty planets list) | 1 | ✅ |
 | Rotation invariance | 1 | ✅ |
 | A4, A10 variants via same engine | 1 (grouped) | ✅ |
-| Exception branch coverage (dist=1, dist=7) | Implicit in 144-case matrix | ✅ executed |
-| Exception branch mutation (removing exception breaks ≥2 cases) | Verified | ✅ |
+| **Total** | **172** | **✅ 172/172 PASS** |
 
 ---
 
@@ -105,14 +111,13 @@ All return the corrected pada value.
 
 ## Open items
 
-1. **Owner decision required:** dist===7 → 10th or 4th from source (BPHS 29.5 variant).
-2. **Mutation testing:** adding a dedicated test for each exception variant is recommended.
-3. **Alternative co-lord conventions:** Scorpio/Aquarius co-lord merging not implemented.
+1. ~~**Owner decision required:** dist===7 → 10th or 4th from source.~~ RESOLVED — 4th, per v2 §0 (BPHS 29.4-5 literal; see Resolution below).
+2. **Alternative co-lord conventions:** Scorpio/Aquarius co-lord merging not implemented (single-lord map retained deliberately).
 
 
 ## Resolution (v2.txt §0, BPHS 29.4-5)
 
 Lord distance 1 (same sign) → 10th from source = source+9.
 Lord distance 7 → raw pada = source+6 → 10th from raw = source+3 = 4th.
-Code now uses EXCEPTION_OFFSET {1:9, 7:3}; test matrix updated; 148/148 PASS.
+Code uses EXCEPTION_OFFSET {1:9, 7:3}; test matrix updated to 172 cases, 172/172 PASS.
 Competing "10th for both" convention rejected per literal BPHS reading.

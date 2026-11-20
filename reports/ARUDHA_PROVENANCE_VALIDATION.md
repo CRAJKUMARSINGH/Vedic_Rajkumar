@@ -55,3 +55,38 @@ The Jaimini interpretation path **cannot bypass** provenance validation.
 - Arudha pada results carry `rashiIndex/rashiName/meaning` — no per-claim `calculationId` or convention-version field yet. This is a **known gap**, not a fabrication.
 - N9 receives `birthDate`/`birthTime` only (no `planets`/`dignities` passed from JaiminiPanel), so N5 Bala returns UNAVAILABLE gracefully — no crash, no invented values.
 - Full provenance UI tooltip ("यह निष्कर्ष क्यों?") is backlog per Phase 4 / CODEX2.txt.
+
+---
+
+## Image-axis provenance — fail-closed (v2 §6/§11)
+
+Module `src/services/answerCard/arudhaImage.ts` stamps every `ImageAxis` with a
+provenance block and gates its publication through `validateImageProvenance()`.
+The checker is **fail-closed**: any malformed or unverifiable stamp withholds the
+section rather than defaulting. `buildImageAxis()` itself is ungated (so tests and
+future callers can inspect it); the composer only emits the `image-vs-substance`
+section after `isImageAxisEnabled()` **and** `validateImageProvenance()` both pass.
+
+Stamped fields: `engine` = `jaiminiService.calculateArudhaPada`,
+`version` = `arudha-image-0.1.0`, `convention` = `ARUDHA_CONVENTION`,
+`arudha_hash` = `stableHash({ al, target, arudhaFromAl, asc })`,
+`status` = `VERIFIED | TRADITIONAL`.
+
+`validateImageProvenance(axis)` rejects (returns `false`) when:
+
+| Condition | Rejected |
+|---|---|
+| `axis` is `null`/`undefined` | ✅ fail-closed |
+| `engine` empty | ✅ |
+| `version` empty | ✅ |
+| `convention` empty or ≠ `ARUDHA_CONVENTION` | ✅ |
+| `arudha_hash` empty | ✅ |
+| `status` not in `{VERIFIED, TRADITIONAL}` | ✅ |
+| `status === 'TRADITIONAL'` **and** `|gap| ≥ 20` (extreme claim off an unverified convention) | ✅ |
+
+Prashna charts (`referenceType: 'prashna'`) are always stamped `TRADITIONAL`
+because the AL rules are natal-only, so an extreme gap on a prashna card is
+withheld by construction (v2 §10 — no prashna contamination).
+
+Test coverage: `src/tests/answerCard/arudhaImage.test.ts` — 25 tests, including
+the negative/fail-closed matrix above (`arudhaImage — provenance fail-closed`).
