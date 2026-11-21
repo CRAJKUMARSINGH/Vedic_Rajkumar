@@ -8,6 +8,9 @@
 
 export type RashiName = string;
 
+// P1: single source of truth for the Lahiri (Chitrapaksha) ayanamsa.
+import { getLahiriAyanamsa } from './ayanamsaEngine';
+
 export const RASHIS_HI = [
   'मेष',
   'वृषभ',
@@ -180,12 +183,9 @@ export function julianDay(year: number, month: number, day: number, hour: number
   );
 }
 
-/** Lahiri ayanamsa calculation - Improved accuracy */
+/** Lahiri ayanamsa - delegated to the shared engine (P1 consolidation) */
 export function lahiriAyanamsa(jde: number): number {
-  const T = (jde - 2451545.0) / 36525.0;
-  // Standard high-precision formula for Lahiri (Chitrapaksha) ayanamsa
-  // 23.85472 is the value for J2000.0
-  return 23.85472 + 0.0139601 * T * 100 - 0.000308 * T * T;
+  return getLahiriAyanamsa(jde);
 }
 
 /** Sun longitude - Meeus Chapter 25 */

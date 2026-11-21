@@ -8,6 +8,7 @@
  */
 
 import { jdTTFromUT } from '@/lib/timeScales';
+import { getLahiriAyanamsa } from '@/lib/vedic/ayanamsaEngine';
 
 // Ayanamsa (Lahiri) — precession correction for the sidereal zodiac.
 // The Lahiri epoch value is derived from the Julian Day inside
@@ -44,8 +45,8 @@ export function calculateAyanamsa(date: Date | string | number): number {
     );
   }
 
-  const T = (jd - 2451545.0) / 36525.0;
-  return 23.85472 + (0.0139601 * T * 100) - (0.000308 * T * T);
+  // P1: all Lahiri math lives in src/lib/vedic/ayanamsaCore.ts.
+  return getLahiriAyanamsa(jd);
 }
 
 /**

@@ -149,13 +149,13 @@ function formatPlanet(
 // ─── Lahiri Ayanamsa ──────────────────────────────────────────────────────────
 /**
  * Lahiri (Chitrapaksha) ayanamsa.
- * Value at J2000.0 = 23.85472°, precession 50.2564″/yr = 0.013960°/yr.
+ * P2: delegated to the single ayanamsa core (src/lib/vedic/ayanamsaCore.ts),
+ * reached through the ayanamsaEngine facade, so the anchor and precession
+ * coefficients are defined exactly once.
  */
-export function getLahiriAyanamsa(jd: number): number {
-  const T = (jd - 2451545.0) / 36525.0;
-  const ay = 23.85472 + 0.013960 * T * 100 - 0.000308 * T * T;
-  return norm(ay);
-}
+import { getLahiriAyanamsa } from '@/lib/vedic/ayanamsaEngine';
+
+export { getLahiriAyanamsa };
 
 // ─── Julian Day ───────────────────────────────────────────────────────────────
 export function dateTimeToJD(dateStr: string, timeStr: string, tzOffsetHours = 5.5): number {
