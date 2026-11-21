@@ -355,6 +355,16 @@ working on this repository. They apply to all sessions until explicitly revoked.
    UX, not authorization — enforcement belongs on a server or it does not exist.
    These rules apply to every feature, including the Answer Layer.
 
+8. **`CODE-JUNCTION/` is a transit bay, not a code store.** All code files
+   (source, tests, config, docs) live in their **own feature folders**. The
+   single exception is [`CODE-JUNCTION/`](CODE-JUNCTION): it must contain
+   **only new enhancement guides and patch files** — briefs, plans, `.patch`
+   files and their supporting notes that are **meant for deletion once
+   applied**. Do not place production code, tests, or permanent documentation
+   there. After a guide/patch has been applied and verified, **delete it** so
+   the folder returns to its empty, `.gitkeep`-only resting state (per
+   instruction 6, keep the **folder**, never the spent contents).
+
 ---
 
 ## 🏗 Contributing
