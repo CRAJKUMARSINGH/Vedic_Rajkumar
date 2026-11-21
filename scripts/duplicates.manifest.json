@@ -48,6 +48,12 @@
       "reason": "duplicate main-thread worker client (ts-nocheck, no timeout)",
       "replacedBy": "src/workers/client.ts",
       "adr": "ADR-004"
+    },
+    {
+      "path": "commitlint.config.js",
+      "reason": "cosmiconfig resolves .commitlintrc.json first, so its rule set (no `infra` scope, sentence-case subjects) never ran",
+      "replacedBy": ".commitlintrc.json",
+      "adr": "ADR-004"
     }
   ],
   "generated": [

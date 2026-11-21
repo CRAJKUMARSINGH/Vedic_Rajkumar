@@ -7,14 +7,15 @@ gets resolved the wrong way by accident. The guard fails if any reappears.
 
 ## Deleted
 
-| Path                                     | Why it was dead                                                                      | Replacement         |
-| ---------------------------------------- | ------------------------------------------------------------------------------------ | ------------------- |
-| `eslint.config.cjs`                      | flat-config resolution picks `.js` first, so every edit to `.cjs` was a silent no-op | `eslint.config.js`  |
-| `src/lib/envConfig.ts`                   | second env module                                                                    | `src/config/env.ts` |
-| `src/test/`                              | second test tree, parallel to `src/tests/`                                           | `src/tests/`        |
-| `public/service-worker.js`               | `vite-plugin-pwa`/workbox already registers                                          | `vite.config.ts`    |
-| `src/utils/serviceWorkerRegistration.ts` | second registration path                                                             | `vite.config.ts`    |
-| `supabase/functions/user-data-export/`   | duplicate of `export-user-data`                                                      | `export-user-data`  |
+| Path                                     | Why it was dead                                                                      | Replacement          |
+| ---------------------------------------- | ------------------------------------------------------------------------------------ | -------------------- |
+| `eslint.config.cjs`                      | flat-config resolution picks `.js` first, so every edit to `.cjs` was a silent no-op | `eslint.config.js`   |
+| `src/lib/envConfig.ts`                   | second env module                                                                    | `src/config/env.ts`  |
+| `src/test/`                              | second test tree, parallel to `src/tests/`                                           | `src/tests/`         |
+| `public/service-worker.js`               | `vite-plugin-pwa`/workbox already registers                                          | `vite.config.ts`     |
+| `src/utils/serviceWorkerRegistration.ts` | second registration path                                                             | `vite.config.ts`     |
+| `supabase/functions/user-data-export/`   | duplicate of `export-user-data`                                                      | `export-user-data`   |
+| `commitlint.config.js`                   | cosmiconfig resolves `.commitlintrc.json` first, so its rules were a silent no-op    | `.commitlintrc.json` |
 
 ## Generated, not hand-edited
 

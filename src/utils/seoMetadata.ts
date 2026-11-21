@@ -14,7 +14,7 @@ export interface PageSEO {
 }
 
 const BASE_URL = (import.meta.env.VITE_SITE_URL ?? 'https://vedicrajkumar.com').replace(/\/$/, '');
-const DEFAULT_OG = `${BASE_URL}/og-image.png`;
+export const DEFAULT_OG = `${BASE_URL}/og-image.png`;
 
 export const SEO_PAGES: Record<string, PageSEO> = {
   home: {

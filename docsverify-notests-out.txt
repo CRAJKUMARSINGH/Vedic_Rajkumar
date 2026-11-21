@@ -1,9 +1,0 @@
-﻿Canonical (derived from the repository):
-  source        : unknown — counts reused, NOT freshly run
-  version       : 0.0.0-development
-  corpus charts : 15
-  golden charts : 15
-  tests         : 2620 passed / 0 failed / 4 skipped (total 2624) across 162 files
-
-certification summary → E:\Rajkumar\Vedic_Rajkumar\dist\certification-summary.json
-✔ docs:verify — every tracked claim matches the code.

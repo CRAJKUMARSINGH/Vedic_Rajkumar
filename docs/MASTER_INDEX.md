@@ -46,21 +46,21 @@
 
 ## Key Deliverables by Week
 
-| #   | Focus                | Primary Artifacts                                                                          |
-| --- | -------------------- | ------------------------------------------------------------------------------------------ |
-| 1   | Repo Hygiene         | `.commitlintrc.json`, `.husky/commit-msg`, `commitlint.config.js`, `archive/`, CI skeleton |
-| 2   | API Layer            | `src/api/client.ts`, typed endpoints, error normalization, retries                         |
-| 3   | Feature Flags        | `src/features/flags/`, `useFeature` hook, kill switches                                    |
-| 4   | Auth & RBAC          | Supabase RLS, session mgmt, roles, MFA, `src/auth/`                                        |
-| 5   | Data Compliance      | Consent, export (JSON), deletion jobs, `supabase/functions/export-user-data/`              |
-| 6   | Security Hardening   | RLS audit, CSP headers, Zod validation, rate limits, audit logs                            |
-| 7   | Performance          | Code-splitting, memoization, IDB caching, bundle optimisation                              |
-| 8   | Testing & QA         | Vitest, accuracy fixtures, Week 8 refinement loop                                          |
-| 9   | Observability        | Structured logs, Sentry, PostHog, tracing, SLOs, alerts, health endpoint                   |
-| 10  | Transit Engine       | Gochar, Sade Sati, Ashtakavarga, Vedha, Panchang, transit alerts                           |
-| 11  | Public API           | API keys, scopes, rate limits, webhooks, OpenAPI, SDK                                      |
-| 12  | Production Readiness | Env validation, backups/DR, canary, load tests, on-call, go-live                           |
-| 13  | Post-Launch          | War room, RUM, caching/CDN, DB scaling, funnels, SEO, roadmap                              |
+| #   | Focus                | Primary Artifacts                                                             |
+| --- | -------------------- | ----------------------------------------------------------------------------- |
+| 1   | Repo Hygiene         | `.commitlintrc.json`, `.husky/commit-msg`, `archive/`, CI skeleton            |
+| 2   | API Layer            | `src/api/client.ts`, typed endpoints, error normalization, retries            |
+| 3   | Feature Flags        | `src/features/flags/`, `useFeature` hook, kill switches                       |
+| 4   | Auth & RBAC          | Supabase RLS, session mgmt, roles, MFA, `src/auth/`                           |
+| 5   | Data Compliance      | Consent, export (JSON), deletion jobs, `supabase/functions/export-user-data/` |
+| 6   | Security Hardening   | RLS audit, CSP headers, Zod validation, rate limits, audit logs               |
+| 7   | Performance          | Code-splitting, memoization, IDB caching, bundle optimisation                 |
+| 8   | Testing & QA         | Vitest, accuracy fixtures, Week 8 refinement loop                             |
+| 9   | Observability        | Structured logs, Sentry, PostHog, tracing, SLOs, alerts, health endpoint      |
+| 10  | Transit Engine       | Gochar, Sade Sati, Ashtakavarga, Vedha, Panchang, transit alerts              |
+| 11  | Public API           | API keys, scopes, rate limits, webhooks, OpenAPI, SDK                         |
+| 12  | Production Readiness | Env validation, backups/DR, canary, load tests, on-call, go-live              |
+| 13  | Post-Launch          | War room, RUM, caching/CDN, DB scaling, funnels, SEO, roadmap                 |
 
 ---
 

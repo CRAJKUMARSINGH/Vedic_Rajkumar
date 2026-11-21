@@ -12,13 +12,14 @@
  * Feature types      → src/features/{feature}/types.ts
  */
 
-import { lazy, Suspense, useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import * as Sentry from '@sentry/react';
 import Providers from '@/Providers';
 import MainLayout from '@/components/MainLayout';
 import ConsentBanner from '@/components/ConsentBanner';
+import PageLoader from '@/components/PageLoader';
 import { routes } from '@/routes';
 import { funnelEvent } from '@/analytics/funnels';
 import { installUpdateFlow } from '@/pwa/update';
@@ -30,10 +31,6 @@ const pageVariants = {
   animate: { opacity: 1, y: 0, transition: { duration: 0.4 } },
   exit:    { opacity: 0, y: -20, transition: { duration: 0.3 } },
 };
-
-// ─── Loading fallback ─────────────────────────────────────────────────────────
-
-const PageLoader = lazy(() => import('@/components/PageLoader'));
 
 // ─── Animated route outlet ────────────────────────────────────────────────────
 

@@ -85,3 +85,24 @@ service-account*.json
 **/serviceAccountKey.json
 .doppler*
 .vault-token
+
+# Generated verification logs & archives (enrichment patch)
+*-out.txt
+*-final.txt
+*-verify.txt
+*-run.txt
+*-result.txt
+*-exit.txt
+*-exit2.txt
+cert-*.txt
+build-*.txt
+vitest-*.txt
+vitest-list.json
+*.rar
+
+# One-off root logs the globs above do not match
+ac-tests.txt
+acc-fast.txt
+e2e-final-gate3.txt
+pw-phase2.txt
+tc-core.txt

@@ -1,1 +1,0 @@
-﻿NOFP_EXIT=1
