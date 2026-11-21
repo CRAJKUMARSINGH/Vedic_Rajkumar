@@ -1,4 +1,8 @@
-echo "🔍 Running typecheck + tests before push..."
-
-npx tsc --noEmit || { echo "❌ Typecheck failed — push aborted."; exit 1; }
-npm run test:run || { echo "❌ Tests failed — push aborted."; exit 1; }
+#!/usr/bin/env sh
+# Deterministic pre-push gate. All logic lives in scripts/hooks/pre-push.mjs,
+# which runs identically on Git-Bash, Linux and macOS.
+#
+# This shim deliberately contains no shell builtins that write to stdout:
+# msys `sh` can be handed a broken stdout handle on Windows, and because Husky
+# runs this script with `sh -e`, a failing `echo` used to abort the gate.
+exec node "$(dirname -- "$0")/../scripts/hooks/pre-push.mjs" "$@"
