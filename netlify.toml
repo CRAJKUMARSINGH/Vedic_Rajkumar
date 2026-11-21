@@ -78,11 +78,20 @@
     # Content Security Policy
     # - default-src 'self'         → everything must come from our origin by default
     # - script-src adds 'unsafe-eval' for WASM (swisseph-wasm) + Clerk CDN
-    # - style-src adds 'unsafe-inline' for Tailwind CSS-in-JS + shadcn
-    # - connect-src allows Supabase, Clerk, PostHog, Sentry
+    # - style-src adds 'unsafe-inline' for Tailwind CSS-in-JS + shadcn and
+    #   fonts.googleapis.com for the @import in src/index.css (Cinzel,
+    #   Noto Sans Devanagari, Crimson Pro, Inter). Without the host the
+    #   stylesheet is blocked and the Hindi Devanagari typography the landing
+    #   page depends on silently falls back to a system font.
+    # - font-src adds fonts.gstatic.com for the woff2 files those @font-face
+    #   rules resolve to (also blocked before this change).
+    # - connect-src allows Supabase, Clerk, PostHog (app + us/eu ingest hosts,
+    #   the latter two were missing although src/observability/analytics/posthog.ts
+    #   defaults to us.i.posthog.com), Sentry, FormSubmit (the landing page's
+    #   feedback widget POSTs here) and Nominatim (birth-place geocoding).
     # - frame-src allows Clerk hosted auth pages
     # - worker-src 'self' blob: for service worker + Web Workers
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' https://*.clerk.accounts.dev https://js.clerk.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.clerk.com https://*.clerk.accounts.dev https://app.posthog.com https://*.sentry.io; frame-src 'self' https://*.clerk.accounts.dev https://*.clerk.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' https://*.clerk.accounts.dev https://js.clerk.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.clerk.com https://*.clerk.accounts.dev https://app.posthog.com https://us.i.posthog.com https://eu.i.posthog.com https://formsubmit.co https://nominatim.openstreetmap.org https://*.sentry.io; frame-src 'self' https://*.clerk.accounts.dev https://*.clerk.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
 
     # Block cross-origin embedding of sensitive resources
     X-Permitted-Cross-Domain-Policies = "none"

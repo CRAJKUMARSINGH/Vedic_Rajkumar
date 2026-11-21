@@ -1,14 +1,12 @@
 {
   "isPlaceholder": false,
-  "generatedAt": "2026-10-20T18:16:45.824Z",
+  "generatedAt": "2026-11-21T08:38:56.003Z",
   "engineFrame": "sidereal (Lahiri) - bodies on TT, angles on UT",
   "swissVersion": "swisseph-wasm v0.1.0 (Lahiri)",
   "corpus": {
     "charts": 15,
     "pre1906": 0,
-    "sources": [
-      "swisseph-wasm (Lahiri sidereal, houses_ex house system E)"
-    ]
+    "sources": ["swisseph-wasm (Lahiri sidereal, houses_ex house system E)"]
   },
   "bodies": [
     {
