@@ -67,6 +67,13 @@ export interface NorthIndianChartProps {
   compact?: boolean;
   /** Render the accessible/printable details table beneath the SVG. */
   showDetails?: boolean;
+  /**
+   * Make each house a focusable control that expands its detail panel.
+   * Defaults to `true`. Set `false` for a purely illustrative chart: the SVG
+   * then keeps `role="img"` and carries no focusable descendants (an image role
+   * must not contain interactive content — axe `nested-interactive`).
+   */
+  interactive?: boolean;
   className?: string;
 }
 
@@ -77,6 +84,7 @@ export function NorthIndianChart({
   monochrome = false,
   compact = true,
   showDetails = true,
+  interactive = true,
   className,
 }: NorthIndianChartProps) {
   const [expanded, setExpanded] = useState<number | null>(null);
@@ -136,13 +144,18 @@ export function NorthIndianChart({
                 key={house.house}
                 data-testid={`house-${house.house}`}
                 data-house={house.house}
-                role="button"
-                tabIndex={0}
-                aria-label={houseLabel}
-                aria-pressed={expanded === house.house}
-                onClick={() => toggle(house.house)}
-                onKeyDown={(e) => onHouseKey(e, house.house)}
-                className="cursor-pointer outline-none focus-visible:opacity-70"
+                {...(interactive
+                  ? {
+                      role: 'button' as const,
+                      tabIndex: 0,
+                      'aria-label': houseLabel,
+                      'aria-pressed': expanded === house.house,
+                      onClick: () => toggle(house.house),
+                      onKeyDown: (e: KeyboardEvent<SVGGElement>) =>
+                        onHouseKey(e, house.house),
+                      className: 'cursor-pointer outline-none focus-visible:opacity-70',
+                    }
+                  : {})}
               >
                 <title>{houseLabel}</title>
                 <polygon

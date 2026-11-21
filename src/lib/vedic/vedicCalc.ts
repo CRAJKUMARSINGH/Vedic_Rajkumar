@@ -181,7 +181,7 @@ export function julianDay(year: number, month: number, day: number, hour: number
 }
 
 /** Lahiri ayanamsa calculation - Improved accuracy */
-function lahiriAyanamsa(jde: number): number {
+export function lahiriAyanamsa(jde: number): number {
   const T = (jde - 2451545.0) / 36525.0;
   // Standard high-precision formula for Lahiri (Chitrapaksha) ayanamsa
   // 23.85472 is the value for J2000.0
