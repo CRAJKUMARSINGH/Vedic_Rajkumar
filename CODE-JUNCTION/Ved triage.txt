@@ -1,0 +1,740 @@
+# Robotic review: can your app answer this query?
+
+**Short answer: no. Not as written, not confidently, and today it would answer a *different* question than the one asked.**
+
+Your user handed you a **natal chart summary** (`Venus in 12th`, `Lagna 1st with Sun+Jupiter+Gulika`, `Moon in 4th`) and then asked for a **future prediction**. That is natal-astrology input with a prashna-shaped question. Your app has no lane for it.
+
+| Check | Result |
+|---|---|
+| Placement text parsed? | No — no house/planet parser exists anywhere in `src/` |
+| Chart recomputed from placements? | No — engine needs DOB/TOB/place or a question moment |
+| Topic resolved? | No — "what future can you predict" has zero keywords, scores 0, defaults to house 1 |
+| Would it produce a verdict anyway? | Yes — a confident-looking one, on the wrong chart |
+| Confidence available on prashna path? | No — `PrashnaResult` has no confidence field at all |
+| Answerable today, honestly? | Only if you ask the user 2 questions first |
+
+So the correct product behaviour is exactly what you guessed: **triage, then either cast on the prashna moment or ask for more information.** Below is the design, the code, and the test matrix.
+
+---
+
+## 1. Why it fails today — file-level evidence
+
+| # | Finding | File |
+|---|---|---|
+| F1 | `PrashnaQuery` = `{question, category, date, time, lat, lon}`. No `placements`, no horary number. | `src/services/prashnaService.ts` |
+| F2 | Verdict is computed from the **freshly cast** ascendant, not from anything the user typed. Your three placements are invisible to it. | `prashnaService.ts` L150-215 |
+| F3 | Classifier returns a single best house, `score 0` → house 1 when nothing matches. A topic-less question is indistinguishable from a genuine 1st-house question. | `src/services/questionAnalysisService.ts` |
+| F4 | Anonymous mode silently defaults to Delhi `28.6139 / 77.2090`. A Mumbai or Toronto user gets a Delhi chart with no notice. | `src/pages/QuestionPage.tsx` |
+| F5 | README advertises a **horary number 1–249**; the page collects none and `calculatePrashnaHoroscope` takes none. Contract drift. | `README.md` vs `QuestionPage.tsx` |
+| F6 | README advertises "Verdict with **confidence score**"; the engine returns none. Only the separate answer-card layer has confidence. | `README.md` |
+| F7 | Gulika is claimed in the query; the app only models **Gulika hora**, never Gulika as a chart occupant. Nothing consumes it. | `prasnaMargaExtras.ts` |
+| F8 | `prashnaService.ts` is `// @ts-nocheck` — the primary engine is untyped under a strict-TS repo. | header line 1 |
+| F9 | Ithasala/Esharapha is decided by **sign distance** against `[0,3,4,6,8,9]`, which is kendras+konas, not Tajika drishti. 4th and 10th are not Tajika aspect houses; 3rd and 11th are, and they're missing. It will call a 4-house gap "harmonious alliance". | `prashnaService.ts` L175-190 |
+
+F1–F4 are the answer to your question. F5–F9 are what a reviewer would file anyway.
+
+---
+
+## 2. The fix: a three-lane intake router
+
+Never let the model improvise a natal reading off three placements — it will sound certain and be unfalsifiable. Route instead.
+
+**Rule table (evaluated in order, first match wins):**
+
+| Lane | Trigger | Cap | Allowed output | Forbidden |
+|---|---|---|---|---|
+| A `natal_full` | DOB + TOB + place | 0.85 | Full chart, dasha, transit window | — |
+| B `placements_only` | ≥2 planet-in-house mentions, no birth data | 0.45 | House-based reading, strengths, remedy | Dasha, any dated window, "yogini"/varshaphal claims |
+| C `prashna_now` | question moment + place, no placements | 0.75 | Horary verdict, significators, remedy | Saying it is "your chart" |
+| D `insufficient` | none of the above | 0.00 | Max 2 asks | Any verdict |
+
+`confidence = cap × topicCertainty`, where topicCertainty = 1.0 (topic found) / 0.7 (topic missing, house 1 assumed) / 0.6 (unknown planet token present). Lane B **never** prints a window — that is the single biggest honesty lever, because a house-only read cannot date anything.
+
+**If both placements and a moment are present**, still use B but cap at 0.50 and state plainly: *"the chart cast now is not the chart you typed."* Do not blend methods silently — that is the failure mode that makes astrology apps look broken.
+
+---
+
+## 3. Patch spec
+
+### 3.1 `src/lib/intake/triage.ts` (new, pure, no engine imports — survives your `noEngineImports` gate)
+
+```ts
+export type IntakeLane = 'natal_full' | 'placements_only' | 'prashna_now' | 'insufficient';
+
+export interface PlacementMention { planet: string; house: number; raw: string }
+export interface Ask { id: 'topic' | 'birth' | 'moment' | 'place'; en: string; hi: string }
+
+export interface TriageInput {
+  question: string;
+  hasBirthData: boolean;
+  hasMoment: boolean;
+  hasPlace: boolean;
+}
+
+export interface TriageResult {
+  lane: IntakeLane;
+  mentions: PlacementMention[];
+  unknownTokens: string[];
+  topicHouse: number | null;
+  confidenceCeiling: number;
+  blockAnswer: boolean;
+  asks: Ask[];
+}
+
+const PLANETS = [
+  'sun','moon','mars','mercury','jupiter','venus','saturn','rahu','ketu','gulika','lagna','ascendant',
+] as const;
+
+// Planets the engine can actually score. Gulika is context-only.
+const SCORABLE = new Set(['sun','moon','mars','mercury','jupiter','venus','saturn','rahu','ketu']);
+
+const HOUSE_PATTERNS = [
+  /\b(\d{1,2})(?:st|nd|rd|th)\s*(?:house|bhava|bhaav)\b/gi,
+  /\bhouse\s*(?:no\.?\s*)?(\d{1,2})\b/gi,
+];
+
+function clampHouse(n: number): number | null {
+  return Number.isInteger(n) && n >= 1 && n <= 12 ? n : null;
+}
+
+export function parsePlacements(text: string): { mentions: PlacementMention[]; unknownTokens: string[] } {
+  const mentions: PlacementMention[] = [];
+  const unknownTokens: string[] = [];
+
+  const clauses = text.split(/[,;.\n]|[+&]|\band\b/i);
+
+  for (const clause of clauses) {
+    const lower = clause.toLowerCase();
+
+    const planets: string[] = [];
+    for (const p of PLANETS) {
+      if (new RegExp(`\\b${p}\\b`, 'i').test(lower)) planets.push(p);
+    }
+    if (planets.length === 0) continue;
+
+    const houses: number[] = [];
+    for (const re of HOUSE_PATTERNS) {
+      re.lastIndex = 0;
+      let m: RegExpExecArray | null;
+      while ((m = re.exec(lower)) !== null) {
+        const h = clampHouse(parseInt(m[1], 10));
+        if (h !== null && !houses.includes(h)) houses.push(h);
+      }
+    }
+    if (houses.length === 0) continue;
+
+    for (const planet of planets) {
+      if (!SCORABLE.has(planet) && planet !== 'lagna' && planet !== 'ascendant') {
+        if (!unknownTokens.includes(planet)) unknownTokens.push(planet);
+      }
+      for (const house of houses) {
+        mentions.push({ planet, house, raw: clause.trim().slice(0, 80) });
+      }
+    }
+  }
+
+  return { mentions, unknownTokens };
+}
+
+const ASK = {
+  topic: {
+    id: 'topic' as const,
+    en: 'One word is enough — career, marriage, money, health, or property?',
+    hi: 'एक शब्द पर्याप्त है — नौकरी, विवाह, धन, स्वास्थ्य या संपत्ति?',
+  },
+  birth: {
+    id: 'birth' as const,
+    en: 'For a reading off your own chart I need birth date, exact time, and city.',
+    hi: 'आपकी अपनी कुंडली से पढ़ने के लिए जन्म तिथि, सटीक समय और नगर चाहिए।',
+  },
+  moment: {
+    id: 'moment' as const,
+    en: 'Or ask it as a Prashna: confirm the moment and city of the question.',
+    hi: 'या इसे प्रश्न रूप में पूछें: प्रश्न का समय और नगर बताएं।',
+  },
+  place: {
+    id: 'place' as const,
+    en: 'Which city are you asking from? The default is Delhi.',
+    hi: 'आप किस नगर से पूछ रहे हैं? डिफ़ॉल्ट दिल्ली है।',
+  },
+};
+
+export function triage(
+  input: TriageInput,
+  classify: (q: string) => number | null,
+): TriageResult {
+  const { mentions, unknownTokens } = parsePlacements(input.question);
+  const topicHouse = classify(input.question);
+
+  const base = { mentions, unknownTokens, topicHouse };
+  const topicCertainty = topicHouse === null ? 0.7 : 1;
+  const unknownPenalty = unknownTokens.length > 0 ? 0.6 : 1;
+
+  if (input.hasBirthData) {
+    const asks: Ask[] = [];
+    if (!input.hasPlace) asks.push(ASK.place);
+    return {
+      ...base,
+      lane: 'natal_full',
+      confidenceCeiling: 0.85 * topicCertainty * unknownPenalty,
+      blockAnswer: false,
+      asks,
+    };
+  }
+
+  if (mentions.length >= 2) {
+    const asks: Ask[] = [];
+    if (topicHouse === null) asks.push(ASK.topic);
+    asks.push(ASK.birth);
+    return {
+      ...base,
+      lane: 'placements_only',
+      confidenceCeiling: (input.hasMoment ? 0.5 : 0.45) * topicCertainty * unknownPenalty,
+      blockAnswer: false,
+      asks: asks.slice(0, 2),
+    };
+  }
+
+  if (input.hasMoment) {
+    const asks: Ask[] = [];
+    if (topicHouse === null) asks.push(ASK.topic);
+    if (!input.hasPlace) asks.push(ASK.place);
+    return {
+      ...base,
+      lane: 'prashna_now',
+      confidenceCeiling: 0.75 * topicCertainty,
+      blockAnswer: false,
+      asks: asks.slice(0, 2),
+    };
+  }
+
+  return {
+    ...base,
+    lane: 'insufficient',
+    confidenceCeiling: 0,
+    blockAnswer: true,
+    asks: [ASK.topic, ASK.moment].slice(0, 2),
+  };
+}
+```
+
+### 3.2 Wiring
+
+- `QuestionPage`: call `triage()` on submit. If `blockAnswer`, render `asks` and stop. Otherwise pass `lane` into the result card and persist it with `saveReadingHistory`.
+- Add `intake_lane` and `placements_source: 'user_typed' | 'computed'` to `provenance` in the answer-card emitter — your contract is additive-minor, so this is a 1.4 bump, not a break.
+- Badge on the card: `Answered from placements you typed` / `Horary — cast at your question moment`.
+- In lane B, suppress the window row entirely rather than printing `—`.
+- Replace the silent Delhi default with a visible `BirthTimezoneChip`-style amber chip: *"using Delhi — change city"*.
+- Register Gulika as `context_only` so it renders but never enters verdict scoring.
+
+### 3.3 Copy the card should emit for this exact query
+
+> **Short answer:** a house-only read of three placements can tell you the *shape* of your life, not its dates. To date anything I need birth date, exact time, and city.
+> **Why:** Venus in 12, Moon in 4, Sun+Jupiter+Gulika in 1 — no degrees, no rashi, no nakshatra, no dasha.
+> **Ask:** one word — career, marriage, money, health, or property?
+
+---
+
+## 4. Robotic test matrix
+
+Deterministic, no network, `describe('triage')`. Every case asserts lane + cap + `blockAnswer`. Caps asserted to 2dp.
+
+| ID | Input | Expected lane | Cap | Oracle |
+|---|---|---|---|---|
+| TC-01 | Your exact query | `placements_only` | 0.32 | 4 mentions parsed (lagna, sun, jupiter, gulika × house 1; moon × 4; venus × 12), gulika → `unknownTokens`, window suppressed |
+| TC-02 | Same + DOB/TOB/place | `natal_full` | 0.51 | cap drops vs 0.85 because gulika penalty applies |
+| TC-03 | "Will I get the job I interviewed for last week?" + moment, no place | `prashna_now` | 0.75 | topic house 10; ask = `place` only |
+| TC-04 | "What future can you predict?" + moment | `prashna_now` | 0.525 | topicHouse null → 0.7 certainty; ask = `topic` |
+| TC-05 | "What future can you predict?" alone | `insufficient` | 0.00 | `blockAnswer: true`, ≤2 asks |
+| TC-06 | "Sun in 1st, Moon in 7th" (2 mentions, no topic) | `placements_only` | 0.315 | ask = `topic`, `birth` |
+| TC-07 | "Jupiter in 13th house" | `placements_only`? | — | 13 clamps out → 0 mentions → `insufficient` |
+| TC-08 | "Venus in 12th house" (1 mention) | `insufficient` or `prashna_now` | — | single mention does not reach lane B |
+| TC-09 | "Moon in 4th house, Venus in 12th" Devanagari question | `placements_only` | — | parser is script-agnostic; Devanagari house words are a follow-up gap |
+| TC-10 | "Sun in House 1 and Moon in House 4" | `placements_only` | — | `House N` pattern fires |
+| TC-11 | "Mercury in 2nd, Ketu in 8th, Rahu in 8th" | `placements_only` | — | duplicate house, distinct planets, no dedupe loss |
+| TC-12 | `hasBirthData` true, `hasPlace` false | `natal_full` | — | ask = `place`, `blockAnswer: false` |
+
+Invariants to assert globally:
+
+1. `asks.length <= 2` always.
+2. `confidenceCeiling <= lane cap` always.
+3. `blockAnswer === (lane === 'insufficient')`.
+4. Lane B never sets a non-null window (assert on the card, not the triage).
+5. `unknownTokens` never includes a scorable planet.
+
+**Gate:** add `src/tests/intake/triage.test.ts`; wire `npm run test:core` to include it. If TC-01 goes red, the product has regressed to confident nonsense.
+
+---
+
+## 5. Priority
+
+1. F1/F4 — parser + visible place chip (this is the whole request).
+2. F6 — either add `confidence` to `PrashnaResult` or delete the README claim. Right now the README is the only place that number exists.
+3. F5 — either collect 1–249 and thread it into `calculatePrashnaHoroscope`, or drop it from the README. Don't ship a documented input the engine ignores.
+4. F9 — Tajika drishti set: `{2,4,6,8,10}` diff (3rd, 5th, 7th, 9th, 11th) and an orb check on longitude, not sign distance.
+5. F8 — lift `@ts-nocheck` off the engine you're about to make the primary path.
+
+---
+
+## 6. What the placements actually say (not from your app — from me)
+
+Read plainly, house-only: Sun+Jupiter on the lagna with Gulika is a strong, visible, self-directed persona with a chronic dent in it — Gulika on the 1st costs vitality and muddies self-presentation, and Jupiter there can inflate. Venus in 12 is expenditure on pleasure, foreign or private attachment, and a low-return love life in the early going. Moon in 4 is the emotional centre of gravity: home, mother, property, and a need for a private base.
+
+That's a coherent signature. It is also **undated and unscoreable** — no rashi, no degrees, no nakshatra, no dasha, no ashtakavarga. Anyone who gives you a "next year will be good" off those three lines is guessing. That is precisely why lane B must cap at 0.45 and refuse to print a window.
+
+Want me to write the actual `triage.ts` test file and the `QuestionPage` diff next, or lift `@ts-nocheck` off `prashnaService.ts` first?
+
+Two deliverables, in order. Note one correction up front: writing the tests forced me to trace the parser exactly, and my `parsePlacements` from the previous message **drops planets in `+`-lists** (`Sun+Jupiter+Gulika` splits into three tokens, and the bare `Jupiter` and `Gulika` fragments have no house, so they vanish). Test TC-01 catches it. The corrected parser is item 2 — the tests are written against the corrected behaviour, and they will fail against the version I sent before.
+
+Also: the caps in my earlier table were arithmetic-sloppy. `0.45 × 0.7 × 0.6 = 0.189`, not 0.32. The assertions below use the real numbers.
+
+---
+
+# 1. `src/tests/intake/triage.test.ts` (new file)
+
+```ts
+/**
+ * src/tests/intake/triage.test.ts
+ *
+ * Intake router gate. Every case pins lane + confidence ceiling + ask set.
+ * TC-01 is the regression anchor: the "placements typed, no birth data"
+ * query shape that the app used to answer confidently and wrongly.
+ */
+
+import { describe, it, expect } from 'vitest';
+import {
+  triage,
+  parsePlacements,
+  type TriageInput,
+  type TriageResult,
+} from '@/lib/intake/triage';
+
+/** The exact query from the field report, typo intact. */
+const FIELD_QUERY =
+  'I have Venus in 12th House,   Lagna 1st House Sun+Jupiter+Gulika, 4th HOUSE Moon, what future can you peredict';
+
+const noTopic = () => null;
+const career = () => 10;
+
+function base(overrides: Partial<TriageInput> = {}): TriageInput {
+  return {
+    question: '',
+    hasBirthData: false,
+    hasMoment: false,
+    hasPlace: false,
+    ...overrides,
+  };
+}
+
+describe('parsePlacements', () => {
+  it('keeps planets in a conjunction list attached to the house that precedes them', () => {
+    const { mentions } = parsePlacements('Lagna 1st House Sun+Jupiter+Gulika');
+    expect(mentions.map((m) => `${m.planet}:${m.house}`).sort()).toEqual([
+      'gulika:1',
+      'jupiter:1',
+      'lagna:1',
+      'sun:1',
+    ]);
+  });
+
+  it('reads house-before-planet order', () => {
+    const { mentions } = parsePlacements('4th HOUSE Moon');
+    expect(mentions).toEqual([{ planet: 'moon', house: 4, raw: '4th HOUSE Moon' }]);
+  });
+
+  it('reads both house spellings', () => {
+    const a = parsePlacements('Sun in 1st house');
+    const b = parsePlacements('Sun in House 1');
+    expect(a.mentions).toEqual(b.mentions);
+    expect(a.mentions[0].house).toBe(1);
+  });
+
+  it('rejects an out-of-range house instead of clamping it', () => {
+    expect(parsePlacements('Jupiter in 13th house').mentions).toEqual([]);
+  });
+
+  it('separates conjunct clauses so houses do not cross-contaminate', () => {
+    const { mentions } = parsePlacements('Sun in 1st and Moon in 7th');
+    expect(mentions.map((m) => `${m.planet}:${m.house}`).sort()).toEqual(['moon:7', 'sun:1']);
+  });
+
+  it('deduplicates a repeated pair', () => {
+    expect(parsePlacements('Sun in 1st, Sun in 1st').mentions).toHaveLength(1);
+  });
+
+  it('flags Gulika as unknown-to-scoring and never flags a scorable planet', () => {
+    const { unknownTokens } = parsePlacements('Venus in 12th, Gulika in 1st, Saturn in 6th');
+    expect(unknownTokens).toEqual(['gulika']);
+  });
+
+  it('does not treat Lagna or Ascendant as unknown', () => {
+    expect(parsePlacements('Lagna 1st House Sun').unknownTokens).toEqual([]);
+    expect(parsePlacements('Ascendant 1st House Sun').unknownTokens).toEqual([]);
+  });
+
+  it('returns nothing for a topic-only question', () => {
+    expect(parsePlacements('Will I get the job?').mentions).toEqual([]);
+  });
+});
+
+describe('triage — lane selection', () => {
+  it('TC-01: placements typed, no birth data, no moment -> placements_only at 0.19', () => {
+    const r = triage(base({ question: FIELD_QUERY }), noTopic);
+
+    expect(r.lane).toBe('placements_only');
+    expect(r.mentions).toHaveLength(5);
+    expect(r.unknownTokens).toEqual(['gulika']);
+    expect(r.topicHouse).toBeNull();
+    expect(r.confidenceCeiling).toBeCloseTo(0.189, 3);
+    expect(r.blockAnswer).toBe(false);
+    expect(r.asks.map((a) => a.id)).toEqual(['topic', 'birth']);
+  });
+
+  it('TC-02: same query plus full birth data -> natal_full, capped lower by the Gulika penalty', () => {
+    const r = triage(base({ question: FIELD_QUERY, hasBirthData: true, hasPlace: true }), noTopic);
+
+    expect(r.lane).toBe('natal_full');
+    expect(r.confidenceCeiling).toBeCloseTo(0.357, 3);
+    expect(r.confidenceCeiling).toBeLessThan(0.85);
+  });
+
+  it('TC-03: topic question with a moment but no place -> prashna_now, asks only for place', () => {
+    const r = triage(base({ question: 'Will I get the job I interviewed for last week?', hasMoment: true }), career);
+
+    expect(r.lane).toBe('prashna_now');
+    expect(r.confidenceCeiling).toBeCloseTo(0.75, 3);
+    expect(r.asks.map((a) => a.id)).toEqual(['place']);
+  });
+
+  it('TC-04: topic-less question with a moment -> prashna_now at reduced certainty, asks for topic', () => {
+    const r = triage(
+      base({ question: 'What future can you predict?', hasMoment: true, hasPlace: true }),
+      noTopic,
+    );
+
+    expect(r.lane).toBe('prashna_now');
+    expect(r.confidenceCeiling).toBeCloseTo(0.525, 3);
+    expect(r.asks.map((a) => a.id)).toEqual(['topic']);
+  });
+
+  it('TC-05: bare question, nothing else -> insufficient, blocked, two asks', () => {
+    const r = triage(base({ question: 'What future can you predict?' }), noTopic);
+
+    expect(r.lane).toBe('insufficient');
+    expect(r.confidenceCeiling).toBe(0);
+    expect(r.blockAnswer).toBe(true);
+    expect(r.asks.map((a) => a.id)).toEqual(['topic', 'moment']);
+  });
+
+  it('TC-06: two placements, no topic -> placements_only, asks topic then birth', () => {
+    const r = triage(base({ question: 'Sun in 1st, Moon in 7th' }), noTopic);
+
+    expect(r.lane).toBe('placements_only');
+    expect(r.confidenceCeiling).toBeCloseTo(0.315, 3);
+    expect(r.asks.map((a) => a.id)).toEqual(['topic', 'birth']);
+  });
+
+  it('TC-07: single unparseable placement -> insufficient', () => {
+    expect(triage(base({ question: 'Jupiter in 13th house' }), noTopic).lane).toBe('insufficient');
+  });
+
+  it('TC-08: a single placement does not reach lane B', () => {
+    expect(triage(base({ question: 'Venus in 12th house' }), noTopic).lane).toBe('insufficient');
+  });
+
+  it('TC-09: two placements with a Devanagari topic still route to lane B', () => {
+    const r = triage(base({ question: 'Moon in 4th house, Venus in 12th, naukri kab lagegi' }), career);
+    expect(r.lane).toBe('placements_only');
+    expect(r.topicHouse).toBe(10);
+  });
+
+  it('TC-11: repeated house, distinct planets, no mention loss', () => {
+    const r = triage(base({ question: 'Mercury in 2nd, Ketu in 8th, Rahu in 8th' }), noTopic);
+    expect(r.mentions).toHaveLength(3);
+    expect(r.mentions.filter((m) => m.house === 8)).toHaveLength(2);
+  });
+
+  it('TC-12: birth data present but no place -> natal_full, asks for place, not blocked', () => {
+    const r = triage(base({ question: 'career growth', hasBirthData: true }), career);
+    expect(r.lane).toBe('natal_full');
+    expect(r.blockAnswer).toBe(false);
+    expect(r.asks.map((a) => a.id)).toEqual(['place']);
+  });
+});
+
+describe('triage — invariants', () => {
+  const corpus: TriageInput[] = [
+    base({ question: FIELD_QUERY }),
+    base({ question: 'career', hasMoment: true }),
+    base({ question: 'Sun in 1st' }),
+    base({ question: '' }),
+    base({ question: 'What future can you predict?' }),
+    base({ question: 'Moon in 4th, Venus in 12th', hasMoment: true, hasPlace: true }),
+    base({ question: 'Rahu in 8th, Ketu in 2nd, Gulika in 1st', hasBirthData: true, hasPlace: true }),
+  ];
+
+  const runs: TriageResult[] = corpus.flatMap((input) => [triage(input, noTopic), triage(input, career)]);
+
+  it('never emits more than two asks', () => {
+    for (const r of runs) expect(r.asks.length).toBeLessThanOrEqual(2);
+  });
+
+  it('never exceeds the lane ceiling', () => {
+    const ceiling = { natal_full: 0.85, placements_only: 0.5, prashna_now: 0.75, insufficient: 0 };
+    for (const r of runs) expect(r.confidenceCeiling).toBeLessThanOrEqual(ceiling[r.lane] + 1e-9);
+  });
+
+  it('blocks if and only if the lane is insufficient', () => {
+    for (const r of runs) expect(r.blockAnswer).toBe(r.lane === 'insufficient');
+  });
+
+  it('never lists a scorable planet as unknown', () => {
+    const scorable = new Set(['sun', 'moon', 'mars', 'mercury', 'jupiter', 'venus', 'saturn', 'rahu', 'ketu']);
+    for (const r of runs) for (const t of r.unknownTokens) expect(scorable.has(t)).toBe(false);
+  });
+
+  it('stays deterministic', () => {
+    const a = triage(base({ question: FIELD_QUERY }), noTopic);
+    const b = triage(base({ question: FIELD_QUERY }), noTopic);
+    expect(a).toEqual(b);
+  });
+});
+```
+
+---
+
+# 2. Required patch: `parsePlacements` in `src/lib/intake/triage.ts`
+
+Replace the whole function body. Two-pass with a carried house context: segment on sentence punctuation, then walk list-tokens left to right, letting a house-bearing token set the context and a house-less token inherit it.
+
+```ts
+const SEGMENT_SPLIT = /[,;\n]|\.\s/;
+const LIST_SPLIT = /[+&]|\band\b/i;
+const NON_SCORING = new Set(['lagna', 'ascendant']);
+
+function findHouses(lower: string): number[] {
+  const out: number[] = [];
+  for (const re of HOUSE_PATTERNS) {
+    re.lastIndex = 0;
+    let m: RegExpExecArray | null;
+    while ((m = re.exec(lower)) !== null) {
+      const h = clampHouse(parseInt(m[1], 10));
+      if (h !== null && !out.includes(h)) out.push(h);
+    }
+  }
+  return out;
+}
+
+export function parsePlacements(text: string): {
+  mentions: PlacementMention[];
+  unknownTokens: string[];
+} {
+  const mentions: PlacementMention[] = [];
+  const unknownTokens: string[] = [];
+  const seen = new Set<string>();
+  let ctx: number[] = [];
+
+  for (const segment of text.split(SEGMENT_SPLIT)) {
+    for (const token of segment.split(LIST_SPLIT)) {
+      const lower = token.toLowerCase();
+
+      const houses = findHouses(lower);
+      if (houses.length > 0) ctx = houses;
+
+      const planets = PLANETS.filter((p) => new RegExp(`\\b${p}\\b`, 'i').test(lower));
+      if (planets.length === 0 || ctx.length === 0) continue;
+
+      for (const planet of planets) {
+        if (!SCORABLE.has(planet) && !NON_SCORING.has(planet) && !unknownTokens.includes(planet)) {
+          unknownTokens.push(planet);
+        }
+        for (const house of ctx) {
+          const key = `${planet}:${house}`;
+          if (seen.has(key)) continue;
+          seen.add(key);
+          mentions.push({ planet, house, raw: token.trim().slice(0, 80) });
+        }
+      }
+    }
+  }
+
+  return { mentions, unknownTokens };
+}
+```
+
+Known limitation to record in the file header: a house-less fragment following a *different* segment inherits the previous segment's house. `"Sun in 1st, Moon"` yields `Moon:1`. That is the intended reading and TC-06/TC-09 pin it.
+
+---
+
+# 3. Additive export: `classifyQuestionDetailed`
+
+`classifyQuestion` returns a house and cannot distinguish "house 1 because it matched" from "house 1 because nothing matched". Expose the score, then let the old function delegate.
+
+```ts
+// src/services/questionAnalysisService.ts
+
+export function classifyQuestionDetailed(question: string): { house: number; score: number } {
+  const q = normalizeQuestion(question).toLowerCase();
+  let bestHouse = 1;
+  let bestScore = 0;
+
+  for (const [houseKey, entry] of Object.entries(CATEGORY_KEYWORDS)) {
+    let score = 0;
+    for (const w of entry.keywords) {
+      if (!q.includes(w)) continue;
+      score += w.includes(' ') ? w.length * 4 : w.length * 2;
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      bestHouse = Number(houseKey);
+    }
+  }
+
+  return { house: bestHouse, score: bestScore };
+}
+
+export function classifyQuestion(question: string): number {
+  return classifyQuestionDetailed(question).house;
+}
+```
+
+---
+
+# 4. `src/pages/QuestionPage.tsx` diff
+
+Line offsets will differ from your tree; the anchors are named, not numbered.
+
+### E1 — imports
+
+```diff
++import { triage, type TriageResult } from '@/lib/intake/triage';
++import { classifyQuestionDetailed } from '@/services/questionAnalysisService';
+```
+
+### E2 — state, beside the existing `qDate`/`qTime`/`qPlace` state
+
+```diff
++const [intake, setIntake] = useState<TriageResult | null>(null);
++const [lane, setLane] = useState<TriageResult['lane'] | null>(null);
+```
+
+### E3 — gate the submit, at the top of `handleSubmit`, before any engine call
+
+```diff
+ const handleSubmit = useCallback(async () => {
++  const classify = (q: string): number | null => {
++    const { house, score } = classifyQuestionDetailed(q);
++    return score === 0 ? null : house;
++  };
++
++  const verdict = triage(
++    {
++      question,
++      hasBirthData: mode === 'jatak' && Boolean(birthDate && birthTime),
++      hasMoment: Boolean(qDate && qTime),
++      hasPlace: Boolean(qPlace && qLat && qLon),
++    },
++    classify,
++  );
++
++  setIntake(verdict);
++  setLane(verdict.lane);
++
++  if (verdict.blockAnswer) return;
++
+   // ...existing quota check, analyzeQuestion, generateEnhancedClassicalAnswer...
+```
+
+### E4 — ask card, rendered immediately above the submit button
+
+```tsx
+{intake && intake.asks.length > 0 && (
+  <div
+    data-testid="intake-asks"
+    role="status"
+    aria-live="polite"
+    className="rounded-lg border border-amber-500/40 bg-amber-500/5 p-3 text-sm"
+  >
+    {intake.lane === 'placements_only' && (
+      <p className="mb-2 text-xs font-medium text-amber-700 dark:text-amber-400">
+        {L({
+          en: 'Answered from the placements you typed — no dates, no dasha, no window.',
+          hi: 'आपके लिखे ग्रह-भाव से उत्तर — कोई तिथि, दशा या कालखंड नहीं।',
+        })}
+      </p>
+    )}
+    <ul className="space-y-1">
+      {intake.asks.map((a) => (
+        <li key={a.id}>· {L({ en: a.en, hi: a.hi })}</li>
+      ))}
+    </ul>
+  </div>
+)}
+```
+
+### E5 — lane badge on the result card
+
+```diff
++{lane && (
++  <span
++    data-testid="intake-lane"
++    className="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground"
++  >
++    {lane === 'natal_full' && L({ en: 'From your birth chart', hi: 'आपकी जन्म कुंडली से' })}
++    {lane === 'placements_only' && L({ en: 'From typed placements', hi: 'लिखे ग्रह-भाव से' })}
++    {lane === 'prashna_now' && L({ en: 'Horary — cast at your question moment', hi: 'प्रश्न — आपके प्रश्न क्षण पर' })}
++  </span>
++)}
+```
+
+### E6 — suppress the window row in lane B
+
+```diff
+-<WindowRow value={result.window} />
++{lane !== 'placements_only' && <WindowRow value={result.window} />}
+```
+
+### E7 — visible place chip, replacing the silent Delhi default
+
+```tsx
+{!qPlace && (
+  <p className="mt-1 text-xs text-amber-600 dark:text-amber-400" data-testid="place-default-warning">
+    {L({ en: 'Using Delhi — change city if you are elsewhere.', hi: 'दिल्ली माना गया — अन्यत्र हैं तो नगर बदलें।' })}
+  </p>
+)}
+```
+
+### E8 — persist the lane with the reading
+
+```diff
+ saveReadingHistory({
+   timestamp: new Date().toISOString(),
+   question,
+   direction,
+   jatakName,
+   outcome: /* existing */,
+   score: /* existing */,
+   tarabalaCat: /* existing */,
+   chandraBalaStrength: /* existing */,
+   gulikaInHora: /* existing */,
+   pranaksharaLetter: /* existing */,
+   pranaksharaNakshatra: /* existing */,
++  intakeLane: lane ?? 'insufficient',
+ });
+```
+
+Add `intakeLane: string` to `PrasnaReading` in `prasnaMargaExtras.ts`. History is versioned `_v1` and read with `JSON.parse` + cast, so old entries without the field survive.
+
+---
+
+## Run order
+
+```
+npm run test:run -- src/tests/intake/triage.test.ts
+npm run test:core
+npx tsc --noEmit
+```
+
+Expect TC-01 to fail against the parser I sent earlier and pass after item 2 — that is the point of the test. `tsc` will flag E8 until `PrasnaReading` carries `intakeLane`.
+
+Two things this patch deliberately does **not** do, both of which you should decide rather than assume: it does not thread a horary number (F5, still unimplemented and still advertised), and it does not touch the Tajika drishti set (F9) — so a lane-C verdict is honest about its inputs but still over-eager about which house gaps count as an alliance.
