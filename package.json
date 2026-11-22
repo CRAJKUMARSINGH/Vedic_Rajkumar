@@ -15,7 +15,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest",
     "test:run": "vitest run",
-    "test:core": "vitest run src/tests/featureRegistryNav.test.ts src/tests/services/ephemerisService.test.ts src/tests/services/vedicAstroEngine.test.ts",
+    "test:core": "vitest run src/tests/featureRegistryNav.test.ts src/tests/services/ephemerisService.test.ts src/tests/services/vedicAstroEngine.test.ts src/tests/intake/triage.test.ts",
     "validate:accuracy": "vitest run src/tests/validation/accuracySuite.test.ts --reporter=verbose",
     "test:a11y": "vitest run src/tests/week5/accessibilityGaps.test.tsx",
     "test:perf": "lhci autorun --config=.lighthouserc.json",

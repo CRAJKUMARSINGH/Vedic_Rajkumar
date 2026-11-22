@@ -1,0 +1,5 @@
+> npx tsc --noEmit
+(no output — 0 type errors)
+TSC_EXIT=0
+
+Tested HEAD: 4556fad75a3ae94a31ff52ded2efaa2c3d453446 (feature/lovable-hub-landing) + working-tree changes

@@ -51,11 +51,13 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { SEO } from '@/components/SEO';
+import { triage, LANE_BADGE, INTAKE_ENGINES, type TriageResult } from '@/lib/intake/triage';
 
 import { calculateCompletePlanetaryPositions } from '@/services/ephemerisService';
 
 import {
   analyzeQuestion,
+  classifyQuestionDetailed,
   RASHIS_EN,
   RASHIS_HI,
   type QuestionAnalysis,
@@ -242,6 +244,13 @@ const QuestionPage = () => {
   const [qLat, setQLat] = useState('28.6139');
   const [qLon, setQLon] = useState('77.2090');
   const [qPlace, setQPlace] = useState('New Delhi');
+  // The Delhi default must never be applied *silently*. Until the user edits the
+  // city (or explicitly confirms Delhi) the location counts as unconfirmed and
+  // the intake router asks for it instead of casting a Delhi chart.
+  const [placeExplicit, setPlaceExplicit] = useState(false);
+
+  // Intake triage — the router that decides which engine (if any) may run.
+  const [intake, setIntake] = useState<TriageResult | null>(null);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -318,6 +327,64 @@ const QuestionPage = () => {
       return;
     }
 
+    // ── Intake triage — decide the lane BEFORE any engine is invoked ──
+    // Validation (what was supplied) is separate from route selection: the
+    // router reads completeness states, never a bare `hasBirthData` boolean.
+    const parseNum = (v: string): number | null => {
+      const n = Number.parseFloat(v);
+      return Number.isFinite(n) ? n : null;
+    };
+
+    const natalInputs =
+      mode === 'jatak'
+        ? selectedJatakId === 'custom'
+          ? {
+              dob: customDate,
+              tob: customTime,
+              place: customPlace,
+              latitude: parseNum(customLat),
+              longitude: parseNum(customLon),
+            }
+          : selectedJatak
+            ? {
+                dob: selectedJatak.dateOfBirth,
+                tob: selectedJatak.timeOfBirth,
+                place: selectedJatak.placeOfBirth,
+                latitude: parseCoord(selectedJatak.coordinates?.latitude),
+                longitude: parseCoord(selectedJatak.coordinates?.longitude),
+              }
+            : {}
+        : {};
+
+    const prashnaInputs = {
+      moment: `${qDate}T${qTime}:00`,
+      // The Delhi default is only honoured once the user has confirmed it.
+      place: placeExplicit ? qPlace : null,
+      latitude: placeExplicit ? parseNum(qLat) : null,
+      longitude: placeExplicit ? parseNum(qLon) : null,
+    };
+
+    const verdict = triage(
+      { question: question.trim(), natal: natalInputs, prashna: prashnaInputs },
+      classifyQuestionDetailed,
+    );
+    setIntake(verdict);
+
+    if (verdict.blockAnswer) {
+      // Either nothing usable was supplied, or the required inputs for the
+      // routed lane are incomplete (e.g. no city). Nothing is cast.
+      setLoading(false);
+      return;
+    }
+
+    if (verdict.lane === 'placements_only') {
+      // House-only input has NO calculation engine: a typed-placements summary
+      // is rendered instead. The Prashna engine is never used as a substitute,
+      // and no dated window is produced.
+      setLoading(false);
+      return;
+    }
+
     if (!canAskPrashna()) {
       setError(
         L(
@@ -337,41 +404,57 @@ const QuestionPage = () => {
     setLoading(true);
     try {
       const questionTime = new Date(`${qDate}T${qTime}:00`);
-      let qLatNum = parseFloat(qLat);
-      let qLonNum = parseFloat(qLon);
 
-      if (mode === 'jatak') {
-        if (selectedJatakId === 'custom') {
-          qLatNum = parseFloat(customLat) || 28.6139;
-          qLonNum = parseFloat(customLon) || 77.209;
-        } else if (selectedJatak?.coordinates) {
-          qLatNum = parseCoord(selectedJatak.coordinates.latitude);
-          qLonNum = parseCoord(selectedJatak.coordinates.longitude);
-        }
+      // Location comes from the VALIDATED intake, never from a silent default.
+      // The lane gate above already guaranteed a cast-ready location; this
+      // narrows the type and removes the old Delhi fallback entirely.
+      const loc =
+        verdict.lane === 'natal_full'
+          ? {
+              lat: verdict.validation.natal.latitude,
+              lon: verdict.validation.natal.longitude,
+              label: verdict.validation.natal.place,
+            }
+          : {
+              lat: verdict.validation.prashna.latitude,
+              lon: verdict.validation.prashna.longitude,
+              label: verdict.validation.prashna.place,
+            };
+      if (loc.lat === null || loc.lon === null) {
+        setError(L('A city is required before casting.', 'कुंडली बनाने से पहले नगर आवश्यक है।'));
+        setLoading(false);
+        return;
       }
+      const qLatNum = loc.lat;
+      const qLonNum = loc.lon;
+      const locLabel = loc.label ?? qPlace;
 
       // Build Prasna Marga research payload (direction-aware)
       const payload = buildUniversalResearchPayload(question.trim(), direction, questionTime);
       setPrasnaPayload(payload);
 
+      // The selected lane CONTROLS which engine runs. Only `natal_full` may
+      // hand the natal pipeline a subject; a Prashna cast is never fed natal
+      // data, and a freshly cast Prashna chart is never presented as the
+      // user's own chart.
       const natal =
-        mode === 'jatak'
+        verdict.lane === 'natal_full'
           ? selectedJatakId === 'custom'
             ? {
                 name: customName,
-                date: customDate,
-                time: customTime,
-                lat: parseFloat(customLat) || 28.6139,
-                lon: parseFloat(customLon) || 77.209,
+                date: verdict.validation.natal.dob!,
+                time: verdict.validation.natal.tob!,
+                lat: qLatNum,
+                lon: qLonNum,
                 moonRashiIndex: undefined,
               }
             : selectedJatak
               ? {
                   name: selectedJatak.name,
-                  date: selectedJatak.dateOfBirth,
-                  time: selectedJatak.timeOfBirth,
-                  lat: parseCoord(selectedJatak.coordinates?.latitude),
-                  lon: parseCoord(selectedJatak.coordinates?.longitude),
+                  date: verdict.validation.natal.dob!,
+                  time: verdict.validation.natal.tob!,
+                  lat: qLatNum,
+                  lon: qLonNum,
                   moonRashiIndex: selectedJatak.moonRashiIndex,
                 }
               : undefined
@@ -380,7 +463,7 @@ const QuestionPage = () => {
       const analysis = await analyzeQuestion({
         question: question.trim(),
         questionTime,
-        questionLocation: { lat: qLatNum, lon: qLonNum, label: qPlace },
+        questionLocation: { lat: qLatNum, lon: qLonNum, label: locLabel },
         natal,
       });
       setResult(isRoman ? deepTransliterate(analysis) : analysis);
@@ -473,6 +556,7 @@ const QuestionPage = () => {
           gulikaInHora: gulika.isQuestionInGulikaHora,
           pranaksharaLetter,
           pranaksharaNakshatra: pranakshara.nakshatra.nameEn,
+          intakeLane: verdict.lane,
         });
         setHistoryKey(k => k + 1);
       } else {
@@ -502,6 +586,7 @@ const QuestionPage = () => {
           gulikaInHora: gulika.isQuestionInGulikaHora,
           pranaksharaLetter,
           pranaksharaNakshatra: pranakshara.nakshatra.nameEn,
+          intakeLane: verdict.lane,
         });
         setHistoryKey(k => k + 1);
       }
@@ -899,19 +984,52 @@ const QuestionPage = () => {
                   </Label>
                   <Input
                     value={qPlace}
-                    onChange={e => setQPlace(e.target.value)}
+                    onChange={e => {
+                      setQPlace(e.target.value);
+                      // Editing the city counts as confirming a location — the
+                      // Delhi default is never applied silently thereafter.
+                      setPlaceExplicit(true);
+                    }}
                     placeholder="City"
                     className="mt-1"
                   />
                 </div>
                 <div>
                   <Label>Lat</Label>
-                  <Input value={qLat} onChange={e => setQLat(e.target.value)} className="mt-1" />
+                  <Input
+                    value={qLat}
+                    onChange={e => {
+                      setQLat(e.target.value);
+                      setPlaceExplicit(true);
+                    }}
+                    className="mt-1"
+                  />
                 </div>
                 <div>
                   <Label>Lon</Label>
-                  <Input value={qLon} onChange={e => setQLon(e.target.value)} className="mt-1" />
+                  <Input
+                    value={qLon}
+                    onChange={e => {
+                      setQLon(e.target.value);
+                      setPlaceExplicit(true);
+                    }}
+                    className="mt-1"
+                  />
                 </div>
+              </div>
+            )}
+
+            {/* The Delhi default is never silent. Until the querent confirms a
+                city this amber chip states plainly which default would be used
+                and invites an explicit change. */}
+            {mode === 'anonymous' && !placeExplicit && (
+              <div
+                data-testid="place-default-warning"
+                className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs text-amber-800"
+              >
+                {isHi
+                  ? 'पूर्व-निर्धारित स्थान: नई दिल्ली (28.6139, 77.2090)। कुंडली बनाने से पहले नगर बदलें या पुष्टि करें।'
+                  : 'Default location: New Delhi (28.6139, 77.2090). Change or confirm the city before casting.'}
               </div>
             )}
 
@@ -1011,6 +1129,93 @@ const QuestionPage = () => {
 
           </CardContent>
         </Card>
+
+        {/* ── SECTION 2b: Intake lane ──────────────────────────────────────
+            Rendered from the router's decision, before (and independently of)
+            any engine output. A lane describes the *input shape*; it is not a
+            claim that a calculation engine exists for it. `placements_only`
+            has no engine, so it shows a house summary and never a dated
+            window. */}
+        {intake && (
+          <Card data-testid="intake-panel" className="mb-6 border-slate-300 shadow-sm">
+            <CardContent className="pt-6 space-y-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge data-testid="intake-lane" variant="outline" className="text-sm">
+                  {isHi ? LANE_BADGE[intake.lane].hi : LANE_BADGE[intake.lane].en}
+                </Badge>
+                {!INTAKE_ENGINES[intake.lane] && (
+                  <span
+                    data-testid="intake-no-engine"
+                    className="text-xs text-muted-foreground"
+                  >
+                    {L(
+                      'No calculation engine for this input shape.',
+                      'इस इनपुट के लिए कोई गणना इंजन नहीं।',
+                    )}
+                  </span>
+                )}
+              </div>
+
+              {intake.lane === 'placements_only' && (
+                <div data-testid="placements-summary" className="space-y-2">
+                  <p className="text-sm font-medium">
+                    {L(
+                      'Placement summary (from your typed description)',
+                      'ग्रह-भाव सारांश (आपके लिखे विवरण से)',
+                    )}
+                  </p>
+                  {intake.validation.placements.mentions.length > 0 && (
+                    <ul className="flex flex-wrap gap-2">
+                      {intake.validation.placements.mentions.map((m, i) => (
+                        <li key={`${m.planet}-${m.house}-${i}`}>
+                          <Badge variant="secondary">
+                            {m.isLagna ? L('Lagna', 'लग्न') : m.planet} → {L('House', 'भाव')}{' '}
+                            {m.house}
+                          </Badge>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {intake.validation.placements.unresolved.length > 0 && (
+                    <p
+                      data-testid="placements-unresolved"
+                      className="text-xs text-amber-700"
+                    >
+                      {L('House unknown for: ', 'इनका भाव अज्ञात: ')}
+                      {[...new Set(intake.validation.placements.unresolved.map(u => u.planet))].join(
+                        ', ',
+                      )}
+                    </p>
+                  )}
+                  {intake.validation.placements.conflicts.length > 0 && (
+                    <p data-testid="placements-conflicts" className="text-xs text-rose-700">
+                      {intake.validation.placements.conflicts
+                        .map(c => `${c.planet}: ${c.houses.join('/')}`)
+                        .join(' · ')}
+                    </p>
+                  )}
+                  <p className="text-xs text-muted-foreground" data-testid="placements-no-timing">
+                    {L(
+                      'House-only descriptions cannot yield dates, dashas or precise timing. Add birth details for a full reading.',
+                      'केवल भाव विवरण से तिथि, दशा या सटीक समय नहीं निकलता। पूर्ण फलादेश हेतु जन्म विवरण जोड़ें।',
+                    )}
+                  </p>
+                </div>
+              )}
+
+              {intake.asks.length > 0 && (
+                <div data-testid="intake-asks" className="space-y-1">
+                  <p className="text-sm font-medium">{L('To proceed:', 'आगे बढ़ने के लिए:')}</p>
+                  <ul className="list-disc pl-5 text-sm text-slate-700">
+                    {intake.asks.slice(0, 2).map(a => (
+                      <li key={a.id}>{isHi ? a.hi : a.en}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        )}
 
         {/* ── SECTION 3: Results panel ── */}
         {loading && (

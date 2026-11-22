@@ -409,10 +409,13 @@ const CATEGORY_KEYWORDS: { house: number; words: string[] }[] = [
   },
 ];
 
-export function classifyQuestion(question: string): QuestionCategory {
-  // Roman Hindi is folded onto the English keyword table so "kya meri naukri
-  // lagegi" scores house 10 exactly like "will I get a job". Devanagari and
-  // English pass through untouched.
+/**
+ * Classifier that also exposes the raw score, so a caller can tell
+ * "house 1 because it matched" from "house 1 because nothing matched"
+ * (`score === 0`). The public `classifyQuestion` keeps its richer return shape
+ * and delegates the scoring here — no behaviour change for existing callers.
+ */
+export function classifyQuestionDetailed(question: string): { house: number; score: number } {
   const q = normalizeQuestion(question).toLowerCase();
   let best = { house: 1, score: 0 };
   for (const entry of CATEGORY_KEYWORDS) {
@@ -425,6 +428,14 @@ export function classifyQuestion(question: string): QuestionCategory {
     }
     if (score > best.score) best = { house: entry.house, score };
   }
+  return best;
+}
+
+export function classifyQuestion(question: string): QuestionCategory {
+  // Roman Hindi is folded onto the English keyword table so "kya meri naukri
+  // lagegi" scores house 10 exactly like "will I get a job". Devanagari and
+  // English pass through untouched.
+  const best = classifyQuestionDetailed(question);
   const sig = HOUSE_SIGNIFICATIONS[best.house];
   return {
     house: best.house,

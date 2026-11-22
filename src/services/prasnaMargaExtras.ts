@@ -312,6 +312,13 @@ export interface PrasnaReading {
   gulikaInHora: boolean;
   pranaksharaLetter: string;
   pranaksharaNakshatra: string;
+  /**
+   * Intake lane that produced this reading (see `src/lib/intake/triage.ts`).
+   * History is versioned `_v1` and read back with `JSON.parse` + cast, so
+   * legacy entries written before this field existed are still readable —
+   * at runtime they surface as `undefined`.
+   */
+  intakeLane: string;
 }
 
 const HISTORY_KEY = 'prasna_reading_history_v1';

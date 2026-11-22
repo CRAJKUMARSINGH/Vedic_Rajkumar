@@ -107,6 +107,34 @@ function getPrimaryHouseForCategory(category: PrashnaQuery['category']): number 
   }
 }
 
+/**
+ * Legacy Lagna-lord ↔ Karyesh relationship rule used by
+ * `calculatePrashnaHoroscope`.
+ *
+ * F9 (triage review) — CONFIRMED DEFECT, pinned deliberately:
+ * this is the *kendra/kona* house-difference set (`0,3,4,6,8,9` → sign gaps of
+ * 1,4,5,7,9,10), NOT the classical Tajika drishti set (sign gaps of 3,5,7,9,11
+ * → house differences of 2,4,6,8,10). Under this rule a four-house gap is
+ * reported as "Ithasala / harmonious alliance", which Tajika does not sanction,
+ * and the true Tajika aspects at gaps 3 and 11 are missed.
+ *
+ * The verified, degree-based Tajika rule (deeptamsha orb, applying vs
+ * separating, Kamboola, Radda) already exists in
+ * `src/features/prashna/kernel/tajika.ts` and is covered by
+ * `src/tests/prashna/tajika.test.ts`. This helper is kept byte-for-byte
+ * equivalent to the original inline logic so the behaviour is pinned by a
+ * regression test and any later fix is a deliberate, reviewed change — the
+ * rule is NOT silently replaced here.
+ *
+ * NOTE: `prashnaService.ts` has no importers in `src/`; the live Prashna path
+ * is `questionAnalysisService` + `features/prashna/kernel/*`.
+ */
+export function legacyTajikaRelation(houseA: number, houseB: number): 'Ithasala' | 'Esharapha' {
+  const houseDiff = Math.abs(houseA - houseB);
+  const isKendraOrKona = [0, 3, 4, 6, 8, 9].includes(houseDiff);
+  return isKendraOrKona ? 'Ithasala' : 'Esharapha';
+}
+
 export async function calculatePrashnaHoroscope(query: PrashnaQuery): Promise<PrashnaResult> {
   const { queryDate, queryTime, latitude, longitude, category } = query;
 
@@ -168,10 +196,10 @@ export async function calculatePrashnaHoroscope(query: PrashnaQuery): Promise<Pr
   // Check aspect/relationship between Lagna Lord and Karyesh Lord
   const lagnaLordObj = planetsWithHouses.find(p => p.name === lagnaLord);
   if (lagnaLordObj && karyeshPlanetObj) {
+    const relation = legacyTajikaRelation(lagnaLordObj.house, karyeshPlanetObj.house);
     const houseDiff = Math.abs(lagnaLordObj.house - karyeshPlanetObj.house);
-    const isKendraOrKona = [0, 3, 4, 6, 8, 9].includes(houseDiff);
 
-    if (isKendraOrKona) {
+    if (relation === 'Ithasala') {
       tajikaYogas.push({
         name: 'Ithasala Yoga (Harmonious Alliance)',
         planets: [lagnaLord, karyeshLord],
