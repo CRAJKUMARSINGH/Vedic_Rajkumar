@@ -20,7 +20,7 @@ jobs:
           --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
     steps:
       - uses: actions/checkout@v4
-      - uses: supabase/setup-cli@v1
+      - uses: supabase/setup-cli@v3
       - name: Install pg client
         run: sudo apt-get update && sudo apt-get install -y postgresql-client-16
       - name: Run the restore drill against production
