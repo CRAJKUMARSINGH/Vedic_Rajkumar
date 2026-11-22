@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: grafana/setup-k6-action@v1
       - name: Resolve preview URL
         run: echo "EDGE_URL=${{ vars.PREVIEW_EDGE_URL }}" >> "$GITHUB_ENV"
