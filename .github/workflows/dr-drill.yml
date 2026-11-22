@@ -45,6 +45,6 @@ jobs:
           echo "### [$(date -Is)] — Restore drill" >> docs/ops/dr-drill-log.md
           echo "- Result: ${{ job.status }}" >> docs/ops/dr-drill-log.md
           echo "- Run: ${{ github.run_id }}" >> docs/ops/dr-drill-log.md
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with: { name: dr-drill-evidence, path: reports/dr }
