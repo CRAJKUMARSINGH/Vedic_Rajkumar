@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Mars in the 3rd (Scorpio) — in its own sign, self-contained but slow to move.",
-            "hi": "मंगल तृतीय भाव (वृश्चिक) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Mars in the 2nd (Scorpio) — in its own sign, self-contained but slow to move.",
+            "hi": "मंगल द्वितीय भाव (वृश्चिक) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           },
           {
-            "en": "Mars in the 3rd (Scorpio) — in its own sign, self-contained but slow to move.",
-            "hi": "मंगल तृतीय भाव (वृश्चिक) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Jupiter in the 7th (Aries), retrograde — the result arrives in re-runs.",
+            "hi": "गुरु सप्तम भाव (मेष) में, वक्री — फल दोबारा आता है।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "dc35b6b474337e13",
-    "card_hash": "583328685e1614db",
+    "card_hash": "178ee55301aeac0c",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

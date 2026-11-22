@@ -99,12 +99,12 @@
         },
         "citations": [
           {
-            "en": "Sun in the 2nd (Leo) — in its own sign, self-contained but slow to move.",
-            "hi": "सूर्य द्वितीय भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Sun in the 10th (Leo) — in its own sign, self-contained but slow to move.",
+            "hi": "सूर्य दशम भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           },
           {
-            "en": "Mars in the 12th (Cancer) — debilitated, the promise needs repair.",
-            "hi": "मंगल द्वादश भाव (कर्क) में — नीच का, प्रतिज्ञा की मरम्मत चाहिए।"
+            "en": "Sun in the 10th (Leo) — in its own sign, self-contained but slow to move.",
+            "hi": "सूर्य दशम भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       }
@@ -154,7 +154,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "14f95b054682a1c6",
-    "card_hash": "0106788306dfe895",
+    "card_hash": "10da347c6e9e9df2",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

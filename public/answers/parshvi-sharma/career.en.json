@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Mercury in the 4th (Capricorn), retrograde — the result arrives in re-runs.",
-            "hi": "बुध चतुर्थ भाव (मकर) में, वक्री — फल दोबारा आता है।"
+            "en": "Mercury in the 5th (Capricorn), retrograde — the result arrives in re-runs.",
+            "hi": "बुध पंचम भाव (मकर) में, वक्री — फल दोबारा आता है।"
           },
           {
-            "en": "Mercury in the 4th (Capricorn), retrograde — the result arrives in re-runs.",
-            "hi": "बुध चतुर्थ भाव (मकर) में, वक्री — फल दोबारा आता है।"
+            "en": "Jupiter in the 10th (Gemini), retrograde — the result arrives in re-runs.",
+            "hi": "गुरु दशम भाव (मिथुन) में, वक्री — फल दोबारा आता है।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5f72fbfe4ca302d1",
-    "card_hash": "3991f277c80046ca",
+    "card_hash": "54edd70604a0b2d1",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

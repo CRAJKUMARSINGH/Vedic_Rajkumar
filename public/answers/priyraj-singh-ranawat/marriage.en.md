@@ -1,5 +1,5 @@
 # Priyraj Singh Ranawat — Direct Answer
-<!-- card_hash: 9d5bb93291cb6190 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: b8a56ca273b3b6d6 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (38%) (average, 38%)
 
@@ -7,8 +7,8 @@ Marriage: average (38%) (average, 38%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Moon in the 1st (Virgo).
-- Saturn in the 6th (Pisces).
+- Moon in the 9th (Virgo).
+- Saturn in the 3rd (Pisces).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

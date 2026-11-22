@@ -99,12 +99,12 @@
         },
         "citations": [
           {
-            "en": "Mercury in the 6th (Gemini), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.",
-            "hi": "बुध षष्ठ भाव (मिथुन) में, वक्री — फल दोबारा आता है — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Mercury in the 11th (Gemini), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.",
+            "hi": "बुध एकादश भाव (मिथुन) में, वक्री — फल दोबारा आता है — स्वराशि में, आत्मनिर्भर पर धीमा।"
           },
           {
-            "en": "Saturn in the 2nd (Aquarius), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.",
-            "hi": "शनि द्वितीय भाव (कुंभ) में, वक्री — फल दोबारा आता है — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Mercury in the 11th (Gemini), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.",
+            "hi": "बुध एकादश भाव (मिथुन) में, वक्री — फल दोबारा आता है — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       }
@@ -154,7 +154,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5d5bd36863e2327b",
-    "card_hash": "86a541c2baee4186",
+    "card_hash": "1c7c2a9aef1bedd6",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

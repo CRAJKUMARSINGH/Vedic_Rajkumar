@@ -99,12 +99,12 @@
         },
         "citations": [
           {
-            "en": "Moon in the 1st (Gemini).",
-            "hi": "चंद्र प्रथम भाव (मिथुन) में।"
+            "en": "Moon in the 6th (Gemini).",
+            "hi": "चंद्र षष्ठ भाव (मिथुन) में।"
           },
           {
-            "en": "Sun in the 7th (Sagittarius).",
-            "hi": "सूर्य सप्तम भाव (धनु) में।"
+            "en": "Saturn in the 9th (Virgo).",
+            "hi": "शनि नवम भाव (कन्या) में।"
           }
         ]
       }
@@ -154,7 +154,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5b6c65faa7477069",
-    "card_hash": "92616e0eb8345f9f",
+    "card_hash": "3df49013d23a75b3",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

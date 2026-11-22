@@ -9,7 +9,8 @@
 import type { VerdictType } from '@/services/conclusiveJatakJudgmentService';
 import type { ComposedAnswer } from './answerComposer';
 
-export type Topic = 'health' | 'house_construction' | 'career' | 'marriage' | 'finance';
+export type Topic =
+  | 'health' | 'house_construction' | 'career' | 'marriage' | 'finance' | 'business';
 export type Lang = 'hi' | 'en';
 export type Band = 'excellent' | 'good' | 'average' | 'caution' | 'avoid';
 
@@ -19,6 +20,7 @@ export const ALL_TOPICS: readonly Topic[] = [
   'career',
   'marriage',
   'finance',
+  'business',
 ] as const;
 
 /**
@@ -44,8 +46,13 @@ export const DEFAULT_LANG: Lang = 'hi';
  * 1.3 — additive: optional `composed` reading layer (verdict_line, ranked
  * decisions, why/sequence/remedy sections, verified app links). Legacy
  * cards without `composed` remain valid; readers must treat it as optional.
+ *
+ * 1.4 — additive: the `business` (ownership) topic, and deep-reading sections
+ * riding in `composed.sections` (computed positions, aspects, divisional,
+ * sudarshana-chakra, shadbala, dasha timeline, timing windows, support,
+ * ownership form, risks). No field removed or renamed.
  */
-export const ANSWER_CONTRACT_VERSION = '1.3';
+export const ANSWER_CONTRACT_VERSION = '1.4';
 
 /** 1:1 from the engine's VerdictType — no meaning invented. */
 export const BAND_FROM_VERDICT: Record<VerdictType, Band> = {
@@ -69,6 +76,7 @@ export const TOPIC_LABEL: Record<Topic, { en: string; hi: string }> = {
   career: { en: 'Career', hi: 'करियर' },
   marriage: { en: 'Marriage', hi: 'विवाह' },
   finance: { en: 'Finance', hi: 'आर्थिक' },
+  business: { en: 'Business & ownership', hi: 'व्यवसाय व स्वामित्व' },
 };
 
 export interface EvidenceLine {

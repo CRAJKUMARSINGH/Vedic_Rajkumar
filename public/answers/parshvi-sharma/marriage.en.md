@@ -1,5 +1,5 @@
 # Parshvi Sharma — Direct Answer
-<!-- card_hash: 04a464b341bf73e1 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: d33402ec2aeefa09 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: good (47%) (good, 47%)
 
@@ -7,8 +7,8 @@ Marriage: good (47%) (good, 47%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Jupiter in the 9th (Gemini), retrograde — the result arrives in re-runs.
-- Venus in the 4th (Capricorn).
+- Jupiter in the 10th (Gemini), retrograde — the result arrives in re-runs.
+- Mars in the 7th (Pisces).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

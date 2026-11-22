@@ -1,5 +1,5 @@
 # Arpit — Direct Answer
-<!-- card_hash: c415d2eb1a2894a6 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 897d0c703d2cc3d1 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (56%) (average, 56%)
 
@@ -7,8 +7,8 @@ New house construction: average (56%) (average, 56%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 2nd (Taurus), retrograde — the result arrives in re-runs.
-- Mars in the 9th (Sagittarius).
+- Saturn in the 8th (Taurus), retrograde — the result arrives in re-runs.
+- Mars in the 3rd (Sagittarius).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

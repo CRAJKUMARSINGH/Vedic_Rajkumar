@@ -1,5 +1,5 @@
 # Kiwangi Jain — Direct Answer
-<!-- card_hash: 032ab8c8a2935c89 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 9cd34a0885fa3982 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (48%) (average, 48%)
 
@@ -7,8 +7,8 @@ Career: average (48%) (average, 48%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 5th (Libra) — in its own sign, self-contained but slow to move.
-- Saturn in the 4th (Virgo).
+- Venus in the 10th (Libra) — in its own sign, self-contained but slow to move.
+- Venus in the 10th (Libra) — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

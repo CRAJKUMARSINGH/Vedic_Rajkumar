@@ -1,5 +1,5 @@
 # Jaya Sisodia — Direct Answer
-<!-- card_hash: 9dd9bef1e4c35ce3 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: ec8ecc9782ab133d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (52%) (average, 52%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: average (52%) (average, 52%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Sun in the 6th (Gemini).
-- Moon in the 1st (Capricorn).
+- Sun in the 11th (Gemini).
+- Saturn in the 7th (Aquarius), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

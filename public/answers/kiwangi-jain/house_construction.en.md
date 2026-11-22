@@ -1,5 +1,5 @@
 # Kiwangi Jain — Direct Answer
-<!-- card_hash: 990b3b9582858595 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 2a7bac11557f931f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (41%) (average, 41%)
 
@@ -7,8 +7,8 @@ New house construction: average (41%) (average, 41%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 7th (Sagittarius).
-- Saturn in the 4th (Virgo).
+- Mars in the 12th (Sagittarius).
+- Saturn in the 9th (Virgo).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

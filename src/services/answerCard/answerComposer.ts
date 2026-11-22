@@ -18,6 +18,9 @@ import { deriveSequencing } from './sequencing';
 import { buildRemedy } from './remedyPlan';
 import { buildImageAxis, isImageAxisEnabled, validateImageProvenance } from './arudhaImage';
 import type { Bi } from './bilingual';
+import type { ChartData } from '@/hooks/useChartCalculation';
+import type { DashaForecastResult } from '@/services/dashaForecastService';
+import { buildDeepReading } from './deepReading';
 
 export interface ComposedSection {
   id: string;
@@ -59,6 +62,7 @@ const TOPIC_HOUSES: Record<Topic, readonly number[]> = {
   marriage: [7, 2, 5],
   health: [1, 6, 8],
   house_construction: [4, 2, 11],
+  business: [7, 10, 3, 11],
 };
 
 const DECISION: Record<Band, Bi> = {
@@ -75,6 +79,7 @@ const TOPIC_WORD: Record<Topic, Bi> = {
   marriage: { en: 'the marriage step', hi: 'विवाह कदम' },
   health: { en: 'the health regimen', hi: 'स्वास्थ्य नियम' },
   house_construction: { en: 'the construction', hi: 'निर्माण कार्य' },
+  business: { en: 'the venture', hi: 'उद्यम' },
 };
 
 /** A citation for one planet's position — the "why" atom. */
@@ -138,9 +143,17 @@ export interface ComposeInput {
   verdicts: Verdict[];
   asked: string;
   language: Lang;
+  /**
+   * The live chart + dasha forecast, when available. They enable the deep
+   * reading (positions, aspects, divisional, sudarshana, shadbala, dasha
+   * timeline, timing windows, support, ownership, risks). Optional so a card
+   * can still be composed from facts alone.
+   */
+  chart?: ChartData;
+  forecast?: DashaForecastResult;
 }
 
-export function composeAnswer({ facts, verdicts, asked, language }: ComposeInput): ComposedAnswer {
+export function composeAnswer({ facts, verdicts, asked, language, chart, forecast }: ComposeInput): ComposedAnswer {
   void language; // links/citations are bilingual already; reserved for future locale shaping
   const depth = classifyDepth(asked);
   const budget = sectionBudget(depth);
@@ -170,6 +183,12 @@ export function composeAnswer({ facts, verdicts, asked, language }: ComposeInput
       },
       citations: citationsFor(facts, lead.topic, Math.max(2, budget - 2)),
     });
+  }
+
+  // Deep reading — from engines the card already ran (positions, yogas, dasha
+  // timeline, timing windows, support/non-support). Budget-gated.
+  if (lead && budget >= 6 && chart && forecast) {
+    sections.push(...buildDeepReading(chart, forecast, lead.topic, lead.score_0_100));
   }
 
   // Image-vs-substance axis (v2 §8). Research-only, gated OFF by default and

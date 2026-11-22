@@ -1,17 +1,17 @@
 # Jaya Sisodia — सीधा उत्तर
-<!-- card_hash: e9f9f1e4ddadb24e | lang: hi | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 137e860cff6046e0 | lang: hi | generated: 2026-10-24T00:00:00.000Z -->
 
-स्वास्थ्य सामान्य (52%) (सामान्य, 52%) · नया घर निर्माण सामान्य (52%) (सामान्य, 52%) · करियर अनुकूल (55%) (अनुकूल, 55%) · विवाह सामान्य (59%) (सामान्य, 59%) · आर्थिक सामान्य (54%) (सामान्य, 54%)
+स्वास्थ्य सामान्य (52%) (सामान्य, 52%) · नया घर निर्माण सामान्य (52%) (सामान्य, 52%) · करियर अनुकूल (55%) (अनुकूल, 55%) · विवाह सामान्य (59%) (सामान्य, 59%) · आर्थिक सामान्य (54%) (सामान्य, 54%) · व्यवसाय व स्वामित्व अनुकूल (59%) (अनुकूल, 59%)
 
-**हाँ — पर पहले अड़चन हटाएँ — नौकरी परिवर्तन। निर्माण कार्य: हाँ, शर्त के साथ।**
+**हाँ — पर पहले अड़चन हटाएँ — उद्यम। नौकरी परिवर्तन: हाँ — पर पहले अड़चन हटाएँ।**
 
 ### क्यों
 निर्णय सामान्य श्लोक पर नहीं, इन स्थितियों पर टिका है:
-- शुक्र सप्तम भाव (कर्क) में।
-- गुरु दशम भाव (तुला) में, वक्री — फल दोबारा आता है।
+- शनि सप्तम भाव (कुंभ) में, वक्री — फल दोबारा आता है — स्वराशि में, आत्मनिर्भर पर धीमा।
+- शनि सप्तम भाव (कुंभ) में, वक्री — फल दोबारा आता है — स्वराशि में, आत्मनिर्भर पर धीमा।
 
 ### क्रम
-वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — नौकरी परिवर्तन, फिर निर्माण कार्य, फिर स्वास्थ्य नियम, फिर विवाह कदम, फिर आर्थिक निर्णय। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।
+वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — उद्यम, फिर नौकरी परिवर्तन, फिर निर्माण कार्य, फिर स्वास्थ्य नियम, फिर विवाह कदम, फिर आर्थिक निर्णय। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।
 
 
 **ऐप में देखें**
@@ -20,7 +20,7 @@
 - [कुंडली मिलान](/matchmaking)
 - [दशा-क्रम](/dasha)
 
-> पहले कौन-सा एक चर तय करें — निर्माण कार्य, या शहर? एक बताइए, उसे अकेले लेंगे।
+> पहले कौन-सा एक चर तय करें — नौकरी परिवर्तन, या शहर? एक बताइए, उसे अकेले लेंगे।
 
 ## निर्णय
 | विषय | वर्ग | अंक | विश्वास | समय-सीमा |
@@ -30,6 +30,7 @@
 | करियर | good | 79 | 0.55 | — |
 | विवाह | average | 64 | 0.59 | — |
 | आर्थिक | average | 63 | 0.54 | — |
+| व्यवसाय व स्वामित्व | good | 83 | 0.59 | — |
 
 ## क्यों (ऐप यहाँ कैसे पहुँचा)
 ### स्वास्थ्य
@@ -67,10 +68,18 @@ Therefore: for this Jatak's birth promise, wealth is conditional now because Raj
 - Dasha activation (75/100): Rahu MD with Venus AD gives 75/100 Dasha clearance for wealth; delivery class is standard.
 - Transit timing (32/100): Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
 
+### व्यवसाय व स्वामित्व
+Therefore: for this Jatak's birth promise, career is delivering now because Rajyoga scores 48/100, house promise scores 85/100, Dasha scores 97/100, and transit timing scores 78/100. The final call is DELIVERING: career is the leading field at 79/100.
+- Rajyoga gate (48/100): Rajyoga gate is open through Raj Yoga, Moon Adhi Yoga; status can rise because the forming planets are in the active Dasha field.
+- House promise (85/100): career houses average 85/100 by SAV; strongest is house 1 at 33 points and weakest is house 6 at 24 points.
+- Dasha activation (97/100): Rahu MD with Venus AD gives 97/100 Dasha clearance for career; delivery class is standard.
+- Transit timing (78/100): Therefore: Career timing is structurally supported now if Dasha also confirms.
+
 ## उपाय
 - कोई नहीं
 
 ## सावधानियाँ
+- समय-सीमाएँ अनुमानित हैं।
 - समय-सीमाएँ अनुमानित हैं।
 - समय-सीमाएँ अनुमानित हैं।
 - समय-सीमाएँ अनुमानित हैं।

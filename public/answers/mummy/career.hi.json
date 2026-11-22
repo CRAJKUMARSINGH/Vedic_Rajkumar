@@ -99,12 +99,12 @@
         },
         "citations": [
           {
-            "en": "Venus in the 5th (Leo).",
-            "hi": "शुक्र पंचम भाव (सिंह) में।"
+            "en": "Venus in the 1st (Leo).",
+            "hi": "शुक्र प्रथम भाव (सिंह) में।"
           },
           {
-            "en": "Sun in the 5th (Leo) — in its own sign, self-contained but slow to move.",
-            "hi": "सूर्य पंचम भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Rahu in the 10th (Taurus), retrograde — the result arrives in re-runs.",
+            "hi": "राहु दशम भाव (वृषभ) में, वक्री — फल दोबारा आता है।"
           }
         ]
       }
@@ -154,7 +154,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "74e54a095e91fd62",
-    "card_hash": "46e18703ad0f632c",
+    "card_hash": "e9ada085b359d760",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

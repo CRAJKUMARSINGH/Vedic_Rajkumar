@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Mars in the 7th (Scorpio) — in its own sign, self-contained but slow to move.",
-            "hi": "मंगल सप्तम भाव (वृश्चिक) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Mars in the 5th (Scorpio) — in its own sign, self-contained but slow to move.",
+            "hi": "मंगल पंचम भाव (वृश्चिक) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           },
           {
-            "en": "Mercury in the 10th (Capricorn).",
-            "hi": "बुध दशम भाव (मकर) में।"
+            "en": "Moon in the 10th (Aries).",
+            "hi": "चंद्र दशम भाव (मेष) में।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "a49c15e608b6b6f3",
-    "card_hash": "a475cde4fbc9e4bd",
+    "card_hash": "e566292e036a1a00",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

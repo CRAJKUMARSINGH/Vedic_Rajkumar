@@ -1,5 +1,5 @@
 # Mummy — Direct Answer
-<!-- card_hash: 323df9301b484310 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: e9fe23a6819d8bab | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: good (39%) (good, 39%)
 
@@ -7,8 +7,8 @@ Finance: good (39%) (good, 39%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mercury in the 5th (Leo).
-- Mercury in the 5th (Leo).
+- Mercury in the 1st (Leo).
+- Mercury in the 1st (Leo).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

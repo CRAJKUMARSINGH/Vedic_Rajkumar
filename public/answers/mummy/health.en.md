@@ -1,5 +1,5 @@
 # Mummy — Direct Answer
-<!-- card_hash: e9c00c28d774868d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: a93817e858398fa3 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: good (54%) (good, 54%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: good (54%) (good, 54%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Sun in the 5th (Leo) — in its own sign, self-contained but slow to move.
-- Moon in the 1st (Aries).
+- Sun in the 1st (Leo) — in its own sign, self-contained but slow to move.
+- Sun in the 1st (Leo) — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

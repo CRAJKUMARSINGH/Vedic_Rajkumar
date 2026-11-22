@@ -104,12 +104,12 @@
         },
         "citations": [
           {
-            "en": "Mars in the 12th (Virgo).",
-            "hi": "मंगल द्वादश भाव (कन्या) में।"
+            "en": "Mars in the 3rd (Virgo).",
+            "hi": "मंगल तृतीय भाव (कन्या) में।"
           },
           {
-            "en": "Rahu in the 10th (Gemini), retrograde — the result arrives in re-runs.",
-            "hi": "राहु दशम भाव (मिथुन) में, वक्री — फल दोबारा आता है।"
+            "en": "Moon in the 3rd (Virgo).",
+            "hi": "चंद्र तृतीय भाव (कन्या) में।"
           }
         ]
       }
@@ -159,7 +159,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "108e722a1b7e6599",
-    "card_hash": "5001d60240080143",
+    "card_hash": "9b2506bed624858f",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

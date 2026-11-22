@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Moon in the 1st (Taurus) — exalted, a clean promise.",
-            "hi": "चंद्र प्रथम भाव (वृषभ) में — उच्च का, स्पष्ट प्रतिज्ञा।"
+            "en": "Moon in the 11th (Taurus) — exalted, a clean promise.",
+            "hi": "चंद्र एकादश भाव (वृषभ) में — उच्च का, स्पष्ट प्रतिज्ञा।"
           },
           {
-            "en": "Moon in the 1st (Taurus) — exalted, a clean promise.",
-            "hi": "चंद्र प्रथम भाव (वृषभ) में — उच्च का, स्पष्ट प्रतिज्ञा।"
+            "en": "Mars in the 1st (Cancer) — debilitated, the promise needs repair.",
+            "hi": "मंगल प्रथम भाव (कर्क) में — नीच का, प्रतिज्ञा की मरम्मत चाहिए।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "3476adaadc8caf27",
-    "card_hash": "80fac06fef064bec",
+    "card_hash": "50b8bd8cba6399aa",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

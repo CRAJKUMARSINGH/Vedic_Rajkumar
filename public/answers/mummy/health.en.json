@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Sun in the 5th (Leo) — in its own sign, self-contained but slow to move.",
-            "hi": "सूर्य पंचम भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Sun in the 1st (Leo) — in its own sign, self-contained but slow to move.",
+            "hi": "सूर्य प्रथम भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           },
           {
-            "en": "Moon in the 1st (Aries).",
-            "hi": "चंद्र प्रथम भाव (मेष) में।"
+            "en": "Sun in the 1st (Leo) — in its own sign, self-contained but slow to move.",
+            "hi": "सूर्य प्रथम भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "74e54a095e91fd62",
-    "card_hash": "e9c00c28d774868d",
+    "card_hash": "a93817e858398fa3",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

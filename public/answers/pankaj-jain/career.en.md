@@ -1,5 +1,5 @@
 # Pankaj Jain — Direct Answer
-<!-- card_hash: 8eacc6aff080f858 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: f82787f9f75c0d5b | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: caution (39%) (caution, 39%)
 
@@ -7,8 +7,8 @@ Career: caution (39%) (caution, 39%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 12th (Leo).
-- Mars in the 9th (Taurus).
+- Saturn in the 5th (Leo).
+- Mars in the 2nd (Taurus).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

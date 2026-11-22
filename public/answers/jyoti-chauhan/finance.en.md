@@ -1,5 +1,5 @@
 # Jyoti Chauhan — Direct Answer
-<!-- card_hash: 1882fdf8d2a2db6d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 6ebdd517f41ff7db | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (48%) (average, 48%)
 
@@ -7,8 +7,8 @@ Finance: average (48%) (average, 48%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Sun in the 11th (Aquarius).
-- Venus in the 12th (Pisces) — exalted, a clean promise.
+- Sun in the 8th (Aquarius).
+- Venus in the 9th (Pisces) — exalted, a clean promise.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

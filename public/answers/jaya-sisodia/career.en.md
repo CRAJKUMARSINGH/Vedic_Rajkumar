@@ -1,5 +1,5 @@
 # Jaya Sisodia — Direct Answer
-<!-- card_hash: 5ee35181a5d7101a | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 55a5db3546315eef | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: good (55%) (good, 55%)
 
@@ -7,8 +7,8 @@ Career: good (55%) (good, 55%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 7th (Cancer).
-- Jupiter in the 10th (Libra), retrograde — the result arrives in re-runs.
+- Venus in the 12th (Cancer).
+- Mars in the 10th (Taurus).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

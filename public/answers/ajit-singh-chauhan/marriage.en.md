@@ -1,5 +1,5 @@
 # Ajit Singh Chauhan — Direct Answer
-<!-- card_hash: a277b30ce9332124 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: d6e6e32999bee54b | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: good (37%) (good, 37%)
 
@@ -7,8 +7,8 @@ Marriage: good (37%) (good, 37%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 10th (Cancer).
-- Jupiter in the 7th (Aries), retrograde — the result arrives in re-runs.
+- Saturn in the 12th (Cancer).
+- Mercury in the 2nd (Virgo) — exalted, a clean promise.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

@@ -14,15 +14,16 @@
       "house_construction",
       "career",
       "marriage",
-      "finance"
+      "finance",
+      "business"
     ],
     "language": "en",
     "as_of": "2026-10-24",
     "reference_type": "natal"
   },
   "direct_answer": {
-    "en": "Health & wellbeing: caution (35%) (caution, 35%) · New house construction: caution (46%) (caution, 46%) · Career: average (49%) (average, 49%) · Marriage: avoid (58%) (avoid, 58%) · Finance: caution (45%) (caution, 45%)",
-    "hi": "स्वास्थ्य सावधानी (35%) (सावधानी, 35%) · नया घर निर्माण सावधानी (46%) (सावधानी, 46%) · करियर सामान्य (49%) (सामान्य, 49%) · विवाह प्रतिकूल (58%) (प्रतिकूल, 58%) · आर्थिक सावधानी (45%) (सावधानी, 45%)"
+    "en": "Health & wellbeing: caution (35%) (caution, 35%) · New house construction: caution (46%) (caution, 46%) · Career: average (49%) (average, 49%) · Marriage: avoid (58%) (avoid, 58%) · Finance: caution (45%) (caution, 45%) · Business & ownership: average (43%) (average, 43%)",
+    "hi": "स्वास्थ्य सावधानी (35%) (सावधानी, 35%) · नया घर निर्माण सावधानी (46%) (सावधानी, 46%) · करियर सामान्य (49%) (सामान्य, 49%) · विवाह प्रतिकूल (58%) (प्रतिकूल, 58%) · आर्थिक सावधानी (45%) (सावधानी, 45%) · व्यवसाय व स्वामित्व सामान्य (43%) (सामान्य, 43%)"
   },
   "verdicts": [
     {
@@ -289,15 +290,75 @@
           "hi": "समय-सीमाएँ अनुमानित हैं।"
         }
       ]
+    },
+    {
+      "topic": "business",
+      "headline": {
+        "en": "Business & ownership: average (43%)",
+        "hi": "व्यवसाय व स्वामित्व सामान्य (43%)"
+      },
+      "score_0_100": 73,
+      "band": "average",
+      "engine_verdict": "CONDITIONAL",
+      "confidence_0_1": 0.43,
+      "window": null,
+      "rationale": {
+        "en": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 0/100, house promise scores 100/100, Dasha scores 84/100, and transit timing scores 78/100. The final call is CONDITIONAL: career is the leading field at 67/100.",
+        "hi": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 0/100, house promise scores 100/100, Dasha scores 84/100, and transit timing scores 78/100. The final call is CONDITIONAL: career is the leading field at 67/100."
+      },
+      "conflicts": [
+        "Viparita Raj Yoga must be treated as a failure warning, not as decorative praise."
+      ],
+      "evidence": [
+        {
+          "layer": "Rajyoga gate",
+          "score": 0,
+          "finding": "Viparita Raj Yoga is present but broken by Shadbala gate; the yoga cannot be treated as a clean promise."
+        },
+        {
+          "layer": "House promise",
+          "score": 100,
+          "finding": "career houses average 100/100 by SAV; strongest is house 1 at 36 points and weakest is house 10 at 30 points."
+        },
+        {
+          "layer": "Dasha activation",
+          "score": 84,
+          "finding": "Mercury MD with Mars AD gives 84/100 Dasha clearance for career; delivery class is full."
+        },
+        {
+          "layer": "Transit timing",
+          "score": 78,
+          "finding": "Therefore: Career timing is structurally supported now if Dasha also confirms."
+        }
+      ],
+      "remedies": [
+        {
+          "en": "Mars",
+          "hi": "Mars"
+        }
+      ],
+      "caveats": [
+        {
+          "en": "Windows are approximate.",
+          "hi": "समय-सीमाएँ अनुमानित हैं।"
+        }
+      ]
     }
   ],
   "composed": {
     "verdict_line": {
-      "en": "yes, conditionally — the job change. the health regimen: not yet — fix the base first.",
-      "hi": "हाँ, शर्त के साथ — नौकरी परिवर्तन। स्वास्थ्य नियम: अभी नहीं — पहले आधार सुधारें।"
+      "en": "yes, conditionally — the venture. the job change: yes, conditionally.",
+      "hi": "हाँ, शर्त के साथ — उद्यम। नौकरी परिवर्तन: हाँ, शर्त के साथ।"
     },
     "depth": "standard",
     "ranked": [
+      {
+        "topic": "business",
+        "decision": {
+          "en": "yes, conditionally",
+          "hi": "हाँ, शर्त के साथ"
+        }
+      },
       {
         "topic": "career",
         "decision": {
@@ -347,17 +408,32 @@
         },
         "citations": [
           {
-            "en": "Saturn in the 6th (Sagittarius), retrograde — the result arrives in re-runs.",
-            "hi": "शनि षष्ठ भाव (धनु) में, वक्री — फल दोबारा आता है।"
+            "en": "Venus in the 2nd (Taurus) — in its own sign, self-contained but slow to move.",
+            "hi": "शुक्र द्वितीय भाव (वृषभ) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           },
           {
-            "en": "Mars in the 12th (Gemini).",
-            "hi": "मंगल द्वादश भाव (मिथुन) में।"
+            "en": "Saturn in the 9th (Sagittarius), retrograde — the result arrives in re-runs.",
+            "hi": "शनि नवम भाव (धनु) में, वक्री — फल दोबारा आता है।"
           }
         ]
+      },
+      {
+        "id": "sequence",
+        "title": {
+          "en": "Sequence",
+          "hi": "क्रम"
+        },
+        "body": {
+          "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the venture, then the job change. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
+          "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — उद्यम, फिर नौकरी परिवर्तन। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
+        },
+        "citations": []
       }
     ],
-    "sequence": null,
+    "sequence": {
+      "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the venture, then the job change. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
+      "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — उद्यम, फिर नौकरी परिवर्तन। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
+    },
     "app_links": [
       {
         "label": {
@@ -389,8 +465,8 @@
       }
     ],
     "closing_question": {
-      "en": "Which single variable do you want fixed first — the health regimen, or the city? Say one and I will take it alone.",
-      "hi": "पहले कौन-सा एक चर तय करें — स्वास्थ्य नियम, या शहर? एक बताइए, उसे अकेले लेंगे।"
+      "en": "Which single variable do you want fixed first — the job change, or the city? Say one and I will take it alone.",
+      "hi": "पहले कौन-सा एक चर तय करें — नौकरी परिवर्तन, या शहर? एक बताइए, उसे अकेले लेंगे।"
     }
   },
   "provenance": {
@@ -402,7 +478,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "cfb5558207c8a51e",
-    "card_hash": "44bd7b26f0fc593d",
+    "card_hash": "1c38a0ff5dad1750",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

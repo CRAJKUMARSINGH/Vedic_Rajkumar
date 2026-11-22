@@ -99,12 +99,12 @@
         },
         "citations": [
           {
-            "en": "Saturn in the 4th (Virgo).",
-            "hi": "शनि चतुर्थ भाव (कन्या) में।"
+            "en": "Saturn in the 9th (Virgo).",
+            "hi": "शनि नवम भाव (कन्या) में।"
           },
           {
-            "en": "Mars in the 7th (Sagittarius).",
-            "hi": "मंगल सप्तम भाव (धनु) में।"
+            "en": "Mars in the 12th (Sagittarius).",
+            "hi": "मंगल द्वादश भाव (धनु) में।"
           }
         ]
       }
@@ -154,7 +154,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5b6c65faa7477069",
-    "card_hash": "7144741ac5f5c9bc",
+    "card_hash": "1956721e734d17f3",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

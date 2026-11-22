@@ -1,5 +1,5 @@
 # Swami Rajeev Anand — Direct Answer
-<!-- card_hash: 2e3a151639a9457d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: ca6a046d75d33343 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: caution (46%) (caution, 46%)
 
@@ -7,8 +7,8 @@ New house construction: caution (46%) (caution, 46%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Moon in the 1st (Gemini).
-- Venus in the 11th (Taurus) — in its own sign, self-contained but slow to move.
+- Moon in the 3rd (Gemini).
+- Venus in the 2nd (Taurus) — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

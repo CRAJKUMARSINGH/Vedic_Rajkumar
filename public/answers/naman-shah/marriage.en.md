@@ -1,5 +1,5 @@
 # Naman Shah — Direct Answer
-<!-- card_hash: c3d888cb2f8f811e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: cd79c439a9090b4f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: caution (55%) (caution, 55%)
 
@@ -7,8 +7,8 @@ Marriage: caution (55%) (caution, 55%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Moon in the 1st (Scorpio) — debilitated, the promise needs repair.
-- Saturn in the 5th (Pisces).
+- Moon in the 11th (Scorpio) — debilitated, the promise needs repair.
+- Saturn in the 3rd (Pisces).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

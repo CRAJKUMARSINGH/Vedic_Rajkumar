@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Venus in the 12th (Cancer).",
-            "hi": "शुक्र द्वादश भाव (कर्क) में।"
+            "en": "Venus in the 9th (Cancer).",
+            "hi": "शुक्र नवम भाव (कर्क) में।"
           },
           {
-            "en": "Jupiter in the 6th (Sagittarius) — in its own sign, self-contained but slow to move.",
-            "hi": "गुरु षष्ठ भाव (धनु) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Jupiter in the 2nd (Sagittarius) — in its own sign, self-contained but slow to move.",
+            "hi": "गुरु द्वितीय भाव (धनु) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "14f95b054682a1c6",
-    "card_hash": "24a1bcbb5125a444",
+    "card_hash": "680e546d405f97bd",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

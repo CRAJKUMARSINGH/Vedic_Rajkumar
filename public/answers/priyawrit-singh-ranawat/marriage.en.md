@@ -1,5 +1,5 @@
 # Priyawrit Singh Ranawat — Direct Answer
-<!-- card_hash: 583328685e1614db | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 178ee55301aeac0c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (54%) (average, 54%)
 
@@ -7,8 +7,8 @@ Marriage: average (54%) (average, 54%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 3rd (Scorpio) — in its own sign, self-contained but slow to move.
-- Mars in the 3rd (Scorpio) — in its own sign, self-contained but slow to move.
+- Mars in the 2nd (Scorpio) — in its own sign, self-contained but slow to move.
+- Jupiter in the 7th (Aries), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

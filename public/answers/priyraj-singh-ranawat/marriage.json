@@ -105,12 +105,12 @@
         },
         "citations": [
           {
-            "en": "Moon in the 1st (Virgo).",
-            "hi": "चंद्र प्रथम भाव (कन्या) में।"
+            "en": "Moon in the 9th (Virgo).",
+            "hi": "चंद्र नवम भाव (कन्या) में।"
           },
           {
-            "en": "Saturn in the 6th (Pisces).",
-            "hi": "शनि षष्ठ भाव (मीन) में।"
+            "en": "Saturn in the 3rd (Pisces).",
+            "hi": "शनि तृतीय भाव (मीन) में।"
           }
         ]
       }
@@ -160,7 +160,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "7582ae63ef0373e0",
-    "card_hash": "e5ad25a27fc54f52",
+    "card_hash": "91c2c0129ea23b24",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

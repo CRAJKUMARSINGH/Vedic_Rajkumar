@@ -1,5 +1,5 @@
 # Dhairya Bittu Arthuna — Direct Answer
-<!-- card_hash: 698430e9318ca486 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 395e9fc3701ffd2f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (48%) (average, 48%)
 
@@ -7,8 +7,8 @@ Finance: average (48%) (average, 48%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 5th (Aries).
-- Jupiter in the 2nd (Aquarius).
+- Venus in the 1st (Aries).
+- Mercury in the 2nd (Taurus).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

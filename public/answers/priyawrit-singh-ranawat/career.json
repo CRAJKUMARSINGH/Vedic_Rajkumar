@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Moon in the 1st (Virgo).",
-            "hi": "चंद्र प्रथम भाव (कन्या) में।"
+            "en": "Moon in the 12th (Virgo).",
+            "hi": "चंद्र द्वादश भाव (कन्या) में।"
           },
           {
-            "en": "Venus in the 12th (Leo).",
-            "hi": "शुक्र द्वादश भाव (सिंह) में।"
+            "en": "Rahu in the 10th (Cancer), retrograde — the result arrives in re-runs.",
+            "hi": "राहु दशम भाव (कर्क) में, वक्री — फल दोबारा आता है।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "dc35b6b474337e13",
-    "card_hash": "d6779952a2f8beea",
+    "card_hash": "530a00b2ab66b33f",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

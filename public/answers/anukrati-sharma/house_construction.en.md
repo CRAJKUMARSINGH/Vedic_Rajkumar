@@ -1,5 +1,5 @@
 # Anukrati Sharma — Direct Answer
-<!-- card_hash: ca9cfcea3b5f72b0 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: fe9c6bd289a79338 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (48%) (average, 48%)
 
@@ -7,8 +7,8 @@ New house construction: average (48%) (average, 48%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Sun in the 1st (Sagittarius).
-- Mercury in the 2nd (Capricorn).
+- Sun in the 8th (Sagittarius).
+- Mercury in the 9th (Capricorn).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

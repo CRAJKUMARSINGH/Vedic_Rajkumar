@@ -104,12 +104,12 @@
         },
         "citations": [
           {
-            "en": "Mars in the 12th (Virgo).",
-            "hi": "मंगल द्वादश भाव (कन्या) में।"
+            "en": "Mars in the 9th (Virgo).",
+            "hi": "मंगल नवम भाव (कन्या) में।"
           },
           {
-            "en": "Sun in the 4th (Capricorn).",
-            "hi": "सूर्य चतुर्थ भाव (मकर) में।"
+            "en": "Saturn in the 3rd (Pisces).",
+            "hi": "शनि तृतीय भाव (मीन) में।"
           }
         ]
       }
@@ -159,7 +159,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "7582ae63ef0373e0",
-    "card_hash": "a5c4a92fc140db57",
+    "card_hash": "3d53b3755fe3af94",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

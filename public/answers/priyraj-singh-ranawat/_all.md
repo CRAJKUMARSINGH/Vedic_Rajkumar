@@ -1,17 +1,17 @@
 # Priyraj Singh Ranawat — सीधा उत्तर
-<!-- card_hash: f93236bb539f7a25 | lang: hi | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 9e5fd30c6095e35f | lang: hi | generated: 2026-10-24T00:00:00.000Z -->
 
-स्वास्थ्य सामान्य (48%) (सामान्य, 48%) · नया घर निर्माण सामान्य (40%) (सामान्य, 40%) · करियर सामान्य (40%) (सामान्य, 40%) · विवाह सामान्य (38%) (सामान्य, 38%) · आर्थिक सामान्य (42%) (सामान्य, 42%)
+स्वास्थ्य सामान्य (48%) (सामान्य, 48%) · नया घर निर्माण सामान्य (40%) (सामान्य, 40%) · करियर सामान्य (40%) (सामान्य, 40%) · विवाह सामान्य (38%) (सामान्य, 38%) · आर्थिक सामान्य (42%) (सामान्य, 42%) · व्यवसाय व स्वामित्व सामान्य (34%) (सामान्य, 34%)
 
-**हाँ, शर्त के साथ — निर्माण कार्य। आर्थिक निर्णय: हाँ, शर्त के साथ।**
+**हाँ, शर्त के साथ — उद्यम। निर्माण कार्य: हाँ, शर्त के साथ।**
 
 ### क्यों
 निर्णय सामान्य श्लोक पर नहीं, इन स्थितियों पर टिका है:
-- मंगल द्वादश भाव (कन्या) में।
-- सूर्य चतुर्थ भाव (मकर) में।
+- चंद्र नवम भाव (कन्या) में।
+- शुक्र प्रथम भाव (मकर) में।
 
 ### क्रम
-वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — निर्माण कार्य, फिर आर्थिक निर्णय, फिर नौकरी परिवर्तन, फिर स्वास्थ्य नियम, फिर विवाह कदम। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।
+वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — उद्यम, फिर निर्माण कार्य, फिर आर्थिक निर्णय, फिर नौकरी परिवर्तन, फिर स्वास्थ्य नियम, फिर विवाह कदम। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।
 
 
 **ऐप में देखें**
@@ -20,7 +20,7 @@
 - [कुंडली मिलान](/matchmaking)
 - [दशा-क्रम](/dasha)
 
-> पहले कौन-सा एक चर तय करें — आर्थिक निर्णय, या शहर? एक बताइए, उसे अकेले लेंगे।
+> पहले कौन-सा एक चर तय करें — निर्माण कार्य, या शहर? एक बताइए, उसे अकेले लेंगे।
 
 ## निर्णय
 | विषय | वर्ग | अंक | विश्वास | समय-सीमा |
@@ -30,6 +30,7 @@
 | करियर | average | 68 | 0.4 | — |
 | विवाह | average | 61 | 0.38 | — |
 | आर्थिक | average | 70 | 0.42 | — |
+| व्यवसाय व स्वामित्व | average | 74 | 0.34 | — |
 
 ## क्यों (ऐप यहाँ कैसे पहुँचा)
 ### स्वास्थ्य
@@ -67,7 +68,15 @@ Therefore: for this Jatak's birth promise, wealth is conditional now because Raj
 - Dasha activation (62/100): Jupiter MD with Mercury AD gives 62/100 Dasha clearance for wealth; delivery class is full.
 - Transit timing (32/100): Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
 
+### व्यवसाय व स्वामित्व
+Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 94/100, house promise scores 85/100, Dasha scores 53/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 68/100.
+- Rajyoga gate (94/100): Rajyoga gate is open through Gajakesari Yoga, Raj Yoga; status can rise because the forming planets are in the active Dasha field.
+- House promise (85/100): career houses average 85/100 by SAV; strongest is house 10 at 37 points and weakest is house 1 at 23 points.
+- Dasha activation (53/100): Jupiter MD with Mercury AD gives 53/100 Dasha clearance for career; delivery class is full.
+- Transit timing (32/100): Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
+
 ## उपाय
+- Jupiter
 - Jupiter
 - Jupiter
 - Jupiter
@@ -75,6 +84,7 @@ Therefore: for this Jatak's birth promise, wealth is conditional now because Raj
 - Jupiter
 
 ## सावधानियाँ
+- समय-सीमाएँ अनुमानित हैं।
 - समय-सीमाएँ अनुमानित हैं।
 - समय-सीमाएँ अनुमानित हैं।
 - समय-सीमाएँ अनुमानित हैं।

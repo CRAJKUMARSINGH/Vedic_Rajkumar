@@ -14,7 +14,8 @@ export const options = {
   },
 };
 
-const BASE = __ENV.BASE_URL || 'https://api.vedic-rajkumar.app';
+const BASE = (__ENV.BASE_URL || '').replace(/\/$/, '');
+if (!BASE) throw new Error('BASE_URL is not set');
 const KEY = __ENV.API_KEY || 'vk_test_sample';
 
 export default function () {

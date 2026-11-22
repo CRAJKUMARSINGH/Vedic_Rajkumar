@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Venus in the 6th (Libra) — in its own sign, self-contained but slow to move.",
-            "hi": "शुक्र षष्ठ भाव (तुला) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Venus in the 4th (Libra) — in its own sign, self-contained but slow to move.",
+            "hi": "शुक्र चतुर्थ भाव (तुला) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           },
           {
-            "en": "Sun in the 4th (Virgo).",
-            "hi": "सूर्य चतुर्थ भाव (कन्या) में।"
+            "en": "Mercury in the 4th (Libra).",
+            "hi": "बुध चतुर्थ भाव (तुला) में।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "3476adaadc8caf27",
-    "card_hash": "6b9b5b0db45698ca",
+    "card_hash": "892bc3ebaa385c7b",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

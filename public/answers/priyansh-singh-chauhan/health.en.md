@@ -1,5 +1,5 @@
 # Priyansh Singh Chauhan — Direct Answer
-<!-- card_hash: 05828cea328b6266 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 3964cd80dda26cae | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (50%) (average, 50%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: average (50%) (average, 50%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Moon in the 1st (Virgo).
-- Sun in the 1st (Libra) — debilitated, the promise needs repair.
+- Moon in the 3rd (Virgo).
+- Jupiter in the 11th (Taurus), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

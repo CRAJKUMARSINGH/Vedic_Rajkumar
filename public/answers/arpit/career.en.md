@@ -1,5 +1,5 @@
 # Arpit — Direct Answer
-<!-- card_hash: 3d14ddc6d1fe534c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 1076cb34102a964f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (46%) (average, 46%)
 
@@ -7,8 +7,8 @@ Career: average (46%) (average, 46%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Moon in the 1st (Pisces).
-- Venus in the 5th (Leo).
+- Moon in the 6th (Pisces).
+- Venus in the 11th (Leo).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

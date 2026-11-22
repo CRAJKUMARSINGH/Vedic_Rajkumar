@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Mars in the 9th (Sagittarius).",
-            "hi": "मंगल नवम भाव (धनु) में।"
+            "en": "Mars in the 3rd (Sagittarius).",
+            "hi": "मंगल तृतीय भाव (धनु) में।"
           },
           {
-            "en": "Saturn in the 2nd (Taurus), retrograde — the result arrives in re-runs.",
-            "hi": "शनि द्वितीय भाव (वृषभ) में, वक्री — फल दोबारा आता है।"
+            "en": "Sun in the 12th (Virgo).",
+            "hi": "सूर्य द्वादश भाव (कन्या) में।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "87309c17dc1bb6f0",
-    "card_hash": "4920e0b63b7af866",
+    "card_hash": "47abe5e01224ebb2",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

@@ -1,5 +1,5 @@
 # Arpit — Direct Answer
-<!-- card_hash: 1d321a06ea86a190 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 4768bf1cab802060 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (58%) (average, 58%)
 
@@ -7,8 +7,8 @@ Finance: average (58%) (average, 58%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 9th (Sagittarius).
-- Saturn in the 2nd (Taurus), retrograde — the result arrives in re-runs.
+- Mars in the 3rd (Sagittarius).
+- Sun in the 12th (Virgo).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

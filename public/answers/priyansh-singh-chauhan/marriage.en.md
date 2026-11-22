@@ -1,5 +1,5 @@
 # Priyansh Singh Chauhan — Direct Answer
-<!-- card_hash: aa2a7793004730bb | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 7f5fa2409651eb37 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: caution (55%) (caution, 55%)
 
@@ -7,8 +7,8 @@ Marriage: caution (55%) (caution, 55%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 8th (Taurus), retrograde — the result arrives in re-runs.
-- Sun in the 1st (Libra) — debilitated, the promise needs repair.
+- Saturn in the 11th (Taurus), retrograde — the result arrives in re-runs.
+- Sun in the 4th (Libra) — debilitated, the promise needs repair.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

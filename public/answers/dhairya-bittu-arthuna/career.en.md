@@ -1,5 +1,5 @@
 # Dhairya Bittu Arthuna — Direct Answer
-<!-- card_hash: 7749248808c656cd | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 8c2698a64f318ca6 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (47%) (average, 47%)
 
@@ -7,8 +7,8 @@ Career: average (47%) (average, 47%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 1st (Capricorn) — in its own sign, self-contained but slow to move.
-- Mars in the 6th (Gemini).
+- Saturn in the 10th (Capricorn) — in its own sign, self-contained but slow to move.
+- Saturn in the 10th (Capricorn) — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

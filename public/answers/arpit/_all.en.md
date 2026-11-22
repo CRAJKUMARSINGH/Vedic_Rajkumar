@@ -1,17 +1,17 @@
 # Arpit — Direct Answer
-<!-- card_hash: dc7e34ea892f870a | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 760025ddba04bfdb | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
-Health & wellbeing: average (38%) (average, 38%) · New house construction: average (56%) (average, 56%) · Career: average (46%) (average, 46%) · Marriage: average (48%) (average, 48%) · Finance: average (58%) (average, 58%)
+Health & wellbeing: average (38%) (average, 38%) · New house construction: average (56%) (average, 56%) · Career: average (46%) (average, 46%) · Marriage: average (48%) (average, 48%) · Finance: average (58%) (average, 58%) · Business & ownership: average (45%) (average, 45%)
 
-**yes, conditionally — the job change. the health regimen: yes, conditionally.**
+**yes, conditionally — the venture. the job change: yes, conditionally.**
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Moon in the 1st (Pisces).
-- Venus in the 5th (Leo).
+- Mars in the 3rd (Sagittarius).
+- Moon in the 6th (Pisces).
 
 ### Sequence
-Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the job change, then the health regimen, then the construction, then the money decision, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the venture, then the job change, then the health regimen, then the construction, then the money decision, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
 
 
 **Check in the app**
@@ -20,7 +20,7 @@ Optional planning note: if you are acting on several matters, many practitioners
 - [Kundli Milan](/matchmaking)
 - [Dasha timeline](/dasha)
 
-> Which single variable do you want fixed first — the health regimen, or the city? Say one and I will take it alone.
+> Which single variable do you want fixed first — the job change, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
@@ -30,6 +30,7 @@ Optional planning note: if you are acting on several matters, many practitioners
 | Career | average | 70 | 0.46 | — |
 | Marriage | average | 63 | 0.48 | — |
 | Finance | average | 63 | 0.58 | — |
+| Business & ownership | average | 79 | 0.45 | — |
 
 ## Why (how the app arrived here)
 ### Health & wellbeing
@@ -67,10 +68,18 @@ Therefore: for this Jatak's birth promise, wealth is conditional now because Raj
 - Dasha activation (83/100): Venus MD with Rahu AD gives 83/100 Dasha clearance for wealth; delivery class is full.
 - Transit timing (32/100): Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
 
+### Business & ownership
+Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 34/100, house promise scores 93/100, Dasha scores 91/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 70/100.
+- Rajyoga gate (34/100): Rajyoga gate is open through Raj Yoga; status can rise because the forming planets are in the active Dasha field.
+- House promise (93/100): career houses average 93/100 by SAV; strongest is house 6 at 36 points and weakest is house 1 at 29 points.
+- Dasha activation (91/100): Venus MD with Rahu AD gives 91/100 Dasha clearance for career; delivery class is full.
+- Transit timing (32/100): Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
+
 ## Remedies
 - none specified
 
 ## Caveats
+- Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.

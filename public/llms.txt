@@ -15,8 +15,8 @@
 
 ## Answer Layer contract
 
-contract_version: 1.3
-updated: 2026-10-26
+contract_version: 1.4
+updated: 2026-11-22
 stability: additive within a minor; any removal or rename bumps the major.
 languages: hi, en
 default_language: hi
@@ -28,6 +28,12 @@ un-suffixed path. A 1.1 reader still parses every card unchanged.
 1.3 is additive over 1.2: cards may carry an optional `composed` reading
 layer (bilingual verdict_line, ranked decisions, why/sequence/remedy
 sections, verified app links). Cards without `composed` remain valid.
+
+1.4 is additive over 1.3: the `business` topic joins the topic set, and the
+optional `composed` layer may carry deep-reading sections (positions,
+aspects, divisional, sudarshana-chakra, shadbala, yogas, dasha-timeline,
+timing-windows, support, ownership, risks) at deep depth. Cards emitted under
+1.3 remain valid and unchanged.
 
 ### Surfaces
 
@@ -59,7 +65,7 @@ Full subject adds: `dob`, `tob`, `place`, `lat`, `lon`, `tz`, `tz_defaulted`.
 ### Topics
 
 `_all.md` covers a multi-topic ask. Single-topic files: health, house_construction,
-career, marriage, finance.
+career, marriage, finance, business.
 
 ### Provenance
 

@@ -13,6 +13,8 @@ const BRIEF = [
 const DEEP = [
   ' or ', ' vs ', 'versus', 'compare', 'which one', ' ya ', ' aur ', 'all three',
   'should i change', 'prospects', 'outlook',
+  'yoga', 'yogas', 'own ', 'owner', 'business', 'venture', 'resort', 'hotel',
+  'at this juncture', 'strategy', 'kholein', 'vyapar', 'shuru',
 ];
 
 export function classifyDepth(asked: string): Depth {

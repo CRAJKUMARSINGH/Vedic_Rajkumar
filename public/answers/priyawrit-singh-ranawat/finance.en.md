@@ -1,5 +1,5 @@
 # Priyawrit Singh Ranawat — Direct Answer
-<!-- card_hash: 96451e8b2fc982a5 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 197cd4877c49c636 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (50%) (average, 50%)
 
@@ -7,8 +7,8 @@ Finance: average (50%) (average, 50%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 3rd (Scorpio) — in its own sign, self-contained but slow to move.
-- Mercury in the 2nd (Libra).
+- Mars in the 2nd (Scorpio) — in its own sign, self-contained but slow to move.
+- Mars in the 2nd (Scorpio) — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

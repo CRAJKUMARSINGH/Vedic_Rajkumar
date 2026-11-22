@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Jupiter in the 9th (Gemini), retrograde — the result arrives in re-runs.",
-            "hi": "गुरु नवम भाव (मिथुन) में, वक्री — फल दोबारा आता है।"
+            "en": "Jupiter in the 10th (Gemini), retrograde — the result arrives in re-runs.",
+            "hi": "गुरु दशम भाव (मिथुन) में, वक्री — फल दोबारा आता है।"
           },
           {
-            "en": "Venus in the 4th (Capricorn).",
-            "hi": "शुक्र चतुर्थ भाव (मकर) में।"
+            "en": "Mars in the 7th (Pisces).",
+            "hi": "मंगल सप्तम भाव (मीन) में।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5f72fbfe4ca302d1",
-    "card_hash": "267f50430048b9a3",
+    "card_hash": "c8697b30c4bb3f1f",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

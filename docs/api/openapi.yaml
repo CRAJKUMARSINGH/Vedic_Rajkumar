@@ -317,7 +317,8 @@
                               "house_construction",
                               "career",
                               "marriage",
-                              "finance"
+                              "finance",
+                              "business"
                             ]
                           }
                         },
@@ -374,7 +375,8 @@
                               "house_construction",
                               "career",
                               "marriage",
-                              "finance"
+                              "finance",
+                              "business"
                             ]
                           },
                           "headline": {
@@ -568,7 +570,8 @@
                           "type": "string",
                           "enum": [
                             "local",
-                            "swisseph"
+                            "swisseph",
+                            "fallback"
                           ]
                         },
                         "computed_at": {

@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Sun in the 2nd (Leo) — in its own sign, self-contained but slow to move.",
-            "hi": "सूर्य द्वितीय भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Sun in the 1st (Leo) — in its own sign, self-contained but slow to move.",
+            "hi": "सूर्य प्रथम भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           },
           {
-            "en": "Moon in the 1st (Cancer) — in its own sign, self-contained but slow to move.",
-            "hi": "चंद्र प्रथम भाव (कर्क) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Sun in the 1st (Leo) — in its own sign, self-contained but slow to move.",
+            "hi": "सूर्य प्रथम भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "73f6a93e4f25da6f",
-    "card_hash": "ed92f8ed788595c0",
+    "card_hash": "a89c7c727eced718",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

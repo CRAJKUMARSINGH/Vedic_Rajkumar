@@ -1,5 +1,5 @@
 # Priyraj Singh Ranawat — Direct Answer
-<!-- card_hash: a5c4a92fc140db57 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 3d53b3755fe3af94 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (40%) (average, 40%)
 
@@ -7,8 +7,8 @@ New house construction: average (40%) (average, 40%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 12th (Virgo).
-- Sun in the 4th (Capricorn).
+- Mars in the 9th (Virgo).
+- Saturn in the 3rd (Pisces).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

@@ -14,15 +14,16 @@
       "house_construction",
       "career",
       "marriage",
-      "finance"
+      "finance",
+      "business"
     ],
     "language": "hi",
     "as_of": "2026-10-24",
     "reference_type": "natal"
   },
   "direct_answer": {
-    "en": "Health & wellbeing: average (39%) (average, 39%) · New house construction: average (46%) (average, 46%) · Career: average (47%) (average, 47%) · Marriage: average (46%) (average, 46%) · Finance: average (48%) (average, 48%)",
-    "hi": "स्वास्थ्य सामान्य (39%) (सामान्य, 39%) · नया घर निर्माण सामान्य (46%) (सामान्य, 46%) · करियर सामान्य (47%) (सामान्य, 47%) · विवाह सामान्य (46%) (सामान्य, 46%) · आर्थिक सामान्य (48%) (सामान्य, 48%)"
+    "en": "Health & wellbeing: average (39%) (average, 39%) · New house construction: average (46%) (average, 46%) · Career: average (47%) (average, 47%) · Marriage: average (46%) (average, 46%) · Finance: average (48%) (average, 48%) · Business & ownership: average (46%) (average, 46%)",
+    "hi": "स्वास्थ्य सामान्य (39%) (सामान्य, 39%) · नया घर निर्माण सामान्य (46%) (सामान्य, 46%) · करियर सामान्य (47%) (सामान्य, 47%) · विवाह सामान्य (46%) (सामान्य, 46%) · आर्थिक सामान्य (48%) (सामान्य, 48%) · व्यवसाय व स्वामित्व सामान्य (46%) (सामान्य, 46%)"
   },
   "verdicts": [
     {
@@ -264,15 +265,70 @@
           "hi": "समय-सीमाएँ अनुमानित हैं।"
         }
       ]
+    },
+    {
+      "topic": "business",
+      "headline": {
+        "en": "Business & ownership: average (46%)",
+        "hi": "व्यवसाय व स्वामित्व सामान्य (46%)"
+      },
+      "score_0_100": 70,
+      "band": "average",
+      "engine_verdict": "CONDITIONAL",
+      "confidence_0_1": 0.46,
+      "window": null,
+      "rationale": {
+        "en": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 8/100, house promise scores 93/100, Dasha scores 87/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 62/100.",
+        "hi": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 8/100, house promise scores 93/100, Dasha scores 87/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 62/100."
+      },
+      "conflicts": [
+        "House promise is real, but transit has not opened the timing gate; do not call immediate fruition."
+      ],
+      "evidence": [
+        {
+          "layer": "Rajyoga gate",
+          "score": 8,
+          "finding": "No active Rajyoga is certified in the current Dasha; judge outcome by house promise and Dasha lord strength."
+        },
+        {
+          "layer": "House promise",
+          "score": 93,
+          "finding": "career houses average 93/100 by SAV; strongest is house 6 at 35 points and weakest is house 1 at 27 points."
+        },
+        {
+          "layer": "Dasha activation",
+          "score": 87,
+          "finding": "Sun MD with Jupiter AD gives 87/100 Dasha clearance for career; delivery class is full."
+        },
+        {
+          "layer": "Transit timing",
+          "score": 32,
+          "finding": "Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
+        }
+      ],
+      "remedies": [],
+      "caveats": [
+        {
+          "en": "Windows are approximate.",
+          "hi": "समय-सीमाएँ अनुमानित हैं।"
+        }
+      ]
     }
   ],
   "composed": {
     "verdict_line": {
-      "en": "yes, conditionally — the construction. the money decision: yes, conditionally.",
-      "hi": "हाँ, शर्त के साथ — निर्माण कार्य। आर्थिक निर्णय: हाँ, शर्त के साथ।"
+      "en": "yes, conditionally — the venture. the construction: yes, conditionally.",
+      "hi": "हाँ, शर्त के साथ — उद्यम। निर्माण कार्य: हाँ, शर्त के साथ।"
     },
     "depth": "standard",
     "ranked": [
+      {
+        "topic": "business",
+        "decision": {
+          "en": "yes, conditionally",
+          "hi": "हाँ, शर्त के साथ"
+        }
+      },
       {
         "topic": "house_construction",
         "decision": {
@@ -322,12 +378,12 @@
         },
         "citations": [
           {
-            "en": "Moon in the 1st (Sagittarius).",
-            "hi": "चंद्र प्रथम भाव (धनु) में।"
+            "en": "Venus in the 1st (Aries).",
+            "hi": "शुक्र प्रथम भाव (मेष) में।"
           },
           {
-            "en": "Sun in the 4th (Aries) — exalted, a clean promise.",
-            "hi": "सूर्य चतुर्थ भाव (मेष) में — उच्च का, स्पष्ट प्रतिज्ञा।"
+            "en": "Saturn in the 10th (Capricorn) — in its own sign, self-contained but slow to move.",
+            "hi": "शनि दशम भाव (मकर) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       },
@@ -338,15 +394,15 @@
           "hi": "क्रम"
         },
         "body": {
-          "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the construction, then the money decision, then the job change, then the health regimen, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
-          "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — निर्माण कार्य, फिर आर्थिक निर्णय, फिर नौकरी परिवर्तन, फिर स्वास्थ्य नियम, फिर विवाह कदम। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
+          "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the venture, then the construction, then the money decision, then the job change, then the health regimen, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
+          "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — उद्यम, फिर निर्माण कार्य, फिर आर्थिक निर्णय, फिर नौकरी परिवर्तन, फिर स्वास्थ्य नियम, फिर विवाह कदम। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
         },
         "citations": []
       }
     ],
     "sequence": {
-      "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the construction, then the money decision, then the job change, then the health regimen, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
-      "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — निर्माण कार्य, फिर आर्थिक निर्णय, फिर नौकरी परिवर्तन, फिर स्वास्थ्य नियम, फिर विवाह कदम। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
+      "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the venture, then the construction, then the money decision, then the job change, then the health regimen, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
+      "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — उद्यम, फिर निर्माण कार्य, फिर आर्थिक निर्णय, फिर नौकरी परिवर्तन, फिर स्वास्थ्य नियम, फिर विवाह कदम। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
     },
     "app_links": [
       {
@@ -379,8 +435,8 @@
       }
     ],
     "closing_question": {
-      "en": "Which single variable do you want fixed first — the money decision, or the city? Say one and I will take it alone.",
-      "hi": "पहले कौन-सा एक चर तय करें — आर्थिक निर्णय, या शहर? एक बताइए, उसे अकेले लेंगे।"
+      "en": "Which single variable do you want fixed first — the construction, or the city? Say one and I will take it alone.",
+      "hi": "पहले कौन-सा एक चर तय करें — निर्माण कार्य, या शहर? एक बताइए, उसे अकेले लेंगे।"
     }
   },
   "provenance": {
@@ -392,7 +448,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "298c7ebe027e9553",
-    "card_hash": "56882e3f332772aa",
+    "card_hash": "594691b4c3995984",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

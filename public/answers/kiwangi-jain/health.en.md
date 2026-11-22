@@ -1,5 +1,5 @@
 # Kiwangi Jain — Direct Answer
-<!-- card_hash: e80a041f24940eb1 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 4c5486b2b35060c6 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (36%) (average, 36%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: average (36%) (average, 36%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 4th (Virgo).
-- Moon in the 1st (Gemini).
+- Saturn in the 9th (Virgo).
+- Mercury in the 12th (Sagittarius), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

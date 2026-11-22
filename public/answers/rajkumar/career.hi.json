@@ -102,8 +102,8 @@
             "hi": "शुक्र द्वितीय भाव (कन्या) में — नीच का, प्रतिज्ञा की मरम्मत चाहिए।"
           },
           {
-            "en": "Sun in the 2nd (Leo) — in its own sign, self-contained but slow to move.",
-            "hi": "सूर्य द्वितीय भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Sun in the 1st (Leo) — in its own sign, self-contained but slow to move.",
+            "hi": "सूर्य प्रथम भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "73f6a93e4f25da6f",
-    "card_hash": "122e07c4e7cee749",
+    "card_hash": "e8bdf27ee70e1636",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

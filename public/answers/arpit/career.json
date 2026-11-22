@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Moon in the 1st (Pisces).",
-            "hi": "चंद्र प्रथम भाव (मीन) में।"
+            "en": "Moon in the 6th (Pisces).",
+            "hi": "चंद्र षष्ठ भाव (मीन) में।"
           },
           {
-            "en": "Venus in the 5th (Leo).",
-            "hi": "शुक्र पंचम भाव (सिंह) में।"
+            "en": "Venus in the 11th (Leo).",
+            "hi": "शुक्र एकादश भाव (सिंह) में।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "87309c17dc1bb6f0",
-    "card_hash": "6dd3c26a8abb61f6",
+    "card_hash": "3b87acf40d8632bd",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

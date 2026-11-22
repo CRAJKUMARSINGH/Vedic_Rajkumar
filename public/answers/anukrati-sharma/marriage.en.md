@@ -1,5 +1,5 @@
 # Anukrati Sharma — Direct Answer
-<!-- card_hash: 5c8941e06df73b6f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: c5d2fb0843a5164f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (47%) (average, 47%)
 
@@ -7,8 +7,8 @@ Marriage: average (47%) (average, 47%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 3rd (Pisces).
-- Jupiter in the 7th (Gemini), retrograde — the result arrives in re-runs.
+- Mars in the 11th (Pisces).
+- Mercury in the 9th (Capricorn).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

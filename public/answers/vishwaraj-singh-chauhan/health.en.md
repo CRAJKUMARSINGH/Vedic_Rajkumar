@@ -1,5 +1,5 @@
 # Vishwaraj Singh Chauhan — Direct Answer
-<!-- card_hash: 80fac06fef064bec | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 50b8bd8cba6399aa | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (40%) (average, 40%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: average (40%) (average, 40%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Moon in the 1st (Taurus) — exalted, a clean promise.
-- Moon in the 1st (Taurus) — exalted, a clean promise.
+- Moon in the 11th (Taurus) — exalted, a clean promise.
+- Mars in the 1st (Cancer) — debilitated, the promise needs repair.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

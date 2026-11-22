@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Mars in the 3rd (Scorpio) — in its own sign, self-contained but slow to move.",
-            "hi": "मंगल तृतीय भाव (वृश्चिक) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Mars in the 2nd (Scorpio) — in its own sign, self-contained but slow to move.",
+            "hi": "मंगल द्वितीय भाव (वृश्चिक) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           },
           {
-            "en": "Mercury in the 2nd (Libra).",
-            "hi": "बुध द्वितीय भाव (तुला) में।"
+            "en": "Mars in the 2nd (Scorpio) — in its own sign, self-contained but slow to move.",
+            "hi": "मंगल द्वितीय भाव (वृश्चिक) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "dc35b6b474337e13",
-    "card_hash": "96451e8b2fc982a5",
+    "card_hash": "197cd4877c49c636",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

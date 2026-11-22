@@ -1,5 +1,5 @@
 # Jyoti Chauhan — Direct Answer
-<!-- card_hash: d617e06ed5c853e8 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 5b9fe16a05884965 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (48%) (average, 48%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: average (48%) (average, 48%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Moon in the 1st (Aries).
-- Moon in the 1st (Aries).
+- Moon in the 10th (Aries).
+- Jupiter in the 3rd (Virgo), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

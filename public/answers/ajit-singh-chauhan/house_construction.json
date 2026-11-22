@@ -99,12 +99,12 @@
         },
         "citations": [
           {
-            "en": "Mars in the 9th (Taurus).",
-            "hi": "मंगल नवम भाव (वृषभ) में।"
+            "en": "Mars in the 10th (Taurus).",
+            "hi": "मंगल दशम भाव (वृषभ) में।"
           },
           {
-            "en": "Mercury in the 1st (Virgo) — exalted, a clean promise.",
-            "hi": "बुध प्रथम भाव (कन्या) में — उच्च का, स्पष्ट प्रतिज्ञा।"
+            "en": "Rahu in the 4th (Scorpio), retrograde — the result arrives in re-runs.",
+            "hi": "राहु चतुर्थ भाव (वृश्चिक) में, वक्री — फल दोबारा आता है।"
           }
         ]
       }
@@ -154,7 +154,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "ff572c3f4d15ed2a",
-    "card_hash": "e5b8218a3f8663de",
+    "card_hash": "4999360b89b9e526",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

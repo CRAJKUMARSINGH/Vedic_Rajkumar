@@ -1,5 +1,5 @@
 # Kanchi Jain — Direct Answer
-<!-- card_hash: 1b2e86632f8a8f4f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 908bd79cfdddc1f9 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (34%) (average, 34%)
 
@@ -7,7 +7,7 @@ Health & wellbeing: average (34%) (average, 34%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mercury in the 2nd (Leo).
+- Mercury in the 3rd (Leo).
 - Moon in the 1st (Gemini).
 
 **Check in the app**

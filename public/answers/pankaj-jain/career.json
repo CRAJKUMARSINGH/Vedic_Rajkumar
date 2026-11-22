@@ -104,12 +104,12 @@
         },
         "citations": [
           {
-            "en": "Saturn in the 12th (Leo).",
-            "hi": "शनि द्वादश भाव (सिंह) में।"
+            "en": "Saturn in the 5th (Leo).",
+            "hi": "शनि पंचम भाव (सिंह) में।"
           },
           {
-            "en": "Mars in the 9th (Taurus).",
-            "hi": "मंगल नवम भाव (वृषभ) में।"
+            "en": "Mars in the 2nd (Taurus).",
+            "hi": "मंगल द्वितीय भाव (वृषभ) में।"
           }
         ]
       }
@@ -159,7 +159,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "6722f675ff6ebb1e",
-    "card_hash": "7d39792b471dd45e",
+    "card_hash": "6904f7a95efbd6ed",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

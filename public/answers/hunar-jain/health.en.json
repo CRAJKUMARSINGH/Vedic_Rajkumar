@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Mars in the 12th (Cancer) — debilitated, the promise needs repair.",
-            "hi": "मंगल द्वादश भाव (कर्क) में — नीच का, प्रतिज्ञा की मरम्मत चाहिए।"
+            "en": "Mars in the 9th (Cancer) — debilitated, the promise needs repair.",
+            "hi": "मंगल नवम भाव (कर्क) में — नीच का, प्रतिज्ञा की मरम्मत चाहिए।"
           },
           {
-            "en": "Moon in the 1st (Cancer) — in its own sign, self-contained but slow to move.",
-            "hi": "चंद्र प्रथम भाव (कर्क) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Mars in the 9th (Cancer) — debilitated, the promise needs repair.",
+            "hi": "मंगल नवम भाव (कर्क) में — नीच का, प्रतिज्ञा की मरम्मत चाहिए।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "14f95b054682a1c6",
-    "card_hash": "8c728cc53ae1e442",
+    "card_hash": "ab5e6f419d30f5ac",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

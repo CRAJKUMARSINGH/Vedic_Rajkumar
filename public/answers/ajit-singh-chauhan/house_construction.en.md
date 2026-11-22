@@ -1,5 +1,5 @@
 # Ajit Singh Chauhan — Direct Answer
-<!-- card_hash: 091a9e3a5e0b85b0 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 33ef545b1bd9fe60 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (40%) (average, 40%)
 
@@ -7,8 +7,8 @@ New house construction: average (40%) (average, 40%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 9th (Taurus).
-- Mercury in the 1st (Virgo) — exalted, a clean promise.
+- Mars in the 10th (Taurus).
+- Rahu in the 4th (Scorpio), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

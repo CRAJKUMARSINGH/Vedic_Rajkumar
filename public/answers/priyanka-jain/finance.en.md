@@ -1,5 +1,5 @@
 # Priyanka Jain — Direct Answer
-<!-- card_hash: 099cfe9f0d27edaa | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: f47b97d90a8e771e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (57%) (average, 57%)
 
@@ -7,8 +7,8 @@ Finance: average (57%) (average, 57%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 2nd (Scorpio).
-- Venus in the 2nd (Scorpio).
+- Venus in the 3rd (Scorpio).
+- Sun in the 2nd (Libra) — debilitated, the promise needs repair.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

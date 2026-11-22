@@ -1,17 +1,17 @@
 # Anukrati Sharma — Direct Answer
-<!-- card_hash: 29c1eb8961bf0af5 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 15f3695cd2e28f43 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
-Health & wellbeing: average (50%) (average, 50%) · New house construction: average (48%) (average, 48%) · Career: average (44%) (average, 44%) · Marriage: average (47%) (average, 47%) · Finance: average (49%) (average, 49%)
+Health & wellbeing: average (50%) (average, 50%) · New house construction: average (48%) (average, 48%) · Career: average (44%) (average, 44%) · Marriage: average (47%) (average, 47%) · Finance: average (49%) (average, 49%) · Business & ownership: average (41%) (average, 41%)
 
-**yes, conditionally — the job change. the health regimen: yes, conditionally.**
+**yes, conditionally — the venture. the job change: yes, conditionally.**
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 6th (Taurus), retrograde — the result arrives in re-runs.
-- Venus in the 1st (Sagittarius).
+- Mars in the 11th (Pisces).
+- Saturn in the 1st (Taurus), retrograde — the result arrives in re-runs.
 
 ### Sequence
-Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the job change, then the health regimen, then the money decision, then the construction, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the venture, then the job change, then the health regimen, then the money decision, then the construction, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
 
 
 **Check in the app**
@@ -20,7 +20,7 @@ Optional planning note: if you are acting on several matters, many practitioners
 - [Kundli Milan](/matchmaking)
 - [Dasha timeline](/dasha)
 
-> Which single variable do you want fixed first — the health regimen, or the city? Say one and I will take it alone.
+> Which single variable do you want fixed first — the job change, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
@@ -30,6 +30,7 @@ Optional planning note: if you are acting on several matters, many practitioners
 | Career | average | 63 | 0.44 | — |
 | Marriage | average | 56 | 0.47 | — |
 | Finance | average | 58 | 0.49 | — |
+| Business & ownership | average | 71 | 0.41 | — |
 
 ## Why (how the app arrived here)
 ### Health & wellbeing
@@ -67,7 +68,15 @@ Therefore: for this Jatak's birth promise, wealth is conditional now because Raj
 - Dasha activation (61/100): Venus MD with Ketu AD gives 61/100 Dasha clearance for wealth; delivery class is full.
 - Transit timing (32/100): Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
 
+### Business & ownership
+Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 40/100, house promise scores 93/100, Dasha scores 69/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 63/100.
+- Rajyoga gate (40/100): Rajyoga gate is open through Raj Yoga; status can rise because the forming planets are in the active Dasha field.
+- House promise (93/100): career houses average 93/100 by SAV; strongest is house 6 at 41 points and weakest is house 10 at 26 points.
+- Dasha activation (69/100): Venus MD with Ketu AD gives 69/100 Dasha clearance for career; delivery class is full.
+- Transit timing (32/100): Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
+
 ## Remedies
+- Venus
 - Venus
 - Venus
 - Venus
@@ -75,6 +84,7 @@ Therefore: for this Jatak's birth promise, wealth is conditional now because Raj
 - Venus
 
 ## Caveats
+- Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.

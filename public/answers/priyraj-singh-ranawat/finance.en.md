@@ -1,5 +1,5 @@
 # Priyraj Singh Ranawat — Direct Answer
-<!-- card_hash: 514d96a300b58e33 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: fa244298e8862eb9 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (42%) (average, 42%)
 
@@ -7,8 +7,8 @@ Finance: average (42%) (average, 42%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 6th (Pisces).
-- Mars in the 12th (Virgo).
+- Saturn in the 3rd (Pisces).
+- Mars in the 9th (Virgo).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

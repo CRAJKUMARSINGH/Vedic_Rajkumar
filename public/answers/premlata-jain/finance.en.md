@@ -1,5 +1,5 @@
 # Premlata Jain — Direct Answer
-<!-- card_hash: 1ace7c4d8cf3ccd1 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 4e3d743d58821b7d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (56%) (average, 56%)
 
@@ -7,8 +7,8 @@ Finance: average (56%) (average, 56%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 3rd (Libra) — in its own sign, self-contained but slow to move.
-- Moon in the 1st (Leo).
+- Venus in the 2nd (Libra) — in its own sign, self-contained but slow to move.
+- Sun in the 2nd (Libra) — debilitated, the promise needs repair.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

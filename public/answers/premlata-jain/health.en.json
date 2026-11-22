@@ -102,12 +102,12 @@
         },
         "citations": [
           {
-            "en": "Mercury in the 3rd (Libra).",
-            "hi": "बुध तृतीय भाव (तुला) में।"
+            "en": "Mercury in the 2nd (Libra).",
+            "hi": "बुध द्वितीय भाव (तुला) में।"
           },
           {
-            "en": "Moon in the 1st (Leo).",
-            "hi": "चंद्र प्रथम भाव (सिंह) में।"
+            "en": "Saturn in the 10th (Gemini), retrograde — the result arrives in re-runs.",
+            "hi": "शनि दशम भाव (मिथुन) में, वक्री — फल दोबारा आता है।"
           }
         ]
       }
@@ -157,7 +157,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "e3fca7695fcd0aec",
-    "card_hash": "b6b88aa94632f89d",
+    "card_hash": "36a9fe310a8b4edd",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

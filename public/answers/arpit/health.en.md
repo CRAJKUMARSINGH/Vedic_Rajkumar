@@ -1,5 +1,5 @@
 # Arpit — Direct Answer
-<!-- card_hash: 0de80b868beb9d93 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 77e2b3e488948873 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (38%) (average, 38%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: average (38%) (average, 38%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 5th (Leo).
-- Moon in the 1st (Pisces).
+- Venus in the 11th (Leo).
+- Mercury in the 1st (Libra), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

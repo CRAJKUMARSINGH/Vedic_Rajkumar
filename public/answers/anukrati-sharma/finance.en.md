@@ -1,5 +1,5 @@
 # Anukrati Sharma — Direct Answer
-<!-- card_hash: 66e00160b1e32f49 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 73d0666998611023 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (49%) (average, 49%)
 
@@ -7,8 +7,8 @@ Finance: average (49%) (average, 49%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mercury in the 2nd (Capricorn).
-- Mercury in the 2nd (Capricorn).
+- Mercury in the 9th (Capricorn).
+- Jupiter in the 2nd (Gemini), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

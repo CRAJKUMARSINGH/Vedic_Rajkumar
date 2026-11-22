@@ -14,15 +14,16 @@
       "house_construction",
       "career",
       "marriage",
-      "finance"
+      "finance",
+      "business"
     ],
     "language": "hi",
     "as_of": "2026-10-24",
     "reference_type": "natal"
   },
   "direct_answer": {
-    "en": "Health & wellbeing: average (48%) (average, 48%) · New house construction: average (40%) (average, 40%) · Career: average (40%) (average, 40%) · Marriage: average (38%) (average, 38%) · Finance: average (42%) (average, 42%)",
-    "hi": "स्वास्थ्य सामान्य (48%) (सामान्य, 48%) · नया घर निर्माण सामान्य (40%) (सामान्य, 40%) · करियर सामान्य (40%) (सामान्य, 40%) · विवाह सामान्य (38%) (सामान्य, 38%) · आर्थिक सामान्य (42%) (सामान्य, 42%)"
+    "en": "Health & wellbeing: average (48%) (average, 48%) · New house construction: average (40%) (average, 40%) · Career: average (40%) (average, 40%) · Marriage: average (38%) (average, 38%) · Finance: average (42%) (average, 42%) · Business & ownership: average (34%) (average, 34%)",
+    "hi": "स्वास्थ्य सामान्य (48%) (सामान्य, 48%) · नया घर निर्माण सामान्य (40%) (सामान्य, 40%) · करियर सामान्य (40%) (सामान्य, 40%) · विवाह सामान्य (38%) (सामान्य, 38%) · आर्थिक सामान्य (42%) (सामान्य, 42%) · व्यवसाय व स्वामित्व सामान्य (34%) (सामान्य, 34%)"
   },
   "verdicts": [
     {
@@ -296,15 +297,77 @@
           "hi": "समय-सीमाएँ अनुमानित हैं।"
         }
       ]
+    },
+    {
+      "topic": "business",
+      "headline": {
+        "en": "Business & ownership: average (34%)",
+        "hi": "व्यवसाय व स्वामित्व सामान्य (34%)"
+      },
+      "score_0_100": 74,
+      "band": "average",
+      "engine_verdict": "CONDITIONAL",
+      "confidence_0_1": 0.34,
+      "window": null,
+      "rationale": {
+        "en": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 94/100, house promise scores 85/100, Dasha scores 53/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 68/100.",
+        "hi": "Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 94/100, house promise scores 85/100, Dasha scores 53/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 68/100."
+      },
+      "conflicts": [
+        "Rajyoga exists, but Dasha is not clean enough; promise remains visible yet delayed in career.",
+        "House promise is real, but transit has not opened the timing gate; do not call immediate fruition.",
+        "Viparita Raj Yoga must be treated as a failure warning, not as decorative praise."
+      ],
+      "evidence": [
+        {
+          "layer": "Rajyoga gate",
+          "score": 94,
+          "finding": "Rajyoga gate is open through Gajakesari Yoga, Raj Yoga; status can rise because the forming planets are in the active Dasha field."
+        },
+        {
+          "layer": "House promise",
+          "score": 85,
+          "finding": "career houses average 85/100 by SAV; strongest is house 10 at 37 points and weakest is house 1 at 23 points."
+        },
+        {
+          "layer": "Dasha activation",
+          "score": 53,
+          "finding": "Jupiter MD with Mercury AD gives 53/100 Dasha clearance for career; delivery class is full."
+        },
+        {
+          "layer": "Transit timing",
+          "score": 32,
+          "finding": "Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
+        }
+      ],
+      "remedies": [
+        {
+          "en": "Jupiter",
+          "hi": "Jupiter"
+        }
+      ],
+      "caveats": [
+        {
+          "en": "Windows are approximate.",
+          "hi": "समय-सीमाएँ अनुमानित हैं।"
+        }
+      ]
     }
   ],
   "composed": {
     "verdict_line": {
-      "en": "yes, conditionally — the construction. the money decision: yes, conditionally.",
-      "hi": "हाँ, शर्त के साथ — निर्माण कार्य। आर्थिक निर्णय: हाँ, शर्त के साथ।"
+      "en": "yes, conditionally — the venture. the construction: yes, conditionally.",
+      "hi": "हाँ, शर्त के साथ — उद्यम। निर्माण कार्य: हाँ, शर्त के साथ।"
     },
     "depth": "standard",
     "ranked": [
+      {
+        "topic": "business",
+        "decision": {
+          "en": "yes, conditionally",
+          "hi": "हाँ, शर्त के साथ"
+        }
+      },
       {
         "topic": "house_construction",
         "decision": {
@@ -354,12 +417,12 @@
         },
         "citations": [
           {
-            "en": "Mars in the 12th (Virgo).",
-            "hi": "मंगल द्वादश भाव (कन्या) में।"
+            "en": "Moon in the 9th (Virgo).",
+            "hi": "चंद्र नवम भाव (कन्या) में।"
           },
           {
-            "en": "Sun in the 4th (Capricorn).",
-            "hi": "सूर्य चतुर्थ भाव (मकर) में।"
+            "en": "Venus in the 1st (Capricorn).",
+            "hi": "शुक्र प्रथम भाव (मकर) में।"
           }
         ]
       },
@@ -370,15 +433,15 @@
           "hi": "क्रम"
         },
         "body": {
-          "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the construction, then the money decision, then the job change, then the health regimen, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
-          "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — निर्माण कार्य, फिर आर्थिक निर्णय, फिर नौकरी परिवर्तन, फिर स्वास्थ्य नियम, फिर विवाह कदम। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
+          "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the venture, then the construction, then the money decision, then the job change, then the health regimen, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
+          "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — उद्यम, फिर निर्माण कार्य, फिर आर्थिक निर्णय, फिर नौकरी परिवर्तन, फिर स्वास्थ्य नियम, फिर विवाह कदम। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
         },
         "citations": []
       }
     ],
     "sequence": {
-      "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the construction, then the money decision, then the job change, then the health regimen, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
-      "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — निर्माण कार्य, फिर आर्थिक निर्णय, फिर नौकरी परिवर्तन, फिर स्वास्थ्य नियम, फिर विवाह कदम। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
+      "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the venture, then the construction, then the money decision, then the job change, then the health regimen, then the marriage step. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
+      "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — उद्यम, फिर निर्माण कार्य, फिर आर्थिक निर्णय, फिर नौकरी परिवर्तन, फिर स्वास्थ्य नियम, फिर विवाह कदम। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
     },
     "app_links": [
       {
@@ -411,8 +474,8 @@
       }
     ],
     "closing_question": {
-      "en": "Which single variable do you want fixed first — the money decision, or the city? Say one and I will take it alone.",
-      "hi": "पहले कौन-सा एक चर तय करें — आर्थिक निर्णय, या शहर? एक बताइए, उसे अकेले लेंगे।"
+      "en": "Which single variable do you want fixed first — the construction, or the city? Say one and I will take it alone.",
+      "hi": "पहले कौन-सा एक चर तय करें — निर्माण कार्य, या शहर? एक बताइए, उसे अकेले लेंगे।"
     }
   },
   "provenance": {
@@ -424,7 +487,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "7582ae63ef0373e0",
-    "card_hash": "f93236bb539f7a25",
+    "card_hash": "9e5fd30c6095e35f",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Sun in the 6th (Gemini).",
-            "hi": "सूर्य षष्ठ भाव (मिथुन) में।"
+            "en": "Sun in the 11th (Gemini).",
+            "hi": "सूर्य एकादश भाव (मिथुन) में।"
           },
           {
-            "en": "Moon in the 1st (Capricorn).",
-            "hi": "चंद्र प्रथम भाव (मकर) में।"
+            "en": "Saturn in the 7th (Aquarius), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.",
+            "hi": "शनि सप्तम भाव (कुंभ) में, वक्री — फल दोबारा आता है — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5d5bd36863e2327b",
-    "card_hash": "9dd9bef1e4c35ce3",
+    "card_hash": "ec8ecc9782ab133d",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

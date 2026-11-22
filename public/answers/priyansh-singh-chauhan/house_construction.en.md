@@ -1,5 +1,5 @@
 # Priyansh Singh Chauhan — Direct Answer
-<!-- card_hash: 9a1997ebf7b26c1b | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: efb8be3199a7fbca | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (56%) (average, 56%)
 
@@ -7,8 +7,8 @@ New house construction: average (56%) (average, 56%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 2nd (Scorpio).
-- Ketu in the 4th (Sagittarius), retrograde — the result arrives in re-runs.
+- Venus in the 5th (Scorpio).
+- Sun in the 4th (Libra) — debilitated, the promise needs repair.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

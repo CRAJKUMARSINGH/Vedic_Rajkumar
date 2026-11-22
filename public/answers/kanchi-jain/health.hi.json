@@ -98,8 +98,8 @@
         },
         "citations": [
           {
-            "en": "Mercury in the 2nd (Leo).",
-            "hi": "बुध द्वितीय भाव (सिंह) में।"
+            "en": "Mercury in the 3rd (Leo).",
+            "hi": "बुध तृतीय भाव (सिंह) में।"
           },
           {
             "en": "Moon in the 1st (Gemini).",
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "1f20dd6fbc8ae1ca",
-    "card_hash": "637fbe9f756963e1",
+    "card_hash": "b010a98892a8f2f3",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

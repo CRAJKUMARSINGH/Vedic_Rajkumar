@@ -1,5 +1,5 @@
 # Hunar Jain — Direct Answer
-<!-- card_hash: 937afd133df251d7 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 47630b380ed0a794 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: caution (53%) (caution, 53%)
 
@@ -7,8 +7,8 @@ Career: caution (53%) (caution, 53%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Sun in the 2nd (Leo) — in its own sign, self-contained but slow to move.
-- Mars in the 12th (Cancer) — debilitated, the promise needs repair.
+- Sun in the 10th (Leo) — in its own sign, self-contained but slow to move.
+- Sun in the 10th (Leo) — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

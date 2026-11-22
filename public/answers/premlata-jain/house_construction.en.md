@@ -1,5 +1,5 @@
 # Premlata Jain — Direct Answer
-<!-- card_hash: 81ef7d5e54ddbd1c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: aa6ae868359c61ee | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (49%) (average, 49%)
 
@@ -7,8 +7,8 @@ New house construction: average (49%) (average, 49%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Jupiter in the 7th (Aquarius).
-- Rahu in the 4th (Scorpio), retrograde — the result arrives in re-runs.
+- Jupiter in the 6th (Aquarius).
+- Venus in the 2nd (Libra) — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

@@ -1,5 +1,5 @@
 # Hunar Jain — Direct Answer
-<!-- card_hash: 8c728cc53ae1e442 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: ab5e6f419d30f5ac | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: caution (47%) (caution, 47%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: caution (47%) (caution, 47%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 12th (Cancer) — debilitated, the promise needs repair.
-- Moon in the 1st (Cancer) — in its own sign, self-contained but slow to move.
+- Mars in the 9th (Cancer) — debilitated, the promise needs repair.
+- Mars in the 9th (Cancer) — debilitated, the promise needs repair.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

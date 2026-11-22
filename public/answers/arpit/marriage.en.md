@@ -1,5 +1,5 @@
 # Arpit — Direct Answer
-<!-- card_hash: 230f9723086b1704 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 2cfed6bf1213fb10 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (48%) (average, 48%)
 
@@ -7,8 +7,8 @@ Marriage: average (48%) (average, 48%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 9th (Sagittarius).
-- Mercury in the 7th (Libra), retrograde — the result arrives in re-runs.
+- Mars in the 3rd (Sagittarius).
+- Mars in the 3rd (Sagittarius).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

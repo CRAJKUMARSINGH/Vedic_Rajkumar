@@ -1,5 +1,5 @@
 # Naman Shah — Direct Answer
-<!-- card_hash: 2e3d9ffae3435bc2 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 908648b5718e005c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (53%) (average, 53%)
 
@@ -7,8 +7,8 @@ Finance: average (53%) (average, 53%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 5th (Pisces).
-- Mars in the 10th (Leo), retrograde — the result arrives in re-runs.
+- Saturn in the 3rd (Pisces).
+- Mars in the 8th (Leo), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

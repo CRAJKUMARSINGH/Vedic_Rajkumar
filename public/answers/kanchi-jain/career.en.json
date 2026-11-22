@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Jupiter in the 3rd (Virgo).",
-            "hi": "गुरु तृतीय भाव (कन्या) में।"
+            "en": "Jupiter in the 4th (Virgo).",
+            "hi": "गुरु चतुर्थ भाव (कन्या) में।"
           },
           {
-            "en": "Mercury in the 2nd (Leo).",
-            "hi": "बुध द्वितीय भाव (सिंह) में।"
+            "en": "Mercury in the 3rd (Leo).",
+            "hi": "बुध तृतीय भाव (सिंह) में।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "1f20dd6fbc8ae1ca",
-    "card_hash": "df2b6bc6f5d1fff4",
+    "card_hash": "7353b3f7a5a8fb5d",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

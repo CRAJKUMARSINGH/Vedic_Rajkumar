@@ -1,14 +1,14 @@
 # Hunar Jain — सीधा उत्तर
-<!-- card_hash: c92aa43e9d6ccaad | lang: hi | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: e6ab86103e03484e | lang: hi | generated: 2026-10-24T00:00:00.000Z -->
 
-स्वास्थ्य सावधानी (47%) (सावधानी, 47%) · नया घर निर्माण सामान्य (57%) (सामान्य, 57%) · करियर सावधानी (53%) (सावधानी, 53%) · विवाह सामान्य (50%) (सामान्य, 50%) · आर्थिक सामान्य (53%) (सामान्य, 53%)
+स्वास्थ्य सावधानी (47%) (सावधानी, 47%) · नया घर निर्माण सामान्य (57%) (सामान्य, 57%) · करियर सावधानी (53%) (सावधानी, 53%) · विवाह सामान्य (50%) (सामान्य, 50%) · आर्थिक सामान्य (53%) (सामान्य, 53%) · व्यवसाय व स्वामित्व सावधानी (51%) (सावधानी, 51%)
 
-**हाँ, शर्त के साथ — विवाह कदम। निर्माण कार्य: हाँ, शर्त के साथ।**
+**अभी नहीं — पहले आधार सुधारें — उद्यम। विवाह कदम: हाँ, शर्त के साथ।**
 
 ### क्यों
 निर्णय सामान्य श्लोक पर नहीं, इन स्थितियों पर टिका है:
-- शुक्र द्वादश भाव (कर्क) में।
-- गुरु षष्ठ भाव (धनु) में — स्वराशि में, आत्मनिर्भर पर धीमा।
+- शुक्र नवम भाव (कर्क) में।
+- सूर्य दशम भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।
 
 ### क्रम
 वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — विवाह कदम, फिर निर्माण कार्य, फिर आर्थिक निर्णय। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।
@@ -20,7 +20,7 @@
 - [कुंडली मिलान](/matchmaking)
 - [दशा-क्रम](/dasha)
 
-> पहले कौन-सा एक चर तय करें — निर्माण कार्य, या शहर? एक बताइए, उसे अकेले लेंगे।
+> पहले कौन-सा एक चर तय करें — विवाह कदम, या शहर? एक बताइए, उसे अकेले लेंगे।
 
 ## निर्णय
 | विषय | वर्ग | अंक | विश्वास | समय-सीमा |
@@ -30,6 +30,7 @@
 | करियर | caution | 50 | 0.53 | — |
 | विवाह | average | 66 | 0.5 | — |
 | आर्थिक | average | 58 | 0.53 | — |
+| व्यवसाय व स्वामित्व | caution | 71 | 0.51 | — |
 
 ## क्यों (ऐप यहाँ कैसे पहुँचा)
 ### स्वास्थ्य
@@ -67,10 +68,18 @@ Therefore: for this Jatak's birth promise, wealth is conditional now because Raj
 - Dasha activation (64/100): Venus MD with Venus AD gives 64/100 Dasha clearance for wealth; delivery class is full.
 - Transit timing (32/100): Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
 
+### व्यवसाय व स्वामित्व
+Therefore: for this Jatak's birth promise, career is delayed now because Rajyoga scores 34/100, house promise scores 78/100, Dasha scores 48/100, and transit timing scores 32/100. The final call is DELAYED: career is the leading field at 50/100.
+- Rajyoga gate (34/100): Rajyoga gate is open through Viparita Raj Yoga; status can rise because the forming planets are in the active Dasha field.
+- House promise (78/100): career houses average 78/100 by SAV; strongest is house 1 at 29 points and weakest is house 10 at 28 points.
+- Dasha activation (48/100): Venus MD with Venus AD gives 48/100 Dasha clearance for career; delivery class is full.
+- Transit timing (32/100): Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
+
 ## उपाय
 - कोई नहीं
 
 ## सावधानियाँ
+- समय-सीमाएँ अनुमानित हैं।
 - समय-सीमाएँ अनुमानित हैं।
 - समय-सीमाएँ अनुमानित हैं।
 - समय-सीमाएँ अनुमानित हैं।

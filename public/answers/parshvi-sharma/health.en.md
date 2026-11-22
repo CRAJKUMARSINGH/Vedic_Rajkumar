@@ -1,5 +1,5 @@
 # Parshvi Sharma — Direct Answer
-<!-- card_hash: 2278a0daed767ad4 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: d73f401253c4f9d5 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (49%) (average, 49%)
 
@@ -7,7 +7,7 @@ Health & wellbeing: average (49%) (average, 49%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mercury in the 4th (Capricorn), retrograde — the result arrives in re-runs.
+- Mercury in the 5th (Capricorn), retrograde — the result arrives in re-runs.
 - Moon in the 1st (Virgo).
 
 **Check in the app**

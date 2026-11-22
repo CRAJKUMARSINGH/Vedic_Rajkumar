@@ -1,5 +1,5 @@
 # Dhairya Bittu Arthuna — Direct Answer
-<!-- card_hash: 170ddae118327fbb | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 38560bab08854fcd | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (39%) (average, 39%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: average (39%) (average, 39%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 6th (Gemini).
-- Moon in the 1st (Sagittarius).
+- Mars in the 3rd (Gemini).
+- Sun in the 1st (Aries) — exalted, a clean promise.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

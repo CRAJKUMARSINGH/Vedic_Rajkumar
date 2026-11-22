@@ -1,5 +1,5 @@
 # Hunar Jain — Direct Answer
-<!-- card_hash: ce33ba2c497d24be | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: c96182ffc99f518b | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (53%) (average, 53%)
 
@@ -7,8 +7,8 @@ Finance: average (53%) (average, 53%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Jupiter in the 6th (Sagittarius) — in its own sign, self-contained but slow to move.
-- Sun in the 2nd (Leo) — in its own sign, self-contained but slow to move.
+- Jupiter in the 2nd (Sagittarius) — in its own sign, self-contained but slow to move.
+- Jupiter in the 2nd (Sagittarius) — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

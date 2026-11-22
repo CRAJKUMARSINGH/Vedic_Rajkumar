@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Saturn in the 8th (Pisces), retrograde — the result arrives in re-runs.",
-            "hi": "शनि अष्टम भाव (मीन) में, वक्री — फल दोबारा आता है।"
+            "en": "Saturn in the 5th (Pisces), retrograde — the result arrives in re-runs.",
+            "hi": "शनि पंचम भाव (मीन) में, वक्री — फल दोबारा आता है।"
           },
           {
-            "en": "Jupiter in the 6th (Sagittarius) — in its own sign, self-contained but slow to move.",
-            "hi": "गुरु षष्ठ भाव (धनु) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Jupiter in the 2nd (Sagittarius) — in its own sign, self-contained but slow to move.",
+            "hi": "गुरु द्वितीय भाव (धनु) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "14f95b054682a1c6",
-    "card_hash": "721f2ba4c7519181",
+    "card_hash": "45935c1af0469bb0",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

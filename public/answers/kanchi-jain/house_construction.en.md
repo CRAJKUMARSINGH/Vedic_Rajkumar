@@ -1,5 +1,5 @@
 # Kanchi Jain — Direct Answer
-<!-- card_hash: 92ed921e0c5bcb82 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 491718ea916d9f0e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: caution (43%) (caution, 43%)
 
@@ -7,8 +7,8 @@ New house construction: caution (43%) (caution, 43%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mercury in the 2nd (Leo).
-- Moon in the 1st (Gemini).
+- Mercury in the 3rd (Leo).
+- Jupiter in the 4th (Virgo).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

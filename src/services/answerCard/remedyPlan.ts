@@ -22,6 +22,7 @@ const TOPIC_HOUSES: Record<Topic, readonly number[]> = {
   marriage: [7, 2, 5],
   health: [1, 6, 8],
   house_construction: [4, 2, 11],
+  business: [7, 10, 3, 11],
 };
 
 const DIGNITY_RANK: Record<Exclude<Dignity, 'unknown'>, number> = {

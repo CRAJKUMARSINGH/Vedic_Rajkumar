@@ -1,5 +1,5 @@
 # Kiwangi Jain — Direct Answer
-<!-- card_hash: 92616e0eb8345f9f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 3df49013d23a75b3 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (44%) (average, 44%)
 
@@ -7,8 +7,8 @@ Marriage: average (44%) (average, 44%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Moon in the 1st (Gemini).
-- Sun in the 7th (Sagittarius).
+- Moon in the 6th (Gemini).
+- Saturn in the 9th (Virgo).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

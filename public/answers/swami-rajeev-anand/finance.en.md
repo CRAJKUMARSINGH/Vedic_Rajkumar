@@ -1,5 +1,5 @@
 # Swami Rajeev Anand — Direct Answer
-<!-- card_hash: d91d2e540e04c5ce | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 1ecf1afd36376cc1 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: caution (45%) (caution, 45%)
 
@@ -7,8 +7,8 @@ Finance: caution (45%) (caution, 45%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 11th (Taurus) — in its own sign, self-contained but slow to move.
-- Ketu in the 2nd (Leo), retrograde — the result arrives in re-runs.
+- Venus in the 2nd (Taurus) — in its own sign, self-contained but slow to move.
+- Mercury in the 2nd (Taurus).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

@@ -1,5 +1,5 @@
 # Naman Shah — Direct Answer
-<!-- card_hash: 8aef2ae3280307f2 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 7bd6235a0e5a8d12 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (47%) (average, 47%)
 
@@ -7,8 +7,8 @@ Career: average (47%) (average, 47%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 5th (Pisces) — exalted, a clean promise.
-- Mars in the 10th (Leo), retrograde — the result arrives in re-runs.
+- Venus in the 3rd (Pisces) — exalted, a clean promise.
+- Saturn in the 3rd (Pisces).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

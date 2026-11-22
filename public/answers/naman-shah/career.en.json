@@ -103,12 +103,12 @@
         },
         "citations": [
           {
-            "en": "Venus in the 5th (Pisces) — exalted, a clean promise.",
-            "hi": "शुक्र पंचम भाव (मीन) में — उच्च का, स्पष्ट प्रतिज्ञा।"
+            "en": "Venus in the 3rd (Pisces) — exalted, a clean promise.",
+            "hi": "शुक्र तृतीय भाव (मीन) में — उच्च का, स्पष्ट प्रतिज्ञा।"
           },
           {
-            "en": "Mars in the 10th (Leo), retrograde — the result arrives in re-runs.",
-            "hi": "मंगल दशम भाव (सिंह) में, वक्री — फल दोबारा आता है।"
+            "en": "Saturn in the 3rd (Pisces).",
+            "hi": "शनि तृतीय भाव (मीन) में।"
           }
         ]
       }
@@ -158,7 +158,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "15c88eb8b5e7a89b",
-    "card_hash": "8aef2ae3280307f2",
+    "card_hash": "7bd6235a0e5a8d12",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

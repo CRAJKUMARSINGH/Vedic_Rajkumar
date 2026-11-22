@@ -1,5 +1,5 @@
 # Priyraj Singh Ranawat — Direct Answer
-<!-- card_hash: 60ed2ffff49a8562 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 8af52af3da09c539 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (48%) (average, 48%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: average (48%) (average, 48%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 6th (Pisces).
-- Moon in the 1st (Virgo).
+- Saturn in the 3rd (Pisces).
+- Sun in the 1st (Capricorn).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

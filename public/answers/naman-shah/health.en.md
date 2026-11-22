@@ -1,5 +1,5 @@
 # Naman Shah — Direct Answer
-<!-- card_hash: dc9e01979c0d7bdf | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 5836240d26c7ea78 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (47%) (average, 47%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: average (47%) (average, 47%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 5th (Pisces).
-- Moon in the 1st (Scorpio) — debilitated, the promise needs repair.
+- Saturn in the 3rd (Pisces).
+- Jupiter in the 1st (Capricorn) — debilitated, the promise needs repair.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

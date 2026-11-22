@@ -99,12 +99,12 @@
         },
         "citations": [
           {
-            "en": "Saturn in the 10th (Cancer).",
-            "hi": "शनि दशम भाव (कर्क) में।"
+            "en": "Saturn in the 12th (Cancer).",
+            "hi": "शनि द्वादश भाव (कर्क) में।"
           },
           {
-            "en": "Jupiter in the 7th (Aries), retrograde — the result arrives in re-runs.",
-            "hi": "गुरु सप्तम भाव (मेष) में, वक्री — फल दोबारा आता है।"
+            "en": "Mercury in the 2nd (Virgo) — exalted, a clean promise.",
+            "hi": "बुध द्वितीय भाव (कन्या) में — उच्च का, स्पष्ट प्रतिज्ञा।"
           }
         ]
       }
@@ -154,7 +154,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "ff572c3f4d15ed2a",
-    "card_hash": "a277b30ce9332124",
+    "card_hash": "d6e6e32999bee54b",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

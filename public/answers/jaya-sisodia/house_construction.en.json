@@ -99,12 +99,12 @@
         },
         "citations": [
           {
-            "en": "Mars in the 4th (Taurus).",
-            "hi": "मंगल चतुर्थ भाव (वृषभ) में।"
+            "en": "Mars in the 10th (Taurus).",
+            "hi": "मंगल दशम भाव (वृषभ) में।"
           },
           {
-            "en": "Mars in the 4th (Taurus).",
-            "hi": "मंगल चतुर्थ भाव (वृषभ) में।"
+            "en": "Mercury in the 11th (Gemini), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.",
+            "hi": "बुध एकादश भाव (मिथुन) में, वक्री — फल दोबारा आता है — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       }
@@ -154,7 +154,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5d5bd36863e2327b",
-    "card_hash": "00722eed2b1d8f88",
+    "card_hash": "690e7b6039e78b1f",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

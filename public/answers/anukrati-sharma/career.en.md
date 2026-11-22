@@ -1,5 +1,5 @@
 # Anukrati Sharma — Direct Answer
-<!-- card_hash: 8de75e6516921095 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: cb62a91c90474fe8 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (44%) (average, 44%)
 
@@ -7,8 +7,8 @@ Career: average (44%) (average, 44%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 6th (Taurus), retrograde — the result arrives in re-runs.
-- Venus in the 1st (Sagittarius).
+- Saturn in the 1st (Taurus), retrograde — the result arrives in re-runs.
+- Venus in the 8th (Sagittarius).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

@@ -1,5 +1,5 @@
 # Swami Rajeev Anand — Direct Answer
-<!-- card_hash: f167ab8643334bb8 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 2312dd641e09c4f6 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: caution (35%) (caution, 35%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: caution (35%) (caution, 35%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 12th (Gemini).
-- Moon in the 1st (Gemini).
+- Mars in the 3rd (Gemini).
+- Sun in the 1st (Aries) — exalted, a clean promise.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

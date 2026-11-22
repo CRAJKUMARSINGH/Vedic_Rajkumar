@@ -1,5 +1,5 @@
 # Mummy — Direct Answer
-<!-- card_hash: d3bb9de10ab56491 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: b7872af9a4060c62 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: good (41%) (good, 41%)
 
@@ -7,8 +7,8 @@ Marriage: good (41%) (good, 41%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 4th (Cancer).
-- Jupiter in the 7th (Libra).
+- Saturn in the 12th (Cancer).
+- Mercury in the 1st (Leo).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

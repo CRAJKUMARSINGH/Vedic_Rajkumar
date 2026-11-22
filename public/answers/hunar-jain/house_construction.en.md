@@ -1,5 +1,5 @@
 # Hunar Jain — Direct Answer
-<!-- card_hash: 721f2ba4c7519181 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 45935c1af0469bb0 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (57%) (average, 57%)
 
@@ -7,8 +7,8 @@ New house construction: average (57%) (average, 57%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 8th (Pisces), retrograde — the result arrives in re-runs.
-- Jupiter in the 6th (Sagittarius) — in its own sign, self-contained but slow to move.
+- Saturn in the 5th (Pisces), retrograde — the result arrives in re-runs.
+- Jupiter in the 2nd (Sagittarius) — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

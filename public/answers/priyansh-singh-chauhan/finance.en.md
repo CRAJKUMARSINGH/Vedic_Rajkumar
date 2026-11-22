@@ -1,5 +1,5 @@
 # Priyansh Singh Chauhan — Direct Answer
-<!-- card_hash: 5b8c1350df2c6767 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 11a6d6e8aec7a816 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (53%) (average, 53%)
 
@@ -7,8 +7,8 @@ Finance: average (53%) (average, 53%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Sun in the 1st (Libra) — debilitated, the promise needs repair.
-- Venus in the 2nd (Scorpio).
+- Sun in the 4th (Libra) — debilitated, the promise needs repair.
+- Venus in the 5th (Scorpio).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

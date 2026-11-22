@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { ALL_TOPICS, type Topic } from '@/services/answerCard/AnswerCard.types';
 
-export const TOPIC_VALUES = ['health', 'house_construction', 'career', 'marriage', 'finance'] as const;
+export const TOPIC_VALUES = ['health', 'house_construction', 'career', 'marriage', 'finance', 'business'] as const;
 
 /** `YYYY-MM-DD`. Shared by the zod schemas and the hand-validated routes. */
 export const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/;

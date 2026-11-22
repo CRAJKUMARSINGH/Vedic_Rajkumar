@@ -99,12 +99,12 @@
         },
         "citations": [
           {
-            "en": "Venus in the 11th (Leo), retrograde — the result arrives in re-runs.",
-            "hi": "शुक्र एकादश भाव (सिंह) में, वक्री — फल दोबारा आता है।"
+            "en": "Venus in the 1st (Leo), retrograde — the result arrives in re-runs.",
+            "hi": "शुक्र प्रथम भाव (सिंह) में, वक्री — फल दोबारा आता है।"
           },
           {
-            "en": "Saturn in the 10th (Cancer).",
-            "hi": "शनि दशम भाव (कर्क) में।"
+            "en": "Mars in the 10th (Taurus).",
+            "hi": "मंगल दशम भाव (वृषभ) में।"
           }
         ]
       }
@@ -154,7 +154,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "ff572c3f4d15ed2a",
-    "card_hash": "019de614c7bb400e",
+    "card_hash": "db988e5fba59f68a",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

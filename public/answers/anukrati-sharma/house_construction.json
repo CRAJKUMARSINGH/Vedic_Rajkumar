@@ -104,12 +104,12 @@
         },
         "citations": [
           {
-            "en": "Sun in the 1st (Sagittarius).",
-            "hi": "सूर्य प्रथम भाव (धनु) में।"
+            "en": "Sun in the 8th (Sagittarius).",
+            "hi": "सूर्य अष्टम भाव (धनु) में।"
           },
           {
-            "en": "Mercury in the 2nd (Capricorn).",
-            "hi": "बुध द्वितीय भाव (मकर) में।"
+            "en": "Mercury in the 9th (Capricorn).",
+            "hi": "बुध नवम भाव (मकर) में।"
           }
         ]
       }
@@ -159,7 +159,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5e5698f0b3ae95af",
-    "card_hash": "6c86f13e717fd846",
+    "card_hash": "82f4ce56bbc29586",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

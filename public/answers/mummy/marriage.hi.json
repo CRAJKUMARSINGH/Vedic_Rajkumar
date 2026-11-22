@@ -99,12 +99,12 @@
         },
         "citations": [
           {
-            "en": "Saturn in the 4th (Cancer).",
-            "hi": "शनि चतुर्थ भाव (कर्क) में।"
+            "en": "Saturn in the 12th (Cancer).",
+            "hi": "शनि द्वादश भाव (कर्क) में।"
           },
           {
-            "en": "Jupiter in the 7th (Libra).",
-            "hi": "गुरु सप्तम भाव (तुला) में।"
+            "en": "Mercury in the 1st (Leo).",
+            "hi": "बुध प्रथम भाव (सिंह) में।"
           }
         ]
       }
@@ -154,7 +154,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "74e54a095e91fd62",
-    "card_hash": "d46ed1c54b8520ab",
+    "card_hash": "3b3c75ed402f2f74",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

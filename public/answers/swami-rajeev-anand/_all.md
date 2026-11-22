@@ -1,14 +1,18 @@
 # Swami Rajeev Anand — सीधा उत्तर
-<!-- card_hash: b4863a72b122b333 | lang: hi | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 716dfcef29513b3e | lang: hi | generated: 2026-10-24T00:00:00.000Z -->
 
-स्वास्थ्य सावधानी (35%) (सावधानी, 35%) · नया घर निर्माण सावधानी (46%) (सावधानी, 46%) · करियर सामान्य (49%) (सामान्य, 49%) · विवाह प्रतिकूल (58%) (प्रतिकूल, 58%) · आर्थिक सावधानी (45%) (सावधानी, 45%)
+स्वास्थ्य सावधानी (35%) (सावधानी, 35%) · नया घर निर्माण सावधानी (46%) (सावधानी, 46%) · करियर सामान्य (49%) (सामान्य, 49%) · विवाह प्रतिकूल (58%) (प्रतिकूल, 58%) · आर्थिक सावधानी (45%) (सावधानी, 45%) · व्यवसाय व स्वामित्व सामान्य (43%) (सामान्य, 43%)
 
-**हाँ, शर्त के साथ — नौकरी परिवर्तन। स्वास्थ्य नियम: अभी नहीं — पहले आधार सुधारें।**
+**हाँ, शर्त के साथ — उद्यम। नौकरी परिवर्तन: हाँ, शर्त के साथ।**
 
 ### क्यों
 निर्णय सामान्य श्लोक पर नहीं, इन स्थितियों पर टिका है:
-- शनि षष्ठ भाव (धनु) में, वक्री — फल दोबारा आता है।
-- मंगल द्वादश भाव (मिथुन) में।
+- शुक्र द्वितीय भाव (वृषभ) में — स्वराशि में, आत्मनिर्भर पर धीमा।
+- शनि नवम भाव (धनु) में, वक्री — फल दोबारा आता है।
+
+### क्रम
+वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — उद्यम, फिर नौकरी परिवर्तन। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।
+
 
 **ऐप में देखें**
 - [गोचर परत](/transits)
@@ -16,7 +20,7 @@
 - [कुंडली मिलान](/matchmaking)
 - [दशा-क्रम](/dasha)
 
-> पहले कौन-सा एक चर तय करें — स्वास्थ्य नियम, या शहर? एक बताइए, उसे अकेले लेंगे।
+> पहले कौन-सा एक चर तय करें — नौकरी परिवर्तन, या शहर? एक बताइए, उसे अकेले लेंगे।
 
 ## निर्णय
 | विषय | वर्ग | अंक | विश्वास | समय-सीमा |
@@ -26,6 +30,7 @@
 | करियर | average | 67 | 0.49 | — |
 | विवाह | avoid | 33 | 0.58 | — |
 | आर्थिक | caution | 44 | 0.45 | — |
+| व्यवसाय व स्वामित्व | average | 73 | 0.43 | — |
 
 ## क्यों (ऐप यहाँ कैसे पहुँचा)
 ### स्वास्थ्य
@@ -63,7 +68,15 @@ Therefore: for this Jatak's birth promise, wealth is delayed now because Rajyoga
 - Dasha activation (66/100): Mercury MD with Mars AD gives 66/100 Dasha clearance for wealth; delivery class is full.
 - Transit timing (32/100): Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
 
+### व्यवसाय व स्वामित्व
+Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 0/100, house promise scores 100/100, Dasha scores 84/100, and transit timing scores 78/100. The final call is CONDITIONAL: career is the leading field at 67/100.
+- Rajyoga gate (0/100): Viparita Raj Yoga is present but broken by Shadbala gate; the yoga cannot be treated as a clean promise.
+- House promise (100/100): career houses average 100/100 by SAV; strongest is house 1 at 36 points and weakest is house 10 at 30 points.
+- Dasha activation (84/100): Mercury MD with Mars AD gives 84/100 Dasha clearance for career; delivery class is full.
+- Transit timing (78/100): Therefore: Career timing is structurally supported now if Dasha also confirms.
+
 ## उपाय
+- Mars
 - Mars
 - Mars
 - Mars
@@ -71,6 +84,7 @@ Therefore: for this Jatak's birth promise, wealth is delayed now because Rajyoga
 - Mars
 
 ## सावधानियाँ
+- समय-सीमाएँ अनुमानित हैं।
 - समय-सीमाएँ अनुमानित हैं।
 - समय-सीमाएँ अनुमानित हैं।
 - समय-सीमाएँ अनुमानित हैं।

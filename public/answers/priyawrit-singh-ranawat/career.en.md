@@ -1,5 +1,5 @@
 # Priyawrit Singh Ranawat — Direct Answer
-<!-- card_hash: 95a1de927b845e78 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: b13e40f24469f909 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (53%) (average, 53%)
 
@@ -7,8 +7,8 @@ Career: average (53%) (average, 53%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Moon in the 1st (Virgo).
-- Venus in the 12th (Leo).
+- Moon in the 12th (Virgo).
+- Rahu in the 10th (Cancer), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

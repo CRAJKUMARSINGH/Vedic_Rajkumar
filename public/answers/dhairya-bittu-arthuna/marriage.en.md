@@ -1,5 +1,5 @@
 # Dhairya Bittu Arthuna — Direct Answer
-<!-- card_hash: f44c435d696f527c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 0dfdc29b9ff1abf3 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (46%) (average, 46%)
 
@@ -7,8 +7,8 @@ Marriage: average (46%) (average, 46%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 5th (Aries).
-- Venus in the 5th (Aries).
+- Venus in the 1st (Aries).
+- Venus in the 1st (Aries).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

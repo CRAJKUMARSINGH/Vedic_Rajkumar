@@ -1,8 +1,8 @@
 {
   "name": "Vedic Rajkumar",
   "kind": "deterministic-answer-service",
-  "contract_version": "1.3",
-  "updated": "2026-10-26",
+  "contract_version": "1.4",
+  "updated": "2026-11-22",
   "instructions": "Read answer cards; reply from direct_answer; do not recompute.",
   "endpoints": {
     "answer_index": "/answers/index.json",
@@ -99,6 +99,7 @@
     "house_construction",
     "career",
     "marriage",
-    "finance"
+    "finance",
+    "business"
   ]
 }

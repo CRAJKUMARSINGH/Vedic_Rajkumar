@@ -19,6 +19,7 @@ const TOPIC_WORD: Record<Topic, Bi> = {
   marriage: { en: 'the marriage step', hi: 'विवाह कदम' },
   health: { en: 'the health regimen', hi: 'स्वास्थ्य नियम' },
   house_construction: { en: 'the construction', hi: 'निर्माण कार्य' },
+  business: { en: 'the venture', hi: 'उद्यम' },
 };
 
 export interface Sequencing {

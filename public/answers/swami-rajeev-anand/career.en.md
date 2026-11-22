@@ -1,5 +1,5 @@
 # Swami Rajeev Anand — Direct Answer
-<!-- card_hash: c82a4bab705d9432 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 3d5b785638f5a860 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (49%) (average, 49%)
 
@@ -7,8 +7,8 @@ Career: average (49%) (average, 49%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 6th (Sagittarius), retrograde — the result arrives in re-runs.
-- Mars in the 12th (Gemini).
+- Saturn in the 9th (Sagittarius), retrograde — the result arrives in re-runs.
+- Mars in the 3rd (Gemini).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

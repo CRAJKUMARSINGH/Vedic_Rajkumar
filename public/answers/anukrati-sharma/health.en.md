@@ -1,5 +1,5 @@
 # Anukrati Sharma — Direct Answer
-<!-- card_hash: ab6d881772fa8ab3 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 61c07fa1b0cb4e15 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (50%) (average, 50%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: average (50%) (average, 50%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 1st (Sagittarius).
-- Sun in the 1st (Sagittarius).
+- Venus in the 8th (Sagittarius).
+- Saturn in the 1st (Taurus), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

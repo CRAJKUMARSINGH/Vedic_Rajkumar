@@ -1,17 +1,17 @@
 # Priyansh Singh Chauhan — Direct Answer
-<!-- card_hash: 903a9191b660f96e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 6e5537aa28343a3f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
-Health & wellbeing: average (50%) (average, 50%) · New house construction: average (56%) (average, 56%) · Career: average (42%) (average, 42%) · Marriage: caution (55%) (caution, 55%) · Finance: average (53%) (average, 53%)
+Health & wellbeing: average (50%) (average, 50%) · New house construction: average (56%) (average, 56%) · Career: average (42%) (average, 42%) · Marriage: caution (55%) (caution, 55%) · Finance: average (53%) (average, 53%) · Business & ownership: average (44%) (average, 44%)
 
-**yes, conditionally — the job change. the health regimen: yes, conditionally.**
+**yes, conditionally — the job change. the venture: yes, conditionally.**
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 12th (Virgo).
-- Rahu in the 10th (Gemini), retrograde — the result arrives in re-runs.
+- Mars in the 3rd (Virgo).
+- Moon in the 3rd (Virgo).
 
 ### Sequence
-Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the job change, then the health regimen, then the construction, then the money decision. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the job change, then the venture, then the health regimen, then the construction, then the money decision. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
 
 
 **Check in the app**
@@ -20,7 +20,7 @@ Optional planning note: if you are acting on several matters, many practitioners
 - [Kundli Milan](/matchmaking)
 - [Dasha timeline](/dasha)
 
-> Which single variable do you want fixed first — the health regimen, or the city? Say one and I will take it alone.
+> Which single variable do you want fixed first — the venture, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
@@ -30,6 +30,7 @@ Optional planning note: if you are acting on several matters, many practitioners
 | Career | average | 70 | 0.42 | — |
 | Marriage | caution | 52 | 0.55 | — |
 | Finance | average | 62 | 0.53 | — |
+| Business & ownership | average | 68 | 0.44 | — |
 
 ## Why (how the app arrived here)
 ### Health & wellbeing
@@ -67,7 +68,15 @@ Therefore: for this Jatak's birth promise, wealth is conditional now because Raj
 - Dasha activation (64/100): Rahu MD with Moon AD gives 64/100 Dasha clearance for wealth; delivery class is standard.
 - Transit timing (32/100): Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
 
+### Business & ownership
+Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 50/100, house promise scores 93/100, Dasha scores 81/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 70/100.
+- Rajyoga gate (50/100): Rajyoga gate is open through Raj Yoga, Mahabhagya Yoga; status can rise because the forming planets are in the active Dasha field.
+- House promise (93/100): career houses average 93/100 by SAV; strongest is house 1 at 38 points and weakest is house 10 at 26 points.
+- Dasha activation (81/100): Rahu MD with Moon AD gives 81/100 Dasha clearance for career; delivery class is standard.
+- Transit timing (32/100): Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
+
 ## Remedies
+- Rahu
 - Rahu
 - Rahu
 - Rahu
@@ -75,6 +84,7 @@ Therefore: for this Jatak's birth promise, wealth is conditional now because Raj
 - Rahu
 
 ## Caveats
+- Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.

@@ -1,17 +1,17 @@
 # Parshvi Sharma — सीधा उत्तर
-<!-- card_hash: 0ff79557f55d4a84 | lang: hi | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 50f9f0c77c69380d | lang: hi | generated: 2026-10-24T00:00:00.000Z -->
 
-स्वास्थ्य सामान्य (49%) (सामान्य, 49%) · नया घर निर्माण अनुकूल (46%) (अनुकूल, 46%) · करियर सामान्य (57%) (सामान्य, 57%) · विवाह अनुकूल (47%) (अनुकूल, 47%) · आर्थिक अनुकूल (47%) (अनुकूल, 47%)
+स्वास्थ्य सामान्य (49%) (सामान्य, 49%) · नया घर निर्माण अनुकूल (46%) (अनुकूल, 46%) · करियर सामान्य (57%) (सामान्य, 57%) · विवाह अनुकूल (47%) (अनुकूल, 47%) · आर्थिक अनुकूल (47%) (अनुकूल, 47%) · व्यवसाय व स्वामित्व सामान्य (53%) (सामान्य, 53%)
 
 **हाँ — पर पहले अड़चन हटाएँ — आर्थिक निर्णय। विवाह कदम: हाँ — पर पहले अड़चन हटाएँ।**
 
 ### क्यों
 निर्णय सामान्य श्लोक पर नहीं, इन स्थितियों पर टिका है:
-- शुक्र चतुर्थ भाव (मकर) में।
+- शुक्र पंचम भाव (मकर) में।
 - चंद्र प्रथम भाव (कन्या) में।
 
 ### क्रम
-वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — आर्थिक निर्णय, फिर विवाह कदम, फिर निर्माण कार्य, फिर नौकरी परिवर्तन, फिर स्वास्थ्य नियम। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।
+वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — आर्थिक निर्णय, फिर विवाह कदम, फिर निर्माण कार्य, फिर उद्यम, फिर नौकरी परिवर्तन, फिर स्वास्थ्य नियम। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।
 
 
 **ऐप में देखें**
@@ -30,6 +30,7 @@
 | करियर | average | 69 | 0.57 | — |
 | विवाह | good | 81 | 0.47 | — |
 | आर्थिक | good | 81 | 0.47 | — |
+| व्यवसाय व स्वामित्व | average | 77 | 0.53 | — |
 
 ## क्यों (ऐप यहाँ कैसे पहुँचा)
 ### स्वास्थ्य
@@ -67,10 +68,18 @@ Therefore: for this Jatak's birth promise, wealth is delivering now because Rajy
 - Dasha activation (100/100): Jupiter MD with Jupiter AD gives 100/100 Dasha clearance for wealth; delivery class is full.
 - Transit timing (32/100): Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
 
+### व्यवसाय व स्वामित्व
+Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 86/100, house promise scores 85/100, Dasha scores 60/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 69/100.
+- Rajyoga gate (86/100): Rajyoga gate is open through Raj Yoga, Maha Parivartana Yoga; status can rise because the forming planets are in the active Dasha field.
+- House promise (85/100): career houses average 85/100 by SAV; strongest is house 10 at 31 points and weakest is house 6 at 26 points.
+- Dasha activation (60/100): Jupiter MD with Jupiter AD gives 60/100 Dasha clearance for career; delivery class is full.
+- Transit timing (32/100): Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
+
 ## उपाय
 - कोई नहीं
 
 ## सावधानियाँ
+- समय-सीमाएँ अनुमानित हैं।
 - समय-सीमाएँ अनुमानित हैं।
 - समय-सीमाएँ अनुमानित हैं।
 - समय-सीमाएँ अनुमानित हैं।

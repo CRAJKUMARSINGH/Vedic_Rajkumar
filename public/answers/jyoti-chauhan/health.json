@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Moon in the 1st (Aries).",
-            "hi": "चंद्र प्रथम भाव (मेष) में।"
+            "en": "Moon in the 10th (Aries).",
+            "hi": "चंद्र दशम भाव (मेष) में।"
           },
           {
-            "en": "Moon in the 1st (Aries).",
-            "hi": "चंद्र प्रथम भाव (मेष) में।"
+            "en": "Jupiter in the 3rd (Virgo), retrograde — the result arrives in re-runs.",
+            "hi": "गुरु तृतीय भाव (कन्या) में, वक्री — फल दोबारा आता है।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "a49c15e608b6b6f3",
-    "card_hash": "028b013a4390ad1a",
+    "card_hash": "dbd9b81662322b0b",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

@@ -1,5 +1,5 @@
 # Ajit Singh Chauhan — Direct Answer
-<!-- card_hash: 7081e2472a5befac | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: a8740e85bf9f6d13 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: good (44%) (good, 44%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: good (44%) (good, 44%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Sun in the 12th (Leo) — in its own sign, self-contained but slow to move.
-- Moon in the 1st (Virgo).
+- Sun in the 1st (Leo) — in its own sign, self-contained but slow to move.
+- Sun in the 1st (Leo) — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

@@ -104,12 +104,12 @@
         },
         "citations": [
           {
-            "en": "Mars in the 3rd (Pisces).",
-            "hi": "मंगल तृतीय भाव (मीन) में।"
+            "en": "Mars in the 11th (Pisces).",
+            "hi": "मंगल एकादश भाव (मीन) में।"
           },
           {
-            "en": "Jupiter in the 7th (Gemini), retrograde — the result arrives in re-runs.",
-            "hi": "गुरु सप्तम भाव (मिथुन) में, वक्री — फल दोबारा आता है।"
+            "en": "Mercury in the 9th (Capricorn).",
+            "hi": "बुध नवम भाव (मकर) में।"
           }
         ]
       }
@@ -159,7 +159,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5e5698f0b3ae95af",
-    "card_hash": "5c8941e06df73b6f",
+    "card_hash": "c5d2fb0843a5164f",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

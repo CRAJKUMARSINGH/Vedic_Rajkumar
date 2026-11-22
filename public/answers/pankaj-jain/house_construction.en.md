@@ -1,5 +1,5 @@
 # Pankaj Jain — Direct Answer
-<!-- card_hash: 6009b360caa719d5 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 4497eb586a898898 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (44%) (average, 44%)
 
@@ -7,8 +7,8 @@ New house construction: average (44%) (average, 44%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Moon in the 1st (Virgo).
-- Venus in the 11th (Cancer).
+- Moon in the 6th (Virgo).
+- Sun in the 4th (Cancer).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

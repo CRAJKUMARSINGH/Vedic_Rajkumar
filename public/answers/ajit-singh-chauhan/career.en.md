@@ -1,5 +1,5 @@
 # Ajit Singh Chauhan — Direct Answer
-<!-- card_hash: 12d771b061419cc8 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 2770703f0dd680e8 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (52%) (average, 52%)
 
@@ -7,8 +7,8 @@ Career: average (52%) (average, 52%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 11th (Leo), retrograde — the result arrives in re-runs.
-- Saturn in the 10th (Cancer).
+- Venus in the 1st (Leo), retrograde — the result arrives in re-runs.
+- Mars in the 10th (Taurus).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

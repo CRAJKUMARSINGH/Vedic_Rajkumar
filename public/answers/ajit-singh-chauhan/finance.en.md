@@ -1,5 +1,5 @@
 # Ajit Singh Chauhan — Direct Answer
-<!-- card_hash: 9adfca38bdc8ffa5 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 563fc68e63a10967 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (39%) (average, 39%)
 
@@ -7,8 +7,8 @@ Finance: average (39%) (average, 39%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mercury in the 1st (Virgo) — exalted, a clean promise.
-- Rahu in the 2nd (Scorpio), retrograde — the result arrives in re-runs.
+- Mercury in the 2nd (Virgo) — exalted, a clean promise.
+- Moon in the 2nd (Virgo).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

@@ -1,5 +1,5 @@
 # Naman Shah — Direct Answer
-<!-- card_hash: 6c85773ab5ab68a6 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: ee828cdd624d5ced | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (57%) (average, 57%)
 
@@ -7,8 +7,8 @@ New house construction: average (57%) (average, 57%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 10th (Leo), retrograde — the result arrives in re-runs.
-- Ketu in the 4th (Pisces), retrograde — the result arrives in re-runs.
+- Mars in the 8th (Leo), retrograde — the result arrives in re-runs.
+- Mercury in the 4th (Aries).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

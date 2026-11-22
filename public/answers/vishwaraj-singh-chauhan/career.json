@@ -99,12 +99,12 @@
         },
         "citations": [
           {
-            "en": "Mars in the 2nd (Cancer) — debilitated, the promise needs repair.",
-            "hi": "मंगल द्वितीय भाव (कर्क) में — नीच का, प्रतिज्ञा की मरम्मत चाहिए।"
+            "en": "Mars in the 1st (Cancer) — debilitated, the promise needs repair.",
+            "hi": "मंगल प्रथम भाव (कर्क) में — नीच का, प्रतिज्ञा की मरम्मत चाहिए।"
           },
           {
-            "en": "Moon in the 1st (Taurus) — exalted, a clean promise.",
-            "hi": "चंद्र प्रथम भाव (वृषभ) में — उच्च का, स्पष्ट प्रतिज्ञा।"
+            "en": "Ketu in the 10th (Aries), retrograde — the result arrives in re-runs.",
+            "hi": "केतु दशम भाव (मेष) में, वक्री — फल दोबारा आता है।"
           }
         ]
       }
@@ -154,7 +154,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "3476adaadc8caf27",
-    "card_hash": "f997cbc1f7ed7dd4",
+    "card_hash": "ed3e5e3c2fcb2bc5",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

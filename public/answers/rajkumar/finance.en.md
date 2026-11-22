@@ -1,5 +1,5 @@
 # Rajkumar — Direct Answer
-<!-- card_hash: 56fabb83b76f1a60 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 42f1c8674dd1a035 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (52%) (average, 52%)
 
@@ -8,7 +8,7 @@ Finance: average (52%) (average, 52%)
 ### Why
 The call rests on these placements, not on a general stanza:
 - Mercury in the 2nd (Virgo), retrograde — the result arrives in re-runs — exalted, a clean promise.
-- Sun in the 2nd (Leo) — in its own sign, self-contained but slow to move.
+- Mercury in the 2nd (Virgo), retrograde — the result arrives in re-runs — exalted, a clean promise.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

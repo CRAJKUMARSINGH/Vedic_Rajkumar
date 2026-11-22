@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Mars in the 9th (Sagittarius).",
-            "hi": "मंगल नवम भाव (धनु) में।"
+            "en": "Mars in the 3rd (Sagittarius).",
+            "hi": "मंगल तृतीय भाव (धनु) में।"
           },
           {
-            "en": "Mercury in the 7th (Libra), retrograde — the result arrives in re-runs.",
-            "hi": "बुध सप्तम भाव (तुला) में, वक्री — फल दोबारा आता है।"
+            "en": "Mars in the 3rd (Sagittarius).",
+            "hi": "मंगल तृतीय भाव (धनु) में।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "87309c17dc1bb6f0",
-    "card_hash": "230f9723086b1704",
+    "card_hash": "2cfed6bf1213fb10",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

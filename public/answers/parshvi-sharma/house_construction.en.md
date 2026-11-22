@@ -1,5 +1,5 @@
 # Parshvi Sharma — Direct Answer
-<!-- card_hash: 51f0c66d52172cdc | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: f079c4e81e958600 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: good (46%) (good, 46%)
 
@@ -7,8 +7,8 @@ New house construction: good (46%) (good, 46%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Jupiter in the 9th (Gemini), retrograde — the result arrives in re-runs.
-- Sun in the 4th (Capricorn).
+- Jupiter in the 10th (Gemini), retrograde — the result arrives in re-runs.
+- Ketu in the 4th (Sagittarius), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

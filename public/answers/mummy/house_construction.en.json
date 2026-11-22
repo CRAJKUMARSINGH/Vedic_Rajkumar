@@ -99,12 +99,12 @@
         },
         "citations": [
           {
-            "en": "Mars in the 3rd (Gemini).",
-            "hi": "मंगल तृतीय भाव (मिथुन) में।"
+            "en": "Mars in the 11th (Gemini).",
+            "hi": "मंगल एकादश भाव (मिथुन) में।"
           },
           {
-            "en": "Saturn in the 4th (Cancer).",
-            "hi": "शनि चतुर्थ भाव (कर्क) में।"
+            "en": "Ketu in the 4th (Scorpio), retrograde — the result arrives in re-runs.",
+            "hi": "केतु चतुर्थ भाव (वृश्चिक) में, वक्री — फल दोबारा आता है।"
           }
         ]
       }
@@ -154,7 +154,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "74e54a095e91fd62",
-    "card_hash": "f990cb5e686ad64c",
+    "card_hash": "eea4a8be3a9a8ebb",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Jupiter in the 6th (Sagittarius) — in its own sign, self-contained but slow to move.",
-            "hi": "गुरु षष्ठ भाव (धनु) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Jupiter in the 2nd (Sagittarius) — in its own sign, self-contained but slow to move.",
+            "hi": "गुरु द्वितीय भाव (धनु) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           },
           {
-            "en": "Sun in the 2nd (Leo) — in its own sign, self-contained but slow to move.",
-            "hi": "सूर्य द्वितीय भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Jupiter in the 2nd (Sagittarius) — in its own sign, self-contained but slow to move.",
+            "hi": "गुरु द्वितीय भाव (धनु) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "14f95b054682a1c6",
-    "card_hash": "ce33ba2c497d24be",
+    "card_hash": "c96182ffc99f518b",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

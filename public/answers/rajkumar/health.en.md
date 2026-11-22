@@ -1,5 +1,5 @@
 # Rajkumar — Direct Answer
-<!-- card_hash: f04b26b1af408c5a | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: d9afc33616110c7a | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (51%) (average, 51%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: average (51%) (average, 51%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Sun in the 2nd (Leo) — in its own sign, self-contained but slow to move.
-- Moon in the 1st (Cancer) — in its own sign, self-contained but slow to move.
+- Sun in the 1st (Leo) — in its own sign, self-contained but slow to move.
+- Sun in the 1st (Leo) — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

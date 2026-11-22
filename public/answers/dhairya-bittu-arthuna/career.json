@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Saturn in the 1st (Capricorn) — in its own sign, self-contained but slow to move.",
-            "hi": "शनि प्रथम भाव (मकर) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Saturn in the 10th (Capricorn) — in its own sign, self-contained but slow to move.",
+            "hi": "शनि दशम भाव (मकर) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           },
           {
-            "en": "Mars in the 6th (Gemini).",
-            "hi": "मंगल षष्ठ भाव (मिथुन) में।"
+            "en": "Saturn in the 10th (Capricorn) — in its own sign, self-contained but slow to move.",
+            "hi": "शनि दशम भाव (मकर) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "298c7ebe027e9553",
-    "card_hash": "50d9797c453185c7",
+    "card_hash": "b19529663b55a450",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

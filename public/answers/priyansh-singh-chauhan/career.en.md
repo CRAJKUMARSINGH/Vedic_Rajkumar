@@ -1,5 +1,5 @@
 # Priyansh Singh Chauhan — Direct Answer
-<!-- card_hash: a06870d67ba17f8d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 8ec8e5a226268809 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (42%) (average, 42%)
 
@@ -7,8 +7,8 @@ Career: average (42%) (average, 42%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 12th (Virgo).
-- Rahu in the 10th (Gemini), retrograde — the result arrives in re-runs.
+- Mars in the 3rd (Virgo).
+- Moon in the 3rd (Virgo).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

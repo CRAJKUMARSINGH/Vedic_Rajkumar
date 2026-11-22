@@ -19,7 +19,6 @@ import {
   buildJudgmentForArea,
   HOUSE_STRENGTH_SCORE,
   type ConclusiveJatakJudgment,
-  type LifeArea,
 } from '@/services/conclusiveJatakJudgmentService';
 import type { DashaForecastResult } from '@/services/dashaForecastService';
 import { DASHA_SYSTEM } from '@/services/dashaService';
@@ -168,7 +167,7 @@ function buildVerdict(
   };
 }
 
-function composeDirectAnswer(v: Verdict[], lang: Lang): { hi: string; en: string } {
+function composeDirectAnswer(v: Verdict[], _lang: Lang): { hi: string; en: string } {
   const line = (x: Verdict, l: Lang) =>
     `${x.headline[l]} (${BAND_WORD[x.band][l]}, ${Math.round(x.confidence_0_1 * 100)}%` +
     `${x.window ? `, ${x.window.label[l]}` : ''})`;
@@ -231,6 +230,8 @@ export function buildAnswerCard(
       verdicts,
       asked,
       language,
+      chart, // drives the deep-reading sections (positions, yogas, dasha, timing)
+      forecast, // supplies the dasha timeline + timing windows
     }),
   };
 

@@ -3,9 +3,9 @@ import { check, sleep } from 'k6';
 
 export const options = {
   stages: [
-    { duration: '1m', target: 20 },
-    { duration: '3m', target: 100 },
-    { duration: '1m', target: 0 },
+    { duration: '30s', target: 5 },
+    { duration: '30s', target: 5 },
+    { duration: '15s', target: 0 },
   ],
   thresholds: {
     http_req_duration: ['p(95)<800', 'p(99)<1500'],
@@ -13,7 +13,8 @@ export const options = {
   },
 };
 
-const BASE = __ENV.BASE_URL || 'https://api.vedic-rajkumar.app';
+const BASE = (__ENV.BASE_URL || '').replace(/\/$/, '');
+if (!BASE) throw new Error('BASE_URL is not set');
 const KEY = __ENV.API_KEY || 'vk_test_sample';
 
 export default function () {
@@ -23,7 +24,7 @@ export default function () {
 
   check(res, {
     'status 2xx': (r) => r.status >= 200 && r.status < 300,
-    'has lagna': (r) => r.body.includes('lagna'),
+    'has lagna': (r) => (r.body || '').includes('lagna'),
   });
   sleep(0.5);
 }

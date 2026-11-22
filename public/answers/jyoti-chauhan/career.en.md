@@ -1,5 +1,5 @@
 # Jyoti Chauhan — Direct Answer
-<!-- card_hash: bcce280053e109bf | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: c712db9e3910d23e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (44%) (average, 44%)
 
@@ -7,8 +7,8 @@ Career: average (44%) (average, 44%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 7th (Scorpio) — in its own sign, self-contained but slow to move.
-- Mercury in the 10th (Capricorn).
+- Mars in the 5th (Scorpio) — in its own sign, self-contained but slow to move.
+- Moon in the 10th (Aries).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

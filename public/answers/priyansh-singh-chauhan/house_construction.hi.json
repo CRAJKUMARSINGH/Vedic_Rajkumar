@@ -104,12 +104,12 @@
         },
         "citations": [
           {
-            "en": "Venus in the 2nd (Scorpio).",
-            "hi": "शुक्र द्वितीय भाव (वृश्चिक) में।"
+            "en": "Venus in the 5th (Scorpio).",
+            "hi": "शुक्र पंचम भाव (वृश्चिक) में।"
           },
           {
-            "en": "Ketu in the 4th (Sagittarius), retrograde — the result arrives in re-runs.",
-            "hi": "केतु चतुर्थ भाव (धनु) में, वक्री — फल दोबारा आता है।"
+            "en": "Sun in the 4th (Libra) — debilitated, the promise needs repair.",
+            "hi": "सूर्य चतुर्थ भाव (तुला) में — नीच का, प्रतिज्ञा की मरम्मत चाहिए।"
           }
         ]
       }
@@ -159,7 +159,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "108e722a1b7e6599",
-    "card_hash": "67973487ccc83335",
+    "card_hash": "979ff7714545d36c",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

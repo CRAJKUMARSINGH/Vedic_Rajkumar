@@ -98,7 +98,9 @@ export function buildChartFacts(data: ChartData | null | undefined): ChartFacts 
     seen.add(p.name);
     placements.push({
       planet: p.name,
-      house: p.house,
+      // Lagna-referenced (whole-sign). `p.house` from ephemerisService is
+      // Moon-referenced (Chandra lagna) and must NOT be used for a card.
+      house: ascSign === null ? p.house : ((p.rashiIndex - ascSign + 12) % 12) + 1,
       sign: p.rashiIndex,
       retrograde: p.retrograde === true,
       // Prefer canonical dignity when the normalized entry lacks one.

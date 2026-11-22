@@ -14,15 +14,16 @@
       "house_construction",
       "career",
       "marriage",
-      "finance"
+      "finance",
+      "business"
     ],
     "language": "en",
     "as_of": "2026-10-24",
     "reference_type": "natal"
   },
   "direct_answer": {
-    "en": "Health & wellbeing: caution (47%) (caution, 47%) · New house construction: average (57%) (average, 57%) · Career: caution (53%) (caution, 53%) · Marriage: average (50%) (average, 50%) · Finance: average (53%) (average, 53%)",
-    "hi": "स्वास्थ्य सावधानी (47%) (सावधानी, 47%) · नया घर निर्माण सामान्य (57%) (सामान्य, 57%) · करियर सावधानी (53%) (सावधानी, 53%) · विवाह सामान्य (50%) (सामान्य, 50%) · आर्थिक सामान्य (53%) (सामान्य, 53%)"
+    "en": "Health & wellbeing: caution (47%) (caution, 47%) · New house construction: average (57%) (average, 57%) · Career: caution (53%) (caution, 53%) · Marriage: average (50%) (average, 50%) · Finance: average (53%) (average, 53%) · Business & ownership: caution (51%) (caution, 51%)",
+    "hi": "स्वास्थ्य सावधानी (47%) (सावधानी, 47%) · नया घर निर्माण सामान्य (57%) (सामान्य, 57%) · करियर सावधानी (53%) (सावधानी, 53%) · विवाह सामान्य (50%) (सामान्य, 50%) · आर्थिक सामान्य (53%) (सामान्य, 53%) · व्यवसाय व स्वामित्व सावधानी (51%) (सावधानी, 51%)"
   },
   "verdicts": [
     {
@@ -265,15 +266,71 @@
           "hi": "समय-सीमाएँ अनुमानित हैं।"
         }
       ]
+    },
+    {
+      "topic": "business",
+      "headline": {
+        "en": "Business & ownership: caution (51%)",
+        "hi": "व्यवसाय व स्वामित्व सावधानी (51%)"
+      },
+      "score_0_100": 71,
+      "band": "caution",
+      "engine_verdict": "DELAYED",
+      "confidence_0_1": 0.51,
+      "window": null,
+      "rationale": {
+        "en": "Therefore: for this Jatak's birth promise, career is delayed now because Rajyoga scores 34/100, house promise scores 78/100, Dasha scores 48/100, and transit timing scores 32/100. The final call is DELAYED: career is the leading field at 50/100.",
+        "hi": "Therefore: for this Jatak's birth promise, career is delayed now because Rajyoga scores 34/100, house promise scores 78/100, Dasha scores 48/100, and transit timing scores 32/100. The final call is DELAYED: career is the leading field at 50/100."
+      },
+      "conflicts": [
+        "Rajyoga exists, but Dasha is not clean enough; promise remains visible yet delayed in career.",
+        "House promise is real, but transit has not opened the timing gate; do not call immediate fruition."
+      ],
+      "evidence": [
+        {
+          "layer": "Rajyoga gate",
+          "score": 34,
+          "finding": "Rajyoga gate is open through Viparita Raj Yoga; status can rise because the forming planets are in the active Dasha field."
+        },
+        {
+          "layer": "House promise",
+          "score": 78,
+          "finding": "career houses average 78/100 by SAV; strongest is house 1 at 29 points and weakest is house 10 at 28 points."
+        },
+        {
+          "layer": "Dasha activation",
+          "score": 48,
+          "finding": "Venus MD with Venus AD gives 48/100 Dasha clearance for career; delivery class is full."
+        },
+        {
+          "layer": "Transit timing",
+          "score": 32,
+          "finding": "Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses."
+        }
+      ],
+      "remedies": [],
+      "caveats": [
+        {
+          "en": "Windows are approximate.",
+          "hi": "समय-सीमाएँ अनुमानित हैं।"
+        }
+      ]
     }
   ],
   "composed": {
     "verdict_line": {
-      "en": "yes, conditionally — the marriage step. the construction: yes, conditionally.",
-      "hi": "हाँ, शर्त के साथ — विवाह कदम। निर्माण कार्य: हाँ, शर्त के साथ।"
+      "en": "not yet — fix the base first — the venture. the marriage step: yes, conditionally.",
+      "hi": "अभी नहीं — पहले आधार सुधारें — उद्यम। विवाह कदम: हाँ, शर्त के साथ।"
     },
     "depth": "standard",
     "ranked": [
+      {
+        "topic": "business",
+        "decision": {
+          "en": "not yet — fix the base first",
+          "hi": "अभी नहीं — पहले आधार सुधारें"
+        }
+      },
       {
         "topic": "marriage",
         "decision": {
@@ -323,12 +380,12 @@
         },
         "citations": [
           {
-            "en": "Venus in the 12th (Cancer).",
-            "hi": "शुक्र द्वादश भाव (कर्क) में।"
+            "en": "Venus in the 9th (Cancer).",
+            "hi": "शुक्र नवम भाव (कर्क) में।"
           },
           {
-            "en": "Jupiter in the 6th (Sagittarius) — in its own sign, self-contained but slow to move.",
-            "hi": "गुरु षष्ठ भाव (धनु) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Sun in the 10th (Leo) — in its own sign, self-contained but slow to move.",
+            "hi": "सूर्य दशम भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       },
@@ -380,8 +437,8 @@
       }
     ],
     "closing_question": {
-      "en": "Which single variable do you want fixed first — the construction, or the city? Say one and I will take it alone.",
-      "hi": "पहले कौन-सा एक चर तय करें — निर्माण कार्य, या शहर? एक बताइए, उसे अकेले लेंगे।"
+      "en": "Which single variable do you want fixed first — the marriage step, or the city? Say one and I will take it alone.",
+      "hi": "पहले कौन-सा एक चर तय करें — विवाह कदम, या शहर? एक बताइए, उसे अकेले लेंगे।"
     }
   },
   "provenance": {
@@ -393,7 +450,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "14f95b054682a1c6",
-    "card_hash": "83db6b0a4fcaa25b",
+    "card_hash": "c59b2e2c02279290",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

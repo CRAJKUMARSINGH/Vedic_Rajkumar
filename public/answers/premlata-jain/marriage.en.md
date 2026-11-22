@@ -1,5 +1,5 @@
 # Premlata Jain — Direct Answer
-<!-- card_hash: 47998323e7a8aa05 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 423a39ec1588c8d5 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (54%) (average, 54%)
 
@@ -7,8 +7,8 @@ Marriage: average (54%) (average, 54%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Jupiter in the 7th (Aquarius).
-- Jupiter in the 7th (Aquarius).
+- Jupiter in the 6th (Aquarius).
+- Venus in the 2nd (Libra) — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

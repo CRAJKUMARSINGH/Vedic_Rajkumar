@@ -1,5 +1,5 @@
 # Jyoti Chauhan — Direct Answer
-<!-- card_hash: 2e0da96ea91a7f95 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 7618311d3294dca4 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (53%) (average, 53%)
 
@@ -7,8 +7,8 @@ Marriage: average (53%) (average, 53%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 12th (Pisces).
-- Mars in the 7th (Scorpio) — in its own sign, self-contained but slow to move.
+- Saturn in the 9th (Pisces).
+- Mercury in the 7th (Capricorn).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

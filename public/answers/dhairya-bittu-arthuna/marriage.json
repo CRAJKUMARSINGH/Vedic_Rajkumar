@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Venus in the 5th (Aries).",
-            "hi": "शुक्र पंचम भाव (मेष) में।"
+            "en": "Venus in the 1st (Aries).",
+            "hi": "शुक्र प्रथम भाव (मेष) में।"
           },
           {
-            "en": "Venus in the 5th (Aries).",
-            "hi": "शुक्र पंचम भाव (मेष) में।"
+            "en": "Venus in the 1st (Aries).",
+            "hi": "शुक्र प्रथम भाव (मेष) में।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "298c7ebe027e9553",
-    "card_hash": "201f427d59bf87a6",
+    "card_hash": "061d451feb179acd",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

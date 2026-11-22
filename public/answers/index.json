@@ -2,7 +2,7 @@
   "card_version": "1.0",
   "generated_at": "2026-10-24T00:00:00.000Z",
   "contract": "Read the card, reply from direct_answer, do not recompute.",
-  "contract_version": "1.3",
+  "contract_version": "1.4",
   "languages": [
     "hi",
     "en"
@@ -23,7 +23,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "pankaj-jain/_all.json",
       "text": "pankaj-jain/_all.md",
@@ -45,7 +46,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "priyansh-singh-chauhan/_all.json",
       "text": "priyansh-singh-chauhan/_all.md",
@@ -67,7 +69,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "vishwaraj-singh-chauhan/_all.json",
       "text": "vishwaraj-singh-chauhan/_all.md",
@@ -89,7 +92,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "mummy/_all.json",
       "text": "mummy/_all.md",
@@ -111,7 +115,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "rajkumar/_all.json",
       "text": "rajkumar/_all.md",
@@ -133,7 +138,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "kanchi-jain/_all.json",
       "text": "kanchi-jain/_all.md",
@@ -155,7 +161,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "kiwangi-jain/_all.json",
       "text": "kiwangi-jain/_all.md",
@@ -177,7 +184,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "priyanka-jain/_all.json",
       "text": "priyanka-jain/_all.md",
@@ -199,7 +207,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "ajit-singh-chauhan/_all.json",
       "text": "ajit-singh-chauhan/_all.md",
@@ -221,7 +230,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "hunar-jain/_all.json",
       "text": "hunar-jain/_all.md",
@@ -243,7 +253,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "dhairya-bittu-arthuna/_all.json",
       "text": "dhairya-bittu-arthuna/_all.md",
@@ -265,7 +276,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "naman-shah/_all.json",
       "text": "naman-shah/_all.md",
@@ -287,7 +299,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "jaya-sisodia/_all.json",
       "text": "jaya-sisodia/_all.md",
@@ -309,7 +322,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "jyoti-chauhan/_all.json",
       "text": "jyoti-chauhan/_all.md",
@@ -331,7 +345,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "priyraj-singh-ranawat/_all.json",
       "text": "priyraj-singh-ranawat/_all.md",
@@ -353,7 +368,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "priyawrit-singh-ranawat/_all.json",
       "text": "priyawrit-singh-ranawat/_all.md",
@@ -375,7 +391,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "swami-rajeev-anand/_all.json",
       "text": "swami-rajeev-anand/_all.md",
@@ -397,7 +414,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "arpit/_all.json",
       "text": "arpit/_all.md",
@@ -419,7 +437,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "anukrati-sharma/_all.json",
       "text": "anukrati-sharma/_all.md",
@@ -441,7 +460,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "parshvi-sharma/_all.json",
       "text": "parshvi-sharma/_all.md",
@@ -467,7 +487,8 @@
         "house_construction",
         "career",
         "marriage",
-        "finance"
+        "finance",
+        "business"
       ],
       "card": "premlata-jain/_all.json",
       "text": "premlata-jain/_all.md",

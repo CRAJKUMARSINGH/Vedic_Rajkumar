@@ -103,12 +103,12 @@
         },
         "citations": [
           {
-            "en": "Venus in the 1st (Sagittarius).",
-            "hi": "शुक्र प्रथम भाव (धनु) में।"
+            "en": "Venus in the 8th (Sagittarius).",
+            "hi": "शुक्र अष्टम भाव (धनु) में।"
           },
           {
-            "en": "Sun in the 1st (Sagittarius).",
-            "hi": "सूर्य प्रथम भाव (धनु) में।"
+            "en": "Saturn in the 1st (Taurus), retrograde — the result arrives in re-runs.",
+            "hi": "शनि प्रथम भाव (वृषभ) में, वक्री — फल दोबारा आता है।"
           }
         ]
       }
@@ -158,7 +158,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5e5698f0b3ae95af",
-    "card_hash": "ab6d881772fa8ab3",
+    "card_hash": "61c07fa1b0cb4e15",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

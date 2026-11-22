@@ -1,5 +1,5 @@
 # Vishwaraj Singh Chauhan — Direct Answer
-<!-- card_hash: 45a07f84a97c773e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: d40c2fc44e094b8f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: caution (49%) (caution, 49%)
 
@@ -7,8 +7,8 @@ Marriage: caution (49%) (caution, 49%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 9th (Aquarius), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.
-- Sun in the 4th (Virgo).
+- Saturn in the 8th (Aquarius), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.
+- Sun in the 3rd (Virgo).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

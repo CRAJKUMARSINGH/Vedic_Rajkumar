@@ -1,5 +1,5 @@
 # Pankaj Jain — Direct Answer
-<!-- card_hash: a4dd6655db23486e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: e880526de7f61742 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: caution (47%) (caution, 47%)
 
@@ -7,8 +7,8 @@ Marriage: caution (47%) (caution, 47%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 11th (Cancer).
-- Venus in the 11th (Cancer).
+- Venus in the 4th (Cancer).
+- Venus in the 4th (Cancer).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

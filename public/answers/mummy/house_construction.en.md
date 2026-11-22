@@ -1,5 +1,5 @@
 # Mummy — Direct Answer
-<!-- card_hash: f990cb5e686ad64c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: eea4a8be3a9a8ebb | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: good (39%) (good, 39%)
 
@@ -7,8 +7,8 @@ New house construction: good (39%) (good, 39%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 3rd (Gemini).
-- Saturn in the 4th (Cancer).
+- Mars in the 11th (Gemini).
+- Ketu in the 4th (Scorpio), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

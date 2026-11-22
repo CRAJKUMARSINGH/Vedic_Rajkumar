@@ -103,12 +103,12 @@
         },
         "citations": [
           {
-            "en": "Mars in the 12th (Gemini).",
-            "hi": "मंगल द्वादश भाव (मिथुन) में।"
+            "en": "Mars in the 3rd (Gemini).",
+            "hi": "मंगल तृतीय भाव (मिथुन) में।"
           },
           {
-            "en": "Moon in the 1st (Gemini).",
-            "hi": "चंद्र प्रथम भाव (मिथुन) में।"
+            "en": "Sun in the 1st (Aries) — exalted, a clean promise.",
+            "hi": "सूर्य प्रथम भाव (मेष) में — उच्च का, स्पष्ट प्रतिज्ञा।"
           }
         ]
       }
@@ -158,7 +158,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "cfb5558207c8a51e",
-    "card_hash": "f167ab8643334bb8",
+    "card_hash": "2312dd641e09c4f6",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

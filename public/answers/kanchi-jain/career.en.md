@@ -1,5 +1,5 @@
 # Kanchi Jain — Direct Answer
-<!-- card_hash: df2b6bc6f5d1fff4 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 7353b3f7a5a8fb5d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (45%) (average, 45%)
 
@@ -7,8 +7,8 @@ Career: average (45%) (average, 45%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Jupiter in the 3rd (Virgo).
-- Mercury in the 2nd (Leo).
+- Jupiter in the 4th (Virgo).
+- Mercury in the 3rd (Leo).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

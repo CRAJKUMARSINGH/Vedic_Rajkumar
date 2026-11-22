@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Sun in the 4th (Virgo).",
-            "hi": "सूर्य चतुर्थ भाव (कन्या) में।"
+            "en": "Sun in the 3rd (Virgo).",
+            "hi": "सूर्य तृतीय भाव (कन्या) में।"
           },
           {
-            "en": "Mars in the 2nd (Cancer) — debilitated, the promise needs repair.",
-            "hi": "मंगल द्वितीय भाव (कर्क) में — नीच का, प्रतिज्ञा की मरम्मत चाहिए।"
+            "en": "Venus in the 4th (Libra) — in its own sign, self-contained but slow to move.",
+            "hi": "शुक्र चतुर्थ भाव (तुला) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "3476adaadc8caf27",
-    "card_hash": "610e288c6307bd33",
+    "card_hash": "d06b481eab29ce7f",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

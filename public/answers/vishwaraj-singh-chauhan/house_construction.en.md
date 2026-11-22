@@ -1,5 +1,5 @@
 # Vishwaraj Singh Chauhan — Direct Answer
-<!-- card_hash: 672c73fdf9e2ae7c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 352b54a796c3db4d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: good (43%) (good, 43%)
 
@@ -7,8 +7,8 @@ New house construction: good (43%) (good, 43%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 6th (Libra) — in its own sign, self-contained but slow to move.
-- Sun in the 4th (Virgo).
+- Venus in the 4th (Libra) — in its own sign, self-contained but slow to move.
+- Mercury in the 4th (Libra).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

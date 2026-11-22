@@ -98,8 +98,8 @@
         },
         "citations": [
           {
-            "en": "Venus in the 4th (Capricorn).",
-            "hi": "शुक्र चतुर्थ भाव (मकर) में।"
+            "en": "Venus in the 5th (Capricorn).",
+            "hi": "शुक्र पंचम भाव (मकर) में।"
           },
           {
             "en": "Moon in the 1st (Virgo).",
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5f72fbfe4ca302d1",
-    "card_hash": "f35d230e8cf51dd2",
+    "card_hash": "182cd9e6d2f04fc7",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

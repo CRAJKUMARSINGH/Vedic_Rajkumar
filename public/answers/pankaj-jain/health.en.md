@@ -1,5 +1,5 @@
 # Pankaj Jain — Direct Answer
-<!-- card_hash: 1a14518d67f57a5d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 369972f47eb98d6c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: caution (41%) (caution, 41%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: caution (41%) (caution, 41%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 9th (Taurus).
-- Moon in the 1st (Virgo).
+- Mars in the 2nd (Taurus).
+- Mercury in the 4th (Cancer), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

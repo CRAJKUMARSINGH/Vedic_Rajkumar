@@ -1,5 +1,5 @@
 # Jyoti Chauhan — Direct Answer
-<!-- card_hash: 66d595525de6ccff | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 8fccf8ad00528e34 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (46%) (average, 46%)
 
@@ -7,8 +7,8 @@ New house construction: average (46%) (average, 46%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 12th (Pisces) — exalted, a clean promise.
-- Sun in the 11th (Aquarius).
+- Venus in the 9th (Pisces) — exalted, a clean promise.
+- Sun in the 8th (Aquarius).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

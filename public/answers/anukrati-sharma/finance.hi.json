@@ -104,12 +104,12 @@
         },
         "citations": [
           {
-            "en": "Mercury in the 2nd (Capricorn).",
-            "hi": "बुध द्वितीय भाव (मकर) में।"
+            "en": "Mercury in the 9th (Capricorn).",
+            "hi": "बुध नवम भाव (मकर) में।"
           },
           {
-            "en": "Mercury in the 2nd (Capricorn).",
-            "hi": "बुध द्वितीय भाव (मकर) में।"
+            "en": "Jupiter in the 2nd (Gemini), retrograde — the result arrives in re-runs.",
+            "hi": "गुरु द्वितीय भाव (मिथुन) में, वक्री — फल दोबारा आता है।"
           }
         ]
       }
@@ -159,7 +159,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5e5698f0b3ae95af",
-    "card_hash": "5f55e3445fd7b75b",
+    "card_hash": "5d1777a950505af5",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

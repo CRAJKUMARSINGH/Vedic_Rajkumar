@@ -1,14 +1,18 @@
 # Swami Rajeev Anand — Direct Answer
-<!-- card_hash: 44bd7b26f0fc593d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 1c38a0ff5dad1750 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
-Health & wellbeing: caution (35%) (caution, 35%) · New house construction: caution (46%) (caution, 46%) · Career: average (49%) (average, 49%) · Marriage: avoid (58%) (avoid, 58%) · Finance: caution (45%) (caution, 45%)
+Health & wellbeing: caution (35%) (caution, 35%) · New house construction: caution (46%) (caution, 46%) · Career: average (49%) (average, 49%) · Marriage: avoid (58%) (avoid, 58%) · Finance: caution (45%) (caution, 45%) · Business & ownership: average (43%) (average, 43%)
 
-**yes, conditionally — the job change. the health regimen: not yet — fix the base first.**
+**yes, conditionally — the venture. the job change: yes, conditionally.**
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 6th (Sagittarius), retrograde — the result arrives in re-runs.
-- Mars in the 12th (Gemini).
+- Venus in the 2nd (Taurus) — in its own sign, self-contained but slow to move.
+- Saturn in the 9th (Sagittarius), retrograde — the result arrives in re-runs.
+
+### Sequence
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the venture, then the job change. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)
@@ -16,7 +20,7 @@ The call rests on these placements, not on a general stanza:
 - [Kundli Milan](/matchmaking)
 - [Dasha timeline](/dasha)
 
-> Which single variable do you want fixed first — the health regimen, or the city? Say one and I will take it alone.
+> Which single variable do you want fixed first — the job change, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
@@ -26,6 +30,7 @@ The call rests on these placements, not on a general stanza:
 | Career | average | 67 | 0.49 | — |
 | Marriage | avoid | 33 | 0.58 | — |
 | Finance | caution | 44 | 0.45 | — |
+| Business & ownership | average | 73 | 0.43 | — |
 
 ## Why (how the app arrived here)
 ### Health & wellbeing
@@ -63,7 +68,15 @@ Therefore: for this Jatak's birth promise, wealth is delayed now because Rajyoga
 - Dasha activation (66/100): Mercury MD with Mars AD gives 66/100 Dasha clearance for wealth; delivery class is full.
 - Transit timing (32/100): Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
 
+### Business & ownership
+Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 0/100, house promise scores 100/100, Dasha scores 84/100, and transit timing scores 78/100. The final call is CONDITIONAL: career is the leading field at 67/100.
+- Rajyoga gate (0/100): Viparita Raj Yoga is present but broken by Shadbala gate; the yoga cannot be treated as a clean promise.
+- House promise (100/100): career houses average 100/100 by SAV; strongest is house 1 at 36 points and weakest is house 10 at 30 points.
+- Dasha activation (84/100): Mercury MD with Mars AD gives 84/100 Dasha clearance for career; delivery class is full.
+- Transit timing (78/100): Therefore: Career timing is structurally supported now if Dasha also confirms.
+
 ## Remedies
+- Mars
 - Mars
 - Mars
 - Mars
@@ -71,6 +84,7 @@ Therefore: for this Jatak's birth promise, wealth is delayed now because Rajyoga
 - Mars
 
 ## Caveats
+- Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.

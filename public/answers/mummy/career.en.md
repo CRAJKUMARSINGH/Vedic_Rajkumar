@@ -1,5 +1,5 @@
 # Mummy — Direct Answer
-<!-- card_hash: f9aa69075bd6d862 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 47d304959228e00a | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: good (42%) (good, 42%)
 
@@ -7,8 +7,8 @@ Career: good (42%) (good, 42%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 5th (Leo).
-- Sun in the 5th (Leo) — in its own sign, self-contained but slow to move.
+- Venus in the 1st (Leo).
+- Rahu in the 10th (Taurus), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

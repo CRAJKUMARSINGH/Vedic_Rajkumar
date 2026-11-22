@@ -102,8 +102,8 @@
             "hi": "बुध द्वितीय भाव (कन्या) में, वक्री — फल दोबारा आता है — उच्च का, स्पष्ट प्रतिज्ञा।"
           },
           {
-            "en": "Sun in the 2nd (Leo) — in its own sign, self-contained but slow to move.",
-            "hi": "सूर्य द्वितीय भाव (सिंह) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Mercury in the 2nd (Virgo), retrograde — the result arrives in re-runs — exalted, a clean promise.",
+            "hi": "बुध द्वितीय भाव (कन्या) में, वक्री — फल दोबारा आता है — उच्च का, स्पष्ट प्रतिज्ञा।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "73f6a93e4f25da6f",
-    "card_hash": "2b28c02f3baf22e2",
+    "card_hash": "3a0ae33315358af3",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

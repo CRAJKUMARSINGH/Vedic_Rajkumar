@@ -99,12 +99,12 @@
         },
         "citations": [
           {
-            "en": "Mercury in the 5th (Leo).",
-            "hi": "बुध पंचम भाव (सिंह) में।"
+            "en": "Mercury in the 1st (Leo).",
+            "hi": "बुध प्रथम भाव (सिंह) में।"
           },
           {
-            "en": "Mercury in the 5th (Leo).",
-            "hi": "बुध पंचम भाव (सिंह) में।"
+            "en": "Mercury in the 1st (Leo).",
+            "hi": "बुध प्रथम भाव (सिंह) में।"
           }
         ]
       }
@@ -154,7 +154,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "74e54a095e91fd62",
-    "card_hash": "a6857ba0e9dbd93a",
+    "card_hash": "dc80295ab4ad29d1",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

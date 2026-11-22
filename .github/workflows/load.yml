@@ -3,6 +3,13 @@ name: load
 on:
   schedule: [{ cron: '30 19 * * *' }]   # 01:00 IST
   workflow_dispatch:
+    inputs:
+      base_url:
+        description: Override target base URL
+        required: false
+
+permissions:
+  contents: write
 
 jobs:
   smoke:
@@ -11,17 +18,46 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: grafana/setup-k6-action@v1
-      - name: Resolve preview URL
-        run: echo "EDGE_URL=${{ vars.PREVIEW_EDGE_URL }}" >> "$GITHUB_ENV"
-      - run: mkdir -p reports/load && k6 run ops/load/smoke.js
+
+      - name: Resolve target URL
         env:
-          EDGE_URL: ${{ vars.PREVIEW_EDGE_URL }}
-          CRON_TOKEN: ${{ secrets.CRON_TOKEN }}
+          INPUT_URL: ${{ inputs.base_url }}
+          VAR_URL: ${{ vars.PREVIEW_EDGE_URL }}
+        run: |
+          BASE="${INPUT_URL:-$VAR_URL}"; BASE="${BASE%/}"
+          if [ -z "$BASE" ]; then
+            echo "::error::No target. Set repo variable PREVIEW_EDGE_URL or pass base_url."
+            exit 1
+          fi
+          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "$BASE/health" || echo 000)
+          if [ "$code" = "000" ]; then
+            echo "::error::$BASE unreachable (DNS/connect failure) — failing in 15s, not 5min."
+            exit 1
+          fi
+          echo "health probe: HTTP $code"
+          echo "BASE_URL=$BASE" >> "$GITHUB_ENV"
+
+      - run: mkdir -p reports/load && k6 run --summary-export reports/load/summary.json ops/load/smoke.js
+        env:
+          BASE_URL: ${{ env.BASE_URL }}
+          API_KEY: ${{ secrets.LOAD_TEST_API_KEY }}
+
       - uses: actions/upload-artifact@v4
         if: always()
-        with: { name: k6-smoke, path: reports/load }
+        with: { name: k6-smoke, path: reports/load, if-no-files-found: warn }
+
       - name: Note in the logbook on failure
         if: failure()
         run: |
-          echo "### [$(date -Is)] — k6 smoke FAILED" >> docs/audit/PERF_LOG.md
-          echo "- Artifact: k6-smoke (workflow run ${{ github.run_id }})" >> docs/audit/PERF_LOG.md
+          mkdir -p docs/audit
+          {
+            echo "### [$(date -Is)] — k6 smoke FAILED"
+            echo "- Target: ${BASE_URL:-<unresolved>}"
+            echo "- Artifact: k6-smoke (run ${{ github.run_id }})"
+          } >> docs/audit/PERF_LOG.md
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase --autostash
+          git add docs/audit/PERF_LOG.md
+          git commit -m "chore(perf): log k6 smoke failure (run ${{ github.run_id }})" || exit 0
+          git push

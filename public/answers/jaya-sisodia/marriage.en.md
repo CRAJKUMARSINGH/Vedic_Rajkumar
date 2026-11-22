@@ -1,5 +1,5 @@
 # Jaya Sisodia — Direct Answer
-<!-- card_hash: 54fc46f0f12c6d93 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: eaf31dec0d6c5068 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (59%) (average, 59%)
 
@@ -7,8 +7,8 @@ Marriage: average (59%) (average, 59%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 2nd (Aquarius), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.
-- Venus in the 7th (Cancer).
+- Saturn in the 7th (Aquarius), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.
+- Saturn in the 7th (Aquarius), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

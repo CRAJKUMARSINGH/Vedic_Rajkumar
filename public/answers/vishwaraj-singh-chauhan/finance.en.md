@@ -1,5 +1,5 @@
 # Vishwaraj Singh Chauhan — Direct Answer
-<!-- card_hash: 610e288c6307bd33 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: d06b481eab29ce7f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: good (43%) (good, 43%)
 
@@ -7,8 +7,8 @@ Finance: good (43%) (good, 43%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Sun in the 4th (Virgo).
-- Mars in the 2nd (Cancer) — debilitated, the promise needs repair.
+- Sun in the 3rd (Virgo).
+- Venus in the 4th (Libra) — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

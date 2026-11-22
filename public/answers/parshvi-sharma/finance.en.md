@@ -1,5 +1,5 @@
 # Parshvi Sharma — Direct Answer
-<!-- card_hash: f35d230e8cf51dd2 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 182cd9e6d2f04fc7 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: good (47%) (good, 47%)
 
@@ -7,7 +7,7 @@ Finance: good (47%) (good, 47%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 4th (Capricorn).
+- Venus in the 5th (Capricorn).
 - Moon in the 1st (Virgo).
 
 **Check in the app**

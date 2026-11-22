@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Saturn in the 2nd (Taurus), retrograde — the result arrives in re-runs.",
-            "hi": "शनि द्वितीय भाव (वृषभ) में, वक्री — फल दोबारा आता है।"
+            "en": "Saturn in the 8th (Taurus), retrograde — the result arrives in re-runs.",
+            "hi": "शनि अष्टम भाव (वृषभ) में, वक्री — फल दोबारा आता है।"
           },
           {
-            "en": "Mars in the 9th (Sagittarius).",
-            "hi": "मंगल नवम भाव (धनु) में।"
+            "en": "Mars in the 3rd (Sagittarius).",
+            "hi": "मंगल तृतीय भाव (धनु) में।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "87309c17dc1bb6f0",
-    "card_hash": "6c85f36f0c4aaa44",
+    "card_hash": "b264ac4033a0591b",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

@@ -1,5 +1,5 @@
 # Vishwaraj Singh Chauhan — Direct Answer
-<!-- card_hash: 9c48b08121cf8982 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 0b3f94c89dd08d23 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (42%) (average, 42%)
 
@@ -7,8 +7,8 @@ Career: average (42%) (average, 42%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 2nd (Cancer) — debilitated, the promise needs repair.
-- Moon in the 1st (Taurus) — exalted, a clean promise.
+- Mars in the 1st (Cancer) — debilitated, the promise needs repair.
+- Ketu in the 10th (Aries), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

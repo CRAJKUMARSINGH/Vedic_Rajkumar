@@ -104,12 +104,12 @@
         },
         "citations": [
           {
-            "en": "Moon in the 1st (Virgo).",
-            "hi": "चंद्र प्रथम भाव (कन्या) में।"
+            "en": "Moon in the 6th (Virgo).",
+            "hi": "चंद्र षष्ठ भाव (कन्या) में।"
           },
           {
-            "en": "Venus in the 11th (Cancer).",
-            "hi": "शुक्र एकादश भाव (कर्क) में।"
+            "en": "Sun in the 4th (Cancer).",
+            "hi": "सूर्य चतुर्थ भाव (कर्क) में।"
           }
         ]
       }
@@ -159,7 +159,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "6722f675ff6ebb1e",
-    "card_hash": "a161715006884bcf",
+    "card_hash": "4e0ebe98cda9ab42",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

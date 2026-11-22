@@ -1,5 +1,5 @@
 # Priyanka Jain — Direct Answer
-<!-- card_hash: a3d199923b63632f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 6a114d5b45141b63 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (43%) (average, 43%)
 
@@ -7,8 +7,8 @@ Marriage: average (43%) (average, 43%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Jupiter in the 3rd (Sagittarius) — in its own sign, self-contained but slow to move.
-- Venus in the 2nd (Scorpio).
+- Jupiter in the 4th (Sagittarius) — in its own sign, self-contained but slow to move.
+- Venus in the 3rd (Scorpio).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

@@ -103,12 +103,12 @@
         },
         "citations": [
           {
-            "en": "Venus in the 11th (Taurus) — in its own sign, self-contained but slow to move.",
-            "hi": "शुक्र एकादश भाव (वृषभ) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Venus in the 2nd (Taurus) — in its own sign, self-contained but slow to move.",
+            "hi": "शुक्र द्वितीय भाव (वृषभ) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           },
           {
-            "en": "Ketu in the 2nd (Leo), retrograde — the result arrives in re-runs.",
-            "hi": "केतु द्वितीय भाव (सिंह) में, वक्री — फल दोबारा आता है।"
+            "en": "Mercury in the 2nd (Taurus).",
+            "hi": "बुध द्वितीय भाव (वृषभ) में।"
           }
         ]
       }
@@ -158,7 +158,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "cfb5558207c8a51e",
-    "card_hash": "d91d2e540e04c5ce",
+    "card_hash": "1ecf1afd36376cc1",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

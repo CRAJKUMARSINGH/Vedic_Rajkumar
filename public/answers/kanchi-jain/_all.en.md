@@ -1,17 +1,17 @@
 # Kanchi Jain — Direct Answer
-<!-- card_hash: 434ef31083bb385c | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 99e950490184dad8 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
-Health & wellbeing: average (34%) (average, 34%) · New house construction: caution (43%) (caution, 43%) · Career: average (45%) (average, 45%) · Marriage: caution (46%) (caution, 46%) · Finance: caution (44%) (caution, 44%)
+Health & wellbeing: average (34%) (average, 34%) · New house construction: caution (43%) (caution, 43%) · Career: average (45%) (average, 45%) · Marriage: caution (46%) (caution, 46%) · Finance: caution (44%) (caution, 44%) · Business & ownership: average (42%) (average, 42%)
 
-**yes, conditionally — the job change. the construction: not yet — fix the base first.**
+**yes, conditionally — the venture. the job change: yes, conditionally.**
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Jupiter in the 3rd (Virgo).
-- Mercury in the 2nd (Leo).
+- Jupiter in the 4th (Virgo).
+- Jupiter in the 4th (Virgo).
 
 ### Sequence
-Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the job change, then the health regimen. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the venture, then the job change, then the health regimen. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
 
 
 **Check in the app**
@@ -20,7 +20,7 @@ Optional planning note: if you are acting on several matters, many practitioners
 - [Kundli Milan](/matchmaking)
 - [Dasha timeline](/dasha)
 
-> Which single variable do you want fixed first — the construction, or the city? Say one and I will take it alone.
+> Which single variable do you want fixed first — the job change, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
@@ -30,6 +30,7 @@ Optional planning note: if you are acting on several matters, many practitioners
 | Career | average | 71 | 0.45 | — |
 | Marriage | caution | 51 | 0.46 | — |
 | Finance | caution | 53 | 0.44 | — |
+| Business & ownership | average | 76 | 0.42 | — |
 
 ## Why (how the app arrived here)
 ### Health & wellbeing
@@ -67,10 +68,18 @@ Therefore: for this Jatak's birth promise, wealth is delayed now because Rajyoga
 - Dasha activation (69/100): Jupiter MD with Saturn AD gives 69/100 Dasha clearance for wealth; delivery class is full.
 - Transit timing (32/100): Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
 
+### Business & ownership
+Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 16/100, house promise scores 100/100, Dasha scores 84/100, and transit timing scores 78/100. The final call is CONDITIONAL: career is the leading field at 71/100.
+- Rajyoga gate (16/100): No active Rajyoga is certified in the current Dasha; judge outcome by house promise and Dasha lord strength.
+- House promise (100/100): career houses average 100/100 by SAV; strongest is house 1 at 36 points and weakest is house 10 at 30 points.
+- Dasha activation (84/100): Jupiter MD with Saturn AD gives 84/100 Dasha clearance for career; delivery class is full.
+- Transit timing (78/100): Therefore: Career timing is structurally supported now if Dasha also confirms.
+
 ## Remedies
 - none specified
 
 ## Caveats
+- Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.

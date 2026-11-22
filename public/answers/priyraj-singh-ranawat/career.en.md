@@ -1,5 +1,5 @@
 # Priyraj Singh Ranawat — Direct Answer
-<!-- card_hash: e4407724fc1a6660 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 4ffa95d3e7175ec1 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (40%) (average, 40%)
 
@@ -7,8 +7,8 @@ Career: average (40%) (average, 40%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 4th (Capricorn).
-- Saturn in the 6th (Pisces).
+- Venus in the 1st (Capricorn).
+- Saturn in the 3rd (Pisces).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

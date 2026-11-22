@@ -1,5 +1,5 @@
 # Kanchi Jain — Direct Answer
-<!-- card_hash: d2c4e7b18d430b9e | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 1b77d9cb8600737a | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: caution (44%) (caution, 44%)
 
@@ -8,7 +8,7 @@ Finance: caution (44%) (caution, 44%)
 ### Why
 The call rests on these placements, not on a general stanza:
 - Moon in the 1st (Gemini).
-- Mercury in the 2nd (Leo).
+- Venus in the 2nd (Cancer).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

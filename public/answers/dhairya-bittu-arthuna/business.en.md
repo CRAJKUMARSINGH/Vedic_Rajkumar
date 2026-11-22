@@ -1,0 +1,41 @@
+# Dhairya Bittu Arthuna — Direct Answer
+<!-- card_hash: 3ad03f59651f9656 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+
+Business & ownership: average (46%) (average, 46%)
+
+**yes, conditionally — the venture.**
+
+### Why
+The call rests on these placements, not on a general stanza:
+- Venus in the 1st (Aries).
+- Saturn in the 10th (Capricorn) — in its own sign, self-contained but slow to move.
+
+**Check in the app**
+- [Transit (gochar) overlay](/transits)
+- [Muhurat windows](/muhurat)
+- [Kundli Milan](/matchmaking)
+- [Dasha timeline](/dasha)
+
+> Say the one thing you want tightened and I will take it alone.
+
+## Verdicts
+| Topic | Band | Score | Confidence | Window |
+|---|---|---|---|---|
+| Business & ownership | average | 70 | 0.46 | — |
+
+## Why (how the app arrived here)
+### Business & ownership
+Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 8/100, house promise scores 93/100, Dasha scores 87/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 62/100.
+- Rajyoga gate (8/100): No active Rajyoga is certified in the current Dasha; judge outcome by house promise and Dasha lord strength.
+- House promise (93/100): career houses average 93/100 by SAV; strongest is house 6 at 35 points and weakest is house 1 at 27 points.
+- Dasha activation (87/100): Sun MD with Jupiter AD gives 87/100 Dasha clearance for career; delivery class is full.
+- Transit timing (32/100): Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
+
+## Remedies
+- none specified
+
+## Caveats
+- Windows are approximate.
+
+## Provenance
+Lahiri (Chitrapaksha) · Vimshottari · Whole-sign · engine 0.1.0 · as_of 2026-10-24 · input 298c7ebe027e9553

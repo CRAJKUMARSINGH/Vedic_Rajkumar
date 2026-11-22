@@ -1,17 +1,17 @@
 # Ajit Singh Chauhan — Direct Answer
-<!-- card_hash: b17add43d663aa98 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: c03b59abd7fa80b2 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
-Health & wellbeing: good (44%) (good, 44%) · New house construction: average (40%) (average, 40%) · Career: average (52%) (average, 52%) · Marriage: good (37%) (good, 37%) · Finance: average (39%) (average, 39%)
+Health & wellbeing: good (44%) (good, 44%) · New house construction: average (40%) (average, 40%) · Career: average (52%) (average, 52%) · Marriage: good (37%) (good, 37%) · Finance: average (39%) (average, 39%) · Business & ownership: average (50%) (average, 50%)
 
-**yes, conditionally — the construction. the health regimen: yes — but clear the gate first.**
+**yes, conditionally — the venture. the construction: yes, conditionally.**
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 9th (Taurus).
-- Mercury in the 1st (Virgo) — exalted, a clean promise.
+- Saturn in the 12th (Cancer).
+- Venus in the 1st (Leo), retrograde — the result arrives in re-runs.
 
 ### Sequence
-Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the health regimen, then the marriage step, then the construction, then the money decision, then the job change. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the health regimen, then the marriage step, then the venture, then the construction, then the money decision, then the job change. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
 
 
 **Check in the app**
@@ -20,7 +20,7 @@ Optional planning note: if you are acting on several matters, many practitioners
 - [Kundli Milan](/matchmaking)
 - [Dasha timeline](/dasha)
 
-> Which single variable do you want fixed first — the health regimen, or the city? Say one and I will take it alone.
+> Which single variable do you want fixed first — the construction, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
@@ -30,6 +30,7 @@ Optional planning note: if you are acting on several matters, many practitioners
 | Career | average | 70 | 0.52 | — |
 | Marriage | good | 75 | 0.37 | — |
 | Finance | average | 73 | 0.39 | — |
+| Business & ownership | average | 78 | 0.5 | — |
 
 ## Why (how the app arrived here)
 ### Health & wellbeing
@@ -67,10 +68,18 @@ Therefore: for this Jatak's birth promise, wealth is conditional now because Raj
 - Dasha activation (95/100): Jupiter MD with Rahu AD gives 95/100 Dasha clearance for wealth; delivery class is full.
 - Transit timing (32/100): Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
 
+### Business & ownership
+Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 68/100, house promise scores 85/100, Dasha scores 74/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 70/100.
+- Rajyoga gate (68/100): Rajyoga gate is open through Gajakesari Yoga, Raj Yoga; status can rise because the forming planets are in the active Dasha field.
+- House promise (85/100): career houses average 85/100 by SAV; strongest is house 10 at 32 points and weakest is house 1 at 24 points.
+- Dasha activation (74/100): Jupiter MD with Rahu AD gives 74/100 Dasha clearance for career; delivery class is full.
+- Transit timing (32/100): Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
+
 ## Remedies
 - none specified
 
 ## Caveats
+- Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.

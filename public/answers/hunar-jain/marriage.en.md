@@ -1,5 +1,5 @@
 # Hunar Jain — Direct Answer
-<!-- card_hash: dca533fb0b23c826 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 8459b751af0fd3ef | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: average (50%) (average, 50%)
 
@@ -7,8 +7,8 @@ Marriage: average (50%) (average, 50%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 12th (Cancer).
-- Jupiter in the 6th (Sagittarius) — in its own sign, self-contained but slow to move.
+- Venus in the 9th (Cancer).
+- Jupiter in the 2nd (Sagittarius) — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

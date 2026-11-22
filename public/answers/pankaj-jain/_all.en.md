@@ -1,14 +1,14 @@
 # Pankaj Jain — Direct Answer
-<!-- card_hash: 084cd26c230eddc9 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: eaf235e5f890054b | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
-Health & wellbeing: caution (41%) (caution, 41%) · New house construction: average (44%) (average, 44%) · Career: caution (39%) (caution, 39%) · Marriage: caution (47%) (caution, 47%) · Finance: average (40%) (average, 40%)
+Health & wellbeing: caution (41%) (caution, 41%) · New house construction: average (44%) (average, 44%) · Career: caution (39%) (caution, 39%) · Marriage: caution (47%) (caution, 47%) · Finance: average (40%) (average, 40%) · Business & ownership: caution (46%) (caution, 46%)
 
-**yes, conditionally — the construction. the money decision: yes, conditionally.**
+**not yet — fix the base first — the venture. the construction: yes, conditionally.**
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Moon in the 1st (Virgo).
-- Venus in the 11th (Cancer).
+- Venus in the 4th (Cancer).
+- Saturn in the 5th (Leo).
 
 ### Sequence
 Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the construction, then the money decision. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
@@ -20,7 +20,7 @@ Optional planning note: if you are acting on several matters, many practitioners
 - [Kundli Milan](/matchmaking)
 - [Dasha timeline](/dasha)
 
-> Which single variable do you want fixed first — the money decision, or the city? Say one and I will take it alone.
+> Which single variable do you want fixed first — the construction, or the city? Say one and I will take it alone.
 
 ## Verdicts
 | Topic | Band | Score | Confidence | Window |
@@ -30,6 +30,7 @@ Optional planning note: if you are acting on several matters, many practitioners
 | Career | caution | 42 | 0.39 | — |
 | Marriage | caution | 50 | 0.47 | — |
 | Finance | average | 59 | 0.4 | — |
+| Business & ownership | caution | 65 | 0.46 | — |
 
 ## Why (how the app arrived here)
 ### Health & wellbeing
@@ -67,7 +68,15 @@ Therefore: for this Jatak's birth promise, wealth is conditional now because Raj
 - Dasha activation (84/100): Jupiter MD with Venus AD gives 84/100 Dasha clearance for wealth; delivery class is full.
 - Transit timing (32/100): Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
 
+### Business & ownership
+Therefore: for this Jatak's birth promise, career is delayed now because Rajyoga scores 0/100, house promise scores 70/100, Dasha scores 54/100, and transit timing scores 32/100. The final call is DELAYED: career is the leading field at 42/100.
+- Rajyoga gate (0/100): Viparita Raj Yoga is present but broken by Shadbala gate; the yoga cannot be treated as a clean promise.
+- House promise (70/100): career houses average 70/100 by SAV; strongest is house 1 at 30 points and weakest is house 10 at 24 points.
+- Dasha activation (54/100): Jupiter MD with Venus AD gives 54/100 Dasha clearance for career; delivery class is full.
+- Transit timing (32/100): Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
+
 ## Remedies
+- Venus
 - Venus
 - Venus
 - Venus
@@ -75,6 +84,7 @@ Therefore: for this Jatak's birth promise, wealth is conditional now because Raj
 - Venus
 
 ## Caveats
+- Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.

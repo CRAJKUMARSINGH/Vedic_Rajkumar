@@ -1,5 +1,5 @@
 # Kanchi Jain — Direct Answer
-<!-- card_hash: d7d04afa53adc9c6 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 76986e8e4af314c3 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Marriage: caution (46%) (caution, 46%)
 
@@ -7,7 +7,7 @@ Marriage: caution (46%) (caution, 46%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Jupiter in the 3rd (Virgo).
+- Jupiter in the 4th (Virgo).
 - Moon in the 1st (Gemini).
 
 **Check in the app**

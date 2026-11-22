@@ -1,17 +1,17 @@
 # Parshvi Sharma — Direct Answer
-<!-- card_hash: 0389d98bc5606406 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 52f03d63112e6f3b | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
-Health & wellbeing: average (49%) (average, 49%) · New house construction: good (46%) (good, 46%) · Career: average (57%) (average, 57%) · Marriage: good (47%) (good, 47%) · Finance: good (47%) (good, 47%)
+Health & wellbeing: average (49%) (average, 49%) · New house construction: good (46%) (good, 46%) · Career: average (57%) (average, 57%) · Marriage: good (47%) (good, 47%) · Finance: good (47%) (good, 47%) · Business & ownership: average (53%) (average, 53%)
 
 **yes — but clear the gate first — the money decision. the marriage step: yes — but clear the gate first.**
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Venus in the 4th (Capricorn).
+- Venus in the 5th (Capricorn).
 - Moon in the 1st (Virgo).
 
 ### Sequence
-Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the money decision, then the marriage step, then the construction, then the job change, then the health regimen. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
+Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the money decision, then the marriage step, then the construction, then the venture, then the job change, then the health regimen. This is sequencing guidance only; it never overrides medical, financial or safety obligations.
 
 
 **Check in the app**
@@ -30,6 +30,7 @@ Optional planning note: if you are acting on several matters, many practitioners
 | Career | average | 69 | 0.57 | — |
 | Marriage | good | 81 | 0.47 | — |
 | Finance | good | 81 | 0.47 | — |
+| Business & ownership | average | 77 | 0.53 | — |
 
 ## Why (how the app arrived here)
 ### Health & wellbeing
@@ -67,10 +68,18 @@ Therefore: for this Jatak's birth promise, wealth is delivering now because Rajy
 - Dasha activation (100/100): Jupiter MD with Jupiter AD gives 100/100 Dasha clearance for wealth; delivery class is full.
 - Transit timing (32/100): Therefore: Wealth timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
 
+### Business & ownership
+Therefore: for this Jatak's birth promise, career is conditional now because Rajyoga scores 86/100, house promise scores 85/100, Dasha scores 60/100, and transit timing scores 32/100. The final call is CONDITIONAL: career is the leading field at 69/100.
+- Rajyoga gate (86/100): Rajyoga gate is open through Raj Yoga, Maha Parivartana Yoga; status can rise because the forming planets are in the active Dasha field.
+- House promise (85/100): career houses average 85/100 by SAV; strongest is house 10 at 31 points and weakest is house 6 at 26 points.
+- Dasha activation (60/100): Jupiter MD with Jupiter AD gives 60/100 Dasha clearance for career; delivery class is full.
+- Transit timing (32/100): Therefore: Career timing is not structurally certified yet; wait for Jupiter and Saturn to jointly activate the target houses.
+
 ## Remedies
 - none specified
 
 ## Caveats
+- Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.
 - Windows are approximate.

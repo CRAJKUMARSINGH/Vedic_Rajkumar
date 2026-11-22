@@ -103,12 +103,12 @@
         },
         "citations": [
           {
-            "en": "Jupiter in the 7th (Aquarius).",
-            "hi": "गुरु सप्तम भाव (कुंभ) में।"
+            "en": "Jupiter in the 6th (Aquarius).",
+            "hi": "गुरु षष्ठ भाव (कुंभ) में।"
           },
           {
-            "en": "Rahu in the 4th (Scorpio), retrograde — the result arrives in re-runs.",
-            "hi": "राहु चतुर्थ भाव (वृश्चिक) में, वक्री — फल दोबारा आता है।"
+            "en": "Venus in the 2nd (Libra) — in its own sign, self-contained but slow to move.",
+            "hi": "शुक्र द्वितीय भाव (तुला) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       }
@@ -158,7 +158,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "e3fca7695fcd0aec",
-    "card_hash": "81ef7d5e54ddbd1c",
+    "card_hash": "aa6ae868359c61ee",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

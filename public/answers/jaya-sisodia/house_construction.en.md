@@ -1,5 +1,5 @@
 # Jaya Sisodia — Direct Answer
-<!-- card_hash: 00722eed2b1d8f88 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 690e7b6039e78b1f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 New house construction: average (52%) (average, 52%)
 
@@ -7,8 +7,8 @@ New house construction: average (52%) (average, 52%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mars in the 4th (Taurus).
-- Mars in the 4th (Taurus).
+- Mars in the 10th (Taurus).
+- Mercury in the 11th (Gemini), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

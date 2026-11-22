@@ -104,12 +104,12 @@
         },
         "citations": [
           {
-            "en": "Saturn in the 6th (Taurus), retrograde — the result arrives in re-runs.",
-            "hi": "शनि षष्ठ भाव (वृषभ) में, वक्री — फल दोबारा आता है।"
+            "en": "Saturn in the 1st (Taurus), retrograde — the result arrives in re-runs.",
+            "hi": "शनि प्रथम भाव (वृषभ) में, वक्री — फल दोबारा आता है।"
           },
           {
-            "en": "Venus in the 1st (Sagittarius).",
-            "hi": "शुक्र प्रथम भाव (धनु) में।"
+            "en": "Venus in the 8th (Sagittarius).",
+            "hi": "शुक्र अष्टम भाव (धनु) में।"
           }
         ]
       }
@@ -159,7 +159,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5e5698f0b3ae95af",
-    "card_hash": "e54c2d99284ddf3b",
+    "card_hash": "9ea993cc5c4d840a",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

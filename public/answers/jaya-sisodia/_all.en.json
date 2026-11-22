@@ -14,15 +14,16 @@
       "house_construction",
       "career",
       "marriage",
-      "finance"
+      "finance",
+      "business"
     ],
     "language": "en",
     "as_of": "2026-10-24",
     "reference_type": "natal"
   },
   "direct_answer": {
-    "en": "Health & wellbeing: average (52%) (average, 52%) · New house construction: average (52%) (average, 52%) · Career: good (55%) (good, 55%) · Marriage: average (59%) (average, 59%) · Finance: average (54%) (average, 54%)",
-    "hi": "स्वास्थ्य सामान्य (52%) (सामान्य, 52%) · नया घर निर्माण सामान्य (52%) (सामान्य, 52%) · करियर अनुकूल (55%) (अनुकूल, 55%) · विवाह सामान्य (59%) (सामान्य, 59%) · आर्थिक सामान्य (54%) (सामान्य, 54%)"
+    "en": "Health & wellbeing: average (52%) (average, 52%) · New house construction: average (52%) (average, 52%) · Career: good (55%) (good, 55%) · Marriage: average (59%) (average, 59%) · Finance: average (54%) (average, 54%) · Business & ownership: good (59%) (good, 59%)",
+    "hi": "स्वास्थ्य सामान्य (52%) (सामान्य, 52%) · नया घर निर्माण सामान्य (52%) (सामान्य, 52%) · करियर अनुकूल (55%) (अनुकूल, 55%) · विवाह सामान्य (59%) (सामान्य, 59%) · आर्थिक सामान्य (54%) (सामान्य, 54%) · व्यवसाय व स्वामित्व अनुकूल (59%) (अनुकूल, 59%)"
   },
   "verdicts": [
     {
@@ -266,15 +267,70 @@
           "hi": "समय-सीमाएँ अनुमानित हैं।"
         }
       ]
+    },
+    {
+      "topic": "business",
+      "headline": {
+        "en": "Business & ownership: good (59%)",
+        "hi": "व्यवसाय व स्वामित्व अनुकूल (59%)"
+      },
+      "score_0_100": 83,
+      "band": "good",
+      "engine_verdict": "DELIVERING",
+      "confidence_0_1": 0.59,
+      "window": null,
+      "rationale": {
+        "en": "Therefore: for this Jatak's birth promise, career is delivering now because Rajyoga scores 48/100, house promise scores 85/100, Dasha scores 97/100, and transit timing scores 78/100. The final call is DELIVERING: career is the leading field at 79/100.",
+        "hi": "Therefore: for this Jatak's birth promise, career is delivering now because Rajyoga scores 48/100, house promise scores 85/100, Dasha scores 97/100, and transit timing scores 78/100. The final call is DELIVERING: career is the leading field at 79/100."
+      },
+      "conflicts": [
+        "Kamaladala Yoga must be treated as a failure warning, not as decorative praise."
+      ],
+      "evidence": [
+        {
+          "layer": "Rajyoga gate",
+          "score": 48,
+          "finding": "Rajyoga gate is open through Raj Yoga, Moon Adhi Yoga; status can rise because the forming planets are in the active Dasha field."
+        },
+        {
+          "layer": "House promise",
+          "score": 85,
+          "finding": "career houses average 85/100 by SAV; strongest is house 1 at 33 points and weakest is house 6 at 24 points."
+        },
+        {
+          "layer": "Dasha activation",
+          "score": 97,
+          "finding": "Rahu MD with Venus AD gives 97/100 Dasha clearance for career; delivery class is standard."
+        },
+        {
+          "layer": "Transit timing",
+          "score": 78,
+          "finding": "Therefore: Career timing is structurally supported now if Dasha also confirms."
+        }
+      ],
+      "remedies": [],
+      "caveats": [
+        {
+          "en": "Windows are approximate.",
+          "hi": "समय-सीमाएँ अनुमानित हैं।"
+        }
+      ]
     }
   ],
   "composed": {
     "verdict_line": {
-      "en": "yes — but clear the gate first — the job change. the construction: yes, conditionally.",
-      "hi": "हाँ — पर पहले अड़चन हटाएँ — नौकरी परिवर्तन। निर्माण कार्य: हाँ, शर्त के साथ।"
+      "en": "yes — but clear the gate first — the venture. the job change: yes — but clear the gate first.",
+      "hi": "हाँ — पर पहले अड़चन हटाएँ — उद्यम। नौकरी परिवर्तन: हाँ — पर पहले अड़चन हटाएँ।"
     },
     "depth": "standard",
     "ranked": [
+      {
+        "topic": "business",
+        "decision": {
+          "en": "yes — but clear the gate first",
+          "hi": "हाँ — पर पहले अड़चन हटाएँ"
+        }
+      },
       {
         "topic": "career",
         "decision": {
@@ -324,12 +380,12 @@
         },
         "citations": [
           {
-            "en": "Venus in the 7th (Cancer).",
-            "hi": "शुक्र सप्तम भाव (कर्क) में।"
+            "en": "Saturn in the 7th (Aquarius), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.",
+            "hi": "शनि सप्तम भाव (कुंभ) में, वक्री — फल दोबारा आता है — स्वराशि में, आत्मनिर्भर पर धीमा।"
           },
           {
-            "en": "Jupiter in the 10th (Libra), retrograde — the result arrives in re-runs.",
-            "hi": "गुरु दशम भाव (तुला) में, वक्री — फल दोबारा आता है।"
+            "en": "Saturn in the 7th (Aquarius), retrograde — the result arrives in re-runs — in its own sign, self-contained but slow to move.",
+            "hi": "शनि सप्तम भाव (कुंभ) में, वक्री — फल दोबारा आता है — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       },
@@ -340,15 +396,15 @@
           "hi": "क्रम"
         },
         "body": {
-          "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the job change, then the construction, then the health regimen, then the marriage step, then the money decision. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
-          "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — नौकरी परिवर्तन, फिर निर्माण कार्य, फिर स्वास्थ्य नियम, फिर विवाह कदम, फिर आर्थिक निर्णय। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
+          "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the venture, then the job change, then the construction, then the health regimen, then the marriage step, then the money decision. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
+          "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — उद्यम, फिर नौकरी परिवर्तन, फिर निर्माण कार्य, फिर स्वास्थ्य नियम, फिर विवाह कदम, फिर आर्थिक निर्णय। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
         },
         "citations": []
       }
     ],
     "sequence": {
-      "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the job change, then the construction, then the health regimen, then the marriage step, then the money decision. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
-      "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — नौकरी परिवर्तन, फिर निर्माण कार्य, फिर स्वास्थ्य नियम, फिर विवाह कदम, फिर आर्थिक निर्णय। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
+      "en": "Optional planning note: if you are acting on several matters, many practitioners suggest starting with at most 2 at a time — the venture, then the job change, then the construction, then the health regimen, then the marriage step, then the money decision. This is sequencing guidance only; it never overrides medical, financial or safety obligations.",
+      "hi": "वैकल्पिक योजना नोट: कई विषयों पर काम करते समय कुछ परंपराएँ अधिकतम 2 से शुरू करने का सुझाव देती हैं — उद्यम, फिर नौकरी परिवर्तन, फिर निर्माण कार्य, फिर स्वास्थ्य नियम, फिर विवाह कदम, फिर आर्थिक निर्णय। यह केवल क्रम-सुझाव है; चिकित्सा, वित्त या सुरक्षा दायित्वों की जगह नहीं लेता।"
     },
     "app_links": [
       {
@@ -381,8 +437,8 @@
       }
     ],
     "closing_question": {
-      "en": "Which single variable do you want fixed first — the construction, or the city? Say one and I will take it alone.",
-      "hi": "पहले कौन-सा एक चर तय करें — निर्माण कार्य, या शहर? एक बताइए, उसे अकेले लेंगे।"
+      "en": "Which single variable do you want fixed first — the job change, or the city? Say one and I will take it alone.",
+      "hi": "पहले कौन-सा एक चर तय करें — नौकरी परिवर्तन, या शहर? एक बताइए, उसे अकेले लेंगे।"
     }
   },
   "provenance": {
@@ -394,7 +450,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "5d5bd36863e2327b",
-    "card_hash": "e9d7ddb4d30c1af4",
+    "card_hash": "fc31caac7ddfaa0e",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

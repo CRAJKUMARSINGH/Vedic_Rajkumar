@@ -103,12 +103,12 @@
         },
         "citations": [
           {
-            "en": "Venus in the 3rd (Libra) — in its own sign, self-contained but slow to move.",
-            "hi": "शुक्र तृतीय भाव (तुला) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Venus in the 2nd (Libra) — in its own sign, self-contained but slow to move.",
+            "hi": "शुक्र द्वितीय भाव (तुला) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           },
           {
-            "en": "Moon in the 1st (Leo).",
-            "hi": "चंद्र प्रथम भाव (सिंह) में।"
+            "en": "Sun in the 2nd (Libra) — debilitated, the promise needs repair.",
+            "hi": "सूर्य द्वितीय भाव (तुला) में — नीच का, प्रतिज्ञा की मरम्मत चाहिए।"
           }
         ]
       }
@@ -158,7 +158,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "e3fca7695fcd0aec",
-    "card_hash": "1ace7c4d8cf3ccd1",
+    "card_hash": "4e3d743d58821b7d",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

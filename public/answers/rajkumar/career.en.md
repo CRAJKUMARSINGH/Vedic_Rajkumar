@@ -1,5 +1,5 @@
 # Rajkumar — Direct Answer
-<!-- card_hash: 5c084ae4937bc98f | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: a19c93229a40a2b8 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (50%) (average, 50%)
 
@@ -8,7 +8,7 @@ Career: average (50%) (average, 50%)
 ### Why
 The call rests on these placements, not on a general stanza:
 - Venus in the 2nd (Virgo) — debilitated, the promise needs repair.
-- Sun in the 2nd (Leo) — in its own sign, self-contained but slow to move.
+- Sun in the 1st (Leo) — in its own sign, self-contained but slow to move.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

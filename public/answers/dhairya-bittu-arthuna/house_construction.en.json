@@ -98,12 +98,12 @@
         },
         "citations": [
           {
-            "en": "Moon in the 1st (Sagittarius).",
-            "hi": "चंद्र प्रथम भाव (धनु) में।"
+            "en": "Moon in the 9th (Sagittarius).",
+            "hi": "चंद्र नवम भाव (धनु) में।"
           },
           {
-            "en": "Sun in the 4th (Aries) — exalted, a clean promise.",
-            "hi": "सूर्य चतुर्थ भाव (मेष) में — उच्च का, स्पष्ट प्रतिज्ञा।"
+            "en": "Venus in the 1st (Aries).",
+            "hi": "शुक्र प्रथम भाव (मेष) में।"
           }
         ]
       }
@@ -153,7 +153,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "298c7ebe027e9553",
-    "card_hash": "25aee218d2ae4ad8",
+    "card_hash": "1aa08d53013f7d39",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

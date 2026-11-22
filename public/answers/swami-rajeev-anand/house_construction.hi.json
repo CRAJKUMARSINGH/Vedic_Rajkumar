@@ -103,12 +103,12 @@
         },
         "citations": [
           {
-            "en": "Moon in the 1st (Gemini).",
-            "hi": "चंद्र प्रथम भाव (मिथुन) में।"
+            "en": "Moon in the 3rd (Gemini).",
+            "hi": "चंद्र तृतीय भाव (मिथुन) में।"
           },
           {
-            "en": "Venus in the 11th (Taurus) — in its own sign, self-contained but slow to move.",
-            "hi": "शुक्र एकादश भाव (वृषभ) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
+            "en": "Venus in the 2nd (Taurus) — in its own sign, self-contained but slow to move.",
+            "hi": "शुक्र द्वितीय भाव (वृषभ) में — स्वराशि में, आत्मनिर्भर पर धीमा।"
           }
         ]
       }
@@ -158,7 +158,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "cfb5558207c8a51e",
-    "card_hash": "72b71886dea88423",
+    "card_hash": "a06e5039c18a406d",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

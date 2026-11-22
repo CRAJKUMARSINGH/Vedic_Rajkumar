@@ -103,12 +103,12 @@
         },
         "citations": [
           {
-            "en": "Saturn in the 8th (Taurus), retrograde — the result arrives in re-runs.",
-            "hi": "शनि अष्टम भाव (वृषभ) में, वक्री — फल दोबारा आता है।"
+            "en": "Saturn in the 11th (Taurus), retrograde — the result arrives in re-runs.",
+            "hi": "शनि एकादश भाव (वृषभ) में, वक्री — फल दोबारा आता है।"
           },
           {
-            "en": "Sun in the 1st (Libra) — debilitated, the promise needs repair.",
-            "hi": "सूर्य प्रथम भाव (तुला) में — नीच का, प्रतिज्ञा की मरम्मत चाहिए।"
+            "en": "Sun in the 4th (Libra) — debilitated, the promise needs repair.",
+            "hi": "सूर्य चतुर्थ भाव (तुला) में — नीच का, प्रतिज्ञा की मरम्मत चाहिए।"
           }
         ]
       }
@@ -158,7 +158,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "108e722a1b7e6599",
-    "card_hash": "90bf775f543f4859",
+    "card_hash": "b81215ccaba88345",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

@@ -1,5 +1,5 @@
 # Premlata Jain — Direct Answer
-<!-- card_hash: b6b88aa94632f89d | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 36a9fe310a8b4edd | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Health & wellbeing: average (63%) (average, 63%)
 
@@ -7,8 +7,8 @@ Health & wellbeing: average (63%) (average, 63%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mercury in the 3rd (Libra).
-- Moon in the 1st (Leo).
+- Mercury in the 2nd (Libra).
+- Saturn in the 10th (Gemini), retrograde — the result arrives in re-runs.
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

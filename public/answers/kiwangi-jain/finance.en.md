@@ -1,5 +1,5 @@
 # Kiwangi Jain — Direct Answer
-<!-- card_hash: 0e2c5ecacdb6e9a6 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 1a02a95e637039b5 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Finance: average (37%) (average, 37%)
 
@@ -7,8 +7,8 @@ Finance: average (37%) (average, 37%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Saturn in the 4th (Virgo).
-- Mars in the 7th (Sagittarius).
+- Saturn in the 9th (Virgo).
+- Mars in the 12th (Sagittarius).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)

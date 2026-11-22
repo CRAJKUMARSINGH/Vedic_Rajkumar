@@ -104,12 +104,12 @@
         },
         "citations": [
           {
-            "en": "Sun in the 1st (Libra) — debilitated, the promise needs repair.",
-            "hi": "सूर्य प्रथम भाव (तुला) में — नीच का, प्रतिज्ञा की मरम्मत चाहिए।"
+            "en": "Sun in the 4th (Libra) — debilitated, the promise needs repair.",
+            "hi": "सूर्य चतुर्थ भाव (तुला) में — नीच का, प्रतिज्ञा की मरम्मत चाहिए।"
           },
           {
-            "en": "Venus in the 2nd (Scorpio).",
-            "hi": "शुक्र द्वितीय भाव (वृश्चिक) में।"
+            "en": "Venus in the 5th (Scorpio).",
+            "hi": "शुक्र पंचम भाव (वृश्चिक) में।"
           }
         ]
       }
@@ -159,7 +159,7 @@
     "computed_at": "2026-10-24T00:00:00.000Z",
     "as_of": "2026-10-24",
     "input_hash": "108e722a1b7e6599",
-    "card_hash": "5b8c1350df2c6767",
+    "card_hash": "11a6d6e8aec7a816",
     "source_files": [
       "src/services/conclusiveJatakJudgmentService.ts",
       "src/services/dashaForecastService.ts",

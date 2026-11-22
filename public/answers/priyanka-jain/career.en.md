@@ -1,5 +1,5 @@
 # Priyanka Jain — Direct Answer
-<!-- card_hash: 9e09f0c00ee94307 | lang: en | generated: 2026-10-24T00:00:00.000Z -->
+<!-- card_hash: 387650a0fd89857b | lang: en | generated: 2026-10-24T00:00:00.000Z -->
 
 Career: average (42%) (average, 42%)
 
@@ -7,8 +7,8 @@ Career: average (42%) (average, 42%)
 
 ### Why
 The call rests on these placements, not on a general stanza:
-- Mercury in the 1st (Libra).
-- Mercury in the 1st (Libra).
+- Mercury in the 2nd (Libra).
+- Mercury in the 2nd (Libra).
 
 **Check in the app**
 - [Transit (gochar) overlay](/transits)
