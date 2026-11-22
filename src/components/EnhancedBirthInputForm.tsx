@@ -74,10 +74,6 @@ const labels = {
     saving: "Saving...",
     saved: "Saved",
     progress: "Form Progress",
-    step1: "Basic Info",
-    step2: "Time Details",
-    step3: "Location",
-    step4: "Submit",
     quickActions: "Quick Actions",
     useCurrentDate: "Use Today",
     useCurrentTime: "Use Current Time",
@@ -85,7 +81,7 @@ const labels = {
     clearForm: "Clear Form",
     saveProfile: "Save Profile",
     formComplete: "Form Complete",
-    formIncomplete: "Please fill all fields",
+    missing: "Missing",
   },
   hi: {
     title: "जन्म विवरण दर्ज करें",
@@ -103,10 +99,6 @@ const labels = {
     saving: "सहेज रहे हैं...",
     saved: "सहेजा गया",
     progress: "फॉर्म प्रगति",
-    step1: "मूल जानकारी",
-    step2: "समय विवरण",
-    step3: "स्थान",
-    step4: "सबमिट करें",
     quickActions: "त्वरित कार्रवाइयाँ",
     useCurrentDate: "आज की तिथि",
     useCurrentTime: "वर्तमान समय",
@@ -114,7 +106,7 @@ const labels = {
     clearForm: "फॉर्म साफ़ करें",
     saveProfile: "प्रोफाइल सहेजें",
     formComplete: "फॉर्म पूर्ण",
-    formIncomplete: "कृपया सभी फ़ील्ड भरें",
+    missing: "शेष",
   },
 };
 
@@ -144,7 +136,6 @@ export default function EnhancedBirthInputForm({
     time: { isValid: false, message: "" },
     location: { isValid: false, message: "" },
   });
-  const [currentStep, setCurrentStep] = useState(1);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const autoSaveTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -273,14 +264,6 @@ export default function EnhancedBirthInputForm({
     });
   }, [dateDisplay, time, location, lang]);
 
-  // Step progress
-  useEffect(() => {
-    if (date && time && location) setCurrentStep(4);
-    else if (date && time) setCurrentStep(3);
-    else if (date) setCurrentStep(2);
-    else setCurrentStep(1);
-  }, [date, time, location]);
-
   const handleAutoSave = async () => {
     if (!date || !time || !location) return;
     setIsAutoSaving(true);
@@ -402,7 +385,13 @@ export default function EnhancedBirthInputForm({
   };
 
   const isFormValid = validation.date.isValid && validation.time.isValid && validation.location.isValid;
-  const progressPercentage = (currentStep / 4) * 100;
+  // Single-page form: report how many of the three required fields are complete
+  // (and which are missing) rather than implying a multi-step wizard.
+  const fieldStates = [validation.date.isValid, validation.time.isValid, validation.location.isValid];
+  const fieldLabels = [t.date, t.time, t.location];
+  const completedFields = fieldStates.filter(Boolean).length;
+  const missingLabels = fieldLabels.filter((_, i) => !fieldStates[i]);
+  const progressPercentage = (completedFields / fieldStates.length) * 100;
 
   return (
     <div className={cn("w-full max-w-2xl mx-auto", className)}>
@@ -412,14 +401,14 @@ export default function EnhancedBirthInputForm({
         <div className="mb-6">
           <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
             <span className={lang === "hi" ? "font-hindi" : ""}>{t.progress}</span>
-            <span>{currentStep}/4</span>
+            <span>{completedFields}/{fieldStates.length}</span>
           </div>
           <div className="h-2 bg-muted rounded-full overflow-hidden">
             <div className="h-full bg-primary transition-all duration-500" style={{ width: `${progressPercentage}%` }} />
           </div>
           <div className="flex justify-between mt-2 text-xs">
-            {[t.step1, t.step2, t.step3, t.step4].map((s, i) => (
-              <span key={s} className={cn("text-muted-foreground", currentStep >= i + 1 && "text-primary font-medium")}>{s}</span>
+            {fieldLabels.map((s, i) => (
+              <span key={s} className={cn("text-muted-foreground", fieldStates[i] && "text-primary font-medium")}>{s}</span>
             ))}
           </div>
         </div>
@@ -491,6 +480,7 @@ export default function EnhancedBirthInputForm({
             </Label>
             <Input
               id="dob"
+              data-testid="dob-input"
               type="text"
               inputMode="numeric"
               value={dateDisplay}
@@ -517,6 +507,7 @@ export default function EnhancedBirthInputForm({
             </Label>
             <Input
               id="tob"
+              data-testid="tob-input"
               type="time"
               value={time}
               onChange={(e) => setTime(e.target.value)}
@@ -539,6 +530,7 @@ export default function EnhancedBirthInputForm({
           </Label>
           <Input
             id="pob"
+            data-testid="pob-input"
             type="text"
             role="combobox"
             aria-expanded={showDropdown}
@@ -611,13 +603,13 @@ export default function EnhancedBirthInputForm({
             <div className={cn("px-2 py-1 rounded text-xs font-medium",
               isFormValid ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
                           : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200")}>
-              {isFormValid ? t.formComplete : t.formIncomplete}
+              {isFormValid ? t.formComplete : `${t.missing}: ${missingLabels.join(", ")}`}
             </div>
           </div>
         )}
 
         {/* Submit */}
-        <Button type="submit" className="w-full text-base font-semibold" size="lg" disabled={!isFormValid}>
+        <Button type="submit" data-testid="get-transit-cta" className="w-full text-base font-semibold" size="lg" disabled={!isFormValid}>
           {lang === "hi" ? <span className="font-hindi">{t.submit}</span> : t.submit}
         </Button>
       </form>

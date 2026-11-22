@@ -107,6 +107,7 @@ const EnhancedLanguageToggle: React.FC<EnhancedLanguageToggleProps> = ({
         <Button 
           variant="outline" 
           size="sm" 
+          data-testid="lang-toggle"
           className={`flex items-center gap-2 ${className}`}
         >
           <Globe className="h-4 w-4" />
