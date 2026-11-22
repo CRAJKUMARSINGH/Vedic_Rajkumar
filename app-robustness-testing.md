@@ -922,7 +922,7 @@ resolve_entitlement(uuid)` now returns `{tier, source, expires_at}`. **Additive*
 - Trigger: user command **"APPLY UPDATIONS AND TESTS FROM FILES IN FOLDER AND SUBFOLDER OF CODE-JUNCTION"**,
   scoped via AskUserQuestion to three deliverables: repo-hardening (Vedic-acc4 Part A/B), the **ACC-01**
   Varga golden corpus, and the **ACC-08** Panchanga acceptance suite. The two other-project bundles
-  (`Vedvenis.txt` Python/Streamlit BridgeCAD harness; `Package.json` TanStack Start manifest) were left
+  (`Vedvenis.txt` Python/Streamlit civil-engineering harness; `Package.json` TanStack Start manifest) were left
   untouched.
 - **Repo-hardening (Vedic-acc4 Part A).** Added `LICENSING.md`, `MAINTAINERS.md`, `CITATION.cff`,
   `docs/{RELEASE,THREAT-MODEL,DEFINITION-OF-DONE}.md`, AGPL/MIT SPDX headers, and three PR-template
