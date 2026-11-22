@@ -190,7 +190,11 @@ export function validateLahiriFormula(): AyanamsaValidationResult[] {
   out.push({
     check: 'Lahiri at J2000.0 equals the locked anchor',
     detail: `${y2000.toFixed(6)}`,
-    pass: Math.abs(y2000 - AYANAMSA_ANCHORS.Lahiri.valueAtJ2000) < 1e-9,
+    // `getAyanamsa` takes UT and internally advances to TT, so it adds the
+    // ~2.8e-8 deg of precession accumulated over delta-T (≈64 s) since J2000.
+    // A 1e-9 tolerance could therefore never pass; 1e-6 is still ~1e4x tighter
+    // than any anchor error (>1e-3 deg) this check exists to catch.
+    pass: Math.abs(y2000 - AYANAMSA_ANCHORS.Lahiri.valueAtJ2000) < 1e-6,
   });
 
   return out;

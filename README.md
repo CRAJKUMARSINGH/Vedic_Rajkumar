@@ -16,7 +16,7 @@ Casts sidereal (Lahiri ayanamsa) birth charts, prashna (horary) readings, 36-poi
 [![Tailwind](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Node](https://img.shields.io/badge/Node-%E2%89%A520-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Build](https://img.shields.io/badge/build-passing-brightgreen)](#)
-[![Tests](https://img.shields.io/badge/tests-2651%20passing-brightgreen)](#accuracy--testing)
+[![Tests](https://img.shields.io/badge/tests-2716%20passing-brightgreen)](#accuracy--testing)
 [![Accuracy](https://img.shields.io/badge/engine%20accuracy-15%2F15%20charts%20%E2%89%A42%E2%80%B3-brightgreen)](docs/accuracy/METHODOLOGY.md)
 [![Accuracy CI](https://github.com/CRAJKUMARSINGH/Vedic_Rajkumar/actions/workflows/accuracy.yml/badge.svg)](https://github.com/CRAJKUMARSINGH/Vedic_Rajkumar/actions/workflows/accuracy.yml)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a0e292ac-3201-4b0c-8186-53a29d83d069/deploy-status)](https://app.netlify.com/sites/vedic-rajkumar/deploys)
@@ -46,8 +46,8 @@ Vedic Rajkumar focuses on transparency, offline capability, bilingual support, a
 
 |     | Feature                           | What You Get                                                                                                                                                                                                                         |
 | --- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 🌀  | **Sidereal Kundli (Birth Chart)** | Lahiri ayanamsa · North/Central Indian layout · D1 + D9/D9 divisional charts · Nakshatra, Pada, Yogas, Shadbala, Ascendant analysis                                                                                                  |
-| 🔮  | **Prashna (Horary Astrology)**    | Horary number + moment cast · Prashna Marga derived rules · Verdict with confidence score · Reading history · Synthesis overlay                                                                                                      |
+| 🌀  | **Sidereal Kundli (Birth Chart)** | Lahiri ayanamsa · North/Central Indian layout · D1 + D9/D10 divisional charts · Nakshatra, Pada, Yogas, Shadbala, Ascendant analysis                                                                                                 |
+| 🔮  | **Prashna (Horary Astrology)**    | Moment cast · Prashna Marga derived rules · Verdict with confidence score · Reading history · Synthesis overlay                                                                                                                      |
 | 💞  | **Kundli Milan (Matchmaking)**    | Full 36-point **Ashta Koota** (Varna · Vasya · Tara · Yoni · Graha Maitri · Gana · Bhakoot · Nadi) · Mangal Dosha checks · Breakdown tables + narrative                                                                              |
 | 🌅  | **Panchang & Muhurat Finder**     | 5-limbed daily panchang (Tithi, Vaara, Nakshatra, Yoga, Karana) · Sunrise/Sunset/Rahu Kalam/Gulika · Purpose-filtered auspicious windows                                                                                             |
 | 🇮🇳  | **Bilingual EN / HI**             | Full English + Hindi UI with Noto Sans Devanagari font — zero tofu boxes, correct shaping                                                                                                                                            |
@@ -124,7 +124,7 @@ npm run dev
 
 1. Click **Prashna**
 2. Type your clear, focused question (e.g., _"Will I get the job I interviewed for last week?"_)
-3. Enter the horary number (1–249) and the **exact moment** you asked
+3. The chart is cast for the **moment** you ask (optionally set the direction)
 4. Click **Cast Prashna Kundali** — read the verdict, confidence, significators, and suggested remedies
 
 ### 3. Kundli Milan (Matchmaking Compatibility)
@@ -149,7 +149,7 @@ npm run build            # Production build to ./dist
 npm run preview          # Serve the production build locally
 npm run typecheck        # TypeScript strict check (no emit)
 npm run lint             # ESLint across app, Supabase functions, and test sources
-npm run test:run         # All Vitest tests — CI mode (2651 tests)
+npm run test:run         # All Vitest tests — CI mode (2716 tests)
 npm run docs:verify      # Fail if README/docs state a stale metric
 npm run test:core        # Core gate tests (ephemeris + vedic engine + nav)
 npm run validate:accuracy  # 15-reference-chart Swiss Ephemeris comparison
