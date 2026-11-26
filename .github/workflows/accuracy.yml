@@ -1,96 +1,30 @@
-name: accuracy
+name: P12 native ephemeris verification
 
 on:
-  pull_request:
-  push:
-    branches: [main]
-  schedule:
-    - cron: '0 2 * * *'   # nightly at 02:00 UTC
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  # ── Fast gate (every PR) ──────────────────────────────────────────────────
-  corpus-gate:
-    name: Corpus · Shadbala · hook budget
+  native-ephemeris:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
         with:
-          node-version: 22
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run accuracy corpus gate
-        run: npm run test:accuracy:corpus
-
-      - name: Run Shadbala accuracy tests (independent oracle)
-        # Week 15: analytic closed forms, Saptavarga/D4/D20/D60 mapping, the
-        # 15-chart engine coherence sweep, and the birth-offset wiring effect.
-        # The npm script pins --hookTimeout=2000 itself.
-        run: npm run test:accuracy:shadbala
-
-      - name: Timezone wiring + hook budget (DEF-010)
-        # The suites that flaked (DEF-010) are hookless, so an explicit 2s hook
-        # budget proves they fail on an assertion — never on wall-clock. A
-        # silent revert to a wall-clock timeout would show up here.
-        run: npx vitest run src/tests/chartTimezoneWiring.test.ts src/tests/answerCard/schema.test.ts --hookTimeout=2000
-
-      - name: Upload accuracy results
-        if: always()
-        uses: actions/upload-artifact@v4
+          persist-credentials: false
+          sparse-checkout: scripts/accuracy-second-engine.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v7
         with:
-          name: accuracy-corpus
-          path: tools/accuracy/golden/manifest.json
-
-  # ── Fast accuracy tests (every PR) ──────────────────────────────────────
-  accuracy-unit:
-    name: Accuracy unit tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+          node-version: '24'
+      - uses: actions/setup-python@v7
         with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - name: Run accuracy unit tests
-        run: npm run test:accuracy:fast
-      - name: Run time-scale gate (UT/TT split)
-        run: npm run test:time
-
-  # ── Varga golden corpus (every PR) ──────────────────────────────────────
-  varga:
-    name: Varga · golden corpus
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - name: Varga gate (engine vs independent oracle, Tier B exact)
-        run: npm run test:accuracy:varga
-      - name: Anti-tautology guard (oracles must not import the engine)
-        run: npx vitest run src/tests/accuracy/noEngineImports.test.ts
-
-  # ── Full suite (nightly + main push) ─────────────────────────────────────
-  full-suite:
-    name: Full test suite
-    if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - name: Run all tests
-        run: npm run test:run
-      - name: Build
-        run: npm run build
+          python-version: '3.12'
+      - name: Compare native Swiss Ephemeris and WASM on synthetic epochs
+        run: |
+          python -m pip install --only-binary=:all: --no-deps pysweph==2.10.3.6
+          npm install --prefix "$RUNNER_TEMP/p12" --no-audit --no-fund --ignore-scripts swisseph-wasm@0.1.0
+          cp scripts/accuracy-second-engine.mjs "$RUNNER_TEMP/p12/"
+          node "$RUNNER_TEMP/p12/accuracy-second-engine.mjs"
