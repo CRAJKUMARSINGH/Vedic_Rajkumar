@@ -15,7 +15,7 @@ vi.mock('@/api/v1/middleware/auth', () => ({
     keyId: 'k1',
     userId: 'u1',
     tier: 'free',
-    scopes: ['transits:read'],
+    scopes: ['transits:read', 'charts:write'],
   })),
   requireScope: (ctx: { scopes: string[] }, scope: string) => ctx.scopes.includes(scope),
 }));
@@ -37,18 +37,20 @@ describe('GET /v1/transits/:chartId — asOf validation', () => {
     expect(snapshot).not.toHaveBeenCalled();
   });
 
-  it('defaults to now when asOf is omitted', async () => {
-    const res = await api.request('/v1/transits/c1');
-    expect(res.status).toBe(200);
-    const asOf = snapshot.mock.calls[0][1];
-    expect(Number.isNaN(asOf.getTime())).toBe(false);
+  it.each(['/v1/transits/c1', '/v1/transits/c1?asOf=2025-01-01'])('fails closed for %s without verified natal positions', async (path) => {
+    const res = await api.request(path);
+    expect(res.status).toBe(503);
+    expect((await res.json()).error.code).toBe('chart_not_computed');
+    expect(snapshot).not.toHaveBeenCalled();
   });
 
-  it('anchors a date-only asOf to UTC midnight (deterministic instant)', async () => {
-    const res = await api.request('/v1/transits/c1?asOf=2025-01-01');
-    expect(res.status).toBe(200);
-    const asOf = snapshot.mock.calls[0][1];
-    expect(asOf.toISOString().slice(0, 10)).toBe('2025-01-01');
-    expect(asOf.getUTCHours()).toBe(0);
+  it('does not return a fabricated chart on creation', async () => {
+    const res = await api.request('/v1/charts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ date: '2000-01-01', time: '12:00', latitude: 0, longitude: 0, timezone: 'UTC' }),
+    });
+    expect(res.status).toBe(503);
+    expect((await res.json()).error.code).toBe('compute_unavailable');
   });
 });
