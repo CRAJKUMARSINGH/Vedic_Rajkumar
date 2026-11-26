@@ -1,4 +1,1 @@
-echo "🔍 Running typecheck + tests before push..."
-
-npx tsc --noEmit || { echo "❌ Typecheck failed — push aborted."; exit 1; }
-npm run test:run || { echo "❌ Tests failed — push aborted."; exit 1; }
+npm run typecheck && npm run test:run

@@ -142,3 +142,24 @@ jobs:
 
       - name: Run pgTAP suite
         run: supabase test db
+
+  e2e-core:
+    name: Core browser journeys
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: core-e2e-failure
+          path: test-results/
+          retention-days: 14

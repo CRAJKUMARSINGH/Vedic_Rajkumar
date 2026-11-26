@@ -8,6 +8,8 @@ on:
       - 'budgets.json'
       - 'package.json'
   workflow_dispatch:
+  schedule:
+    - cron: '30 20 * * *' # 02:00 IST
 
 permissions:
   contents: read
@@ -15,6 +17,7 @@ permissions:
 
 jobs:
   budget:
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -30,6 +33,7 @@ jobs:
         with: { name: bundle-report, path: reports/bundle }
 
   lighthouse:
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -43,9 +47,9 @@ jobs:
         if: always()
         with: { name: lighthouse-report, path: reports/lighthouse }
 
-  # Real device class, not a desktop preset. Runs nightly only — too slow for PRs.
+  # Emulated mobile device class. Runs nightly only — too slow for PRs.
   mobile-mainthread:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
