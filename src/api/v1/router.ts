@@ -1,10 +1,9 @@
 import { Hono } from 'hono';
 import { authenticate, requireScope, type ApiContext } from './middleware/auth';
 import { consume, rateLimitHeaders, type BucketState } from '../rateLimit/bucket';
-import { checkIdempotency, storeIdempotency } from './middleware/idempotency';
+import { checkIdempotency } from './middleware/idempotency';
 import { BirthInput } from './schemas/chart';
 import { AnswerQuery, parseTopics, ISO_DATE_RE } from './schemas/answer';
-import { transitService } from '@/services/transits/transitService';
 import { buildAnswerCard, buildAnswerCardByName, DEFAULT_ASK } from '@/services/answerCard/answerCardBuilder';
 import { redactAnswerCard } from '@/services/answerCard/redact';
 import { resolveJatak } from '@/lib/jataks/resolveJatak';
@@ -38,16 +37,14 @@ api.post('/v1/charts', async (c) => {
   const idem = c.req.header('idempotency-key');
   if (idem) {
     const cached = await checkIdempotency(c.req.raw, ctx.keyId);
-    if (cached) return c.json(cached.body as never, cached.status as never);
+    // Do not replay legacy successful responses from the former placeholder engine.
+    if (cached && cached.status >= 400) return c.json(cached.body as never, cached.status as never);
   }
 
   const parsed = BirthInput.safeParse(await c.req.json());
   if (!parsed.success) return c.json({ error: { code: 'invalid_input', message: parsed.error.message } }, 422);
 
-  // delegate to compute service
-  const chart = await computeChart(parsed.data);
-  if (idem) await storeIdempotency(ctx.keyId, idem, 201, chart);
-  return c.json(chart, 201);
+  return c.json({ error: { code: 'compute_unavailable', message: 'Chart computation is not connected to this API', requestId: crypto.randomUUID() } }, 503);
 });
 
 api.get('/v1/charts/:id', async (c) => {
@@ -75,9 +72,7 @@ api.get('/v1/transits/:chartId', async (c) => {
       return c.json({ error: { code: 'invalid_input', message: 'asOf must be a valid date' } }, 422);
     }
   }
-  const natal = await getNatal(c.req.param('chartId'));
-  const snap = await transitService.snapshot(natal, asOf);
-  return c.json(snap);
+  return c.json({ error: { code: 'chart_not_computed', message: 'Verified natal positions are not available through this API', requestId: crypto.randomUUID() } }, 503);
 });
 
 // ---- Answer cards (verdict-first agent contract) ----
@@ -117,14 +112,12 @@ api.post('/v1/keys', async (c) => {
   return c.json({ prefix: key.prefix, plaintext: key.plaintext }, 201); // plaintext shown once
 });
 
-async function computeChart(input: unknown) { return { id: crypto.randomUUID(), ...(input as object) }; }
 async function getChart(id: string, userId: string) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data } = await (supabase as any).from('charts').select('*').eq('id', id).eq('user_id', userId).maybeSingle();
   return data;
 }
  
-async function getNatal(_chartId: string) { return { lagnaSign: 0, planets: { Moon: 45 } }; }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function persistKey(userId: string, key: any, tier: string) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
